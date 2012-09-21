@@ -1,0 +1,598 @@
+@font-face {
+    font-family: 'ArsNovaVoidRegular';
+    src: url('arsnovavoid-webfont.eot');
+    src: url('arsnovavoid-webfont.eot?#iefix') format('embedded-opentype'),
+         url('arsnovavoid-webfont.woff') format('woff'),
+         url('arsnovavoid-webfont.ttf') format('truetype'),
+         url('arsnovavoid-webfont.svg#ArsNovaVoidRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'ArsNovaBlackRegular';
+    src: url('arsnovablack-webfont.eot');
+    src: url('arsnovablack-webfont.eot?#iefix') format('embedded-opentype'),
+         url('arsnovablack-webfont.woff') format('woff'),
+         url('arsnovablack-webfont.ttf') format('truetype'),
+         url('arsnovablack-webfont.svg#ArsNovaBlackRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+* {
+  font-family: georgia;
+}
+
+#background {
+  position:relative;
+  width: 98%;
+  height: 98%;
+  background-color: Wheat; /* #e0e0e0; */
+  padding: 0px;
+  color: #335500;
+  border-color: #e0e0e0;
+}
+#rendered {
+  position: relative;
+  background-color: beige;
+  border: none;
+  width: 715px;
+  height: 95%;
+  resize: both;
+}
+.twocolumn {
+  padding-right: 28em;
+}
+.onecolumn {
+  padding-right: 12em;
+}
+
+.twocolumn .marginalContent {
+  margin: -1em -28em -100em 0em;
+  margin-right: -28em;
+  padding-right: 0em;
+  padding-left: 19em;
+  float: right;
+}
+.onecolumn .marginalContent {
+  margin: -1em -12em -100em 0em;
+  padding-right: 0em;
+  padding-left: 35em;
+  float: right;
+}
+#content{
+  height: 100%;
+  overflow: auto;
+  color: black;
+}
+#exemplum{
+  height: 200px;
+}
+span.sixline{
+  font-size: 900%;
+  margin-bottom: -15px;
+  line-height: 0.8;
+  float: left;
+  padding-right: 10px;
+}
+span.fiveline{
+  font-size: 750%;
+  margin-bottom: -15px;
+  line-height: 0.8;
+  float: left;
+  padding-right: 10px;
+}
+/* span.fourline{ */
+/*   font-size: 400%; */
+/*   float: left; */
+/*   padding-right: 10px; */
+/* } */
+span.fourline{
+  font-size: 600%;
+  margin-bottom: -10px;
+  line-height: 0.8;
+  float: left;
+  padding-right: 10px;
+}
+span.threeline{
+  font-size: 450%;
+  margin-bottom: -6px;
+  line-height: 0.8;
+  float: left;
+  padding-right: 10px;
+}
+span.twoline{
+  font-size: 280%;
+  margin-bottom: -4px;
+  line-height: 0.8;
+  float: left;
+  padding-right: 10px;
+}
+span.strikethrough, .strikethrough.text{
+  text-decoration: line-through;
+}
+span.red, .red.text{
+  color: red;
+  fill: red;
+}
+span.gold, gold.text {
+  color: #FC0;
+}
+span.redline, .redline.text {
+  text-shadow: red 1px 0px 0px;
+}
+span.blueline, .blueline.text {
+  text-shadow: blue 1px 0px 0px;
+}
+span.blue, tspan.blue, .text.blue {
+  color: blue;
+  fill: blue;
+}
+span.violet, .violet.text{
+  color: #9400D3;
+  fill: #9400D3;
+}
+pre p{
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+.indent{
+  text-indent: 18px;
+}
+.centre{
+  text-align: center;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+}
+pre {
+/* width: 880px;*/
+ font-family: serif;
+ white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+.notation{
+  float: left;
+  position: relative;
+  margin: 5px;
+  top: 0px;
+  background-color: white;
+  border: none;
+}
+#codediv{
+  float: right;
+  position: relative;
+  top: 5px;
+  right: 5px;
+  margin: 0px;
+  padding: 0px;
+/*  width: 45%;*/
+}
+#codediv #code{
+/*  width: 100%;*/
+  font-size: 13px;
+  font-family: verdana, sans-serif;
+  top: 20px;
+}
+tr.tc {
+  display: none;
+}
+tr.score {
+ background-color: #BCF;
+}
+tr.pieceinfo {
+ margin-bottom: 5px;
+}
+tr.pieceinfo:hover {
+  background-color: #DEF;
+}
+table.settings {
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  border-collapse: collapse;
+  width: 922px;
+}
+table.settings tr td {
+  padding: 5px;
+}
+table.settings tbody * {
+  font-size: small;
+}
+.tabselect {
+  background-color: Wheat;
+}
+.fontselect {
+  background-color: Azure;
+}
+.tuning {
+  background-color: LemonChiffon;
+}
+.tempo {
+  background-color: MistyRose;
+}
+.examples {
+  background-color: Thistle;
+  width: 25%;
+}
+div.buttons {
+  padding: 2px;
+  border: none;
+}
+.space {
+  white-space: pre;
+  padding: 0 1em;
+}
+
+.add {
+  color: #CCC;
+}
+
+.colend {
+  border-bottom: 2px dashed #99F;
+  margin-bottom: 0px;
+}
+
+.col {
+  text-align: right;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: small;
+  color: #66C;
+  padding-top: 0px;
+  margin-top: 0px;
+  margin-right: 10px;
+} 
+
+.pag {
+  font-size: 130%;
+}
+
+.fol {
+  font-size: 120%;
+}
+
+.fieldname {
+  font-weight: bold;
+  font-size: 80%;
+}
+
+.scaleButton {
+  padding: 2px;
+  background-color: white;
+  cursor: pointer;
+  border: 1px solid gray;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+.scaleButton:hover {
+  padding: 2px;
+  background-color: #FFA;
+}
+
+.annotation, .variants {
+  font-family: sans-serif;
+  font-size: 180%;
+  line-height: 0.5;
+  vertical-align: -60%;
+  cursor: default;
+}
+.annotation {
+  color: blue;
+  fill: blue;
+}
+
+.choice .text{
+  font-size: 100%;
+  font-family: georgia, serif;
+}
+
+.choice, .variantGroup {
+  color: #060;
+  fill: #060;
+}
+.variants.highlight {
+  text-decoration: none;
+}
+
+.marginalStar {
+  font-family: sans-serif;
+  font-size: 180%;
+  line-height: 0.4;
+  vertical-align: -60%;
+  color: #E0A;
+  cursor: default;
+}
+
+.marginalContent {
+  line-height: 0.9;
+  font-size: 90%;
+}
+
+.examplecomments {
+  margin: -20px 30px 0 30px;
+  padding: 3px;
+  border: 1px dotted #663;
+  background-color: #DDDDCC;
+}
+.tooltip {
+		/* display:none; */
+		background-color:#ffa;
+    z-index: 20;
+		border:1px solid #cc9;
+		padding:3px;
+		font-size:13px;
+		-moz-box-shadow: 2px 2px 11px #666;
+		-webkit-box-shadow: 2px 2px 11px #666;
+    cursor: none;
+	}
+
+.hand{
+  font-style: italic;
+}
+
+.marginLoc{
+  font-size: 0.7em;
+  vertical-align: super;
+}
+
+/* svg.musicexample{ */
+/*  width: 690px; */
+/* } */
+
+.redSVGLine{
+  stroke: #F00;
+}
+
+.blackSVGLine{
+  stroke: #000;
+}
+
+.blindSVGLine{
+  stroke: #AAA;
+}
+
+.mensural, .symbolbutton.duration.void{
+  font-family: ArsNovaVoidRegular;
+}
+
+.plainchant {
+  font-family: ArsNovaBlackRegular;
+}
+
+.ligatureVertical, .ligatureStem, .rhombusTail, .neumeJoin, .neumeLine, .chantTail {
+  stroke-width: 1.4;
+  stroke: black;
+}
+
+.ligatureHorizontal {
+  stroke-width: 3.5;
+  stroke: black;
+}
+
+.chantSquare {
+  stroke-width: 7.5;
+  stroke: black;
+}
+
+.obliqueOuter, .rhombus {
+  fill: black;
+  stroke-width: 0;
+}
+.obliqueInner {
+  fill: white;
+  stroke-width: 0;
+}
+
+.scallopedBarline, .barlineComponent, .barline{
+  stroke: black;
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.ligatureVertical.red, .ligatureStem.red, .rhombusTail.red, .neumeJoin.red, .ligatureHorizontal.red, .chantSquare.red, chantTail.red, .scallopedBarline.red, .barlineComponent.red{
+  stroke: red;
+}
+
+.textblock {
+  font-size: 120%;
+}
+
+.variantWitnesses {
+  font-weight: bold;
+  padding: 1ex;
+  font-size: 90%;
+}
+
+.variantWitnessesSpecial {
+  font-style: italic;
+  padding: 1ex;
+  font-size: 90%;
+}
+
+.divider {
+  stroke: #CDC;
+  stroke-width: 1.5px;
+}
+
+.choice {
+  color: #060;
+  /* font-weight: bolder; */
+}
+
+.variants {
+  display: none;
+}
+.variants.ins {
+  display: inline;
+}
+.variants.musical {
+  color: #060;
+  fill: #060;
+  display: inline;
+}
+
+.treatiseTitle {
+  text-align: center;
+  font-size: 130%;
+  font-variant: small-caps;
+  letter-spacing: 0.1em;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+}
+
+.heading {
+  font-style: italic;
+}
+.subheading {
+  font-style: italic;
+}
+
+.highlight {
+  text-decoration: underline;
+}
+.variants.highlight {
+  text-decoration: none;
+}
+
+.sourcedescription {
+  text-indent: 5ex;
+}
+
+.sourceidentifier {
+  font-weight: bold;
+  display: inline-block;
+  width: 15ex;
+}
+
+#buttonbox{
+  background-color: white;
+  z-index: 12;
+  position: absolute;
+  border: 2px solid Wheat;
+  padding: 3px;
+  border-collapse: collapse;
+}
+.buttonrow, .buttonbar{
+  display: table-row;
+  border: none;
+}
+.buttonrow.extrarow{
+  display: block;
+  padding: 5px;
+}
+.buttoncell{
+  display: table-cell;
+  border: none;
+  padding: 0;
+  margin: 0;
+  vertical-align: top;
+}
+.buttoncell span{
+  padding: 0;
+  margin: 0;
+}
+.uibutton{
+  background-color: #FFFFFF;
+  padding: 6px;
+  border: 2px solid #DDD;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.uibutton.selected{
+  border: 2pt solid #224;
+  background-color: #DDF
+}
+.uibutton:hover{
+  border: 2pt solid #69A;
+}
+.clickable:hover{
+  cursor: pointer;
+  stroke: blue;
+  stroke-width: 2px;
+}
+.clickable *:hover {
+  stroke: blue;
+  fill: blue;
+}
+
+.uibutton * .chantsquare {
+  stroke-width: 15;
+}
+
+.uibutton * .chantTail {
+  stroke-width: 2.8;
+}
+
+.buttoncircle {
+  height: 26px;
+  width: 26px;
+  background: white;
+  opacity: 0.8;
+  border-radius: 13px;
+  border: 1px solid gray;
+  position: absolute;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.miscbutton{
+  position: absolute;
+  z-index: 12;
+  /* background-color: white; */
+  /* opacity: 0.4; */
+  /* cursor: pointer; */
+  padding: 2px;
+}
+.miscbutton span {
+  font-weight: bold;
+  font-size: 100%;
+  opacity: 1;
+}
+.miscbutton:hover{
+  opacity: 0.9;
+  color: orange;
+  font-size: 110%;
+}
+#uparrow{
+  top: -15px;
+  left: 5px;
+  background-color: white;
+  border: 2px solid #CCC;
+  border-radius: 2px;
+  opacity: 1;
+  position: absolute;
+}
+#downarrow{
+  bottom: -13px;
+  left: 5px;
+  background-color: white;
+  border: 2px solid #CCC;
+  border-radius: 2px;
+  opacity: 1;
+  position: absolute;
+}
+#buttonbar .uibutton{
+  display: table-cell;
+  padding: 0.5ex;
+  margin: 0.5ex;
+}
+.spanpicker{
+  width: 1ex;
+  height: 1ex;
+  margin: 0.1ex;
+}
+.punctoggle{
+  cursor: pointer;
+}

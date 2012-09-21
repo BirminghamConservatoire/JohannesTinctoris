@@ -1,0 +1,12 @@
+.onecolumn {
+  padding: 0 1ex 0 1ex;
+}
+
+#navbox {
+  padding: 0px;
+}
+#navbox * {
+  font-size: 70%;
+  letter-spacing: -0.5px;
+  font-family: Georgia, serif;
+}

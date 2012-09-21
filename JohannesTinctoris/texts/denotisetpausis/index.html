@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Early Music Theory — The Theoretical Works of Johannes Tinctoris — De notis et pausis</title>
+	<script src="../../SpryAssets/SpryMenuBar.js" type="text/javascript"></script>
+  <script type="text/javascript" src="../../jquery-1.8.0.min.js"></script>
+  <script type="text/javascript" src="../../../GUIEditor/jquery.scrollTo-1.4.2.js"></script>
+	<link href="../../SpryAssets/SpryMenuBarHorizontal.css" rel="stylesheet" type="text/css">
+	  <script type="text/javascript" src="../../../GUIEditor/debugger.js"></script>
+	  <script type="text/javascript" src="../../../GUIEditor/dom.js"></script>
+	  <script type="text/javascript" src="../../../GUIEditor/meidom.js"></script>
+	  <script type="text/javascript" src="../../../GUIEditor/base.js"></script>
+	  <script type="text/javascript" src="../../../GUIEditor/buttons.js"></script>
+	  <script type="text/javascript" src="../../../GUIEditor/classes.js"></script>
+	  <script type="text/javascript" src="../../../GUIEditor/text-classes.js"></script>
+	  <script type="text/javascript" src="../../../GUIEditor/music-parser.js"></script>
+	  <script type="text/javascript" src="../../../GUIEditor/parser.js"></script>
+    <script type="text/javascript" src="../../viewer.js"></script>
+	  <script src="../../jt1.js" type="text/javascript"></script>
+	  <link href="../../jt1.css" rel="stylesheet" type="text/css">
+	  <link type="text/css" rel="stylesheet" href="../../../GUIEditor/jt-editor-v.css" />
+	  <link type="text/css" rel="stylesheet" href="../edited.css" />
+	  <link type="text/css" rel="stylesheet" href="../../../GUIEditor/print.css" media="print"/>
+</head>
+<body>
+<div class="header"><div class="row"><div class="EMTLogo cell">Early&nbsp;Music Theory</div><div class="projecthead cell">The Theoretical Works of Johannes Tinctoris</div></div></div>
+<div id="menudiv">
+<ul id="MenuBar1" class="MenuBarHorizontal">
+  <li class="img"><a class="MenuBarItemSubmenu img" href="#"><img src="../../jt.png" alt="JT logo"></a>
+    <ul>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Preferences</a></li>
+      <li><a href="../../#">Tinctoris Home</a></li>
+      <li><a href="#">Early Music Theory Home</a></li>
+    </ul>
+  </li>
+  <li><a class="MenuBarItemSubmenu" href="#">Treatise texts</a>
+    <ul>
+      <li class="options"><a id="Latin">Latin</a></li>
+      <li class="options"><a id="Translation">Translation</a></li>
+      <li class="options linebelow"><a id="Parallel">Parallel</a></li>
+      <li class="lineabove"><a href="#">Expositio manus</a></li>
+      <li><a href="#">Proportionale musices</a></li>
+      <li><a href="#">Liber imperfectionum notarum musicalium</a></li>
+      <li><a href="#">Tractatus de regulari valore notaru</a></li>
+      <li><a href="#">Tractatus de notis et pausis</a></li>
+      <li><a href="#">Tractatus alterationum</a></li>
+      <li><a href="#">Scriptum ... super punctis musicalibus</a></li>
+      <li><a href="#">Liber de natura et proprietate tonorum</a></li>
+      <li><a href="#">Liber de arte contrapuncti</a></li>
+      <li><a href="#">Complexus effectuum musices</a></li>
+      <li><a href="#">De inventione et usu musice</a></li>
+      <li><a href="#">Terminorum musicae diffinitorium</a></li>
+   	</ul>
+  </li>
+  <li><a class="MenuBarItemSubmenu" href="#">Sources</a>
+    <ul>
+      <li><a href="#">Facsimiles</a></li>
+      <li><a href="#">Source transcriptions</a></li>
+   	</ul>
+  </li>
+  <li><a class="MenuBarItemSubmenu" href="#">Commentary</a>
+    <ul>
+      <li><a href="#">General</a></li>
+      <li><a href="#">Expositio manus</a></li>
+      <li><a href="#">Proportionale musices</a></li>
+      <li><a href="#">Liber imperfectionum notarum musicalium</a></li>
+      <li><a href="#">Tractatus de regulari valore notaru</a></li>
+      <li><a href="#">Tractatus de notis et pausis</a></li>
+      <li><a href="#">Tractatus alterationum</a></li>
+      <li><a href="#">Scriptum ... super punctis musicalibus</a></li>
+      <li><a href="#">Liber de natura et proprietate tonorum</a></li>
+      <li><a href="#">Liber de arte contrapuncti</a></li>
+      <li><a href="#">Complexus effectuum musices</a></li>
+      <li><a href="#">De inventione et usu musice</a></li>
+      <li><a href="#">Terminorum musicae diffinitorium</a></li>
+   	</ul>
+  </li>
+  <li><a href="#">Help</a></li>
+</ul></div>
+	<div id="leftOptions">
+  	<div class="sourceNavigation" id="navbox"></div>
+    <div class="editedText optionsBlock">
+      <div class="blockHeader">Edited texts</div>
+	    <div class="toggle textVariants"> variants</div>
+  	  <div class="toggle punctuation"> punctuation</div>
+    </div>
+    <div class="translatedText optionsBlock">
+      <div class="blockHeader">Translations</div>
+	    <div class="toggle exx">Examples with </div>
+  	  <div class="toggle translationNotes"> translation notes</div>
+    </div>
+    <div class="sourceText optionsBlock">
+      <div class="blockHeader">Source transcriptions</div>
+	    <div class="toggle transcriptionNotes"> transcription notes</div>
+    </div>
+  </div>
+  <div id="content" class="pane1"></div>
+</body>
+</html>

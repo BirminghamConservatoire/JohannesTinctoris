@@ -26,6 +26,7 @@ function MusicExample(){
       if(currentInfo){
         if(infop(next)){
           currentInfo.extras.push(next);
+          next.params = currentInfo;
         } else {
           currentInfo = false;
         }
@@ -147,7 +148,7 @@ function MusicExample(){
     currentSystems.push(svgGroup(SVG, "Stafflines", false));
     this.parameters.draw();
     for(eventi = 0; eventi<this.events.length; eventi++){
-      if(this.events[eventi].objType) {
+      if(this.events[eventi].objType && !this.events[eventi].params) {
         this.events[eventi].draw(curx, cury);
       }
     }
@@ -705,10 +706,10 @@ function parseClefReading(fields){
   var clef = parseClef(fields[0].substring(1, fields[0].length-1));
   for(var i=1; i<fields.length; i++){
     if(fields[i].charAt(0) =='"'){
-      return [fields.slice(i), new MReading(fields.slice(1, i-1), [clef], "")];
+      return [fields.slice(i), new MReading(fields.slice(1, i), [clef], "")];
     }
   }
-  return [false, new MReading(fields.slice(1, fields.length-1), [clef], "")];
+  return [false, new MReading(fields.slice(1, fields.length), [clef], "")];
 }
 function parseClefVar(fields){
   var next = false;
@@ -738,6 +739,59 @@ function parseClef(spec){
   return false;
 }
 
+function parseStaff(spec){
+  var staff = new Staff;
+  var pointer = 0;
+  var wit = [];
+  var val;
+  // First: lines
+  if(spec[0].charAt(0)=='"'){
+    staff.lines = new ValueChoice();
+    while(pointer< spec.length && !colourp(spec[pointer])){
+      val = linesp(spec[pointer]);
+      pointer++;
+      while(pointer< spec.length && !linesp(spec[pointer]) && !colourp(spec[pointer])){
+        wit.push(spec[pointer]);
+        pointer++;
+      }
+      staff.lines.addReading(wit, val, false);
+      wit = [];
+    }
+  } else {
+    // No variant
+    staff.lines = linesp(spec[0]);
+    pointer++;
+  }
+  // now colour
+  if(spec[pointer].charAt(0)=='"'){
+    staff.colour = new ValueChoice();
+    while(pointer < spec.length){
+      val = colourp(spec[pointer]);
+      pointer++;
+      while(!colourp(spec[pointer])){
+        wit.push(spec[pointer]);
+        pointer++;
+      }
+      staff.colour.addReading(wit, val, false);
+      wit = [];
+    }    
+  } else {
+    // No variant
+    staff.colour = colourp(spec[pointer]);
+  }
+  return staff;
+}
+function linesp(string){
+  return (!isNaN(parseInt(string)) && parseInt(string))
+    || 
+    (!isNaN(parseInt(string.substring(1, string.length-1)))
+      && parseInt(string.substring(1, string.length-1)));
+}
+function colourp(string){
+  return string.match(/(black|red|blind)/) ? string.match(/(black|red|blind)/)[0] : false;
+}
+
+
 function nextInfo(){
   var info = consumeParenthesis();
   var obj = false;
@@ -750,11 +804,16 @@ function nextInfo(){
         return parseSolm(fields.slice(1));
       case "clef":
         if(fields.length>2){
-          if(fields[1]=="var") return parseClefVar(fields.slice(2));
+          if(fields[1]=="var") {
+            return parseClefVar(fields.slice(2));
+          } else if (fields[1].charAt(0) == '"'){
+            return parseClefVar(fields.slice(1));
+          }
           return parseClef("C8");
         }
         return parseClef(fields[1]);
       case "staf":
+        return parseStaff(fields.slice(fields[1]=="var" ? 2 : 1));
         obj = new Staff();
         var value, description;
         var witnesses = [];

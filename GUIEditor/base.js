@@ -153,6 +153,7 @@ var punctuationStyle="modern";
 
 // Current variable values (for context)
 //var tooltip = false;
+var sources = [];
 var nodeNo = 0;
 var nodes = [];
 var textnodes = [];
@@ -1255,6 +1256,30 @@ var infos = ["SolmizationSignature", "Clef", "Staff"];
 function infop(object){
   if(typeof(object.objType) != "undefined" && infos.indexOf(object.objType)>-1){
     return true;
+  } else if(typeof(object.objType) != "undefined" && object.objType == "MusicalChoice"){
+    return object.infop();
+  }
+  return false;
+}
+function clefp(object, variant){
+  return typeof(object.objType)!="undefined" 
+    && (object.objType == "Clef" 
+        || (object.objType == "MusicalChoice" && object.clefp(variant)));
+}
+function solmp(object, variant){
+  return typeof(object.objType)!="undefined" 
+    && (object.objType == "SolmizationSignature" 
+        || (object.objType == "MusicalChoice" && object.solmp(variant)));
+}
+function findClef(extras){
+  for(var i=0; i<extras.length; i++){
+    if(clefp(extras[i])) return extras[i];
+  }
+  return false;
+}
+function findSolm(extras){
+  for(var i=0; i<extras.length; i++){
+    if(solmp(extras[i])) return extras[i];
   }
   return false;
 }
@@ -1372,4 +1397,9 @@ function ligatureDrawingKit(ligarray){
         break;
     }
   }
+}
+
+function listeq(l1, l2){
+  // returns true if every item in l1 is == every item in l2
+  return l1.every(function(el, i, a){return el==l2[i];});
 }

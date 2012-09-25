@@ -343,7 +343,7 @@ function LigatureComment(comment){
     this.startY = cury - rastralSize * currentLinecount;
     this.startX = drawnx;
     this.endY = this.startY - Math.floor(rastralSize * textScale * 2);
-    var star = svgText(SVG, drawnx, this.startY, "annotation musical", false, false, "*");
+    var star = svgText(SVG, drawnx, this.startY, "annotation musical", false, false, "*"); // *
     if(!star) alert("oo");
     var j = currentExample.comments.indexOf(this);
     star.setAttributeNS(null, "onmouseover", "top.tooltipForComment("+examplei+","+j+", "+(this.startX+10)+","+(10+this.startY)+");");
@@ -1248,6 +1248,7 @@ function SolmizationSignature() {
   this.text = false;
   this.example = currentExample;
   this.domObj = false;
+  this.params = false;
   this.toText = function (){
     var text = "{solm: ";
     if(this.members.length) {
@@ -1316,6 +1317,7 @@ function Clef() {
   this.staffPos = false;
   this.example = currentExample;
   this.domObj = false;
+  this.params = false;
   currentClef = this;
   this.toText = function(){
     //FIXME: variants
@@ -1571,7 +1573,7 @@ function TextUnderlay(){
         curx = rastralSize;
       } else if (currentExample.events[eventi-1].objType != "TextUnderlay"){
         if(!currentExample.events[eventi-1].startX){
-          alert(currentExample.events[eventi-1].objType);
+          alert(currentExample.events[eventi-1].objType + " TU.draw");
         }
         curx = currentExample.events[eventi-1].startX;
       }
@@ -1861,27 +1863,28 @@ function Parameters(){
     // FIXME: Mensuration, etc.
     return text +">";
   };
-  this.draw = function(){
-    eventi=-1;
-    if(showvariants){
-      this.annotations();
-      this.specComment.draw();
-    }
-    if(this.clef){
-      this.clef.draw();
-    }
-    if(this.solmization){
-      this.solmization.draw();
-    }
-    if(this.mensuralSignature){
-      this.mensuralSignature.draw();
-    }
+  this.getClef = function(){
+    return this.clef || findClef(this.extras);
+  };
+  this.getSolmization = function(){
+    return this.solmization || findSolm(this.extras);
+  };
+  this.hasChoice = function(){
+    var c = this.getClef();
+    var s = this.getSolmization();
+    return !((!c || c.objType == "Clef") && (!s || s.objType == "SolmizationSignature")
+      && typeof(this.staff.lines) == "number" && typeof(this.staff.colour) =="string");
   };
   this.annotations = function(){
-    if((!this.clef || this.clef.objType == "Clef")
+    var c = this.getClef();
+    var s = this.getSolmization();
+    if((!c || c.objType == "Clef") && (!s || s.objType == "SolmizationSignature")
       && typeof(this.staff.lines) == "number" && typeof(this.staff.colour) =="string"){
       // No annotation needed (because there's no variant or there is
       // a variant attached to clef)
+      return;
+    } else if (c || s){
+      // handle this in another way
       return;
     } else {
       initialStaffStar = [svgText(SVG, 0, Math.max(0, cury - rastralSize * this.staff.trueLines() ),
@@ -1889,7 +1892,98 @@ function Parameters(){
       addAnnotation(initialStaffStar[0], this, "staff");
     }
   };
+  this.draw = function(){
+    eventi=-1;
+    if(showvariants){
+      this.annotations();
+      this.specComment.draw();
+    }
+    var oldSVG = SVG;
+    SVG = svgGroup(SVG, "prefGroup", false);
+    if(this.getClef()){
+      this.getClef().draw();
+    }
+    if(this.getSolmization()){
+      this.getSolmization().draw();
+    }
+    if(this.hasChoice()){
+      SVG.style.fill = "#060";
+      addAnnotation(SVG, this, "staff");
+    }
+    SVG = oldSVG;
+    if(this.mensuralSignature){
+      this.mensuralSignature.draw();
+    }
+  };
+  this.getWitOptions = function(wit){
+    var params = [];
+    var clef = this.getClef();
+    var solm = this.getSolmization();
+    if(typeof(this.staff.lines) == "number"){
+      params.push(this.staff.lines);
+    } else {
+      params.push(witnessReading(wit, this.staff.lines).value);
+    }
+    if(typeof(this.staff.colour) == "string"){
+      params.push(this.staff.colour);
+    } else {
+      params.push(witnessReading(wit, this.staff.colour).value);
+    }
+    if(clef){
+      if(clef.objType == "Clef"){
+        params.push(clef);
+      } else {
+        params.push(witnessReading(wit, clef));
+      }
+    }
+    if(solm){
+      if(solm.objType == "SolmizationSignature"){
+        params.push(solm);
+      } else {
+        params.push(witnessReading(wit, solm));
+      }
+    }
+    return params;
+  };
+  this.variantList = function(){
+    var pars;
+    var vars = [];
+    var found;
+    for (var i=0; i<sources.length; i++){
+      pars = this.getWitOptions(sources[i].id);
+      found = false;
+      for(var j=0; j<vars.length; j++){
+        if(listeq(pars, vars[j][0])){
+          found = true;
+          vars[j][1].push(sources[i].id);
+          break;
+        }
+      }
+      if(!found){
+        vars.push([pars, [sources[i].id]]);
+      }
+    }
+    return vars;
+  };
   this.tip = function(){
+    SVG = svg(false, false);
+    svgCSS(SVG, "jt-editor-v.css");
+    tooltip.appendChild(SVG);
+    var vars = this.variantList();
+    var d = 40;
+    curx = 7;
+    cury = rastralSize * 7;
+//    tempx = curx+d;
+    for(var i=0; i<vars.length; i++){
+      if(i>0) svgLine(SVG, curx, cury, curx, 0, "divider", false);
+      this.addTip(vars[i][0][0], vars[i][0][1], vars[i][1], vars[i][0][2], vars[i][0][3]);
+//      curx = tempx;
+//      tempx = curx+d;
+      curx += d;
+    }
+    return SVG;
+  };
+  this.tipold = function(){
     SVG = svg(false, false);
     svgCSS(SVG, "jt-editor-v.css");
     tooltip.appendChild(SVG);
@@ -1957,7 +2051,7 @@ function Parameters(){
     }
     return SVG;
   };
-  this.addTip = function(lines, colour, witnesses) {
+  this.addTip = function(lines, colour, witnesses, clef, solm) {
     staff = svgGroup(SVG, "Stafflines", false);
     drawSystemLines(staff, lines, cury -lines*rastralSize, curx+10, curx+55, colour, SVG);
     var description = svgText(SVG, curx + 10, 10, "variantReading", false, false, false);
@@ -1966,7 +2060,12 @@ function Parameters(){
     } else {
       svgSpan(description, "VariantWitnesses", false, witnesses.join(" "));
     }
-
+//    oldSVG = SVG;
+//    SVG = staff;
+    curx += 15;
+    if(clef) clef.draw();
+    if(solm) solm.draw();
+//    SVG = oldSVG;
   };
   this.getWitnesses = function(){
     var witnesses = [];
@@ -2037,6 +2136,31 @@ function MChoice(){
   this.width = function(){
     return this.content.length ? this.content[0].width() : 0;
   };
+  this.infop = function(){
+    // Find out if this contains useful prefatory info
+    if(this.content[0].applies(false)){
+      return infop(this.content[0].content[0]);
+    }
+    return false;
+  };
+  this.clefp = function(variant){
+    for(var i=0; i<(variant? this.content.length : 1); i++){
+      if(this.content[i].applies(variant)){
+      // Default object
+        return this.content[i].clefp();
+      }
+    }
+    return false;
+  };
+  this.solmp = function(variant){
+    for(var i=0; i<variant? this.content.length : 1; i++){
+      if(this.content[i].applies(variant)){
+        // Default object
+        return this.content[i].solmp();
+      }
+    }
+    return false;
+  };
   // FIXME: not needed
   this.fetch = function(variant){
     if(typeof(variant)=="undefined" || !variant){
@@ -2105,7 +2229,7 @@ function MChoice(){
       if(this.content[0].description == "ins."){
         if(showvariants){
           //starry thing
-          click = svgText(SVG, curx, cury-(currentLinecount*rastralSize), "musical variants text", false, false, "*");
+          click = svgText(SVG, curx, cury-(currentLinecount*rastralSize), "musical variants text", false, false, "ˇ");//*
           curx += rastralSize;
         } else return;
       } else if(this.textBlock){
@@ -2228,7 +2352,7 @@ function LigChoice(){
       // An insertion means that the default version has *nothing*
       if(!showvariants) return false;
       // If we are showing variants, we need a marker
-      click = svgText(SVG, curx, cury-(currentLinecount*rastralSize), "musical variants text", false, false, "*");
+      click = svgText(SVG, curx, cury-(currentLinecount*rastralSize), "musical variants text", false, false, "ˇ");//ˇ
       curx += rastralSize;
     } else {
       click = this.content[0].draw(false, false); // ?!
@@ -2354,7 +2478,7 @@ function ObliqueNoteChoice(){
       // An insertion means that the default version has *nothing*
       if(!showvariants) return false;
       // If we are showing variants, we need a marker
-      click = svgText(SVG, curx, cury-(currentLinecount*rastralSize), "musical variants text", false, false, "*");
+      click = svgText(SVG, curx, cury-(currentLinecount*rastralSize), "musical variants text", false, false, "ˇ");//ˇ
       curx += rastralSize;
     } else {
       click = this.content[0].draw(false, false); // ?!
@@ -2384,6 +2508,24 @@ function MReading(witnesses, content, description){
     } else {
       return this.description != "ins.";
     }
+  };
+  this.clefp = function(){
+    // FIXME: Doesn't feel right -- what if there're notes first?
+    for(var i=0; i<this.content.length; i++){
+      if(this.content[i].objType == "Clef"){
+        return this.content[i];
+      }
+    }
+    return false;
+  };
+  this.solmp = function(){
+    // FIXME: Doesn't feel right -- what if there're notes first?
+    for(var i=0; i<this.content.length; i++){
+      if(this.content[i].objType == "SolmizationSignature"){
+        return this.content[i];
+      }
+    }
+    return false;
   };
   this.forwardEvent = function(variant){ return this.content[0];};
   this.backwardEvent = function(variant){ return this.content[this.content.length-1];};
@@ -2446,6 +2588,8 @@ function MReading(witnesses, content, description){
       } else {
         if(typeof(this.content[i]) == "string") {
           obj.push(svgSpan(svgEl, 'text', false, this.content[i]));
+        } else if (this.clefp || this.solmp){
+          obj.push(this.content[i].draw());
         } else {
           obj.push(this.content[i].draw());
         }

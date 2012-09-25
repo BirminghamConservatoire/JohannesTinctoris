@@ -220,7 +220,7 @@ function Paragraph(){
 function Annotation(){
   this.objType = "Annotation";
   this.code = false;
-  this.domObj = DOMSpan("annotation", false, "*");
+  this.domObj = DOMSpan("annotation", false, "‸");//*"
   this.toText = function(){
     return "**"+this.code+"**";
   };
@@ -498,7 +498,7 @@ function Choice(){
         span.appendChild(el);
       }
     }
-    el = DOMSpan(ins ? "ins variants" : "variants", false, "*");
+    el = DOMSpan(ins ? "ins variants" : "variants", false, "‸");//*
     span.appendChild(el);
     // $(el).mouseover(function(text){
     //     return function(e){

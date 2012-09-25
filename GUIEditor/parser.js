@@ -276,6 +276,7 @@ function TreatiseDoc(text){
   };
   resetAnnotations();
   resetDebugger();
+  sources = this.sources;
   var prevcomplaint = complaint;
   complaint = [];
   var currentElement = new Paragraph();

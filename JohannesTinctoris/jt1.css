@@ -53,14 +53,13 @@ body {
 	/*background-color: #EEE;*/
 	padding-bottom: 1em;
 }
-.options a.checked{
+.options a.checked, .tickoptions.checked{
 	font-weight: bold;
 }
-.options a:after{
+.options a:after, .tickoptions:after{
 	content: none;
 }
-
-.options a.checked:after{
+.options a.checked:after, .tickoptions.checked:after{
 	content: " ✓";
 }
 #centrepane{
@@ -117,7 +116,7 @@ body {
 	padding: 8px;
 	background-color: rgba(238, 238, 238, 0.95);
 	border-radius: 8px;
-	font-size: 90%;
+	font-size: 85%;
 }
 .optionsBlock div {
 	padding: 6px 4px 0px 4px;
@@ -128,15 +127,15 @@ body {
 	padding: 0 0 6px 0;
 	font-weight: bold;
 	color: #433;
-	background-color; rgba(222,222,222,0.95);
+	background-color: rgba(222,222,222,0.95);
 }
 
 .sourceNavigation{
 }
-.toggle{
+.toggle, .tickoptions, .switchoption{
 	cursor: pointer;
 }
-.toggle:hover{
+.toggle:hover, .tickoptions:hover, .switchoption:hover{
 	background-color: #AAA;
 	border-radius: 4px;
 }
@@ -146,10 +145,10 @@ body {
 .textVariants.checked:before, .translationNotes.checked:before, .transcriptionNotes.checked:before{
 	content: "Hide";
 }
-.punctuation:before{
+.punctuat:before{
 	content: "Modern";
 }
-.punctuation.checked:before{
+.punctuat.checked:before{
 	content: "Manuscript";
 }
 .exx:after{
@@ -166,4 +165,55 @@ body {
   overflow: scroll;
   background-color: #F5F0D7;
   border-radius: 8px;
+}
+div.tickgroup{
+  border-bottom: 2px solid white;
+  border-top: 2px solid white;
+  border-radius: 6px;
+  padding: 5px 0;
+  margin: 2px 0px 1px 7px;
+}
+div.switchoption span.label{
+  font-weight: bold;
+}
+div.switchoption .opt{
+  display: inline-block;
+  border-left: 2px solid white;
+  margin-left: 2px;
+  padding-left: 2px;
+}
+div.switchoption.checked span.neg, div.switchoption span.pos, 
+    div.switchoption.checked span.modern, div.switchoption span.MS {
+  color: #999;
+  font-weight: normal;
+}
+div.switchoption span.neg, div.switchoption.checked span.pos,
+    div.switchoption span.modern, div.switchoption.checked span.MS{
+  color: #000;
+  font-weight: bold;
+}
+.infoshowhide{
+  display: inline-block;
+  width: 2ex;
+  height: 2ex;
+  font-size: 80%;
+	font-family: "Helvetica Neue", Helvetica, Verdana, Verdana, Geneva, sans-serif;
+  font-weight: bold;
+  margin: -1ex 0.5ex 0 0 ;
+  padding: 0.2ex 0.5ex 0.8ex 0.5ex;
+  text-align: center;
+  border-radius: 2ex;
+  border:1px solid #655;
+  background-color: #655;
+  color: white;
+  cursor: pointer
+}
+.infoshowhide:hover{
+  border: 1px solid white;
+  border:1px solid #D55;
+  background-color: #C55;
+}
+.infoshowhide.showing{
+  border:1px solid #A00;
+  background-color: #900;
 }

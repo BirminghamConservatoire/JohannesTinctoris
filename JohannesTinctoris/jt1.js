@@ -51,10 +51,17 @@ function loadSettings(){
   editable = false;
   showvariants = Number(settings.variants);
   if(showvariants) $(".textVariants").addClass("checked");
+  if(showvariants) {
+    $(".vars.tickoptions.yes").addClass("checked");
+    $(".showhidevariants").addClass("checked");
+  } else {
+    $(".vars.tickoptions.no").addClass("checked");
+  }
   showtranslationnotes = Number(settings.translationNotes);
   showtranscriptionnotes = Number(settings.transcriptionNotes);
   punctuationStyle = Number(settings.MSPunctuation) ? "MS" : "modern";
-  if(punctuationStyle == "MS") $(".punctuation").addClass("checked");
+  $(".punctuation."+punctuationStyle).addClass("checked");
+  if(punctuationStyle == "MS") $(".switchpunctuation").addClass("checked");
 	$("#"+settings.language).addClass("checked");
 }
 
@@ -105,7 +112,6 @@ function setlocation (name, val){
   }
 }
 
-
 $(document).ready(function(){
 	var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"SpryAssets/SpryMenuBarDownHover.gif", imgRight:"SpryAssets/SpryMenuBarRightHover.gif"});
 	loadSettings();
@@ -121,6 +127,43 @@ $(document).ready(function(){
 			e.stopImmediatePropagation();
 		});
 	});
+  $(".tickoptions").click(function(){
+     if(!$(this).hasClass("checked")){
+       $(this).addClass("checked");
+       if($(this).hasClass("vars")){
+         showvariants = $(this).hasClass("yes");
+         $(".tickoptions.vars."+(showvariants?"no":"yes")).removeClass("checked");
+         refreshMenus({variants: showvariants});
+         setlocation("showvars", showvariants ? 1 : 0);
+       } else if($(this).hasClass("punctuation")){
+         punctuationStyle = $(this).hasClass("MS") ? "MS" : "modern";
+         $(".tickoptions.punct."+punctuationStyle).removeClass("checked");
+         refreshMenus({MSPunctuation: punctuationStyle});
+         setlocation("MSPunctuation", punctuationStyle=="MS" ? 1 : 0);
+       }
+      doc = new TreatiseDoc(doc.text);
+      navSelect(doc);
+      refreshMenus();
+     }
+  });
+  $(".showhidevariants").click(function(){
+    $(this).toggleClass("checked");
+    showvariants = $(this).hasClass("checked");
+    refreshMenus({variants: showvariants});
+    doc = new TreatiseDoc(doc.text);
+    navSelect(doc);
+    refreshMenus();
+    setlocation("showvars", showvariants ? 1 : 0);
+  });
+  $(".switchpunctuation").click(function(){
+    $(this).toggleClass("checked");
+    punctuationStyle = $(this).hasClass("checked") ? "MS" : "modern";
+    refreshMenus({MSPunctuation: punctuationStyle});
+    doc = new TreatiseDoc(doc.text);
+    navSelect(doc);
+    refreshMenus();
+    setlocation("MSPunctuation", punctuationStyle=="MS" ? 1 : 0);
+  });
 	$(".toggle").click(function(e){
 		$(this).toggleClass("checked");
     if($(this).hasClass("textVariants")){
@@ -131,10 +174,10 @@ $(document).ready(function(){
       navSelect(doc);
       refreshMenus();
       setlocation("showvars", varp ? 1 : 0);
-    } else if ($(this).hasClass("punctuation")){
+    } else if ($(this).hasClass("punctuat")){
       var puncp = $(this).hasClass("checked");
       refreshMenus({MSPunctuation: varp});
-      punctuationStype = varp ? "modern" : "MS";
+      punctuationStyle = varp ? "modern" : "MS";
       doc = new TreatiseDoc(doc.text);
       navSelect(doc);
       setlocation("MSPunctuation", puncp ? 1 : 0);

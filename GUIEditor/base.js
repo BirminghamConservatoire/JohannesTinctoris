@@ -150,6 +150,11 @@ var showvariants = true;
 var showtranslationnotes = true;
 var showtranscriptionnotes = true;
 var punctuationStyle="modern";
+var editorDisplay = "show";
+var dateDisplay = "show";
+var copyTextDisplay = "show";
+var sourceDisplay = "show";
+var infoButtons = false;
 
 // Current variable values (for context)
 //var tooltip = false;
@@ -1402,4 +1407,29 @@ function ligatureDrawingKit(ligarray){
 function listeq(l1, l2){
   // returns true if every item in l1 is == every item in l2
   return l1.every(function(el, i, a){return el==l2[i];});
+}
+
+function infoButton(abbr, fields, parent, on, togglevar){
+  var div = DOMDiv('infoshowhide '+abbr, false, abbr);
+  parent.appendChild(div);
+  if(on) $(div).addClass("showing");
+  $(div).data("fields", fields);
+  $(div).data("togglevar", togglevar);
+  div.onclick = function(){infoToggle(this);};
+  return div;
+}
+
+function infoToggle(div){
+  var fields = $(div).data("fields");
+  var togglevar = $(div).data("togglevar");
+  togglevar = togglevar=="show" ? "hide" : "show";
+  $(div).toggleClass("showing");
+  var show = $(div).hasClass("showing");
+  for(var i=0; i<fields.length; i++){
+    if(show) {
+      $(".info."+fields[i]).show();
+    } else {
+      $(".info."+fields[i]).hide();
+    }
+  }
 }

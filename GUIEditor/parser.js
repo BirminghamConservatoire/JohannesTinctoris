@@ -231,30 +231,67 @@ function TreatiseDoc(text){
     }
     return text + "</treatise>";
   };
+  this.infoButtons = function(){
+    var ib = this.div.appendChild(DOMDiv('infoButtons'), false, false);
+    if(this.editor || this.entered || this.checked || this.approved){
+      if(editorDisplay == "show" || editorDisplay == "hide"){
+        infoButton("e", ["editor", "checkedby", "enteredby", "approvedby"], ib,
+          editorDisplay == "show", "editorDisplay");
+      }
+    }
+    if(this.established){
+      if(dateDisplay == "show" || dateDisplay == "hide"){
+        infoButton("d", ["dateestablished"], ib,
+          dateDisplay == "show", "dateDisplay");
+      }
+    }
+    if(this.source || this.sources){
+      if(sourceDisplay == "show" || sourceDisplay == "hide"){
+        infoButton("s", ["source", "sources"], ib,
+          sourceDisplay == "show", "sourceDisplay");
+      }
+    }
+    if(this.copy){
+      if(copyTextDisplay == "show" || copyTextDisplay == "hide"){
+        infoButton("c", ["copytext"], ib,
+        copyTextDisplay == "show", "copyTextDisplay");
+      }
+    }    
+  };
   this.writeHeaders = function(){
     if(this.title){
       this.div.appendChild(DOMTextEl("h2", "title", false, this.title));
     }
+    if(infoButtons){
+      this.infoButtons();
+    }
     if(this.editor){
       this.div.appendChild(fieldDatumPair("Editor", this.editor));
+      if(editorDisplay == "hide" || !editorDisplay) $(".info.editor").hide();
     }
     if(this.entered){
       this.div.appendChild(fieldDatumPair("Entered by", this.entered));
+      if(editorDisplay == "hide" || !editorDisplay) $(".info.enteredby").hide();
     }
     if(this.checked){
       this.div.appendChild(fieldDatumPair("Checked by", this.checked));
+      if(editorDisplay == "hide" || !editorDisplay) $(".info.checkedby").hide();
     }
     if(this.established){
       this.div.appendChild(fieldDatumPair("Date established", this.established));
+      if(dateDisplay == "hide" || !dateDisplay) $(".info.dateestablished").hide();
     }
     if(this.approved){
       this.div.appendChild(fieldDatumPair("Approved by", this.approved));
+      if(editorDisplay == "hide" || !editorDisplay) $(".info.approvedby").hide();
     }
     if(this.copy){
       this.div.appendChild(fieldDatumPair("Copy text", this.copy));
+      if(copyTextDisplay == "hide" || !copyTextDisplay) $(".info.copytext").hide();
     }
     if(this.source){
       this.div.appendChild(fieldDatumPair("Source", this.source));
+      if(sourceDisplay == "hide" || !sourceDisplay) $(".info.source").hide();
     }
     if(this.script){
       this.div.appendChild(fieldDatumPair("Script", this.script));
@@ -272,6 +309,7 @@ function TreatiseDoc(text){
         div.appendChild(this.sources[i].toHTML());
       }
       this.div.appendChild(div);
+      if(sourceDisplay == "hide" || !sourceDisplay) $(".info.sources").hide();
     }
   };
   resetAnnotations();

@@ -3,6 +3,11 @@ var textname = "De notis et pausis";
 var variants = ["BU", "G", "Br1", "V"];
 editable = false;
 nocache = true;
+infoButtons = true;
+copyTextDisplay = false;
+editorDisplay = "hide";
+dateDisplay = "hide";
+sourceDisplay = "hide";
 function url (variant){
   return pathtotexts+textname+" ("+variant+").txt";
 }

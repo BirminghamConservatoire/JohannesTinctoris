@@ -99,6 +99,7 @@ function TreatiseDoc(text){
   this.editor = false;
   this.columns = false;
   this.hands = [];
+  this.maxWidth = 0;
   // When we click on a button we lose the selection, so this
   // click-button needs to store the selection information as the
   // pointer approaches it
@@ -343,7 +344,8 @@ function TreatiseDoc(text){
     $("p").removeClass("twocolumn");
     $("p").addClass("onecolumn");
   }
-  refreshExamples();
+  this.maxWidth = refreshExamples();
+  this.div.style.width = Math.max(this.maxWidth, 500)+"px";
   if(complaint.length>prevcomplaint.length){
 //    alert("New error messages (see bottom of page)");
     showErrorCount(complaint.length);
@@ -372,6 +374,7 @@ function TreatiseDoc(text){
 }
 
 function refreshExamples(){
+  var mw = 0;
   for(var i=0; i<examples.length; i++){
     // examples[i][0].staffCanvas.style.zIndex = 1;
     // examples[i][0].staffCanvas.style.top = 0 - examples[i][1].height;
@@ -379,6 +382,7 @@ function refreshExamples(){
     // examples[i][1].style.zIndex = 5;
     examplei = i;
     examples[i][0].draw(examples[i][1], nocache);
+    mw = Math.max(mw, examples[i][1].width.baseVal.value);
     examples[i][0].toText();
     var fun = function(ex){
         return function(e) {
@@ -401,6 +405,7 @@ function refreshExamples(){
   //     $(this).data("parseobj").edit(e);
   // });
   firstTime = false;
+  return mw + 20;
 }
 
 function readPara(){

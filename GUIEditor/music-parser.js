@@ -134,8 +134,8 @@ function MusicExample(){
     SVG = exampleSVG;
 //FIXME:    context = SVG.getContext("2d");
     clearSVG(SVG);
-    svgCSS(SVG, "jt-editor-v.css");
-    svgCSS(SVG, "print.css");
+    svgCSS(SVG, cssPath("jt-editor-v.css"));
+    svgCSS(SVG, cssPath("print.css"));
     this.w2 = [];
     currentSystems = [];
     var fontstring = Math.round(3 * rastralSize * prop) +"pt ArsNovaVoidRegular";

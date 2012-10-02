@@ -1889,7 +1889,7 @@ function Parameters(){
     } else {
       initialStaffStar = [svgText(SVG, 0, Math.max(0, cury - rastralSize * this.staff.trueLines() ),
                          "variants musical", false, false, "*"), this.staff, currentExample];
-      addAnnotation(initialStaffStar[0], this, "staff");
+      if(showVariants) addAnnotation(initialStaffStar[0], this, "staff");
     }
   };
   this.draw = function(){
@@ -1906,7 +1906,7 @@ function Parameters(){
     if(this.getSolmization()){
       this.getSolmization().draw();
     }
-    if(this.hasChoice()){
+    if(showvariants && this.hasChoice()){
       SVG.style.fill = "#060";
       addAnnotation(SVG, this, "staff");
     }
@@ -2230,7 +2230,7 @@ function MChoice(){
         if(showvariants){
           //starry thing
           click = svgText(SVG, curx, cury-(currentLinecount*rastralSize), "musical variants text", false, false, "ˇ");//*
-          curx += rastralSize;
+          curx += rastralSize / 2;
         } else return;
       } else if(this.textBlock){
         if(showvariants) this.styles.push('choice');
@@ -2358,7 +2358,7 @@ function LigChoice(){
       click = this.content[0].draw(false, false); // ?!
       if(showvariants) click.style.fill = "#060";
     }
-    addAnnotation(click, this, "Ligature MusicalChoice");
+    if(showvariants) addAnnotation(click, this, "Ligature MusicalChoice");
     return click;
   };
 }
@@ -2484,7 +2484,7 @@ function ObliqueNoteChoice(){
       click = this.content[0].draw(false, false); // ?!
       if(showvariants) click.style.fill = "#060";
     }
-    addAnnotation(click, this, "Oblique MusicalChoice");
+    if(showvariants) addAnnotation(click, this, "Oblique MusicalChoice");
     return click;
   };
 }
@@ -2616,7 +2616,7 @@ function MReading(witnesses, content, description){
   this.draw = function(txtBlock, styles){
     var obj;
     if(typeof(txtBlock) == "undefined" || !txtBlock) {
-      obj = svgGroup(SVG, 'variantGroup', false);
+      obj = svgGroup(SVG, showvariants ? 'variantGroup' : 'invisibleVariantGroup', false);
       this.sketch(obj, false);
       // for(var i=0; i<stuff.length; i++){
       //   if(stuff[i]){
@@ -2624,7 +2624,7 @@ function MReading(witnesses, content, description){
       //   }
       // }
     } else {
-      obj = svgSpan(txtBlock, 'variantGroup', false);
+      obj = svgSpan(txtBlock, showvariants ? 'variantGroup' : 'invisibleVariantGroup', false);
       var stuff = this.sketchText(styles);
       for(var i=0; i<stuff.length; i++){
         obj.appendChild(stuff[i]);

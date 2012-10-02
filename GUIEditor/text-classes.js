@@ -193,7 +193,7 @@ function Paragraph(){
           this.content[i].staffSVG = staffSVG;
         }
 //        div.style.width = exWidth;
-        div.style.width = this.content[i].width();
+        div.style.width = this.content[i].width() + "px";
 //        div.height = this.content[i].height();
 //        newSVG.setAttribute('width', exWidth);
         // alert(newSVG.width.baseVal);
@@ -205,7 +205,8 @@ function Paragraph(){
 //        staffSVG.style.position="relative";
 //        newSVG.style.position="relative";
 //        staffSVG.style.top = 0 - this.content[i].height();
-        staffSVG.style.height = this.content[i].height();
+        // staffSVG.style.height = this.content[i].height();
+        staffSVG.height = this.content[i].height();
 //        staffSVG.style.marginBottom = 0 - this.content[i].height();
         examples.push([this.content[i], newSVG]);
       } else {

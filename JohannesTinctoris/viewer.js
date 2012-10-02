@@ -8,6 +8,7 @@ copyTextDisplay = false;
 editorDisplay = "hide";
 dateDisplay = "hide";
 sourceDisplay = "hide";
+cssloc = "../../../GUIEditor";
 function url (variant){
   return pathtotexts+textname+" ("+variant+").txt";
 }

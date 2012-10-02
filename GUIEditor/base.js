@@ -133,7 +133,8 @@ var vertical;
 var leading = 20;
 // var topMargin = 40;
 var topMargin = 25;
-var lmargin = 10;
+//var lmargin = 10;
+var lmargin = 3;
 var rastralSize = 15;
 var exWidth = 690;
 var localWidth = exWidth;
@@ -774,7 +775,8 @@ function sysBreak2(lastp){
     currentSystems.push(svgGroup(SVG, "Stafflines", false));
   }
 //  if(isNaN($(currentExample.staffSVG).innerWidth())) alert([currentExample, $(currentExample.staffSVG)]);
-  localWidth = Math.max(curx+2, localWidth);
+//  localWidth = Math.max(curx+2, localWidth);
+  localWidth = Math.min(curx+2, localWidth);
   currentExample.staffSVG.setAttribute('width', localWidth);
 }
 
@@ -1432,4 +1434,9 @@ function infoToggle(div){
       $(".info."+fields[i]).hide();
     }
   }
+}
+
+var cssloc = ".";
+function cssPath(filename){
+  return cssloc +"/"+ filename;
 }

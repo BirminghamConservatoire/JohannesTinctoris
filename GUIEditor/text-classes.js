@@ -412,6 +412,7 @@ function Text(text){
   };
   this.toHTML = function(){
     if(uncapitalise){
+//      alert([uncapitalise, this.content]);
       var firstPos = this.code.search(/\S/);
       if(firstPos<0){
         this.DOMObj = document.createTextNode(" ");
@@ -422,7 +423,7 @@ function Text(text){
     } else {
       this.DOMObj = document.createTextNode(this.code);
     }
-    uncapitalize = false;
+    uncapitalise = false;
     return this.DOMObj;
   };
 }

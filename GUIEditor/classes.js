@@ -2063,7 +2063,11 @@ function Parameters(){
 //    oldSVG = SVG;
 //    SVG = staff;
     curx += 15;
-    if(clef) clef.draw();
+    if(clef) {
+      var c = currentClef;
+      clef.draw();
+      currentClef = c;
+    }
     if(solm) solm.draw();
 //    SVG = oldSVG;
   };

@@ -283,9 +283,9 @@ div.buttons {
 
 .annotation, .variants {
   font-family: sans-serif;
-//  font-size: 180%;
-//  line-height: 0.5;
-//  vertical-align: -60%;
+/*   font-size: 180%; */
+/*   line-height: 0.5; */
+/*   vertical-align: -60%; */
   letter-spacing: 0.1ex;
   font-size: 120%;
   cursor: default;

@@ -87,7 +87,8 @@ function MusicExample(){
     sysWidths = [rastralSize + this.parameters.width()];
 //    var x = lmargin +rastralSize/2;
     for(eventi=0; eventi<this.events.length; eventi++){
-      if(this.events[eventi].objType == "Staff"){
+      if(this.events[eventi].objType == "Staff" 
+         || (wrapWidth && sysWidths[sysWidths.length-1] >= wrapWidth)){
         sysWidths[sysWidths.length-1] += rastralSize * 2;
         if(sysWidths[sysWidths.length-1]+lmargin>SVG.width){
           sysWidths[sysWidths.length-1] = SVG.width - lmargin;
@@ -148,6 +149,12 @@ function MusicExample(){
     currentSystems.push(svgGroup(SVG, "Stafflines", false));
     this.parameters.draw();
     for(eventi = 0; eventi<this.events.length; eventi++){
+      if(wrapWidth && curx>=wrapWidth){
+        sysBreak2();
+        sysBreak();
+        this.SVG.height.baseVal.value = this.SVG.height.baseVal.value 
+          + (rastralSize*5)+5+(currentLinecount*rastralSize);
+      }
       if(this.events[eventi].objType && !this.events[eventi].params) {
         this.events[eventi].draw(curx, cury);
       }
@@ -722,6 +729,7 @@ function parseClefVar(fields){
     fields = nextC[0];
   }
   obj.content.push(nextC[1]);
+  currentClef = obj.content[0].content[0];
   return obj;
 }
 function parseClef(spec){
@@ -732,7 +740,6 @@ function parseClef(spec){
   obj.type = spec.substring(0, spec.length - 1);
   obj.staffPos = "0123456789ABCDEF".indexOf(spec.charAt(spec.length - 1));
   if(obj.staffPos != -1 && obj.type.match(/(Gamma|C|F|G|E)/)){
-    // FIXME: What? What does this mean?
     return obj;
   }
   currentClef = old;

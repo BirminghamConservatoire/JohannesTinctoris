@@ -188,6 +188,7 @@ var currentSystem = false;
 var currentSystems = [];
 var currentInfo = false;
 var suppressBreak = true;
+var wrapWidth = false;
 var currentClef = false;
 var currentRedline = false;
 var uncapitalise = false;

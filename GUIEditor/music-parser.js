@@ -44,6 +44,8 @@ function MusicExample(){
     if(this.swidth) {
       return this.swidth;
     } else {
+      this.setSysWidths();
+      return this.swidth;
       var w = 0;
       for(var e=0;e<this.events.length; e++){
         var w2 = this.events[e].startX ? this.events[e].startX : 0;
@@ -85,14 +87,16 @@ function MusicExample(){
   };
   this.setSysWidths = function(){
     sysWidths = [rastralSize + this.parameters.width()];
+    this.swidth = 0;
 //    var x = lmargin +rastralSize/2;
     for(eventi=0; eventi<this.events.length; eventi++){
       if(this.events[eventi].objType == "Staff" 
-         || (wrapWidth && sysWidths[sysWidths.length-1] >= wrapWidth)){
+         || (wrapWidth && sysWidths[sysWidths.length-1] >= wrapWidth - rastralSize * 2 - lmargin)){
         sysWidths[sysWidths.length-1] += rastralSize * 2;
         if(sysWidths[sysWidths.length-1]+lmargin>SVG.width){
           sysWidths[sysWidths.length-1] = SVG.width - lmargin;
         }
+        this.swidth = Math.max(this.swidth, sysWidths[sysWidths.length-1]);
         sysWidths.push(rastralSize);
       } else {
         if(isNaN(this.events[eventi].width())){
@@ -104,6 +108,7 @@ function MusicExample(){
         sysWidths[sysWidths.length -1] +=this.events[eventi].width();
       }
     }
+    this.swidth = Math.max(this.swidth, sysWidths[sysWidths.length-1]);
   };
   this.toText = function(){
     var text = this.parameters.toText();
@@ -146,24 +151,36 @@ function MusicExample(){
     sysNo = 1;
     curx += rastralSize / 2;
     cury += currentLinecount * rastralSize;
+    var texted = false;
+    var maxx = false;
     currentSystems.push(svgGroup(SVG, "Stafflines", false));
     this.parameters.draw();
     for(eventi = 0; eventi<this.events.length; eventi++){
       if(wrapWidth && curx>=wrapWidth){
         sysBreak2();
         sysBreak();
+        currentClef.draw();
         this.SVG.height.baseVal.value = this.SVG.height.baseVal.value 
           + (rastralSize*5)+5+(currentLinecount*rastralSize);
       }
       if(this.events[eventi].objType && !this.events[eventi].params) {
-        this.events[eventi].draw(curx, cury);
+        try {
+          this.events[eventi].draw(curx, cury);          
+        } catch (x) {
+        }
+        if(this.events[eventi].objType == "TextUnderlay"){
+          texted = true;
+        }
       }
     }
     sysBreak2(true);
     for(var w=0; w<this.w2.length; w++){
       drawSystemLines(currentSystems[w], this.w2[w][2], this.w2[w][1], lmargin, 
         this.w2[w][0], this.w2[w][3], this.staffSVG);
+        maxx = Math.max(this.w2[w][0], maxx);
     }
+    SVG.height.baseVal.value = SVG.getBoundingClientRect().height + (texted ? 25 : 5);
+    SVG.width.baseVal.value = maxx + (texted ? 25 : 5);
   };
 }
 
@@ -603,6 +620,8 @@ function getSubText (){
   while(strsize != 0){
     if(varpos!=-1 && (commentpos == -1 || varpos<commentpos) 
        && (tagpos ==-1 || varpos < tagpos)) {
+      if(varpos) components.push(string.substring(0,varpos));
+      string = string.substring(varpos);
       // FIXME: A variant inside a variant would spell madness, but
       // lets assume sanity for now
       components.push(nextTextChoice());

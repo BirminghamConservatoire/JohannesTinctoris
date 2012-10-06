@@ -267,10 +267,8 @@ function LigatureNote(note){
         return 1;
       }
     } else if (this.rhythm == "B" &&
-               ((!this.prevEvent(variant) 
-                 && this.nextEvent(variant).varStartStaffPos(variant) < this.staffPos)
-                || (!this.nextEvent(variant)
-                    && this.prevEvent(variant).varEndStaffPos(variant) < this.staffPos))){
+               (!this.prevEvent(variant) 
+                 && this.nextEvent(variant).varStartStaffPos(variant) < this.staffPos)){
       return -1;
     } else {
       return false;
@@ -454,7 +452,7 @@ function Ligature(){
       if(e.sup) return 3/2*rastralSize;
       return 0;
     }
-    if(e.objType == "Note") alert(this.str);
+    if(e.objType == "Note") alert(this.str+" err-02");
     e = e.nextEvent(variant);
     if (e & e.rhythm == "M" && e.sup) return rastralSize;
     return 0; 
@@ -2232,9 +2230,12 @@ function MChoice(){
     if(this.content.length){
       if(this.content[0].description == "ins."){
         if(showvariants){
-          //starry thing
-          click = svgText(SVG, curx, cury-(currentLinecount*rastralSize), "musical variants text", false, false, "ˇ");//*
-          curx += rastralSize / 2;
+          if(this.textBlock){
+            click = svgSpan(this.textBlock, "musical ins variants", false, "‸");
+          } else {
+            click = svgText(SVG, curx, cury-(currentLinecount*rastralSize), "musical variants text", false, false, "ˇ");//*
+            curx += rastralSize / 2;
+          }
         } else return;
       } else if(this.textBlock){
         if(showvariants) this.styles.push('choice');
@@ -2574,9 +2575,9 @@ function MReading(witnesses, content, description){
       block.appendChild(text[i]);
     }
     if(this.witnesses[0] == "MSS" || this.witnesses[0] == "emend."){
-      svgSpan(block, "variantWitnessesSpecial", false, this.witnesses.join(" "));
+      svgSpan(block, "variantWitnessesSpecial", false, " "+this.witnesses.join(" "));
     } else {
-      svgSpan(block, "VariantWitnesses", false, this.witnesses.join(" "));
+      svgSpan(block, "VariantWitnesses", false, " "+this.witnesses.join(" "));
     }
   if(!lastTime) svgSpan(block, false, false, " : ");
   return block;

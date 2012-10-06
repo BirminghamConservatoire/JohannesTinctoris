@@ -322,10 +322,20 @@ function TreatiseDoc(text){
   var currentString = "";
   pointer = 0;
   string = text;
-  this.parseHeaders();
+  try{
+    this.parseHeaders();
+  } catch (x) {
+    // Register an error?
+  }
   while(string !=""){
-    var para = readPara();
-    if(para) this.contents.push(para);
+    try{
+      var para = readPara();
+      if(para) this.contents.push(para);      
+    } catch (x) {
+      var para = new Comment();
+      para.code = "Error";
+      this.contents.push(para);
+    }
   }
   this.hands = hands;
 //  this.draw = function(){
@@ -345,7 +355,7 @@ function TreatiseDoc(text){
     $("p").addClass("onecolumn");
   }
   this.maxWidth = refreshExamples();
-  this.div.style.width = Math.max(this.maxWidth, 500)+"px";
+  this.div.style.width = Math.max(this.maxWidth+5, 450)+"px";
   if(complaint.length>prevcomplaint.length){
 //    alert("New error messages (see bottom of page)");
     showErrorCount(complaint.length);
@@ -381,9 +391,13 @@ function refreshExamples(){
     // examples[i][0].staffCanvas.style.marginBottom = 0 - examples[i][1].height;
     // examples[i][1].style.zIndex = 5;
     examplei = i;
-    examples[i][0].draw(examples[i][1], nocache);
-    mw = Math.max(mw, examples[i][1].width.baseVal.value);
-    examples[i][0].toText();
+    try{
+      examples[i][0].draw(examples[i][1], nocache);
+      mw = Math.max(mw, examples[i][1].width.baseVal.value);
+      examples[i][0].toText();  
+    } catch (x) {
+      // FIXME: Log somewhere
+    }
     var fun = function(ex){
         return function(e) {
           var offset = $(this).offset();
@@ -578,7 +592,11 @@ function readTag(){
         string = string.substring(9, locend);
         var me = findExample();
         if(!me){
-          me = new MusicExample();
+          try{
+            me = new MusicExample();
+          } catch (x) {
+            return false;
+          }
         }
         string = savedString;
         pointer = savedPointer;

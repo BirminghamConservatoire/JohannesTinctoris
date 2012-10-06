@@ -53,15 +53,6 @@ body {
 	/*background-color: #EEE;*/
 	padding-bottom: 1em;
 }
-.options a.checked, .tickoptions.checked{
-	font-weight: bold;
-}
-.options a:after, .tickoptions:after{
-	content: none;
-}
-.options a.checked:after, .tickoptions.checked:after{
-	content: " ✓";
-}
 #centrepane{
 	position: relative;
 	float: right;
@@ -111,6 +102,35 @@ body {
 	margin: 8px;
 	width: 25ex;
 }
+.sourceNavigation{
+}
+.pane1{
+  float: left;
+  width: 45em;
+  margin: 16px 3px 0 0;
+  padding: 6px;
+  overflow: scroll;
+  background-color: #F5F0D7;
+  border-radius: 8px;
+}
+h2.title{
+  margin-top: 0.5ex;
+  margin-bottom: 0.2ex;
+}
+/* OPTIONS */
+.tickoptions{
+  margin-left: 1ex;
+}
+
+.options a.checked, .tickoptions.checked{
+	font-weight: bold;
+}
+.options a:after, .tickoptions:after{
+	content: none;
+}
+.options a.checked:after, .tickoptions.checked:after{
+	content: " ✓";
+}
 .optionsBlock {
 	margin: 8px 2px 8px 0;
 	padding: 8px;
@@ -129,69 +149,41 @@ body {
 	color: #433;
 	background-color: rgba(222,222,222,0.95);
 }
-
-.sourceNavigation{
+.tickgroupheader {
+  /* background-color: #CCC; */
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid white;
 }
-.toggle, .tickoptions, .switchoption{
+
+.toggle, .active * .tickoptions, .switchoption{
 	cursor: pointer;
 }
-.toggle:hover, .tickoptions:hover, .switchoption:hover{
+.toggle:hover, .active * .tickoptions:hover, .switchoption:hover{
 	background-color: #AAA;
 	border-radius: 4px;
 }
-.textVariants:before, .translationNotes:before, .transcriptionNotes:before{
-	content: "Show";
-}
-.textVariants.checked:before, .translationNotes.checked:before, .transcriptionNotes.checked:before{
-	content: "Hide";
-}
-.punctuat:before{
-	content: "Modern";
-}
-.punctuat.checked:before{
-	content: "Manuscript";
-}
-.exx:after{
-	content: "Original notation";
-}
-.exx.checked:after{
-	content: "Modern notation";
-}
-.pane1{
-  float: left;
-  width: 45em;
-  margin: 16px 3px 0 0;
-  padding: 6px;
-  overflow: scroll;
-  background-color: #F5F0D7;
-  border-radius: 8px;
-}
-div.tickgroup{
-  border-bottom: 2px solid white;
-  border-top: 2px solid white;
-  border-radius: 6px;
-  padding: 5px 0;
-  margin: 2px 0px 1px 7px;
-}
-div.switchoption span.label{
-  font-weight: bold;
-}
-div.switchoption .opt{
-  display: inline-block;
-  border-left: 2px solid white;
-  margin-left: 2px;
-  padding-left: 2px;
-}
-div.switchoption.checked span.neg, div.switchoption span.pos, 
-    div.switchoption.checked span.modern, div.switchoption span.MS {
-  color: #999;
-  font-weight: normal;
-}
-div.switchoption span.neg, div.switchoption.checked span.pos,
-    div.switchoption span.modern, div.switchoption.checked span.MS{
-  color: #000;
-  font-weight: bold;
-}
+/* .textVariants:before, .translationNotes:before, .transcriptionNotes:before{ */
+/* 	content: "Show"; */
+/* } */
+/* .textVariants.checked:before, .translationNotes.checked:before, .transcriptionNotes.checked:before{ */
+/* 	content: "Hide"; */
+/* } */
+/* .punctuat:before{ */
+/* 	content: "Modern"; */
+/* } */
+/* .punctuat.checked:before{ */
+/* 	content: "Manuscript"; */
+/* } */
+/* .exx:after{ */
+/* 	content: "Original notation"; */
+/* } */
+/* .exx.checked:after{ */
+/* 	content: "Modern notation"; */
+/* } */
+/* div.switchoption span.label{ */
+/*   font-weight: bold; */
+/* } */
 .infoshowhide{
   display: inline-block;
   width: 2ex;
@@ -217,7 +209,15 @@ div.switchoption span.neg, div.switchoption.checked span.pos,
   border:1px solid #A00;
   background-color: #900;
 }
-h2.title{
-  margin-top: 0.5ex;
-  margin-bottom: 0.2ex;
+div.tickgroup.b{
+  border-bottom: 2px solid white;
+  padding: 5px 0;
+  margin: 2px 0px 1px 7px;
+}
+div.tickgroup{
+  padding: 5px 0;
+  margin: 2px 0px 1px 7px;
+}
+.optionsBlock.inactive * {
+  color: rgba(127, 127, 127, 0.5);
 }

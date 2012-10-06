@@ -901,6 +901,31 @@ function resetAnnotations(){
 }
 
 function addAnnotation(domObject, object, type){
+  $(domObject).data("object", object);
+  domObject.setAttributeNS(null, "onmouseover", "top.showAnnotation(this);");
+  domObject.setAttributeNS(null, "onmouseout", "top.removeTooltip();");
+}
+
+function showAnnotation(obj){
+  var thing = $(obj).data("object");
+  var tip = Tooltip(false);
+  var t1 = thing.tip(tip);
+  var s1 = t1.getBBox();
+  var s2 = t1.getBoundingClientRect();
+  if(s2.width) {
+    tip.style.width = Math.max(s2.width + 10, 80)+"px";// + t1.getBBox().x;
+    t1.style.width = Math.max(s2.width + 10, 80)+"px";
+  }
+  if(s2.height) {
+    tip.style.height = Math.max(80, s2.height + 10)+"px";// + t1.getBBox().y +15;
+    t1.style.height = Math.max(80, s2.height)+"px";//s2.height+10;
+  }
+  tip.style.position = "fixed";
+  tip.style.top = 30+$(obj).offset().top+"px";
+  tip.style.left = 30+$(obj).offset().left+"px";
+}
+
+function addAnnotation2(domObject, object, type){
   var annotation = new AnnotationSet();
   annotation.AType = type;
   annotation.domObj = domObject;

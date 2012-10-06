@@ -255,7 +255,8 @@ function getTranscribedText(i){
 }
 
 function getEditedText(i){
-  wrapWidth = false;
+//  wrapWidth = false;
+  wrapWidth = 460;
   $.ajax({
       async: true,
       url: 'edited.txt',

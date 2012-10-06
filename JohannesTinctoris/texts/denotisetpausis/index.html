@@ -79,37 +79,48 @@
    	</ul>
   </li>
   <li><a href="#">Help</a></li>
-</ul></div>
+</ul>
+</div>
 	<div id="leftOptions">
   	<div class="sourceNavigation" id="navbox"></div>
-    <div class="editedText optionsBlock">
+    <div class="editedText optionsBlock active">
       <div class="blockHeader">Edited texts</div>
-      <div class="switchoption showhidevariants">
-        <span class="label">Show Variants?</span>
-        <span class="opt pos">✓</span><span class="opt neg">✗</span>
-      </div>
-      <div class="switchoption switchpunctuation">
-        <span class="label">Punctuation:</span><br/> 
-        <span class="opt MS">MS</span><span class="opt modern">modern</span></div>
-      <div class="tickgroup variantoptions">
-        <div class="tickoptions vars no">Hide variants</div>
-        <div class="tickoptions vars yes">Show variants</div>
+      <div class="tickgroup variantoptions b">
+        <div class="tickgroupheader">Variant display</div>
+        <div class="tickoptions vars no">Hide</div>
+        <div class="tickoptions vars yes">Show</div>
       </div>
       <div class="tickgroup punctuationoptions">
-        <div class="tickoptions punctuation modern">Modern punctuation</div>
-        <div class="tickoptions punctuation MS">Manuscript punctuation</div>
+        <div class="tickgroupheader">Punctuation</div>
+        <div class="tickoptions punctuation modern">Modern</div>
+        <div class="tickoptions punctuation MS">Manuscript</div>
       </div>
 	    <!-- <div class="toggle textVariants"> variants</div> -->
   	  <!-- <div class="toggle punctuat"> punctuation</div> -->
     </div>
-    <div class="translatedText optionsBlock">
+    <div class="translatedText optionsBlock inactive" disabled="true">
       <div class="blockHeader">Translations</div>
-	    <div class="toggle exx">Examples with </div>
-  	  <div class="toggle translationNotes"> translation notes</div>
+      <div class="tickgroup punctuationoptions">
+        <div class="tickgroupheader">Notation</div>
+        <div class="tickoptions egnotation original">Original</div>
+        <div class="tickoptions egnotation modernised">Modernised</div>
+      </div>
+      <div class="tickgroup punctuationoptions">
+        <div class="tickgroupheader">Translation notes</div>
+        <div class="tickoptions translationnotes no">Hide</div>
+        <div class="tickoptions translationnotes yes">Show</div>
+      </div>
+	    <!-- <div class="toggle exx">Examples with </div> -->
+  	  <!-- <div class="toggle translationNotes"> translation notes</div> -->
     </div>
-    <div class="sourceText optionsBlock">
+    <div class="sourceText optionsBlock inactive">
       <div class="blockHeader">Source transcriptions</div>
-	    <div class="toggle transcriptionNotes"> transcription notes</div>
+      <div class="tickgroup punctuationoptions">
+        <div class="tickgroupheader ">Transcription notes</div>
+        <div class="tickoptions transcriptionnotes no">Hide</div>
+        <div class="tickoptions transcriptionnotes yes">Show</div>
+      </div>
+	    <!-- <div class="toggle transcriptionNotes"> transcription notes</div> -->
     </div>
   </div>
   <div id="content" class="pane1"></div>

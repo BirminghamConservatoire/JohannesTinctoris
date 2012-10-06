@@ -201,12 +201,13 @@ function Paragraph(){
         // alert(newSVG.width);        
         para.appendChild(div);
         div.appendChild(newSVG);
-        div.appendChild(staffSVG);
+//        div.appendChild(staffSVG);
 //        staffSVG.style.position="relative";
 //        newSVG.style.position="relative";
 //        staffSVG.style.top = 0 - this.content[i].height();
         // staffSVG.style.height = this.content[i].height();
-        staffSVG.height = this.content[i].height();
+//        staffSVG.height = this.content[i].height();
+//        newSVG.height = newSVG.getBoundingClientRect().height;
 //        staffSVG.style.marginBottom = 0 - this.content[i].height();
         examples.push([this.content[i], newSVG]);
       } else {
@@ -474,6 +475,14 @@ function Choice(){
   this.addNilReading = function(witnesses){
     this.content.push(new NilReading(witnesses));
   };
+  this.nonDefault = function(){
+    if(this.content.length &&
+      (this.content[0].description == "ins." 
+       || this.content[0].description == "ins. & del.")) alert(this.content[0].description);
+    return this.content.length &&
+      (this.content[0].description == "ins." 
+       || this.content[0].description == "ins. & del.");
+  };
   this.toText = function(){
     var string = "{var=";
     for(var i=0; i<this.content.length; i++){
@@ -484,7 +493,7 @@ function Choice(){
   };
   this.toHTML = function(){
     if(!showvariants) {
-      if(this.content.length && this.content[0].description != "ins."){
+      if(this.nonDefault()){
         return this.content[0].contentToHTML();
       } else {
         return false;
@@ -493,7 +502,7 @@ function Choice(){
     var span = DOMSpan("choice", false, false);
     var el;
     var i = 0;
-    var ins = this.content[0].description == "ins.";
+    var ins = this.nonDefault();
     if(!ins) {
       el = this.content[0].contentToHTML();
       if(el){

@@ -476,9 +476,6 @@ function Choice(){
     this.content.push(new NilReading(witnesses));
   };
   this.nonDefault = function(){
-    if(this.content.length &&
-      (this.content[0].description == "ins." 
-       || this.content[0].description == "ins. & del.")) alert(this.content[0].description);
     return this.content.length &&
       (this.content[0].description == "ins." 
        || this.content[0].description == "ins. & del.");

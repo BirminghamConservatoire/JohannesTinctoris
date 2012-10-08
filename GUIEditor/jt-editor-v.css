@@ -383,6 +383,11 @@ div.buttons {
   stroke: black;
 }
 
+.variantGroup .ligatureBox .ligatureVertical, .variantGroup .ligatureBox .ligatureStem, 
+   .variantGroup .ligatureBox .ligatureHorizontal{
+  stroke: #060;
+}
+
 .chantSquare {
   stroke-width: 7.5;
   stroke: black;
@@ -442,6 +447,7 @@ div.buttons {
 .variants.musical {
   color: #060;
   fill: #060;
+  stroke: #060;
   display: inline;
 }
 

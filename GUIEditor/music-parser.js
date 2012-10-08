@@ -222,6 +222,7 @@ function nextEvent() {
     case "s":
     case "f":
     case "F":
+    case "^":
       return nextNote();
     case "p":
     case "v":

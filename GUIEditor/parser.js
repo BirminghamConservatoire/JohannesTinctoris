@@ -650,7 +650,7 @@ function readTag(){
         string = string.substring(loc+1, end);
         span.content = readString();
         string = os;
-        poiinter = op;
+        pointer = op;
         return span;
       } else {
           alert(string);

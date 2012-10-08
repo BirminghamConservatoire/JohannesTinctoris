@@ -267,7 +267,7 @@ function LigatureNote(note){
         return 1;
       }
     } else if (this.rhythm == "B" &&
-               (!this.prevEvent(variant) 
+               (!this.prevEvent(variant) && this.nextEvent(variant)
                  && this.nextEvent(variant).varStartStaffPos(variant) < this.staffPos)){
       return -1;
     } else {
@@ -469,13 +469,29 @@ function Ligature(){
     this.members.push(event);
     return event;
   };
+  this.addChoice = function(event){
+    if(this.lastEventObj){
+      this.lastEventObj.nextEventObj = event;
+      event.prevEventObj = this.lastEventObj;
+      for(var c=0; c<event.content.length; c++){
+        event.content[c].content[0].prevEventObj = this.lastEventObj;
+      }
+    } else{
+      this.firstEventObj = event;
+    }
+    this.lastEventObj = event;
+    event.ligature = this;
+    this.members.push(event);
+    return event;
+  };
   this.addElement = function(el){
     switch(el.objType){
       case "LigatureNote":
       case "Oblique":
+        return this.addEvent(el);
       case "ObliqueNote Choice":
       case "Ligature Choice":
-        return this.addEvent(el);
+        return this.addChoice(el);
       default:
         el.ligature = this;
         this.members.push(el);
@@ -697,11 +713,6 @@ function Oblique(){
       e = e.nextEvent(variant);
     }
     return e;
-    // if(this.members[i].objType == "Note"){
-    //   return this.members[i];
-    // } else {
-    //   return this.members[i].fetch(variant);
-    // }
   };
   this.width = function(variant){
     return oWidth(this.member(0, variant).staffPos, this.member(1, variant).staffPos);
@@ -748,24 +759,6 @@ function Oblique(){
   };
   this.draw = function(prevPos, semi){
     this.drawVar(false);
-    // // FIXME: temporary
-    // this.startX = curx;
-    // this.drawTexts();
-    // this.drawComments();
-    // var lstem = false;
-    // var rstem = false;
-    // // Assume never have (ins.) or (del.) mid-oblique
-    // if(!semi && oblElementRhythm(this.members[0]) == "S"){
-    //   lstem = 1;
-    // } else if (!prevPos && oblElementRhythm(this.members[0]) == "B") {
-    //   lstem = -1;
-    // }
-    // if(oblElementRhythm(this.members[1]) == "L"){
-    //   rstem = true;
-    // }
-    // drawOblique(oblElementStaffPos(this.members[0]), oblElementStaffPos(this.members[1]), prevPos,
-    //    rastralSize * 2, lstem, rstem);
-    // setDotPos(oblElementStaffPos(this.members[1]));
   };
 }
 function ObliqueNote(note, index, oblique){
@@ -2163,23 +2156,6 @@ function MChoice(){
     }
     return false;
   };
-  // FIXME: not needed
-  this.fetch = function(variant){
-    if(typeof(variant)=="undefined" || !variant){
-      if(this.content[0].description == "ins."){
-        return false;
-      } else {
-        return this.content[0];
-      }
-    } else {
-      for(var i=0; i<this.content.length; i++){
-        if(this.content[i].witnesses.indexOf(variant)>-1 || this.content[i].witnesses[0]=="MSS"){
-          return this.content[i];
-        }
-      }
-      return false;
-    }
-  };
   this.toText = function(){
     // FIXME:!!
     var string = "{var=";
@@ -2221,6 +2197,11 @@ function MChoice(){
     }
     return SVG;
   };
+  this.nonDefault = function(){
+    return this.content.length &&
+      (this.content[0].description == "ins." 
+       || this.content[0].description == "ins. & del.");
+  };
   this.draw = function(){
     //FIXME
     this.startX = curx;
@@ -2228,7 +2209,7 @@ function MChoice(){
     this.SVG = SVG;
     var click;
     if(this.content.length){
-      if(this.content[0].description == "ins."){
+      if(this.nonDefault()){
         if(showvariants){
           if(this.textBlock){
             click = svgSpan(this.textBlock, "musical ins variants", false, "‸");
@@ -2243,7 +2224,9 @@ function MChoice(){
         this.styles.pop();
       } else {
         click = this.content[0].draw(false, false);
-        if(showvariants) click.style.fill = "#060";
+        if(showvariants) {
+          click.style.fill = "#060";
+        }
       }
       if(showvariants) addAnnotation(click, this, "MusicalChoice");
     }
@@ -2269,6 +2252,11 @@ function LigChoice(){
   this.content = [];
   this.prevEventObj = false;
   this.nextEventObj = false;
+  this.nonDefault = function(){
+    return this.content.length &&
+      (this.content[0].description == "ins." 
+       || this.content[0].description == "ins. & del.");
+  };
   this.applicableReading = function(variant){
     for(var i=0; i<this.content.length; i++){
       if(this.content[i].applies(variant)) return this.content[i];
@@ -2353,7 +2341,7 @@ function LigChoice(){
     this.SVG = SVG;
     var click;
     if(!this.content.length) return false;
-    if(this.content[0].description == "ins."){
+    if(this.nonDefault()){
       // An insertion means that the default version has *nothing*
       if(!showvariants) return false;
       // If we are showing variants, we need a marker
@@ -2361,7 +2349,9 @@ function LigChoice(){
       curx += rastralSize;
     } else {
       click = this.content[0].draw(false, false); // ?!
-      if(showvariants) click.style.fill = "#060";
+      if(showvariants) {
+        click.style.fill = "#060";
+      }
     }
     if(showvariants) addAnnotation(click, this, "Ligature MusicalChoice");
     return click;
@@ -2386,6 +2376,11 @@ function ObliqueNoteChoice(){
   this.content = [];
   this.prevEventObj = false;
   this.nextEventObj = false;
+  this.nonDefault = function(){
+    return this.content.length &&
+      (this.content[0].description == "ins." 
+       || this.content[0].description == "ins. & del.");
+  };
   this.applicableReading = function(variant){
     for(var i=0; i<this.content.length; i++){
       if(this.content[i].applies(variant)) return this.content[i];
@@ -2479,7 +2474,7 @@ function ObliqueNoteChoice(){
     this.SVG = SVG;
     var click;
     if(!this.content.length) return false;
-    if(this.content[0].description == "ins."){
+    if(this.nonDefault()){
       // An insertion means that the default version has *nothing*
       if(!showvariants) return false;
       // If we are showing variants, we need a marker
@@ -2507,11 +2502,14 @@ function MReading(witnesses, content, description){
     }
     return width;
   };
+  this.nonDefault = function(){
+    return this.description == "ins." || this.description == "ins. & del.";
+  };
   this.applies = function(variant){
     if(variant){
       return this.witnesses.indexOf(variant)>-1 || this.witnesses[0] =="MSS";
     } else {
-      return this.description != "ins.";
+      return !this.nonDefault();
     }
   };
   this.clefp = function(){

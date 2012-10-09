@@ -357,8 +357,13 @@ function getRhythm(){
 }
 
 function consume(n){
-  string = string.substring(n);
-  pointer += n;
+  if(string.length < n){
+    pointer += string.length;
+    string = "";
+  } else {
+    string = string.substring(n);
+    pointer += n;
+  }
 }
 
 function consumeIf(search){
@@ -375,8 +380,13 @@ function consumeIf(search){
 
 function consumeSpace(){
   var nextNonSpace = string.search(/\S/);
-  pointer += nextNonSpace;
-  string = string.substring(string.search(/\S/));
+  if(nextNonSpace == -1){
+    pointer += string.length;
+    string = "";
+  } else {
+    pointer += nextNonSpace;
+    string = string.substring(string.search(/\S/));
+  }
 }
 
 function unRead(value){

@@ -341,8 +341,7 @@ function LigatureComment(comment){
     this.startY = cury - rastralSize * currentLinecount;
     this.startX = drawnx;
     this.endY = this.startY - Math.floor(rastralSize * textScale * 2);
-    var star = svgText(SVG, drawnx, this.startY, "annotation musical", false, false, "*"); // *
-    if(!star) alert("oo");
+    var star = svgText(SVG, drawnx, this.startY, "annotation musical", false, false, "*");
     var j = currentExample.comments.indexOf(this);
     star.setAttributeNS(null, "onmouseover", "top.tooltipForComment("+examplei+","+j+", "+(this.startX+10)+","+(10+this.startY)+");");
     star.setAttributeNS(null, "onmouseout", "top.removeTooltip()");
@@ -1248,7 +1247,7 @@ function SolmizationSignature() {
         text += this.members[i].toText();
       }
       if(this.text) text += this.text.toText();
-    } else text += 0;
+    } else text += "0";
     return text + "}";
   };
   this.width = function(){
@@ -1258,6 +1257,7 @@ function SolmizationSignature() {
 //    breakIfNecessary();
     this.startX = curx;
       // FIXME: HACK!!! (for kerning -- RW's glyphs have leading space)
+    if(!this.members.length) return;
     curx -=  rastralSize;
     if(this.text){
       this.text.draw();
@@ -1267,22 +1267,22 @@ function SolmizationSignature() {
       this.members[i].draw();
       // Remember the widest glyph
       lastx = Math.max(lastx, curx);
-      // But align all glyphs vertically
-      curx = this.startX;
+      if(i<this.members.length - 1 && this.members[i+1].sup) curx = this.members[i].startX;
     }
     // Use the widest spacing
     curx = lastx;
   };
 }
 
-
 function SolmizationSign(){
   this.objType = "SolmizationSign";
   this.symbol = false;
   this.staffPos = false;
   this.pitch = false;
+  this.sup = false;
   this.example = currentExample;
   this.domObj = false;
+  this.startX = false;
   this.toText = function(){
     return this.symbol + (this.pitch || this.staffPos.toString(16).toUpperCase());
   };
@@ -1292,9 +1292,11 @@ function SolmizationSign(){
     } else return 0;
   };
   this.draw = function(){
-    if(this.symbol&&this.staffPos){
+    var pos = this.staffPos || (this.pitch && staffPosFromPitchString(this.pitch));
+    this.startX = curx;
+    if(this.symbol && pos){
       var chardata = solmDictionary[this.symbol];
-      this.domObj = svgText(SVG, curx, texty(chardata[1], this.staffPos), "mensural solmisation "+this.symbol,
+      this.domObj = svgText(SVG, curx, texty(chardata[1], pos), "mensural solmisation "+this.symbol,
         false, musicStyle(), chardata[0]);
       curx+=chardata[2]*rastralSize;
     }
@@ -2129,7 +2131,7 @@ function MChoice(){
     this.content.push(new MNilReading(witnesses));
   };
   this.width = function(){
-    return this.content.length ? this.content[0].width() : 0;
+    return this.content.length && this.content[0] ? this.content[0].width() : 0;
   };
   this.infop = function(){
     // Find out if this contains useful prefatory info
@@ -2498,7 +2500,7 @@ function MReading(witnesses, content, description){
   this.width = function (){
     var width = 0;
     for (var i=0; i<this.content.length; i++){
-      width += this.content[i].width();
+      if(this.content[i]) width += this.content[i].width();
     }
     return width;
   };
@@ -2541,7 +2543,7 @@ function MReading(witnesses, content, description){
         if(typeof(this.content[i])=='string' && this.content[i].length>0){
           // This probably never exists?
           text+=this.content[i];
-        }else{
+        }else if (content[i]){
           // more likely
           text+=this.content[i].toText();
         }
@@ -2558,7 +2560,7 @@ function MReading(witnesses, content, description){
       if(typeof(this.content[i])=="string"){
         obj.push(svgSpan(false, styles.length ? textClasses(styles) :"text", false,
                          this.content[i]));
-      } else {
+      } else if(this.content[i]){
         this.content[i].draw(false, styles); // FIXME: Watch this!!!
         styles = this.content[i].updateStyles(styles);
       }
@@ -2588,7 +2590,7 @@ function MReading(witnesses, content, description){
       if(typeof(this.content[i].ligature) != "undefined" && this.content[i].ligature && fn){
         obj.push(this.content[i].ligature.drawVar(this.witnesses[0]));
 //        obj.push(this.content[i].draw(false));
-      } else {
+      } else if(this.content[i]){
         if(typeof(this.content[i]) == "string") {
           obj.push(svgSpan(svgEl, 'text', false, this.content[i]));
         } else if (this.clefp || this.solmp){

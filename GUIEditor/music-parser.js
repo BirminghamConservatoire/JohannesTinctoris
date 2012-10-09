@@ -70,18 +70,13 @@ function MusicExample(){
     return false;
   };
   this.height = function(){
-//    var height = 5;
     // FIXME: clearly stupid
     var height = rastralSize * 
       (typeof(this.parameters.staff) == "undefined" ? 1 : (this.parameters.staff.trueLines() + 4));
     for(var i=0; i<this.events.length; i++){
-//      if(isBreakp(i, this.events)){
       if(this.events[i].objType == "Staff"){
         height += rastralSize * 9 + 5;
         }
-    }
-    if(height>160){
-//      alert(height);
     }
     return height;
   };
@@ -288,14 +283,21 @@ function nextBarline(){
 
 function nextSolmSign(){
   var solm = new SolmizationSign();
-  solm.symbol = string.charAt(0);
-  string = string.substring(1);
-  solm.staffPos = getStaffPos();
-  // pitch = setgetvPos();
-  // if(pitch){
-  //   solm.pitch = pitch[0];
-  //   solm.staffPos = pitch[1];
-  // }
+  var nextChar = 0;
+  if(string.charAt(nextChar) === "^"){
+    solm.sup = true;
+    nextChar++;
+  }
+  solm.symbol = string.charAt(nextChar);
+  string = string.substring(nextChar+1);
+  // solm.staffPos = getStaffPos();
+  var pitch = /^([A-g])\1{0,2}/.exec(string);
+  if(pitch){
+    solm.pitch = pitch[0];
+    string = string.substring(pitch.length);
+  } else {
+    solm.staffPos = getStaffPos();
+  }
   return solm;
 }
 
@@ -710,25 +712,78 @@ function consumeParenthesis(){
 }
 
 function parseMens(sig, pos){
-  if(!sig || sig === "0") return false;
   var obj = new MensuralSignature();
+  if(!sig || sig === "0") return obj;
   obj.signature = sig.charAt(0);
   obj.staffPos = "0123456789ABCDEF".indexOf(pos);
   return obj;
 }
 function parseSolm(signs){
-  if(!signs[0] || signs[0] === "0") return false;
-  obj = new SolmizationSignature();
+  var solm, pitch, nextChar;
+  var obj = new SolmizationSignature();
+  if(!signs[0] || signs[0] === "0" || signs[0] === '"0"') return obj;
   for(var i=0; i<signs.length; i++){
-    var solm = new SolmizationSign();
-    solm.symbol = signs[i].charAt(0);
-    solm.staffPos = "0123456789ABCDEF".indexOf(signs[i].charAt(1));
-    if(solm.staffPos != -1){
+    nextChar = 0;
+    solm = new SolmizationSign();
+    if(signs[i].charAt(0) == "^") {
+      solm.sup = true;
+      nextChar++;
+    }
+    solm.symbol = signs[i].charAt(nextChar);
+    nextChar++;
+    pitch = signs[i].substring(nextChar);
+    if(/([A-g])\1{0,2}/.exec(pitch)){
+      // This really is a pitch
+      solm.pitch = pitch;
+    } else {
+      // staffpos
+      solm.staffPos = "0123456789ABCDEF".indexOf(signs[i].charAt(nextChar));
+    }
+    if(solm.pitch || solm.staffPos != -1){
       obj.members.push(solm);
     }
   }
   return obj;
 }
+function parseSolmReading(fields){
+  var solm = false, signs = [], start, finish, last, sigged;
+  for(var i=0; i<fields.length; i++){
+    if(sigged || sigged === 0){
+      if(fields[i].charAt(0) =='"'){
+        return [fields.slice(i), new MReading(fields.slice(sigged, i), [solm], "")];
+      }
+    } else {
+      start = i==0 ? 1 : 0;
+      finish = fields[i].length;
+      if(fields[i].lastIndexOf('"')>0){
+        finish = fields[i].lastIndexOf('"');
+        last = true;
+      }
+      signs.push(fields[i].substring(start, finish));
+      if(last){ 
+        solm = parseSolm(signs);
+        signs = [];
+        sigged = i+1;
+      }
+    }
+  }
+  return [false, new MReading(fields.slice(1, fields.length), [solm], "")];
+}
+function parseSolmVar(fields){
+  var next = false;
+  var obj = new MChoice();
+  var nextS = parseSolmReading(fields);
+  fields = nextS[0];
+  while(fields){
+    obj.content.push(nextS[1]);
+    nextS = parseSolmReading(fields);
+    fields = nextS[0];
+  }
+  obj.content.push(nextS[1]);
+  return obj;
+}
+
+
 function parseClefReading(fields){
   var clef = parseClef(fields[0].substring(1, fields[0].length-1));
   for(var i=1; i<fields.length; i++){
@@ -826,9 +881,13 @@ function nextInfo(){
     var fields = info.match(/[^{}, :=]+/g);
     switch(fields[0]){
       case "mens":
-        return parseMens(fields[1], fields[2]);
+        if(fields[1] && fields[2] && (fields[1].charAt(0)==='"' || fields[2].charAt(0)==='"')){
+          parseMensVar(fields.slice(1));
+        } else return parseMens(fields[1], fields[2]);
       case "solm":
-        return parseSolm(fields.slice(1));
+        if(fields[1].charAt(0)=='"'){
+          return parseSolmVar(fields.slice(1));
+        } else return parseSolm(fields.slice(1));
       case "clef":
         if(fields.length>2){
           if(fields[1]=="var") {

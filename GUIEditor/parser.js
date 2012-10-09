@@ -89,6 +89,7 @@ function TreatiseDoc(text){
   this.entered = false;
   this.checked = false;
   this.approved = false;
+  this.translator = false;
   this.copy = false;
   this.source = false;
   this.established = false;
@@ -141,6 +142,9 @@ function TreatiseDoc(text){
           break;
         case "Approved by:":
           this.approved = trimString(consumeIf(/[^\r\n]*[\r\n]*/));
+          break;
+        case "Translator:":
+          this.translator = trimString(consumeIf(/[^\r\n]*[\r\n]*/));
           break;
         case "Copy-text:":
           this.copy = trimString(consumeIf(/[^\r\n]*[\r\n]*/));
@@ -197,6 +201,7 @@ function TreatiseDoc(text){
   this.headerText = function(){
     var text = (this.title ? this.title : "")+"\n";
     if(this.editor) text += "Editor: "+this.editor+"\n";
+    if(this.translator) text += "Translator: "+this.translator+"\n";
     if(this.entered) text += "Data entry: "+this.entered+"\n";
     if(this.checked) text += "Checked by: "+this.checked+"\n";
     if(this.established) text += "Date established: "+this.established+"\n";
@@ -326,6 +331,8 @@ function TreatiseDoc(text){
     this.parseHeaders();
   } catch (x) {
     // Register an error?
+    alert("Header issue");
+    alert(x);
   }
   while(string !=""){
     try{
@@ -333,7 +340,7 @@ function TreatiseDoc(text){
       if(para) this.contents.push(para);      
     } catch (x) {
       var para = new Comment();
-      para.code = "Error";
+      para.content.push(new Text("Error"));
       this.contents.push(para);
     }
   }
@@ -355,7 +362,11 @@ function TreatiseDoc(text){
     $("p").addClass("onecolumn");
   }
   this.maxWidth = refreshExamples();
-  this.div.style.width = Math.max(this.maxWidth+5, 450)+"px";
+  if(wrapWidth){
+    this.div.style.width = Math.max(this.maxWidth+5, wrapWidth)+"px";
+  } else {
+//    this.div.style.width = Math.max(this.maxWidth+5, 450)+"px";
+  }
   if(complaint.length>prevcomplaint.length){
 //    alert("New error messages (see bottom of page)");
     showErrorCount(complaint.length);
@@ -424,6 +435,7 @@ function refreshExamples(){
 
 function readPara(){
   var para = new Paragraph();
+  consumeSpace();
   // FIXME: HACK!!! Broken by anything with an enclosed linebreak
   var end = string.search(/[\n\r\f]/);
   if(end==-1) end = string.length;

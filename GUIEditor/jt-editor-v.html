@@ -1,50 +1,43 @@
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-	<title>JT music examples test interface</title>
-	<link type="text/css" rel="stylesheet" href="jt-editor-v.css" />
-	<link type="text/css" rel="stylesheet" href="print.css" media="print"/>
-	<script src="jquery-1.4.4.js" type="text/javascript"></script>
-	<script src="jquery.scrollTo-1.4.2.js" type="text/javascript"></script>
-  <!-- <style type="text/css">@import "jquery.svg.css";</style>  -->
-  <!-- <script type="text/javascript" src="jquery.svg.js"></script> -->
-  <!-- <script type="text/javascript" src="jquery.svgdom.js"></script> -->
-	<script type="text/javascript" src="debugger.js"></script>
-	<script type="text/javascript" src="dom.js"></script>
-	<script type="text/javascript" src="meidom.js"></script>
-	<script type="text/javascript" src="base.js"></script>
-	<script type="text/javascript" src="buttons.js"></script>
-	<script type="text/javascript" src="classes.js"></script>
-	<script type="text/javascript" src="text-classes.js"></script>
-	<script type="text/javascript" src="music-parser.js"></script>
-	<script type="text/javascript" src="parser.js"></script>
+	  <title>JT music examples test interface</title>
+	  <link type="text/css" rel="stylesheet" href="jt-editor-v.css" />
+	  <link type="text/css" rel="stylesheet" href="print.css" media="print"/>
+	  <script src="jquery-1.4.4.js" ></script>
+	  <script src="jquery.scrollTo-1.4.2.js"></script>
+    <!-- <style type="text/css">@import "jquery.svg.css";</style>  -->
+    <!-- <script type="text/javascript" src="jquery.svg.js"></script> -->
+    <!-- <script type="text/javascript" src="jquery.svgdom.js"></script> -->
+	  <script src="debugger.js"></script>
+	  <script src="dom.js"></script>
+	  <script src="meidom.js"></script>
+	  <script src="base.js"></script>
+	  <script src="buttons.js"></script>
+	  <script src="classes.js"></script>
+	  <script src="text-classes.js"></script>
+	  <script src="music-parser.js"></script>
+	  <script src="parser.js"></script>
+	  <script src="editor.js"></script>
   </head>
   <body>
- 	<div id="background">
+ 	  <div id="background">
       <div id="buttonbar">
         <div class="uibutton"><span class="spanpicker red">Ut</span></div>
         <div class="uibutton"><span class="spanpicker redline">Ut</span></div>
         <div class="uibutton"><span class="spanpicker blue">Ut</span></div>
-        <span class="punc">Punctuation style: 
-          <span class="puncToggle"
-               onclick="punctuationStyle=(punctuationStyle=='modern'?'MS':'modern');
-                        this.innerHTML = punctuationStyle;
-                        doc = new TreatiseDoc(document.getElementById('code').value);">modern</span></span>
       </div>
-  	<div id="rendered" class="notation">
-      <div id="content"></div>
-      <!-- <div id="exemplum"><canvas id="ex_canvas"></canvas></div> -->
-  	</div>
-	  <div id="codediv"><!-- Type (or Paste) code below: -->
-		  <textarea rows="60" cols="40" id="code" 
-                onkeyup="if(!doc || this.value != doc.text) 
-                         {try {var temp = new TreatiseDoc(this.value); doc = temp;} catch(e){}}"></textarea>
+  	  <div id="rendered" class="notation">
+        <div id="content"></div>
+  	  </div>
+	    <div id="codediv"><!-- Type (or Paste) code below: -->
+		    <textarea rows="60" cols="40" id="code"></textarea>
+	    </div>
 	  </div>
-	</div>
-  <div id="vertical"></div>
-	<div id="chooser"></div>
-	<div id="parsediv"></div>
-  <div id="debug"></div>
-  <div id="ecount"></div>
- </body>
+    <div id="vertical"></div>
+	  <div id="chooser"></div>
+	  <div id="parsediv"></div>
+    <div id="debug"></div>
+    <div id="ecount"></div>
+  </body>
 </html>

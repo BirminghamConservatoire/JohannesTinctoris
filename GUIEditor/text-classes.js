@@ -193,7 +193,7 @@ function Paragraph(){
           this.content[i].staffSVG = staffSVG;
         }
 //        div.style.width = exWidth;
-        div.style.width = this.content[i].width() + "px";
+// --> more recent        div.style.width = this.content[i].width() + "px";
 //        div.height = this.content[i].height();
 //        newSVG.setAttribute('width', exWidth);
         // alert(newSVG.width.baseVal);

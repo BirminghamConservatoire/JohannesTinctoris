@@ -64,6 +64,7 @@
   float: right;
 }
 #content{
+    font-size: 100%;
   height: 100%;
   line-height: 1.3;
   overflow: auto;
@@ -71,6 +72,9 @@
 }
 #exemplum{
   height: 200px;
+}
+span.verse{
+  margin-left: 18px;
 }
 span.sixline{
   font-size: 900%;
@@ -118,6 +122,7 @@ span.strikethrough, .strikethrough.text{
 span.red, .red.text{
   color: red;
   fill: red;
+  stroke: red;
 }
 span.gold, gold.text {
   color: #FC0;
@@ -340,7 +345,7 @@ div.buttons {
     cursor: none;
 	}
 
-.hand{
+.hand, .citation{
   font-style: italic;
 }
 
@@ -408,8 +413,12 @@ div.buttons {
   fill: none;
 }
 
-.ligatureVertical.red, .ligatureStem.red, .rhombusTail.red, .neumeJoin.red, .ligatureHorizontal.red, .chantSquare.red, chantTail.red, .scallopedBarline.red, .barlineComponent.red{
+.ligatureVertical.red, .ligatureStem.red, .rhombusTail.red, .neumeJoin.red, .ligatureHorizontal.red, .chantSquare.red, chantTail.red, .scallopedBarline.red, .barlineComponent.red {
   stroke: red;
+}
+.red *{
+  stroke: red;
+  fill: red;
 }
 
 .textblock {

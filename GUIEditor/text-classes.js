@@ -179,36 +179,16 @@ function Paragraph(){
           this.DOMObj.appendChild(para);
         }
       } else if (this.content[i].objType == "MusicExample"){
-        var div = document.createElement('span');
-        div.className = "musicexample";
+        var div = DOMDiv('musicexample', false, false);
         if(this.content[i].SVG){
           var newSVG = this.content[i].SVG;
-          var staffSVG = this.content[i].staffSVG;
         } else {
-//          var newSVG = svg(exWidth, this.content[i].height());
           var newSVG = svg(this.content[i].width(), this.content[i].height());
           newSVG.className += " musicexample";
-          var staffSVG = newSVG;
           this.content[i].SVG = newSVG;
-          this.content[i].staffSVG = staffSVG;
         }
-//        div.style.width = exWidth;
-// --> more recent        div.style.width = this.content[i].width() + "px";
-//        div.height = this.content[i].height();
-//        newSVG.setAttribute('width', exWidth);
-        // alert(newSVG.width.baseVal);
-        // newSVG.width = this.content[i].parameters.width();
-        // alert(newSVG.width);        
         para.appendChild(div);
         div.appendChild(newSVG);
-//        div.appendChild(staffSVG);
-//        staffSVG.style.position="relative";
-//        newSVG.style.position="relative";
-//        staffSVG.style.top = 0 - this.content[i].height();
-        // staffSVG.style.height = this.content[i].height();
-//        staffSVG.height = this.content[i].height();
-//        newSVG.height = newSVG.getBoundingClientRect().height;
-//        staffSVG.style.marginBottom = 0 - this.content[i].height();
         examples.push([this.content[i], newSVG]);
       } else {
         var obj = this.content[i].toHTML();
@@ -222,7 +202,8 @@ function Paragraph(){
 function Annotation(){
   this.objType = "Annotation";
   this.code = false;
-  this.domObj = DOMSpan("annotation", false, "‸");//*"
+//  this.domObj = DOMSpan("annotation", false, "‸");//*"
+  this.domObj = DOMSpan("annotation", false, "*");
   this.toText = function(){
     return "**"+this.code+"**";
   };
@@ -640,3 +621,32 @@ function Source(id, details){
   };
 }
 
+function BlankExample(){
+  this.objType = "Blank Example";
+  this.index = false;
+  this.musicExample = false;
+  this.latinTreatise = false;
+  this.DOMObj = document.createElement('p');
+  this.toText = function(){
+    return "{example}";
+  };
+  this.toHTML = function(){
+    if(this.musicExample){
+      var div = document.createElement('span');
+      div.className = "musicexample";
+      if(this.musicExample.SVG){
+        var newSVG = this.musicExample.SVG;
+      } else {
+        var newSVG = svg(this.musicExample.width(), this.musicExample.height());
+        newSVG.className += " musicexample";
+        this.musicExample.SVG = newSVG;
+      }
+      this.DOMObj.appendChild(div);
+      div.appendChild(newSVG);
+      examples.push([this.musicExample, newSVG]);
+    } else {
+      this.DOMObj.appendChild(DOMSpan("red", false, "This example will be added later"));
+    }
+    return this.DOMObj;
+  };
+}

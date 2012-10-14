@@ -47,22 +47,6 @@ function findExample(){
   return false;
 }
 
-function showErrorCount(n){
-  var div = document.getElementById('ecount');
-  if(div){
-    div.innerHTML = n;
-    div.style.position = "fixed";
-    div.style.top = 0;
-    div.style.right = 0;
-    div.style.backgroundColor = "DDE";
-    div.style.border = "1px solid #131";
-    $(div).show(200);
-    $(div).hide(200).delay(1000);
-    //  $(div).show();
-    //  $(div).hide();
-  }
-}
-
 function trimString (str){
   if(!str) {
     return false;
@@ -77,14 +61,13 @@ function fieldDatumPair(field, datum){
   return div;
 }
 
-function TreatiseDoc(text){
+function TreatiseDoc(text, outdiv){
   this.text = text;
   this.contents = [];
   this.examples = [];
   this.structures = false;
   this.out = false;
-  this.div = document.getElementById('content');
-  this.div.innerHTML = "";
+  this.div = outdiv ? outdiv : document.getElementById('content');
   this.title = false;
   this.entered = false;
   this.checked = false;
@@ -101,13 +84,14 @@ function TreatiseDoc(text){
   this.columns = false;
   this.hands = [];
   this.maxWidth = 0;
-  // When we click on a button we lose the selection, so this
-  // click-button needs to store the selection information as the
-  // pointer approaches it
-  $("#buttonbar").mouseenter(function(e){
-    range = window.getSelection().getRangeAt(0).cloneRange();
-  });
-  $(".spanpicker").click(function(e){
+  this.setUpInteraction = function(){
+    // When we click on a button we lose the selection, so this
+    // click-button needs to store the selection information as the
+    // pointer approaches it
+    $("#buttonbar").mouseenter(function(e){
+        range = window.getSelection().getRangeAt(0).cloneRange();
+    });
+    $(".spanpicker").click(function(e){
       if($(this).hasClass("red")){
         toSpan("red");
       } else if ($(this).hasClass("redline")){
@@ -122,12 +106,18 @@ function TreatiseDoc(text){
       $(code).scrollTo(scroll);
       // FIXME:
       doc = new TreatiseDoc(code.value);
-  });
-  nodeNo=0;
-  nodes = [];
-  chapter = 0;
-  book = 0;
-  hands = [];
+    });
+  };
+  this.init = function(){
+    if(editable){
+      this.setUpInteraction();
+    }
+    nodeNo=0;
+    nodes = [];
+    chapter = 0;
+    book = 0;
+    hands = [];
+  };
   this.parseHeaders = function(){
     //FIXME:
     this.title = trimString(consumeIf(/[^\r\n]*[\r\n]/));
@@ -251,7 +241,7 @@ function TreatiseDoc(text){
           dateDisplay == "show", "dateDisplay");
       }
     }
-    if(this.source || this.sources){
+    if(this.source || this.sources.length){
       if(sourceDisplay == "show" || sourceDisplay == "hide"){
         infoButton("s", ["source", "sources"], ib,
           sourceDisplay == "show", "sourceDisplay");
@@ -270,6 +260,10 @@ function TreatiseDoc(text){
     }
     if(infoButtons){
       this.infoButtons();
+    }
+    if(this.translator){
+      this.div.appendChild(fieldDatumPair("Translator", this.translator));
+      if(editorDisplay == "hide" || !editorDisplay) $(".info.translator").hide();
     }
     if(this.editor){
       this.div.appendChild(fieldDatumPair("Editor", this.editor));
@@ -318,117 +312,94 @@ function TreatiseDoc(text){
       if(sourceDisplay == "hide" || !sourceDisplay) $(".info.sources").hide();
     }
   };
-  resetAnnotations();
-  resetDebugger();
-  sources = this.sources;
-  var prevcomplaint = complaint;
-  complaint = [];
-  var currentElement = new Paragraph();
-  var currentString = "";
-  pointer = 0;
-  string = text;
-  try{
-    this.parseHeaders();
-  } catch (x) {
-    // Register an error?
-    alert("Header issue");
-    alert(x);
-  }
-  while(string !=""){
-    try{
-      var para = readPara();
-      if(para) this.contents.push(para);      
+  this.parse = function (){
+    this.init();
+    resetAnnotations();
+    resetDebugger();
+    sources = this.sources;
+    complaint = [];
+    pointer = 0;
+    string = text;
+    try {
+      this.parseHeaders();
     } catch (x) {
-      var para = new Comment();
-      para.content.push(new Text("Error"));
-      this.contents.push(para);
+      
     }
-  }
-  this.hands = hands;
-//  this.draw = function(){
-  this.writeHeaders();
-  for(var i=0; i<this.contents.length; i++){
-    var domEl = this.contents[i].toHTML();
-    if(domEl){
-      this.div.appendChild(domEl);
-    }
-  }
-  var rendwidth = document.getElementById("rendered");
-  if(this.columns==2){
-    $("p").removeClass("onecolumn");
-    $("p").addClass("twocolumn");
-  } else {
-    $("p").removeClass("twocolumn");
-    $("p").addClass("onecolumn");
-  }
-  this.maxWidth = refreshExamples();
-  if(wrapWidth){
-    this.div.style.width = Math.max(this.maxWidth+5, wrapWidth)+"px";
-  } else {
-//    this.div.style.width = Math.max(this.maxWidth+5, 450)+"px";
-  }
-  if(complaint.length>prevcomplaint.length){
-//    alert("New error messages (see bottom of page)");
-    showErrorCount(complaint.length);
-  }
-  for(var comp=0; comp<complaint.length; comp++){
-    writeToDebugger("<p>"+complaint[comp]+"</p>");
-  }
-  if(editable) {
-    $("p").attr("contenteditable", "true");
-    $("p").keyup(function(e){
-      var anode = window.getSelection().anchorNode;
-      var tnode = nodes[Number(this.parentNode.id.substring(5))];
-      for(var ci in tnode.content){
-        if(tnode.content[ci].DOMObj == anode){
-          tnode.content[ci].code = anode.data;
-          var code = document.getElementById("code");
-          var scroll = $(code).scrollTop();
-          code.value = doc.toText();
-          $(code).scrollTo(scroll);
-          // FIXME:
-          doc = new TreatiseDoc(code.value);
-        }
+    while(string!=""){
+      try{
+        var para = readPara();
+        if(para) this.contents.push(para);      
+      } catch (x) {
+        var para = new Comment();
+        para.contents.push(new Text("Error"));
+        this.contents.push(para);
       }
-    });
-  }
+    }
+    this.hands = hands;
+  };
+  this.draw = function(){
+    this.div.innerHTML = "";
+    this.writeHeaders();
+    if(exampleSource) matchExamples(this, exampleSource);
+    for(var i=0; i<this.contents.length; i++){
+      var domEl = this.contents[i].toHTML();
+      if(domEl){
+        this.div.appendChild(domEl);
+      }
+    }
+    if(this.columns==2){
+      $("p").removeClass("onecolumn");
+      $("p").addClass("twocolumn");
+    } else {
+      $("p").removeClass("twocolumn");
+      $("p").addClass("onecolumn");
+    }
+    this.maxWidth = refreshExamples();
+    if(wrapWidth){
+      this.div.style.width = Math.max(this.maxWidth+5, wrapWidth)+"px";
+    } else {
+      //    this.div.style.width = Math.max(this.maxWidth+5, 450)+"px";
+    }
+    for(var comp=0; comp<complaint.length; comp++){
+      writeToDebugger("<p>"+complaint[comp]+"</p>");
+    }
+    if(editable) {
+      $("p").attr("contenteditable", "true");
+      $("p").keyup(function(e){
+        var anode = window.getSelection().anchorNode;
+        var tnode = nodes[Number(this.parentNode.id.substring(5))];
+        for(var ci in tnode.content){
+          if(tnode.content[ci].DOMObj == anode){
+            tnode.content[ci].code = anode.data;
+            var code = document.getElementById("code");
+            var scroll = $(code).scrollTop();
+            code.value = doc.toText();
+            $(code).scrollTo(scroll);
+            // FIXME:
+            doc = new TreatiseDoc(code.value);
+          }
+        }
+      });
+    }
+  };
+  this.parse();
+  this.draw();
 }
 
 function refreshExamples(){
   var mw = 0;
   for(var i=0; i<examples.length; i++){
-    // examples[i][0].staffCanvas.style.zIndex = 1;
-    // examples[i][0].staffCanvas.style.top = 0 - examples[i][1].height;
-    // examples[i][0].staffCanvas.style.marginBottom = 0 - examples[i][1].height;
-    // examples[i][1].style.zIndex = 5;
     examplei = i;
     try{
       examples[i][0].draw(examples[i][1], nocache);
       mw = Math.max(mw, examples[i][1].width.baseVal.value);
-      examples[i][0].toText();  
     } catch (x) {
       // FIXME: Log somewhere
     }
-    var fun = function(ex){
-        return function(e) {
-          var offset = $(this).offset();
-          var t = ex.commentsTip(e.pageX - offset.left, e.pageY - offset.top);
-          if(t){
-            t.style.position = "fixed";
-            t.style.top = e.pageY;
-            t.style.left = e.pageX;
-          }
-        };
-    }(examples[i][0]);
-//    $(examples[i][1]).mousemove(fun);
   }
-//  $("canvas").mouseout(removeTooltip);
   if(firstTime && false){
     window.setTimeout(refreshExamples, 300);
   }
-  // $(".clickable").click(function(e){
-  //     $(this).data("parseobj").edit(e);
-  // });
   firstTime = false;
   return mw + 20;
 }
@@ -512,6 +483,8 @@ function readString(){
         if(punc && punc[0] && punc[0].length>1){
           content.push(new Punctuation(punc[0]));
           consumeIf(/\{[,.¶:;\ ]+\}/);
+        } else if(consumeIf("{example}")){
+          content.push(new BlankExample());
         } else {
           content.push(readChoice());
         }
@@ -883,5 +856,36 @@ function findLocation(e){
       $("#content").scrollTo($("#content a.chapter")[chaps.length-1], 500);
     }
     $("#content").scrollTo("-=80px", 500);
+  }
+}
+
+function matchExamples(treatise, text){
+  // Search for all references to musicExamples and replace them with real ones
+  var examples = 0, eg=false;
+  var reg = /<example.*?<\/example>/g;
+  var oldstring = string; // Probably unnecessary
+  for(var i=0; i<treatise.contents.length; i++){
+    if(treatise.contents[i].objType==="Paragraph"){
+      // FIXME: This should probably be a properly recursive walk
+      for(var j=0; j<treatise.contents[i].content.length; j++){
+        if(treatise.contents[i].content[j].objType==="Blank Example"){
+          treatise.contents[i].content[j].index = examples;
+          examples++;
+          eg = reg.exec(text);
+          if(eg!==null){
+            string = eg[0].substring(9, eg[0].length - 10);
+            treatise.contents[i].content[j].musicExample = new MusicExample();
+          }
+        }
+      }
+    } else if(treatise.contents[i].objType==="Blank Example"){
+      treatise.contents[i].index = examples;
+      examples++;
+      eg = reg.exec(text);
+      if(reg!==null){
+        string = eg[0].substring(9, eg[0].length - 10);
+        treatise.content[i].musicExample = new MusicExample();
+      }
+    }
   }
 }

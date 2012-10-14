@@ -1,0 +1,102 @@
+JOHANNES TINCTORIS: DE NOTIS ET PAUSIS
+Translator: Ronald Woodley
+Checked by: Jeffrey J. Dean
+Date established: 4 September 2012
+<treatise><title>A treatise on notes and rests</title>
+<prologue><heading>Prologue</heading>
+Distinguished sir, Martin Hanard, canon of Cambrai and papal singer, undying good wishes from Johannes Tinctoris, least among singers of the King of Sicily. Considering, most renowned of singers, how necessary it is for one intending to devote effort to artful singing to be acquainted with notes and rests, I have set about dealing with these as concisely as I can, not out of any longing for praise, but out of the genuinely affectionate regard that I feel towards those studying music. For, as the loftiness of your perception is well aware, it is the case that nobody emerges skilled in the art of speaking without an acquaintance with letters; in a similar fashion, no-one will ever sing correctly if he is ignorant of notes and rests. For from letters are formed syllables, then sentences, and finally whole speeches; likewise pieces of music are composed of notes and rests. And although very many highly melodious singers can be found who are utterly lacking in knowledge of notes and rests, just as there are innumerable speakers highly distinguished in their speech, yet ignorant of letters, my own teaching here should not be considered superfluous for this reason. To be sure, whoever comes to sing melodiously by means of this teaching understands that he is doing so correctly, which is altogether praiseworthy; otherwise he will not sing well. For as the wise maintain, nobody does well what he does not understand.</prologue>
+<book><chapter><heading>On the definition of a note and the distinction of notes: Book I Chapter 1 [i]</heading>
+First, then, let us deal with notes, and afterwards with rests. A note is the sign of a pitch, of either definite or indefinite value. Hence, it should be observed that there are two species of notes. For some are of definite value and standard bounds according to the mensurations to which they are subject, as I have suitably propounded in the book that I have written called <citation>On the standard value of notes</citation>. And we use such notes only in mensural music. Other notes are performed now with a greater, now with a lesser, value, according to the wish of those singing. These notes, indeed, are used in plainchant. And so let me make some comments first about the former, and afterwards the latter.</chapter>
+<chapter><heading>On notes of definite value: Chapter 2 [ii]</heading>
+We have received just five notes of definite value, set down by our forebears, which, like the five senses fitted by nature to regulate the human body, are sufficient for all pieces of music to be composed; and they very cleverly ordered these five into one pentameter verse in a most artful fashion, as follows:
+<verse>Maxima, longa, breve, semibreve, minim.</verse>
+Moreover, each of these notes, with the sole exception of the minim, is formed in two ways, namely simply or in compound: simply when the notes are not bound together and compound when they are bound together. Let us see, then, for each one what the note is, and in what fashion it is formed simply. After this I shall explain their compound form, which occurs by means of the ligature.</chapter>
+<chapter><heading>On the maxima: Chapter 3 [iii]</heading>
+The maxima is a note of the value of three longas in perfect major modus, and of two in imperfect; and it is called a maxima because the remaining notes are smaller in both form and value. Its form is of a quadrilateral, not square, however, but having the width of two squares and a tail drawn downward or upward on its right side, as here: {example}</chapter>
+<chapter><heading>On the longa: Chapter 4 [iv]</heading>
+The longa is a note of the value of three breves in perfect minor modus, and of two in imperfect; and it is called a longa because with respect to the breve, from which it differs only in its tail, it is long. For its form is square, like the breve, but it takes a tail drawn downward or upward on its right side, as here: {example}</chapter>
+<chapter><heading>On the breve: Chapter 5 [v]</heading>
+The breve is a note of the value of three semibreves in perfect tempus, and of two in imperfect; and it is called a breve because with respect to the longa it is short. Its form, indeed, is square, but in no circumstances taking a tail, as here: {example}</chapter>
+<chapter><heading>On the semibreve: Chapter 6 [vi]</heading>
+The semibreve is a note of the value of three minims in major prolation, and of two in minor; and it is called a semibreve as being, in a sense, an incomplete breve, because with respect to the breve it is incomplete. For its form is not perfectly square, since it is written with four corners, of which the first is drawn at the top, the second at the bottom, the third on the right, and the fourth on the left, as here: {example}</chapter>
+<chapter><heading>On the minim: Chapter 7 [vii]</heading>
+The minim is a note of indivisible value; and it is called a minim because the remaining notes are greater in value. Its form is the same as the semibreve, with a tail drawn directly upward or downward, as here: {example} However, sometimes a minim takes a short stroke drawn obliquely from its extremity, or is filled in with some colour, though the former occurs more often in major prolation, and only as a sign of dupla proportion; the latter, on the other hand, occurs in minor prolation, and as a sign not only of dupla, but also sesquialtera proportion. In such circumstances unskilled musicians call this kind of minim a semiminim, but they are completely mistaken, as I argue clearly in the book that I have written called <citation>The proportionary of music</citation>.</chapter>
+<chapter><heading>On ligatures: Chapter 8 [viii]</heading>
+Furthermore, four of these notes, that is to say the maxima, the longa, the breve and the semibreve, are formed in another manner, through the use of the ligature. A ligature, then, is an unbroken connection, one to another, of two or more notes. Every ligature, indeed, is either ascending or descending. An ascending ligature is when the last of two notes is higher than the first, or the last of more than two notes is higher than the penultimate, as here:
+{example}
+A descending ligature, on the other hand, is when the last of two ligated notes is lower than the first, or the last of several ligated notes is lower than the penultimate, as here:
+{example}
+Moreover, every ligature is either upright or oblique. An upright ligature is when the notes bound together are drawn in an upright fashion, as is clear here:
+{example}
+An oblique ligature is when the notes bound together are drawn obliquely to each other, as here:
+{example}</chapter>
+<chapter><heading>On differentiating the notes occurring together in ligatures: Chapter 9 [ix]</heading>
+And since in ligatures of this kind some notes are first, others middle, and others last, in order to know what the notes are in any ligature, we will deal first with first notes, secondly with middle notes, and thirdly with last notes.</chapter>
+<chapter><heading>On the general rules for ascertaining the first notes of ligatures: Chapter 10 [x]</heading>
+And so, first, seven general rules are assigned for ascertaining the first notes of ligatures:
+<subheading>On the first general rule</subheading>
+The first general rule is that in every ascending ligature a first note having a tail drawn upward on the left side is a semibreve, as is clear here:
+{example}
+<subheading>On the second general rule</subheading>
+The second general rule is that in an ascending upright ligature a first note without a tail is a breve, as here:
+{example}
+<subheading>On the third general rule</subheading>
+The third general rule is that in an ascending oblique ligature a first note having a tail drawn downward on the left side is a breve, as here:
+{example}
+<subheading>On the fourth general rule</subheading>
+The fourth general rule is that in an ascending oblique ligature a first note without a tail is a longa, as here:
+{example}
+<subheading>On the fifth general rule</subheading>
+The fifth general rule is that in every descending ligature a first note having a tail drawn upward on the left side is a semibreve, as here:
+{example}
+<subheading>On the sixth general rule</subheading>
+The sixth general rule is that in every descending ligature a first note having a tail drawn downward on the left side is a breve, as here:
+{example}
+<subheading>On the seventh general rule</subheading>
+The seventh general rule is that in every descending ligature without a tail the first note is a longa, as here:
+{example}</chapter>
+<chapter><heading>On ascertaining the middle notes of ligatures: Chapter 11 [xi]</heading>
+Secondly, so that the middle notes of ligatures, which are all those that are bound together between the first and last in any ligature, may be ascertained, a single general rule is given, which is that all middle notes in every ligature are breves, unless the first note has a tail drawn upward on the left side, since in that case the second note, like the first, is a semibreve, as here:
+{example}</chapter>
+<chapter><heading>On the general rules about ascertaining the final notes of ligatures: Chapter 12 [xii]</heading>
+Thirdly, for ascertaining the last notes in ligatures, two general rules are assigned.
+<subheading>On the first general rule</subheading>
+The first general rule is that in every ascending ligature all last notes are breves, unless only two notes are bound together, of which the first has a tail drawn upward on the left side, since in that case the last note, like the first, is a semibreve, as here:
+{example}
+<subheading>On the second general rule</subheading>
+The second general rule is that in every descending upright ligature the last note is a longa, and in an oblique one it is a breve, unless only two notes are bound together, of which the first has a tail drawn upward on the left side, since in that case the last note, like the first, is a semibreve, as here:
+{example}</chapter>
+<chapter><heading>An important point concerning the ligature of the maxima: Chapter 13 [xiii]</heading>
+It should be noted, moreover, that in every ligature in which a note, according to the last general rule on first notes, and the last general rule on last notes, is a longa, if it is widened into the form of a maxima, it is made a maxima, as here:
+{example}</chapter>
+<chapter><heading>In how many ways the maxima and longa may be bound together with other notes in their proper form: Chapter 14 [xiv]</heading>
+Finally, it should be noted that a maxima is bound with a maxima, longa, and semibreve, and a longa with a maxima, longa, breve, and also semibreve, in two ways: first when, for binding together, one of the former is placed directly above one of the latter, and secondly when it is placed to the side, in its proper and simple form, as here:
+{example}
+Hence, if in any ligature the notes retain their proper form, it is said to take place ‘with propriety’; if they take some other form, though, it is said to take place ‘without propriety’.</chapter>
+<chapter><heading>On notes of indefinite value: Chapter 15 [xv]</heading>
+Notes of indefinite value are those that are not bounded by any standard value. Notes of this kind are those that we use in plainchant: their form is sometimes similar to the form of the longa, the breve, and the semibreve, and sometimes dissimilar, such that they are called ‘fly feet’ by most people, on account of their small size, as here:
+{example}
+{example}
+And notes of this kind are sung now measured, now unmeasured, now under one perfect mensuration, now under another imperfect one, according to the practice of churches or the wish of those singing.</chapter></book>
+<book><chapter><heading>On rests: Book II Chapter 1 [i]</heading>
+Now it remains for me to examine, to the extent of my ability, the matter of rests. A rest is the sign of a silence to be made according to the mensuration of the note to which it belongs. Therefore, whatever the standard value of a note, the value of the rest belonging to that note is just the same. Moreover, there are four notes to which rests belong, namely the longa, breve, semibreve and minim. Hence we must deal with each of these one at a time, so that they may be understood more clearly.</chapter>
+<chapter><heading>On the longa rest: Chapter 2 [ii]</heading>
+The longa rest is a straight stroke, formed in any colour, occupying three spaces in perfect minor modus, and two in imperfect. A rest of this kind, like the longa itself, therefore has the value of three breves in perfect minor modus, and of two in imperfect, as is clear here:
+{example}
+{example}</chapter>
+<chapter><heading>On the breve rest: Chapter 3 [iii]</heading>
+The breve rest is a straight stroke, formed in any colour, occupying a single space in any tempus. A rest of this kind, moreover, has the value of three semibreves in perfect tempus and of two in imperfect, as is clear here:
+{example}
+{example}</chapter>
+<chapter><heading>On the semibreve rest: Chapter 4 [iv]</heading>
+The semibreve rest is a short straight stroke, formed in any colour, occupying half of a space and drawn downward from a staff-line. A rest of this kind, moreover, has the value of three minims in major prolation, and of two in minor, as is clear here:
+{example}
+{example}</chapter>
+<chapter><heading>On the minim rest: Chapter 5 [v]</heading>
+The minim rest is a short straight stroke, formed in any colour, occupying half of a space and drawn upward from a staff-line. Moreover, the value of a rest of this kind, like the minim itself, is indivisible, because it is simple and uncompounded, as here:
+{example}
+And this rest is commonly called a ‘sigh’, since it is most appropriately measured by sighing. Sometimes it takes a short oblique stroke drawn downward on its right side; it nevertheless does not receive any other name, but is measured the same as one minim that sets up a dupla proportion with it, as here:
+{example}</chapter></book>
+<conclusion><heading>The conclusion of the work</heading>
+And let this be enough said about notes and rests, which I reckoned should be directed to you, most outstanding of men, not in order for me to teach you – lest, as the Greek proverb puts it, I should seem as it were a sow to be teaching Minerva – but so that you may accept this lasting record of my studies with all the depth of gratitude of a friend, for I have come to know you as such. Nor do I doubt that this poor little gift will be most welcome to your supreme powers, since we see the wealthiest men accepting paltry gifts, and the most highly skilled enjoying basic instruction.</conclusion>
+<explicit>Here ends the short treatise on musical notes and rests.</explicit>

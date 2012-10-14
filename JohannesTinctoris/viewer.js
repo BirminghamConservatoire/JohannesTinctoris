@@ -254,7 +254,66 @@ function getTranscribedText(i){
   });
 }
 
-function getEditedText(i){
+function getEditedText(){
+//  wrapWidth = false;
+  wrapWidth = 460;
+  $(".translatedText.optionsBlock").addClass("inactive");
+  $(".translatedText.optionsBlock").removeClass("active");
+  $(".editedText.optionsBlock").removeClass("inactive");
+  $(".editedText.optionsBlock").addClass("active");
+  $(".sourceText.optionsBlock").addClass("inactive");
+  $(".sourceText.optionsBlock").removeClass("active");
+  $.ajax({
+      async: true,
+      url: 'edited.txt',
+      datatype: 'text/plain',
+      failure: function(){
+        alert("no");
+      },
+      success: function(data){
+        doc = new TreatiseDoc(data);
+        doc.out = document.getElementById("content");
+        navSelect(doc);
+        scrollFromHash();
+      }
+  });
+}
+function getEnglishText(){
+//  wrapWidth = false;
+  wrapWidth = 460;
+  $(".translatedText.optionsBlock").removeClass("inactive");
+  $(".translatedText.optionsBlock").addClass("active");
+  $(".editedText.optionsBlock").addClass("inactive");
+  $(".editedText.optionsBlock").removeClass("active");
+  $(".sourceText.optionsBlock").addClass("inactive");
+  $(".sourceText.optionsBlock").removeClass("active");
+  $.ajax({
+      async: false,
+      url: 'edited.txt',
+      datatype: 'text/plain',
+      failure: function(){
+        alert("no");
+      },
+      success: function(data){
+        exampleSource = data;
+      }
+  });
+  $.ajax({
+      async: true,
+      url: 'english.txt',
+      datatype: 'text/plain',
+      failure: function(){
+        alert("no");
+      },
+      success: function(data){
+        doc = new TreatiseDoc(data);
+        doc.out = document.getElementById("content");
+        navSelect(doc);
+        scrollFromHash();
+      }
+  });
+}
+function getParallelText(){
 //  wrapWidth = false;
   wrapWidth = 460;
   $.ajax({
@@ -273,12 +332,22 @@ function getEditedText(i){
   });
 }
 
+function getText(){
+  if(settings.language === "Latin"){
+    getEditedText();
+  } else if (settings.language === "Parallel") {
+    getParallelText();
+  } else {
+    getEnglishText();
+  }
+}
 $(document).ready(function(){
   document.getElementById("content").style.height = ($(window).height() 
                       - $("#content").offset().top
                       -20)+"px";
+  
   if(window.location.toString().indexOf("/texts/")>-1){
-    getEditedText();
+    getText();
   } else if (window.location.toString().indexOf("/sources/")>-1){
     getTranscribedText(); 
   }

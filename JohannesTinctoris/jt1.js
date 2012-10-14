@@ -121,6 +121,9 @@ $(document).ready(function(){
 		$(this).addClass("checked");
 		settings.language = this.id;
 		refreshMenus(false);
+    if(window.location.toString().indexOf("/texts/")!==-1){
+      getText();
+    }
 //		e.stopImmediatePropagation();
 		$(this).mouseout(function(e){
 			$(this).removeClass("MenuBarItemHover");

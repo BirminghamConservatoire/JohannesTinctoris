@@ -2,13 +2,13 @@ function MusicExample(){
   this.objType = "MusicExample";
   this.code = string;
   this.SVG = false;
-  this.staffSVG = false;
   this.context = false;
   this.events = [];
   this.comments = [];
   this.drawCount = 0;
   this.starts = pointer;
   this.swidth = false;
+  this.classes = false;
   currentExample = this;
   initialStaffStar = false;
   var next;
@@ -118,6 +118,9 @@ function MusicExample(){
   };
   this.draw = function(exampleSVG, force){
 //    alert(JSON.stringify(this));
+    if(exampleSVG != this.SVG) alert("ok");
+    // FIXME: 14/10/12 If this shows no alerts, remove this and all
+    // svg passing
     if(this.drawCount>1 && !force){
       return;
     }
@@ -133,6 +136,7 @@ function MusicExample(){
     currentSubType = this.parameters.notationSubtype;
     currentRedline = false;
     SVG = exampleSVG;
+    this.SVG = SVG; // ??
 //FIXME:    context = SVG.getContext("2d");
     clearSVG(SVG);
     svgCSS(SVG, cssPath("jt-editor-v.css"));
@@ -146,10 +150,12 @@ function MusicExample(){
     sysNo = 1;
     curx += rastralSize / 2;
     cury += currentLinecount * rastralSize;
+    var svgold = false;
     var texted = false;
     var maxx = false;
     currentSystems.push(svgGroup(SVG, "Stafflines", false));
     this.parameters.draw();
+    this.classes = new Classes();
     for(eventi = 0; eventi<this.events.length; eventi++){
       if(wrapWidth && curx>=wrapWidth){
         sysBreak2();
@@ -160,7 +166,13 @@ function MusicExample(){
       }
       if(this.events[eventi].objType && !this.events[eventi].params) {
         try {
+          if(this.classes.render()){
+            svgold = SVG;
+            SVG = svgGroup(SVG, this.classes.classString(), false);
+          }
           this.events[eventi].draw(curx, cury);          
+          if(svgold) SVG = svgold;
+          svgold = false;
         } catch (x) {
         }
         if(this.events[eventi].objType == "TextUnderlay"){
@@ -171,7 +183,7 @@ function MusicExample(){
     sysBreak2(true);
     for(var w=0; w<this.w2.length; w++){
       drawSystemLines(currentSystems[w], this.w2[w][2], this.w2[w][1], lmargin, 
-        this.w2[w][0], this.w2[w][3], this.staffSVG);
+        this.w2[w][0], this.w2[w][3], this.SVG);
         maxx = Math.max(this.w2[w][0], maxx);
     }
     SVG.height.baseVal.value = SVG.getBoundingClientRect().height + (texted ? 25 : 5);
@@ -578,9 +590,7 @@ function nextOblique(ligature){
     } else if(string.substring(0,1) == "{"){
       // FIXME: do stuff
       next = nextObliqueNoteChoice(oblique);
-      if(next){
-        oblique.extendMembers(next);
-      }
+      oblique.extendMembers(next);
     } else {
       next = nextNote();
       if(next){
@@ -711,13 +721,60 @@ function consumeParenthesis(){
   return false;
 }
 
-function parseMens(sig, pos){
+function parseMens(string){
+  var obj = new MensuralSignature();
+  if(!string || !string.length) return obj;
+  var pointer = 0;
+  if(string.charAt(0)==="^"){
+    obj.sup = true;
+    pointer++;
+  }
+  if(string.charAt(pointer)) {
+    obj.signature = string.charAt(pointer);
+  } else return obj;
+  pointer++;
+  if(string.charAt(pointer)) obj.staffPos = "0123456789ABCDEF".indexOf(string.charAt(pointer));
+  return obj;
+}
+
+function parseMensOld(sig, pos){
   var obj = new MensuralSignature();
   if(!sig || sig === "0") return obj;
   obj.signature = sig.charAt(0);
   obj.staffPos = "0123456789ABCDEF".indexOf(pos);
   return obj;
 }
+function parseMensReading(fields){
+  var mens;
+  var signature = false;
+  if(fields[0] !== "(om.)"){
+    mens = new MensuralSignature();
+  } else if(fields[0].length>1){
+    mens = parseMens(fields[0]);
+  } else{
+    // This is an error. See if a blank works as a recovery strategy
+    mens = new MensuralSignature();
+  }
+  for(var i=1; i<fields.length; i++){
+    if(fields[i].charAt(0) === '"' || fields[i].substring(0, 3) === '(om'){
+      return [fields.slice(i), new MReading(fields.slice(1, i), [mens], "")];
+    }
+  }
+  return [false, new MReading(fields.slice(1, fields.length), [mens], "")];
+}
+function parseMensVar(fields){
+  var obj = new MChoice();
+  var nextM = parseMensReading(fields);
+  fields = nextM[0];
+  while(fields){
+    obj.content.push(nextM[1]);
+    nextM = parseMensReading(fields);
+    fields = nextM[0];
+  }
+  obj.content.push(nextM[1]);
+  return obj;
+}
+
 function parseSolm(signs){
   var solm, pitch, nextChar;
   var obj = new SolmizationSignature();
@@ -767,7 +824,7 @@ function parseSolmReading(fields){
       }
     }
   }
-  return [false, new MReading(fields.slice(1, fields.length), [solm], "")];
+  return [false, new MReading(fields.slice(sigged, fields.length), [solm], "")];
 }
 function parseSolmVar(fields){
   var next = false;
@@ -794,7 +851,6 @@ function parseClefReading(fields){
   return [false, new MReading(fields.slice(1, fields.length), [clef], "")];
 }
 function parseClefVar(fields){
-  var next = false;
   var obj = new MChoice();
   var nextC = parseClefReading(fields);
   fields = nextC[0];
@@ -881,9 +937,18 @@ function nextInfo(){
     var fields = info.match(/[^{}, :=]+/g);
     switch(fields[0]){
       case "mens":
-        if(fields[1] && fields[2] && (fields[1].charAt(0)==='"' || fields[2].charAt(0)==='"')){
-          parseMensVar(fields.slice(1));
-        } else return parseMens(fields[1], fields[2]);
+        if(fields[1] && fields[2] && 
+           (fields[1].charAt(0)==='"' || fields[2].charAt(0)==='"' ||
+            fields[1].substring(0, 2)==='(o')){
+          return parseMensVar(fields.slice(1));
+        } else if(fields[1].length==2){
+          // new format
+          return parseMens(fields[1]);
+        } else if(fields.length>1){
+          return parseMens(fields[1], fields[2]);
+        } else {
+          return false;
+        }
       case "solm":
         if(fields[1].charAt(0)=='"'){
           return parseSolmVar(fields.slice(1));

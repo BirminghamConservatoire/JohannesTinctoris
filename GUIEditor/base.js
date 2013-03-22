@@ -954,7 +954,6 @@ function drawRhombus(x, y, colour, ltail, rtail, extras){
   var m = metrics();
   var a = m.chantPenA;
   var b = m.chantPenB;
-  if (foo) alert([a, b]);
   var group = svgGroup(SVG, "rhombus", false);
   var classExtra = " ";
   if(colour){
@@ -1068,7 +1067,6 @@ function nextPitch(){
     if(event.objType == "Note") {
       return pitchAndPos(event);
     } else if (event.objType == "ChantNote"){
-//      alert(pitchAndPos(event));
       return pitchAndPos(event);
     } else if (event.objType == "Ligature"){
       // FIXME: not robust to clef changes
@@ -1119,8 +1117,6 @@ function last(list){
 //   var bottom = 0;
 //   var bbox;
 //   var l, r, t, b;
-//   alert(kids.length);
-//   alert(svgEl.getAttributeNS(SVGNS, "childNodes"));
 //   for(var i=0; i<kids.length; i++){
 //     if(kids && kids[i].getAttributeNS(SVGNS, "childNodes").length){
 //       bbox = mySVGBBox(kids[i], depth+1);
@@ -1281,8 +1277,6 @@ function showAnnotation2(obj, clicked){
     fndiv.style.position = "fixed";
     fndiv.style.left = obj.getBoundingClientRect().left+"px";
     if(subvariant(obj)){
-      // alert(($(obj).parents("SVG")[0].getBoundingClientRect().bottom
-      //                    +fndiv.getBoundingClientRect().height)+"px");
       fndiv.style.top = ($(obj).parents("SVG")[0].getBoundingClientRect().bottom
                          +fndiv.getBoundingClientRect().height)+"px";
     } else {
@@ -1426,8 +1420,6 @@ function toSpan(type){
   var startNode = nodes[startNo];
   var endNode = nodes[endNo];
   // var st = range.startContainer;
-  // alert([st.data, st.parentNode, $(st).index()]);
-  // $(st.parentNode).contents().each(function(i, e){if(e==st) alert(e.data);});
   var startIndices = getIndices(range.startContainer);
   var endIndices = getIndices(range.endContainer);
   if(startNo || startNo == 0) {
@@ -2023,7 +2015,6 @@ function docMapping(){
     var tDoc = this.docForPane(pane);
     var treatiseGroup = this.treatises[tDoc.group];
     if(!treatiseGroup){
-      // if(typeof(tDoc.group)==="undefined") alert(childPane);
       return;
     }
     if(treatiseGroup.length>1){
@@ -2078,7 +2069,6 @@ function docMapping(){
     var fndiv = DOMDiv('popup '+ptype+" stream-"+code, id, false);
     fn.push(fndiv);
 //     if(fn.length && fn[fn.length-1][1]===info) {
-// //      alert("gotcha");
 //       return;
 //     }
 //    if(fn.length>24 && fn.length<28) debugger;
@@ -2093,7 +2083,6 @@ function docMapping(){
       fndiv.appendChild(frame);
       fndiv.appendChild(document.createTextNode(" "));
       info.tip(frame);
-//      alert([frame.width.baseVal.value, frame.getBoundingClientRect().right, frame.getBoundingClientRect().width]);
 //      fndiv.style.width = Math.max(frame.getBoundingClientRect().width, frame.width.baseVal.value)+26+"px";
       fndiv.style.width = frame.getBBox().width+26+"px";
       fndiv.style.height = frame.getBBox().height+26+"px";
@@ -2264,8 +2253,6 @@ function specialTogglePunct(select){
 }
 
 function relativeRight(element, parent){
-  // alert([element.getBoundingClientRect().right- parent.getBoundingClientRect().left, 
-  //        element.getBBox().x+element.getBBox().width-parent.getBBox().x]);
 //  return element.getBoundingClientRect().right - parent.getBoundingClientRect().left;
   return element.getBBox().x+element.getBBox().width-parent.getBBox().x;
 }
@@ -2289,9 +2276,6 @@ function trimPreInsSpaces(endsinpunct){
   var content = currenttextparent.content;
   // if(content.length>pari+2
   //   && content[pari+1].objType==="Choice" && content[pari+1].nonDefault()) {
-  //   alert([content[pari].code, 
-  //          content[pari+1].nonDefault(),
-  //          punctuationp(content[pari+2])]);
   // }
   return content.length>pari+2
     && content[pari+1].objType==="Choice"

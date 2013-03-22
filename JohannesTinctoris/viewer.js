@@ -103,7 +103,11 @@ function romanReference(a, b, c){
   if(a && a!=="0") ref.push(roman(Number(a)).toUpperCase());
   if(b && b!=="0") ref.push(roman(Number(b)));
   if(c && c!=="0") ref.push(c);
-  return ref.join(".");
+  if(!ref.length){
+    return "Section...";
+  } else {
+    return ref.join(".");
+  }
 }
 function getSelected(select){
   return $(select).children(":selected")[0];
@@ -858,7 +862,6 @@ function currentPosition(div){
   var loc = /at-\S*/.exec(para.className)[0].split("-").slice(1);
   // var loc = /at-\S*/.exec(para.className)[0].split("-").slice(1).map(Number);
   var pos = $(para).offset().top;
-  alert(loc);
   return new Position(loc[0], loc[1], loc[2], loc[3], pos-offset);
 }
 

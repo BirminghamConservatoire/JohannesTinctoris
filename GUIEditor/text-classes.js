@@ -250,7 +250,6 @@ function Paragraph(){
           this.content[i].SVG = newSVG;
         }
         this.content[i].counter = desperatecounter;
-        // alert([this.content[i].counter, i, desperatecounter]);
         desperatecounter++;
         if(i+1<this.content.length 
            && (this.content[i+1].objType==="Text"
@@ -323,7 +322,6 @@ function Marginal(){
       if(this.side) text += " ("+this.side+")";
     }
     text += ">";
-    // alert(this.content);
     // for(var i=0; i<this.content.length; i++){
     //   text += " "+typeof(this.content[i])=="string" ? this.content[i] : this.content[i].toText();
     // }
@@ -420,7 +418,6 @@ function textBlockToHTML(container, content, block){
         content[i].SVG = newSVG;
       }
       content[i].counter = desperatecounter;
-        // alert([this.content[i].counter, i, desperatecounter]);
       desperatecounter++;
       if(i+1<content.length 
          && (content[i+1].objType==="Text"
@@ -586,7 +583,6 @@ function Text(text){
     if(trimPreInsSpaces(spaceAfterPunc)) this.code = this.code.slice(0, 0-closingSpaces);
     if(this.removepunct) this.code = this.code.substring(/^\s*[,.:¶?!]/.exec(this.content)[0].length);
     if(uncapitalise && !this.overrideCapitalize){
-//      alert([uncapitalise, this.content]);
       var firstPos = this.code.search(/\S/);
       if(firstPos<0){
         this.DOMObj = document.createTextNode(" ");

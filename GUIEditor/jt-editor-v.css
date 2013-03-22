@@ -642,8 +642,13 @@ neumeJoin{
   fill: white;
   stroke-width: 0;
 }
+.ledgerline{
+  stroke: black;
+  stroke-width: 1;
+  fill: none;
+}
 
-.scallopedBarline, .barlineComponent, .barline, .ledgerline{
+.scallopedBarline, .barlineComponent, .barline{
   stroke: black;
   stroke-width: 1.5;
   fill: none;

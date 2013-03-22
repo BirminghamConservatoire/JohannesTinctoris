@@ -72,6 +72,7 @@ function firstVisible(divs, val){
     } else if (top1>val && top2 && top2>val){
       high = mid-1;
     } else {
+      return Math.max(mid-1, 0);
       return mid;
     }
   }

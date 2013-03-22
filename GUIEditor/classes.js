@@ -109,7 +109,6 @@ function Note(){
         $(this.domObj).hover(shiftHoverToShift(this, 1), hoverOutShiftChecked());
       }
       if(!myglyph){
-//        alert(this.rhythm);
         obj = svgText(this.domObj, curx,//this.startX, 
                       texty(charData[1]*prop, this.staffPos),
              "mensural " + this.rhythm+(this.pitch ? this.pitch : this.staffPos), false,
@@ -763,7 +762,6 @@ function Ligature(){
     //               ((this.firstNoteIndexp(i) && oblElementStaffPos(item) > this.nextPos(i)) ||
     //                (this.lastNoteIndexp(i) && this.prevPos(i) > oblElementStaffPos(item))))) {
     //     item.startX = curx;
-    //     if(isNaN(cury)) alert(JSON.stringify(item));
     //     drawBox(item, this.prevPos(i), (oblElementRhythm(this.members[i])=="M" ? 2.5* rastralSize : rastralSize),
     //       false, false, item.sup);
     //     spair = false;
@@ -2161,7 +2159,6 @@ function TextUnderlay(){
         curx = rastralSize;
       } else if (currentExample.events[eventi-1].objType != "TextUnderlay"){
         if(!currentExample.events[eventi-1].startX){
-          // alert(currentExample.events[eventi-1].objType + " TU.draw");
           // FIXME: This seems to happen for texts with musical choice in them
           currentExample.events[eventi-1].startX = curx; // for now
         }
@@ -2567,7 +2564,7 @@ function LedgerLineChange(){
     if(num) {
       this.count = num;
       if(comma>-1 && comma<end){
-        this.color = string.substring(comma+1, end).trim();
+        this.colour = string.substring(comma+1, end).trim();
       }
     }
   };

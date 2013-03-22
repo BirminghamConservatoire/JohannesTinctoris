@@ -104,6 +104,9 @@ function TreatiseDoc(text, outdiv){
   this.hands = [];
   this.maxWidth = 0;
   this.marg = false;
+  this.edition = function(){
+    return this.language!=="Latin" || this.source.length;
+  }
   this.setScrollPos = function(book, chapter, section, paragraph, offset, scroll){
     if(this.scrollpos.book===book && this.scrollpos.chapter===chapter
        && this.scrollpos.section===section && this.scrollpos.paragraph===paragraph){

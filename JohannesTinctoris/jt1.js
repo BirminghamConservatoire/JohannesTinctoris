@@ -4,7 +4,11 @@ var settings = {language: "Latin",
 	transcribe: false,
 	translationNotes: false,
 	transcriptionNotes: false};
+// Useful DOM objects
+var domobj = [];
+var texts = {};
 
+var foo=false;
 /* Client-side access to querystring name=value pairs
 Version 1.3 28 May 2008
 License (Simplified BSD): http://adamv.com/dev/javascript/qslicense.txt
@@ -38,153 +42,151 @@ function Querystring(qs) { // optionally pass a querystring to parse
 }
 //////////
 
-function loadSettings(){
-	var qs = new Querystring(null);
-	if(qs){
-		settings.language = qs.get("language", settings.language);
-		settings.variants = qs.get("showvars", Number(settings.variants));
-		settings.MSPunctuation = qs.get("MSPunctuation", Number(settings.MSPunctuation));
-		settings.transcribe = qs.get("transcribeexx", Number(settings.transcribe));
-		settings.translationNotes = qs.get("translationNotes", Number(settings.translationNotes));
-		settings.transcriptionNotes = qs.get("transcriptionNotes", Number(settings.transcriptionNotes));
-	}
-  editable = false;
-  showvariants = Number(settings.variants);
-  if(showvariants) $(".textVariants").addClass("checked");
-  if(showvariants) {
-    $(".vars.tickoptions.yes").addClass("checked");
-    $(".showhidevariants").addClass("checked");
-  } else {
-    $(".vars.tickoptions.no").addClass("checked");
-  }
-  showtranslationnotes = Number(settings.translationNotes);
-  showtranscriptionnotes = Number(settings.transcriptionNotes);
-  punctuationStyle = Number(settings.MSPunctuation) ? "MS" : "modern";
-  $(".punctuation."+punctuationStyle).addClass("checked");
-  if(punctuationStyle == "MS") $(".switchpunctuation").addClass("checked");
-	$("#"+settings.language).addClass("checked");
-}
-
-function settingsToQueryString(s){
-	var qs = "";
-	qs+= "language="+s.language;
-	if(s.variants) qs += "&showvars=1";
-	if(s.MSPunctuation) qs += "&MSPunctuation=1";
-	if(s.transcribe) qs += "&transcribeexx=1";
-	if(s.translationNotes) qs += "&translationNotes=1";
-	if(s.transcriptionNotes) qs += "&transcriptionNotes=1";
-	return qs;
-}
-
-function updateSettingsWithVariables(variables){
-	if(variables){
-		if(variables.variants) settings.variants = variables.variants;
-		if(variables.language) settings.language = variables.language;
-	}
-}
 function refreshMenus(variables){
 	updateSettingsWithVariables(variables);
-	$("a").each(function(index, el) {
-		var newsrc = el.href;
-		if(newsrc){
-			var fragpos = newsrc.indexOf('#');
-			var frag = fragpos>-1 ? newsrc.substring(fragpos) : "";
-	    if(newsrc.indexOf('?')>-1){
-				newsrc = newsrc.substring(0, newsrc.indexOf('?'));
-			} else if (frag.length) {
-				newsrc = newsrc.substring(0, fragpos);
-			}
-			newsrc += "?"+settingsToQueryString(settings)+frag;
-			el.href = newsrc;
-		}
-  });
-}
-function setlocation (name, val){
-  var locsearch = location.search;
-  var varset = locsearch.indexOf(name);
-  if(varset>-1){
-    var start = locsearch.indexOf("=", varset);
-    var end = locsearch.indexOf("&", varset);
-    if(end ==-1) end = locsearch.length;
-    window.location.search = locsearch.substring(0, start)+"="+val+locsearch.substring(end);
-  } else {
-    window.location.search = locsearch+(locsearch.length>1 ? "&" : "")+name+"="+val;
-  }
+  // fixme: Broken now
+	// $("a").each(function(index, el) {
+	// 	var newsrc = el.href;
+	// 	if(newsrc){
+	// 		var fragpos = newsrc.indexOf('#');
+	// 		var frag = fragpos>-1 ? newsrc.substring(fragpos) : "";
+	//     if(newsrc.indexOf('?')>-1){
+	// 			newsrc = newsrc.substring(0, newsrc.indexOf('?'));
+	// 		} else if (frag.length) {
+	// 			newsrc = newsrc.substring(0, fragpos);
+	// 		}
+	// 		newsrc += "?"+settingsToQueryString(settings)+frag;
+	// 		el.href = newsrc;
+	// 	}
+  // });
 }
 
+function firstVisible(divs, val){
+  var low = 0, high = divs.length - 1, mid, top1, top2;
+  while (low <= high){
+    mid = (low + high) >>1;
+    top1 = $(divs[mid]).offset().top;
+    top2 = mid>0 && $(divs[mid-1]).offset().top;
+    if(top1<val){
+      low = mid+1;
+    } else if (top1>val && top2 && top2>val){
+      high = mid-1;
+    } else {
+      return mid;
+    }
+  }
+  return 0;
+}
+
+function grabdomobjects(){
+  domobj['showV'] = document.getElementById("displayvars");
+  domobj['hideV'] = document.getElementById("hidevars");
+  domobj['MS'] = document.getElementById("MSPunct");
+  domobj['Modern'] = document.getElementById("ModernPunct");
+  domobj['Edited'] = document.getElementById("edited");
+  domobj['English'] = document.getElementById("translated");
+  domobj['LatL'] = document.getElementById("latinL");
+  domobj['LatR'] = document.getElementById("latinR");
+  domobj['EngL'] = document.getElementById("translatedL");
+  domobj['EngR'] = document.getElementById("translatedR");
+  domobj['Content'] = document.getElementById("content");
+}
+
+function redraw(){
+  updateMenuSettings();
+  if(docMap.docs.length){
+    for(var i=0; i<docMap.docs.length; i++){
+      if(docMap.docs[i].docType=="Edited"){
+        var top = docMap.docs[i].out.scrollTop;
+        docMap.docs[i].draw();
+        docMap.docs[i].out.scrollTop = top;
+      }
+    }
+    jqNavSelect(docMap.docs[0]);
+    var parent = document.getElementById("content");
+    var lpane = document.getElementById("leftcontentpane");
+    var rpane = document.getElementById("rightcontentpane");
+    parent.style.width = parseInt(lpane.style.width, 10)+parseInt(rpane.style.width, 10)+30+"px";
+  } else {
+    doc.draw();
+    jqNavSelect(doc);
+  }
+  $("div.para").dblclick(alignVersions);
+}
+function followHash(){
+  if(pageSettings.settings.hashlink){
+    var link = document.getElementById(pageSettings.settings.hashlink);
+    if(!link){
+      alert("oops: "+pageSettings.settings.hashlink);
+      return;
+    }
+    $(".scroller").scrollTo(link);
+  }
+}
+function hashChange(){
+  pageSettings = new pathSettings(["transcribeexx", "translationNotes", "transcriptionNotes"],
+    ["MSPunctuation", "showvars", "pane", "source", "language", "book", "chapter", 
+     "section", "paragraph", "treatise", "hashlink"],
+                               5);
+  followHash();
+}
 $(document).ready(function(){
-	var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"SpryAssets/SpryMenuBarDownHover.gif", imgRight:"SpryAssets/SpryMenuBarRightHover.gif"});
-	loadSettings();
-	refreshMenus();
-	$(".options a").click(function(e){
-		$(".options a").removeClass("checked");
-		$(this).addClass("checked");
-		settings.language = this.id;
-		refreshMenus(false);
-    if(window.location.toString().indexOf("/texts/")!==-1){
-      getText();
+//	var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"SpryAssets/SpryMenuBarDownHover.gif", imgRight:"SpryAssets/SpryMenuBarRightHover.gif"});
+  $("#MenuBar1").menubar({menuIcon: true, buttons: true});
+  grabdomobjects();
+  // loadSettings();
+  followHash();
+  $("a").click(function(e){
+    if(this.href.indexOf("hashlink")>-1){
+      window.location = this.href;
+      pageSettings.loadSettingsFromString(window.location.hash);
+      followHash();
+      return false;
     }
-//		e.stopImmediatePropagation();
-		$(this).mouseout(function(e){
-			$(this).removeClass("MenuBarItemHover");
-			e.stopImmediatePropagation();
-		});
-	});
-  $(".tickoptions").click(function(){
-     if(!$(this).hasClass("checked")){
-       $(this).addClass("checked");
-       if($(this).hasClass("vars")){
-         showvariants = $(this).hasClass("yes");
-         $(".tickoptions.vars."+(showvariants?"no":"yes")).removeClass("checked");
-         refreshMenus({variants: showvariants});
-         setlocation("showvars", showvariants ? 1 : 0);
-       } else if($(this).hasClass("punctuation")){
-         punctuationStyle = $(this).hasClass("MS") ? "MS" : "modern";
-         $(".tickoptions.punct."+punctuationStyle).removeClass("checked");
-         refreshMenus({MSPunctuation: punctuationStyle});
-         setlocation("MSPunctuation", punctuationStyle=="MS" ? 1 : 0);
-       }
-      doc = new TreatiseDoc(doc.text);
-      navSelect(doc);
-      refreshMenus();
-     }
+    return true;
   });
-  $(".showhidevariants").click(function(){
-    $(this).toggleClass("checked");
-    showvariants = $(this).hasClass("checked");
-    refreshMenus({variants: showvariants});
-    doc = new TreatiseDoc(doc.text);
-    navSelect(doc);
-    refreshMenus();
-    setlocation("showvars", showvariants ? 1 : 0);
-  });
-  $(".switchpunctuation").click(function(){
-    $(this).toggleClass("checked");
-    punctuationStyle = $(this).hasClass("checked") ? "MS" : "modern";
-    refreshMenus({MSPunctuation: punctuationStyle});
-    doc = new TreatiseDoc(doc.text);
-    navSelect(doc);
-    refreshMenus();
-    setlocation("MSPunctuation", punctuationStyle=="MS" ? 1 : 0);
-  });
-	$(".toggle").click(function(e){
-		$(this).toggleClass("checked");
-    if($(this).hasClass("textVariants")){
-      var varp = $(this).hasClass("checked");
-      refreshMenus({variants: varp});
-      showvariants = varp;
-      doc = new TreatiseDoc(doc.text);
-      navSelect(doc);
-      refreshMenus();
-      setlocation("showvars", varp ? 1 : 0);
-    } else if ($(this).hasClass("punctuat")){
-      var puncp = $(this).hasClass("checked");
-      refreshMenus({MSPunctuation: varp});
-      punctuationStyle = varp ? "modern" : "MS";
-      doc = new TreatiseDoc(doc.text);
-      navSelect(doc);
-      setlocation("MSPunctuation", puncp ? 1 : 0);
-      refreshMenus();
-    }
-	});
+//  window.onhashchange = hashChange();
+  pageSettings.updateMenus();
+  if(window.location.toString().indexOf("/texts/")>-1){
+    predrawInit();
+    getText();
+  }
+	// $(".options a").click(function(e){
+	// 	$(".options a").removeClass("checked");
+	// 	$(this).addClass("checked");
+  //   pageSettings.updateSetting("language", this.id);
+  //   if(window.location.toString().indexOf("/texts/")==-1){
+  //     e.stopImmediatePropagation();
+  //   } else {
+  //     // FIXME: this is a forward reference
+  //     var pane = document.getElementById("leftcontentpane") || document.getElementById("content");
+  //     var paras = $(pane).children(".para");
+  //     var obj, offset, loc;
+  //     if(paras.length){
+  //       obj = paras[firstVisible(paras, $(pane).offset().top)];
+  //       offset = $(obj).offset().top - $(pane).offset().top;
+  //       loc = locationInTreatise(obj);
+  //     } else {
+  //       alert([$(pane).children(".para").length, pane.innerHTML]);
+  //     }
+  //     getText();
+  //     if(loc){
+  //       if(document.getElementById("rightcontentpane")){
+  //         simpleScrollTo(document.getElementById("rightcontentpane"), offset, loc[0], loc[1], loc[2], loc[3]);
+  //         simpleScrollTo(document.getElementById("leftcontentpane"), offset, loc[0], loc[1], loc[2], loc[3]);
+  //       } else if(document.getElementById("leftcontentpane")){
+  //         simpleScrollTo(document.getElementById("leftcontentpane"), offset, loc[0], loc[1], loc[2], loc[3]);
+  //       } else {
+  //         simpleScrollTo(document.getElementById("content"), offset, loc[0], loc[1], loc[2], loc[3]);
+  //       }
+  //     }
+  //   }
+  //   return false;
+	// });
+});
+$(window).load(function(){
+  var news = document.getElementById("news");
+  if(news){
+    $(news).rssfeed('http://feeds.bbci.co.uk/news/rss.xml?edition=uk',{ limit: 1});
+  }
 });

@@ -86,6 +86,37 @@ function DOMImage(cname, id, src){
   if(id) img.id = id;
   return img;
 }
+function DOMListItem(cname, id, content){
+  return DOMTextEl("li", cname, id, content);
+}
+function DOMList(type, cname, id, array){
+  var list = document.createElement(type);
+  var el;
+  if(cname) list.className = cname;
+  if(id) list.id = id;
+  if(array){
+    for(var i=0; i<array.length; i++){
+      el = array[i];
+      if(Array.isArray(el)){
+        el = DOMList(type, false, false, el);
+      } else if(el.tagName!="li"){
+        el = DOMListItem(false, false, el);
+      }
+      list.appendChild(el);
+    }
+  }
+  return list;
+}
+function DOMAddToList(list, el){
+  if(Array.isArray(el)){
+    el = DOMList("ul", false, false, el);
+  } else if(el.tagName!="li"){
+    el = DOMListItem(false, false, el);
+  }
+  list.appendChild(el);
+  return list;
+}
+
 ///////////////////
 
 var tooltip = false;
@@ -95,6 +126,7 @@ function Tooltip(info){
     document.body.appendChild(tooltip);
   } else {//if(tooltip.innerHTML!=info){
     $(tooltip).empty();
+    $(tooltip).removeClass("clicked");
     if(typeof(info) == "string"){
       tooltip.appendChild(document.createTextNode(info));
     } else if (info){
@@ -103,8 +135,8 @@ function Tooltip(info){
   }
   return tooltip;
 }
-function removeTooltip(){
-  if(tooltip){
+function removeTooltip(hovered){
+  if(tooltip && (!hovered || !$(tooltip).hasClass("clicked"))){
     $("#tooltip").remove();
     $(".highlight").removeClass("highlight");
     tooltip = false;
@@ -125,9 +157,10 @@ function svg (w,h){
 }
 
 function clearSVG(svgEl){
-  while(svgEl.firstChild){
-    svgEl.removeChild(svgEl.firstChild);
-  }
+  $(svgEl).empty();
+  // while(svgEl.firstChild){
+  //   svgEl.removeChild(svgEl.firstChild);
+  // }
 }
 function svgCSS(element, css){
   var link = document.createElementNS(SVGNS, "link");
@@ -173,6 +206,30 @@ function svgLine(svgEl, x1, y1, x2, y2, cname, id){
   el.setAttributeNS(null, "y1", y1);
   el.setAttributeNS(null, "x2", x2);
   el.setAttributeNS(null, "y2", y2);
+  if(svgEl) svgEl.appendChild(el);
+  return el;
+}
+function svgCircle(svgEl, x, y, r, cname, id){
+  var el = document.createElementNS(SVGNS, "circle");
+  if(cname) el.setAttributeNS(null, "class", cname);
+  if(id) el.setAttributeNS(null, "id", id);
+  el.setAttributeNS(null, "cx", x);
+  el.setAttributeNS(null, "cy", y);
+  el.setAttributeNS(null, "r", r);
+  if(svgEl) svgEl.appendChild(el);
+  return el;
+}
+function svgRect(svgEl, x, y, w, h, cname, id, rx, ry){
+  var el = document.createElementNS(SVGNS, "rect");
+  if(cname) el.setAttributeNS(null, "class", cname);
+  if(id) el.setAttributeNS(null, "id", id);
+  el.setAttributeNS(null, "x", x);
+  el.setAttributeNS(null, "y", y);
+  el.setAttributeNS(null, "width", w);
+  el.setAttributeNS(null, "height", h);
+  // rx and ry are for rounded corners
+  if(rx) el.setAttributeNS(null, "rx", rx);
+  if(ry) el.setAttributeNS(null, "ry", ry);
   if(svgEl) svgEl.appendChild(el);
   return el;
 }

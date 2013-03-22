@@ -3,6 +3,10 @@
 function Book(){
   this.objType = "Book";
   this.code = "<book>";
+  this.book = book++;
+  chapter = 0;
+  section = 0;
+  paragraph = 0;
   this.DOMObj = DOMAnchor('book', false, false, false);
   this.toText = function(){
     return this.code;
@@ -21,16 +25,52 @@ function BookEnd(){
     return false;
   };
 }
+function Prologue(){
+  this.objType = "Prologue";
+  this.code = "<prologue>";
+  this.special = false;
+  this.chapter = "p";
+  chapter = "p";
+  paragraph = 0;
+  section = 0;
+  this.DOMObj = DOMAnchor('chapter', false, false, "ch-prologue");
+  this.toText = function(){
+    return this.code;
+  }
+  this.toHTML = function(){
+    return this.DOMObj;
+  }
+}
+function Conclusion(){
+  this.objType = "Conclusion";
+  this.code = "</conclusion>";
+  this.special = false;
+  this.chapter = "c";
+  chapter = "c";
+  paragraph = 0;
+  section = 0;
+  this.DOMObj = DOMAnchor('chapter', false, false, "ch-conclusion");
+  this.toText = function(){
+    return this.code;
+  }
+  this.toHTML = function(){
+    return this.DOMObj;
+  }
+}
+
 function Chapter(){
   this.objType = "Chapter";
   this.code = "<chapter>";
-  this.chapter = chapter++;
-  this.DOMObj = DOMAnchor('chapter', false, false, "ch-"+this.chapter);
+  this.special = false;
+  this.chapter = (chapter==="p" || chapter==="c" ? (chapter=0) : chapter++);
+  paragraph = 0;
+  section = 0;
+  this.DOMObj = false;
   this.toText = function(){
     return this.code;
   };
   this.toHTML = function(){
-    return this.DOMObj;
+    return this.DOMObj = DOMAnchor('chapter', false, false, "ch-"+this.chapter);
   };
 }
 function ChapEnd(){
@@ -47,6 +87,8 @@ function ChapEnd(){
 function Section(){
   this.objType = "Section";
   this.code = "</section>";
+  this.section = section++;
+  paragraph = 0;
   this.DOMObj = DOMAnchor('section', false, false, false);
   this.toText = function(){
     return this.code;
@@ -58,7 +100,7 @@ function Section(){
 function Heading(){
   this.objType = "Heading";
   this.code = "<heading>";
-  this.chapter = chapter++;
+  this.chapter = chapter ==="p" || chapter==="c" ? (chapter = 0) : chapter++;
   // fixme
   this.DOMObj = false;
   this.toText = function(){
@@ -112,6 +154,7 @@ function Column(){
   };
   this.toHTML = function(){
     if (this.location) {
+      $(this.DOMObj).empty();
       this.DOMObj.id = "col"+this.location;
       this.locationHTML();
       this.DOMObj.appendChild(DOMAnchor('column', 'cola'+this.location, false, false));
@@ -125,6 +168,10 @@ function Paragraph(){
   this.classes = [];
   this.content = [];
   this.code = false;
+  this.book = book;
+  this.chapter = chapter;
+  this.section = section;
+  this.paragraph = paragraph++;
   this.n = nodeNo++;
   this.textnodes = [];
   nodes[this.n] = this;
@@ -133,7 +180,7 @@ function Paragraph(){
   this.toText = function(){
     var text = "\n"+this.classesToText();
     for(var i=0; i<this.content.length; i++){
-      text += " "+typeof(this.content[i])=="string" ? this.content[i] : (this.content[i].toText ? this.content[i].toText() : "");
+      text += typeof(this.content[i])=="string" ? this.content[i] : (this.content[i].toText ? this.content[i].toText() : "");
     }
     return text;
   };
@@ -146,19 +193,28 @@ function Paragraph(){
     return text;
   };
   this.toHTML = function(){
+    this.DOMObj = DOMDiv('para'+" at-"+this.book+"-"
+                         +this.chapter+"-"+this.section+"-"+this.paragraph,
+                         'node-'+this.n, false);
+    this.DOMObjs = [document.createElement('p')];
     var para = this.DOMObjs[0];
+    // Paragraphs always begin with capitals unsuppressed. Probably.
+    uncapitalise = false;
+    var i=0;
     if(this.classes.length>0){
       var str = "";
-      for(var i=0; i<this.classes.length; i++){
+      for(i=0; i<this.classes.length; i++){
         if(i>0){
-          str+= " ";
+          // str+= " ";
         }
         str+= this.classes[i];
       }
       para.className = str;
-    } 
+    }
     this.DOMObj.appendChild(para);
-    for(var i=0; i<this.content.length; i++){
+    currenttextparent = this;
+    for(i=0; i<this.content.length; i++){
+      pari = i;
       if(typeof(this.content[i]) == 'string'){
         // NEVER HAPPENS (anymore)
         this.textnodes.push([i, document.createTextNode(this.content[i])]);
@@ -179,17 +235,37 @@ function Paragraph(){
           this.DOMObj.appendChild(para);
         }
       } else if (this.content[i].objType == "MusicExample"){
-        var div = DOMDiv('musicexample', false, false);
-        if(this.content[i].SVG){
+        var div = DOMDiv('musicexample dc'+desperatecounter
+//                         +(this.content.length == 1 ? " standalone" 
+                         +(standalonep(this.content[i], this.content) ? " standalone" 
+                           : " inline"),
+          false, false);
+        if(margin) this.content[i].marginSpace = true;
+        this.content[i].reset();
+        if(this.content[i].SVG && false){
           var newSVG = this.content[i].SVG;
         } else {
           var newSVG = svg(this.content[i].width(), this.content[i].height());
-          newSVG.className += " musicexample";
+          newSVG.className += " musicexample dc"+desperatecounter;
           this.content[i].SVG = newSVG;
         }
-        para.appendChild(div);
+        this.content[i].counter = desperatecounter;
+        // alert([this.content[i].counter, i, desperatecounter]);
+        desperatecounter++;
+        if(i+1<this.content.length 
+           && (this.content[i+1].objType==="Text"
+               || this.content[i+1].objType==="Punctuation")
+           && punctuationp(this.content[i+1])){
+          // Don't want line break here
+          var span = DOMSpan("nobreak", false, div);
+          para.appendChild(span);
+          span.appendChild(this.content[i+1].separatePunctuation());
+        } else {
+          para.appendChild(div);
+        }
         div.appendChild(newSVG);
         examples.push([this.content[i], newSVG]);
+        if(this.content.length===1) para.className+=" justMusic";
       } else {
         var obj = this.content[i].toHTML();
         if(obj) para.appendChild(obj);
@@ -238,6 +314,7 @@ function Marginal(){
   this.side = false;
   // this.domObj = DOMSpan("marginal", false, DOMSpan("marginalStar", false, "* "));
   this.domObj = DOMDiv("marginal", false, false);
+  margins = true;
   this.toText = function(){
     var text = "<marg";
     if(this.margin || this.side){
@@ -264,6 +341,7 @@ function Marginal(){
     return descString;
   };
   this.toHTML =function(){
+    $(curDoc.drawTo).addClass("marginalia");
     var span = DOMSpan("marginalContent", false, false);
 //    this.domObj.style.title = this.locString();
     var p = $($(this.content.toHTML()).children()[0]).contents();
@@ -276,11 +354,105 @@ function Marginal(){
   };
 }
 
+function textualContentp(element){
+  switch(element.objType){
+    case "Book":
+    case "BookEnd":
+    case "Chapter":
+    case "ChapEnd":
+    case "Section":
+    case "Heading":
+    case "HeadingEnd":
+    case "Column":
+    case "Annotation":
+    case "Marginal":
+    case "Hand":
+      return false;
+    default:
+      return true;
+  }
+}
+
+function standalonep(example, array){
+  if(example.parameters && example.parameters.spec === "full measure") {
+    return true;
+  } else if (example.parameters && example.parameters.spec === "in-line") {
+    return false;
+  } else {
+    return array.filter(textualContentp).length <=1;
+  }
+}
+
+function textBlockToHTML(container, content, block){
+  // FIXME: revisit this -- I'm abstracting so that spans, etc can
+  // house more complex things, like music examples
+  currenttextparent = block;
+  for(var i=0; i<content.length; i++){
+    pari = i;
+    //FIXME: this is nonsense, what is it supposed to do?
+    if (content[i].objType == "Column/Page" || 
+        (typeof(content[i].content) != "undefined" && 
+         typeof(content[i].content) == "Span" && 
+         content[i].content[0].objType == "Column/Page")) {
+      var cn = container.className;
+      container.className += " colend";
+      var breakCaption = content[i].toHTML();
+      if(block.DOMObjs) block.DOMObjs.push(breakCaption);
+      container.appendChild(breakCaption);
+      if(i<content.length - 1){
+        container = document.createElement('p');
+        container.className = cn;
+        if(block.DOMObjs) block.DOMObjs.push(para);
+        container.appendChild(para);
+      }
+    } else if (content[i].objType == "MusicExample"){
+      var div = DOMDiv('musicexample dc'+desperatecounter
+//                         +(content.length == 1 ? " standalone" 
+                         +(standalonep(content[i], content) ? " standalone" 
+                           : " inline"),
+          false, false);
+      content[i].reset();
+      if(content[i].SVG && false){
+        var newSVG = content[i].SVG;
+      } else {
+        var newSVG = svg(content[i].width(), content[i].height());
+        newSVG.className += " musicexample dc"+desperatecounter;
+        content[i].SVG = newSVG;
+      }
+      content[i].counter = desperatecounter;
+        // alert([this.content[i].counter, i, desperatecounter]);
+      desperatecounter++;
+      if(i+1<content.length 
+         && (content[i+1].objType==="Text"
+             || content[i+1].objType==="Punctuation")
+         && punctuationp(content[i+1])){
+        // Don't want line break here
+        var span = DOMSpan("nobreak", false, div);
+        container.appendChild(span);
+        span.appendChild(content[i+1].separatePunctuation());
+      } else {
+        container.appendChild(div);
+      }
+      if(content.length===1) container.className+=" justMusic";
+      div.appendChild(newSVG);
+        examples.push([content[i], newSVG]);
+    } else {
+      var obj = content[i].toHTML();
+      if(obj) {
+        container.appendChild(obj);
+      }
+    }
+  }
+  return container;
+}
+
 function Span(){
   this.objType = "Span";
   this.type = false;
   this.code = false;
+  this.DOMObj = false;
   this.content = [];
+  this.extra = false;
   this.toText = function(){
     var text = this.typeToText("open");
     for(var i=0; i<this.content.length; i++){
@@ -295,20 +467,25 @@ function Span(){
     text += typeof(reverseSpans[this.type]) == "undefined" ? this.type : reverseSpans[this.type];
     return text + ">";
   };
+  this.extraClasses = function(){
+    return this.extra ? " span"+this.extra: "";
+  }
   this.toHTML = function(){
     var span = document.createElement('span');
-    span.className = this.type;
-    for(var i=0; i<this.content.length; i++){
-      if(typeof(this.content[i] == 'string') && this.content[i].length > 0){
-        span.appendChild(document.createTextNode(this.content[i]));
-      } else if(this.content[i]) {
-        var dobj = this.content[i].toHTML();
-        if(dobj) {
-          span.appendChild(dobj);
-        }
-      }
-    }
-    return span;
+    span.className = this.type + this.extraClasses();
+    this.DOMObj = textBlockToHTML(span, this.content, this);
+    return this.DOMObj;
+    // for(var i=0; i<this.content.length; i++){
+    //   if(typeof(this.content[i] == 'string') && this.content[i].length > 0){
+    //     span.appendChild(document.createTextNode(this.content[i]));
+    //   } else if(this.content[i]) {
+    //     var dobj = this.content[i].toHTML();
+    //     if(dobj) {
+    //       span.appendChild(dobj);
+    //     }
+    //   }
+    // }
+    // return span;
   };
 }
 
@@ -367,6 +544,7 @@ function Add(){
     return "["+this.code+"]";
   };
   this.toHTML = function(){
+    this.DOMObj.innerHTML = '';
     this.DOMObj.appendChild(document.createTextNode('['));
     for(var i=0; i<this.content.length; i++){
       if(typeof(this.content[i] == 'string') && this.content[i].length > 0){
@@ -385,6 +563,16 @@ function Text(text){
   this.content = text;
   this.code = text;
   this.DOMObj = false;
+  this.overrideCapitalize = false;
+  this.removepunct = false;
+  this.punctuation = function(){
+    var str = /^\s*[,.:¶?!]/.exec(this.content);
+    return str ? true : false;
+  }
+  this.separatePunctuation = function(){
+    this.removepunct = true;
+    return document.createTextNode(/^\s*[,.:¶?!]/.exec(this.content)[0].slice(-1));
+  };
   this.addChar = function(c){
     this.code += c;
     this.content += c;
@@ -393,7 +581,11 @@ function Text(text){
     return this.code;
   };
   this.toHTML = function(){
-    if(uncapitalise){
+    var closingSpaces = /\s*$/.exec(this.code)[0].length;
+    var spaceAfterPunc = /[,.:¶?!]\s+$/.exec(this.code);
+    if(trimPreInsSpaces(spaceAfterPunc)) this.code = this.code.slice(0, 0-closingSpaces);
+    if(this.removepunct) this.code = this.code.substring(/^\s*[,.:¶?!]/.exec(this.content)[0].length);
+    if(uncapitalise && !this.overrideCapitalize){
 //      alert([uncapitalise, this.content]);
       var firstPos = this.code.search(/\S/);
       if(firstPos<0){
@@ -427,20 +619,60 @@ function ExampleComments(comments){
 
 function Punctuation(options){
   this.objType = "Punctuation";
+  this.suppressDraw = false;
+  this.punctuation = function(o){
+    return punctuationStyle==="modern" ? (this.modern ? true : false) : (this.MS ? true : false);};
   this.MS = options.charAt(0);
   this.modern = options.charAt(1);
-  this.MSDOM = this.MS == " " ? false : document.createTextNode(this.MS);
+  this.MSDOM = this.MS=== " " ? false : 
+    (this.MS==="¶" ? DOMSpan("noitalic", false, this.MS) : document.createTextNode(this.MS));
   this.modernDOM = this.modern == " " ? false : document.createTextNode(this.modern);
+  this.separatePunctuation = function(){
+    this.suppressDraw = false;
+    var DOMObj = this.toHTML();
+    this.suppressDraw = true;
+    return DOMObj;
+  }
+  this.getDOMObj = function(){
+    // Caching is an issue. FIXME: for now, disable it
+    var refresh = true
+    if(refresh){
+      if(punctuationStyle==="modern") {
+        switch(this.modern){
+          case " ":
+            this.modernDOM = false;
+            break;
+          case "¶":
+            this.modernDOM = DOMSpan("break", false, DOMEl("br", false, false));
+            break;
+          default:
+            this.modernDOM = document.createTextNode(this.modern);
+        }
+        return this.modernDOM;
+      } else {
+        return this.MSDOM = this.MS=== " " ? false : 
+          (this.MS==="¶" ? DOMSpan("noitalic", false, this.MS) : document.createTextNode(this.MS));
+      }
+;
+    }
+    return punctuationStyle=="modern" ? this.modernDOM : this.MSDOM;
+  }
   this.toText = function(){
     return "{"+this.MS+this.modern+"}";
   };
   this.toHTML = function(){
-    if(punctuationStyle == "modern" && ".?!".indexOf(this.modern)==-1 && this.MS!="¶") {
+    if(this.suppressDraw) return;
+    if(punctuationStyle == "modern" && ".?!¶".indexOf(this.modern)==-1 && this.MS!="¶") {
       uncapitalise = this.modern;
     } else {
       uncapitalise = false;
     }
-    return punctuationStyle=="modern" ? this.modernDOM : this.MSDOM;
+    if(punctuationStyle=="both"){
+      var span = DOMSpan("punct", false, DOMSpan("punctbothms", false, this.MS));
+      span.appendChild(DOMSpan("punctbothmod", false, this.modern));
+      return span;
+    }
+    return this.getDOMObj();
   };
 }
 
@@ -472,9 +704,9 @@ function Choice(){
   this.toHTML = function(){
     if(!showvariants) {
       if(this.nonDefault()){
-        return this.content[0].contentToHTML();
-      } else {
         return false;
+      } else {
+        return this.content[0].contentToHTML();
       }
     }
     var span = DOMSpan("choice", false, false);
@@ -552,7 +784,10 @@ function Reading(witnesses, content, description){
       if(typeof(this.content[i] == 'string') && this.content[i].length > 0){
         span.appendChild(document.createTextNode(this.content[i]));
       } else if(this.content[i]) {
-        span.appendChild(this.content[i].toHTML());
+        var obj = this.content[i].toHTML();
+        // obj is false if the content[i] shouldn't generate html,
+        // i.e. the object is invisible in current view.
+        if(obj) span.appendChild(obj);
       }
     }
     return span;
@@ -626,25 +861,28 @@ function BlankExample(){
   this.index = false;
   this.musicExample = false;
   this.latinTreatise = false;
-  this.DOMObj = document.createElement('p');
+  this.DOMObj = DOMDiv('musicexample', false, false);
   this.toText = function(){
     return "{example}";
   };
   this.toHTML = function(){
     if(this.musicExample){
-      var div = document.createElement('span');
-      div.className = "musicexample";
+      var newSVG;
+      this.DOMObj.innerHTML = '';
+      // var div = document.createElement('span');
+      // div.className = "musicexample";
       if(this.musicExample.SVG){
-        var newSVG = this.musicExample.SVG;
+        newSVG = this.musicExample.SVG;
       } else {
-        var newSVG = svg(this.musicExample.width(), this.musicExample.height());
+        newSVG = svg(this.musicExample.width(), this.musicExample.height());
         newSVG.className += " musicexample";
         this.musicExample.SVG = newSVG;
       }
-      this.DOMObj.appendChild(div);
-      div.appendChild(newSVG);
+      this.DOMObj.appendChild(newSVG);
+//      div.appendChild(newSVG);
       examples.push([this.musicExample, newSVG]);
     } else {
+      this.DOMObj.innerHTML = '';
       this.DOMObj.appendChild(DOMSpan("red", false, "This example will be added later"));
     }
     return this.DOMObj;

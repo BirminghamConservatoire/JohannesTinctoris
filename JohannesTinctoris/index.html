@@ -3,66 +3,53 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Early Music Theory — The Theoretical Works of Johannes Tinctoris</title>
-	<script src="SpryAssets/SpryMenuBar.js" type="text/javascript"></script>
-  <script type="text/javascript" src="jquery-1.8.0.min.js"></script>
-	<link href="SpryAssets/SpryMenuBarHorizontal.css" rel="stylesheet" type="text/css">
-	<link href="jt1.css" rel="stylesheet" type="text/css">
+  <link rel="icon" type="image/png" href="jt.png">
+  <script src="../GUIEditor/jquery-1.8.2.min.js"></script>
+  <script src="../GUIEditor/jquery-ui-1.9.0.custom.min.js"></script>
+  <script src="jquery.zrssfeed.js"></script>
+  <script src="jquery.ui.menubar.js"></script>
+  <script src="path.js"></script>
 	<script src="jt1.js" type="text/javascript"></script>
+	<link href="smoothness/jquery-ui-1.9.0.custom.css" rel="stylesheet">
+	<link href="jquery.ui.menubar.css" rel="stylesheet" type="text/css">
+	<link href="jt1.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-<div class="header"><div class="row"><div class="EMTLogo cell">Early&nbsp;Music Theory</div><div class="projecthead cell">The Theoretical Works of Johannes Tinctoris</div></div></div>
+<div class="header"><div class="row"><div class="EMTLogo cell">Early&nbsp;Music Theory</div><div class="projecthead cell"><a href="#">The Theoretical Works of Johannes Tinctoris</a></div></div></div>
 <div id="menudiv">
 <ul id="MenuBar1" class="MenuBarHorizontal">
-  <li class="img"><a class="MenuBarItemSubmenu img" href="#"><img src="jt.png" alt="JT logo"></a>
+  <li><a href="#"><span class="ui-icon ui-icon-home icon-menu-button"></span></a></li>
+  <!-- <li class="img"><a class="MenuBarItemSubmenu img" href="#"><img  height="25px" src="../../jt.png" alt="JT logo"></a> -->
+  <li><a class="MenuBarItemSubmenu" href="#">Project</a>
     <ul>
-      <li><a href="#">About</a></li>
+      <li><a href="#">About the project</a></li>
+      <li><a href="#">Project staff</a></li>
+      <li><a href="#">Editorial policy</a></li>
       <li><a href="#">Blog</a></li>
-      <li><a href="#">Preferences</a></li>
-      <li><a href="#">Tinctoris Home</a></li>
-      <li><a href="#">Early Music Theory Home</a></li>
+    </ul>
+  </li>
+  <li><a class="MenuBarItemSubmenu" href="#">Tinctoris</a>
+    <ul>
+      <li><a href="short_biography.html#">Short Biography</a></li>
+      <li><a href="#">Works list</a></li>
+      <li><a href="#">Short Bibliography</a></li>
     </ul>
   </li>
   <li><a class="MenuBarItemSubmenu" href="#">Treatise texts</a>
     <ul>
-      <li class="options"><a id="Latin">Latin</a></li>
-      <li class="options"><a id="Translation">Translation</a></li>
-      <li class="options linebelow"><a id="Parallel">Parallel</a></li>
-      <li class="lineabove"><a href="#">Expositio manus</a></li>
-      <li><a href="#">Proportionale musices</a></li>
-      <li><a href="#">Liber imperfectionum notarum musicalium</a></li>
-      <li><a href="#">Tractatus de regulari valore notaru</a></li>
-      <li><a href="texts/denotisetpausis/">Tractatus de notis et pausis</a></li>
-      <li><a href="#">Tractatus alterationum</a></li>
-      <li><a href="#">Scriptum ... super punctis musicalibus</a></li>
-      <li><a href="#">Liber de natura et proprietate tonorum</a></li>
-      <li><a href="#">Liber de arte contrapuncti</a></li>
-      <li><a href="#">Complexus effectuum musices</a></li>
-      <li><a href="#">De inventione et usu musice</a></li>
-      <li><a href="#">Terminorum musicae diffinitorium</a></li>
-   	</ul>
-  </li>
-  <li><a class="MenuBarItemSubmenu" href="#">Sources</a>
-    <ul>
-      <li><a href="#">Facsimiles</a></li>
-      <li><a href="#">Source transcriptions</a></li>
-   	</ul>
-  </li>
-  <li><a class="MenuBarItemSubmenu" href="#">Commentary</a>
-    <ul>
-      <li><a href="#">General</a></li>
       <li><a href="#">Expositio manus</a></li>
+      <li><a href="#">De natura et proprietate tonorum</a></li>
+      <li><a href="texts/denotisetpausis#">De notis et pausis</a></li>
+      <li><a href="#">De regulari valore notarum</a></li>
+      <li><a href="texts/deimperfectionenotarum#">De imperfectionum notarum musicalium</a></li>
+      <li><a href="#">De alterationum notarum</a></li>
+      <li><a href="#">De punctis</a></li>
+      <li><a href="#">De arte contrapuncti</a></li>
       <li><a href="#">Proportionale musices</a></li>
-      <li><a href="#">Liber imperfectionum notarum musicalium</a></li>
-      <li><a href="#">Tractatus de regulari valore notaru</a></li>
-      <li><a href="#">Tractatus de notis et pausis</a></li>
-      <li><a href="#">Tractatus alterationum</a></li>
-      <li><a href="#">Scriptum ... super punctis musicalibus</a></li>
-      <li><a href="#">Liber de natura et proprietate tonorum</a></li>
-      <li><a href="#">Liber de arte contrapuncti</a></li>
+      <li><a href="#">Diffinitorium musice</a></li>
       <li><a href="#">Complexus effectuum musices</a></li>
       <li><a href="#">De inventione et usu musice</a></li>
-      <li><a href="#">Terminorum musicae diffinitorium</a></li>
    	</ul>
   </li>
   <li><a href="#">Help</a></li>
@@ -84,5 +71,6 @@ on any computer. The material of the edition can be accessed by clicking on the 
     <li><b>Commentary</b> for commentary material, including more general articles</li>
     <li><b>Sources</b> for facsimiles and single-source transcriptions</li>
     <li><b>Help</b> for more information</li></ul></div></div>
+<div id="news"></div>
 </body>
 </html>

@@ -2,44 +2,77 @@ function MusicExample(){
   this.objType = "MusicExample";
   this.code = string;
   this.SVG = false;
+  this.counter = false;
   this.context = false;
   this.events = [];
   this.comments = [];
+  this.textObjects = [];
   this.drawCount = 0;
   this.starts = pointer;
   this.swidth = false;
   this.classes = false;
-  currentExample = this;
-  initialStaffStar = false;
-  var next;
-  var length;
-  currentClef = false;
-  consumeSpace();
-  this.parameters = getParameters();
-  currentInfo = this.parameters;
-  this.w2 = [];
-  consumeSpace();
-  while(string.length >0){
-    length = string.length;
-    next = nextEvent();
-    if(next){
-      if(currentInfo){
-        if(infop(next)){
-          currentInfo.extras.push(next);
-          next.params = currentInfo;
-        } else {
-          currentInfo = false;
-        }
-      } else if(next.objType == "Staff"){
-        currentInfo = next;
-      }
-      this.events.push(next);
-    } else if(length == string.length){
-      // We're stuck in a loop. Try to escape
-      string = string.substring(1);
-    }
+  this.marginSpace = false;
+  this.parameters = false;
+  this.bbox = false;
+  this.parse = function(){
+    var augmented = false;
+    this.classes = new Classes();
+    string = this.code;
+    currentExample = this;
+    initialStaffStar = false;
+    var next;
+    var length;
+    currentClef = false;
     consumeSpace();
-  }
+    this.parameters = getParameters();
+    currentInfo = this.parameters;
+    this.w2 = [];
+    consumeSpace();
+    while(string.length >0){
+      length = string.length;
+      next = nextEvent();
+      if(next){
+        if(currentInfo){
+          if(infop(next)){
+            currentInfo.extras.push(next);
+            next.params = currentInfo;
+          } else if(!ignorable(next)){
+            currentInfo = false;
+          }
+        } else if(next.objType == "Staff"){
+          currentInfo = next;
+        }
+        if(next.objType=="Dot"){
+          next.augments = augmented;
+        } else if(next.objType=="Fermata"){
+          next.lengthens = augmented;
+        } else if (next.objType==="Comment" && this.events.length && 
+                   this.events[this.events.length-1].objType==="Ligature"){
+          this.events[this.events.length-1].members.push(new LigatureComment(next));
+        } 
+        if(next.objType==="TextUnderlay" && this.events.length
+           && typeof(this.events[this.events.length-1].text) !=="undefined"
+           && !this.events[this.events.length-1].text) {
+          this.events[this.events.length-1].text=next;
+        } else {
+          this.events.push(next);
+        }
+      } else if(length == string.length){
+        // We're stuck in a loop. Try to escape
+        string = string.substring(1);
+      }
+      // if there's no whitespace, following dot is of augmentation
+      augmented= consumeSpace() ? false : next;
+    }
+  };
+  this.reset = function(){
+    this.swidth = false;
+    this.drawCount = 0;
+    this.w2 = [];
+    this.events = [];
+    this.comments = [];
+    this.parse();
+  };
   this.width = function(){
     if(this.swidth) {
       return this.swidth;
@@ -73,20 +106,28 @@ function MusicExample(){
     // FIXME: clearly stupid
     var height = rastralSize * 
       (typeof(this.parameters.staff) == "undefined" ? 1 : (this.parameters.staff.trueLines() + 4));
-    for(var i=0; i<this.events.length; i++){
-      if(this.events[i].objType == "Staff"){
-        height += rastralSize * 9 + 5;
-        }
-    }
+    // for(var i=0; i<this.events.length; i++){
+    //   if(this.events[i].objType == "Staff"){
+    //     height += rastralSize * 9 + 5;
+    //   }
+    //}
+    this.setSysWidths();
+    height = sysWidths.length * height + 15;
     return height;
+  };
+  this.targetWidth = function(){
+    return (wrapWidth 
+            ? (wrapWidth - (rastralSize * 3) - (lmargin+10) - (this.marginSpace ? 100 : 0))
+            : false);
   };
   this.setSysWidths = function(){
     sysWidths = [rastralSize + this.parameters.width()];
     this.swidth = 0;
-//    var x = lmargin +rastralSize/2;
+  //    var x = lmargin +rastralSize/2;
     for(eventi=0; eventi<this.events.length; eventi++){
       if(this.events[eventi].objType == "Staff" 
-         || (wrapWidth && sysWidths[sysWidths.length-1] >= wrapWidth - rastralSize * 2 - lmargin)){
+         || (wrapWidth && sysWidths[sysWidths.length-1] >= this.targetWidth())){
+//             (wrapWidth - rastralSize*3 - lmargin-10)){
         sysWidths[sysWidths.length-1] += rastralSize * 2;
         if(sysWidths[sysWidths.length-1]+lmargin>SVG.width){
           sysWidths[sysWidths.length-1] = SVG.width - lmargin;
@@ -118,12 +159,16 @@ function MusicExample(){
   };
   this.draw = function(exampleSVG, force){
 //    alert(JSON.stringify(this));
-    if(exampleSVG != this.SVG) alert("ok");
+//    if(exampleSVG != this.SVG) alert("ok");
     // FIXME: 14/10/12 If this shows no alerts, remove this and all
     // svg passing
-    if(this.drawCount>1 && !force){
-      return;
-    }
+    // if(this.drawCount>1 && !force){
+    //   alert("oh really?");
+    //   return;
+    // }
+    // 22/01/12 This showed up for redrawing punctuation. FIXME: find
+    // out what's happening
+    underlays = [];
     this.drawCount++;
     currentClef = false;
     currentExample = this;
@@ -135,12 +180,11 @@ function MusicExample(){
     currentType = this.parameters.notation;
     currentSubType = this.parameters.notationSubtype;
     currentRedline = false;
-    SVG = exampleSVG;
-    this.SVG = SVG; // ??
-//FIXME:    context = SVG.getContext("2d");
+    SVG = this.SVG;//exampleSVG;
+    // this.SVG = SVG; // ??
     clearSVG(SVG);
     svgCSS(SVG, cssPath("jt-editor-v.css"));
-    svgCSS(SVG, cssPath("print.css"));
+//    svgCSS(SVG, cssPath("print.css"));
     this.w2 = [];
     currentSystems = [];
     var fontstring = Math.round(3 * rastralSize * prop) +"pt ArsNovaVoidRegular";
@@ -149,15 +193,26 @@ function MusicExample(){
     localWidth = exWidth;
     sysNo = 1;
     curx += rastralSize / 2;
-    cury += currentLinecount * rastralSize;
-    var svgold = false;
+//    cury += currentLinecount * rastralSize;
     var texted = false;
     var maxx = false;
+    var remain = this.events.length;    
     currentSystems.push(svgGroup(SVG, "Stafflines", false));
     this.parameters.draw();
-    this.classes = new Classes();
     for(eventi = 0; eventi<this.events.length; eventi++){
-      if(wrapWidth && curx>=wrapWidth){
+      remain--;
+      if(wrapWidth && (curx>=this.targetWidth()-rastralSize ||
+                       (remain<3 && 
+                        curx>=this.targetWidth()-((this.events.length-eventi)*2*rastralSize)) ||
+                       (remain>1 && this.events[eventi+1].augments 
+                        && curx+this.events[eventi].width>=this.targetWidth()-rastralSize))){
+         // wrapWidth-32){
+        // The custos has to know the next (=current) note, so rewind
+        // the pointer, briefly
+        eventi-=1;
+        var custos = new Custos();
+        custos.draw();
+        eventi+=1;
         sysBreak2();
         sysBreak();
         currentClef.draw();
@@ -166,29 +221,74 @@ function MusicExample(){
       }
       if(this.events[eventi].objType && !this.events[eventi].params) {
         try {
-          if(this.classes.render()){
-            svgold = SVG;
-            SVG = svgGroup(SVG, this.classes.classString(), false);
-          }
-          this.events[eventi].draw(curx, cury);          
-          if(svgold) SVG = svgold;
-          svgold = false;
+          this.events[eventi].draw(curx, cury);
         } catch (x) {
+          // alert(x+" -- unnecessary error message 1");
         }
-        if(this.events[eventi].objType == "TextUnderlay"){
+        if(this.events[eventi].objType == "TextUnderlay"
+           || this.events[eventi].text){
           texted = true;
         }
       }
     }
+    if(this.classes.classes.length) drawClasses(this.classes.classes, false);
     sysBreak2(true);
     for(var w=0; w<this.w2.length; w++){
       drawSystemLines(currentSystems[w], this.w2[w][2], this.w2[w][1], lmargin, 
         this.w2[w][0], this.w2[w][3], this.SVG);
-        maxx = Math.max(this.w2[w][0], maxx);
+      maxx = Math.max(this.w2[w][0], maxx);
     }
-    SVG.height.baseVal.value = SVG.getBoundingClientRect().height + (texted ? 25 : 5);
-    SVG.width.baseVal.value = maxx + (texted ? 25 : 5);
+    var box = this.SVG.getBoundingClientRect();
+    if(!box.height) {
+      //      alert("Rectangle error"+this.code);
+      // FIXME: Certainly still causes brokenness
+//      this.SVG.height.baseVal.value = 64;
+      var max= false, min=false, b;
+      for(var n=0; n<SVG.childNodes.length; n++){
+        b=SVG.childNodes[n].getBoundingClientRect();
+        if(b.top && (!min || b.top<min)) min = b.top;
+        if(b.bottom && (!max || b.bottom>max)) max = b.bottom;
+      }
+      this.SVG.height.baseVal.value = Math.max(64, max-min + (texted ? 30 : 0));
+    } else {
+//      if($.browser.webkit){
+        var bbox = this.SVG.getBBox();
+        this.bbox = bbox;
+        var top = bbox.y < 0 ? bbox.y -1 : 0;
+        var bottom = bbox.y+bbox.height+1;
+        var height = bottom - top;
+        if(top) {
+//          console.log(top); //-13=>4 -32=>10 -18=>-4 -32=>10
+//          this.SVG.parentNode.style.marginTop = top+5+"px";
+          var nudge = rastralSize*-2.4;
+          if($(this.SVG.parentNode).hasClass("inline")) {
+            this.SVG.parentNode.style.marginTop = "-35px";
+            if(this.w2[0][2]==3){
+              nudge -= rastralSize/2;
+            }
+          }
+          this.SVG.parentNode.style.verticalAlign = nudge-top+"px";
+        } 
+        this.SVG.setAttribute('height', height);
+        this.SVG.height.baseVal.value = height;
+        this.SVG.style.height = height+"px";
+        this.SVG.setAttribute('viewBox', bbox.x+" "+top+" "+bbox.width+" "+height);//bbox.height);
+        this.SVG.width.baseVal.value = bbox.width+bbox.x;
+      // } else {
+      //   this.SVG.height.baseVal.value = Number(box.height); //+ (texted ? 35 : 5);
+      // }
+//      this.SVG.height.baseVal.value = Number(SVG.getBoundingClientRect().height) + (texted ? 35 : 5);
+//      this.SVG.style.height = (Number(SVG.getBoundingClientRect().height) + (texted ? 35 : 5)+10)+"px";
+    }
+//     if(!$.browser.webkit){
+// //      this.SVG.width.baseVal.value = maxx + (texted ? 25 : 5);
+//       this.SVG.width.baseVal.value = this.SVG.getBBox().
+//     }
+    // this.SVG.parentNode.style.width = maxx+(texted ? 25 : 5)+8+"px";
+    currentExample = false;
   };
+  this.parse();
+  currentExample = false;
 }
 
 function nextEvent() {
@@ -205,7 +305,14 @@ function nextEvent() {
     case "{":
       if(string.substring(0,5) == "{var="){
         return nextChoice();
-      } else {
+      } 
+    // if(string.substring(0,5) == "{&c.}"){
+      //   var obj = new etc();
+      //   string = string.substring(5);
+      //   getAndSetPitch(obj);
+      //   return obj;
+      // } 
+      else {
         return nextInfo();
       }
     case "b":
@@ -238,7 +345,19 @@ function nextEvent() {
     case "c":
       return nextCustos();
     case "*":
-      return nextComment();
+      if(string.charAt(1)==="*"){
+        return nextComment();
+      } else {
+        return nextFermata();
+      }
+    case "2":
+    case "3":
+      return nextRepeat();
+    case "&":
+      var obj = new etc();
+      string = string.substring(1);
+      getAndSetPitch(obj);
+      return obj;
   }
   return false;
 }
@@ -306,7 +425,7 @@ function nextSolmSign(){
   var pitch = /^([A-g])\1{0,2}/.exec(string);
   if(pitch){
     solm.pitch = pitch[0];
-    string = string.substring(pitch.length);
+    string = string.substring(pitch[0].length);
   } else {
     solm.staffPos = getStaffPos();
   }
@@ -351,12 +470,47 @@ function nextLongRest(){
   return rest;
 }
 
+function nextRepeat(){
+  var obj = new Repeat();
+  obj.multiple = Number(string.charAt(0));
+  if(string.charAt(1) !=":") return false;
+  consume(2);
+  obj.start = getStaffPos();
+  if(obj.start && consumeIf("-")){
+    obj.end = getStaffPos();
+    while(string.charAt(0)==="-" || string.charAt(0)==="+"){
+      var pos;
+      if(!obj.ldots){
+        obj.ldots = repeatDotArray(obj.start, obj.end);
+        obj.rdots = repeatDotArray(obj.start, obj.end);
+      }
+      if(string.charAt(0)==="-"){
+        consume(1);
+        pos = getStaffPos();
+        obj.ldots.splice(obj.ldots.indexOf(pos),1);
+        obj.rdots.splice(obj.rdots.indexOf(pos),1);
+      } else {
+        consume(1);
+        pos = getStaffPos();
+        obj.ldots = obj.ldots.push(pos);
+        obj.rdots = obj.ldots.push(pos);
+      }
+    }
+    return obj;
+  }
+  return false;
+}
+
 function nextNote(){
   var sup = consumeIf(/\^/);
   var obj = new Note;
   obj.rhythm = getRhythm();
   obj.sup = sup;
   obj = getAndSetPitch(obj);
+  var tails = consumeIf(/[/]?[+-]*/);
+  if(tails){
+    obj.forceTail = tails;
+  }
   return obj;
 }
 
@@ -379,6 +533,13 @@ function nextDot(){
   // If pitched
   // return getAndSetPitch(obj);
   // Otherwise
+  obj.staffPos = getStaffPos();
+  return obj;
+}
+
+function nextFermata(){
+  var obj = new Fermata();
+  string = string.substring(1);
   obj.staffPos = getStaffPos();
   return obj;
 }
@@ -420,11 +581,30 @@ function nextTaglike(){
       return new VoidOpen();
     case "/void":
       return new VoidClose();
+    case "full":
+      return new FullOpen();
+    case "/full":
+      return new FullClose();
     case "text":
+    case "label":
       var thingy = nextText();
       if(thingy){
+        thingy.type = tag;
         return thingy;
-      } 
+      }
+    default:
+      if(tag.substring(0, 4)=="text" || tag.substring(0, 5)=="label"){
+        // text with position
+        var thing = nextText();
+        if(tag.substring(0, 5)=="label") thing.type = "label";
+        if(thing){
+          return thing;
+        }
+      } else if (tag.substring(0, 4)=="part"){
+        var thing = new Part();
+        thing.id = parseInt(tag.substring(5));
+        return thing;
+      }
   }
   return false;
 }
@@ -447,7 +627,8 @@ function nextNeume(){
     strsize = string.length;
     if(consumeIf("<obl>")){
       next = nextObliqueNeume();
-    } else if(string.substring(0, 6)=="<text>"){
+//    } else if(string.substring(0, 6)=="<text>"){
+    } else if(consumeIf(/<(text|label):?.*?>/)){
       next = nextText();
     } else if (string.substring(0,2)=="**"){
       next = nextComment();
@@ -459,7 +640,13 @@ function nextNeume(){
       next.rtail = consumeIf("t") ? true : false;
     }
     if(next){
-      neume.members.push(next);
+      if(next.objType==="TextUnderlay" && neume.members.length
+         && typeof(neume.members[neume.members.length-1].text) !==undefined
+         && !neume.members[neume.members.length-1].text){
+        neume.members[neume.members.length-1].text = next;
+      } else {
+        neume.members.push(next);
+      }
       next = false;
     }
     consumeSpace();
@@ -488,7 +675,7 @@ function nextObliqueNeume(){
   string = string.substring(0, end);
   consumeSpace();
   while(string.length != 0) {
-    if(consumeIf("<text>")){
+    if(consumeIf(/<(text|label):?.*?>/)){
       oblique.texts[oblique.members.length-1] = nextText();
     } else if(string.substring(0,2) == "**"){
       oblique.comments[oblique.members.length-1] = nextComment();
@@ -535,7 +722,8 @@ function nextLigature(){
   var next = false;
   var prevevent = false;
   while(strsize!=0){
-    if(consumeIf("<text>")){
+    if(consumeIf(/<(text|label):?.*?>/)){
+      //FIXME ignores meaning
       next = nextText();
     } else if(consumeIf("<obl>")){
       next = nextOblique(ligature);
@@ -550,6 +738,9 @@ function nextLigature(){
     } else {
       next = nextNote();
       next = new LigatureNote(next);
+      if(string.charAt(0)=="."){
+        next.dot = nextDot();
+      }
     }
     if(next){
 //      ligature.members.push(next);
@@ -583,7 +774,7 @@ function nextOblique(ligature){
   var strsize = string.length;
   var next = false;
   while(strsize!=0){
-    if(consumeIf("<text>")){
+    if(consumeIf(/<(text|label):?.*?>/)){
       oblique.texts[oblique.members.length-1] = nextText();
     } else if(string.substring(0,2) == "**"){
       oblique.comments[oblique.members.length-1] = nextComment();
@@ -595,6 +786,9 @@ function nextOblique(ligature){
       next = nextNote();
       if(next){
         next = new ObliqueNote(next, oblique.members.length, oblique);
+        if(string.charAt(0)=="."){
+          next.dot = nextDot();
+        }
         oblique.extendMembers(next);
       }
     }
@@ -609,12 +803,17 @@ function nextOblique(ligature){
 }
 
 function nextText (){
-  var end = string.indexOf("</text>");
-  if(end == -1){
+  var t = string.indexOf("</text>");
+  var l = string.indexOf("</label>");
+  // This looks complicated, but we want -1 if both are -1, otherwise,
+  // we want the one that isn't -1 or the lower of the two otherwise
+  var end = ((t >-1 && t<l) || l===-1) ? t : l;
+  var taglength = ((t >-1 && t<l) || l===-1) ? 7 : 8;
+  if(end === -1){
     return false;
   }
   var text = new TextUnderlay();
-  var returnString = string.substring(end+7);
+  var returnString = string.substring(end+taglength);
   string = string.substring(0, end);
   text.components = getSubText();
   string = returnString;
@@ -721,19 +920,24 @@ function consumeParenthesis(){
   return false;
 }
 
-function parseMens(string){
+function parseMens(spec){
   var obj = new MensuralSignature();
-  if(!string || !string.length) return obj;
   var pointer = 0;
-  if(string.charAt(0)==="^"){
+  if(!spec || !spec.length) return obj;
+  if(spec.charAt(0) == "[") {
+    obj.editorial=true;
+    pointer++;
+  }
+  if(spec.charAt(spec.length-1)=="]") spec = spec.substring(0, spec.length-1);
+  if(spec.charAt(pointer)==="^"){
     obj.sup = true;
     pointer++;
   }
-  if(string.charAt(pointer)) {
-    obj.signature = string.charAt(pointer);
+  if(spec.charAt(pointer)) {
+    obj.signature = spec.charAt(pointer);
   } else return obj;
   pointer++;
-  if(string.charAt(pointer)) obj.staffPos = "0123456789ABCDEF".indexOf(string.charAt(pointer));
+  if(spec.charAt(pointer)) obj.staffPos = "0123456789ABCDEF".indexOf(spec.charAt(pointer));
   return obj;
 }
 
@@ -747,10 +951,10 @@ function parseMensOld(sig, pos){
 function parseMensReading(fields){
   var mens;
   var signature = false;
-  if(fields[0] !== "(om.)"){
+  if(fields[0] === "(om.)"){
     mens = new MensuralSignature();
   } else if(fields[0].length>1){
-    mens = parseMens(fields[0]);
+    mens = parseMens(fields[0].substring(1, fields[0].length-1));
   } else{
     // This is an error. See if a blank works as a recovery strategy
     mens = new MensuralSignature();
@@ -803,29 +1007,97 @@ function parseSolm(signs){
   return obj;
 }
 function parseSolmReading(fields){
-  var solm = false, signs = [], start, finish, last, sigged;
+  var solm=false, closed, signs=[], start, finish, last, from, descr="", field;
   for(var i=0; i<fields.length; i++){
-    if(sigged || sigged === 0){
-      if(fields[i].charAt(0) =='"'){
-        return [fields.slice(i), new MReading(fields.slice(sigged, i), [solm], "")];
+    field = fields[i];
+    if(field.charAt(0)==='"'){
+      // Starting a solm sig
+      if(from && (solm || i-from)){
+        return [fields.slice(i), 
+                new MReading(fields.slice(from, i), solm ? [solm] : [], descr)];
+      } else {
+        if(field.charAt(field.length-1)==='"'){
+          solm = parseSolm([field.substring(1, field.length-1)]);
+          closed = true;
+          from = i+1;
+        } else {
+          signs.push(field.substring(1));
+          from = i+1;
+        }
+      }
+    } else if (fields[i].charAt(0)==='('){
+      // starting a descr
+      if(from && ((solm && i-from) || descr.length)){
+        return [fields.slice(i),
+                new MReading(fields.slice(from, i), solm ? [solm] : [], descr)];
+      } else {
+        // relevant description
+        finish = field.lastIndexOf(')');
+        descr = field.substring(1, finish > -1 ? finish : field.length);
+        from = i+1;
+      }
+    } else if (!closed){
+      finish = field.lastIndexOf('"');
+      if(finish>-1){
+        signs.push(field.substring(0, finish));
+        closed = true;
+        solm = parseSolm(signs);
+        from = i+1;
+      } else {
+        signs.push(field);
+        from = i+1;
       }
     } else {
-      start = i==0 ? 1 : 0;
-      finish = fields[i].length;
-      if(fields[i].lastIndexOf('"')>0){
-        finish = fields[i].lastIndexOf('"');
-        last = true;
-      }
-      signs.push(fields[i].substring(start, finish));
-      if(last){ 
-        solm = parseSolm(signs);
-        signs = [];
-        sigged = i+1;
-      }
+      // Witnesses. Do nothing
     }
   }
-  return [false, new MReading(fields.slice(sigged, fields.length), [solm], "")];
+  return [false, new MReading(fields.slice(from), solm ? [solm] : [], descr)];
 }
+
+// function parseSolmReading(fields){
+//   var solm = false, signs = [], start, finish, last, sigged, descr="";
+//   for(var i=0; i<fields.length; i++){
+//     if(sigged || sigged === 0){
+//       if(fields[i].charAt(0) =='"'){
+//         return [fields.slice(i), 
+//                 new MReading(fields.slice(sigged, i), solm ? [solm] :[], descr)];
+//       }
+//     } else if(fields[i].charAt(0)==='('){
+//       // Could be a variety of things.
+//       if(sigged || sigged===0){
+//         // This is either a post-sig description or a new sig
+//         if(descr.length || i-sigged >1){
+//           // Definitely new sig
+//           return [fields.slice(i), 
+//                   new MReading(fields.slice(sigged, i), solm ? [solm] : [], descr)];
+//         } else {
+//           // Description for existing sig
+//           finish = fields[i].lastIndexOf(')');
+//           descr = fields[i].substring(1, finish > -1 ? finish : fields.length);
+//           sigged = i+1;
+//         }
+//       } else {
+//         // No sig yet
+//         finish = fields[i].lastIndexOf(')');
+//         descr = fields[i].substring(1, finish > -1 ? finish : fields.length);
+//       }
+//     } else {
+//       start = i==0 ? 1 : 0;
+//       finish = fields[i].length;
+//       if(fields[i].lastIndexOf('"')>0){
+//         finish = fields[i].lastIndexOf('"');
+//         last = true;
+//       }
+//       signs.push(fields[i].substring(start, finish));
+//       if(last){ 
+//         solm = parseSolm(signs);
+//         signs = [];
+//         sigged = i+1;
+//       }
+//     }
+//   }
+//   return [false, new MReading(fields.slice(sigged, fields.length), solm ? [solm] : [], descr)];
+// }
 function parseSolmVar(fields){
   var next = false;
   var obj = new MChoice();
@@ -840,16 +1112,45 @@ function parseSolmVar(fields){
   return obj;
 }
 
-
 function parseClefReading(fields){
-  var clef = parseClef(fields[0].substring(1, fields[0].length-1));
-  for(var i=1; i<fields.length; i++){
+  var clef = false, descr="", from=false, finish;
+  for(var i=0; i<fields.length; i++){
     if(fields[i].charAt(0) =='"'){
-      return [fields.slice(i), new MReading(fields.slice(1, i), [clef], "")];
+      if(from && (clef || i-from)){
+        // either we've got a clef for this reading, or there is none
+        // (and so there has been at least one witness listed)
+        return [fields.slice(i), new MReading(fields.slice(from, i), clef ? [clef] : [], descr)];
+      } else {
+        // Clef for this reading
+        finish = fields[i].lastIndexOf('"');
+        clef = parseClef(fields[i].substring(1, finish > -1 ? finish : fields[i].length));
+        from = i+1;
+      }
+    } else if(fields[i].charAt(0)==='('){
+      if(from && ((clef && i-from) || descr.length)) {
+        // this either doesn't apply to the clef or there's already a
+        // description
+        return [fields.slice(i), new MReading(fields.slice(from, i), clef ? [clef] : [], descr)];
+      } else {
+        // relevant description
+        finish = fields[i].lastIndexOf(')');
+        descr = fields[i].substring(1, finish > -1 ? finish : fields[i].length);
+        from = i+1;
+      }
     }
   }
-  return [false, new MReading(fields.slice(1, fields.length), [clef], "")];
+  return [false, new MReading(fields.slice(from, fields.length), clef ? [clef] : [], descr)];
 }
+
+// function parseClefReading(fields){
+//   var clef = parseClef(fields[0].substring(1, fields[0].length-1));
+//   for(var i=1; i<fields.length; i++){
+//     if(fields[i].charAt(0) =='"'){
+//       return [fields.slice(i), new MReading(fields.slice(1, i), [clef], "")];
+//     }
+//   }
+//   return [false, new MReading(fields.slice(1, fields.length), [clef], "")];
+// }
 function parseClefVar(fields){
   var obj = new MChoice();
   var nextC = parseClefReading(fields);
@@ -868,6 +1169,11 @@ function parseClef(spec){
   // FIXME: Why??
   var old = currentClef;
   var obj = new Clef();
+  if(spec.charAt(0)=="[") {
+    obj.editorial=true;
+    spec = spec.substring(1);
+  }
+  if(spec.charAt(spec.length-1)=="]") spec = spec.substring(0, spec.length-1);
   obj.type = spec.substring(0, spec.length - 1);
   obj.staffPos = "0123456789ABCDEF".indexOf(spec.charAt(spec.length - 1));
   if(obj.staffPos != -1 && obj.type.match(/(Gamma|C|F|G|E)/)){
@@ -926,7 +1232,7 @@ function linesp(string){
       && parseInt(string.substring(1, string.length-1)));
 }
 function colourp(string){
-  return string.match(/(black|red|blind)/) ? string.match(/(black|red|blind)/)[0] : false;
+  return string.match(/(black|red|blind|0)/) ? string.match(/(black|red|blind|0)/)[0] : false;
 }
 
 
@@ -1066,7 +1372,8 @@ function nextObliqueNoteChoice(parent){
 
 function nextChoiceLikeThing(choice, textp){
   // Based on readChoice in parser.js
-  var locend = string.indexOf("}");
+  //var locend = string.indexOf("}");
+  var locend = findClose("}", 1);
   var finalString = string.substring(locend+1);
   var readingString, reading, witnesses, quoteloc, braceloc, description, stringTemp;
   var prevLength = false;
@@ -1075,22 +1382,34 @@ function nextChoiceLikeThing(choice, textp){
     prevLength = string.length;
     quoteloc = string.indexOf('"');
     braceloc = string.indexOf('(');
-        if(braceloc != -1 && (braceloc < quoteloc || quoteloc==-1)){
+    if(braceloc != -1 && (braceloc < quoteloc || quoteloc==-1)){
       string = string.substring(braceloc);
       // this clause begins with an editorial comment
-      description = consumeIf(/\(.*?\)/).slice(1, -1);
+//      description = consumeIf(/\(.*?\)/).slice(1, -1);
+      description = consumeTillClose(")", 1).slice(1, -1);
     } else {
       description = false;
     }
     consumeSpace();
     if(quoteloc != -1){
       string = string.substring(string.indexOf('"'));
-      readingString = consumeIf(/\".*?\"/).slice(1,-1);
+      // readingString = consumeIf(/\".*?\"/).slice(1,-1);
+      readingString = consumeTillClose('"', 1).slice(1, -1);
     } else {
       readingString = false;
     }
     consumeSpace();
-    witnesses = trimString(consumeIf(/[^:}]*/)).split(/\s+/);
+    witnesses = consumeTillOption([':', '}'], 0);
+    // But the brace at the end may already have been removed, so
+    if(witnesses) {
+      witnesses = witnesses.slice(0, -1);
+    } else {
+      // This is the bit before the }
+      witnesses = consumeN(string.length);
+    }
+    witnesses = trimString(witnesses);
+    witnesses = witnesses.split(/\s+/);
+    consumeSpace();
     stringTemp = string;
     string = readingString;
     switch(description){

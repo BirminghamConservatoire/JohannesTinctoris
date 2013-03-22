@@ -1,11 +1,45 @@
-#content {
-  width: 100%;
-  height: 100%;
-  z-index: 100;
-  overflow: visible;
+/* #content { */
+/*   width: 100%; */
+/*   height: 100%; */
+/*   z-index: 100; */
+/*   overflow: visible; */
+/*   background-color: white; */
+/* } */
+/* .mainBody, .pane{ */
+/*   overflow: visible; */
+/*   height: 100%; */
+/* } */
+
+body{
+ overflow: visible;
+ font-size: 80%;
 }
 
-div#codediv, #sizes {
+div{
+  overflow: visible;
+}
+div#codediv, #sizes, #menudiv, #leftOptions, .infoButtons, .titleBar, .header, .header * {
   display: none;
   visibility: hidden;
+}
+/* .pane{ */
+/*   overflow: visible; */
+/*   height: 100%; */
+/* } */
+.pane, #mainBody, #content, .contentpane{
+  overflow: visible!important;
+  visibility: visible;
+  border: none;
+  height: 100%;
+}
+.mainBody div.drawTo {
+  overflow: visible!important;
+  display: block!important;
+  visibility: visible!important;
+  height: 100%;
+  background-color: white;
+  border: none;
+}
+.mainBody div.drawTo * {
+   visibility: visible!important;
 }

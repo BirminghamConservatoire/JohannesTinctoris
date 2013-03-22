@@ -8,7 +8,7 @@
 // characters from RW's fonts, y offsets and width guidance.
 // 
 // For notes, mostly
-
+showagain=false;
 var prop=0.7;
 var noteEn = 1.8 * prop;
 var ya = 50.5;
@@ -34,9 +34,25 @@ var baseDictionary =
           s: ["h", yb, noteEn],
           f: ["k", yb, noteEn],
           c: ["~", yb, noteEn]},
+   lhalf: {M: ["å", ya, 2.8],
+          L: ["ß", ya, noteEn], 
+          B: ["∂", yb, noteEn],
+          S: ["f", yb, noteEn],
+          m: ["g", yb, noteEn],
+          s: ["h", yb, noteEn],
+          f: ["k", yb, noteEn],
+          c: ["~", yb, noteEn]},
+   rhalf: {M: ["a", ya, 2.8],
+          L: ["s", ya, noteEn], 
+          B: ["d", yb, noteEn],
+          S: ["f", yb, noteEn],
+          m: ["g", yb, noteEn],
+          s: ["h", yb, noteEn],
+          f: ["k", yb, noteEn],
+          c: ["~", yb, noteEn]},
    square: {c: ["~", yb, 2.5]},
    hufnagel: {c: ["~", yb, 2.5]}};
-// For completely void/black note shapes
+// For completely void/black note shapes //FIXME: what?
 var voidBaseDictionary = 
   {void: {M: ["a", ya, 2.8],
           L: ["s", ya, noteEn], 
@@ -54,8 +70,23 @@ var voidBaseDictionary =
           s: ["j", yb, noteEn],
           f: ["∆", yb, noteEn],
           c: ["~", yb, noteEn]},
+   lhalf: {M: ["å", ya, 2.8],
+          L: ["ß", ya, noteEn], 
+          B: ["∂", yb, noteEn],
+          S: ["f", yb, noteEn],
+          m: ["g", yb, noteEn],
+          s: ["h", yb, noteEn],
+          f: ["k", yb, noteEn],
+          c: ["~", yb, noteEn]},
+   rhalf: {M: ["a", ya, 2.8],
+          L: ["s", ya, noteEn], 
+          B: ["d", yb, noteEn],
+          S: ["f", yb, noteEn],
+          m: ["g", yb, noteEn],
+          s: ["h", yb, noteEn],
+          f: ["k", yb, noteEn],
    square: {c: ["~", yb, 2.5]},
-   hufnagel: {c: ["~", yb, 2.5]}};
+   hufnagel: {c: ["~", yb, 2.5]}}};
 // For inverted notes (some of these stay the same)
 var flippedDictionary = 
   {void: {M: ["A", yb, 2.8], 
@@ -71,7 +102,22 @@ var flippedDictionary =
            S: ["f", yb, noteEn],
            m: ["G", ya, noteEn],
            s: ["H", ya, noteEn],
-           f: ["J", ya, noteEn]}};
+           f: ["J", ya, noteEn]},
+   lhalf: {M: ["Å", ya, 2.8],
+          L: ["Í", ya, noteEn], 
+          B: ["Î", yb, noteEn],
+          S: ["Ï", yb, noteEn],
+          m: ["g", yb, noteEn],
+          s: ["h", yb, noteEn],
+          f: ["k", yb, noteEn],
+          c: ["~", yb, noteEn]},
+   rhalf: {M: ["A", ya, 2.8],
+          L: ["S", ya, noteEn], 
+          B: ["D", yb, noteEn],
+          S: ["F", yb, noteEn],
+          m: ["g", yb, noteEn],
+          s: ["h", yb, noteEn],
+          f: ["k", yb, noteEn]}};
 var voidFlippedDictionary = 
   {void: {M: ["A", yb, 2.8], 
           L: ["S", yb, noteEn], 
@@ -86,7 +132,22 @@ var voidFlippedDictionary =
            S: ["f", yb, noteEn],
            m: ["G", ya, noteEn],
            s: ["J", ya, noteEn],
-           f: ["Ô", ya, noteEn]}};
+           f: ["Ô", ya, noteEn]},
+   lhalf: {M: ["Å", ya, 2.8],
+          L: ["Í", ya, noteEn], 
+          B: ["Î", yb, noteEn],
+          S: ["Ï", yb, noteEn],
+          m: ["g", yb, noteEn],
+          s: ["h", yb, noteEn],
+          f: ["k", yb, noteEn],
+          c: ["~", yb, noteEn]},
+   rhalf: {M: ["A", ya, 2.8],
+          L: ["S", ya, noteEn], 
+          B: ["D", yb, noteEn],
+          S: ["F", yb, noteEn],
+          m: ["g", yb, noteEn],
+          s: ["h", yb, noteEn],
+          f: ["k", yb, noteEn]}};
 
 var restDictionary = 
   {B: ["∂", yb, 1.3],
@@ -96,24 +157,38 @@ var restDictionary =
    f: ["˚", yb, 1.5]};
 var clefDictionary = 
   {
-    C: [":", 28.5, 2],
+    C: [":", 28.5, 1.3],
     F: ["L", 43.5, 3],
     G: ["Ý", 28.5, 2.5]
   };
 var mensDictionary = 
-  {
-    O: ["X", 35, 2.75, false],
-    C: ["C", 35, 2.75, false],
-    Ø: ["X", 35, 2.75, "<"],
-    Ç: ["C", 35, 2.75, "<"]
-  };
+   {
+     O: ["o", 10, 2, false],
+     C: ["c", 10, 2, false],
+     Ø: ["ø", 10, 2, false],
+     Ç: ["ç", 10, 2, false],
+     c: ["C", 10, 2, false],
+     ø: ["O", 10, 2, false]
+   };
+// var mensDictionary = 
+//   {
+//     O: ["X", 35, 2.75, false],
+//     C: ["C", 35, 2.75, false],
+//     // Ø: ["X", 35, 2.75, "<"],
+//     // Ç: ["C", 35, 2.75, "<"],
+//     Ø: ["X", 35, 2.75, "\u003c"],
+//     Ç: ["C", 35, 2.75, "\u003c"],
+//     c: ["C", 35, 2.75, "?"],
+//     ø: ["X", 35, 2.75, "/"]
+//   };
 var solmDictionary = 
   {
     b: ["b",4, 2.5*prop],
-    h: ["µ",35, 2.5*prop],
-    x: ["M",35, 2.5*prop]
+    h: ["µ",4, 2.5*prop],
+    x: ["M",4, 2.5*prop]
   };
-var dotData = [">", 36, 1];
+var dotData = [">", 36, 1*prop];
+var fermataData = ["Z", 36, prop];
 // No longer needed -- I'm drawing these.
 // var obliqueDictionary = 
 //   {
@@ -127,15 +202,21 @@ var dotData = [">", 36, 1];
 //
 // Constants
 var foo=false;
-var editable = true;
+//var editable = true;
+var editable = false;
 var nocache = false;
+var titleBar = false;
+var showtitle = true;
+var margins = false;
 var vertical;
 var leading = 20;
 // var topMargin = 40;
-var topMargin = 25;
+//var topMargin = 25;
+var topMargin = 0;
 //var lmargin = 10;
 var lmargin = 3;
-var rastralSize = 15;
+//var rastralSize = 15;
+var rastralSize = 12;
 var exWidth = 690;
 var localWidth = exWidth;
 var colours = {red: "#F00", black: "#000", blind: "#AAA"};
@@ -147,6 +228,7 @@ var notes = ["AA", "BB", "CC", "DD", "EE", "FF", "GG",
   "aaa", "bbb", "ccc", "ddd", "eee", "fff", "ggg"];
 
 // UI-set variables
+var singlePaneMode = true;
 var showvariants = true;
 var showtranslationnotes = true;
 var showtranscriptionnotes = true;
@@ -155,6 +237,7 @@ var editorDisplay = "show";
 var dateDisplay = "show";
 var copyTextDisplay = "show";
 var sourceDisplay = "show";
+var extraInfoDisplay = "show";
 var infoButtons = false;
 var exampleSource = false;
 
@@ -162,6 +245,10 @@ var docMap = false;
 
 // Current variable values (for context)
 //var tooltip = false;
+var scrollLock = false;
+var paneWidths = false;
+var maxWidth = 650;
+var minWidth = 350;
 var sources = [];
 var nodeNo = 0;
 var nodes = [];
@@ -175,14 +262,18 @@ var doc = false;
 var complaint = [];
 var chapter = 0;
 var book = 0;
+var section = 0;
+var paragraph = 0;
 var string;
 var SVG = false;
 var canvas = false;
 var context = false;
 var currentExample = false;
+var curDoc = false;
 var handsmet = [];
 var examplei = false;
 var eventi = false;
+var texti = false;
 var curx = 0;
 var cury = 20;
 var currentLinecount = 5;
@@ -191,6 +282,7 @@ var currentSystem = false;
 var currentSystems = [];
 var currentInfo = false;
 var suppressBreak = true;
+//var wrapWidth = 460;
 var wrapWidth = false;
 var currentClef = false;
 var currentRedline = false;
@@ -205,16 +297,31 @@ var examples = [];
 var k1 = Math.cos(Math.PI/3) ;//0.866;
 var k2 = Math.sin(Math.PI/3);//0.5;
 var textScale = 0.8;
+// var textScale = 0.6;
 var commentStyle = "#00F";
 var comments = false;
 var hands = [];
 var range = false;
-
+var desperatecounter = 0;
+var underlays = [];
+var currenttextparent = false;
+var pari = false;
+//offset for editorial square bracket character
+var braceOff = 7.5;
 function musicStyle(){
   return "font-size : "+(3*rastralSize*prop)+"pt";
 }
+function mensStyle(){
+  return "font-size : "+(1.6*rastralSize*prop)+"pt";
+}
 function restStyle(){
   return "font-size: "+(3 * rastralSize) +"pt";
+}
+function braceStyle(){
+  return "font-size: "+(2*rastralSize*prop)+"pt";
+}
+function etcStyle(){
+  return "font-size: "+(0.7*rastralSize) +"pt";
 }
 
 function textClasses(cstyles){
@@ -251,7 +358,8 @@ function metrics(){
     vThickness: rastralSize / 7.5 * prop,
     hThickness: rastralSize / 3 * prop,
     stemLength: rastralSize * 3.3 * prop,
-    hOffset:    rastralSize / 3 * prop,
+    // hOffset:    rastralSize / 3 * prop,
+    hOffset:    rastralSize / 2.5 * prop,
     oblOffset: rastralSize / 3 * prop,
     chantThickness: rastralSize /2,
     chantPenA: rastralSize / 7,
@@ -363,6 +471,106 @@ function getRhythm(){
   }
 }
 
+function consumeStyleTags(){
+  // Some tags are too fundamental to parse explicitly in the main
+  // parser. These should be dealt with in the consume function. I
+  // think.
+  var oneoff=false;
+  var end = false;
+  var found = false;
+  if(!currentExample) return;
+  if(string.charAt(0)=="<" && (string.indexOf(">")!==-1)){
+    oneoff = false;
+    end = string.indexOf(">");
+  } else if(string.charAt(0)=="{" && (string.indexOf("}")!==-1)){
+    oneoff = true;
+    end = string.indexOf("}");
+  } else {
+    return;
+  }
+  switch(string.substring(1, end)){
+    case "red":
+      found = new RedOpen();
+      found.oneOff = oneoff;
+      break;
+    case "/red":
+      found = new RedClose();
+      break;
+    case "blue":
+      found = new BlueOpen();
+      found.oneOff = oneoff;
+      break;
+    case "/blue":
+      found = new BlueClose();
+      break;
+    case "strikethrough":
+      found = new StrikethroughOpen();
+      found.oneOff = oneoff;
+      break;
+    case "/strikethrough":        
+      found = new StrikethroughClose();
+      break;
+    case "redline":
+      found = new RedlineOpen();
+      found.oneOff = oneoff;
+      break;
+    case "/redline":        
+      found = new RedlineClose();
+      break;
+    case "void":
+      found = new VoidOpen();
+      found.oneOff = oneoff;
+      break;
+    case "/void":
+      found = new VoidClose();
+      break;
+    case "full":
+      found = new FullOpen();
+      found.oneOff = oneoff;
+      break;
+    case "/full":
+      found = new FullClose();
+      break;
+    case "1halffull":
+      found = new HalfFullOpen();
+      found.oneOff = oneoff;
+      found.side = 1;
+      break;
+    case "/1halffull":
+      found = new HalfFullClose();
+      break;
+    case "2halffull":
+      found = new HalfFullOpen();
+      found.oneOff = oneoff;
+      break;
+    case "/2halffull":
+      found = new HalfFullClose();
+      break;
+    default:
+      if(string.substring(1, 3)==="ll"){
+        found = new LedgerLineChange();
+        if(string.charAt(3)==":"){
+          found.readComponents(string);
+        }
+        found.oneOff = oneoff;
+      } else if (string.substring(1, 4)==="/ll"){
+        found = new LedgerLineChange();
+        found.count = 0;
+        found.oneOff = true;
+      }
+  }
+  if(found) {
+    currentExample.classes.addClass(found);
+    string = string.substring(end+1);
+    pointer += end;
+  }
+  return;
+}
+
+function clearOneOffTags(){
+  if(currentExample) currentExample.classes.removeOneOffClasses();
+}
+
 function consume(n){
   if(string.length < n){
     pointer += string.length;
@@ -386,6 +594,22 @@ function consumeIf(search){
 }
 
 function consumeSpace(){
+  // Remove space from string global variable. Return true if space is
+  // removed
+  var p = pointer;
+  clearOneOffTags();
+  consumeSpace2();
+  // return
+  var slen = 0;
+  while(string.length !==slen){
+    slen = string.length;
+    consumeStyleTags();
+    consumeSpace2();
+  }
+  return p===pointer ? false : true;
+}
+
+function consumeSpace2(){
   var nextNonSpace = string.search(/\S/);
   if(nextNonSpace == -1){
     pointer += string.length;
@@ -421,7 +645,7 @@ function drawSystem(linecount, y, x1, x2, colour, lcanvas){
 }
 
 function drawSystemLines(sysgroup, linecount, y, x1, x2, colour, lcanvas){
-   y+=0.5;
+   // y+=0.5;
    for(var i=0; i<linecount; i++){
      svgLine(sysgroup, x1, y, x2, y, colour+"SVGLine", false);
     y += rastralSize;
@@ -450,34 +674,43 @@ function drawScallopedBarline(x, top, bottom, colour){
   return svgPath(SVG, path, "scallopedBarline"+(colour? " "+colour: ""), false);
 }
 
-function drawPartialBarline(x, y, start, end){
-  svgLine(SVG, x, y-yoffset(start), x, y-yoffset(end), "barline", false);
+function drawPartialBarline(x, y, start, end, extras){
+  svgLine(SVG, x, y-yoffset(start), x, y-yoffset(end), 
+    "barline"+(extras ? extras : ""), false);
 }
 
-function drawBarline(x, y){
-  svgLine(SVG, x+0.5, y-rastralSize, x+0.5, y-(rastralSize * currentLinecount), "barline", false);
+function drawBarline(x, y, extras){
+  svgLine(SVG, x+0.5, y-rastralSize, x+0.5, y-(rastralSize * currentLinecount), 
+    "barline"+(extras ? extras : ""), false);
 }
 
-function drawSmallBarline(start, end, thickness){
+function drawSmallBarline(start, end, thickness, extras){
   var starty = cury - yoffset(start);
   var endy = cury - yoffset(end);
-  svgLine(SVG, curx+0.5, starty, curx+0.5, endy, "barline", false);
+  svgLine(SVG, curx+0.5, starty, curx+0.5, endy, "barline"+(extras ? extras : ""), false);
 }
 
-function drawLedgerLine(x, y, x2) {
+function drawLedgerLine(x, y, x2, extraClasses) {
   // FIXME: line end is wrong
+  if(!extraClasses) extraClasses = "";
   if(x2){
-    svgLine(SVG, x, y, x2, y, "ledgerline", false);
+    return svgLine(SVG, x, y, x2, y, "ledgerline"+extraClasses, false);
   } else{
-    svgLine(SVG, x, y, x+rastralSize, y, "ledgerline", false);
+    return svgLine(SVG, x, y, x+rastralSize, y, "ledgerline"+extraClasses, false);
   }
+}
+
+function squareBracket(x, y, open, extraClasses){
+  return svgText(SVG, x, y, "editorial bracket"+extraClasses, 
+                 false, braceStyle(), open ? "[" : "]");
 }
 
 // b. ii) Ligature components (boxes)
 
-function drawBox(note, staffPos, width, lStem, rStem, sup){
+function drawBox(note, staffPos, width, lStem, rStem, sup, full, extras){
   var m = metrics();
-  var group = svgGroup(SVG, "ligatureBox"+(editable ? " clickable" : ""), false);
+  var group = svgGroup(SVG, "ligatureBox"+(editable ? " clickable" : "")
+                       +(extras ? extras : ""), false);
   var pos = note.staffPos;
   var poffset = yoffset(pos);
   width = width * prop;
@@ -503,10 +736,18 @@ function drawBox(note, staffPos, width, lStem, rStem, sup){
             cury - poffset - m.stemLength, "ligatureStem", false);    
   }
   // MIDDLE
-  svgLine(group, curx, cury - poffset+m.hOffset, curx+width, cury-poffset+m.hOffset,
-         "ligatureHorizontal", false);
-  svgLine(group, curx, cury - poffset-m.hOffset, curx+width, cury-poffset-m.hOffset,
-         "ligatureHorizontal", false);
+  // Two lines if void, box if full
+  if(full){
+    // svgRect(group, curx, cury-poffset-m.hOffset, 
+    //   width, 2*m.hOffset, "ligatureSquare", false);
+    svgRect(group, curx, cury-poffset-(m.halfHeight-m.chantPenA),
+      width, 2*(m.halfHeight-m.chantPenA), "ligatureSquare", false);
+  } else {
+    svgLine(group, curx, cury - poffset+m.hOffset, curx+width, cury-poffset+m.hOffset,
+      "ligatureHorizontal", false);
+    svgLine(group, curx, cury - poffset-m.hOffset, curx+width, cury-poffset-m.hOffset,
+      "ligatureHorizontal", false);
+  }
   curx+=width;
   // RIGHT
   svgLine(group, curx, cury - poffset-m.halfHeight, curx, 
@@ -565,7 +806,7 @@ function drawOblique2 (sp1, sp2, staffPos, width, lstem, rstem){
   return path;
 }
 
-function drawObliqueStart(sp1, sp2){
+function drawObliqueStart(sp1, sp2, full, extras){
   var m = metrics();
   // I'm confused here. I named vThickness as the size of vertical
   // strokes, but the thickness affects horizontal values, so renaming
@@ -583,6 +824,7 @@ function drawObliqueStart(sp1, sp2){
   var x1a = curx+(width/2);
   var y1a = (y1+y2)/2;
   var ThD = ThH*gradient;
+  var path;
   // 6***
   // *******
   // **1*******
@@ -596,15 +838,23 @@ function drawObliqueStart(sp1, sp2){
   //       ******3
   //          ****
   //             4
-  var path = svgPath(SVG,
-                    svgPolyPath([x1+ThH, y1-DV, x1+ThH, y1+DV, 
-                      x1a, y1a+DV, x1a, y1a+DV+ThV, x1, y1+DV+ThV-ThD,
-                      x1, y1-DV-ThV-ThD, x1a, y1a-DV-ThV, x1a, y1a-DV], true), 
-                      "ligatureOblique start", false);
+  if(full) {
+    // Filled oblique is just points 4-7 here
+    path = svgPath(SVG,
+             svgPolyPath([x1a, y1a+DV+ThV, x1, y1+DV+ThV-ThD,
+                   x1, y1-DV-ThV-ThD, x1a, y1a-DV-ThV], true),
+             "ligatureOblique start"+(extras ? extras : ""), false);
+  } else {
+    path = svgPath(SVG,
+      svgPolyPath([x1+ThH, y1-DV, x1+ThH, y1+DV, 
+                   x1a, y1a+DV, x1a, y1a+DV+ThV, x1, y1+DV+ThV-ThD,
+                   x1, y1-DV-ThV-ThD, x1a, y1a-DV-ThV, x1a, y1a-DV], true), 
+      "ligatureOblique start"+(extras ? extras : ""), false);
+  }
   return path;
 }
 
-function drawObliqueEnd(sp2, sp1){
+function drawObliqueEnd(sp2, sp1, full, extras){
   var m = metrics();
   // I'm confused here. I named vThickness as the size of vertical
   // strokes, but the thickness affects horizontal values, so renaming
@@ -621,6 +871,7 @@ function drawObliqueEnd(sp2, sp1){
   var x1a = curx+(width/2);
   var y1a = (y1+y2)/2;
   var ThD = ThH*gradient;
+  var path;
   // 1
   // ****
   // 2******
@@ -634,11 +885,19 @@ function drawObliqueEnd(sp2, sp1){
   //       ****4**
   //          ****
   //             7
-  var path = svgPath(SVG,
-                svgPolyPath([x1a, y1a-DV-ThV, x1a, y1a-DV,
-                  x2-ThH, y2-DV, x2-ThH, y2+DV, x1a, y1a+DV,
+   if(full) {
+    // Filled oblique is just points 1 & 6-8 here
+    path = svgPath(SVG,
+                svgPolyPath([x1a, y1a-DV-ThV,
                   x1a, y1a+DV+ThV, x2, y2+DV+ThV+ThD, x2, y2-DV-ThV+ThD], true),
-                      "ligatureOblique end", false);
+                "ligatureOblique end"+(extras ? extras :""), false);
+   } else {
+     path = svgPath(SVG,
+                  svgPolyPath([x1a, y1a-DV-ThV, x1a, y1a-DV,
+                      x2-ThH, y2-DV, x2-ThH, y2+DV, x1a, y1a+DV,
+                      x1a, y1a+DV+ThV, x2, y2+DV+ThV+ThD, x2, y2-DV-ThV+ThD], true),
+                  "ligatureOblique end"+(extras ? extras :""), false);
+   }
   // FIXME: Why?
   curx -= ThH/2;
   return path;  
@@ -661,7 +920,7 @@ function oWidth(p1, p2){
   return prop * rastralSize * (k + a * Math.abs(p2-p1));
 }
 
-function drawOblique (sp1, sp2, staffPos, width, lStem, rStem){
+function drawOblique (sp1, sp2, staffPos, width, lStem, rStem, extras){
   width = oWidth(sp1, sp2);
   var m = metrics();
   if(currentSubType == "void"){
@@ -681,7 +940,7 @@ function drawOblique (sp1, sp2, staffPos, width, lStem, rStem){
   curx+=(m.vThickness/2);
   if(lStem){
     svgLine(SVG, curx, cury-yoffset(sp1)-(lStem*stemLength), curx, cury-yoffset(sp1)+(lStem*offset),
-            "ligatureVertical", false);
+            "ligatureVertical"+(extras ? extras : ""), false);
   }
   if(staffPos && Math.abs(staffPos-sp1)>1){
     var joinTop = Math.max(yoffset(staffPos), yoffset(sp1)) + offset;
@@ -691,7 +950,7 @@ function drawOblique (sp1, sp2, staffPos, width, lStem, rStem){
   curx += width- m.vThickness;
 }
 
-function drawRhombus(x, y, colour, ltail, rtail){
+function drawRhombus(x, y, colour, ltail, rtail, extras){
   var m = metrics();
   var a = m.chantPenA;
   var b = m.chantPenB;
@@ -703,25 +962,26 @@ function drawRhombus(x, y, colour, ltail, rtail){
   }
   if(ltail){
     svgLine(group, x-k1*a-k2*b-1, y+k2*a-k1*b, x-k1*a-k2*b-1, y+k2*a-k1*b+rastralSize,
-            "rhombusTail" + classExtra, false);
+            "rhombusTail" + classExtra+(extras ? extras : ""), false);
   }
   if(rtail){
     svgLine(group, x+k1*a+k2*b+1, y-k2*a+k1*b, x+k1*a+k2*b+1, y-k2*a+k1*b+rastralSize, 
-            "rhombusTail" + classExtra, false);
+            "rhombusTail" + classExtra+(extras ? extras : ""), false);
   }
   svgPolygon(group, [x-k1*a+k2*b, y+k2*a+k1*b,x+k1*a+k2*b, y-k2*a+k1*b,
                      x+k1*a-k2*b, y-k2*a-k1*b, x-k1*a-k2*b, y+k2*a-k1*b],
-             "rhombus" + classExtra, false);
+             "rhombus" + classExtra+(extras ? extras : ""), false);
 }
 
 // b. ii) Chant components
 
-function drawNeumeJoin(x, y, p1, p2, colour, sup){
+function drawNeumeJoin(x, y, p1, p2, colour, sup, extras){
   var m = metrics();
   var a = m.chantPenA;
   var b = m.chantPenB;
-  return svgLine(SVG, x-neumeStep(p1, p2)+k1*a+k2*b, y-yoffset(p1)-k2*a+k1*b,
-                 x-k1*a-k2*b,y-yoffset(p2)+k2*a-k1*b, "neumeJoin " + (colour ? colour : ""));
+  return svgLine(SVG, x-neumeStep(p1, p2)+k1*a+k2*b-0.5, y-yoffset(p1)-k2*a+k1*b,
+                 x-k1*a-k2*b+0.5,y-yoffset(p2)+k2*a-k1*b,
+                 "neumeJoin " + (colour ? colour : "")+(extras ? extras : ""));
 }
 
 function neumeStep(p1, p2){
@@ -741,11 +1001,11 @@ function drawChantBox(x, y, ltail, rtail, colour, sup, nudge){
           sup == true ? x - ct + 1 : x, y + (ct/2) + nudge, 
           "chantSquare"+(colour ? " "+colour: ""), false);
   if(rtail!=false){
-    svgLine(SVG, x+(ct/2)-(rastralSize*0.7/15), y+(ct/2), x+(ct/2)-(rastralSize*0.7/15), y+rastralSize,
+    svgLine(SVG, x+(ct/2)-(rastralSize*0.7/15), y-(ct/2)+nudge, x+(ct/2)-(rastralSize*0.7/15), y+rastralSize,
             "chantTail"+(colour ? " "+colour: ""), false);
   }
   if(ltail!=false){
-    svgLine(SVG, x-(ct/2)+0.5, y+(ct/2), x-(ct/2)+0.5, y+rastralSize, 
+    svgLine(SVG, x-(ct/2)+0.5, y-(ct/2)+nudge, x-(ct/2)+0.5, y+rastralSize, 
             "chantTail"+(colour ? " "+colour: ""), false);
   }
 }
@@ -780,7 +1040,8 @@ function bracedParam(str){
 function sysBreak(){
   var width = sysWidths[sysNo];
   curx = lmargin;
-  cury += rastralSize * 5 + 5;
+//  cury += rastralSize * 5 + 5;
+  cury += rastralSize * 3;
   curx += rastralSize / 2;
   cury += currentLinecount * rastralSize;
   sysNo++;
@@ -794,6 +1055,7 @@ function sysBreak2(lastp){
   }
   localWidth = Math.min(curx+2, localWidth);
   currentExample.SVG.setAttribute('width', localWidth);
+  underlays = [];
 }
 
 // e. custos assistance
@@ -916,41 +1178,175 @@ function resetAnnotations(){
 }
 
 function addAnnotation(domObject, object, type){
+  // Rather cryptically, domObject is the in-text object (referrer),
+  // whilst object is the thing to show in any footnote or pop
+  // up. type is free text
+  var doc = curDoc;
+  var oldcurx = curx;
+  var oldcury = cury;
   $(domObject).data("object", object);
-  domObject.setAttributeNS(null, "onmouseover", "top.showAnnotation(this);");
-  domObject.setAttributeNS(null, "onmouseout", "top.removeTooltip();");
+  // Makes it highlight on hover
+  $(domObject).addClass("hoverable");
+  // 
+  if(doc) docMap.addPopup(object, domObject, "annotation", doc);
+  domObject.setAttributeNS(null, "onmouseover", "top.showAnnotation2(this);");
+  domObject.setAttributeNS(null, "onmouseout", "top.untip(true);");
+  // domObject.setAttributeNS(null, "onmouseout", "top.removeTooltip(true);");
+  domObject.setAttributeNS(null, "onclick", "top.showAnnotation2(this, true);");
+  curx = oldcurx;
+  cury = oldcury;
+}
+function untip(hovered){
+  removeTooltip(hovered);
+  $(".glow").removeClass("glow");
+  $(".refglow").each(function (i, e){e.className.baseVal = e.className.baseVal.split(" refglow").join("");});
+  $(".popup").not(".clicked").hide();  
 }
 
-function showAnnotation(obj){
+function englow(pop, ref){
+  $(pop).addClass("glow");
+  var oldClass = ref.className.baseVal;
+  if(oldClass.indexOf("refglow")===-1) ref.className.baseVal = oldClass+" refglow";
+//  $(ref).addClass("refglow");
+  
+}
+function unglow(pop, ref){
+  $(pop).removeClass("glow");
+  ref.className.baseVal = ref.className.baseVal.split(" refglow").join("");
+//  $(ref).removeClass("refglow");
+  
+}
+function popGlow(e){
+  var pop = e.delegateTarget;
+  var ref = $(pop).data("ref");
+  englow(pop, ref);
+}
+function popUnglow(e){
+  var pop = e.delegateTarget;
+  var ref = $(pop).data("ref");
+  unglow(pop, ref);
+}
+function fnGlow(e){
+  var ref = e.delegateTarget;
+  var pop = $(ref).data("fn");
+  englow(pop, ref);
+}
+function fnUnglow(e){
+  var ref = e.delegateTarget;
+  var pop = $(ref).data("fn");
+  unglow(pop, ref);
+}
+
+function popupCloseButtonClicked(e){
+  if(e.altKey) {
+    var pops = $(".popup");
+    $(".TBCloseButton.closepopup").remove();
+    pops.removeClass("clicked");
+    pops.hide();
+  } else {
+    var thisPop = $(e.delegateTarget.parentNode);
+    $(e.delegateTarget).remove();
+    thisPop.removeClass("clicked");
+    thisPop.hide();
+  }
+}
+function popupCloseButton(pop){
+  var button = DOMDiv("TBCloseButton closepopup", false, DOMDiv("closeX", false, "×"));
+  pop.appendChild(button);
+  $(button).click(popupCloseButtonClicked);
+}
+
+function subvariant(obj){
+  var parents=$(obj).parents();
+  var par, parcl;
+  for(var i=0; i<parents.length; i++){
+    par = parents[i];
+    if(typeof(par.className.baseVal)==="undefined") {
+      // No longer in SVG territory, but still no variantgroup
+      return false;
+    }
+    parcl = par.className.baseVal;
+    if(parcl.indexOf("variantGroup")>-1){
+      return true;
+    }
+  }
+  return false;
+}
+
+function showAnnotation2(obj, clicked){
+  var fndiv = $(obj).data("fn");
+  var foo = $(obj).parents("g.variantGroup");
+  if($(fndiv).filter(":hidden").length>0){
+    $(fndiv).show();
+    fndiv.style.position = "fixed";
+    fndiv.style.left = obj.getBoundingClientRect().left+"px";
+    if(subvariant(obj)){
+      // alert(($(obj).parents("SVG")[0].getBoundingClientRect().bottom
+      //                    +fndiv.getBoundingClientRect().height)+"px");
+      fndiv.style.top = ($(obj).parents("SVG")[0].getBoundingClientRect().bottom
+                         +fndiv.getBoundingClientRect().height)+"px";
+    } else {
+      fndiv.style.top = $(obj).parents("SVG")[0].getBoundingClientRect().bottom+"px";
+    }
+  }
+  englow(fndiv, obj);
+  if(clicked && !$(fndiv).hasClass("clicked")){
+    $(fndiv).draggable();
+    $(fndiv).addClass("clicked");
+    popupCloseButton(fndiv);
+    //  docMap.popPosition(obj, fndiv);
+    //  fndiv.style.top = $(obj).offset().top; //"0px";
+    //  fndiv.style.left = //"0px";
+    //  fndiv.style.width = "100px";
+    //  fndiv.style.height= "100px";
+  }
+}
+
+function showAnnotation(obj, clicked){
   var thing = $(obj).data("object");
   var tip = Tooltip(false);
-  var t1 = thing.tip(tip);
-  var s1 = t1.getBBox();
+  var t1 = svg(false, false);
+  tip.appendChild(t1);
+  $(tip).draggable();
+  /*var t1 = */ thing.tip(t1);
+  if(clicked) {
+    $(tip).draggable();
+    $(tip).addClass("clicked");
+    $(tip).click(removeTooltip);
+//    obj.removeEventListener("onmouseout", "top.removeTooltip();");
+  }
+//  var s1 = t1.getBBox();
   var s2 = t1.getBoundingClientRect();
-  if(s2.width) {
-    tip.style.width = Math.max(s2.width + 20, 80)+"px";// + t1.getBBox().x;
-    t1.style.width = Math.max(s2.width + 15, 80)+"px";
+  var s2width = s2.width ? s2.width : s2.right - s2.left;
+  var s2height = s2.height ? s2.height : Math.abs(s2.top - s2.bottom); //fixme: which is higher?
+  tip.style.width = Math.max(s2width + 20, 80)+"px";// + t1.getBBox().x;
+  t1.style.width = Math.max(s2width + 15, 80)+"px";
+  tip.style.height = Math.max(80, s2height + 20)+"px";// + t1.getBBox().y +15;
+  t1.style.height = Math.max(80, s2height+15)+"px";//s2.height+10;
+  if(clicked){
+    tip.style.position = "fixed";
+    tip.style.left = "10px";
+    tip.style.top = Math.max($(obj).offset.top, 50)+"px";
+  } else {
+    tip.style.position = "fixed";
+    tip.style.top = 30+obj.getBoundingClientRect().top+"px";
+    tip.style.left = 30+obj.getBoundingClientRect().left+"px";
   }
-  if(s2.height) {
-    tip.style.height = Math.max(80, s2.height + 20)+"px";// + t1.getBBox().y +15;
-    t1.style.height = Math.max(80, s2.height+15)+"px";//s2.height+10;
-  }
-  tip.style.position = "fixed";
-  tip.style.top = 30+$(obj).offset().top+"px";
-  tip.style.left = 30+$(obj).offset().left+"px";
+  // tip.style.top = 30+$(obj).offset().top+"px";
+  // tip.style.left = 30+$(obj).offset().left+"px";
 }
 
-function addAnnotation2(domObject, object, type){
-  var annotation = new AnnotationSet();
-  annotation.AType = type;
-  annotation.domObj = domObject;
-  annotation.object = object;
-  annotation.svgEl = SVG;
-  annotation.domObj.setAttributeNS(null, "onmouseover", "top.Annotations["+Annotations.length+"].tip();");
-  annotation.domObj.setAttributeNS(null, "onmouseout", "top.removeTooltip();");
-  Annotations.push(annotation);
-  return Annotations.length -1;
-}
+// function addAnnotation2(domObject, object, type){
+//   var annotation = new AnnotationSet();
+//   annotation.AType = type;
+//   annotation.domObj = domObject;
+//   annotation.object = object;
+//   annotation.svgEl = SVG;
+//   annotation.domObj.setAttributeNS(null, "onmouseover", "top.Annotations["+Annotations.length+"].tip();");
+//   annotation.domObj.setAttributeNS(null, "onmouseout", "top.removeTooltip(true);");
+//   Annotations.push(annotation);
+//   return Annotations.length -1;
+// }
 
 function mergeKeys(list1, list2){
   // Takes the cartesian join of two lists of keys;
@@ -1203,11 +1599,11 @@ function endTagPos(tag){
     locClose = string.indexOf("</"+tag+">", from);
     locOpen = string.indexOf("<"+tag+">", from);
     if(locClose == -1) {
-      alert(string);
+      alert("unclosed"+string);
       return string.length;
     }
   }
-  alert(string);
+  alert("unclosed (b)"+string);
   return string.length;
 }
 
@@ -1217,11 +1613,22 @@ function valueText(value){
   } else if(typeof(value.objType)!="undefined" && value.objType == "ValueChoice"){
     return value.toText();
   } else {
-    alert(value);
+    alert("bad val"+value);
     return value;
   }
 };
 
+var ignorables = ["TextUnderlay", "Comment", "Part"];
+function ignorable(object){
+  // return true if the presence of this object shouldn't ban using
+  // later symbols in prefatory information
+  if(typeof(object.objType) != "undefined" && ignorables.indexOf(object.objType)>-1){
+    return true;
+  } else if(typeof(object.objType) != "undefined" && object.objType == "MusicalChoice"){
+    return object.ignorable();
+  }
+  return false;
+}
 // For now, not mens...
 var infos = ["SolmizationSignature", "Clef", "Staff"];
 function infop(object){
@@ -1390,12 +1797,14 @@ function infoToggle(div){
   var togglevar = $(div).data("togglevar");
   togglevar = togglevar=="show" ? "hide" : "show";
   $(div).toggleClass("showing");
+  //FIXME: lame
+  var parent = div.parentNode.parentNode;
   var show = $(div).hasClass("showing");
   for(var i=0; i<fields.length; i++){
     if(show) {
-      $(".info."+fields[i]).show();
+      $(parent).find(".info."+fields[i]).show();
     } else {
-      $(".info."+fields[i]).hide();
+      $(parent).find(".info."+fields[i]).hide();
     }
   }
 }
@@ -1404,3 +1813,588 @@ var cssloc = ".";
 function cssPath(filename){
   return cssloc +"/"+ filename;
 }
+
+function docMapping(){
+  this.docs = [];
+  this.treatises = {};
+  this.panes = [];
+  this.treatisePos = {};
+  this.hold = false;
+  this.popups = [];
+  this.unhold = function(){
+    this.hold = false;
+    wrapWidth = this.paneWidth();
+    for(var i=0; i<docMap.docs.length; i++){
+      if(docMap.docs[i].prevWidth != wrapWidth){
+        docMap.docs[i].forceredraw = true;
+        docMap.docs[i].draw();
+      }
+    }
+    fixHeight(true);
+  };
+  this.paneWidth = function(){
+    return Math.max(minWidth, Math.min(maxWidth, ($(window).width()-60) / this.panes.length))-30;
+  };
+  this.fixWidths = function(){
+    if(this.hold) return false;
+    var width = this.paneWidth();
+    if(width===wrapWidth) {
+      return false;
+    }
+    window.clearTimeout();
+    wrapWidth = width;
+//    document.getElementById("tempdebug").innerHTML = wrapWidth;
+    setTimeout(function(){
+      for(var i=0; i<docMap.docs.length; i++){
+        if(docMap.docs[i].prevWidth != wrapWidth){
+          docMap.docs[i].forceredraw = true;
+          docMap.docs[i].draw();
+        }
+      }
+      fixHeight(true);
+    }, 30);
+    return true;
+  };
+  this.addTreatise = function(doc){
+    if(typeof(this.treatises[doc.group])==="undefined"){
+      this.treatises[doc.group] = [];
+    }
+    this.treatises[doc.group].push(doc);
+  };
+  this.treatiseViewEntry = function(string, extraClass){
+    if(extraClass && extraClass.length) {
+      extraClass = " "+extraClass;
+    } else {
+      extraClass="";
+    }
+    var anchor = DOMAnchor("viewOptionAnchor"+extraClass, false, string, false);
+    return DOMListItem("viewOption", false, anchor);
+  };
+  this.switchView = function(DOMObj){
+    var pane = $(DOMObj).parents(".contentpane")[0];
+    var prevDoc = this.docForPane(pane);
+    var treatise = prevDoc.group;
+    var replacement, sname;
+    if($(DOMObj).hasClass("edited")){
+      applyEditedText(treatise, pane, []);
+    } else if($(DOMObj).hasClass("translation")){
+      applyTranslatedText(treatise, pane, false, []);
+    } else {
+      sname = /SS\S*SS/.exec(DOMObj.className)[0];
+      applySourceText(sname.substring(2, sname.length-2), treatise, pane, []);
+    }
+    this.removeDoc(prevDoc);
+    this.updatePanes();
+  };
+  this.updatePageSettings = function(){
+    var panedoc;
+    var panes = $(".contentpane");
+    for(var i=0; i<panes.length; i++){
+      panedoc = this.docForPane(panes[i]);
+      pageSettings.updateSetting("pane"+i, panedoc.docType);
+      if(panedoc.docType==="Transcription") {
+        pageSettings.updateSetting("source"+i, panedoc.shortSource);
+      } else if (pageSettings.settings["source"+i]){
+        pageSettings.removeSetting("source"+i);
+      }
+      if(panedoc.group!=currentTreatise())
+        pageSettings.updateSetting("treatise"+i, panedoc.group);
+      if(panedoc.showvars!==showvariants)
+        pageSettings.updateSetting("showvars"+i, panedoc.showvars);
+      if(panedoc.MSPunctuation!==(punctuationStyle==="MS"))
+        pageSettings.updateSetting("MSPunctuation"+i, panedoc.MSPunctuation);
+    }
+    while(pageSettings.settings["pane"+i]){
+      var fields = ["pane", "source", "treatise", "showvars", "MSPunctuation"];
+      for(var j=0; j<fields.length; j++){
+        if(pageSettings.settings[fields[j]+i]){
+          pageSettings.removeSetting(fields[j]+i);
+        }
+      }
+      i++;
+    }
+  };
+  this.addViewRight = function(DOMObj){
+    var oldpane = $(DOMObj).parents(".contentpane")[0];
+    var pane = DOMDiv("pane contentpane", false, false);
+    var prevDoc = this.docForPane(pane);
+    var treatise = prevDoc.group;
+    oldpane.parentNode.insertBefore(pane, oldpane.nextSibling);    
+    if($(DOMObj).hasClass("edited")){
+      applyEditedText(treatise, pane, []);
+    } else if($(DOMObj).hasClass("translation")){
+      applyTranslatedText(treatise, pane, false, []);
+    } else {
+      sname = /SS\S*SS/.exec(DOMObj.className)[0];
+      applySourceText(sname.substring(2, sname.length-2), treatise, pane, []);
+    }
+    this.updatePanes();
+    this.updatePageSettings();
+    this.fixWidths();
+  };
+  this.setTreatisePos = function(treatise, book, chapter, section, paragraph, offset){
+    if(!this.treatisPos[treatise]) this.treatisPos[treatise] = {};
+    var tp = this.treatisPos[treatise];
+    if(tp.book!==book || tp.chapter!==chapter || tp.section!==section||tp.paragraph!==paragraph){
+      tp.book=book;
+      tp.chapter=chapter;
+      tp.section=section;
+      tp.paragraph=paragraph;
+//      this.treatises[treatise]
+    }
+  };
+  this.treatiseViews = function(ul, doc){
+    var entry;
+    var docString = doc.describe();
+    var options = texts[doc.group].sources;
+    ul.appendChild(this.treatiseViewEntry("Edited Latin", 
+      "edited"+ (docString=="Edited Latin" ? " selected" : "")));
+    ul.appendChild(this.treatiseViewEntry("English Translation", 
+      "translation "+doc.language+(docString=="Translation" ? " selected" : "")));
+    for(var i=0; i<options.length; i++){
+      ul.appendChild(this.treatiseViewEntry(options[i][1] +" ("+options[i][0]+")", 
+        "transcription SS"+options[i][0]+"SS"
+          +(docString=="Transcription: "+options[i] ? " selected" : "")));
+    }
+    return ul;
+  };
+  this.docForPane = function(pane){
+    for(var i=0; i<this.docs.length; i++){
+      if(this.docs[i].out===pane){
+        return this.docs[i];
+      }
+    }
+    return false;
+  };
+  this.updatePanes = function(){
+    this.panes = [];
+    for(var i=0; i<this.docs.length; i++){
+      this.panes.push([this.docs[i].out, this.docs[i].drawTo, this.docs[i]]);
+    }
+    // FIXME: this is a problem when adding panes initially. Check why
+    // and when it's needed
+//    this.updatePageSettings();
+  };
+  this.deleteAllBut = function(doc){
+    var pos = this.docs.indexOf(doc);
+    var killdocs;
+    if(pos){
+      killdocs = this.docs.slice(0, pos).concat(this.docs.slice(pos+1));
+    } else {
+      killdocs = this.docs.slice(1);
+    }
+    for(var i=0; i<killdocs.length; i++){
+      $(killdocs[i].out).remove();
+      this.removeDoc(doc);
+    }
+  };
+  this.removeDoc = function(doc){
+    this.treatises[doc.group].splice(this.treatises[doc.group].indexOf(doc), 1);
+    this.docs.splice(this.docs.indexOf(doc), 1);
+    this.updatePanes();
+    this.fixWidths();
+    this.updatePageSettings();
+  };
+  this.addDoc = function (doc){
+    this.docs.push(doc);
+    this.addTreatise(doc);
+    this.updatePanes();
+    if(this.hold) return;
+    if(!this.fixWidths()) {
+      doc.draw();
+    }
+  };
+  this.scrollTreatise = function(treatise, book, chapter, section, paragraph, offset, exclude){
+    var tGroup = this.treatises[treatise];
+    $(".drawTo").unbind('scroll');
+    for(i=0; i<tGroup.length; i++){
+      if(exclude && exclude === tGroup[i]){
+        tGroup[i].setScrollPos(book, chapter, section, paragraph, offset, false);
+      } else if (!exclude || exclude != tGroup[i]){
+        //tGroup[i].setScrollPos(book, chapter, section, paragraph, offset, false);
+      }
+    }
+    window.setTimeout(function(){$(".drawTo").scroll(scroller120);}, 20);
+  };
+  this.updateFromScroll = function(childPane){
+    // FIXME: not called?
+    if(childPane=="Scrolling")return;
+    var pane = $(childPane).parents(".contentpane")[0];
+    var tDoc = this.docForPane(pane);
+    var treatiseGroup = this.treatises[tDoc.group];
+    if(!treatiseGroup){
+      // if(typeof(tDoc.group)==="undefined") alert(childPane);
+      return;
+    }
+    if(treatiseGroup.length>1){
+      var paras = $(childPane).children(".para");
+      var currentPara = paras[firstVisible(paras, $(childPane).offset().top)];
+      var offset = $(currentPara).offset().top - $(childPane).offset().top;
+      var pclass = /at-\S*/.exec(currentPara.className)[0].substring(3);
+      var loc = pclass.indexOf("-");
+      var book = Number(pclass.substring(0,loc));
+      pclass = pclass.substring(loc+1);
+      loc = pclass.indexOf("-");
+//      var chapter = Number(pclass.substring(0, loc));
+      var chapter = pclass.substring(0, loc);
+      pclass = pclass.substring(loc+1);
+      loc = pclass.indexOf("-");
+      var section = Number(pclass.substring(0, loc));
+      var paragraph = Number(pclass.substring(loc+1));
+      for(var i=0; i<treatiseGroup.length; i++){
+        if(treatiseGroup[i] !== tDoc && treatiseGroup[i].drawTo!==childPane){
+          simpleScrollTo(treatiseGroup[i].drawTo, 
+            offset, 
+            //0,
+            book, chapter, section, paragraph);
+        }
+        $(treatiseGroup[i].out).find(".loctext").html(romanReference(book, chapter, section));
+      }
+    }
+  };
+  this.scrollTo = function(book, chapter){
+    // FIXME: mock-up
+    for(var i=0; i<this.docs.length; i++){
+      $(this.docs[i].out).scrollTo($(this.docs[i].locus(book, chapter)), 500);
+    }
+  };
+  this.docCode = function(tDoc){
+    var pane = tDoc.out;
+    var index = $(".contentpane").index(pane);
+    if(!index || index===-1) return "a";
+    return String.fromCharCode(97+index);
+  };
+  this.popPosition = function(obj, fn){
+    var pane = $(obj).parents(".pane")[0];
+    var doc = this.docForPane(pane);
+    if(doc){
+      fn.style.top = $(obj).offset().top+"px";
+      fn.style.left = (this.docCode(doc)==="a" ? pane.getBoundingClientRect().right : 10)+"px";
+    }
+  };
+  this.addPopup = function(info, referrer, ptype, tDoc){
+    var fn = tDoc.footnotes;
+    var code = this.docCode(tDoc);
+    var fndiv = DOMDiv('popup '+ptype+" stream-"+code, id, false);
+    fn.push(fndiv);
+//     if(fn.length && fn[fn.length-1][1]===info) {
+// //      alert("gotcha");
+//       return;
+//     }
+//    if(fn.length>24 && fn.length<28) debugger;
+    var no = fn.length;
+    var id = "popup-"+code+"-"+no;
+    if(document.getElementById(id)) $("#"+id).remove();
+    document.getElementById("footnotes").appendChild(fndiv);
+    if(typeof(info) == "string"){
+      fndiv.appendChild(document.createTextNode(info));
+    } else if (info){
+      var frame = svg(100, 100);
+      fndiv.appendChild(frame);
+      fndiv.appendChild(document.createTextNode(" "));
+      info.tip(frame);
+//      alert([frame.width.baseVal.value, frame.getBoundingClientRect().right, frame.getBoundingClientRect().width]);
+//      fndiv.style.width = Math.max(frame.getBoundingClientRect().width, frame.width.baseVal.value)+26+"px";
+      fndiv.style.width = frame.getBBox().width+26+"px";
+      fndiv.style.height = frame.getBBox().height+26+"px";
+      frame.name = code+no;
+//      fndiv.style.heigth = Math.max(frame.getBoundingClientRect().height, frame.height.baseVal.value)+10+"px";
+      frame.setAttribute("data-ref", code+no);
+      frame.title = code+no;
+      
+    }
+    fndiv.name = code+no;
+    $(fndiv).data("ref", referrer);
+    $(fndiv).mouseenter(popGlow);
+    $(fndiv).mouseleave(popUnglow);
+    $(referrer).data("fn", fndiv);
+//    tDoc.footnotes.push([fndiv, info]);
+    // if(no<25 || no>26) {
+    $(fndiv).hide();
+//     } else {
+// //      debugger;
+//       fndiv.style.position = "fixed";
+//       fndiv.style.top = "0px";
+//       fndiv.style.left = no==25 ? "0px" : "400px";
+//     }
+  };
+}
+function scroller120(e){
+  var pane = e.delegateTarget;
+  var paras = $(pane).children(".para");
+  var currentPara = paras[firstVisible(paras, $(pane).offset().top)];
+//  var location = /at-\S*/.exec(currentPara.className)[0].split("-").slice(1).map(Number);
+  var location = /at-\S*/.exec(currentPara.className)[0].split("-").slice(1);
+  var doc = docMap.docForPane(this.parentNode);
+  var treatise = doc.group;
+  docMap.scrollTreatise(treatise, location[0], location[1], location[2], location[3], 
+    $(currentPara).offset().top - $(this).offset().top, doc);
+}
+function checkScroll(){
+  var scrollDiv = scrollLock;
+  docMap.updateFromScroll(scrollDiv);
+  scrollLock = "Scrolling";
+  window.setTimeout(function(){scrollLock=false;}, 1000);
+}
+
+docMap = new docMapping();
+
+function getSources (){
+  // FIXME: clearly wrong
+  if(docMap && docMap.docs.length){
+    return docMap.docs[0].sources;
+  } else if(doc){
+    return doc.sources;
+  } else if(sources){
+    return sources;
+  } else {
+    return false;
+  }
+}
+function present(tag, clist){
+  for(var i=0; i<clist.length; i++){
+    if(clist[i].objType===tag) return i;
+  }
+  return false;
+}
+function voidRule(el){
+  var pos = present("VoidOpen", el.classList);
+  return pos===0 || pos ? true : false;
+}
+function fullRule(el){
+  var pos = present("FullOpen", el.classList);
+  return pos===0 || pos ? true : false;
+}
+function halfFullRule(el){
+  var pos = present("HalfFullOpen", el.classList);
+  return pos===0 || pos ? el.classList[pos].side : false;
+}
+function voidnotesp(el){
+  if(el.classList){
+    if(voidnotes){// || currentSubType==="void"){
+      var pos = present("FullOpen", el.classList);
+      if(pos || pos ===0){
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      var pos = present("VoidOpen", el.classList);
+      if(pos || pos ===0){
+        return true;
+      } else {
+        return false;
+      }
+    }
+  } else {
+    return voidnotes;
+  }
+}
+
+function firstOccurrence(needle, index, array){
+  var pos;
+  if(this.index || this.index===0) {
+    pos = string.indexOf(needle[this.index], this.start);
+  } else {
+    pos= string.indexOf(needle, this.start);
+  }
+  if(pos===-1) pos = string.length+1;
+  if(this.min && pos < this.min) {
+    this.min = pos;
+    this.mini = index;
+  }
+  return pos;
+}
+
+function findClose(closeChar, starti, parentheses){
+  if(!starti) starti = 0;
+  if(!parentheses) parentheses = [['"', '"'], ['{', '}'], ['(', ')']];
+  var first = string.indexOf(closeChar, starti);
+  var positions = {start: starti, index: 0, min: string.length, mini: false};
+  parentheses.forEach(firstOccurrence, positions);
+  if((!positions.mini && positions.mini!==0) || positions.min >= first) {
+    return first; // no parentheses
+  }
+  return findClose(closeChar, findClose(parentheses[positions.mini][1], 
+    positions.min+1, parentheses)+1, parentheses);
+}
+
+function consumeTillClose(closeChar, starti, parentheses){
+  if(!starti) starti = 0;
+  if(!parentheses) parentheses = [['"', '"'], ['{', '}'], ['(', ')']];
+  var close = findClose(closeChar, starti, parentheses);
+  if(close===-1){
+    // No match
+    return false;
+  } else {
+    return consumeN(close+1);
+  }
+}
+
+function consumeTillOption(closeChars, starti, parentheses){
+  if(!starti) starti = 0;
+  if(!parentheses) parentheses = [['"', '"'], ['{', '}'], ['(', ')']];
+  var best;
+  for(var i=0; i<closeChars.length; i++){
+    var close = findClose(closeChars[i], starti, parentheses);
+    if(close!=-1 && (!best || close<best)) best = close;
+  }
+  if(best) {
+    return consumeN(best+1);
+  } else {
+    return false;
+  }
+}
+
+function consumeN(n){
+  var match = string.substring(0, n);
+  string = string.substring(n);
+  pointer+=n;
+  return match;
+}
+
+function specialTogglePunct(select){
+  var pos = $(doc.drawTo).offset();
+  var val = select.childNodes[select.selectedIndex].value;
+  doc.MSPunctuation = val==="MS";
+  punctuationStyle = val;
+  doc.forceredraw = true;
+  doc.draw();
+  $(doc.drawTo).offset(pos);
+}
+
+function relativeRight(element, parent){
+  // alert([element.getBoundingClientRect().right- parent.getBoundingClientRect().left, 
+  //        element.getBBox().x+element.getBBox().width-parent.getBBox().x]);
+//  return element.getBoundingClientRect().right - parent.getBoundingClientRect().left;
+  return element.getBBox().x+element.getBBox().width-parent.getBBox().x;
+}
+
+function underlayRight(){
+  if(underlays.length){
+    var spaceWidth = 1.3 * rastralSize * prop;
+    return relativeRight(underlays[underlays.length-1], SVG)+spaceWidth;
+  } else return 0;
+}
+
+function punctuationp(obj){
+  if(typeof(obj.punctuation)==="undefined"){
+    return false;
+  } else {
+    return obj.punctuation();
+  }
+}
+
+function trimPreInsSpaces(endsinpunct){
+  var content = currenttextparent.content;
+  // if(content.length>pari+2
+  //   && content[pari+1].objType==="Choice" && content[pari+1].nonDefault()) {
+  //   alert([content[pari].code, 
+  //          content[pari+1].nonDefault(),
+  //          punctuationp(content[pari+2])]);
+  // }
+  return content.length>pari+2
+    && content[pari+1].objType==="Choice"
+    && content[pari+1].nonDefault()
+    && (punctuationp(content[pari+2]) || endsinpunct);
+}
+
+function repeatDotArray(start, end){
+  var result = [];
+  for(var i=Math.min(start, end); i<=Math.max(start, end); i++){
+    if(i%2===1){
+      result.push(i);
+    }
+  }
+  return result;
+}
+
+/////////////
+//
+// Font glyphs as SVG curves
+
+// function PathCommand(components){
+//   this.command = components[0];
+//   this.commandFamily = components[0].toUpperCase();
+//   this.components = components;
+//   this.relative = this.command !==this.commandFamily;
+//   this.isX = function(c){
+//     switch(this.commandFamily){
+//       case "V":
+//         // V doesn't take an X value
+//         return false; 
+//       case "M":
+//       case "Q":
+//       case "L":
+//       default:
+//         // I know this is a boolean anyway, but I don't trust
+//         // javascript
+//         return c%2===1 ? true : false;
+//     }
+//   };
+//   this.stringed = function(scale, offset){
+//     var isX, fact, off, comp;
+//     var str = "";
+//     for(var c=0; c<this.components.length; c++){
+//       comp = this.components[c];
+//       if(typeof(comp) == "number"){
+//         isX = this.isX(c);
+//         fact = isX ? scale : -scale;
+//         off = this.relative ? 0 : (isX ? offset.x : offset.y);
+//         str+= ((comp * fact) + off)+" ";
+//       } else {
+//         str+=comp+" ";
+//       }
+//     }
+//     return str;
+//   };
+// }
+// function Glyph(commands){
+//   this.commands = commands.map(function(el){return new PathCommand(el);});
+//   this.advance = false;
+//   this.em = false;
+//   this.leftmost = false;
+//   this.defaultOffset = {x:0, y:0};
+//   this.path = function(size, offset){
+//     var path = "";
+//     if(!offset) offset = {x:0, y:0};
+//     if(!size) size = this.em;
+//     var scale = size/this.em;
+//     offset.x += this.defaultOffset.x*scale;
+//     offset.y += this.defaultOffset.y*scale;
+//     for(var i=0; i<this.commands.length; i++){
+//       path+=this.commands[i].stringed(scale, offset);
+//     };
+//     return path;
+//   };
+//   this.draw = function(x, y, size, cname, id){
+//     return svgPath(SVG, [this.path(size, {x:x, y:y})], cname, id);
+//   };
+//   this.advanceWidth = function(size){
+//     return size ? (size/this.em) * this.advance : this.advance;
+//   };
+// }
+
+// // sample glyphs
+
+// var fermataGlyph = new Glyph([["M", -352, -178], 
+//          ["q", 0, 530, 340, 870], ["q", 315, 315, 757, 316], 
+//          ["q", 451, 0, 781, -342], ["q", 326, -344, 325, -811], 
+//          ["q", 0, -217, -82, -433], ["q", -25, -66, -26, -65], 
+//          ["l", -86, -131], ["q", -46, -12, -98, -12], 
+//          ["q", -131, 0, -285, 63], ["q", 145, 96, 274, 301], 
+//          ["q", 135, 213, 135, 369], ["q", 0, 272, -129, 364], 
+//          ["q", -238, 176, -403, 232], ["q", -160, 66, -406, 55], 
+//          ["q", -324, 0, -620, -186], ["q", -330, -209, -330, -496], 
+//          ["q", 0, -152, 139, -356], ["q", 135, -197, 285, -273], 
+//          ["q", -92, -92, -287, -92], ["q", -76, 0, -118, 57], 
+//          ["q", -86, 117, -109, 140], ["q", -57, 225, -57, 430], ["z"], 
+//          ["M", 575, -236], ["l", 136, 74], ["q", 129, 0, 207, -78], 
+//          ["v", -202], ["q", -6, -70, -144, -70], 
+//          ["q", -84, 0, -131, 35], ["q", -49, 31, -68, 31], ["v", 210], ["z"]]);
+// //fermataGlyph.advance = 2123;
+// fermataGlyph.advance = 2475;
+// fermataGlyph.leftmost = 352;
+// fermataGlyph.em = 2475;
+// //fermataGlyph.em = 1800;
+// fermataGlyph.defaultOffset = {x:352, y:0};

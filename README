@@ -6,3 +6,6 @@ There are two modules included:
 
 Both modules is in the early alpha stages of development, and consist
 of messy research code. Please contact project members for more information.
+
+N.B. Setup will require users to install JQuery and JQuery UI in
+appropriate places. This will be documented properly at some point.

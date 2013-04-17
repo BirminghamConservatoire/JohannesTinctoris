@@ -46,6 +46,8 @@ function MusicExample(){
           next.augments = augmented;
         } else if(next.objType=="Fermata"){
           next.lengthens = augmented;
+        } else if(next.objType==="SignumCongruentiae"){
+          next.effects = augmented;
         } else if (next.objType==="Comment" && this.events.length && 
                    this.events[this.events.length-1].objType==="Ligature"){
           this.events[this.events.length-1].members.push(new LigatureComment(next));
@@ -322,10 +324,17 @@ function nextEvent() {
     case "P":
       return nextRest();
     case "-":
+      var obj;
       string = string.substring(1);
-      var note = nextNote();
-      note.flipped = true;
-      return note;
+      if(string.charAt(0)==="?") {
+        obj = nextSignumCongruentiae(); 
+      } else {
+        obj = nextNote();
+      }
+      obj.flipped = true;
+      return obj;
+    case "?":
+      return nextSignumCongruentiae();
     case ".":
       return nextDot();
     case "M":
@@ -533,6 +542,13 @@ function nextDot(){
   // If pitched
   // return getAndSetPitch(obj);
   // Otherwise
+  obj.staffPos = getStaffPos();
+  return obj;
+}
+
+function nextSignumCongruentiae(){
+  var obj = new SignumCongruentiae;
+  string = string.substring(1);
   obj.staffPos = getStaffPos();
   return obj;
 }

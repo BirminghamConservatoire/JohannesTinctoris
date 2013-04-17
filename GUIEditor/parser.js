@@ -835,8 +835,9 @@ function readString(){
       case "\r":
       case "\f":
         consume(1);
+      //FIXME: -1 for musicexample
+        sentence++;
         return content;
-        break;
       case "[":
         fresh = readLocation();
         if(fresh){
@@ -854,8 +855,12 @@ function readString(){
           content.push(readChoice());
         }
         break;
+      case ".":
+      case "!":
+      case "?":
+        if(string.length>1 && !/[\n\r\f]/.test(string.charAt(1))) sentence++;
       default:
-        if(latest && latest.objType == 'text'){
+        if(latest && latest.objType == 'text' && !/[?!.]/.test(latest.content)){
           content[content.length -1].addChar(string.charAt(0));
         } else {
           if(/^\s*[_]/.exec(string)){
@@ -1030,6 +1035,7 @@ function readTag(){
       if(locend>1){
         var content = string.substring(loc+1, locend);
         var span = new Span();
+        if(tag==="heading") inHeading =true;
         if (spans[tag]){
           span.type = spans[tag];
         } else {
@@ -1043,6 +1049,8 @@ function readTag(){
         span.content = readString();
         string = oldstring.substring(fake ? string.length : locend+(tag.length+3));
         pointer = op+locend+(fake ? 0 : tag.length+3);
+        if(tag==="heading") sentence = 0;
+        inHeading = false;
         return span;
       }
     }
@@ -1086,7 +1094,7 @@ function readChoice(){
   foobar = string.substring(0);
   var finalString = string.substring(locend+1);
   var finalPos = pointer+locend+1;
-  var readingString, reading, witnesses, quoteloc, braceloc, description, stringTemp;
+  var readingString, reading, witnesses, quoteloc, braceloc, description, stringTemp, extraDescription;
   var choice = new Choice();
   var prevLength = string.length; // Obviously wrong, but that's
                                   // deliberate -- we want the loop to
@@ -1115,12 +1123,17 @@ function readChoice(){
     }
     consumeSpace();
     braceloc = string.indexOf('(');
-    if(!description && braceloc===0){
+//    if(!description && braceloc===0){
+    if(braceloc===0){
       string = string.substring(braceloc);
-      // this clause begins with an editorial comment
+      // this clause ends with an editorial comment
       // description = consumeIf(/\(.*?\)/).slice(1, -1);
       consumeSpace();
-      description = consumeTillClose(")", 1).slice(1, -1);
+      if(description){
+        extraDescription = consumeTillClose(")", 1).slice(1, -1);
+      } else {
+        description = consumeTillClose(")", 1).slice(1, -1);
+      }
     }
     consumeSpace();
 //    witnesses = trimString(consumeIf(/[^:}]*/)).split(/\s+/);
@@ -1141,13 +1154,13 @@ function readChoice(){
         break;
       case "ins.":
         // Now what?
-        choice.addReading(witnesses, string ? readString() : [], description);
+        choice.addReading(witnesses, string ? readString() : [], description, extraDescription);
         break;
       case "om.":
-        choice.addOmission(witnesses);
+        choice.addOmission(witnesses, extraDescription);
         break;
       default:
-        choice.addReading(witnesses, string ? readString() : [], description);
+        choice.addReading(witnesses, string ? readString() : [], description, extraDescription);
         break;
     }
     string = stringTemp;
@@ -1246,6 +1259,22 @@ function resetEgSize(){
   for(var i=0; i<examples.length; i++){
     examples[i][0].draw(examples[i][1], true);
   }
+}
+
+function addSentences(string){
+  var result = /[.?!]/.exec(string);
+  console.log([sentence, string, result]);
+  if(result){
+    sentence += result.length;
+  } 
+}
+
+function locationString(){
+  var selection = window.getSelection();
+  var node1 = selection.anchorNode;
+  var node2 = selection.focusNode;
+  var o1 = selection.anchorOffset;
+  var o2 = selection.focusOffset;
 }
 
 function findLocation(e){

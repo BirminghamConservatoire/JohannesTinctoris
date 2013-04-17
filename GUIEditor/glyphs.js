@@ -124,25 +124,16 @@ function glyphFromD(dAttribute, atts){
   return glyph;
 }
 
-// The old way:
-var fermataGlyph = new Glyph([["M", -352, -178], 
-         ["q", 0, 530, 340, 870], ["q", 315, 315, 757, 316], 
-         ["q", 451, 0, 781, -342], ["q", 326, -344, 325, -811], 
-         ["q", 0, -217, -82, -433], ["q", -25, -66, -26, -65], 
-         ["l", -86, -131], ["q", -46, -12, -98, -12], 
-         ["q", -131, 0, -285, 63], ["q", 145, 96, 274, 301], 
-         ["q", 135, 213, 135, 369], ["q", 0, 272, -129, 364], 
-         ["q", -238, 176, -403, 232], ["q", -160, 66, -406, 55], 
-         ["q", -324, 0, -620, -186], ["q", -330, -209, -330, -496], 
-         ["q", 0, -152, 139, -356], ["q", 135, -197, 285, -273], 
-         ["q", -92, -92, -287, -92], ["q", -76, 0, -118, 57], 
-         ["q", -86, 117, -109, 140], ["q", -57, 225, -57, 430], ["z"], 
-         ["M", 575, -236], ["l", 136, 74], ["q", 129, 0, 207, -78], 
-         ["v", -202], ["q", -6, -70, -144, -70], 
-         ["q", -84, 0, -131, 35], ["q", -49, 31, -68, 31], ["v", 210], ["z"]]);
-//fermataGlyph.advance = 2123;
-fermataGlyph.advance = 2800;
-fermataGlyph.leftmost = 352;
-fermataGlyph.em = 2475;
-//fermataGlyph.em = 1800;
-fermataGlyph.defaultOffset = {x:352, y:0};
+// Say we want a fermata:
+// The font svg file has this:
+// <glyph unicode="F" horiz-adv-x="2123" d="M-352 -178q0 530 340 870q315 315 757 316q451 0 781 -342q326 -344 325 -811q0 -217 -82 -433q-25 -66 -26 -65l-86 -131q-46 -12 -98 -12q-131 0 -285 63q145 96 274 301q135 213 135 369q0 272 -129 364q-238 176 -403 232q-160 55 -406 55q-324 0 -620 -186 q-330 -209 -330 -496q0 -152 139 -356q135 -197 285 -273q-92 -92 -287 -92q-76 0 -118 57q-86 117 -109 140q-57 225 -57 430zM575 -236l136 74q129 0 207 -78v-202q-6 -70 -144 -70q-84 0 -131 35q-49 31 -68 31v210z" />
+var fermataGlyph = glyphFromD("M-352 -178q0 530 340 870q315 315 757 316q451 0 781 -342q326 -344 325 -811q0 -217 -82 -433q-25 -66 -26 -65l-86 -131q-46 -12 -98 -12q-131 0 -285 63q145 96 274 301q135 213 135 369q0 272 -129 364q-238 176 -403 232q-160 55 -406 55q-324 0 -620 -186 q-330 -209 -330 -496q0 -152 139 -356q135 -197 285 -273q-92 -92 -287 -92q-76 0 -118 57q-86 117 -109 140q-57 225 -57 430zM575 -236l136 74q129 0 207 -78v-202q-6 -70 -144 -70q-84 0 -131 35q-49 31 -68 31v210z", 
+  [["advance", 2475], // How much space to leave right (bounding rect can be calculated, but this var allow space to be reserved)
+   ["em", 2475], // scaling unit. Fairly arbitrary, but will be the same for all glyphs in font
+   ["defaultOffset", {x:352, y:0}], // self-explanatory -- where to put it
+   ["leftmost", 352]]); // where the left extremity is
+   
+// After that, 
+// fermataGlyph.draw(curx, cury, pointSize, ClassName);
+// fermataGlyph.advanceWidth(pointSize)
+// etc. 

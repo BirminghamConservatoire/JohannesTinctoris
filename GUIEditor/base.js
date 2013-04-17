@@ -264,12 +264,15 @@ var chapter = 0;
 var book = 0;
 var section = 0;
 var paragraph = 0;
+var sentence = 0;
 var string;
 var SVG = false;
 var canvas = false;
 var context = false;
 var currentExample = false;
 var curDoc = false;
+var inHeading = false;
+var inTip = false;
 var handsmet = [];
 var examplei = false;
 var eventi = false;
@@ -1195,22 +1198,33 @@ function addAnnotation(domObject, object, type){
 function untip(hovered){
   removeTooltip(hovered);
   $(".glow").removeClass("glow");
-  $(".refglow").each(function (i, e){e.className.baseVal = e.className.baseVal.split(" refglow").join("");});
+  $(".refglow").each(function (i, e){
+    if(typeof(e.className.baseVal)==="undefined"){
+      $(e).removeClass("refglow");
+    } else {
+      e.className.baseVal = e.className.baseVal.split(" refglow").join("");
+    }
+  });
   $(".popup").not(".clicked").hide();  
 }
 
 function englow(pop, ref){
   $(pop).addClass("glow");
-  var oldClass = ref.className.baseVal;
-  if(oldClass.indexOf("refglow")===-1) ref.className.baseVal = oldClass+" refglow";
-//  $(ref).addClass("refglow");
-  
+  if(typeof(ref.className.baseVal)==="undefined"){
+    // Not an SVG
+     $(ref).addClass("refglow");
+  } else {
+    var oldClass = ref.className.baseVal;
+    if(oldClass.indexOf("refglow")===-1) ref.className.baseVal = oldClass+" refglow";
+  }
 }
 function unglow(pop, ref){
   $(pop).removeClass("glow");
-  ref.className.baseVal = ref.className.baseVal.split(" refglow").join("");
-//  $(ref).removeClass("refglow");
-  
+  if(typeof(ref.className.baseVal)==="undefined"){
+    $(ref).removeClass("refglow");
+  } else {
+    ref.className.baseVal = ref.className.baseVal.split(" refglow").join("");
+  }
 }
 function popGlow(e){
   var pop = e.delegateTarget;
@@ -1276,7 +1290,9 @@ function showAnnotation2(obj, clicked){
     $(fndiv).show();
     fndiv.style.position = "fixed";
     fndiv.style.left = obj.getBoundingClientRect().left+"px";
-    if(subvariant(obj)){
+    if(obj.tagName==="SPAN"){
+      fndiv.style.top = obj.getBoundingClientRect().bottom+"px";
+    } else if(subvariant(obj)){
       fndiv.style.top = ($(obj).parents("SVG")[0].getBoundingClientRect().bottom
                          +fndiv.getBoundingClientRect().height)+"px";
     } else {
@@ -2078,6 +2094,8 @@ function docMapping(){
     document.getElementById("footnotes").appendChild(fndiv);
     if(typeof(info) == "string"){
       fndiv.appendChild(document.createTextNode(info));
+    } else if (info.objType==="Choice"){ 
+      fndiv.appendChild(info.footnote());
     } else if (info){
       var frame = svg(100, 100);
       fndiv.appendChild(frame);
@@ -2293,92 +2311,28 @@ function repeatDotArray(start, end){
   return result;
 }
 
-/////////////
-//
-// Font glyphs as SVG curves
-
-// function PathCommand(components){
-//   this.command = components[0];
-//   this.commandFamily = components[0].toUpperCase();
-//   this.components = components;
-//   this.relative = this.command !==this.commandFamily;
-//   this.isX = function(c){
-//     switch(this.commandFamily){
-//       case "V":
-//         // V doesn't take an X value
-//         return false; 
-//       case "M":
-//       case "Q":
-//       case "L":
-//       default:
-//         // I know this is a boolean anyway, but I don't trust
-//         // javascript
-//         return c%2===1 ? true : false;
-//     }
-//   };
-//   this.stringed = function(scale, offset){
-//     var isX, fact, off, comp;
-//     var str = "";
-//     for(var c=0; c<this.components.length; c++){
-//       comp = this.components[c];
-//       if(typeof(comp) == "number"){
-//         isX = this.isX(c);
-//         fact = isX ? scale : -scale;
-//         off = this.relative ? 0 : (isX ? offset.x : offset.y);
-//         str+= ((comp * fact) + off)+" ";
-//       } else {
-//         str+=comp+" ";
-//       }
-//     }
-//     return str;
-//   };
-// }
-// function Glyph(commands){
-//   this.commands = commands.map(function(el){return new PathCommand(el);});
-//   this.advance = false;
-//   this.em = false;
-//   this.leftmost = false;
-//   this.defaultOffset = {x:0, y:0};
-//   this.path = function(size, offset){
-//     var path = "";
-//     if(!offset) offset = {x:0, y:0};
-//     if(!size) size = this.em;
-//     var scale = size/this.em;
-//     offset.x += this.defaultOffset.x*scale;
-//     offset.y += this.defaultOffset.y*scale;
-//     for(var i=0; i<this.commands.length; i++){
-//       path+=this.commands[i].stringed(scale, offset);
-//     };
-//     return path;
-//   };
-//   this.draw = function(x, y, size, cname, id){
-//     return svgPath(SVG, [this.path(size, {x:x, y:y})], cname, id);
-//   };
-//   this.advanceWidth = function(size){
-//     return size ? (size/this.em) * this.advance : this.advance;
-//   };
-// }
-
-// // sample glyphs
-
-// var fermataGlyph = new Glyph([["M", -352, -178], 
-//          ["q", 0, 530, 340, 870], ["q", 315, 315, 757, 316], 
-//          ["q", 451, 0, 781, -342], ["q", 326, -344, 325, -811], 
-//          ["q", 0, -217, -82, -433], ["q", -25, -66, -26, -65], 
-//          ["l", -86, -131], ["q", -46, -12, -98, -12], 
-//          ["q", -131, 0, -285, 63], ["q", 145, 96, 274, 301], 
-//          ["q", 135, 213, 135, 369], ["q", 0, 272, -129, 364], 
-//          ["q", -238, 176, -403, 232], ["q", -160, 66, -406, 55], 
-//          ["q", -324, 0, -620, -186], ["q", -330, -209, -330, -496], 
-//          ["q", 0, -152, 139, -356], ["q", 135, -197, 285, -273], 
-//          ["q", -92, -92, -287, -92], ["q", -76, 0, -118, 57], 
-//          ["q", -86, 117, -109, 140], ["q", -57, 225, -57, 430], ["z"], 
-//          ["M", 575, -236], ["l", 136, 74], ["q", 129, 0, 207, -78], 
-//          ["v", -202], ["q", -6, -70, -144, -70], 
-//          ["q", -84, 0, -131, 35], ["q", -49, 31, -68, 31], ["v", 210], ["z"]]);
-// //fermataGlyph.advance = 2123;
-// fermataGlyph.advance = 2475;
-// fermataGlyph.leftmost = 352;
-// fermataGlyph.em = 2475;
-// //fermataGlyph.em = 1800;
-// fermataGlyph.defaultOffset = {x:352, y:0};
+function displayReference(refobj, out){
+  var para = $(refobj).parents("div.para")[0];
+  var pclass = /at-\S*/.exec(para.className)[0].substring(3);
+  var loc = pclass.split("-");
+  var sclass = /sentence-\S*/.exec(refobj.className)[0].substring(9);
+  var book = roman(Number(loc[0])).toUpperCase();;
+  var chapter = isNaN(Number(loc[1])) ? loc[1] : roman(Number(loc[1]));
+  var jump = $(para).parents("div.pane").find("a.jump-"+book+"_"+chapter);
+  jump = jump && jump.length ? jump[0].innerHTML : 
+    (chapter == "p" ? "Prel. " : (chapter == "c" ? "Conc." : book+"."+chapter));
+  if(!out){
+    out = document.getElementById("cursorLocator");
+    if(!out) {
+      out = DOMDiv(false, "cursorLocator", false);
+      document.body.appendChild(out);
+      out.style.position = "fixed";
+      out.style.bottom = "0px";
+      out.style.right = "0px";
+      out.style.width = "20ex";
+      out.style.backgroundColor = "#EEE";
+      out.style.padding = "3px";
+    }
+  }
+  out.innerHTML = jump +"("+(Number(sclass)+1)+")";
+}

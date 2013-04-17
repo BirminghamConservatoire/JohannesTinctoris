@@ -691,6 +691,19 @@ neumeJoin{
   /* font-size: 120%; */
 }
 
+.variantReading .editorialDescription, .variantReading .readingDesc {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 100%;
+}
+
+.variantReading .editorialDescription{
+  padding-left: 0.3ex;
+}
+.variantReading .readingDesc {
+  padding-right: 0.3ex;
+}
+
 .variantWitnesses {
   font-weight: bold;
   padding: 1ex;

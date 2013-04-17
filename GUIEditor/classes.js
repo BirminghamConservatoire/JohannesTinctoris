@@ -252,6 +252,56 @@ function Dot(){
     return this.domObj;
   };
 }
+function SignumCongruentiae(){
+  this.objType = "SignumCongruentiae";
+  this.effects = false;
+  this.staffPos = false;
+  this.startX = false;
+  this.text = false;
+  this.domObj = false;
+  this.flipped = false;
+  this.example = currentExample;
+  this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
+  this.width = function(){
+    return 0;
+  };
+  this.toText = function(){
+    // FIXME: fake
+    return "?"+this.staffPos ? this.staffPos : "";
+  };
+  this.draw = function(){
+    var extraClasses = "";
+    var oldx = 0;
+    var pos = this.staffPos;
+    if(!pos){
+      if(this.flipped){
+        pos = (dotPos-2) || (Math.floor(currentLinecount/4)*2-3);
+      } else {
+        pos = (2+dotPos) || (Math.floor(currentLinecount/4)*2+3);
+      }
+    }
+    console.log([pos, this.staffPos]);
+    if(this.effects){
+      oldx = curx;
+      curx = this.effects.startX;
+    }
+    this.startX = curx;
+    if(this.classList.length){
+      extraClasses = classString(this.classList);
+      drawClasses(this.classList, this);
+    }
+    if(this.flipped){
+      this.domObj = arsNovaVoid.sigCongUp.draw(curx, cury-yoffset(pos), rastralSize, "mensural sigcongruent"+extraClasses);
+    } else {
+      this.domObj = arsNovaVoid.sigCong.draw(curx, cury-yoffset(pos), rastralSize, "mensural sigcongruent"+extraClasses);
+    }
+    curx += fermataGlyph.advanceWidth(rastralSize);
+    curx = Math.max(oldx, curx);
+    return this.domObj;    
+  };
+
+}
+
 function Fermata(){
   this.objType = "Fermata";
   this.lengthens = false;

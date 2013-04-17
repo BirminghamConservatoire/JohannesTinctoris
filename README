@@ -1,0 +1,8 @@
+Project files for a digital edition of the Complete Theoretical Works of Johannes Tinctoris
+
+There are two modules included:
+  * JT-editor: an online form and renderer for editors to input mixed music and text
+  * JohannesTinctoris: a draft version of the website to be mounted
+
+Both modules is in the early alpha stages of development, and consist
+of messy research code. Please contact project members for more information.

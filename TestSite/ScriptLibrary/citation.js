@@ -264,14 +264,14 @@ function removeStart(node){
 
 function makeCitation(id, n){
   // var entry = BibliographyEntries.filter("has(#"+id+")");
-  var entry = $("#"+id, FullBibliography).parents("p");
+  var entry = $("#"+id, FullBibliography).parents("div").children("p");
   if(entry.length){
     var newNode = entry[0].cloneNode(true);
     currentCitation = DOMDiv("marginalCitation", "mcit-"+id+"---"+n, newNode);
     bibliographyButton(currentCitation, id);
     $(".sidebar2")[0].appendChild(currentCitation);
     fixLinks(n, currentCitation);
-    removeStart(newNode);
+//    removeStart(newNode);
 //    $(newNode.firstChild).remove();
     $(currentCitation).click(function(e){
       if(e.altKey){

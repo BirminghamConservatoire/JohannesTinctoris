@@ -275,12 +275,12 @@ function SignumCongruentiae(){
     var pos = this.staffPos;
     if(!pos){
       if(this.flipped){
-        pos = (dotPos-2) || (Math.floor(currentLinecount/4)*2-3);
+        pos = this.staffPos || (dotPos-3) || (Math.floor(currentLinecount/4)*2-3);
       } else {
-        pos = (2+dotPos) || (Math.floor(currentLinecount/4)*2+3);
+        pos = this.staffPos || (2+dotPos) || (Math.floor(currentLinecount/4)*2+3);
       }
     }
-    console.log([pos, this.staffPos]);
+    console.log([pos, this.staffPos, this.flipped, this.effects, this.effects.startX]);
     if(this.effects){
       oldx = curx;
       curx = this.effects.startX;
@@ -1855,6 +1855,7 @@ function Clef() {
   };
   this.draw = function(){
     var oldSVG = SVG;
+    var oldX = this.startX;
     this.domObj = svgGroup(SVG, "mensgroup", false);
     SVG = this.domObj;
     var extraClasses = "";
@@ -1902,6 +1903,7 @@ function Clef() {
       $(this.domObj).hover(shiftHoverToShift(this, 2), hoverOutShiftChecked());
     }
     SVG = oldSVG;
+    if(oldX) this.startX = oldX;
     return this.domObj;
 //    curx += rastralSize * 2;
   };
@@ -1942,12 +1944,12 @@ function Staff() {
     return typeof(this.colour) == "string" ? this.colour : this.colour.content[0].value;
   };
   this.draw = function(){
-    tempdebug=true;
-    sysBreak2();
+    var olc = noBreaks ? currentLinecount : this.trueLines();
+    var osc = noBreaks ? currentStaffColour : this.trueColour();
+    if(!noBreaks) sysBreak2();
     currentLinecount = this.trueLines();
     currentStaffColour = this.trueColour();
-    sysBreak();
-    tempdebug=false;
+    if(!noBreaks) sysBreak();
     var clef = findClef(this.extras);
     var solm = findSolm(this.extras);
     if(clef) clef.draw();
@@ -2219,6 +2221,9 @@ function TextUnderlay(){
       }
     } else {
       curx = Math.max(curx, underlayRight());
+    }
+    if(curx>80 && curx<100){
+      console.log([curx, lmargin, eventi, currentExample.code, currentExample.events[eventi-1].objType, currentExample.events[eventi-1].startX, rastralSize]);
     }
     var textBlock = SVG.nodeName.toUpperCase()==="TEXT" ? SVG 
       : svgText(SVG, curx, cury+rastralSize, "textblock", false, false, false);
@@ -2700,6 +2705,7 @@ function Parameters(){
   this.startY = cury;
   this.extras = [];
   this.note = false;
+  this.noMatch = true;
   this.width = function(){
     var w = 0;
     if(this.clef){
@@ -2727,8 +2733,28 @@ function Parameters(){
   this.getClef = function(){
     return this.clef || findClef(this.extras);
   };
+  this.getDefaultClef = function(){
+    var clef = this.getClef();
+    if(clef.objType == "Clef"){
+      return clef;
+    } else if (clef){
+      return clef.content[0];
+    } else {
+      return false;
+    }
+  };
   this.getSolmization = function(){
     return this.solmization || findSolm(this.extras);
+  };
+  this.getDefaultSolmization = function(){
+    var solm = this.getSolmization();
+    if(solm.objType == "SolmizationSignature"){
+      return solm;
+    } else if (solm){
+      return solm.content[0];
+    } else {
+      return false;
+    }
   };
   this.hasChoice = function(){
     var c = this.getClef();
@@ -2766,8 +2792,9 @@ function Parameters(){
     }
     var oldSVG = SVG;
     SVG = svgGroup(SVG, "prefGroup", false);
-    if(this.getClef()){
-      var thisclef = this.getClef();
+    var thisclef;
+    if(thisclef = this.getClef()){
+//      var thisclef = this.getClef();
       if(thisclef.objType !== "Clef"){
         thisclef.params = this;
       }
@@ -2777,7 +2804,6 @@ function Parameters(){
       this.getSolmization().draw();
     }
     if(showvariants && this.hasChoice()){
-      
       SVG.style.fill = "#060";
       addAnnotation(SVG, this, "staff");
       SVG = this.SVG;
@@ -2819,6 +2845,26 @@ function Parameters(){
     }
     return params;
   };
+  this.varSortFunction = function(){
+    var clef = this.getDefaultClef();
+    var solm = this.getDefaultSolmization();
+    var lines = this.staff.trueLines();
+    var colour = this.staff.trueColour();
+    var p = this;
+    return function (v1, v2){
+      if(v1[0][0] == lines && v1[0][1]==colour
+         && v1[0][2] == clef && v1[0][3]==solm){
+        p.noMatch = false;
+        return -1;
+      } else if (v2[0][0] == lines && v2[0][1]==colour
+         && v2[0][2] == clef && v2[0][3]==solm){
+        p.noMatch = false;
+        return 1;
+      } else {
+        return 0;
+      }
+    };
+  };
   this.variantList = function(){
     var pars;
     var vars = [];
@@ -2838,6 +2884,7 @@ function Parameters(){
         vars.push([pars, [sources[i].id]]);
       }
     }
+    vars.sort(this.varSortFunction()) ;
     return vars;
   };
   this.tip = function(tipSVG){
@@ -2852,8 +2899,15 @@ function Parameters(){
     // cury = rastralSize * 7;
     curx = 0;
     cury = rastralSize*9;
-//    tempx = curx+d;
     var bottom = 0;
+    if(this.noMatch){
+      this.addTip(this.staff.trueLines(), this.staff.trueColour(), ["(ed.)"], 
+                  this.getDefaultClef(), this.getDefaultSolmization());
+      if(i>0) svgLine(SVG, curx, cury, curx, 10, "divider", false);
+      curx += d;
+      bottom = Math.max(bottom, this.staff.trueLines());
+    }
+//    tempx = curx+d;
     for(var i=0; i<vars.length; i++){
       if(i>0) svgLine(SVG, curx, cury, curx, 10, "divider", false);
       this.addTip(vars[i][0][0], vars[i][0][1], vars[i][1], vars[i][0][2], vars[i][0][3]);
@@ -2872,10 +2926,10 @@ function Parameters(){
     drawSystemLines(staff, lines, cury -lines*rastralSize, curx+10, curx+55, colour, SVG);
     var description = svgText(SVG, curx + 5, 20, //10,
       "variantReading", false, false, false);
-    if(witnesses[0] == "MSS" || witnesses[0] == "emend."){
+    if(witnesses[0] == "MSS" || witnesses[0] == "emend." || witnesses[0]=="ed."){
       svgSpan(description, "variantWitnessesSpecial", false, witnesses.join(" "));
     } else {
-      svgSpan(description, "VariantWitnesses", false, witnesses.join(" "));
+      svgSpan(description, "variantWitnesses", false, witnesses.join(" "));
     }
 //    oldSVG = SVG;
 //    SVG = staff;
@@ -2978,11 +3032,15 @@ function MChoice(){
     return true;
   };
   this.clefp = function(variant){
-    for(var i=0; i<(variant? this.content.length : 1); i++){
-      if(this.content[i].applies(variant)){
-      // Default object
-        return this.content[i].clefp();
+    if(variant){
+      for(var i=0; i<this.content.length; i++){
+        if(this.content[i].applies(variant)){
+          // Default object
+          return this.content[i].clefp();
+        }
       }
+    } else {
+      return this.content[0].clefp();
     }
     return false;
   };
@@ -3008,6 +3066,7 @@ function MChoice(){
     var oldClef = currentClef;
     var prevSVG = SVG;
     var oldUnderlays = underlays;
+    noBreaks = true;
     underlays = [];
     SVG = tipSVG;//svg(false, false);
     svgCSS(SVG, "jt-editor-v.css");
@@ -3024,9 +3083,7 @@ function MChoice(){
       var y = 20;
       for(var i=0; i<this.content.length; i++){
         var block = this.content[i].footnoteText(x,y, i+1==this.content.length);
-        // var block = svgText(SVG, x, y, false, false, false, false);
-        // this.content[i].draw(block, this.styles);
-//        var size = block.getBBox();
+        console.log(block);
         var size = block.getBoundingClientRect();
         var size2 = block.getBBox();
         y += size.height + 2;
@@ -3041,32 +3098,31 @@ function MChoice(){
       var staff = svgGroup(SVG, "Stafflines", false);
       if(this.clef &&!this.clefp()) this.clef.draw();
       var prevx = curx;
+      var olc, osc;
       for(var i=0; i<this.content.length; i++){
         if(i>0) svgLine(SVG, curx - 10, cury, curx - 10, 0, "divider", false);
+        olc = currentLinecount;
+        osc = currentStaffColour;
         var block = this.content[i].footnote(curx,20);
-        if(typeof(block.getBBox)==="undefined"){// || !block.parentNode.parentNode.parentNode) {
-            alert("bounding box error");
-          alert(this.content[i].objType);
-          alert(this.content[i].footnote);
-          return false;
-        }
-//        var size = block.getBBox();
-//        var size = block.getBoundingClientRect();
         var size = $.browser.webkit ? block.getBBox() : block.getBoundingClientRect();
-//        curx += size.width;
         curx = Math.max(curx+10, prevx+size.width+10);
-//        curx += prevx+20;
+        drawSystemLines(staff, currentLinecount, cury-(rastralSize*currentLinecount), 
+                        i ? prevx : 0, curx, 
+                        currentStaffColour, SVG);
+        currentLinecount = olc;
+        currentStaffColour = osc;
         prevx  = curx;
       }
       SVG.height.baseVal.value = cury;
-      cury -= this.lines * rastralSize;
-      drawSystemLines(staff, this.lines, cury, 0, curx, this.staffColour, SVG);
+      // cury -= this.lines * rastralSize;
+      // drawSystemLines(staff, this.lines, cury, 0, curx, this.staffColour, SVG);
     }
     underlays = oldUnderlays;
     SVG.width.baseVal.value = curx;
     SVG.height.baseVal.value = SVG.getBBox().height+Math.max(SVG.getBBox().y, 0);
     currentClef = oldClef;
     SVG = prevSVG
+    noBreaks = false;
     return tipSVG;
   };
   this.nonDefault = function(){
@@ -3465,11 +3521,17 @@ function MReading(witnesses, content, description){
   };
   this.sketchText = function(styles){
     var obj = [];
+    var span;
     for (var i=0; i<this.content.length; i++){
       if(typeof(this.content[i])=="string"){
-        obj.push(svgSpan(false, styles.length ? textClasses(styles) :"text", false,
-                         this.content[i]));
+        // .content is almost always an array containing just a single string
+        span = svgSpan(false, styles.length ? textClasses(styles) :"text", false,
+                         this.content[i]);
+        obj.push(span);
+        SVG.appendChild(span);
+        console.log(["string", this.content]);
       } else if(this.content[i]){
+        console.log(["not", this.content]);
         this.content[i].draw(false, styles); // FIXME: Watch this!!!
         styles = this.content[i].updateStyles(styles);
       }
@@ -3489,7 +3551,7 @@ function MReading(witnesses, content, description){
     if(this.witnesses[0] == "MSS" || this.witnesses[0] == "emend."){
       svgSpan(block, "variantWitnessesSpecial", false, " "+this.witnesses.join(" "));
     } else {
-      svgSpan(block, "VariantWitnesses", false, " "+this.witnesses.join(" "));
+      svgSpan(block, "variantWitnesses", false, " "+this.witnesses.join(" "));
     }
     if(!lastTime) svgSpan(block, false, false, " : ");
     return block;
@@ -3533,7 +3595,7 @@ function MReading(witnesses, content, description){
     if(this.witnesses[0] == "MSS" || this.witnesses[0] == "emend."){
       svgSpan(description, "variantWitnessesSpecial", false, this.witnesses.join(" "));
     } else {
-      svgSpan(description, "VariantWitnesses", false, this.witnesses.join(" "));
+      svgSpan(description, "variantWitnesses", false, this.witnesses.join(" "));
     }
     return block;
   };
@@ -3589,7 +3651,7 @@ function MOmission(witnesses){
     if(this.witnesses[0] == "MSS" || this.witnesses[0] == "emend."){
       svgSpan(description, "variantWitnessesSpecial", false, this.witnesses.join(" "));
     } else {
-      svgSpan(description, "VariantWitnesses", false, this.witnesses.join(" "));
+      svgSpan(description, "variantWitnesses", false, this.witnesses.join(" "));
     }
     return block;    
   };

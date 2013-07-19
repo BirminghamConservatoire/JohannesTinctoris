@@ -541,6 +541,17 @@ function Space(){
   };
 }
 
+function BlankLines(code){
+  this.objType = "Blank Lines";
+  this.code = code;
+  this.toText = function(){
+    return "["+this.code+"]";
+  }
+  this.toHTML = function(){
+    return DOMSpan('add blank', false, document.createTextNode("["+this.code+"]"));
+  }
+}
+
 function Add(){
   this.objType = "Add";
   this.code = "";
@@ -608,7 +619,7 @@ function Text(text){
       textNode = document.createTextNode(this.code);
     }
     this.DOMObj = DOMSpan('sentence-'+this.sentence, false, textNode);
-    $(this.DOMObj).hover(function(){displayReference(this, false);});
+    if(!typeof(roman)=="undefined") $(this.DOMObj).hover(function(){displayReference(this, false);});
     uncapitalise = false;
     return this.DOMObj;
   };
@@ -637,7 +648,7 @@ function Punctuation(options){
   this.MS = options.charAt(0);
   this.modern = options.charAt(1);
   this.MSDOM = this.MS=== " " ? false : 
-    (this.MS==="¶" ? DOMSpan("noitalic", false, this.MS) : document.createTextNode(this.MS));
+    (this.MS==="¶" ? DOMSpan("noitalic pilcrow", false, this.MS) : document.createTextNode(this.MS));
   this.modernDOM = this.modern == " " ? false : document.createTextNode(this.modern);
 //  addSentences(options.charAt(1));
   if(/[.?!]/.test(this.modern)) sentence++;
@@ -665,7 +676,7 @@ function Punctuation(options){
         return this.modernDOM;
       } else {
         return this.MSDOM = this.MS=== " " ? false : 
-          (this.MS==="¶" ? DOMSpan("noitalic", false, this.MS) : document.createTextNode(this.MS));
+          (this.MS==="¶" ? DOMSpan("noitalic pilcrow", false, this.MS) : document.createTextNode(this.MS));
       }
 ;
     }

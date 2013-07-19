@@ -465,10 +465,10 @@ div.buttons {
   font-size: 120%;
   cursor: default;
 }
-.annotation {
-  color: blue;
-  fill: blue;
-}
+/* .annotation { */
+/*   color: blue; */
+/*   fill: blue; */
+/*}*/
 
 .choice .text{
   font-size: 100%;
@@ -479,6 +479,10 @@ div.buttons {
   color: #060;
   fill: #060;
 }
+.variantGroup line, .variantGroup line.rest {
+  stroke: #060;
+}
+
 .variants.highlight {
   text-decoration: none;
 }
@@ -565,7 +569,7 @@ div.musicexample.standalone {
   stroke: #AAA;
 }
 
-.0SVGLine{
+.NoSVGLine{
   stroke: none;
 }
 
@@ -599,6 +603,10 @@ div.musicexample.standalone {
   stroke: black;
   stroke-width: 2.3;
 }
+
+/* .annotation line { */
+/*   stroke: blue; */
+/* } */
 
 .ligatureVertical, .ligatureStem, .rhombusTail, .neumeJoin, .neumeLine, .chantTail {
   stroke-width: 1.4;
@@ -1014,4 +1022,12 @@ div.musicexample:first-child svg{
 .maxRestGroup, .maxRestGroup line, .longRest, .longRest line {
   stroke: black;
   stroke-width: 1.5;
+}
+
+span.heading span.noitalic:first-child {
+  color: red;
+}
+
+.pilcrow {
+  color: blue;
 }

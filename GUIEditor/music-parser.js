@@ -47,7 +47,7 @@ function MusicExample(){
         } else if(next.objType=="Fermata"){
           next.lengthens = augmented;
         } else if(next.objType==="SignumCongruentiae"){
-          next.effects = augmented;
+          next.effects = this.events[this.events.length-1];
         } else if (next.objType==="Comment" && this.events.length && 
                    this.events[this.events.length-1].objType==="Ligature"){
           this.events[this.events.length-1].members.push(new LigatureComment(next));

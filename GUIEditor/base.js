@@ -279,6 +279,9 @@ var eventi = false;
 var texti = false;
 var curx = 0;
 var cury = 20;
+var noBreaks = false;
+var systemLines = false;
+var staffGroup = false;
 var currentLinecount = 5;
 var currentStaffColour = "";
 var currentSystem = false;
@@ -289,6 +292,7 @@ var suppressBreak = true;
 var wrapWidth = false;
 var currentClef = false;
 var currentRedline = false;
+var currentSolm = false;
 var uncapitalise = false;
 var initialStaffStar = false;
 var drawingWidth;
@@ -639,9 +643,10 @@ function setDotPos(staffPos){
 // b. i) lines
 
 function drawSystem(linecount, y, x1, x2, colour, lcanvas){
-   y+=0.5;
-   for(var i=0; i<linecount; i++){
-     svgLine(SVG, x1, y, x2, y, colour+"SVGLine", false);
+  y+=0.5;
+  if(colour==="0") colour = "No";
+  for(var i=0; i<linecount; i++){
+    svgLine(SVG, x1, y, x2, y, colour+"SVGLine", false);
     y += rastralSize;
   }
   return group;
@@ -649,8 +654,15 @@ function drawSystem(linecount, y, x1, x2, colour, lcanvas){
 
 function drawSystemLines(sysgroup, linecount, y, x1, x2, colour, lcanvas){
    // y+=0.5;
-   for(var i=0; i<linecount; i++){
-     svgLine(sysgroup, x1, y, x2, y, colour+"SVGLine", false);
+  if(colour==="0") colour = "No";
+  if(noBreaks){
+    console.log("yay");
+//    console.log([sysgroup, linecount, y, x1, x2, colour]);
+  }else {
+    console.log("fuck");
+  }
+  for(var i=0; i<linecount; i++){
+    svgLine(sysgroup, x1, y, x2, y, colour+"SVGLine", false);
     y += rastralSize;
   }
   return sysgroup;

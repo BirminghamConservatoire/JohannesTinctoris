@@ -1064,7 +1064,7 @@ function readLocation(){
   if(locend >1){
     var locstring = string.substring(1, locend);
     consume(locend+1);
-    consumeSpace();
+//    consumeSpace();
     if(chapterp(locstring)){
       return new Chapter();
     } else if(sectionp(locstring)){
@@ -1075,6 +1075,9 @@ function readLocation(){
       return chap;
     } else if(locstring == "-"){
       return new Space();
+    } else if (/^\s*[0-9]*\s*blank\s+lines? *$/.test(locstring)){
+      // blank line indicator
+      return new BlankLines(locstring);
     } else {
       // Must be editorial
       var add = new Add();
@@ -1103,6 +1106,7 @@ function readChoice(){
   while(string.length && prevLength != string.length){
     prevLength = string.length;
     quoteloc = string.indexOf('"');
+    colonloc = string.indexOf(':');
     braceloc = string.indexOf('(');
     if(braceloc != -1 && (braceloc < quoteloc || quoteloc==-1)){
       string = string.substring(braceloc);
@@ -1114,7 +1118,7 @@ function readChoice(){
       description = false;
     }
     consumeSpace();
-    if(quoteloc != -1){
+    if(quoteloc != -1 && (colonloc===-1 || quoteloc<colonloc)){
       string = string.substring(string.indexOf('"'));
 //      readingString = consumeIf(/\".*?\"/).slice(1,-1);
       readingString = consumeTillClose('"', 1).slice(1, -1);

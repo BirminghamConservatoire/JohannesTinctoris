@@ -451,8 +451,8 @@ HILLBLU libro, each released under CC-SA3 by its respective authors */
   display: block;
 }
 .note:hover {
-  border: 1px dashed #414958;
-  margin: 4px;
+  /* border: 1px dashed #414958; */
+  /* margin: 4px; */
 }
 .fn {
   vertical-align: super;
@@ -460,4 +460,8 @@ HILLBLU libro, each released under CC-SA3 by its respective authors */
 }
 .note .fn {
   padding-right: 4px;
+}
+p > img {
+  max-width: 100%;
+  height: auto;
 }

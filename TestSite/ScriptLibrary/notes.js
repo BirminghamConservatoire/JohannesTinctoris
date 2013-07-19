@@ -27,10 +27,19 @@ function getNotes(){
   notes = $(".contentbox a[href^=notes]");
   for(var i=0; i<notes.length; i++){
     var el = DOMSpan("fn", false, (1+i)+"");
+    $(notes[i]).empty();
     notes[i].appendChild(el);
     $(notes[i]).data("index", i);
     $(notes[i]).data("ref", notes[i].hash.substring(1));
     allNotes.push(notes[i].hash.substring(1));
+  }
+}
+
+function maybeHideNote(e){
+  if(e.altKey){
+    e.preventDefault();
+    $(this).remove();
+    return false;
   }
 }
 
@@ -49,6 +58,7 @@ function showNote(e){
   } else {
     alert($(this).data("ref"));
   }
+  $(note).click(maybeHideNote);
   $(note).find('[href*="Bibliography"]').hoverIntent(citationHoverIn, nullHoverOut);
   $(note).find('[href*="Bibliography"]').click(pinCitation);
   e.preventDefault();

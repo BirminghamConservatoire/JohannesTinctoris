@@ -1,0 +1,11 @@
+Variants are a bit of a muddle at the moment, but here's how they work.
+
+* areas of divergence are contained in Choice objects
+
+* paths of divergence are contained in Readings objects with witnesses
+
+* a path can be followed in compound objects using nextEvent(var) and prevEvent(var)
+
+* since direction may be important (for example in oblique), there is
+  a (this) type method that's directional: forwardElement. How I fill
+  these slots will affect how necessary that is.

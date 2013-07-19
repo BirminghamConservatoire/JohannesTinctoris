@@ -52,7 +52,11 @@ h5 {
   margin-bottom: 5px;
   margin-left: 0;
   padding-left: 0;
+  color: #414958;
 }
 .contentbox p {
   padding-left: 15px;
+}
+a.noteanchor:hover {
+  color: #cc2414;
 }

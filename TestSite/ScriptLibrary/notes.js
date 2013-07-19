@@ -10,6 +10,24 @@ var notesPage = false;
 var imageScalingFactor=sf;
 var allNotes = [];
 
+function noteClickFun(id){
+  return function(){
+    $(document.getElementById(id).parentNode).click();
+  };
+}
+
+function updateXRefs(){
+  var noterefs;
+  for(var i=0; i<allNotes.length; i++){
+    noterefs = $("a.noteref[href='"+allNotes[i]+"']");
+    for(var j=0; j<noterefs.length; j++){
+      noterefs[j].innerHTML = "n."+(1+i);
+      noterefs[j].href="#note-"+(1+i);
+      $(noterefs[j]).click(noteClickFun("fnref-"+(i+1)));
+    }
+  }
+}
+
 function getNoteEntries(){
   // Fetch notes page and store it in notesPage
   $.ajax({
@@ -26,9 +44,10 @@ function getNotes(){
   // footnote numbers for reference
   notes = $(".contentbox a[href^=notes]");
   for(var i=0; i<notes.length; i++){
-    var el = DOMSpan("fn", false, (1+i)+"");
+    var el = DOMSpan("fn", "fnref-"+(1+i), (1+i)+"");
     $(notes[i]).empty();
     notes[i].appendChild(el);
+    $(notes[i]).addClass("noteanchor");
     $(notes[i]).data("index", i);
     $(notes[i]).data("ref", notes[i].hash.substring(1));
     allNotes.push(notes[i].hash.substring(1));
@@ -36,11 +55,11 @@ function getNotes(){
 }
 
 function maybeHideNote(e){
-  if(e.altKey){
+//  if(e.altKey){
     e.preventDefault();
     $(this).remove();
     return false;
-  }
+//  }
 }
 
 function showNote(e){
@@ -49,18 +68,22 @@ function showNote(e){
   var id = "note-"+index;
   if(document.getElementById(id)) return $(document.getElementById(id)).remove();
   var note = $("#"+$(this).data("ref"), notesPage);
+  // var anchor = DOMAnchor("{"+$(this).data("ref")+"}", false, false, false);
+  // anchor.name = "{"+$(this).data("ref")+"}";
   if(note && note.length) {
     note = $(note[0]).parents("p")[0].cloneNode(true);
     $(note).addClass("note");
     note.id=id
     note.insertBefore(DOMSpan("fn", false, index+""), note.firstChild);
+    // note.insertBefore(anchor, note.firstChild);
     this.parentNode.insertBefore(note, this.nextSibling);
   } else {
     alert($(this).data("ref"));
   }
-  $(note).click(maybeHideNote);
+  $(note).dblclick(maybeHideNote);
   $(note).find('[href*="Bibliography"]').hoverIntent(citationHoverIn, nullHoverOut);
   $(note).find('[href*="Bibliography"]').click(pinCitation);
+  updateXRefs();
   e.preventDefault();
   return false;
 }
@@ -139,6 +162,7 @@ $(function(){
   getNotes();
   getFigures();
   inlineNotes();
+  updateXRefs();
   // $(".contentbox a").filter('[href^="notes.html"]').hoverIntent(citationHoverIn, nullHoverOut);
   $(".contentbox a").filter('[href^="notes.html"]').click(showNote);
 });

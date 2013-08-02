@@ -1,4 +1,4 @@
-var editorMode = true;
+editorMode = true;
 
 function pitchOrHeightShift(object, d){
   // return function for changing pitch of [object] by [d] steps

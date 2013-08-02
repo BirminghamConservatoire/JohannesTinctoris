@@ -646,17 +646,6 @@ function TreatiseDoc(text, outdiv){
       $(this.out).find("p").removeClass("twocolumn");
       $(this.out).find("p").addClass("onecolumn");
     }
-    // $(this.drawTo).scroll(function(e){
-    //   if(typeof(docMap)!=="undefined" && (!scrollLock || scrollLock===this)){
-    //     // if(scrollLock===this) return;
-    //     scrollLock=this;
-    //     window.clearTimeout();
-    //     window.setTimeout(checkScroll, 50);
-    //     // docMap.updateFromScroll(scrollLock);
-    //     // window.clearTimeout();
-    //     // window.setTimeout(function(){scrollLock=false;}, 500);
-    //   }
-    // });
     if(!singlePaneMode) $(this.drawTo).scroll(scroller120);
 //    $("div.para").dblclick(alignVersions);
     this.maxWidth = refreshExamples(this.examples);
@@ -687,9 +676,6 @@ function TreatiseDoc(text, outdiv){
             doc.MSPunctuation = true;
             break;
           case "MS":
-            // punctuationStyle="modern";
-            // this.innerHTML = "Showing modern punctuation";
-            // doc.MSPunctuation = false;
             punctuationStyle="both";
             this.innerHTML = "Showing all punctuation";
             doc.MSPunctuation = false;

@@ -30,7 +30,9 @@ a:active {
 }
 .style2 {line-height: 0px; vertical-align: super; font-size: 10px;}
 .style4 {line-height: 0px; vertical-align: super; font-size: 10px; font-style: italic; }
-.style1 {font-size: 12px}
+.style1 {
+  /* font-size: 12px */
+}
 .contentbox, .marginalCitation {
  background-image: url(../Images/Ivory%20Laid%20Paper.png);
 	/* background-image: url(core_images/buff3.gif); */
@@ -44,6 +46,9 @@ body {
 .style5 {font-size: 14px}
 .cited {
   border-left: 5px solid #068297;
+}
+.contentbox div {
+  padding-left: 5px;
 }
 h1 {
   font-size: 120%;

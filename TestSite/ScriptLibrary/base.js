@@ -230,6 +230,7 @@ var notes = ["AA", "BB", "CC", "DD", "EE", "FF", "GG",
   "aaa", "bbb", "ccc", "ddd", "eee", "fff", "ggg"];
 
 // UI-set variables
+var editorMode=false;
 var singlePaneMode = true;
 var showvariants = true;
 var showtranslationnotes = true;

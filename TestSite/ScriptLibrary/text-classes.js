@@ -289,6 +289,7 @@ function Paragraph(){
     }
     return this.DOMObj;
   };
+  // Paragraph
 }
 
 function Annotation(){
@@ -757,7 +758,8 @@ function Choice(){
     }
     el = DOMSpan(ins ? "ins variants" : "variants", false, "‸");//*
     span.appendChild(el);
-    if(showvariants) addAnnotation(span, this, "Choice");
+    // if(showvariants)  // Necessary?
+    addAnnotation(span, this, "Choice");
     return span;
   };
   this.footnote = function(){

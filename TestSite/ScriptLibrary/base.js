@@ -1137,66 +1137,10 @@ function last(list){
   return list[list.length-1];
 }
 
-// function mySVGBBox(svgEl, depth){
-//   if(depth>20) return [0,0,0,0];
-//   var kids = svgEl.getAttributeNS(SVGNS, "childNodes");
-//   if(typeof(kids)=='undefined') kids = [];
-//   var left = 1000;
-//   var top = 1000;
-//   var right = 0;
-//   var bottom = 0;
-//   var bbox;
-//   var l, r, t, b;
-//   for(var i=0; i<kids.length; i++){
-//     if(kids && kids[i].getAttributeNS(SVGNS, "childNodes").length){
-//       bbox = mySVGBBox(kids[i], depth+1);
-//       if(left>bbox[0]) left = bbox[0];
-//       if(top>bbox[1]) top = bbox[1];
-//       if(right<bbox[2]) right = bbox[2];
-//       if(bottom<bbox[3]) bottom = bbox[3];
-//     } else {
-//       if(typeof(kids[i].getBBox)=="function"){
-//         bbox = kids[i].getBBox();
-//         r = bbox.x+bbox.width;
-//         b = bbox.y+bbox.height;
-//         if(left>bbox.x) left = bbox.x;
-//         if(top>bbox.y) top = bbox.y;
-//         if(right<r) right = r;
-//         if(bottom<b) bottom = b;
-//       }
-//     }
-//   }
-//   return [left, top, right, bottom];
-// }
-
 ////////////////////////////
 //
 // Annotation tracking
 // 
-
-function AnnotationSet(){
-  this.domObj = false;
-  this.object = false;
-  this.AType = false;
-  this.svgEl = false;
-  this.tip = function(){
-    var tip = Tooltip(false);
-    var t1 = this.object.tip(tip);
-    var s1 = t1.getBBox();
-    var s2 = t1.getBoundingClientRect();
-    if(s2.width) {
-      tip.style.width = Math.max(s2.width + 10, 80)+"px";// + t1.getBBox().x;
-      t1.style.width = Math.max(s2.width + 10, 80)+"px";
-    }
-    if(s2.height) {
-      tip.style.height = Math.max(80, s2.height + 10)+"px";// + t1.getBBox().y +15;
-      t1.style.height = Math.max(80, s2.height)+"px";//s2.height+10;
-    }
-    tip.style.position = "fixed";
-    tip.style.top = this.object.startY+15+$(this.svgEl).offset().top+"px";
-    tip.style.left = this.object.startX+15+$(this.svgEl).offset().left+"px";
-  };
-}
 
 var Annotations = [];
 function resetAnnotations(){
@@ -1215,10 +1159,10 @@ function addAnnotation(domObject, object, type){
   $(domObject).addClass("hoverable");
   // 
   if(doc) docMap.addPopup(object, domObject, "annotation", doc);
-  domObject.setAttributeNS(null, "onmouseover", "top.showAnnotation2(this);");
+  domObject.setAttributeNS(null, "onmouseover", "top.showAnnotation(this);");
   domObject.setAttributeNS(null, "onmouseout", "top.untip(true);");
   // domObject.setAttributeNS(null, "onmouseout", "top.removeTooltip(true);");
-  domObject.setAttributeNS(null, "onclick", "top.showAnnotation2(this, true);");
+  domObject.setAttributeNS(null, "onclick", "top.showAnnotation(this, true);");
   curx = oldcurx;
   cury = oldcury;
 }
@@ -1319,7 +1263,7 @@ function subvariant(obj){
   return false;
 }
 
-function showAnnotation2(obj, clicked){
+function showAnnotation(obj, clicked){
   var fndiv = $(obj).data("fn");
 //  if(obj.tagName==="SPAN" && subvariant(obj) && !isInTip(obj)) return;
   if($(fndiv).filter(":hidden").length>0){
@@ -1388,21 +1332,7 @@ function showAnnotation(obj, clicked){
     tip.style.top = 30+obj.getBoundingClientRect().top+"px";
     tip.style.left = 30+obj.getBoundingClientRect().left+"px";
   }
-  // tip.style.top = 30+$(obj).offset().top+"px";
-  // tip.style.left = 30+$(obj).offset().left+"px";
 }
-
-// function addAnnotation2(domObject, object, type){
-//   var annotation = new AnnotationSet();
-//   annotation.AType = type;
-//   annotation.domObj = domObject;
-//   annotation.object = object;
-//   annotation.svgEl = SVG;
-//   annotation.domObj.setAttributeNS(null, "onmouseover", "top.Annotations["+Annotations.length+"].tip();");
-//   annotation.domObj.setAttributeNS(null, "onmouseout", "top.removeTooltip(true);");
-//   Annotations.push(annotation);
-//   return Annotations.length -1;
-// }
 
 function mergeKeys(list1, list2){
   // Takes the cartesian join of two lists of keys;

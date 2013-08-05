@@ -1293,45 +1293,8 @@ function showAnnotation(obj, clicked){
     $(fndiv).draggable();
     $(fndiv).addClass("clicked");
     popupCloseButton(fndiv);
-    //  docMap.popPosition(obj, fndiv);
-    //  fndiv.style.top = $(obj).offset().top; //"0px";
-    //  fndiv.style.left = //"0px";
-    //  fndiv.style.width = "100px";
-    //  fndiv.style.height= "100px";
   }
   return false;
-}
-
-function showAnnotation(obj, clicked){
-  var thing = $(obj).data("object");
-  var tip = Tooltip(false);
-  var t1 = svg(false, false);
-  tip.appendChild(t1);
-  $(tip).draggable();
-  /*var t1 = */ thing.tip(t1);
-  if(clicked) {
-    $(tip).draggable();
-    $(tip).addClass("clicked");
-    $(tip).click(removeTooltip);
-//    obj.removeEventListener("onmouseout", "top.removeTooltip();");
-  }
-//  var s1 = t1.getBBox();
-  var s2 = t1.getBoundingClientRect();
-  var s2width = s2.width ? s2.width : s2.right - s2.left;
-  var s2height = s2.height ? s2.height : Math.abs(s2.top - s2.bottom); //fixme: which is higher?
-  tip.style.width = Math.max(s2width + 20, 80)+"px";// + t1.getBBox().x;
-  t1.style.width = Math.max(s2width + 15, 80)+"px";
-  tip.style.height = Math.max(80, s2height + 20)+"px";// + t1.getBBox().y +15;
-  t1.style.height = Math.max(80, s2height+15)+"px";//s2.height+10;
-  if(clicked){
-    tip.style.position = "fixed";
-    tip.style.left = "10px";
-    tip.style.top = Math.max($(obj).offset.top, 50)+"px";
-  } else {
-    tip.style.position = "fixed";
-    tip.style.top = 30+obj.getBoundingClientRect().top+"px";
-    tip.style.left = 30+obj.getBoundingClientRect().left+"px";
-  }
 }
 
 function mergeKeys(list1, list2){

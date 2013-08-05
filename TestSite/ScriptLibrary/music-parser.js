@@ -1081,50 +1081,6 @@ function parseSolmReading(fields){
   return [false, new MReading(fields.slice(from), solm ? [solm] : [], descr)];
 }
 
-// function parseSolmReading(fields){
-//   var solm = false, signs = [], start, finish, last, sigged, descr="";
-//   for(var i=0; i<fields.length; i++){
-//     if(sigged || sigged === 0){
-//       if(fields[i].charAt(0) =='"'){
-//         return [fields.slice(i), 
-//                 new MReading(fields.slice(sigged, i), solm ? [solm] :[], descr)];
-//       }
-//     } else if(fields[i].charAt(0)==='('){
-//       // Could be a variety of things.
-//       if(sigged || sigged===0){
-//         // This is either a post-sig description or a new sig
-//         if(descr.length || i-sigged >1){
-//           // Definitely new sig
-//           return [fields.slice(i), 
-//                   new MReading(fields.slice(sigged, i), solm ? [solm] : [], descr)];
-//         } else {
-//           // Description for existing sig
-//           finish = fields[i].lastIndexOf(')');
-//           descr = fields[i].substring(1, finish > -1 ? finish : fields.length);
-//           sigged = i+1;
-//         }
-//       } else {
-//         // No sig yet
-//         finish = fields[i].lastIndexOf(')');
-//         descr = fields[i].substring(1, finish > -1 ? finish : fields.length);
-//       }
-//     } else {
-//       start = i==0 ? 1 : 0;
-//       finish = fields[i].length;
-//       if(fields[i].lastIndexOf('"')>0){
-//         finish = fields[i].lastIndexOf('"');
-//         last = true;
-//       }
-//       signs.push(fields[i].substring(start, finish));
-//       if(last){ 
-//         solm = parseSolm(signs);
-//         signs = [];
-//         sigged = i+1;
-//       }
-//     }
-//   }
-//   return [false, new MReading(fields.slice(sigged, fields.length), solm ? [solm] : [], descr)];
-// }
 function parseSolmVar(fields){
   var next = false;
   var obj = new MChoice();
@@ -1326,73 +1282,6 @@ function nextInfo(){
       return parseClef(fields[1]);
     case "staf":
       return parseStaff(fields.slice(fields[1]=="var" ? 2 : 1));
-      // obj = new Staff();
-      // var value, description;
-      // var witnesses = [];
-      // for(var j=1; j<fields.length; j++){
-      //   if(!obj.colour && j == fields.length -1){
-      //     if(witnesses.length){
-      //       obj.lines.addReading(witnesses, value, description);
-      //     }
-      //     obj.colour = fields[j];
-      //   } else {
-      //     switch(fields[j].charAt(0)){
-      //     case '"':
-      //       if(witnesses.length) { // we've got another reading and need
-      //         // to store the previous one
-      //         if(obj.colour){
-      //           obj.colour.addReading(witnesses, value, description);
-      //         } else {
-      //           obj.lines.addReading(witnesses, value, description);
-      //         }
-      //         witnesses = [];
-      //         description = false;
-      //       }
-      //       value = obj.colour ? fields[j].slice(1, -1) : parseInt(fields[j].slice(1, -1));
-      //       break;
-      //     case '(':
-      //       if(witnesses.length) { // we've got another reading
-      //         // and need to store the
-      //         // previous one
-      //         if(obj.colour){
-      //           obj.colour.addReading(witnesses, value, description);
-      //         } else {
-      //           obj.lines.addReading(witnesses, value, description);
-      //         }
-      //         value = false;
-      //         witnesses = [];
-      //       }
-      //       description = fields[j];
-      //       break;
-      //     case 'v':
-      //       // we're introducing variants for staff colour now
-      //       if(obj.lines) {
-      //         if(witnesses.length){
-      //           if(obj.colour){
-      //             obj.colour.addReading(witnesses, value, description);
-      //           } else {
-      //             obj.lines.addReading(witnesses, value, description);
-      //           }
-      //           value = false;
-      //           witnesses = [];
-      //           description = false;
-      //             }
-      //         obj.colour = new ValueChoice();
-      //       } else {
-      //         obj.lines = new ValueChoice();
-      //       }
-      //       break;
-      //     default:
-      //       if(!obj.lines){
-      //         // This isn't a {var} situation
-      //         obj.lines = parseInt(fields[j]);
-      //       } else {
-      //         witnesses.push(fields[j]);
-      //       }
-      //     }
-      //   }
-      // }
-      // return obj;
     case "mensural":
     case "plainchant":
       obj = new Notation();
@@ -1426,6 +1315,59 @@ function nextObliqueNoteChoice(parent){
 }
 
 function nextChoiceLikeThing(choice, textp){
+  // cf readChoice in parser.js
+  var lDescription, readingString, rDescription, description;
+  var witnesses, staffing, agreedVersion;
+  var locend = findClose("}", 1);
+  var finalString = string.substring(locend+1);
+  var clef = currentClef;
+  var prevLength = false;
+  string = string.substring(5, locend); // 5 because of "{var="
+  consumeSpace();
+  while(string.length && prevLength != string.length){
+    prevLength = string.length;
+    lDescription = consumeDescription();
+    readingString = consumeReadingString();
+    rDescription = consumeDescription();
+    description = lDescription || rDescription;
+    witnesses = consumeWitnesses();
+    staffing = staffDetailsForWitnesses(witnesses);
+    agreedVersion = stavesAgree(staffing);
+    stringTemp = string;
+    string = readingString;
+    switch(description){
+      case "nil":
+        choice.addNilReading(witnesses);
+        break;
+      case "ins.":
+        // Now what?
+        if(textp){
+          choice.addTextReading(witnesses, string, description);
+        } else {
+          choice.addReading(witnesses, string, description, false, staffing);
+        }
+        currentClef = clef;
+        break;
+      case "om.":
+        choice.addOmission(witnesses);
+        break;
+      default:
+        if(textp){
+          choice.addTextReading(witnesses, string, description);
+        } else {
+          choice.addReading(witnesses, string, description, false, staffing);
+        }
+        currentClef = clef;
+        break;
+    }
+    string = stringTemp;
+  }
+  currentClef = clef;
+  string = finalString;
+  return choice;
+}
+
+function nextChoiceLikeThing2(choice, textp){
   // Based on readChoice in parser.js
   //var locend = string.indexOf("}");
   var locend = findClose("}", 1);

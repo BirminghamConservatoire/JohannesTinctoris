@@ -1116,7 +1116,8 @@ function consumeWitnesses(){
   consume(1);
   while(cur!==":" && cur!=="}"){
     if(prevlength===string.length) {
-      alert([string, i, orig]);
+      console.log(["iteration number "+i+" of consumeWitnesses failed at char `"+cur+"`", 
+                   string, i, orig, cur, witnesses]);
       return witnesses;
     }
     i++;
@@ -1163,6 +1164,7 @@ function readChoice(){
   var choice = new Choice();
   var prevLength = string.length;
   string = string.substring(5, locend);
+  console.log(string);
   consumeSpace();
   while(string.length && prevLength != string.length){
     prevLength = string.length;

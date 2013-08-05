@@ -702,7 +702,7 @@ neumeJoin{
 .variantWitnessList {
   padding: 0.1ex;
 }
-.variantWitnessList .variantWitness, .variantwitnesses{
+.variantWitnessList .variantWitness, .variantWitnesses{
   font-weight: bold;
   font-size: 90%;
 }

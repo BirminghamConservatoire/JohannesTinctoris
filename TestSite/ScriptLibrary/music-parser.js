@@ -317,14 +317,7 @@ function nextEvent() {
     case "{":
       if(string.substring(0,5) == "{var="){
         return nextChoice();
-      } 
-    // if(string.substring(0,5) == "{&c.}"){
-      //   var obj = new etc();
-      //   string = string.substring(5);
-      //   getAndSetPitch(obj);
-      //   return obj;
-      // } 
-      else {
+      } else {
         return nextInfo();
       }
     case "b":

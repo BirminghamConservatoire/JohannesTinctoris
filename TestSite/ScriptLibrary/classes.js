@@ -2958,6 +2958,30 @@ function Parameters(){
 //////////////////////////////////////////
 //
 // 7. Choice and Readings (c.f. text-classes)
+//
+//
+// Generally, these work as for text, but there are some issues worth
+// mentioning.
+//
+// *** Clefs, stafflines and solmization signatures ***
+//
+// Each source will have its own combinatio of clef, staff line count
+// and colour, and solmization signature, and these may be relevant
+// for considering variants. On the other hand, they may conceal
+// points of similarity between sources if, say, a rhythmic variant is
+// shown with each variation in clef for each source in which it
+// occurs.
+// 
+// We use set of display rules defined by Jeffrey Dean in an e-mail of
+// 29 May, 2013:
+//
+//  * If only the note value of a single note is varied *and* one or
+//     more witnesses has the accepted staff/clef combination, then
+//     the default is shown.
+//  * In all other cases, variants are separated by combination
+//
+// This issue is rarer in print editions because of the use of textual
+// variant lists rather than notated ones.
 
 function MChoice(){
   this.objType = "MusicalChoice";
@@ -2989,13 +3013,14 @@ function MChoice(){
     var oldColour = currentStaffColour;
     if(!isntdefault){
       // Simplest case. Accepted reading is always standardised
-      this.content.push(new MReading(witnesses, string?nextMusic():[], description, false, false));
+      this.content.push(new MReading(witnesses, string?nextMusic():[], description, 
+                                     description2, false));
     } else if (witnesses.length <=1 || agreement){
       // Easiest case: either all definitions are the same (AGREEMENT) or there's only one
       // Do staff stuff: 
       currentClef = staffing[0][1];
       // Then add reading
-      this.content.push(new MReading(witnesses, string?nextMusic():[], description, false, 
+      this.content.push(new MReading(witnesses, string?nextMusic():[], description, description2, 
                                      staffing));
     } else {
       // Question 1: Is the variant insignificant
@@ -3018,7 +3043,7 @@ function MChoice(){
           for(var j=0; j<wits[i].length; j++){
             st.push([wits[i][j]].concat(staffings[i]));
           }
-          this.content.push(new MReading(wits[i], obj, description, false, st));
+          this.content.push(new MReading(wits[i], obj, description, description2, st));
           string = ostr;
         }
       }
@@ -3026,8 +3051,8 @@ function MChoice(){
     currentclef = oldClef;
   };
   // MChoice
-  this.addTextReading = function(witnesses, string, description){
-    this.content.push(new MReading(witnesses, string?getSubText():[], description));
+  this.addTextReading = function(witnesses, string, description, description2){
+    this.content.push(new MReading(witnesses, string?getSubText():[], description, description2));
   };
   this.addOmission = function(witnesses){
     this.content.push(new MOmission(witnesses));
@@ -3274,7 +3299,7 @@ function LigChoice(){
   this.nextEvent = function(variant){
     return this.nextEventObj ? this.nextEventObj.forwardEvent(variant) : false;
   };
-  // MChoice
+  // LigChoice
   this.addReading = function(witnesses, string, description, description2, staffing){
     // First, we need to look at the staffing to work out 1) what clef
     // we need and 2) whether this reading should become several
@@ -3290,9 +3315,9 @@ function LigChoice(){
       // only one definition, or this is the main reading. In the last
       // case, using a different clef to the main one would
       // (currently) affect main display as well as the pop ups.
-      currentClef = staffing[0][1];
+      currentClef = isntdefault ? staffing[0][1] : oldClef;
       this.content.push(new MReading(witnesses, (string?nextMusic(this.ligature):[]), 
-                                     description, false, staffing));
+                                     description, description2, staffing));
     } else {
       // Now... If the variant is only of the form of a single note,
       // without changing its pitch, it is not considered significant,
@@ -3303,7 +3328,7 @@ function LigChoice(){
       if(obj.length===1 && this.content[0].content.length===1
          && obj[0].pitch===this.content[0].pitch && defaultPresent(staffing)){
         this.content.push(new MReading(witnesses, (string ? nextMusic(this.ligature) : []),
-                                       description, false, false));
+                                       description, description2, false));
       } else {
         console.log(["Need to do something", matchStaves(staffing)]);
         currentClef = staffing[0][1];
@@ -3316,8 +3341,8 @@ function LigChoice(){
     currentLinecount = oldLines;
     currentStaffColour = oldColour;
   };
-  this.addTextReading = function(witnesses, string, description){
-    this.content.push(new MReading(witnesses, string?getSubText():[], description));
+  this.addTextReading = function(witnesses, string, description, description2){
+    this.content.push(new MReading(witnesses, string?getSubText():[], description, description2));
   };
   this.addOmission = function(witnesses){
     this.content.push(new MOmission(witnesses));
@@ -3338,7 +3363,7 @@ function LigChoice(){
     }
     return string + "}";    
   };
-  // MChoice
+  // LigChoice
   this.tip = function(tipSVG){
     // FIXME: aaaah!
     SVG = tipSVG;//svg(false, false);
@@ -3349,7 +3374,7 @@ function LigChoice(){
     cury = rastralSize * 10;
     var start = curx;
     var staff = svgGroup(SVG, "Stafflines", false);
-    if(this.clef && !(this.content[0].needsChange())) {
+    if(this.clef && !(this.content[0].needsChange() || this.nonDefault())) {
       var clef = this.clef.draw();
       var cclass = clef.getAttributeNS(null, "class");
       clef.setAttributeNS(null, "class", cclass+" indicative");
@@ -3381,7 +3406,7 @@ function LigChoice(){
     SVG.width.baseVal.value = curx;
     return SVG;
   };
-  // MChoice
+  // LigChoice
   this.drawVar = function(variant){
     // FIXME: ?needed
     return this.applicableReading(variant).draw();
@@ -3411,7 +3436,7 @@ function LigChoice(){
     }
     return click;
   };
-  // MChoice
+  // LigChoice
 }
 
 function ObliqueNoteChoice(){
@@ -3665,23 +3690,20 @@ function MReading(witnesses, content, description, description2, staves){
   };
   // MReading
   this.footnoteText = function(x,y, lastTime){
-    var block = svgText(SVG, x, y, "variantReading", false, false,
-      this.description ? "("+this.description+") " : false);
+    var block = svgText(SVG, x, y, "variantReading", false, false, false);
     var OLDSVG = SVG;
+    if(this.description) svgSpan(block, "readingDesc", false, this.description+" ");
     SVG = block;
     var text = this.sketchText(["variantReading"]);
     SVG = OLDSVG;
     for(var i=0; i<text.length; i++){
 //      block.appendChild(text[i]);
     }
-    if(this.description2){ 
-       svgSpan(block, "descrtiptionFinal", 
-               false, " ("+this.description+") ");
-    }
+    if(this.description2) svgSpan(block, "descriptionFinal", false, " "+this.description2);
     if(this.witnesses[0] == "MSS" || this.witnesses[0] == "emend."){
-      svgSpan(block, "variantWitnessesSpecial", false, " "+this.witnesses.join(" "));
+      svgSpan(block, "variantWitnessesSpecial variantWitness", false, " "+this.witnesses.join(" "));
     } else {
-      svgSpan(block, "variantWitnesses", false, " "+this.witnesses.join(" "));
+      svgSpan(block, "variantWitnesses variantWitness", false, " "+this.witnesses.join(" "));
     }
     if(!lastTime) svgSpan(block, false, false, " : ");
     return block;
@@ -3755,16 +3777,15 @@ function MReading(witnesses, content, description, description2, staves){
         }
       }
     }
-    // for(var i=0; i<content.length ; i++){
-    //   block.appendChild(content[i]);
-    // }
     var content = this.sketch(block, true);
-    var description = svgText(block, x-3, y+5, "variantReading", false, false,
-      this.description ? "("+this.description+") " : false);
+    var description = svgText(block, x-3, y+5, "variantReading", false, false, false);
+    if(this.description || this.description2){
+      svgSpan(description, "readingDesc", false, (this.description || this.description2)+" ");
+    }
     if(this.witnesses[0] == "MSS" || this.witnesses[0] == "emend."){
-      svgSpan(description, "variantWitnessesSpecial", false, this.witnesses.join(" "));
+      svgSpan(description, "variantWitnessesSpecial variantWitness", false, this.witnesses.join(" "));
     } else {
-      svgSpan(description, "variantWitnesses", false, this.witnesses.join(" "));
+      svgSpan(description, "variantWitnesses variantWitness", false, this.witnesses.join(" "));
     }
     drawSystemLines(systemLines[0], systemLines[1], 
                     systemLines[4]-rastralSize*systemLines[1],
@@ -3831,10 +3852,11 @@ function MOmission(witnesses){
   this.footnote = function(x,y){
     var block = svgGroup(SVG, "VariantReading music", false);
     var description = svgText(block, x, y, "variantReading", false, false, 'om. ');
+    svgSpan(description, "readingDesc", false, 'om. ');
     if(this.witnesses[0] == "MSS" || this.witnesses[0] == "emend."){
-      svgSpan(description, "variantWitnessesSpecial", false, this.witnesses.join(" "));
+      svgSpan(description, "variantWitnessesSpecial variantWitness", false, this.witnesses.join(" "));
     } else {
-      svgSpan(description, "variantWitnesses", false, this.witnesses.join(" "));
+      svgSpan(description, "variantWitnesses variantWitness", false, this.witnesses.join(" "));
     }
     return block;    
   };

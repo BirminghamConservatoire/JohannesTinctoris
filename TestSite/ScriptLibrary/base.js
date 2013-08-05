@@ -2271,7 +2271,6 @@ function displayReference(refobj, out){
   var jump = $(para).parents("div.pane").find("a.jump-"+book+"_"+chapter);
   jump = jump && jump.length ? jump[0].innerHTML : 
     (chapter == "p" ? "Prol. " : (chapter == "c" ? "Conc." : book+"."+chapter));
-  console.log(jump);
   if(!out){
     out = document.getElementById("cursorLocator");
     if(!out) {
@@ -2285,10 +2284,8 @@ function displayReference(refobj, out){
     }
   }
   var drawnPane = $(para).parents(".drawTo");
-  console.log(drawnPane.length);
   if(drawnPane.length){
     rect = drawnPane[0].getBoundingClientRect();
-    console.log([rect.bottom, rect.right]);
     out.style.top = (rect.top-1)+"px";
     out.style.left = (rect.right-100)+"px";
     // out.style.top = (rect.bottom-30)+"px";
@@ -2323,6 +2320,8 @@ function staffDetailsForWitnesses(witnesses){
       if(!obj.appliesTo || 
          obj.appliesTo.indexOf(witnesses[j])>-1 ||
          obj.appliesTo.indexOf("MSS")>-1){
+        if(currentExample.starts===9171 && witnesses[j]==="G"){
+        }
         switch(obj.objType){
         case "Clef":
           if(!clef){
@@ -2337,7 +2336,7 @@ function staffDetailsForWitnesses(witnesses){
         case "Staff":
           if(!staff){
             staff = obj;
-          } 
+          }
           break;
         }
         if(staff && clef && solm){
@@ -2346,6 +2345,12 @@ function staffDetailsForWitnesses(witnesses){
       }
     }
     results.push([witnesses[j], clef, solm, staff]);
+    clef = false;
+    solm = false;
+    staff = false;
+  }
+  if(currentExample.starts===9171){
+    console.log(results);
   }
   return results;
 }
@@ -2377,6 +2382,9 @@ function matchStaves(staffing){
   return [witnesses, newS];
 }
 function defaultPresent(staffing){
+  if(currentExample.starts===9171){
+    console.log(staffing);
+  }
   return staffing.some(isDefaultStaffing);
 }
 

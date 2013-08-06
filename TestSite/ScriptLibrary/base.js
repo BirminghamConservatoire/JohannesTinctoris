@@ -1888,9 +1888,11 @@ function docMapping(){
   this.addViewRight = function(DOMObj){
     var oldpane = $(DOMObj).parents(".contentpane")[0];
     var pane = DOMDiv("pane contentpane", false, false);
+    // ?
+    var pos = currentPosition($(oldpane).find(".drawTo")[0]);
     var prevDoc = this.docForPane(pane);
     var treatise = prevDoc.group;
-    oldpane.parentNode.insertBefore(pane, oldpane.nextSibling);    
+    oldpane.parentNode.insertBefore(pane, oldpane.nextSibling);
     if($(DOMObj).hasClass("edited")){
       applyEditedText(treatise, pane, []);
     } else if($(DOMObj).hasClass("translation")){
@@ -1902,7 +1904,11 @@ function docMapping(){
     this.updatePanes();
     this.updatePageSettings();
     this.fixWidths();
+    fixHeight(true);
     this.fixButtons();
+    for(var i=0; i<this.docs.length; i++){
+      pos.simpleScroll(this.docs[i].drawTo);
+    }
   };
   this.setTreatisePos = function(treatise, book, chapter, section, paragraph, offset){
     if(!this.treatisPos[treatise]) this.treatisPos[treatise] = {};
@@ -2417,6 +2423,8 @@ function staffPairAgrees2(s1, s2){
     && staffEqual2(s1[3], s2[2], s1[0]);
 }
 function clefEqual(c1, c2){
+  if(c1.erroneousClef) c1 = c1.erroneousClef;
+  if(c2.erroneousClef) c2 = c2.erroneousClef;
   return c1.staffPos===c2.staffPos 
     && c1.type===c2.type;
 }

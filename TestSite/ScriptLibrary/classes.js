@@ -3851,7 +3851,7 @@ function MOmission(witnesses){
   this.width = function(){return 0;};
   this.footnote = function(x,y){
     var block = svgGroup(SVG, "VariantReading music", false);
-    var description = svgText(block, x, y, "variantReading", false, false, 'om. ');
+    var description = svgText(block, x, y, "variantReading", false, false, false);
     svgSpan(description, "readingDesc", false, 'om. ');
     if(this.witnesses[0] == "MSS" || this.witnesses[0] == "emend."){
       svgSpan(description, "variantWitnessesSpecial variantWitness", false, this.witnesses.join(" "));
@@ -3872,9 +3872,9 @@ function ValueChoice(){
     this.content.push(new ValueReading(witnesses, string, description));
   };
   this.addOmission = function(witnesses){
-    this.content.push(new MOmission(witnesses));
+    this.content.push(new MOmission(witnesses, false, "om. "));
   };
-  this.addOmission = function(witnesses){
+  this.addNil = function(witnesses){
     this.content.push(new MNilReading(witnesses));
   };
   this.toText = function(){

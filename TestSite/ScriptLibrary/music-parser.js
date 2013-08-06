@@ -982,9 +982,13 @@ function parseMensReading(fields){
   for(var i=1; i<fields.length; i++){
     if(fields[i].charAt(0) === '"' || fields[i].substring(0, 3) === '(om'){
       return [fields.slice(i), new MReading(fields.slice(1, i), [mens], "")];
-    }
+    } 
   }
-  return [false, new MReading(fields.slice(1, fields.length), [mens], "")];
+  if(fields[0]==="(om.)"){
+    return [false, new MOmission(fields.slice(1, fields.length))];
+  } else {
+    return [false, new MReading(fields.slice(1, fields.length), [mens], "om.")];
+  }
 }
 function parseMensVar(fields){
   var obj = new MChoice();

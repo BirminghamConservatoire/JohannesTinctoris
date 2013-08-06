@@ -339,21 +339,16 @@ function TreatiseDoc(text, outdiv){
     var displayTitle = DOMDiv("titlebarheader", false, 
       DOMSpan("titlebartitle", false, (this.shortTitle ? this.shortTitle : this.title)+" "));
     // displayTitle.appendChild(document.createElement("br"));
-    // var menu = DOMTextEl("ul", "titlebarmenubar MenuBarHorizontal", false, false);
     var menu = DOMTextEl("ul", "titlebarmenubar MenuBarH", false, false);
     displayTitle.appendChild(menu);
     // View/language
     var ul = DOMTextEl("ul", "titlebarmenu view", false, false);
-//     var li = DOMListItem("titlebartext view", false, this.describe()+" ");
     var li = DOMListItem("titlebartext view", false, 
                          DOMAnchor(false, false, 
                                    DOMSpan('viewText', false, this.describe()+" ")));
     li.appendChild(ul);
     docMap.treatiseViews(ul, this);
-//    var ul2 = DOMTextEl("ul", "titlebarmenuparent view", false, li);
     menu.appendChild(li);
-//    displayTitle.appendChild(ul2);
-//    $(ul2).menu();
     $(ul).find("a").click(function(e){
       if($(this).hasClass("selected")) return;
       docMap.switchView(this);
@@ -366,22 +361,11 @@ function TreatiseDoc(text, outdiv){
         this.scrollpos.book
             ? romanReference(this.scrollpos.book, this.scrollpos.chapter, this.scrollpos.section)
             : "Section...")));
-    // li = DOMListItem("titlebartext location titlebarlocdetail", false, 
-    //   DOMSpan("loctext", false, 
-    //     //romanReference(1,1,1)));
-    //     this.scrollpos.book
-    //         ? romanReference(this.scrollpos.book, this.scrollpos.chapter, this.scrollpos.section)
-    //         : "Section..."));
     li.appendChild(ul);
-//    ul2 = DOMTextEl("ul", "titlebarmenuparent location titlebarloc", false, li);
-//    displayTitle.appendChild(ul2);
     menu.appendChild(li);
     jqNavSelect(this, ul);
     bar.appendChild(displayTitle);
-//    $(ul2).menu();
-    // +>
     ul = DOMTextEl("ul", "titlebarmenu add r", false, false);
-//    li = DOMListItem("addpanebutton r", false, "+");
     li = DOMListItem("addpanebutton r", false, 
                      DOMSpan("ui-icon my-icon my-ui-icon-plus",
                              false, false));
@@ -400,7 +384,6 @@ function TreatiseDoc(text, outdiv){
     ul2 = DOMTextEl("ul", "TBsettingsbutton TBbutton", false, li);
     bar.appendChild(ul2);
     this.settingsMenu(ul);
-    // $(ul2).menu();
     $(ul2).menu({icons: {submenu: "gear"}});
     $(this.out).addClass("contentcontainer");
     this.out.appendChild(bar);
@@ -512,6 +495,7 @@ function TreatiseDoc(text, outdiv){
       if(docMap.panes.length===1) return;
       var doc = $(this).data("doc");
       $(doc.out).remove();
+      $("#cursorLocator").remove();
       docMap.removeDoc(doc);
     });
   };
@@ -1448,34 +1432,3 @@ function matchExamples(treatise, text){
     count = grabExamples(treatise.contents[i], count, fullExamples);
   }
 }
-
-// function matchExamples(treatise, text){
-//   // Search for all references to musicExamples and replace them with real ones
-//   var examples = 0, eg=false;
-//   var reg = /<example.*?<\/example>/g;
-//   var oldstring = string; // Probably unnecessary
-//   for(var i=0; i<treatise.contents.length; i++){
-//     if(treatise.contents[i].objType==="Paragraph"){
-//       // FIXME: This should probably be a properly recursive walk
-//       for(var j=0; j<treatise.contents[i].content.length; j++){
-//         if(treatise.contents[i].content[j].objType==="Blank Example"){
-//           treatise.contents[i].content[j].index = examples;
-//           examples++;
-//           eg = reg.exec(text);
-//           if(eg!==null){
-//             string = eg[0].substring(9, eg[0].length - 10);
-//             treatise.contents[i].content[j].musicExample = new MusicExample();
-//           }
-//         }
-//       }
-//     } else if(treatise.contents[i].objType==="Blank Example"){
-//       treatise.contents[i].index = examples;
-//       examples++;
-//       eg = reg.exec(text);
-//       if(reg!==null){
-//         string = eg[0].substring(9, eg[0].length - 10);
-//         treatise.content[i].musicExample = new MusicExample();
-//       }
-//     }
-//   }
-// }

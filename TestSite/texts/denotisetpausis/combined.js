@@ -2,10 +2,10 @@ texts.denotisetpausis = {};
 if(!texts.treatises) texts.treatises = [];
 texts.treatises.push("denotisetpausis");
 texts.denotisetpausis.exportYear = 2013;
-texts.denotisetpausis.exportMonth = 6;
-texts.denotisetpausis.exportDay = 5;
-texts.denotisetpausis.exportHour = 10;
-texts.denotisetpausis.exportMinutes = 52;
+texts.denotisetpausis.exportMonth = 8;
+texts.denotisetpausis.exportDay = 7;
+texts.denotisetpausis.exportHour = 19;
+texts.denotisetpausis.exportMinutes = 38;
 texts.denotisetpausis.sources = [['BU', 'I-Bu 2573, fols. 47r-52r'],
 ['Br1', 'B-Br II 4147, fols. 28rb-31va'],
 ['G', 'B-Gu 70, fols. 161ra-168vb'],
@@ -13,7 +13,7 @@ texts.denotisetpausis.sources = [['BU', 'I-Bu 2573, fols. 47r-52r'],
 texts.denotisetpausis.edited = 'De notis et pausis\n\
 Editor: Jeffrey J. Dean\n\
 Checked by: Ronald Woodley\n\
-Date established: 30 May 2013\n\
+Date established: 10 July 2013\n\
 Copy-text: Thesaurus Musicarum Latinarum, TINTDN.TEXT (Seay edn)\n\
 Sources:\n\
 V	E-VAu 835, fols. 43v-47v (modern numeration)\n\
@@ -57,7 +57,7 @@ Prima regula generalis est{.,} quod in omni ligatura ascendente{.,} prima nota h
 <example: {full measure}, {mensural: void}, {staf: "5" Br1 : "3" V BU : "4" G, red}> {clef: "CA" Br1 : "C8" V BU G} {solm: 0} {mens: C7}<label>Exemplum {var=(ins.) "prime regule" G}.</label> <lig>SF SG Ba</lig> <lig>SG <obl>Sa Bb</obl></lig> <lig>Sc Sd</lig> {var="<lig><obl>SG Sa</obl></lig>" V BU Br1 : "<lig>SG Sa</lig>" G} LG ||</example>\n\
 <subheading>{¶ } {var="De secunda generali regula" Br1 : "Secunda regula generalis" G : (om.) V BU}</subheading>\n\
 Secunda regula generalis est{.,} quod in ligatura ascendente et {var="recta" V BU Br1 : "certa" G}{.,} prima nota sine cauda brevis est{.,} {var="ut hic patet" BU : "ut in presenti exemplo patet" V : "ut hic" Br1 G}:\n\
-<example: {full measure}, {mensural: void}, {staf: "5" Br1 : "4" V BU G, red}> {clef: "CA" Br1 : "C8" V : "C6 [C8]" BU : "C4 [C6]" G} {solm: 0} {mens: O9}<label>Exemplum {var=(ins.) "2e regule generalis" G}.</label> <lig>Ba Bb Bc</lig> <lig>Ba Bd</lig> {var="<lig>Bb ^Le</lig>" V Br1 : "<lig>Bd ^Lg</lig>" BU : "<lig>Bd Bg</lig>" G}</lig> <lig>Bb Bc <obl>Bd Be</obl></lig> ||</example>\n\
+<example: {full measure}, {mensural: void}, {staf: "5" Br1 : "4" V BU G, red}> {clef: "CA" Br1 : "C8" V : "C6 [C8]" BU : "C4 [C6]" G} {solm: 0} {mens: O9}<label>Exemplum {var=(ins.) "2e regule generalis" G}.</label> <lig>Ba Bb Bc</lig> <lig>Ba Bd</lig> {var="<lig>Bb ^Le</lig>" V Br1 : "<lig>Bd ^Lg</lig>" BU : "<lig>Bd Bg</lig>" G} <lig>Bb Bc <obl>Bd Be</obl></lig> ||</example>\n\
 <subheading>{¶ } {var="De tercia generali regula" Br1 : "Tercia regula generalis" G : (om.) V BU}</subheading>\n\
 {var="Tercia" Br1 G : "Tertia" V BU} regula generalis est{.,} quod in ligatura ascendente et obliqua{.,} prima nota habens caudam a parte sinistra {var="deorsum" V BU G : "deor-" (at line end) Br1} protractam brevis est{.,} {var="ut hic patet" BU : "ut hic patet in exemplo" V : "ut hic" Br1 G}:\n\
 <example: {full measure}, {mensural: void}, {staf: "5" (ed.) : "3" V Br1 : "4" BU G, red}> {clef: C8} {solm: 0} {mens: O5}<label>Exemplum {var=(ins.) "3e regule generalis" G}.</label> <lig><obl>BF BG</obl></lig> <lig><obl>Ba Bb</obl></lig> <lig><obl>Bc Bd</obl></lig> {var=(ins.) "<lig><obl>Bb Be</obl></lig> <lig><obl>Ba Bd</obl></lig> <lig><obl>BG Ba</obl></lig> <lig><obl>Bb Bc</obl></lig>" G} ||</example>\n\
@@ -89,7 +89,7 @@ Advertendum autem est{. } quod in omni ligatura in qua nota secundum {var="ultim
 <example: {full measure}, {mensural: void}, {staf: "5" V : "4" BU Br1 G, red}> {clef: "FA" V BU Br1 : "F8" G} {solm: 0} {mens: 0}<label>Exemplum.</label> <lig>MD LA</lig> <lig>BD MC</lig> <lig>ME MD</lig> ||</example></chapter>\n\
 <chapter><heading>{¶ } Quot modis maxima ac longa aliis cum propria forma colligentur. Capitulum .xiv.</heading>\n\
 Finaliter advertendum{. } quod maxima cum maxima{.,} longa{.,} brevi{.,} et semibrevi{.,} longaque cum maxima{.,} longa{.,} brevi{.,} etiam et semibrevi{.,} dupliciter ligantur{.:} {var="Primo" V BU Br1 : "Uno modo" G} quando una illarum super aliquam istarum directe{.,} secundo quando a latere cum propria simplici forma colligando ponitur{.,} {var="ut hic" V BU Br1 : "ut in exemplo subsequenti" G}:\n\
-<example: {full measure}, {mensural: void}, {staf: 5, red}> {clef: CA} {solm: 0} {mens: 0}<label>Exemplum.</label> <lig>MD ^MG</lig> {var="<lig>LD ^MG</lig>" V BU Br1 : "<lig>LE ^Ma</lig>" G} <lig>{var="SD SF" BU G : "BD BF" V : "SF Sa" Br1} ^Mc</lig> <lig>LG ^Lc</lig> <lig>Ba {var="^Ld" V BU Br1 : "Bd" G}</lig> <lig>SG Sa {var="^Lc" V BU Br1 : "Bc" G}</lig> <lig>Mb Md</lig> <lig>La Mc</lig> {var=(ins.) "{staf: 4, red}" BU} <lig>BG Ma</lig> <lig>SF SG Ma</lig> {var=(ins.) "|3-B {staf: 4, red} {clef: C8}" V : (ins.) "|| {clef: CA}" (in mid staff) BU} {var="<lig>LD LG</lig>" V BU Br1 : (om.) G} <lig>BF La</lig> <lig>Sb Sc Ld</lig> ||</example>\n\
+<example: {full measure}, {mensural: void}, {staf: 5, red}> {clef: CA} {solm: 0} {mens: 0}<label>Exemplum.</label> <lig>MD ^MG</lig> {var="<lig>LD ^MG</lig>" V BU Br1 : "<lig>LE ^Ma</lig>" G} <lig>{var="SD SF" BU G : "BD BF" V : "SF Sa" Br1} ^Mc</lig> <lig>LG ^Lc</lig> <lig>Ba {var="^Ld" V BU Br1 : "Bd" G}</lig> <lig>SG Sa {var="^Lc" V BU Br1 : "Bc" G}</lig> <lig>Mb Md</lig> <lig>La Mc</lig> {var=(ins.) "{staf: 3, red} {clef: C8} {solm: 0}" BU} <lig>BG Ma</lig> <lig>SF SG Ma</lig> {var=(ins.) "|3-B {staf: 4, red} {clef: C8}" V : (ins.) "||2-8 {clef: C8}" (in mid staff) BU} {var="<lig>LD LG</lig>" V BU Br1 : (om.) G} <lig>BF La</lig> <lig>Sb Sc Ld</lig> ||</example>\n\
 {¶ } Hinc si in quavis ligatura note propriam retinent formam cum proprietate{.,} si vero aliam {var=(ins.) "formam" G} recipiant sine proprietate fieri dicitur.</chapter>\n\
 <chapter><heading>{¶ } De notis incerti valoris. Capitulum .xv.</heading>\n\
 Note vero incerti valoris sunt ille que nullo regulari valore sunt limitate{.,} cuiusmodi sunt quibus in plano cantu utimur: {var="quarumquidem" V BU Br1 : "quarum quia" G} forma {var="interdum est" V BU Br1 : "est interdum" G} similis forme longe{.,} brevis{.,} et semibrevis{.,} et interdum dissimilis{.,} ita quod pedes muscarum propter earum parvitatem a plerisque nominantur{.,} ut hic:**The following examples are generally better represented in BU than in the other sources. V has inaccuracies of pitch and neume grouping; Br1 is curtailed; G has notational inaccuracies in square notation, and its Hufnagel example gives the "Gaudeamus" melody instead of "Salve sancta parens" (but this scribe was the most accomplished in Hufnagelschrift). The variation is such that a precise collation has not been attempted here; a normalized version of BU is used, and the examples as given in the other sources can be seen in the separate transcriptions and facsimiles.**\n\
@@ -112,7 +112,7 @@ Pausa semibrevis est tractulus quidam quovis colore formatus dimidietatem {var="
 <example: {full measure}, {mensural: void}, {staf: "5" V BU G : "4" Br1, red}> {clef: CA} {solm: 0} {mens: C7}<label>Exemplum.</label> PS7 SG {var=(ins.) "{clef: C8}" Br1} mF mG Sa Bb <lig>Sc Sd</lig> PS9 Sb mG mb Sa LG ||</example></chapter>\n\
 <chapter><heading>{¶ } {var="De pausa minime." V BU Br1 : (om.) G} {var="Capitulum .v." V BU : (om.) Br1 G}</heading>\n\
 Pausa minime est {var="tractulus" Br1 G : "tractus" V BU} quidam quovis colore formatus{. } dimidietatem {var="spacii" Br1 G : "spatii" V BU} occupans{.,} et {var="a" V BU Br1 : "de" G} linea sursum protractus. {var="Valor" V BU Br1 : "Valet" G} autem huiusmodi {var="pause" V BU Br1 : "pausa" G}{.,} sicut et minima{.,} individuus est{.,} eo quod ipsa {var="sit simplex" V BU Br1 : "minima simplex sit" G} et incomposita{.,} {var="ut hic patet" V : "ut hic in sequenti exemplo patet" BU : "ut hic" Br1 : (transp.) G}:\n\
-<example: {column measure}, {mensural: void}, {staf: "5" Br1 G : "4" V BU, red}> {clef: "CA" BU Br1 G : "C8" V} {solm: 0} {mens: O7}<label>Exemplum.</label> BF SG Pm9 Sa mb Sc Bd {var="PmB" BU Br1 G : "PmD" V} mc mb mG. sF mG Sa LG ||</example>\n\
+<example: {full measure}, {mensural: void}, {staf: "5" Br1 G : "4" V BU, red}> {clef: "CA" BU Br1 G : "C8" V} {solm: 0} {mens: O7}<label>Exemplum.</label> BF SG Pm9 Sa mb Sc Bd {var="PmB" BU Br1 G : "PmD" V} mc mb mG. sF mG Sa LG ||</example>\n\
 {¶ } Vocaturque hec pausa {var="vulgariter suspirium" V BU Br1 : "suspirium vulgariter" G}{.,} quoniam suspirando aptissime mensuratur {var=(ins.) "ut hic" (followed by preceding example) G}. Recipit et interdum tractulum quemdam obliquum a parte dextra deorsum protractum{ ,} nec tamen aliud accipit nomen{ ,} sed commensuratur uni minime que cum ea proportionem duplam efficit{.,} {var="ut hic patet" V : "ut hic" BU Br1 : "ut patet hic" G}:\n\
 <example: {full measure}, {mensural: void}, {staf: 5, red}> {clef: CA} {solm: 0} {mens: Ø5}<label>{var="Exemplum" V BU Br1 : "Exem-em-plum" G}.</label> SD mE mD Ps7 {void}sG mF mG. <void>sa sb sc</void> md PsB mc {void}sb SG mF .9 mG ma {var=(ins.) "{staf: 4, red}" Br1} {mens: C7} SG mF mD Ps5 sE sF sG ma. sG ma mF SE LD ||</example></chapter></book>\n\
 <conclusion><heading>{¶ } {var="Operis conclusio" V BU Br1 : (Conclusio om. altogether) G}</heading>\n\
@@ -514,7 +514,7 @@ Running heads: [none]\n\
 texts.denotisetpausis.BU = 'De notis et pausis\n\
 Data entry: Jeffrey J. Dean\n\
 Checked by:\n\
-Date established: 2013 05 31\n\
+Date established: 2013 07 10\n\
 Copy-text: Thesaurus Musicarum Latinarum, TINTDN.TEXT (Seay edn)\n\
 Source: I-Bu 2573, fols. 47r-52r (modern numeration)\n\
 Script: Lettera rotonda, 1 column per page\n\
@@ -578,7 +578,7 @@ Running heads: (verso) De notis (recto) et pausis\n\
 <example: {right 1/4-column opposite first 3 lines of preceding paragraph}, {mensural: void}, {staf: 4, red}> || {clef: FA} {solm: 0} {mens: 0} <lig>MD LA</lig> <lig>BD MC</lig> <lig>ME MD</lig>__</example></chapter>\n\
 [-50v-]<chapter><blue>¶</blue> <red>Quot modis maxima ac longa aliis cum propria forma colligentur Capitulum quartumdecimum</red>\n\
 <4line><gold>F</gold></4line>Inaliter advertendum. quod maxima cum maxima. longa. brevi. et semibrevi longa que cum maxima. longa. brevi. etiam et semibrevi. dupliciter ligantur. Primo quando una illarum super aliquam istarum directe. secundo quando a latere cum propria simplici forma colligando ponitur ut hic:\n\
-<example: {full measure + right 3/5-column opposite following paragraph}, {mensural: void}, {staf: 5, red}><text>Exem</text> {clef: CA} {solm: 0} {mens: 0} [-] <lig>MD ^MG</lig> <lig>LD ^MG</lig> <lig>SD SF ^Mc</lig> <lig>LG ^Lc</lig> <lig>Ba ^Ld</lig> <lig>SG Sa ^Lc</lig> <lig>Mb Md<text>plum.</text></lig> <lig>La Mc</lig> c __{staf: 4, red}|2-B {clef: CA} {solm: 0} <lig>BG Ma</lig> <lig>SF SG Ma</lig> || {clef: CA} {solm: 0} <lig>LD LG</lig> <lig>BF La</lig> <lig>Sb Sc Ld</lig></example>\n\
+<example: {full measure + right 3/5-column opposite following paragraph}, {mensural: void}, {staf: 5, red}><text>Exem</text> {clef: CA} {solm: 0} {mens: 0} [-] <lig>MD ^MG</lig> <lig>LD ^MG</lig> <lig>SD SF ^Mc</lig> <lig>LG ^Lc</lig> <lig>Ba ^Ld</lig> <lig>SG Sa ^Lc</lig> <lig>Mb Md<text>plum.</text></lig> <lig>La Mc</lig> c _{staf: 3, red}|0-9 {clef: C8} {solm: 0} <lig>BG Ma</lig> <lig>SF SG Ma</lig> <ll: -1, blind>||2-8 {clef: C8} {solm: 0} <lig>LD LG</lig> <lig>BF</ll> La</lig> <lig>Sb Sc Ld</lig> [-]</example>\n\
 <red>¶</red> Hinc si in quavis ligatura note propriam retinent formam cum proprietate. si vero aliam recipiant sine proprietate fieri dicitur:</chapter>\n\
 <chapter><blue>¶</blue> <red>De notis incerti valoris. Capitulum quintumdecimum</red>\n\
 <4line><blue>N</blue></4line>Ote vero incerti valoris sunt ille que nullo regulari valore sunt limitate. cuiusmodi sunt quibus in plano cantu utimur: quarumquidem forma interdum est similis forme longe brevis et semibrevis. et interdum dissimilis. ita quod pedes muscarum propter earum parvitatem a plerisque nominantur ut hic.\n\

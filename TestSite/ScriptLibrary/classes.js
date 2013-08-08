@@ -3391,6 +3391,11 @@ function LigChoice(){
         }
       }
     }
+    console.log([staff, this.lines, cury, 0, curx, this.staffColour]);
+    tempy = cury;
+    cury -= this.lines * rastralSize;
+    drawSystemLines(staff, this.lines, cury, 0, curx, this.staffColour);
+    cury = tempy;
     var prevx = curx;
     for(var i=0; i<this.content.length; i++){
       if(i>0) svgLine(SVG, curx - 10, cury, curx-10, 0, "divider", false);
@@ -3401,8 +3406,8 @@ function LigChoice(){
       prevx  = curx;
     }
     SVG.height.baseVal.value = cury;
-    cury -= this.lines * rastralSize;
-    drawSystemLines(staff, this.lines, cury, 0, curx, this.staffColour);
+    // cury -= this.lines * rastralSize;
+//    drawSystemLines(staff, this.lines, cury, 0, curx, this.staffColour);
     SVG.width.baseVal.value = curx;
     return SVG;
   };
@@ -3493,10 +3498,59 @@ function ObliqueNoteChoice(){
   this.nextEvent = function(variant){
     return this.nextEventObj ? this.nextEventObj.forwardEvent(variant) : false;
   };
-  this.addReading = function(witnesses, string, description){
-    var rdg = new MReading(witnesses, string?nextMusic(this.oblique):[], description);
-    this.content.push(rdg);
+  this.addReading = function(witnesses, string, description, description2, staffing){
+    // FIXME: Make this method an external function, since it's a
+    // duplicate, more or less of other choice methods
+    var agreement = stavesAgree(staffing);
+    var isntdefault = this.content.length || description === "ins." || 
+        description==="ins. & del.";
+    var oldClef = currentClef;
+    var oldSolm = currentSolm;
+    var oldLines = currentLinecount;
+    var oldColour = currentStaffColour;
+    if(!isntdefault){
+      // Simplest case. Accepted reading is always standardised
+      this.content.push(new MReading(witnesses, string?nextMusic(this.oblique):[], description, 
+                                     description2, false));
+    } else if (witnesses.length <=1 || agreement){
+      // Easiest case: either all definitions are the same (AGREEMENT) or there's only one
+      // Do staff stuff: 
+      currentClef = staffing[0][1];
+      // Then add reading
+      this.content.push(new MReading(witnesses, string?nextMusic(this.oblique):[], description, description2, 
+                                     staffing));
+    } else {
+      // Question 1: Is the variant insignificant
+      var ostr = string;
+      var obj = nextMusic(this.oblique);
+      if(obj.length===1 && this.content[0].content.length===1
+         && obj[0].pitch === this.content[0].content[0].pitch && defaultPresent(staffing)){
+          // this is an insignificant variant, so don't worry about it
+        this.content.push(new MReading(witnesses, obj, description, false, false));
+      } else {
+        var split = matchStaves(staffing);
+        var wits = split[0]
+        var staffings = split[1];
+        for(var i=0; i<wits.length; i++){
+          currentClef = staffings[i][0];
+          string = ostr;
+          hackedString = ostr; // Why do I need this?! string disappears otherwise!!!
+          obj = nextMusic();
+          var st = [];
+          for(var j=0; j<wits[i].length; j++){
+            st.push([wits[i][j]].concat(staffings[i]));
+          }
+          this.content.push(new MReading(wits[i], obj, description, description2, st));
+          string = ostr;
+        }
+      }
+    }
+    currentclef = oldClef;
   };
+  // this.addReading2 = function(witnesses, string, description){
+  //   var rdg = new MReading(witnesses, string?nextMusic(this.oblique):[], description);
+  //   this.content.push(rdg);
+  // };
   // ObliqueNoteChoice
   this.addOmission = function(witnesses){
     this.content.push(new MOmission(witnesses));
@@ -3527,7 +3581,15 @@ function ObliqueNoteChoice(){
     cury = rastralSize * 10;
     var start = curx;
     var staff = svgGroup(SVG, "Stafflines", false);
-    if(this.clef) this.clef.draw();
+    if(this.clef) {
+        var clef = this.clef.draw();
+        var cclass = clef.getAttributeNS(null, "class");
+        clef.setAttributeNS(null, "class", cclass+" indicative");
+    }
+    var tempy = cury;
+    cury -= this.lines * rastralSize;
+    drawSystemLines(staff, this.lines, cury, 0, curx, this.staffColour);
+    cury = tempy;
     var prevx = curx;
     for(var i=0; i<this.content.length; i++){
       if(i>0) {
@@ -3541,8 +3603,8 @@ function ObliqueNoteChoice(){
 //      curx  += 20;
     }
     SVG.height.baseVal.value = cury;
-    cury -= this.lines * rastralSize;
-    drawSystemLines(staff, this.lines, cury, 0, curx, this.staffColour);
+    // cury -= this.lines * rastralSize;
+    // drawSystemLines(staff, this.lines, cury, 0, curx, this.staffColour);
     SVG.width.baseVal.value = curx;
     return SVG;
   };
@@ -3779,9 +3841,8 @@ function MReading(witnesses, content, description, description2, staves){
     }
     var content = this.sketch(block, true);
     var description = svgText(block, x-3, y+5, "variantReading", false, false, false);
-    if(this.description || this.description2){
-      svgSpan(description, "readingDesc", false, (this.description || this.description2)+" ");
-    }
+    if(this.description) svgSpan(description, "readingDesc", false, this.description +" ");
+    if(this.description2) svgSpan(description, "readingDesc final", false, " "+this.description2+" ");
     if(this.witnesses[0] == "MSS" || this.witnesses[0] == "emend."){
       svgSpan(description, "variantWitnessesSpecial variantWitness", false, this.witnesses.join(" "));
     } else {

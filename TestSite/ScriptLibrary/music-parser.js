@@ -1341,7 +1341,7 @@ function nextChoiceLikeThing(choice, textp){
         if(textp){
           choice.addTextReading(witnesses, string, description);
         } else {
-          choice.addReading(witnesses, string, description, false, staffing);
+          choice.addReading(witnesses, string, lDescription, rDescription, staffing);
         }
         currentClef = clef;
         break;
@@ -1352,7 +1352,7 @@ function nextChoiceLikeThing(choice, textp){
         if(textp){
           choice.addTextReading(witnesses, string, description);
         } else {
-          choice.addReading(witnesses, string, description, false, staffing);
+          choice.addReading(witnesses, string, lDescription, rDescription, staffing);
         }
         currentClef = clef;
         break;

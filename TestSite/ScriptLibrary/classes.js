@@ -369,7 +369,7 @@ function Custos(){
     if(this.text){
       this.text.draw();
     }
-    if(spos){
+    if(!spos){
       var guess = nextPitch();
       if(!guess) return false;
       this.pitch = guess[0];

@@ -754,6 +754,12 @@ function Ligature(){
     var tempSVG = SVG;
     var group = svgGroup(SVG, "CompleteLigatureGroup", false);
     SVG = group;
+    var extraClasses = "";
+    // Now check for styles
+    if(this.classList.length){
+      extraClasses = classString(this.classList);
+      drawClasses(this.classList, this);
+    }
     for(var i=0; i<this.members.length; i++){
       this.members[i].draw();
     }
@@ -2598,17 +2604,6 @@ function LedgerLineChange(){
   };
   this.width = function() {return 0;//  ld/2;//FIXME
                           };
-  this.actuallyDraw = function(){
-    // FIXME: for reference -- this is dead code
-    var pos = this.count < 0 ? 2*(0-this.count)
-      : 2*(currentLinecount+2);
-    colour = this.colour || currentStaffColour;
-    for(var i=0; i<Math.abs(this.count); i++){
-      drawLedgerLine(this.startX, this.startY - yoffset(pos), this.endX || curx, " "+colour);
-      pos += 2;
-    }
-    if(this.previous && this.previous.count!=0) this.previous.actuallyDraw();
-  };
   // Ledger Line Change
   this.finishLines = function(){
     if(this.domObj){
@@ -4009,20 +4004,20 @@ function Classes(){
     }
   };
   this.classString = function(){
-    return this.classes.reduce(
+    var s = this.classes.reduce(
       function(str, el){
         return str+" "
           + (typeof(el.classString) == "undefined" ? el.objType : el.classString);}, "");
+    return s;
   };
 }
 
 function classString (classes){
-    return classes.reduce(
-      function(str, el){
-        return str
-          + (typeof(el.classString) == "undefined" 
-             ? "" 
-             : " " +el.classString);}, "");
+  return classes.reduce(
+    function(str, el){
+      return str
+        + (typeof(el.classString) == "undefined" ? "" : " " +el.classString);},
+    "");
 }
 
 function drawClasses (classes){

@@ -1820,7 +1820,7 @@ function Clef() {
     curx+=rastralSize/2;
     if(this.erroneousClef){
       this.erroneousClef.draw();
-//      currentClef = this;
+      currentClef = this;
     }
     SVG = oldSVG;
     if(oldX) this.startX = oldX;

@@ -218,7 +218,8 @@ var topMargin = 0;
 //var lmargin = 10;
 var lmargin = 3;
 //var rastralSize = 15;
-var rastralSize = 12;
+//var rastralSize = 12;
+var rastralSize = 10;
 var exWidth = 690;
 var localWidth = exWidth;
 var colours = {red: "#F00", black: "#000", blind: "#AAA"};
@@ -1218,12 +1219,16 @@ function fnUnglow(e){
   unglow(pop, ref);
 }
 
+function closeAllPopups(){
+  var pops = $(".popup");
+  $(".TBCloseButton.closepopup").remove();
+  pops.removeClass("clicked");
+  pops.hide();
+ }
+
 function popupCloseButtonClicked(e){
   if(e.altKey) {
-    var pops = $(".popup");
-    $(".TBCloseButton.closepopup").remove();
-    pops.removeClass("clicked");
-    pops.hide();
+    closeAllPopups();
   } else {
     var thisPop = $(e.delegateTarget.parentNode);
     $(e.delegateTarget).remove();
@@ -2265,6 +2270,20 @@ function repeatDotArray(start, end){
     }
   }
   return result;
+}
+
+function displayStatusBarReference(refobj){
+  var para = $(refobj).parents("div.para")[0];
+  var pclass = /at-\S*/.exec(para.className)[0].substring(3);
+  var loc = pclass.split("-");
+  var sclass = /sentence-\S*/.exec(refobj.className)[0].substring(9);
+  var book = roman(Number(loc[0])).toUpperCase();;
+  var chapter = isNaN(Number(loc[1])) ? loc[1] : roman(Number(loc[1]));
+  var pane = $(para).parents("div.pane")[0];
+  var out = $(pane).find(".cursorLocator")[0];
+  var outstring = book ? book+"." : "";
+  outstring += (chapter==="p" ? "Prol" : chapter);
+  out.innerHTML = outstring+"."+(Number(sclass)+1);
 }
 
 function displayReference(refobj, out){

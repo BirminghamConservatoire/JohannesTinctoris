@@ -272,11 +272,14 @@ function MusicExample(){
         if(top) {
 //          console.log(top); //-13=>4 -32=>10 -18=>-4 -32=>10
 //          this.SVG.parentNode.style.marginTop = top+5+"px";
-          var nudge = rastralSize*-2.4;
+          //var nudge = rastralSize*-2.4;
+          var nudge = rastralSize*-2.3;
           if($(this.SVG.parentNode).hasClass("inline")) {
-            this.SVG.parentNode.style.marginTop = "-35px";
-            if(this.w2[0][2]==3){
-              nudge -= rastralSize/2;
+            // this.SVG.parentNode.style.marginTop = "-35px";
+            this.SVG.parentNode.style.marginTop = (-2*rastralSize)+"px";
+            if(this.w2[0][2]===3){
+              // nudge -= rastralSize/2;
+              nudge -= rastralSize;
             }
           }
           this.SVG.parentNode.style.verticalAlign = nudge-top+"px";

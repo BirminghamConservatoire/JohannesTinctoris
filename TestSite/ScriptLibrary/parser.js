@@ -356,7 +356,7 @@ function TreatiseDoc(text, outdiv){
     // FIXME: loc
     ul = DOMTextEl("ul", "titlebarmenu location", false, false);
     li = DOMListItem("titlebartext location titlebarlocdetail", false, 
-      DOMAnchor(false, false, DOMSpan("loctext", false, 
+      DOMAnchor(false, false, DOMSpan("locText", false, 
         //romanReference(1,1,1)));
         this.scrollpos.book
             ? romanReference(this.scrollpos.book, this.scrollpos.chapter, this.scrollpos.section)
@@ -390,6 +390,9 @@ function TreatiseDoc(text, outdiv){
     this.drawTo = DOMDiv("drawTo", false, false);
     this.out.appendChild(this.drawTo);
     $(menu).menubar({menuIcon: true, buttons: true});
+    // location
+    var l = DOMDiv("cursorLocator", false, false);
+    bar.appendChild(l);
   };
   this.settingsMenu = function(ul){
     var item;
@@ -425,6 +428,7 @@ function TreatiseDoc(text, outdiv){
         var pos = currentPosition(doc.drawTo);
         $(this).addClass("checked");
         $(this.parentNode).find(".showvariants").removeClass("checked");
+        closeAllPopups();
         doc.showvars = false;
         doc.forceredraw = true;
         docMap.updatePageSettings();

@@ -620,7 +620,7 @@ function Text(text){
       if(firstPos<0){
         this.DOMObj = document.createTextNode(" ");
         if(!inTip && !editorMode){
-          $(this.DOMObj).hover(function(){displayReference(this, false);});
+          $(this.DOMObj).hover(function(){displayStatusBarReference(this, false);});
         }
         return this.DOMObj; // don't reset uncapitalize;
       } else {
@@ -631,7 +631,7 @@ function Text(text){
     }
     this.DOMObj = DOMSpan('sentence-'+this.sentence, false, textNode);
 //    if(!typeof(roman)=="undefined") $(this.DOMObj).hover(function(){displayReference(this, false);});
-    if(!inTip && !editorMode) $(this.DOMObj).hover(function(){displayReference(this, false);});
+    if(!inTip && !editorMode) $(this.DOMObj).hover(function(){displayStatusBarReference(this, false);});
     uncapitalise = false;
     return this.DOMObj;
   };

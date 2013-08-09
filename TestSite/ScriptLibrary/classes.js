@@ -2403,11 +2403,21 @@ function StrikethroughClose(){
 function NegativeSpace(){
   this.objType = "NegativeSpace";
   this.startX = false;
+  this.classList = [];
+  if(currentExample.classes && currentExample.classes.classes.length){
+    this.classList = currentExample.classes.classes.slice(0);
+  }
   this.toText = function(){
     return "_";
   };
   this.width = function() {return 0-rastralSize/2;};
   this.draw = function(){
+    var extraClasses = "";
+    // Now check for styles
+    if(this.classList.length){
+      extraClasses = classString(this.classList);
+      drawClasses(this.classList, this);
+    }
     this.startX = curx;
     curx -= rastralSize/2;
   };
@@ -2416,6 +2426,10 @@ function NegativeSpace(){
 function PositiveSpace(){
   this.objType = "PositiveSpace";
   this.startX = false;
+  this.classList = [];
+  if(currentExample.classes && currentExample.classes.classes.length){
+    this.classList = currentExample.classes.classes.slice(0);
+  }
   this.toText = function() {
     return "[-]";
   };
@@ -2424,6 +2438,12 @@ function PositiveSpace(){
     return rastralSize;
   };
   this.draw = function(){
+    var extraClasses = "";
+    // Now check for styles
+    if(this.classList.length){
+      extraClasses = classString(this.classList);
+      drawClasses(this.classList, this);
+    }
     this.startX = curx;
     curx += rastralSize;
   };

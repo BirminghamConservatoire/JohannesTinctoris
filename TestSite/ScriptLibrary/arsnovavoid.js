@@ -4,6 +4,7 @@ var highOffset = [["defaultOffset", {x:-24, y:1750}]];
 var lowOffset = [["defaultOffset", {x:-24, y:208}]];
 var maxAdvance = [["advance", 1404]];
 var restMetrics = [["advance", 552], ["em", 444], ["defaultOffset", {x:-108,y:208}]];
+var semiminimRestMetrics = [["advance", 552], ["em", 444], ["defaultOffset", {x:-192,y:208}]];
 var clefMetrics = [["defaultOffset", {x:-108,y:972}], ["advance", 500]];
 var mensMetrics = [["advance", 1680], ["em", 1320], 
                    ["defaultOffset", {x:-24, y:600}], ["leftmost", 141]];
@@ -127,7 +128,7 @@ var arsNovaVoid = {
   breveRest: glyphFromD("M348 -31v475h72v-475h-72z", restMetrics),
   semibreveRest: glyphFromD("M348 145v299h72v-217z", restMetrics),
   minimRest: glyphFromD("M348 -31v217l72 82v-299h-72z", restMetrics),
-  semiminimRest: glyphFromD("M348 -31v217l150 168l129 -153l-35 -37l-129 98l-43 -45v-248h-72z", restMetrics),
+  semiminimRest: glyphFromD("M348 -31v217l150 168l129 -153l-35 -37l-129 98l-43 -45v-248h-72z", semiminimRestMetrics),
   fusaRest: glyphFromD("M348 -31v217l150 168l129 -153l-35 -37l-129 98l-17 -20\
                          l105 -123l-29 -33l-102 70v-187h-72z", 
                        restMetrics),

@@ -934,8 +934,8 @@ p.justMusic{
   color: #A00;
 }
 .add, .editorial, .indicative {
-  color: #CCC;
-  fill: #CCC;
+  color: #888;
+  fill: #888;
 }
 .nobreak {
   white-space: nowrap;

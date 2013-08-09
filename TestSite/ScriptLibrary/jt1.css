@@ -187,7 +187,7 @@ div.databox{
 }
 .pane1, .pane1#content{
   float: left;
-  width = 100%;
+  width: 100%;
   padding: 6px;
   overflow: visible;
 }
@@ -254,8 +254,16 @@ div.databox{
   cursor: pointer;
   background: transparent;
 }
-.loctext, .viewtext{
-  font-size: 12px;
+.cursorLocator {
+  margin: 2px;
+  background-color: #F5F5DC;
+  float: right;
+  border-radius: 4px;
+  padding: 2px;
+  font-size: 80%;
+}
+.locText, .viewText{
+  font-size: 14px;
   /* font-weight: bold; */
 }
 .ui-icon.my-icon{

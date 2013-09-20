@@ -270,6 +270,7 @@ var book = 0;
 var section = 0;
 var paragraph = 0;
 var sentence = 0;
+var exampleno = 0;
 var string;
 var hackedString;
 var SVG = false;
@@ -280,6 +281,7 @@ var currentReading = false;
 var curDoc = false;
 var inHeading = false;
 var inTip = false;
+var oneOff=false;
 var handsmet = [];
 var examplei = false;
 var eventi = false;
@@ -319,6 +321,7 @@ var range = false;
 var desperatecounter = 0;
 var underlays = [];
 var currenttextparent = false;
+var curtextitem = false;
 var pari = false;
 //offset for editorial square bracket character
 var braceOff = 7.5;
@@ -369,8 +372,8 @@ function starFont(){
 function metrics(){
   return {
     halfHeight: rastralSize * 2/3 * prop,
-    vThickness: rastralSize / 7.5 * prop,
-    hThickness: rastralSize / 3 * prop,
+    vThickness: rastralSize / 6 * prop,
+    hThickness: rastralSize / 3.5 * prop,
     stemLength: rastralSize * 3.3 * prop,
     // hOffset:    rastralSize / 3 * prop,
     hOffset:    rastralSize / 2.5 * prop,
@@ -1584,6 +1587,7 @@ function ignorable(object){
 // For now, not mens...
 var infos = ["SolmizationSignature", "Clef", "Staff"];
 function infop(object){
+  if(!object) return false;
   if(typeof(object.objType) != "undefined" && infos.indexOf(object.objType)>-1){
     return true;
   } else if(typeof(object.objType) != "undefined" && object.objType == "MusicalChoice"){
@@ -1809,7 +1813,7 @@ function docMapping(){
   this.paneWidth = function(){
     return Math.max(minWidth, Math.min(maxWidth, ($(window).width()-60) / this.panes.length))-30;
   };
-  this.fixWidths = function(){
+  this.fixWidths = function(pos){
     if(this.hold) return false;
     var width = this.paneWidth();
     if(width===wrapWidth) {
@@ -1819,15 +1823,18 @@ function docMapping(){
     window.clearTimeout();
     wrapWidth = width;
 //    document.getElementById("tempdebug").innerHTML = wrapWidth;
-    setTimeout(function(){
+    setTimeout(function(args){
       for(var i=0; i<docMap.docs.length; i++){
         if(docMap.docs[i].prevWidth != wrapWidth){
           docMap.docs[i].forceredraw = true;
           docMap.docs[i].draw();
         }
+        if(args[0]) {
+          retryScroll([args[0], docMap.docs[i].drawTo]);
+        }
       }
       fixHeight(true);
-    }, 30);
+    }, 30, [pos]);
     this.fixButtons();
     return true;
   };
@@ -1908,11 +1915,13 @@ function docMapping(){
     }
     this.updatePanes();
     this.updatePageSettings();
-    this.fixWidths();
+    var scrolled = this.fixWidths(pos);
     fixHeight(true);
     this.fixButtons();
-    for(var i=0; i<this.docs.length; i++){
-      pos.simpleScroll(this.docs[i].drawTo);
+    if(!scrolled){
+      for(var i=0; i<this.docs.length; i++){
+        pos.simpleScroll(this.docs[i].drawTo);
+      }
     }
   };
   this.setTreatisePos = function(treatise, book, chapter, section, paragraph, offset){
@@ -2252,15 +2261,186 @@ function punctuationp(obj){
 }
 
 function trimPreInsSpaces(endsinpunct){
+  /// The logic is:
+  //   * Is there anything after the ins?
+  // 
+  //   * Is the ins an ins (i.e. a non-default choice)?
+  //
+  //     * Does this end in punctuation? 
+  //         OR
+  //     * Does the the thing after the ins start with punctuation 
   var content = currenttextparent.content;
   // if(content.length>pari+2
   //   && content[pari+1].objType==="Choice" && content[pari+1].nonDefault()) {
   // }
-  return content.length>pari+2
-    && content[pari+1].objType==="Choice"
-    && content[pari+1].nonDefault()
-    && (punctuationp(content[pari+2]) || endsinpunct);
+  var curt = curtextitem;
+  var n1 = curt.next;
+  var n2 = (n1 && n1.objType==="Choice") ? nextTextItem(n1, true) : false;
+  // var res1 = content.length>pari+2
+  //   && content[pari+1].objType==="Choice"
+  //   && content[pari+1].nonDefault()
+  //   && (punctuationp(content[pari+2]) || endsinpunct);
+  var res2 = n2 && n1.nonDefault() && (endsinpunct || punctuationp(n2));
+  // if(res1!==res2) console.log("difference", n1, n2, res1, res2);
+  // if(curt.content==="ut hic vides ") console.log(">>", curt, n1, n2, res1, res2, punctuationp(n2));
+  return res2;
+  // return content.length>pari+2
+  //   && content[pari+1].objType==="Choice"
+  //   && content[pari+1].nonDefault()
+  //   && (punctuationp(content[pari+2]) || endsinpunct);
 }
+
+function trimPostInsSpaces(baseText){
+  var tellall = false;
+  if(nextTextItem(baseText).content==="Prologus"){
+    tellall = true;
+  }
+  var prev = baseText.previous;
+  if(!prev) return false;
+  if(prev.objType==="Choice" && prev.nonDefault()) {
+    var pt = prevTextItem(prev, true);
+    if(!pt) return true;
+    if(pt.objType==="Punctuation"){
+      var ptstring = punctuationStyle==="modern" ? pt.modern : pt.MS;
+      if(/\S/.test(ptstring)){
+        // needs space
+        return false;
+      } else {
+        return true;
+      }
+    } else if ((/^\s*$/.test(pt.content))){
+      pr = prevTextItem(pt, true);
+      if(!pr) return true;
+      if(pr.objType==="Punctuation"){
+        var prstring = punctuationStyle==="modern" ? pr.modern : pr.MS;
+        if(/\S/.test(prstring)){
+          // needs space
+          return false;
+        } else {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+}
+
+function newPart(item){
+  var prev = item.previous;
+  if(prev.objType==="Part") console.log("wtf");
+  console.log("and...");
+  while(prev){
+    if(prev.objType==="Part"){
+      console.log("yay");
+      return true;
+    } else if(infop(prev)){
+      console.log("ooh");
+      return false;
+    }
+    prev = prev.previous;
+  }
+  return true;
+}
+
+function followedBySolm(item){
+  var next = item.next;
+  while(next){
+    if(next.objType==="SolmizationSignature"){
+      return true;
+    } else if(!ignorable(next)){
+      return false;
+    } 
+    next = next.next;
+  }
+  return false;
+}
+
+function readingElements(e, i, a){
+  return e.content;
+}
+function elementSets(container){
+  if(container.objType==="Choice" || container.objType==="MusicalChoice"){
+    return container.content.map(readingElements, container);
+  } else if(typeof(container.content)!="undefined"){
+    return [container.content];
+  } else if(Array.isArray(container)){
+    return [container];
+  } else {
+    return [];
+  }
+}
+function correctContainer(container){
+  // Ensure that container .next and .previous point where they should
+  if(container.objType==="Span"){
+    if(container.content.length){
+      container.next = container.content[0];
+      container.previous = last(container.content);
+    }
+  } else if(container.objType ==="Choice" || container.objType ==="MusicalChoice"){
+    if(!container.nonDefault()){
+      if(container.content[0].content.length){
+        container.next = container.content[0].content[0];
+        container.previous = last(container.content[0].content);
+      }
+    }
+  }
+}
+
+function correctNexts(container){
+  var elements;
+  var elSets = elementSets(container);
+  for(var j=0; j<elSets.length; j++){
+    elements = elSets[j];
+    if(!elements) continue;
+    for(var i=0; i<elements.length; i++){
+      if(i===0 && typeof(container.previous) !== "undefined"){
+        elements[i].previous = container.previous;
+      }
+      if(i===elements.length-1 && typeof(container.next) !== "undefined"){
+        elements[i].next = container.next;
+      }
+      if(elements[i].objType==="Span" || elements[i].objType==="Choice" || elements[i].objType==="MusicalChoice"){
+        correctNexts(elements[i]);
+      }
+    }
+  }
+  correctContainer(container);
+}
+
+function nextTextItem(item, withinPara, parStart){
+  // Return the next textual item after ITEM. If WITHINPARA is true,
+  // then return false if ITEM is the last one in its container,
+  // otherwise, treat the entire document as a continuous list of
+  // objects.
+  var cand = item.next;
+  var parpart = parStart ? parStart : pari;
+  if(!cand){
+    if(withinPara || (parpart+1>=curDoc.contents.length)) return false;
+    parpart++;
+    cand = curDoc.contents[parpart].content[0];
+  }
+  if(simpleTextualContentp(cand)){
+    return cand;
+  }
+  return nextTextItem(cand, withinPara, parpart);
+}
+
+function prevTextItem(item, withinPara){
+  // Return the previous textual item after ITEM. If WITHINPARA is true,
+  // then return false if ITEM is the last one in its container,
+  // otherwise, treat the entire document as a continuous list of
+  // objects.
+  var cand = item.previous;
+  if(!cand){
+    if(withinPara || pari) return false;
+    cand = last(curDoc.contents[pari-1].content);
+  }
+  if(simpleTextualContentp(cand)){
+    return cand;
+  }
+  return prevTextItem(cand);
+}
+
 
 function repeatDotArray(start, end){
   var result = [];
@@ -2273,17 +2453,38 @@ function repeatDotArray(start, end){
 }
 
 function displayStatusBarReference(refobj){
+  var meg = $(refobj).parents("div.musicexample");
+  if(meg && meg.length) {
+    displayStatusBarReferenceME(refobj, meg[0]);
+  } else {
+    var para = $(refobj).parents("div.para")[0];
+    var pclass = /at-\S*/.exec(para.className)[0].substring(3);
+    var loc = pclass.split("-");
+    var sclass = /sentence-\S*/.exec(refobj.className)[0].substring(9);
+    var book = roman(Number(loc[0])).toUpperCase();;
+    var chapter = isNaN(Number(loc[1])) ? loc[1] : roman(Number(loc[1]));
+    var pane = $(para).parents("div.pane")[0];
+    var out = $(pane).find(".cursorLocator")[0];
+    $(out).show();
+    var outstring = book ? book+"." : "";
+    outstring += (chapter==="p" ? "Prol" : chapter);
+    out.innerHTML = outstring+"."+(Number(sclass)+1);
+  }
+}
+
+function displayStatusBarReferenceME(refobj, musicex){
   var para = $(refobj).parents("div.para")[0];
-  var pclass = /at-\S*/.exec(para.className)[0].substring(3);
+  var pclass = /at-\S*/.exec(musicex.className)[0].substring(3);
   var loc = pclass.split("-");
-  var sclass = /sentence-\S*/.exec(refobj.className)[0].substring(9);
   var book = roman(Number(loc[0])).toUpperCase();;
   var chapter = isNaN(Number(loc[1])) ? loc[1] : roman(Number(loc[1]));
+  var exno = loc.length>3 ? 1+Number(loc[3]) : "0";
   var pane = $(para).parents("div.pane")[0];
   var out = $(pane).find(".cursorLocator")[0];
+  $(out).show();
   var outstring = book ? book+"." : "";
   outstring += (chapter==="p" ? "Prol" : chapter);
-  out.innerHTML = outstring+"."+(Number(sclass)+1);
+  out.innerHTML = outstring+".ex"+exno;  
 }
 
 function displayReference(refobj, out){
@@ -2374,9 +2575,6 @@ function staffDetailsForWitnesses(witnesses){
     solm = false;
     staff = false;
   }
-  if(currentExample.starts===9171){
-    console.log(results);
-  }
   return results;
 }
 
@@ -2407,9 +2605,6 @@ function matchStaves(staffing){
   return [witnesses, newS];
 }
 function defaultPresent(staffing){
-  if(currentExample.starts===9171){
-    console.log(staffing);
-  }
   return staffing.some(isDefaultStaffing);
 }
 
@@ -2442,6 +2637,9 @@ function staffPairAgrees2(s1, s2){
     && staffEqual2(s1[3], s2[2], s1[0]);
 }
 function clefEqual(c1, c2){
+  if(!c1) console.log("c1 missing "+book+"."+chapter+"."+sentence);
+  if(!c2) console.log("c2 missing "+book+"."+chapter+"."+sentence);
+  if(!c1 && !c2) return true;
   if(c1.erroneousClef) c1 = c1.erroneousClef;
   if(c2.erroneousClef) c2 = c2.erroneousClef;
   return c1.staffPos===c2.staffPos 

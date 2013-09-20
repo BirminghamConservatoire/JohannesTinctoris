@@ -15,6 +15,12 @@ function MusicExample(){
   this.parameters = false;
   this.bbox = false;
   this.colbreaks = [];
+  this.book = book;
+  this.chapter = chapter;
+  this.section = section;
+  this.exampleno = exampleno;
+  exampleno++;
+  this.atClass = "at-"+this.book+"-"+this.chapter+"-"+this.section+"-"+this.exampleno;
   this.parse = function(){
     this.staves = [];
     var augmented = false;
@@ -23,7 +29,7 @@ function MusicExample(){
     currentExample = this;
     initialStaffStar = false;
     var next;
-    var length;
+    var length, prev;
     currentClef = false;
     currentSolm = false;
     consumeSpace();
@@ -35,15 +41,24 @@ function MusicExample(){
       length = string.length;
       next = nextEvent();
       if(next){
+        if(prev) {
+          prev.next = next;
+          next.previous = prev;
+        }
         if(currentInfo){
           if(infop(next)){
             currentInfo.extras.push(next);
             next.params = currentInfo;
+            if(next.objType=="MusicalChoice") next.addParams(currentInfo);
           } else if(!ignorable(next)){
             currentInfo = false;
           }
         } else if(next.objType == "Staff"){
           currentInfo = next;
+        }
+        if(next.objType==="SolmizationSignature" 
+           && this.events.length && this.events[this.events.length-1].objType==="Clef"){
+          this.events[this.events.length-1].solm = next;
         }
         if(next.objType=="Dot"){
           next.augments = augmented;
@@ -64,6 +79,7 @@ function MusicExample(){
         } else {
           this.events.push(next);
         }
+        prev = next;
       } else if(length == string.length){
         // We're stuck in a loop. Try to escape
         string = string.substring(1);
@@ -71,6 +87,7 @@ function MusicExample(){
       // if there's no whitespace, following dot is of augmentation
       augmented= consumeSpace() ? false : next;
     }
+    correctNexts(this.events);
   };
   this.reset = function(){
     this.swidth = false;
@@ -273,15 +290,16 @@ function MusicExample(){
 //          console.log(top); //-13=>4 -32=>10 -18=>-4 -32=>10
 //          this.SVG.parentNode.style.marginTop = top+5+"px";
           //var nudge = rastralSize*-2.4;
-          var nudge = rastralSize*-2.3;
+          var nudge = rastralSize*-2.55;
           if($(this.SVG.parentNode).hasClass("inline")) {
             // this.SVG.parentNode.style.marginTop = "-35px";
             this.SVG.parentNode.style.marginTop = (-2*rastralSize)+"px";
             if(this.w2[0][2]===3){
-              // nudge -= rastralSize/2;
-              nudge -= rastralSize;
+              nudge -= rastralSize/2;
+              // nudge -= rastralSize;
             }
           }
+          if(safari) this.w2[0][2]===3 ? nudge+=2 : nudge+=4;
           this.SVG.parentNode.style.verticalAlign = nudge-top+"px";
         } 
         this.SVG.setAttribute('height', height);
@@ -300,6 +318,9 @@ function MusicExample(){
 //       this.SVG.width.baseVal.value = this.SVG.getBBox().
 //     }
     // this.SVG.parentNode.style.width = maxx+(texted ? 25 : 5)+8+"px";
+    if(!inTip && !editorMode){
+      $(this.SVG).hover(function(){displayStatusBarReference(this);});
+    }
     currentExample = false;
   };
   this.parse();
@@ -620,6 +641,11 @@ function nextTaglike(){
         // text with position
         var thing = nextText();
         if(tag.substring(0, 5)=="label") thing.type = "label";
+        var colon = tag.indexOf(":");
+        if(colon>-1){
+          thing.position = tag.substring(colon+1).trim();
+          console.log(thing);
+        }
         if(thing){
           return thing;
         }
@@ -753,6 +779,7 @@ function nextLigature(){
     } else if(string.substring(0,2) == "**"){
       next = nextComment();
       next = new LigatureComment(next);
+      currentExample.comments.push(next);
     } else if(string.charAt(0)=="<") {
       complaint.push("Unexpected item in the tagging area: "+string);
       return false;
@@ -987,10 +1014,12 @@ function parseMensReading(fields){
       return [fields.slice(i), new MReading(fields.slice(1, i), [mens], "")];
     } 
   }
+  var wits = fields.slice(1, fields.length);
   if(fields[0]==="(om.)"){
-    return [false, new MOmission(fields.slice(1, fields.length))];
+    return [false, new MOmission(wits, "om.", false, staffDetailsForWitnesses(wits))];
   } else {
-    return [false, new MReading(fields.slice(1, fields.length), [mens], "om.")];
+    return [false, new MReading(wits, [mens], "om.",
+                               false, staffDetailsForWitnesses(wits))];
   }
 }
 function parseMensVar(fields){
@@ -1317,14 +1346,17 @@ function nextObliqueNoteChoice(parent){
 function nextChoiceLikeThing(choice, textp){
   // cf readChoice in parser.js
   var lDescription, readingString, rDescription, description;
-  var witnesses, staffing, agreedVersion;
+  var witnesses, staffing, agreedVersion, stringTemp;
   var locend = findClose("}", 1);
   var finalString = string.substring(locend+1);
   var clef = currentClef;
   var prevLength = false;
   string = string.substring(5, locend); // 5 because of "{var="
   consumeSpace();
+  var debug1;
   while(string.length && prevLength != string.length){
+    if(string.length>15 && book===1&&chapter===3) debug1 = false;
+    if(debug1)console.log(string);
     prevLength = string.length;
     lDescription = consumeDescription();
     readingString = consumeReadingString();
@@ -1335,6 +1367,7 @@ function nextChoiceLikeThing(choice, textp){
     agreedVersion = stavesAgree(staffing);
     stringTemp = string;
     string = readingString;
+    if(debug1)console.log(string, stringTemp, lDescription, rDescription, witnesses);
     switch(description){
       case "nil":
         choice.addNilReading(witnesses);
@@ -1349,7 +1382,9 @@ function nextChoiceLikeThing(choice, textp){
         currentClef = clef;
         break;
       case "om.":
-        choice.addOmission(witnesses);
+      case "transp.":
+      case "transp. and expanded":
+        choice.addOmission(witnesses, lDescription, rDescription, staffing);
         break;
       default:
         if(textp){
@@ -1361,7 +1396,9 @@ function nextChoiceLikeThing(choice, textp){
         break;
     }
     string = stringTemp;
+    if(debug1) console.log(string.length, prevLength);
   }
+  if(debug1) console.log("finally: "+string);
   currentClef = clef;
   string = finalString;
   return choice;
@@ -1427,7 +1464,7 @@ function nextChoiceLikeThing2(choice, textp){
         currentClef = clef;
         break;
       case "om.":
-        choice.addOmission(witnesses);
+        choice.addOmission(witnesses, description, false, staffing);
         break;
       default:
         if(textp){
@@ -1459,6 +1496,10 @@ function nextMusic(parent){
     length = string.length;
     next = nextEvent();
     if(next){
+      if(next.objType==="SolmizationSignature"
+         && results.length && results[results.length-1].objType==="Clef"){
+        results[results.length-1].solm = next;
+      }
       if(parent){
         next = parent.enrichEvent(next, results);
       }

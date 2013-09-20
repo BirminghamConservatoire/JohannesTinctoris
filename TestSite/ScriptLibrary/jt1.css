@@ -254,8 +254,16 @@ div.databox{
   cursor: pointer;
   background: transparent;
 }
+.titlebarmenubar.ui-widget-header .ui-button.ui-state-default.ui-state-hover *{
+  color: #666;
+}
+.titlebarmenubar.ui-widget-header .ui-button.ui-state-default *{
+  color: #000;
+}
+
 .cursorLocator {
   margin: 2px;
+  margin-right: 28px;
   background-color: #F5F5DC;
   float: right;
   border-radius: 4px;
@@ -269,11 +277,14 @@ div.databox{
 .ui-icon.my-icon{
   height: 16px!important;
   width: 16px!important;
-  top: 1px!important;
-  left: 1px!important;
+  top: 3px!important;
+  left: 3px!important;
 }
 .ui-icon.my-ui-icon-gear{
   background-image: url('../Images/cog-empty-nobox.png');
+}
+.TBbutton.greyed{
+  opacity: 0.3;
 }
 .ui-icon.my-ui-icon-plus{
   background-image: url('../Images/plus.png');
@@ -282,8 +293,8 @@ div.databox{
   background-color: #CCC;
 }
 .TBbutton.ui-widget-content{
-  height: 20px;
-  width: 20px;
+  height: 24px;
+  width: 24px;
   padding: 0;
   float: right;
   margin: 2px;
@@ -304,8 +315,15 @@ div.databox{
   border-width: 2px;
 }
 .TBbutton.ui-widget-content:hover .ui-icon.my-icon{
-  top: 0px!important;
-  left: 0px!important;
+  top: 2px!important;
+  left: 2px!important;
+}
+.TBbutton.greyed.ui-widget-content:hover{
+  border-width: 1px;
+}
+.TBbutton.greyed.ui-widget-content:hover .ui-icon.my-icon{
+  top: 3px!important;
+  left: 3px!important;
 }
 .TBaddPaneButton{
  height: 12px;

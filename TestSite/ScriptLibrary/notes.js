@@ -80,9 +80,17 @@ function showNote(e){
   } else {
     alert($(this).data("ref"));
   }
+  var cites = $(note).find('[href*="Bibliography"]');
+  var base = false;
+  for(var i=0; i<cites.length; i++){
+    if(!base) base=Math.floor(posForAnchor(cites[i]));
+    $(cites[i]).data("refposition", base+(i/100));
+    $(cites[i]).hoverIntent(citationHoverIn, nullHoverOut);
+    $(cites[i]).click(pinCitation);
+  }
   $(note).dblclick(maybeHideNote);
-  $(note).find('[href*="Bibliography"]').hoverIntent(citationHoverIn, nullHoverOut);
-  $(note).find('[href*="Bibliography"]').click(pinCitation);
+  // $(note).find('[href*="Bibliography"]').hoverIntent(citationHoverIn, nullHoverOut);
+  // $(note).find('[href*="Bibliography"]').click(pinCitation);
   updateXRefs();
   e.preventDefault();
   return false;

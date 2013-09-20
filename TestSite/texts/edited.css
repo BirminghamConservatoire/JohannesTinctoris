@@ -52,7 +52,7 @@ p {
 }
 
 .ligatureHorizontal {
-  stroke-width: 2.6;
+  stroke-width: 2.3;
 }
 div.musicexample {
   display: inline-block;
@@ -70,10 +70,10 @@ div.musicexample:first-child svg{
 }
 
 .chantSquare {
-  stroke-width: 5.5;
+  stroke-width: 5;
 }
 
 .maxRestGroup, .maxRestGroup line, .longRest, .longRest line {
   stroke: black;
-  stroke-width: 1.5;
+  stroke-width: 1.2;
 }

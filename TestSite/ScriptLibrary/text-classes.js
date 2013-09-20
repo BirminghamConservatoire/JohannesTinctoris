@@ -1,9 +1,37 @@
 // Classes for textual content
-
+//
+//  These are:
+//    * Book
+//    * BookEnd
+//    * Prologue
+//    * Conclusion
+//    * Chapter
+//    * ChapEnd
+//    * Section
+//    * Heading
+//    * HeadingEnd
+//    * Column
+//    * NewLine
+//    * Paragraph
+//    * Annotation
+//    * Marginal
+//    * Span
+//    * Hand
+//    * Space
+//    * BlankLines
+//    * Add
+//    * Text
+//    * ExampleComments
+//    * Punctuation
+//    * Choice
+//    * Source
+//
 function Book(){
   this.objType = "Book";
   this.code = "<book>";
   this.book = book++;
+  this.next = false;
+  this.previous = false;
   chapter = 0;
   section = 0;
   paragraph = 0;
@@ -19,6 +47,8 @@ function Book(){
 function BookEnd(){
   this.objType = "BookEnd";
   this.code = "</book>";
+  this.next = false;
+  this.previous = false;
   this.toText = function(){
     return this.code;
   };
@@ -31,10 +61,13 @@ function Prologue(){
   this.code = "<prologue>";
   this.special = false;
   this.chapter = "p";
+  this.next = false;
+  this.previous = false;
   chapter = "p";
   paragraph = 0;
   section = 0;
   sentence = 0;
+  exampleno = 0;
   this.DOMObj = DOMAnchor('chapter', false, false, "ch-prologue");
   this.toText = function(){
     return this.code;
@@ -48,10 +81,13 @@ function Conclusion(){
   this.code = "</conclusion>";
   this.special = false;
   this.chapter = "c";
+  this.next = false;
+  this.previous = false;
   chapter = "c";
   paragraph = 0;
   section = 0;
   sentence = 0;
+  exampleno = 0;
   this.DOMObj = DOMAnchor('chapter', false, false, "ch-conclusion");
   this.toText = function(){
     return this.code;
@@ -66,9 +102,12 @@ function Chapter(){
   this.code = "<chapter>";
   this.special = false;
   this.chapter = (chapter==="p" || chapter==="c" ? (chapter=0) : chapter++);
+  this.next = false;
+  this.previous = false;
   paragraph = 0;
   section = 0;
   sentence = 0;
+  exampleno = 0;
   this.DOMObj = false;
   this.toText = function(){
     return this.code;
@@ -80,6 +119,8 @@ function Chapter(){
 function ChapEnd(){
   this.objType = "ChapEnd";
   this.code = "</chapter>";
+  this.next = false;
+  this.previous = false;
   this.toText = function(){
     return this.code;
   };
@@ -95,6 +136,8 @@ function Section(){
   paragraph = 0;
   sentence = 0;
   this.DOMObj = DOMAnchor('section', false, false, false);
+  this.next = false;
+  this.previous = false;
   this.toText = function(){
     return this.code;
   };
@@ -108,6 +151,8 @@ function Heading(){
   this.chapter = chapter ==="p" || chapter==="c" ? (chapter = 0) : chapter++;
   // fixme
   this.DOMObj = false;
+  this.next = false;
+  this.previous = false;
   this.toText = function(){
     return this.code;
   };
@@ -119,6 +164,8 @@ function Heading(){
 function HeadEnd(){
   this.objType = "HeadingEnd";
   this.code = "</heading>";
+  this.next = false;
+  this.previous = false;
   // No matter what the header, a heading is only one sentence
   sentence = 1;
   this.toText = function(){
@@ -134,6 +181,8 @@ function Column(){
   this.code = false;
   this.location = false;
   this.DOMObj = DOMDiv('col', false, false);
+  this.next = false;
+  this.previous = false;
   this.toText = function(){
     return "[-"+this.location+"-]";
   };
@@ -173,6 +222,8 @@ function Column(){
 function Newline(){
   this.objType="Newline";
   this.classes = [];
+  this.next = false;
+  this.previous = false;
   this.toHTML = function(){
     return document.createElement("br");
   }
@@ -193,6 +244,38 @@ function Paragraph(){
   nodes[this.n] = this;
   this.DOMObj = DOMDiv('para', 'node-'+this.n, false);
   this.DOMObjs = [document.createElement('p')];
+  this.musicOnly = function(){
+    var found = false;
+    for(var i=0; i<this.content.length; i++){
+      if(textualContentp(this.content[i])){
+        return false;
+      } else if(this.content[i].objType==="MusicExample"){
+        found = true;
+      }
+    }
+    return found;
+  };
+  this.realNext = function(){
+    return this.content.length ? this.content[0] 
+      : ((curDoc.contents.length>this.n+2) ? curDoc.contents[this.n+1] : false);
+  };
+  this.realPrevious = function(){
+    return this.content.length ? this.content[this.content.length-1] 
+      : (this.n===0 ? false : curDoc.contents[this.n-1]);
+  };
+  this.textualStructures = function(){
+    var structures = [];
+    var substructure = false;
+    for(var i=0; i<this.content.length; i++){
+      if(simpleTextualContentp(this.content[i])){
+        structures.push(this.content[i]);
+      } else if (containsTextualContentp(this.content[i])) {
+        var substructure = this.content[i].textualStructures();
+        if(substructure && substructure.length) structures = structures.concat(substructure);
+      } 
+    }
+    return structures;
+  }
   this.toText = function(){
     var text = "\n"+this.classesToText();
     for(var i=0; i<this.content.length; i++){
@@ -229,8 +312,8 @@ function Paragraph(){
       para.className = str;
     }
     this.DOMObj.appendChild(para);
-    currenttextparent = this;
     for(i=0; i<this.content.length; i++){
+      currenttextparent = this;
       pari = i;
       if(typeof(this.content[i]) == 'string'){
         // NEVER HAPPENS (anymore)
@@ -252,11 +335,11 @@ function Paragraph(){
           this.DOMObj.appendChild(para);
         }
       } else if (this.content[i].objType == "MusicExample"){
+        var standalone = standalonep(this.content[i], this.content)
         var div = DOMDiv('musicexample dc'+desperatecounter
 //                         +(this.content.length == 1 ? " standalone" 
-                         +(standalonep(this.content[i], this.content) ? " standalone" 
-                           : " inline"),
-          false, false);
+                         +(standalone ? " standalone" : " inline")+" "+this.content[i].atClass,
+                         false, false);
         if(margin) this.content[i].marginSpace = true;
         this.content[i].reset();
         if(this.content[i].SVG && false){
@@ -297,6 +380,8 @@ function Annotation(){
   this.code = false;
 //  this.domObj = DOMSpan("annotation", false, "‸");//*"
   this.domObj = DOMSpan("annotation", false, "*");
+  this.next = false;
+  this.previous = false;
   this.toText = function(){
     return "**"+this.code+"**";
   };
@@ -331,6 +416,8 @@ function Marginal(){
   this.side = false;
   // this.domObj = DOMSpan("marginal", false, DOMSpan("marginalStar", false, "* "));
   this.domObj = DOMDiv("marginal", false, false);
+  this.next = false;
+  this.previous = false;
   margins = true;
   this.toText = function(){
     var text = "<marg";
@@ -374,18 +461,48 @@ function textualContentp(element){
   switch(element.objType){
     case "Book":
     case "BookEnd":
+    case "Prologue":
+    case "Conclusion":
     case "Chapter":
     case "ChapEnd":
     case "Section":
     case "Heading":
     case "HeadingEnd":
     case "Column":
+    case "NewLine":
+    case "ExampleComments":
     case "Annotation":
     case "Marginal":
     case "Hand":
+    case "SentenceBreak":
+    case "MusicExample":
       return false;
     default:
       return true;
+  }
+}
+
+function simpleTextualContentp(element){
+  switch(element.objType){
+    case "text":
+    case "Punctuation":
+      return true;
+    default:
+      return false;
+  }
+}
+function simpleTextOrContainerp(element){
+  return element && (simpleTextualContentp(element) || containsTextualContentp(element));
+}
+function containsTextualContentp(element){
+  switch(element.objType){
+    case "Paragraph":
+    case "Span":
+      return element.contents.some(simpleTextOrContainerp);
+    case "Choice":
+      return !element.nonDefault && element.content[0].content.some(simpleTextorContainerp);
+    default:
+      return false;
   }
 }
 
@@ -402,8 +519,8 @@ function standalonep(example, array){
 function textBlockToHTML(container, content, block){
   // FIXME: revisit this -- I'm abstracting so that spans, etc can
   // house more complex things, like music examples
-  currenttextparent = block;
   for(var i=0; i<content.length; i++){
+    currenttextparent = block;
     pari = i;
     //FIXME: this is nonsense, what is it supposed to do?
     if (content[i].objType == "Column/Page" || 
@@ -425,7 +542,7 @@ function textBlockToHTML(container, content, block){
       var div = DOMDiv('musicexample dc'+desperatecounter
 //                         +(content.length == 1 ? " standalone" 
                          +(standalonep(content[i], content) ? " standalone" 
-                           : " inline"),
+                           : " inline")+" "+content[i].atClass,
           false, false);
       content[i].reset();
       if(content[i].SVG && false){
@@ -468,6 +585,27 @@ function Span(){
   this.DOMObj = false;
   this.content = [];
   this.extra = false;
+  this.next = false;
+  this.previous = false;
+  this.realNext = function(){
+    return this.content.length ? this.content[0] : this.next;
+  };
+  this.realPrevious = function(){
+    return this.content.length ? this.content[this.content.length-1] : this.previous;
+  };
+  this.textualStructures = function(){
+    var structures = [];
+    var substructure = false;
+    for(var i=0; i<this.content.length; i++){
+      if(simpleTextualContentp(this.content[i])){
+        structures.push(this.content[i]);
+      } else if (containsTextualContentp(this.content[i])) {
+        var substructure = this.content[i].textualStructures();
+        if(substructure && substructure.length) structures = structures.concat(substructure);
+      } 
+    }
+    return structures;
+  };
   this.toText = function(){
     var text = this.typeToText("open");
     for(var i=0; i<this.content.length; i++){
@@ -509,6 +647,8 @@ function Hand(){
   this.content = [];
   this.id = false;
   this.DOMObj = DOMSpan("hand", false, false);
+  this.next = false;
+  this.previous = false;
   this.toText = function(){
     var text = "<newhand";
     if(this.id) {
@@ -553,6 +693,8 @@ function Space(){
 function BlankLines(code){
   this.objType = "Blank Lines";
   this.code = code;
+  this.next = false;
+  this.previous = false;
   this.toText = function(){
     return "["+this.code+"]";
   }
@@ -565,6 +707,8 @@ function Add(){
   this.objType = "Add";
   this.code = "";
   this.content = [];
+  this.next = false;
+  this.previous = false;
   this.DOMObj = DOMSpan('add', false, false);
   this.toText = function(){
     return "["+this.code+"]";
@@ -592,6 +736,8 @@ function Text(text){
   this.overrideCapitalize = false;
   this.removepunct = false;
   this.sentence = inHeading ? 0 : sentence;
+  this.next = false;
+  this.previous = false;
   this.punctuation = function(){
     var str = /^\s*[,.:¶?!]/.exec(this.content);
     return str ? true : false;
@@ -611,8 +757,12 @@ function Text(text){
     var closingSpaces = /\s*$/.exec(this.code)[0].length;
     var spaceAfterPunc = /[,.:¶?!]\s+$/.exec(this.code);
     var textNode = false;
+    curtextitem = this;
     if(closingSpaces && trimPreInsSpaces(spaceAfterPunc)) {
       this.code = this.code.slice(0, 0-closingSpaces);
+    }
+    if(/^\s/.test(this.code) && trimPostInsSpaces(this)){
+      this.code = this.code.slice(1);
     }
     if(this.removepunct) this.code = this.code.substring(/^\s*[,.:¶?!]/.exec(this.content)[0].length);
     if(uncapitalise && !this.overrideCapitalize){
@@ -620,7 +770,7 @@ function Text(text){
       if(firstPos<0){
         this.DOMObj = document.createTextNode(" ");
         if(!inTip && !editorMode){
-          $(this.DOMObj).hover(function(){displayStatusBarReference(this, false);});
+          $(this.DOMObj).hover(function(){displayStatusBarReference(this);});
         }
         return this.DOMObj; // don't reset uncapitalize;
       } else {
@@ -652,6 +802,20 @@ function ExampleComments(comments){
   };
 }
 
+function SentenceBreak(){
+  this.objType="SentenceBreak";
+  sentence++;
+  this.punctuation = function(){
+    return true;
+  };
+  this.toText = function(){
+    return "{.}";
+  };
+  this.toHTML = function(){
+    return false;
+  }
+}
+
 function Punctuation(options){
   this.objType = "Punctuation";
   this.suppressDraw = false;
@@ -659,6 +823,8 @@ function Punctuation(options){
     return punctuationStyle==="modern" ? (this.modern ? true : false) : (this.MS ? true : false);};
   this.MS = options.charAt(0);
   this.modern = options.charAt(1);
+  this.next = false;
+  this.previous = false;
   this.MSDOM = this.MS=== " " ? false : 
     (this.MS==="¶" ? DOMSpan("noitalic pilcrow", false, this.MS) : document.createTextNode(this.MS));
   this.modernDOM = this.modern == " " ? false : document.createTextNode(this.modern);
@@ -716,6 +882,8 @@ function Punctuation(options){
 function Choice(){
   this.objType = "Choice";
   this.content = [];
+  this.next = false;
+  this.previous = false;
   this.addReading = function(witnesses, content, description, extraDescription){
     this.content.push(new Reading(witnesses, content, description, extraDescription));
   };
@@ -730,6 +898,13 @@ function Choice(){
       (this.content[0].description == "ins." 
        || this.content[0].description == "ins. & del.");
   };
+  this.punctuation = function(){
+    if(this.nonDefault) {
+      return false;
+    } else {
+      return(this.content[0].content[0].punctuation());
+    }
+  };
   this.toText = function(){
     var string = "{var=";
     for(var i=0; i<this.content.length; i++){
@@ -737,6 +912,13 @@ function Choice(){
       string+= this.content[i].toText();
     }
     return string + "}";
+  };
+  this.textualStructures = function(){
+    if(this.nonDefault()){
+      return false;
+    } else {
+      return this.content[0].textualStructures();
+    }
   };
   this.toHTML = function(){
     if(!showvariants) {
@@ -796,6 +978,21 @@ function Reading(witnesses, content, description, extraDescription){
   this.description = description;
   this.extraDescription = extraDescription ? extraDescription : false;
   this.content = content;
+  this.next = false;
+  this.previous = false;
+  this.textualStructures = function(){
+    var structures = [];
+    var substructure = false;
+    for(var i=0; i<this.content.length; i++){
+      if(simpleTextualContentp(this.content[i])){
+        structures.push(this.content[i]);
+      } else if (containsTextualContentp(this.content[i])) {
+        var substructure = this.content[i].textualStructures();
+        if(substructure && substructure.length) structures = structures.concat(substructure);
+      } 
+    }
+    return structures;
+  }
   this.toText = function(){
     var text = "";
     if(this.description) text += "("+this.description+")";
@@ -850,10 +1047,15 @@ function NilReading(witnesses, lDescription, rDescription){
   this.witnesses = witnesses;
   this.lDescription = lDescription;
   this.rDescription = rDescription;
+  this.next = false;
+  this.previous = false;
   this.toText = function(){
     var text = "(nil)";
     text+= this.witnesses.join(" ");
     return text;
+  };
+  this.textualStructures = function(){
+    return false;
   };
   this.ContentToHTML = function() {
     return false;
@@ -870,8 +1072,11 @@ function Omission(witnesses, lDescription, rDescription){
   this.witnesses = witnesses;
   this.lDescription = lDescription;
   this.rDescription = rDescription;
+  this.textualStructures = function(){
+    return false;
+  };
   this.toText = function(){
-    var text = "(om.)";
+    var text = "("+this.ldescription+")";
     text+= this.witnesses.join(" ");
     return text;
   };
@@ -880,7 +1085,7 @@ function Omission(witnesses, lDescription, rDescription){
   };
   this.footnote = function(){
     var span = DOMSpan("variantReading", false, 
-                       DOMSpan("readingDesc", false, "om. "));
+                       DOMSpan("readingDesc", false, this.lDescription+" "));
     span.appendChild(DOMSpan("variantWitnesses", false, witnessList(this)));
     return span;
   };
@@ -891,6 +1096,8 @@ function Source(id, details){
   //FIXME: stupid
   this.id = id;
   this.details = details;
+  this.next = false;
+  this.previous = false;
   this.toText = function(){
     return this.id+"\t"+this.details+"\n";
   };
@@ -907,6 +1114,8 @@ function BlankExample(){
   this.index = false;
   this.musicExample = false;
   this.latinTreatise = false;
+  this.next = false;
+  this.previous = false;
   this.DOMObj = DOMDiv('musicexample', false, false);
   this.toText = function(){
     return "{example}";
@@ -921,10 +1130,11 @@ function BlankExample(){
         newSVG = this.musicExample.SVG;
       } else {
         newSVG = svg(this.musicExample.width(), this.musicExample.height());
-        newSVG.className += " musicexample";
+        newSVG.className += " musicexample ";
         this.musicExample.SVG = newSVG;
       }
       this.DOMObj.appendChild(newSVG);
+      this.DOMObj.className += " "+this.musicExample.atClass;
 //      div.appendChild(newSVG);
       examples.push([this.musicExample, newSVG]);
     } else {

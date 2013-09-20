@@ -7,6 +7,7 @@ var settings = {language: "Latin",
 // Useful DOM objects
 var domobj = [];
 var texts = {};
+var baseDir = "TestSite";
 
 var foo=false;
 /* Client-side access to querystring name=value pairs

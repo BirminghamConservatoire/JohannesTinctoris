@@ -116,10 +116,10 @@ function repositionMarginal(div, list, clashes, stuckCount){
     if(queryT<targetB+5 && queryB>targetT-5){
       // Clash. Reposition.
       var n2 = Number(list[i].id.substring(list[i].id.lastIndexOf("-")+1));
-      if(n1==n2){
-        // sanity check
-        continue;
-      }
+      // if(n1==n2){
+      //   // sanity check
+      //   continue;
+      // }
       var stuck = clashes.indexOf(i)>-1;
       if(!stuck){
         clashes.push(i);
@@ -127,9 +127,7 @@ function repositionMarginal(div, list, clashes, stuckCount){
         stuckCount++;
         jumpby = 15*stuckCount;
       }
-      console.log(jumpby);
         // Try to keep cardinal order based on id numeral
-      console.log("pre");
       if(n1<=n2){
         div.style.top = (targetT-jumpby - div.clientHeight)+"px";
       } else {
@@ -141,7 +139,6 @@ function repositionMarginal(div, list, clashes, stuckCount){
 }
 
 function repositionCitation(div){
-  console.log(div.id);
   repositionMarginal(div, citations, [], 0);
 }
 
@@ -168,7 +165,6 @@ function repositionCitation2(div, from, stuckCount){
       var n1 = Number(div.id.substring(div.id.indexOf("---")+3));
       var n2 = Number(citations[i].id.substring(citations[i].id.indexOf("---")+3));
       var stuck = from.indexOf(i)>-1;
-      console.log([n1, n2, stuck]);
       if(!stuck){
         from.push(i);
       } else {
@@ -194,7 +190,6 @@ function killAllCitations(){
     $(citations[i]).remove();
   }
   citations = [];
-  console.log(currentCitation);
   $(currentCitation).remove();
   currentCitation = false;
 }
@@ -265,6 +260,7 @@ function removeStart(node){
 function makeCitation(id, n){
   // var entry = BibliographyEntries.filter("has(#"+id+")");
   var entry = $("#"+id, FullBibliography).parents("div").children("p");
+  console.log(entry.length);
   if(entry.length){
     var newNode = entry[0].cloneNode(true);
     currentCitation = DOMDiv("marginalCitation", "mcit-"+id+"---"+n, newNode);
@@ -305,7 +301,6 @@ function getRef(anchor){
 function bSearchForPos(pos, a, max, min){
   // Using wikipedia code
   if(max<min){
-    console.log([a, max, min]);
     return 0; // something wrong
   } else {
     var mid = Math.floor(max+min/2);
@@ -335,7 +330,10 @@ function posForAnchor(anchor){
 }
 
 function getN(anchor){
-  return $(anchor).data("refposition") || posForAnchor(anchor);
+  var pos = $(anchor).data("refposition");
+  if(pos || pos===0) return pos;
+  pos= posForAnchor(anchor);
+  return pos;
 }
 
 function citationHoverIn(e){
@@ -383,7 +381,6 @@ var previews = [];
 var z=0;
 
 function zoomFunction(e){
-  console.log(++z);
   var thumb = this;
   var canvas = $(this).data("canvas");
   var img = $(this).data("img");
@@ -416,7 +413,6 @@ function zoomFunction(e){
   var posy = (e.pageY-prevy)/prevh;
   posx *= img.width;
   posy *= img.height;
-  console.log([posx, posy, pw, ph]);
   zoomdiv.style.height = ph+"px";
   zoomdiv.style.width = pw+"px";
   imgcanvas.height = ph;
@@ -455,11 +451,9 @@ function makePreview(path, n, y){
   prevcanimg.onload = function(){
     var w = Math.min(prevParent.clientWidth - 20, this.width);
     var scaleFactor =  w / this.width;
-    console.log([w, scaleFactor]);
     prevdiv.style.width = w+"px";
     prevcan.width = w;
     prevcan.height = this.height * scaleFactor;
-    console.log([prevdiv.clientHeight, scaleFactor]);
     prevcontext.drawImage(prevcanimg, 0, 0, prevcan.width, prevcan.height);
     if(scaleFactor < 1){
 //      var zfun = zoomfunction(prevcanimg);
@@ -517,6 +511,7 @@ function previewHoverIn(e){
 
 $(function(){
   // initialising
+  // Declare where thumbnails and zoom are displayed
   prevParent = rmargin ? $(".sidebar2")[0] : $(".sidebar1")[0];
   zoomParent = zoomBanner ? 
     document.body :
@@ -601,7 +596,6 @@ function previewImage(path, y){
   prevcanimg.onload = function(){
     var w = Math.min(prevParent.clientWidth - 20, this.width);
     var scaleFactor =  w / this.width;
-    console.log([w, scaleFactor]);
     prevdiv.style.width = w+"px";
     prevcan.width = w;
     prevcan.height = this.height * scaleFactor;

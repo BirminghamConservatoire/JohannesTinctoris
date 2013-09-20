@@ -970,7 +970,8 @@ function Oblique(){
     if(ls){
       m0.drawLStem(ls);
     }
-    var ppos = this.prevEvent(variant).staffPos;
+    // var ppos = this.prevEvent(variant).staffPos;
+    var ppos = staffPosition(this.prevEvent(variant));
     // Join
     if(ppos && Math.abs(ppos-m0.staffPos)>1){
       var met = metrics();
@@ -980,7 +981,7 @@ function Oblique(){
       var joinTop = Math.max(yoffset(ppos), yoffset(m0.staffPos))+offset;
       var joinBottom = Math.min(yoffset(ppos), yoffset(m0.staffPos))-offset;
       
-      svgLine(SVG, curx+met.vThickness, cury-joinBottom, curx+met.vThickness, cury-joinTop, "ligatureVertical join", false);
+      svgLine(SVG, curx+met.vThickness, cury-joinBottom, curx+met.vThickness, cury-joinTop, "ligatureVertical join from-"+ppos+" to-"+m0.staffPos, false);
     }
     // FIXME: WHERE'S RSTEM?!?
     setDotPos(this.member(0, variant).staffPos);
@@ -1053,8 +1054,10 @@ function ObliqueNote(note, index, oblique){
     var m = metrics();
     var stemLength = this.voidnotes || currentSubType=="void" 
       ? m.stemLength : m.stemLength/4;
+    // var offset = this.voidnotes  || currentSubType=="void" 
+    //   ?  m.oblOffset+m.vThickness : m.hThickness/2;
     var offset = this.voidnotes  || currentSubType=="void" 
-      ?  m.oblOffset+m.vThickness : m.hThickness/2;
+      ?  m.oblOffset*0.64 : m.hThickness/2;
     var extraClasses = "";
     var y = yPos(cury, staffPosition(this));
     if(this.classList.length){
@@ -1755,6 +1758,7 @@ function Clef() {
   this.example = currentExample;
   this.domObj = false;
   this.params = false;
+  this.solm = false;
   this.editorial = false;
   this.appliesTo = false;
   this.erroneousClef = false;
@@ -1827,6 +1831,14 @@ function Clef() {
     if(this.erroneousClef){
       this.erroneousClef.draw();
       currentClef = this;
+    }
+    if(!this.params && currentSolm && currentSolm.members.length && !this.solm && currentReading && !followedBySolm(this)) {
+      var solm = currentSolm.draw();
+      if(solm) {
+        var sclass = solm.getAttributeNS(null, "class");
+        solm.setAttributeNS(null, "class", sclass+" indicative");
+      }
+      $(solm).addClass("editorial");
     }
     SVG = oldSVG;
     if(oldX) this.startX = oldX;
@@ -2190,16 +2202,30 @@ function TextUnderlay(){
     } else {
       curx = Math.max(curx, underlayRight());
     }
+    var ynudge = 0;
+    var pos = this.position;
+    var hpos = /[lrc]/.exec(this.position);
+    if(hpos) hpos = hpos[0];
+    var vpos = /[0-9]*/.exec(this.position);
+    if(vpos) vpos = Number(vpos[0]);
+    if(vpos){
+      ynudge = vpos*rastralSize/4;
+    }
     var textBlock = SVG.nodeName.toUpperCase()==="TEXT" ? SVG 
-      : svgText(SVG, curx, cury+rastralSize, "textblock", false, false, false);
+      : svgText(SVG, curx, cury+rastralSize-ynudge, "textblock", false, false, false);
     var oldSVG = SVG;
     SVG = textBlock;
     var styles = new Array();
     for(var i=0; i<this.components.length; i++){
       if(typeof(this.components[i]) == "string"){
-        if(this.components[i].length>0 && /\S+/.test(this.components)){
-          var txt = svgSpan(SVG, (styles.length ? textClasses(styles) :"text"), false,
-            this.components[i]);
+        if(this.components[i].length>0 && /\S+/.test(this.components[i])){
+          var txt = svgSpan(SVG, 
+                            (styles.length ? textClasses(styles) :"text"), false,
+                            ((this.components.length > i+1 
+                              && this.components[i+1].objType==="MusicalChoice"
+                              && this.components[i+1].content[0].description.indexOf("ins.")>-1)
+                             ? this.components[i].replace(/\s+$/g, '')
+                             : this.components[i]));
           // FIXME: Unneccessary now?
           // var dx = txt.getBBox().width;
           // curx += dx;
@@ -2212,6 +2238,16 @@ function TextUnderlay(){
         this.components[i].draw();
         styles = this.components[i].updateStyles(styles);
       }
+    }
+    switch(hpos){
+      case "l":
+        SVG.setAttributeNS(null, "x", lmargin);
+        break;
+      case "r":
+        SVG.setAttributeNS(null, "x", currentExample.width()-SVG.getBoundingClientRect().width-rastralSize);
+        break;
+      case "c":
+        SVG.setAttributeNS(null, "x", (currentExample.width()-SVG.getBoundingClientRect().width)/2);
     }
     SVG = oldSVG;
     curx = this.startX;
@@ -3069,8 +3105,8 @@ function MChoice(){
   this.addTextReading = function(witnesses, string, description, description2){
     this.content.push(new MReading(witnesses, string?getSubText():[], description, description2));
   };
-  this.addOmission = function(witnesses){
-    this.content.push(new MOmission(witnesses));
+  this.addOmission = function(witnesses, description, description2, staffing){
+    this.content.push(new MOmission(witnesses, description, description2, staffing));
   };
   this.addNilReading = function(witnesses){
     this.content.push(new MNilReading(witnesses));
@@ -3085,6 +3121,13 @@ function MChoice(){
     }
     return false;
   };
+  this.addParams = function(params){
+    for(var i=0; i<this.content.length; i++){
+      if(infop(this.content[i].content[0])){
+        this.content[i].content[0].params = params;
+      }
+    }
+  }
   this.ignorable = function(){
     // Find out if this contains useful prefatory info
     if(this.content[0].applies(false)){
@@ -3129,6 +3172,7 @@ function MChoice(){
   };
   // MChoice
   this.tip = function(tipSVG){
+    var oldSystem = systemLines;
     var oldClef = currentClef;
     var prevSVG = SVG;
     var oldUnderlays = underlays;
@@ -3167,7 +3211,7 @@ function MChoice(){
         var cclass = clef.getAttributeNS(null, "class");
         clef.setAttributeNS(null, "class", cclass+" indicative");
       }
-      if(this.solm &&!this.solmp() && !(this.content[0].needsChange())) {
+      if(this.solm &&!this.solmp() && !(this.content[0].needsChange()) && !newPart(this.content[0].content[0])) {
         if(!(this.solm.clefp && this.solm.clefp())){
           // Looks crazy, but true if it's an MChoice
           var solm = this.solm.draw();
@@ -3182,7 +3226,7 @@ function MChoice(){
       var prevx = curx;
       var olc, osc;
       staffGroup = staff;
-      drawSystemLines(staff, currentLinecount, cury-rastralSize*currentLinecount, 0, curx-10, currentStaffColour);
+      drawSystemLines(staff, currentLinecount, cury-rastralSize*currentLinecount, 0, curx-10, "a "+currentStaffColour);
       systemLines = [staffGroup, currentLinecount, currentStaffColour, curx-10, cury];
       for(var i=0; i<this.content.length; i++){
         if(i>0) svgLine(SVG, curx - 10, cury, curx - 10, 0, "divider", false);
@@ -3206,6 +3250,7 @@ function MChoice(){
     SVG.width.baseVal.value = curx;
     SVG.height.baseVal.value = SVG.getBBox().height+Math.max(SVG.getBBox().y, 0)+1;
     currentClef = oldClef;
+    systemLines = oldSystem;
     SVG = prevSVG
     noBreaks = false;
     return tipSVG;
@@ -3472,6 +3517,7 @@ function ObliqueNoteChoice(){
   this.lines = currentLinecount;
   this.staffColour = currentStaffColour.length ? currentStaffColour : "red";
   this.clef = currentClef;
+  this.solm = currentSolm && currentSolm.members.length ? currentSolm : false;
   this.domObj = false;
   this.textBlock = false;
   this.SVG = false;
@@ -3573,6 +3619,22 @@ function ObliqueNoteChoice(){
   this.addNilReading = function(witnesses){
     this.content.push(new MNilReading(witnesses));
   };
+  this.solmp = function(variant){
+    // Not sure this is possible, so for now:
+    return false;
+    // FIXME: Think this through!
+    if(variant){
+      for(var i=0; i<variant? this.content.length : 1; i++){
+        if(this.content[i].applies(variant)){
+          // Default object
+          return this.content[i].solmp();
+        }
+      }
+    } else {
+      return this.content[0].solmp();
+    }
+    return false;
+  };
   this.width = function(){
     // FIXME
     return this.content.length ? this.content[0].width() : 0;
@@ -3600,6 +3662,18 @@ function ObliqueNoteChoice(){
         var clef = this.clef.draw();
         var cclass = clef.getAttributeNS(null, "class");
         clef.setAttributeNS(null, "class", cclass+" indicative");
+    }
+    if(this.solm &&!this.solmp() && !(this.content[0].needsChange())) {
+      if(!(this.solm.clefp && this.solm.clefp())){
+        // Looks crazy, but true if it's an MChoice
+        var solm = this.solm.draw();
+        if(solm) {
+          var sclass = solm.getAttributeNS(null, "class");
+          solm.setAttributeNS(null, "class", sclass+" indicative");
+        } else {
+          console.log(["Solmization signature error:", this.solm]);
+        }
+      }
     }
     var tempy = cury;
     cury -= this.lines * rastralSize;
@@ -3680,7 +3754,7 @@ function MReading(witnesses, content, description, description2, staves){
       content[i].appliesTo = witnesses;
       // currentExample.staves.push([currentExample.events.length, 
       //                             content[i], this]);
-      break;
+//      break;
     }
   }
   ///
@@ -3854,6 +3928,7 @@ function MReading(witnesses, content, description, description2, staves){
         }
       }
     }
+    if(this.content[0].objType=="Staff") curx+=rastralSize;
     var content = this.sketch(block, true);
     var description = svgText(block, x-3, y+5, "variantReading", false, false, false);
     if(this.description) svgSpan(description, "readingDesc", false, this.description +" ");
@@ -3863,10 +3938,11 @@ function MReading(witnesses, content, description, description2, staves){
     } else {
       svgSpan(description, "variantWitnesses variantWitness", false, this.witnesses.join(" "));
     }
+    curx = Math.max(curx, description.getBoundingClientRect().right);
     drawSystemLines(systemLines[0], systemLines[1], 
                     systemLines[4]-rastralSize*systemLines[1],
                     Math.max(systemLines[3]-10, 0), curx,
-                    systemLines[2]);
+                    "o "+systemLines[2]);
     systemLines = oldSL;
     SVG = oldSVG;
     currentLinecount = lc;
@@ -3874,6 +3950,7 @@ function MReading(witnesses, content, description, description2, staves){
     currentClef = oc;
     currentSolm = os;
     staffGroup = oldstaff;
+    currentReading=false;
     return block;
   };
   // MReading
@@ -3916,24 +3993,79 @@ function MNilReading(witnesses){
   this.width = function(){return 0;};
   this.draw = function(){};
 }
-function MOmission(witnesses){
+function MOmission(witnesses, description, description2, staves){
   this.objType = "MusicalOmission";
   this.witnesses = witnesses;
+  this.description = description;
+  this.description2 = description2;
+  this.staves = staves;
   this.toText = function(){
-    var text = "(om.)";
+    var text = "("+description+")";
     text+= this.witnesses.join(" ");
     return text;
   };
+  this.clefp = function(){
+    return false;
+  };
+  this.solmp = function(){
+    return false;
+  };
   this.width = function(){return 0;};
   this.footnote = function(x,y){
+    // FIXME: abstract this away -- it happens too often
+    currentReading=this;
+    var oldstaff = staffGroup;
+    var oldSL = systemLines;
+    var drawPrep = false
+    staffGroup = svgGroup(SVG, "Stafflines", false);
+    var lc = currentLinecount;
+    var sc = currentStaffColour;
+    var oc = currentClef;
+    var os = currentSolm;
+    var oldSVG = SVG
+    if(this.staves && !defaultPresent(this.staves) && !this.clefp()){
+      currentClef = this.staves[0][1];
+      currentSolm = this.staves[0][2];
+      currentLinecount = this.staves[0][3].varLines(this.witnesses[0]);
+      currentStaffColour = this.staves[0][3].varColour(this.witnesses[0]);
+      // currentLinecount = this.staves[0][3].trueLines();
+      // currentStaffColour = this.staves[0][3].trueColour();
+      drawPrep = true;
+    }
     var block = svgGroup(SVG, "VariantReading music", false);
+    if(drawPrep){
+      var clef = currentClef.draw();
+      var cclass = clef.getAttributeNS(null, "class");
+      clef.setAttributeNS(null, "class", cclass+" indicative");
+      if(currentSolm && currentSolm.members.length){
+        var solm = currentSolm.draw();
+        if(solm) {
+          var sclass = solm.getAttributeNS(null, "class");
+          solm.setAttributeNS(null, "class", sclass+" indicative");
+        } else {
+          console.log("Solmization signature error");
+        }
+      }
+    }
+    systemLines = [staffGroup, currentLinecount, currentStaffColour, curx, cury];
     var description = svgText(block, x, y, "variantReading", false, false, false);
-    svgSpan(description, "readingDesc", false, 'om. ');
+    svgSpan(description, "readingDesc", false, this.description+' ');
     if(this.witnesses[0] == "MSS" || this.witnesses[0] == "emend."){
       svgSpan(description, "variantWitnessesSpecial variantWitness", false, this.witnesses.join(" "));
     } else {
       svgSpan(description, "variantWitnesses variantWitness", false, this.witnesses.join(" "));
     }
+    drawSystemLines(systemLines[0], systemLines[1], 
+                    systemLines[4]-rastralSize*systemLines[1],
+                    Math.max(systemLines[3]-10, 0), curx+10,
+                    systemLines[2]);
+    systemLines = oldSL;
+    SVG = oldSVG;
+    currentLinecount = lc;
+    currentStaffColour = sc;
+    currentClef = oc;
+    currentSolm = os;
+    staffGroup = oldstaff;
     return block;    
   };
   this.draw = function(){};

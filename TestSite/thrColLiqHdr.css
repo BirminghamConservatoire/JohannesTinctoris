@@ -78,9 +78,13 @@ body.edition, .edition .container{
 */
 .sidebar1 {
 	float: left;
-	width: 15%;
+	width: 20%;
+  min-width: 188px;
 	background: #DDD;
 	padding: 40px 10px;
+}
+.twitter-timeline {
+  padding: 10% 0;
 }
 .content {
 	padding: 0 10px 10px 10px;
@@ -104,7 +108,7 @@ body.edition, .edition .container{
 }
 .sidebar2 {
 	float: left;
-	width: 30%;
+	width: 25%;
 	background: #DDD;
 	padding: 40px 10px;
 }
@@ -473,6 +477,26 @@ p > img {
   padding: 5px;
   background-color: rgba(255, 255, 255, 0.3);
 }
+.minibiog {
+  text-align: justify;
+}
 .preamble a {
   font-style: normal;
+}
+.minibiog a:hover{
+  text-decoration: underline;
+}
+.biog-image {
+  float: right;
+  padding: 5px;
+  margin: 2px 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 4px;
+}
+.biog-image img {
+  width: 120px;
+}
+.minibiog {
+  margin-bottom: 20px;
 }

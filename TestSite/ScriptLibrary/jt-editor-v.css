@@ -92,6 +92,9 @@ span.twoline{
   float: left;
   padding-right: 10px;
 }
+span.large{
+  font-size: 250%;
+}
 /* +0.5x spacing */
 /* #content.oneandahalfspacing{ */
 /*   line-height: 1.8; */
@@ -258,6 +261,9 @@ span.twoline{
 span.verse{
   margin-left: 18px;
 }
+span.underscore{
+  text-decoration: underline;
+}
 span.strikethrough.spanred{
   background: url(redthrough.png) repeat-x center left;
   text-decoration: none;
@@ -283,6 +289,9 @@ span.gold, .gold.text, span.gold *, .gold.text * {
 }
 span.redline, .redline.text {
   text-shadow: red 1px 0px 0px;
+}
+span.yellowline, .yellowline.text {
+  text-shadow: #BC0 2px 1px 0px;
 }
 span.blueline, .blueline.text {
   text-shadow: blue 1px 0px 0px;
@@ -596,17 +605,19 @@ div.musicexample.standalone {
 /* } */
 
 .ligatureVertical, .ligatureStem, .rhombusTail, .neumeJoin, .neumeLine, .chantTail {
-  stroke-width: 1.4;
+  /* stroke-width: 1.4; */
+  stroke-width: 1.1;
   stroke: black;
 }
 .neumeLine, .chantTail {
-  stroke-width: 1;
+  stroke-width: 1.1;
 }
 neumeJoin{
   stroke-width: 4;
 }
 .ligatureHorizontal {
-  stroke-width: 3.5;
+  /* stroke-width: 3.5; */
+  stroke-width: 2.4;
   stroke: black;
 }
 

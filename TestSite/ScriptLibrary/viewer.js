@@ -13,7 +13,7 @@ dateDisplay = "hide";
 extraInfoDisplay = "hide";
 sourceDisplay = "hide";
 cssloc = "../../../GUIEditor";
-rastralSize = 12;
+rastralSize = 10;
 titleBar = true;
 
 function curChapter(){
@@ -780,7 +780,10 @@ function fixHeight(ignorewidth){
   // } else if($("#menudiv:visible").length && window.matchMedia("screen").matches){
   } else if($(".mainBody").length && window.matchMedia("screen").matches){
     // i.e. not print
+    var topheight = $(".header").height() + $(".nav").height();
+    var total = $(window).height();
     var space = $(".mainBody").height();
+    $(".mainBody")[0].style.height=(total-topheight-2)+"px";
 //    var space = $(window).height() - $(domobj['Content']).offset().top; 
     domobj['Content'].style.height = (space-20)+"px";
     var bars = $(domobj['Content']).find(".titleBar");
@@ -836,6 +839,9 @@ function locationInTreatise(obj){
   }
   return [book, chap, sect, para];
 }
+function retryScroll(args){
+  args[0].simpleScroll(args[1]);
+}
 function Position(book, chapter, section, paragraph, offset){
   this.offset = offset;
   this.paragraph = paragraph;
@@ -847,15 +853,17 @@ function Position(book, chapter, section, paragraph, offset){
       +(this.section ? this.section : 0)+"-"+this.paragraph;
   };
   this.simpleScroll = function(div){
-    var par = $(div).children(this.atClass());
+    var par = $(div).find(this.atClass());
     var pane = div.parentNode;
     if(par.length && Number(this.book)){
       var ref = romanReference(this.book, this.chapter, this.section).replace(".", "_");
-      $(div).scrollTo(par, {axis: "y", offset: {left: 0, top: -offset}});
+      $(div).scrollTo(par[0], {axis: "y", offset: {left: 0, top: -offset}});
       // now update location
       $(pane).find(".loctext").html(ref);
       $(pane).find(".navitem a").removeClass("selected");
       $(pane).find(".jump-"+ref).addClass("selected");
+    } else {
+      setTimeout(retryScroll, 200, [this, div]);
     }
   };
 }
@@ -905,6 +913,7 @@ function simpleScrollTo(div, offset, book, chap, sect, para){
 function alignVersions(e){
   if(e.altKey){
     var loc2=locationInTreatise(e.delegateTarget);
+    console.log(loc2);
     var loc = /at-\S*/.exec(e.delegateTarget.className)[0].split("-").slice(1).map(Number);
     var div = e.delegateTarget.parentNode;
     var offset = $(e.delegateTarget).offset().top - $(div).offset().top;

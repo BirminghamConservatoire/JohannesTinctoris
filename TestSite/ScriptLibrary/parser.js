@@ -9,8 +9,11 @@ var spans = {
   "polychrome": "polychrome",
   "redline": "redline",
   "blueline": "blueline",
+  "highlight": "yellowline",
   "strikethrough": "strikethrough",
   "insertabove": "insertabove",
+  "large": "large",
+  "underscore": "underscore",
   "2line": "twoline",
   "3line": "threeline",
   "4line": "fourline",
@@ -28,8 +31,11 @@ var reverseSpans = {
   "polychrome": "polychrome",
   "redline": "redline",
   "blueline": "blueline",
+  "yellowline": "highlight",
   "strikethrough": "strikethrough",
   "insertabove": "insertabove",
+  "large": "large",
+  "underscore": "underscore",
   "twoline": "2line",
   "threeline": "3line",
   "fourline": "4line",
@@ -81,6 +87,7 @@ function TreatiseDoc(text, outdiv){
   this.contents = [];
   this.exampleSource = false;
   this.examples = [];
+  this.leaves = [];
   this.structures = false;
   this.out = outdiv ? outdiv : document.getElementById('content');
   this.drawTo = this.out;
@@ -116,7 +123,7 @@ function TreatiseDoc(text, outdiv){
     this.scrollpos.chapter=chapter;
     this.scrollpos.section=section;
     this.scrollpos.paragraph=paragraph;
-    $(this.out).find(".loctext").html(romanReference(book, chapter, section));
+    $(this.out).find(".locText").html(romanReference(book, chapter, section));
     if(scroll){
       simpleScrollTo(this.drawTo, offset, book, chapter, section, paragraph);
     }
@@ -385,6 +392,9 @@ function TreatiseDoc(text, outdiv){
     bar.appendChild(ul2);
     this.settingsMenu(ul);
     $(ul2).menu({icons: {submenu: "gear"}});
+    if(this.docType!=="Edited") {
+      $(ul2).addClass("greyed");
+    }
     $(this.out).addClass("contentcontainer");
     this.out.appendChild(bar);
     this.drawTo = DOMDiv("drawTo", false, false);
@@ -393,6 +403,8 @@ function TreatiseDoc(text, outdiv){
     // location
     var l = DOMDiv("cursorLocator", false, false);
     bar.appendChild(l);
+    $(l).hide();
+    $(this.out).mouseleave(function(e){$(this).find(".cursorLocator").hide()});
   };
   this.settingsMenu = function(ul){
     var item;
@@ -473,6 +485,7 @@ function TreatiseDoc(text, outdiv){
         pos.simpleScroll(doc.drawTo);
       });
     } else {
+      // FIXME: why doesn't it work?
       ul.appendChild(DOMListItem(false, false, "no options"));  
     }
   };
@@ -579,10 +592,15 @@ function TreatiseDoc(text, outdiv){
       
     }
     margin = false;
+    var tS = [];
     while(string!=""){
       try{
         var para = readPara();
-        if(para) this.contents.push(para);      
+        if(para){
+          this.contents.push(para);
+          if(para.musicOnly()) sentence--;
+          // this.textualStructures.push(para.textualStructures());
+        }
       } catch (x) {
         var para = new Comment();
         para.contents.push(new Text("Error"));
@@ -769,6 +787,7 @@ function readPara(){
   if(centre){
     para.classes.push("centre");
   }
+  correctNexts(para);
   para.book = book;
   para.chapter = chapter;
   para.section = section;
@@ -779,6 +798,7 @@ function readPara(){
 }
 
 function readString(){
+  // FIXME: revisit and put newobj = true and single next/previous block
   var content = new Array();
   var fresh = false;
   var latest = false;
@@ -789,11 +809,16 @@ function readString(){
       case "<":
         fresh = readTag();
         if(fresh){
+          if(latest){
+            fresh.previous = latest;
+            latest.next = fresh;
+          }
           content.push(fresh);
           // if(fresh.objType == "MusicExample" && fresh.comments.length){
           //   content.push(fresh.commentsDiv());
           // }
         }
+        if(oneOff) return content;
         break;
       case "*":
         var comment = consumeIf(/\*\*[^*]*\*\*/);
@@ -803,6 +828,10 @@ function readString(){
             content[content.length -1].addChar(string.charAt(0));
           } else {
             content.push(new Text(string.charAt(0)));
+            if(latest) {
+              latest.next = content[content.length-1];
+              latest.next.previous = latest;
+            }
           }
           consume(1);
         } else if(comment.toLowerCase() == "**indent**"){
@@ -812,6 +841,10 @@ function readString(){
         } else {
           var ann = new Annotation();
           ann.code=comment.slice(2, -2);
+          if(latest) {
+            ann.previous = latest;
+            latest.next = ann;
+          }
           content.push(ann);
         }
         break;
@@ -825,19 +858,44 @@ function readString(){
       case "[":
         fresh = readLocation();
         if(fresh){
+          if(latest) {
+            fresh.previous = latest;
+            latest.next = fresh;
+          }
           content.push(fresh);
         }
         break;
       case "{":
+        // heavily used code -- could be punctuation of some sort or
+        // comment or music example spacer or single-character tag
         var punc = string.substring(1,3).match(/[,.¶:;()–-—!?\ ‘’]+/);
         if(punc && punc[0] && punc[0].length>1){
           content.push(new Punctuation(punc[0]));
+          if(latest){
+            latest.next = content[content.length-1];
+            latest.next.previous = latest;
+          }
           consumeIf(/\{[,.¶:;()–-—!?\ ‘’]+\}/);
+        } else if (punc && string.substring(0,3) ==="{.}"){
+          content.push(new SentenceBreak());
+          consume(3);
+          consumeSpace();
         } else if(consumeIf("{example}")){
           content.push(new BlankExample());
+          if(latest){
+            latest.next = content[content.length-1];
+            latest.next.previous = latest;
+          }
+        } else if(knownTag()) {
+          content.push(readOneOffTag());
         } else {
           content.push(readChoice());
+          if(latest){
+            latest.next = content[content.length-1];
+            latest.next.previous = latest;
+          }
         }
+        if(oneOff) return content;
         break;
       case ".":
       case "!":
@@ -852,8 +910,16 @@ function readString(){
             var newtext = new Text(" ");
             newtext.overrideCapitalize = true;
             content.push(newtext);
+            if(latest){
+              latest.next = content[content.length-1];
+              latest.next.previous = latest;
+            }
           } else {
             content.push(new Text(string.charAt(0)));
+            if(latest){
+              latest.next = content[content.length-1];
+              latest.next.previous = latest;
+            }
           }
         }
         consume(1);
@@ -871,6 +937,40 @@ function readString(){
   }
   return content;
 }  
+function knownTag(){
+  var tagends = string.indexOf("}");
+  if(tagends>-1){
+    var tag = string.substring(1, tagends);
+    if(typeof(spans[tag])!=="undefined"){
+      return true;
+    }
+  }
+  return false;
+}
+
+function readOneOffTag(){
+  var tagends = string.indexOf("}");
+  if(tagends>-1){
+    var tag = string.substring(1, tagends);
+    if(typeof(spans[tag])!=="undefined"){
+      var span = new Span();
+      span.type = spans[tag];
+      consume(tagends+1);
+      consumeSpace();
+      if(/[<{]/.test(string.charAt(0))){
+        oneOff=true;
+        span.content = readString();
+        oneOff=false;
+      } else {
+        span.content.push(new Text(string.charAt(0)));
+        consume(1);
+      }
+      return span;
+    }
+  } else{
+    return false;
+  }
+}
 
 function readTag(){
   var loc = string.indexOf(">");
@@ -1152,7 +1252,6 @@ function readChoice(){
   var choice = new Choice();
   var prevLength = string.length;
   string = string.substring(5, locend);
-  console.log(string);
   consumeSpace();
   while(string.length && prevLength != string.length){
     prevLength = string.length;
@@ -1172,6 +1271,8 @@ function readChoice(){
         choice.addReading(witnesses, string ? readString() : [], lDescription, rDescription);
         break;
       case "om.":
+      case "transp.":
+      case "transp. and expanded":
         choice.addOmission(witnesses, lDescription, rDescription);
         break;
       default:

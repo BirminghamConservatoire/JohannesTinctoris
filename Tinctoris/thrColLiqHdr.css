@@ -1,0 +1,715 @@
+@charset "UTF-8";
+body {
+	font: 100%/1.4 Georgia, "Times New Roman", serif;
+	background: #DDD;
+	margin: 0;
+	padding: 0;
+	color: #000;
+}
+* {
+		box-sizing: border-box;
+	-moz-box-sizing: border-box;
+
+}
+/* ~~ Element/tag selectors ~~ */
+ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing div. The remaining bottom margin will hold it away from any elements that follow. */
+	padding-right: 15px;
+	padding-left: 15px; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
+}
+a img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
+	border: none;
+}
+
+/* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
+a:link {
+	color:#414958;
+	font-weight: bold;
+	text-decoration: none; /* unless you style your links to look extremely unique, it's best to provide underlines for quick visual identification */
+}
+a:visited {
+	color: #4E5869;
+	font-weight: bold;
+	text-decoration: none;
+}
+a:hover, a:active, a:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
+	text-decoration: none;
+}
+
+/* ~~ this container surrounds all other divs giving them their percentage-based width ~~ */
+.container {
+	width: 100%;
+	/*max-width: 1350px;/* a max-width may be desirable to keep this layout from getting too wide on a large monitor. This keeps line length more readable. IE6 does not respect this declaration. */
+	min-width: 975px;/* a min-width may be desirable to keep this layout from getting too narrow. This keeps line length more readable in the side columns. IE6 does not respect this declaration. */
+	background: #DDD;
+	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout. It is not needed if you set the .container's width to 100%. */
+}
+body.edition, .edition .container{
+  background: #FFF;
+}
+
+
+/* ~~ the header is not given a width. It will extend the full width of your layout. It contains an image placeholder that should be replaced with your own linked logo ~~ */
+.header {
+	background: #FFF;
+	background-image: url(Images/Ivory%20Laid%20Paper.png);
+	background-position: left top;
+	border-bottom: 2px solid #0b2573;
+  margin: 0;
+	min-height: 140px;
+  break-after: avoid;
+  page-break-after: avoid;
+}
+.header.shortHeader {
+  min-height: 60px;
+}
+/* ~~ These are the columns for the layout. ~~ 
+
+1) Padding is only placed on the top and/or bottom of the divs. The elements within these divs have padding on their sides. This saves you from any "box model math". Keep in mind, if you add any side padding or border to the div itself, it will be added to the width you define to create the *total* width. You may also choose to remove the padding on the element in the div and place a second div within it with no width and the padding necessary for your design.
+
+2) No margin has been given to the columns since they are all floated. If you must add margin, avoid placing it on the side you're floating toward (for example: a right margin on a div set to float right). Many times, padding can be used instead. For divs where this rule must be broken, you should add a "display:inline" declaration to the div's rule to tame a bug where some versions of Internet Explorer double the margin.
+
+3) Since classes can be used multiple times in a document (and an element can also have multiple classes applied), the columns have been assigned class names instead of IDs. For example, two sidebar divs could be stacked if necessary. These can very easily be changed to IDs if that's your preference, as long as you'll only be using them once per document.
+
+4) If you prefer your nav on the right instead of the left, simply float these columns the opposite direction (all right instead of all left) and they'll render in reverse order. There's no need to move the divs around in the HTML source.
+
+*/
+.sidebar1 {
+	float: left;
+	width: 20%;
+  min-width: 188px;
+	background: #DDD;
+	padding: 40px 10px;
+  break-before: avoid;
+  page-break-before: avoid;
+}
+.twitter-timeline {
+  padding: 10% 0;
+}
+.content {
+	padding: 0 10px 10px 10px;
+	width: 55%;
+	float: left;
+  break-before: avoid;
+  page-break-before: avoid;
+}
+.contentbox {
+	background-color: #EEE;
+  background-image: url(Images/Ivory%20Laid%20Paper.png);
+	/* background-image: url(core_images/buff3.gif); */
+	background-repeat: repeat;
+	margin: 20px 0px;
+	padding: 5px 5px;
+}
+.help-box {
+  width: 98%;
+  margin: 0 auto;
+  padding: 0;
+}
+.help-box .contentbox {
+  padding: 5px 10px 20px 10px;
+}
+.help-box ul {
+  margin: 0 10px;
+  padding: 0 10px;
+}
+.sidebar1 .contentbox {
+	padding: 0;
+	margin: 20px 5px;
+}
+.content .contentbox {
+	padding: 20px;
+}
+.sidebar2 {
+	float: left;
+	width: 25%;
+	background: #DDD;
+	padding: 40px 10px;
+}
+.content {
+	background: #DDD;
+}
+.sidebar2 .imagebox{
+	margin: 18px auto;
+	width: 90%;
+	height: 90%;
+	max-width: 340px;
+}
+.sidebar2 .contentbox{
+	margin: 5px auto;
+	font-size: 14px;
+	text-align: center;
+	max-width: 315px;
+	padding: 6px 8px;
+}
+.sidebar2 img{
+	max-width: 100%;
+	max-height: 100%;
+	height: auto;
+	width: auto;
+	margin: 0 auto;
+}
+/* ~~ This grouped selector gives the lists in the .content area space ~~ */
+.content ul, .content ol { 
+	padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
+}
+
+/* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
+ul.nav {
+	list-style: none; /* this removes the list marker */
+	border-top: 1px solid #666; /* this creates the top border for the links - all others are placed using a bottom border on the LI */
+	margin-bottom: 15px; /* this creates the space between the navigation on the content below */
+}
+ul.nav li {
+	border-bottom: 1px solid #666; /* this creates the button separation */
+}
+ul.nav a, ul.nav a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */
+	padding: 5px 5px 5px 15px;
+	display: block; /* this gives the link block properties causing it to fill the whole LI containing it. This causes the entire area to react to a mouse click. */
+	text-decoration: none;
+	background: #8090AB;
+	color: #000;
+}
+ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background and text color for both mouse and keyboard navigators */
+	background: #6F7D94;
+	color: #FFF;
+}
+
+/* ~~The footer ~~ */
+.footer {
+	padding: 10px 0;
+	background: #DDD;
+	position: relative;/* this gives IE6 hasLayout to properly clear */
+	clear: both; /* this clear property forces the .container to understand where the columns end and contain them */
+}
+
+/* ~~miscellaneous float/clear classes~~ */
+.fltrt {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* this class can be used to float an element left in your page. The floated element must precede the element it should be next to on the page. */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* this class can be placed on a <br /> or empty div as the final element following the last floated div (within the #container) if the #footer is removed or taken out of the #container */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
+#EMTLogo{
+	display:inline-block;
+	padding: 2px 20px;
+	margin: 23px 0 0 0;
+	border-right: 6px double #0b2573;
+}
+.header .imagebox{
+	float: left;
+	clear: none;
+}
+.header .imagebox.right{
+	float: right;
+}
+.content .imagebox{
+	border: 1px solid #0b2573;
+	background: #FFF;
+	margin: 20px;
+	padding: 10px;
+	display: inline-block;
+}
+#projectlogo a{
+/*	margin: 25px 40px auto auto;*/
+  width: 412px;
+	margin: 25px auto auto auto;
+	display: block;
+}
+.shortHeader #projectlogo a{
+  margin: 12px auto auto auto;
+}
+.shortHeader #EMT{
+  margin: 10px 0 0 0;
+}
+.shortHeader #EMTLogo{
+  margin: 0;
+}
+#projectlogo{
+	width: 50%;
+}
+#EMT{
+	width: 15%;
+  min-width: 193px;
+}
+.bloglink {
+  float:right;
+  clear: none;
+}
+.bloglink a {
+  margin: 8px 16px;
+  padding: 4px;
+  border: 2px solid #0b2573;
+  border-radius: 12px;
+  background-color: rgba(255,255,255,0.45);
+  text-align: right;
+  display: block;
+}
+.bloglink a:hover {
+  background-color: rgba(255,255,255,0.7);
+  border: 2px solid #3C518F;
+}
+#JTTeam{
+	margin: 32px auto 0 0;
+}
+#Team{
+	width: 29%;
+  min-height: 138px;
+}
+.frontpagemenu {
+	min-height: 36px;
+	margin: 0 auto 10px auto;
+	width: 842px;
+}
+.frontpagemenu > ul > li {
+	height: 36px;
+}
+.tabr{
+	display: table-cell;
+	width: 15%;
+}
+.tabl{
+	display: table-cell;
+	width: 85%;
+}
+.nav{
+	display: table;
+	width: 100%;
+  break-after: avoid;
+  page-break-after: avoid;
+}
+.nav .row{
+	display: table-row;	
+}
+.frontpagemenubar {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 14px;
+	font-style: normal;
+	padding-left: 0;
+}
+#MenuBar1, #MenuBar1 a {
+	font-size: 15px;
+  left: 50px;
+	font-weight: normal;
+}
+#MenuBar1 a:hover {
+	color: white;
+}
+#MenuBar1 a.notes:hover {
+	color: #cc2414;
+  background-color: #F4F4FF;
+}
+#MenuBar1 li{
+	border: 1px solid #0b2573;
+	border-top: none;
+}
+#MenuBar1 > li > ul{
+	border-top: 2px solid #0b2573;
+	margin-top: 0px;
+}
+#MenuBar1 > li > ul > li > ul{
+	border-top: 2px solid #0b2573;
+/*	top: -1px;
+	left: 0px;*/
+	margin-left: 174px;
+}
+.frontpagemenu #MenuBar1 li .MenuBarSubmenuVisible li {
+	font-size: 14px;
+	width: 175px;
+	text-align: left;
+	font-weight: normal;
+}
+#MenuBar1 > li > a.MenuBarItemSubmenu {
+	font-weight: bold;
+}
+#textMenu > li > a.notes{
+  font-style: italic;
+  /* text-align: right; */
+  font-size: 95%;
+  background-color: #EEEEF5;
+}
+#textMenu > li > a.notes.last{
+  border-bottom: 2px solid black;
+}
+.ref-2014 {
+  border-top: 2px solid black;
+}
+.frontpagemenu #MenuBar1 * {
+	border-color: #0b2573;
+}
+#Accordion1 {
+	 border: 2px solid black;
+}
+#Accordion1 * {
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+#Accordion1 .AccordionPanelTab {
+	font-size: 15px;
+	text-align: center;
+	font-weight: bold;
+	color: white;
+	background-color: #cc817a; /*#0b2573;*/
+	background-image: none;
+	border-top: 2px solid white;
+}
+#Accordion1 .AccordionPanel:first-child .AccordionPanelTab {
+	border-top: none; /*2px solid black;*/
+}
+#Accordion1 .AccordionPanel.AccordionPanelOpen .AccordionPanelTab {
+	font-weight: bold;
+	background-image: none;
+	background-color: #cc2414;
+	color: #FFF;
+}
+#Accordion1, #Accordion1 * {
+	border-color: black;
+	background-image: url(Images/Ivory%20Laid%20Paper.png);
+}
+.AccordionPanelContent {
+	line-height: 19px;
+	font-size: 13px;
+}
+ul.MenuBarHorizontal .MenuBarSubmenuVisible{
+	width: 177px;
+}
+ul.MenuBarHorizontal a.MenuBarItemSubmenu
+{
+	background-image: url(SpryAssets/SpryMenuBarDown.gif);
+	background-image: url(SpryAssets/SpryMenuBarDown.gif), -moz-linear-gradient(to top, #CCC, #CCC, #E2E2E2, #E2E2E2, #E2E2E2);
+	background-image: url(SpryAssets/SpryMenuBarDown.gif), -webkit-linear-gradient(bottom, #CCC 40%, #E2E2E2 60%);
+	background-image: url(SpryAssets/SpryMenuBarDown.gif), -o-linear-gradient(to top, #CCC, #CCC, #E2E2E2, #E2E2E2, #E2E2E2);
+	background-repeat: no-repeat;
+	background-position: 95% 50%;
+}
+.AccordionFocused{
+	outline-color: #cc817a;
+}
+#MenuBar1 > li > ul{
+ display: none;
+}
+#MenuBar1 > li .MenuBarSubmenuVisible{
+ display: inherit;
+}
+#MenuBar1 a.placeholder {
+  color: #BBB;
+}
+.team {
+  border-collapse: collapse;
+  border: none;
+  margin: 52px 0 0 0;
+}
+.team td{
+  padding: 0;
+}
+#projectTeam{
+  background-image: url(Images/JT%20Team.png);
+  width: 90px;
+  height: 21px;
+}
+#RonaldWoodley{
+  background-image: url(Images/RW.png);
+  width: 141px;
+  height: 21px;
+}
+#RonaldWoodley:hover{
+  background-image: url(Images/RW-red.png);
+}
+#JeffreyDean{
+  background-image: url(Images/JJD.png);
+  height: 25px;
+}
+#JeffreyDean:hover{
+  background-image: url(Images/JJD-red.png);
+}
+#DavidLewis{
+  background-image: url(Images/DL.png);
+  height: 25px;
+}
+#DavidLewis:hover{
+  background-image: url(Images/DL-red.png);
+}
+.marginalCitation{
+  position: absolute;
+  margin-right: 10px;
+  padding: 3px;
+  background-color: #EEE;
+  cursor: pointer;
+}
+.marginalCitation p{
+  margin: 0;
+}
+
+.preview.marginalCitation.nozoom{
+  cursor: default;
+  cursor: -moz-zoom-in;
+  cursor: -webkit-zoom-in;
+}
+.preview.marginalCitation{
+  cursor: zoom-in;
+  cursor: -moz-zoom-in;
+  cursor: -webkit-zoom-in;
+}
+.zoomed{
+  /* position: fixed; */
+  /* top: 100px; */
+  /* left: 50px; */
+}
+.biblButton{
+  height: 32px;
+  width: 40px;
+  /* Based on Book blue, by Tvskyfreak, itself derived from Hill's
+HILLBLU libro, each released under CC-SA3 by its respective authors */
+  background-color: white;
+  background: url(Images/Book_simple_small.png) no-repeat center;
+  display: block;
+  margin: 4px;
+  padding: 3px;
+  position: relative;
+  float: right;
+  border-radius: 6px;
+  border: 2px solid #AAD;
+}
+
+.biblButton:hover {
+  border: 2px solid #DDD;
+}
+
+#toTop {
+  position: fixed;
+  right: 87%;
+  cursor: pointer;
+  bottom: 3px;
+  border: 3px solid #55A;
+  border-radius: 10px;
+  background-color: #EEE;
+  opacity: 0.4;
+  padding: 4px;
+  font-family: helvetica, arial, sans-serif;
+}
+
+#toTop:hover {
+  border-color: #336;
+}
+.note {
+  margin: 5px;
+  font-size: 95%;
+  /* border: 1px dashed #414958; */
+  background-color: rgba(255, 255, 255, 0.5);
+  display: block;
+}
+.note:hover {
+  /* border: 1px dashed #414958; */
+  /* margin: 4px; */
+}
+.fn {
+  vertical-align: super;
+  font-size: 90%;
+}
+.note .fn {
+  padding-right: 4px;
+}
+p > img {
+  max-width: 100%;
+  height: auto;
+}
+.preamble {
+  font-style: italic;
+  font-size: 90%;
+  margin: 25px 50px;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.preamble.archive {
+  font-size: 100%;
+  border: 2px dashed #cc2414;
+  padding: 10px;
+  border-radius: 10px;
+}
+.preamble.archive b{
+  color: #cc2414;
+}
+.minibiog {
+  text-align: justify;
+  padding-bottom: 5px;
+}
+.preamble a {
+  font-style: normal;
+}
+/* .minibiog a:hover{ */
+/*   text-decoration: underline; */
+/* } */
+.biog-image {
+  float: right;
+  padding: 5px;
+  margin: 2px 9px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 4px;
+}
+.minibiog:nth-child(even) .biog-image {
+  float: left;
+}
+.biog-image img {
+  width: 120px;
+}
+.minibiog {
+  margin-bottom: 20px;
+}
+hr {
+  break-after: page;
+  page-break-before: always;
+}
+p.address{
+  font-size: 90%;
+}
+.emt a:hover, a:hover{
+  /* text-decoration: underline; */
+  /* color: #933; */
+  color: #cc2414;
+}
+#warn span{
+  margin: 0px auto;
+  padding: 6px;
+  text-align:center;
+  color:#414958;
+  border: 2px solid #666;
+  border-radius: 15px;
+  cursor: pointer;  
+  font-family: helvetica, arial, sans-serif;
+}
+div.helpshot {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  width: 420px;
+}
+div.helpshot.h647 {
+  padding: 6px;
+  border-radius: 12px;
+  width: 659px;
+}
+div.helpshot.h716 {
+  padding: 6px;
+  border-radius: 12px;
+  width: 728px;
+}
+div.helpshot.h821 {
+  padding: 6px;
+  border-radius: 12px;
+  width: 833px;
+}
+div.helpshot.h853 {
+  padding: 6px;
+  border-radius: 12px;
+  width: 865px;
+}
+div.helpshot.h950 {
+  padding: 6px;
+  border-radius: 12px;
+  width: 963px;
+}
+div.explanation{
+  /* border-collapse: collapse; */
+  margin: 0 6px;
+  width: 647px;
+  display: table;
+  table-layout: fixed;
+  border-left: 1px solid #888;
+}
+div.explanation.plus25 {
+  width: 672px;
+}
+div.explanation-row{
+  display: table-row;
+}
+div.explanation.navigation{
+  width: 100%;
+  margin-bottom: 20px;
+  border: none;
+}
+div.explanation div.explanation-row .cell{
+  border-right: 1px solid #888;
+  margin: 0;
+  padding: 4px;
+  display: table-cell;
+  overflow: auto;
+  /* word-wrap: break-word; */
+  font-size: 85%;
+  /* border-collapse: collapse; */
+}
+div.explanation.navigation div.explanation-row .cell{
+  border: none;
+}
+.cell.c{
+  text-align: center;
+}
+.cell.r{
+  text-align: right;
+}
+.cell.w100{
+  width: 100px;
+}
+.cell.w116{
+  width: 116px;
+}
+.cell.w62{
+  width: 62px;
+}
+.cell.w40{
+  width: 40px;
+}
+.simplemap a {
+  cursor: pointer;
+}
+.wordsplit, .wordjoin{
+  color: #777;
+}
+span.correction .overwritten.m {
+  letter-spacing: -1em;
+  color: #777;
+}
+span.correction .correct.n {
+  letter-spacing: 0.3em;
+}
+table.abbreviationsAndExpansions {
+  border: none;
+  border-collapse: collapse;
+  margin: 12px 0px;
+}
+table.abbreviationsAndExpansions td{
+  padding: 2px 12px;
+}
+table.abbreviationsAndExpansions tr td.expansion {
+  font-style: italic;  
+}
+sub.virgula {
+  font-size: 10%;
+  letter-spacing: 0.1em;
+	font-weight: 900;  
+  vertical-align: -30%;
+}
+.mock-a {
+	color:#414958;
+	font-weight: bold;
+}
+img.clickToZoom {
+  cursor: zoom-in;
+  cursor: -webkit-zoom-in;
+}
+img.logo {
+  padding: 12px;
+  background-color: #FFF;
+  margin-left: 24px;
+}

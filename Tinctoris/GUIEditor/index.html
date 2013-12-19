@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	  <title>JT music examples test interface</title>
+	  <link type="text/css" rel="stylesheet" href="../ScriptLibrary/jt-editor-v.css" />
+	  <link type="text/css" rel="stylesheet" href="../ScriptLibrary/print.css" media="print"/>
+	  <script src="../ScriptLibrary/jquery-1.8.2.min.js" ></script>
+	  <script src="../ScriptLibrary/jquery.scrollTo-1.4.2.js"></script>
+    <script src="../ScriptLibrary/jquery-ui-1.9.0.custom.min.js"></script>
+	  <script src="../ScriptLibrary/debugger.js"></script>
+	  <script src="../ScriptLibrary/dom.js"></script>
+	  <script src="../ScriptLibrary/glyphs.js"></script>
+	  <script src="../ScriptLibrary/arsnovavoid.js"></script>
+	  <script src="../ScriptLibrary/base.js"></script>
+	  <script src="editbase.js"></script>
+	  <script src="../ScriptLibrary/buttons.js"></script>
+	  <script src="../ScriptLibrary/classes.js"></script>
+	  <script src="../ScriptLibrary/text-classes.js"></script>
+	  <script src="../ScriptLibrary/music-parser.js"></script>
+	  <script src="../ScriptLibrary/parser.js"></script>
+	  <script src="../ScriptLibrary/editor.js"></script>
+	  <!-- <script src="../ScriptLibrary/jt1.js"></script> -->
+    <script src="../ScriptLibrary/viewer.js"></script>
+  </head>
+  <body id="TheTreatiseEditor">
+ 	  <div id="background">
+      <div id="buttonbar">
+        <div class="uibutton">Punctuation: 
+          <select class="punctuationpicker" onchange="specialTogglePunct(this);"><option value="modern" selected="true">Modern</option><option value="MS">MS</option><option value="both">Both</option></select></div>
+        <div class="uibutton"><span id="reparse">Process</span></div>
+        <div class="wrapstuff">Wrap: 
+          <input type="checkbox" id="wraptoggle" onchange="togglewrapping(this)" />
+          <span id="wrapspan">Width: 
+            <input type="number" min="100" max="1000" value="600"
+                   onchange="wrapWidth=this.value; adjustWidth();"/>
+          </span>
+        </div>
+        <div class="linespace">Line spacing:
+            <input type="range" min="1" max="2" value="1" step="0.5"
+                   onchange="setSpacing(this.value);"/>
+        </div>
+      </div>
+  	  <div id="rendered" class="notation pane">
+        <div class="cursorLocator"></div>
+        <div id="content"></div>
+  	  </div>
+	    <div id="codediv"><!-- Type (or Paste) code below: -->
+		    <textarea rows="60" cols="40" id="code"></textarea>
+	    </div>
+	  </div>
+    <div id="vertical"></div>
+	  <div id="chooser"></div>
+	  <div id="parsediv"></div>
+    <div id="debug"></div>
+    <div id="ecount"></div>
+    <div id="footnotes"></div>
+  </body>
+</html>

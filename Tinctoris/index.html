@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+  <title>Johannes Tinctoris: Complete Theoretical Works</title>
+  <link rel="icon" type="image/png" href="Images/jt.png">
+  <link href="SpryAssets/SpryMenuBarHorizontal.css" rel="stylesheet" type="text/css" />
+  <link href="SpryAssets/SpryAccordion.css" rel="stylesheet" type="text/css" />
+  <link href="thrColLiqHdr.css" rel="stylesheet" type="text/css" /><!--[if lte IE 7]>
+  <style>
+  .content { margin-right: -1px; } /* this 1px negative margin can be placed on any of the columns in this layout with the same corrective effect. */
+  ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it needs to correct extra whiltespace between the links */
+  </style>
+  <![endif]-->
+  <script src="ScriptLibrary/privatemenu.js" type="text/javascript"></script>
+  <script src="SpryAssets/SpryMenuBar.js" type="text/javascript"></script>
+  <script src="SpryAssets/SpryAccordion.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    function showNote(){ 
+      alert("We strive to ensure that these pages\
+ conform to web standards, but these standards are continually evolving, and\
+ are not always quickly and consistently adopted by browser\
+ developers.\n\
+ We test our pages on the latest versions of Webkit and\
+ Gecko-based browsers (e.g. Mozilla Firefox, Apple Safari and\
+ Google Chrome) on Mac OS 10.7+. Other browsers and platforms\
+ may display some aspects of the site differently than intended.\n\
+ We are keen to hear about any technical issues that do arise.");
+    }
+    function addTechWarn(){
+      var agent = window.navigator.userAgent;
+      if(agent.indexOf("Mac OS X")>=0){
+        // Mac
+        if(agent.indexOf("Gecko/")>=0 || agent.indexOf("AppleWebKit/")>=0){
+          // Browser ok.
+          return;
+        }
+      }
+      var w = document.getElementById("warn");
+      w.innerHTML = "<span>Browser Note</span>";
+      w.onclick = showNote;
+    }
+  </script>
+</head>
+
+<body onload="addTechWarn()">
+
+<div class="container">
+  <div class="header">
+  	<div class="imagebox" id="EMT"><a href="../#"><img src="Images/EMT logo full.png" id="EMTLogo" alt="Early Music Theory Logo" name="EMTLogo"  /></a> </div>
+    <div class="imagebox" id="projectlogo"><a href="#"><img src="Images/JT CTW Title main.png" id="JTLogo"  alt="Tinctoris EditonLogo" /></a></div>
+    <div class="imagebox right" id="Team">
+      <!-- <a href="#"><img src="Images/masthead_team.png" id="JTTeam" alt="Team: Ronald Woodley, Jeffrey Dean & David Lewis" /></a> -->
+      <!-- FIXME: not accessible -->
+      <a href="Project/ProjectTeam/#">
+      <table class="team">
+        <tr>
+          <td id="projectTeam"></td>
+          <td id="RonaldWoodley"></td>
+        </tr>
+        <tr>
+          <td />
+          <td id="JeffreyDean"></td>
+        </tr>
+        <tr>
+          <td />
+          <td id="DavidLewis"></td>
+        </tr>
+      </table>
+      </a>
+    </div>
+  </div>
+  <div class="nav">
+  	<div class="row">
+			<div class="tabl">
+   	 		<div class="frontpagemenu">
+  				<ul id="MenuBar1" class="MenuBarHorizontal">
+    				<li><a href="#" class="MenuBarItemSubmenu">Home</a>
+            <ul>
+              <li><a href="#">Project Home</a></li>
+              <li><a href="../#">Early Music Theory Home</a></li>
+              <li><a href="../blog/#">Blog</a></li>
+            </ul>
+          </li>
+          <li><a class="MenuBarItemSubmenu" href="#">Project</a>
+            <ul>
+              <li><a href="Project/ProjectTeam/#">Project Team</a></li>
+              <li><a class="placeholder" href="#">Funding</a></li>
+            </ul>
+          </li>
+          <li><a href="#" class="MenuBarItemSubmenu">Tinctoris</a>
+            <ul>
+              <li><a href="Tinctoris/BiographicalOutline/#">Biographical Outline</a></li>
+              <li><a class="placeholder" href="#">Work List</a></li>
+              <li><a class="placeholder" href="#">Sources</a></li>
+              <li><a href="Tinctoris/Bibliography/#">Bibliography</a></li>
+            </ul>
+          </li>
+          <li><a href="#" class="MenuBarItemSubmenu">Texts</a>
+            <ul id="textMenu" >
+              <li><a class="notes first" href="texts/Notes/TreatiseTitles/#">A note about treatise titles</a></li>
+              <li><a class="notes last" href="texts/Notes/PresentationOfTexts/#">Notes on the presentation of texts</a></li>
+              <li><a class="placeholder" href="#">Expositio manus</a></li>
+              <li><a class="placeholder" href="#">De natura et proprietate tonorum</a></li>
+              <li><a href="texts/denotisetpausis/#">De notis et pausis</a></li>
+              <li><a class="placeholder" href="#">De regulari valore notarum</a></li>
+              <li><a href="texts/deimperfectionenotarum/#">De imperfectione notarum musicalium</a></li>
+              <li><a class="placeholder" href="#">De alteratione notarum</a></li>
+              <li><a href="texts/depunctis/#">De punctis</a></li>
+              <li><a class="placeholder" href="#">De arte contrapuncti</a></li>
+              <li><a class="placeholder" href="#">Proportionale musices</a></li>
+              <li><a class="placeholder" href="#">Diffinitorium musice</a></li>
+              <li><a class="placeholder" href="#">Complexus effectuum musices</a></li>
+              <li><a href="texts/deinventioneetusumusice/#">De inventione et usu musice</a></li>
+            </ul>
+          </li>
+          <li><a class="MenuBarItemSubmenu" href="#">Commentary</a>
+            <ul>
+              <li><a href="Articles/DatingAndProvenanceOfValencia835/#">The Dating and Provenance of Valencia 835</a></li>
+              <li><a href="Articles/SyncopatedImperfection/#">Syncopated Imperfection &amp; Alteration</a></li>
+            </ul>
+          </li>
+          <li><a href="#" class="MenuBarItemSubmenu">Help</a>
+            <ul>
+              <li><a href="Help/#">Guide to the site</a></li>
+              <li><a href="Project/ProjectTeam/#">Contact</a></li>
+              <li><a class="ref-2014" href="help/REF-2014/#">REF 2014</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+  	</div>
+	    <div class="tabr"></div>
+    </div>
+  </div>
+  <div class="sidebar1">
+    <!-- <div class="contentbox"> -->
+      <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/EarlyMusicTheor"  data-widget-id="377471649013972992">Tweets by @EarlyMusicTheor</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      <div id="warn"></div>
+      <!-- <div id="Accordion1" class="Accordion" tabindex="0"> -->
+      <!--   <div class="AccordionPanel"> -->
+      <!--     <div class="AccordionPanelTab">News</div> -->
+      <!--     <div class="AccordionPanelContent">Blah, blah</div> -->
+      <!--   </div> -->
+      <!--   <div class="AccordionPanel"> -->
+      <!--     <div class="AccordionPanelTab">Blog</div> -->
+      <!--     <div class="AccordionPanelContent">blog, blog</div> -->
+      <!--   </div> -->
+      <!--   <div class="AccordionPanel"> -->
+      <!--     <div class="AccordionPanelTab">Project Team</div> -->
+      <!--     <div class="AccordionPanelContent"> -->
+      <!--       <p>Ronald Woodley<br /> -->
+      <!--       Jeffrey J. Dean<br /> -->
+      <!--       David Lewis</p> -->
+      <!--       <p><em>further information...</em></p> -->
+      <!--     </div> -->
+      <!--   </div> -->
+      <!-- </div> -->
+    <!-- </div> -->
+  </div>
+  <div class="content">
+
+  	<div class="contentbox">
+		  <p>JOHANNES TINCTORIS (<em>c</em>. 1435–1511) is widely acknowledged as one of the most important writers on music of the late Middle Ages and early Renaissance. His twelve Latin treatises demonstrate not only an exceptional technical command of the intellectually demanding musical notation and theory of the time, but also an intimate acquaintance with contemporary compositional practice, derived from a close knowledge of the composers of his day and their music, both in northern Europe, where he began his career, and in Italy, where he was employed from the 1470s to the early 1490s at the Aragonese royal court in Naples.</p>
+  		<p>This project, currently in its initial stages of development, presents a complete new edition of Tinctoris's treatises, along with full English translations and multiple layers of commentary material, covering a wide range of technical, historical and critical issues arising from both the texts themselves and the wider context of Tinctoris&rsquo;s life and the musical environment of early Renaissance Europe. Combining the highest levels of historical, textual and critical scholarship with innovative technological presentation, this open-access edition  explores new methods of relating text-based materials to the numerous, often complex, music examples that punctuate the treatises.</p>
+      <p>The <a href="http://www.stoa.org/tinctoris/">legacy version
+      of the Tinctoris project</a>, hosted by The Stoa Consortium, is
+      still available, but in due course it will be subsumed
+      completely within the new site.</p>  <hr />
+  	<p><em>Support for the project is gratefully acknowledged from:</em></p>
+    <div class="imagebox"><a href="http://www.ahrc.ac.uk"><img alt="Arts and Humanities Research Council logo" src="Images/ahrc_logo.png" /></a></div>
+    <div class="imagebox"><a href="http://www.bcu.ac.uk/pme/conservatoire"><img alt="Birmingham Conservatoire logo" src="Images/bcu_logo.jpg" /></a></div>
+    <!--end .contentbox -->
+  	</div>
+    <!-- end .content -->
+   </div>
+  <div class="sidebar2">
+    <div class="imagebox">
+      <img src="Images/v_jtlarge.jpg" alt="Image of Tinctoris" />
+    </div>
+    <div class="contentbox">
+      Johannes Tinctoris, depicted seated at his desk<br />
+      <br />
+      <em>Universitat de València, Biblioteca Històrica<br />
+      MS 835, fol. 2 (detail)</em><br />
+  </div>
+
+    <!-- end .sidebar2 --></div>
+  <div class="footer">
+   
+    <!-- end .footer --></div>
+  <!-- end .container --></div>
+  <script type="text/javascript">
+		var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"SpryAssets/SpryMenuBarDownHover.gif", imgRight:"SpryAssets/SpryMenuBarRightHover.gif"});
+		var Accordion1 = new Spry.Widget.Accordion("Accordion1");
+  </script>
+</body>
+</html>

@@ -12,6 +12,8 @@ function MusicExample(){
   this.swidth = false;
   this.classes = false;
   this.marginSpace = false;
+  this.marginalia = [];
+  this.catchwords = [];
   this.parameters = false;
   this.bbox = false;
   this.colbreaks = [];
@@ -19,6 +21,7 @@ function MusicExample(){
   this.chapter = chapter;
   this.section = section;
   this.exampleno = exampleno;
+  this.staves = [];
   exampleno++;
   this.atClass = "at-"+this.book+"-"+this.chapter+"-"+this.section+"-"+this.exampleno;
   this.parse = function(){
@@ -75,7 +78,17 @@ function MusicExample(){
         if(next.objType==="TextUnderlay" && this.events.length
            && typeof(this.events[this.events.length-1].text) !=="undefined"
            && !this.events[this.events.length-1].text) {
-          this.events[this.events.length-1].text=next;
+          if(this.events[this.events.length-1].objType !== "SignumCongruentiae"){
+            // FIXME: This is a painful hack. sig cong is treated by
+            // the system as an event in its own right, that happens
+            // to take its position from the note before. That would
+            // be fine, even if we add text, but not if the text
+            // should alter the position of the note that the sig cong
+            // attaches to. In that case, we'd draw it before adjusting the position.
+            this.events[this.events.length-1].text=next;
+          } else if (this.events.length>1){
+            this.events[this.events.length-2].text=next;
+          }
         } else {
           this.events.push(next);
         }
@@ -181,6 +194,11 @@ function MusicExample(){
     text += "</example>";
     return text;
   };
+  this.toTEI = function(doc, parent){
+    if(!parent) parent=(doc.currentParent || doc.body);
+    parent.appendChild(doc.element("notatedMusic"));
+    // more
+  };
   this.draw = function(exampleSVG, force){
 //    alert(JSON.stringify(this));
 //    if(exampleSVG != this.SVG) alert("ok");
@@ -194,6 +212,7 @@ function MusicExample(){
     // out what's happening
     underlays = [];
     this.drawCount++;
+    this.catchwords = [];
     currentClef = false;
     currentExample = this;
     var st = this.parameters.staff;
@@ -443,7 +462,7 @@ function nextBarline(){
   if(staffPos || staffPos==0){
     bar.start = staffPos;
     if(string.charAt(0)=="-"){
-      string = string.substring(1);
+      consume(1);
       staffPos = getStaffPos();
       bar.end = staffPos;
     }
@@ -609,6 +628,13 @@ function nextTaglike(){
       return new RedOpen();
     case "/red":
       return new RedClose();
+    case "large":
+      if(string.indexOf("</large>")==-1){
+        complaint.push("Missing close tag for <large> around "+string);
+      }
+      return new LargeOpen();
+    case "/large":
+      return new LargeClose();
     case "blue":
       if(string.indexOf("</blue>")==-1){
         complaint.push("Missing close tag for <blue> around "+string);
@@ -646,7 +672,6 @@ function nextTaglike(){
         var colon = tag.indexOf(":");
         if(colon>-1){
           thing.position = tag.substring(colon+1).trim();
-          console.log(thing);
         }
         if(thing){
           return thing;
@@ -655,6 +680,24 @@ function nextTaglike(){
         var thing = new Part();
         thing.id = parseInt(tag.substring(5));
         return thing;
+      } else if (tag.substring(0, 5)=="/part"){
+        var thing = new Part();
+        return thing;
+      } else if (tag.substring(0, 9)=="catchword" || tag.substring(0, 9)=="signature"){
+        var margType = tag.substring(0, 9);
+        var end = string.indexOf("</"+margType+">");
+        if(end>-1){
+          var os = string.substring(end+12);
+          var c = new Catchword();
+          c.tag = margType;
+          var colon = tag.indexOf(":");
+          if(colon>-1) c.position = trimString(tag.substring(colon+1, tagend));
+          string = string.substring(0,end);
+          c.code = string;
+          c.content = readPara();
+          string = os;
+          return c;
+        }
       }
   }
   return false;
@@ -886,21 +929,30 @@ function getSubText (){
        && (tagpos ==-1 || varpos < tagpos)) {
       if(varpos) components.push(string.substring(0,varpos));
       string = string.substring(varpos);
-      // FIXME: A variant inside a variant would spell madness, but
-      // lets assume sanity for now
-      components.push(nextTextChoice());
+      end = string.indexOf("}");
+      if(typeof(spans[string.substring(1, end)])!=="undefined"){
+        components.push(getTag("<"+string.substring(1, end)+">"));
+        components.push(string.substring(end+1, end+2));
+        components.push(getTag("</"+string.substring(1, end)+">"));
+        string = string.substring(end+2);
+      } else {
+//        console.log("fail");
+        // FIXME: A variant inside a variant would spell madness, but
+        // lets assume sanity for now
+        components.push(nextTextChoice());
+      }
       // A variant can invalidate more or less anything that follows, so...
       varpos = string.indexOf("{");
       tagpos = string.indexOf("<"); // just to check it wasn't in the comment;
       commentpos = string.indexOf("**");
-    } else {
-      if(commentpos != -1 && (commentpos < tagpos || tagpos == -1)){
+    } else if(commentpos != -1 && (commentpos < tagpos || tagpos == -1)){
         components.push(string.substring(0,commentpos));
         string = string.substring(commentpos);
         components.push(nextComment());
+        varpos = string.indexOf("{");
         tagpos = string.indexOf("<"); // just to check it wasn't in the comment;
         commentpos = string.indexOf("**");
-      }
+    } else {
       if(tagpos > 0){
         components.push(string.substring(0,tagpos));
         string = string.substring(tagpos);
@@ -917,7 +969,9 @@ function getSubText (){
         }
         components.push(next);
       }
-      tagpos = string.indexOf("<");
+      varpos = string.indexOf("{");
+      tagpos = string.indexOf("<"); // just to check it wasn't in the comment;
+      commentpos = string.indexOf("**");
     }
   }
   return components;
@@ -941,6 +995,10 @@ function getTag (tag){
       return new StrikethroughOpen();
     case "</strikethrough>":
       return new StrikethroughClose();
+    case "<large>":
+      return new LargeOpen();
+    case "</large>": 
+      return new LargeClose();
     default:
       return false;
   }
@@ -989,7 +1047,10 @@ function parseMens(spec){
     obj.signature = spec.charAt(pointer);
   } else return obj;
   pointer++;
-  if(spec.charAt(pointer)) obj.staffPos = "0123456789ABCDEF".indexOf(spec.charAt(pointer));
+  if(spec.charAt(pointer)) {
+    obj.staffPos = staffPosFromString(spec.substring(pointer))[0];
+//    obj.staffPos = "0123456789ABCDEF".indexOf(spec.charAt(pointer));
+  }
   return obj;
 }
 
@@ -1056,7 +1117,8 @@ function parseSolm(signs){
       solm.pitch = pitch;
     } else {
       // staffpos
-      solm.staffPos = "0123456789ABCDEF".indexOf(signs[i].charAt(nextChar));
+      // solm.staffPos = "0123456789ABCDEF".indexOf(signs[i].charAt(nextChar));
+      solm.staffPos = staffPosFromSTring(signs[i].substring(nextChar))[0];
     }
     if(solm.pitch || solm.staffPos != -1){
       obj.members.push(solm);
@@ -1137,8 +1199,9 @@ function parseClefReading(fields){
       } else {
         // Clef for this reading
         finish = fields[i].lastIndexOf('"');
-        if(!finish && fields[i+1].charAt(0)=="["){
+        if(!finish && (fields[i+1].charAt(0)=="[" || fields[i+1].charAt(0)=="^")){
           // Erroneous clef, specified in form "C6 [C8]"
+          
           finish = fields[i+1].lastIndexOf('"');
           clef = parseClef(fields[i].substring(1)+" "
                            + (finish>-1 ? fields[i+1].substring(0,finish) : fields[i+1]));
@@ -1209,14 +1272,25 @@ function parseClef(spec, sub){
   if(!spec.length) return false;
 //  obj.type = spec.substring(0, spec.length - 1);
 //  obj.staffPos = "0123456789ABCDEF".indexOf(spec.charAt(spec.length - 1));
-  obj.staffPos = "0123456789ABCDEF".indexOf(spec.charAt(0));
-  if(obj.staffPos===-1) return false;
-  spec = spec.substring(1);
-  var anotherBit = spec.search(/\S/)>-1;
-  if(anotherBit){
-    obj.erroneousClef=parseClef(spec.substring(anotherBit), true);
-    // HACK: new Clef adds a spurious clef to MusicExample.staves, so let's undo that
-    currentExample.staves.pop();
+  // obj.staffPos = "0123456789ABCDEF".indexOf(spec.charAt(0));
+  // if(obj.staffPos===-1) return false;
+  // spec = spec.substring(1);
+  var pos = staffPosFromString(spec);
+  if(!pos) return false;
+  spec = spec.substring(pos[1]);
+  obj.staffPos = pos[0];
+  var p = obj.staffPos;
+  var anotherBit = spec.search(/\S/);
+  if(anotherBit>-1){
+    console.log("clef has extra '"+spec+"'", anotherBit, spec.substring(anotherBit));
+    if(spec.charAt(anotherBit)==="^"){
+      obj.stackedClefs.push(parseClef(spec.substring(anotherbit+1), true));
+    } else { 
+      // Is an erroneous (and corrected) clef)
+      obj.erroneousClef=parseClef(spec.substring(anotherBit), true);
+      // HACK: new Clef adds a spurious clef to MusicExample.staves, so let's undo that
+      currentExample.staves.pop();
+    }
   }
   currentClef = obj
   return obj;
@@ -1307,6 +1381,13 @@ function nextInfo(){
           return parseClefVar(fields.slice(2));
         } else if (fields[1].charAt(0) == '"'){
           return parseClefVar(fields.slice(1));
+        } else if (fields[2].charAt(0)=== '^'){
+          //stacked clefs
+          var clef = parseClef(fields[1]);
+          for(var i=2; i<fields.length; i++){
+            clef.stackedClefs.push(parseClef(fields[i].substring(1)));
+          }
+          return clef;
         }
         return parseClef("C8");
       }
@@ -1355,10 +1436,8 @@ function nextChoiceLikeThing(choice, textp){
   var prevLength = false;
   string = string.substring(5, locend); // 5 because of "{var="
   consumeSpace();
-  var debug1;
   while(string.length && prevLength != string.length){
     if(string.length>15 && book===1&&chapter===3) debug1 = false;
-    if(debug1)console.log(string);
     prevLength = string.length;
     lDescription = consumeDescription();
     readingString = consumeReadingString();
@@ -1369,7 +1448,6 @@ function nextChoiceLikeThing(choice, textp){
     agreedVersion = stavesAgree(staffing);
     stringTemp = string;
     string = readingString;
-    if(debug1)console.log(string, stringTemp, lDescription, rDescription, witnesses);
     switch(description){
       case "nil":
         choice.addNilReading(witnesses);
@@ -1398,9 +1476,7 @@ function nextChoiceLikeThing(choice, textp){
         break;
     }
     string = stringTemp;
-    if(debug1) console.log(string.length, prevLength);
   }
-  if(debug1) console.log("finally: "+string);
   currentClef = clef;
   string = finalString;
   return choice;

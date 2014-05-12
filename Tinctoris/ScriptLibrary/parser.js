@@ -11,6 +11,7 @@ var spans = {
   "blueline": "blueline",
   "highlight": "yellowline",
   "strikethrough": "strikethrough",
+  "expunction": "expunction",
   "insertabove": "insertabove",
   "large": "large",
   "underscore": "underscore",
@@ -33,6 +34,7 @@ var reverseSpans = {
   "blueline": "blueline",
   "yellowline": "highlight",
   "strikethrough": "strikethrough",
+  "expunction": "expunction",
   "insertabove": "insertabove",
   "large": "large",
   "underscore": "underscore",
@@ -88,6 +90,7 @@ function TreatiseDoc(text, outdiv){
   this.exampleSource = false;
   this.examples = [];
   this.leaves = [];
+  this.breaks = [];
   this.structures = false;
   this.out = outdiv ? outdiv : document.getElementById('content');
   this.drawTo = this.out;
@@ -103,6 +106,7 @@ function TreatiseDoc(text, outdiv){
   this.source = false;
   this.established = false;
   this.basefile = false;
+  this.basefiles = false;
   this.sources = [];
   this.running = false;
   this.scriptSpec = false;
@@ -112,6 +116,8 @@ function TreatiseDoc(text, outdiv){
   this.hands = [];
   this.maxWidth = 0;
   this.marg = false;
+  this.curCatchword = false;
+  this.blobURL = false;
   this.edition = function(){
     return this.language!=="Latin" || this.source.length;
   }
@@ -172,6 +178,10 @@ function TreatiseDoc(text, outdiv){
   };
   this.parseHeaders = function(){
     //FIXME:
+    if(!/[\r\n][^\r\n]+/.exec(string)) {
+      // Just one line. Assume it's content
+      return;
+    }
     this.title = trimString(consumeIf(/[^\r\n]*[\r\n]/));
     var nextfield=consumeIf(/[^:]*:/);
     while(nextfield){
@@ -196,6 +206,9 @@ function TreatiseDoc(text, outdiv){
           break;
         case "Base file:":
           this.basefile = trimString(consumeIf(/[^\r\n]*[\r\n]*/));
+          break;
+        case "Base files:":
+          this.basefiles = trimString(consumeIf(/[^\r\n]*[\r\n]*/)).split(", ");
           break;
         case "Editor:":
           this.editor = trimString(consumeIf(/[^\r\n]*[\r\n]*/));
@@ -593,7 +606,7 @@ function TreatiseDoc(text, outdiv){
     try {
       this.parseHeaders();
     } catch (x) {
-      
+      console.log("hmm...");
     }
     margin = false;
     var tS = [];
@@ -608,7 +621,8 @@ function TreatiseDoc(text, outdiv){
           // this.textualStructures.push(para.textualStructures());
         }
       } catch (x) {
-        var para = new Comment();
+        console.log(x);
+        var para = new Paragraph(true);
         para.contents.push(new Text("Error"));
         this.contents.push(para);
       }
@@ -617,10 +631,22 @@ function TreatiseDoc(text, outdiv){
     margin = false;
     this.hands = hands;
   };
+  this.toTEI = function(){
+    var ocd = curDoc;
+    curDoc = this;
+    var doc = new TEIDoc();
+    doc.headers(this);
+    for(var i=0; i<this.contents.length; i++){
+      this.contents[i].toTEI(doc);
+    }
+    curDoc = ocd;
+    return doc;
+  };
   this.draw = function(){
     curDoc = this;
     margin = this.marg;
     this.showvar = this.showvars || this.source;
+    this.breaks = [];
     if(!this.forceredraw && $(this.out.childNodes.length)) {
       return;
     }
@@ -682,31 +708,36 @@ function TreatiseDoc(text, outdiv){
       $("div.para").dblclick(alignVersions);
     }
     this.forceredraw = false;
+    // if(pageSettings.settings.book || pageSettings.settings.chapter){
+    //   this.setScrollPos(pageSettings.settings.book ? Math.max(pageSettings.settings.book, 1) - 1 : 0,
+    //                     pageSettings.settings.chapter ? pageSettings.settings.chapter : 0, 0, 0, 0, true);
+    // }
     showvariants = oldshowvariants;
     punctuationStyle = oldpunctuationStyle;
-      $(".punctuationswitch").click(function(){
-        var pos = $(doc.drawTo).offset();
-        switch(punctuationStyle){
-          case "modern":
-            punctuationStyle="MS";
-            this.innerHTML = "Showing MS punctuation";
-            doc.MSPunctuation = true;
-            break;
-          case "MS":
-            punctuationStyle="both";
-            this.innerHTML = "Showing all punctuation";
-            doc.MSPunctuation = false;
-            break;
-          case "Both":
-            punctuationStyle="modern";
+    $(".marginal").css("width", (this.drawTo.getBoundingClientRect().width-20)+"px");
+    $(".punctuationswitch").click(function(){
+      var pos = $(doc.drawTo).offset();
+      switch(punctuationStyle){
+      case "modern":
+        punctuationStyle="MS";
+        this.innerHTML = "Showing MS punctuation";
+        doc.MSPunctuation = true;
+        break;
+      case "MS":
+        punctuationStyle="both";
+        this.innerHTML = "Showing all punctuation";
+        doc.MSPunctuation = false;
+        break;
+      case "Both":
+        punctuationStyle="modern";
             this.innerHTML = "Showing modern punctuation";
-            doc.MSPunctuation = false;
-            break;              
-        }
-        doc.forceredraw = true;
-        doc.draw();
-        $(doc.drawTo).offset(pos);
-      });
+        doc.MSPunctuation = false;
+        break;              
+      }
+      doc.forceredraw = true;
+      doc.draw();
+      $(doc.drawTo).offset(pos);
+    });
     if(editable) {
       $("p").attr("contenteditable", "true");
       $("p").keyup(function(e){
@@ -725,6 +756,24 @@ function TreatiseDoc(text, outdiv){
         }
       });
     }
+    replaceBreakers();
+    ///////////////////
+    /*
+    var TEIDoc = this.toTEI();
+    // /*
+//     var serializer = new XMLSerializer();
+// //    var fileContent = [TEIDoc.tree.outerHTML];
+//     var fileContent = [serializer.serializeToString(TEIDoc.doc)];
+    // var blob = new Blob(fileContent, {type: "application/xml"});
+    var blob = TEIDoc.blobify();
+    var url = window.URL || window.webkitURL; // get rid of this when suffix removed in releases
+    if(this.blobURL) url.revokeObjectURL(this.blobURL);
+    this.blobURL = url.createObjectURL(blob);
+    var link = DOMAnchor('TEI', false, "TEI", this.blobURL);
+    $(this.drawTo).find('.infoButtons')[0].appendChild(link);
+    // console.log(TEIDoc);
+    // alert(TEIDoc.tree.innerHTML);
+    */
   };
   this.parse();
 //  this.draw();
@@ -741,7 +790,19 @@ function refreshExamples(examples){
       wrapWidth = false;
     }
     if(thisDiv){
+      $(thisDiv).find(".catch").remove();
+      var catches  = DOMDiv('catch', false, false);
+      thisDiv.insertBefore(catches, thisSVG);
       examples[i][0].draw(examples[i][1], nocache);
+      // for(var catchi=0; catchi<examples[i][0].catchwords.length; catchi++){
+      //   var eg = examples[i][0];
+      //   var c = eg.catchwords[catchi].toHTML();
+      //   catches.appendChild(c);
+      //   if(eg.catchwords[catchi].yOffset){
+      //     var span = $(c).find(".catchword")[0];
+      //     span.style.top = (eg.catchwords[catchi].yOffset-(eg.bbox.y < 0 ? eg.bbox.y -1 : 0))+"px";
+      //   }
+      // }
       if($(thisDiv).hasClass("standalone")){
         // thisDiv.style.height = examples[i][1].height.baseVal.value+15+"px";
         // thisDiv.style.height = thisDiv.getBoundingClientRect().height+5+"px";
@@ -778,8 +839,8 @@ function refreshExamples(examples){
   return mw + 16;
 }
 
-function readPara(){
-  var para = new Paragraph();
+function readPara(suppressNodeNumbers){
+  var para = new Paragraph(suppressNodeNumbers);
   consumeSpace();
   // FIXME: HACK!!! Broken by anything with an enclosed linebreak
   var end = string.search(/[\n\r\f]/);
@@ -832,6 +893,16 @@ function readString(){
         }
         if(oneOff) return content;
         break;
+      case "^":
+        fresh = readSup();
+        if(fresh){
+          if(latest){
+            fresh.previous = latest;
+            latest.next = fresh;
+          }
+          content.push(fresh);
+        }
+        break;
       case "*":
         var comment = consumeIf(/\*\*[^*]*\*\*/);
         if(!comment){
@@ -851,14 +922,41 @@ function readString(){
         } else if(comment.toLowerCase() == "**centre**"){
           centre = true;
         } else {
+          var olds = sentence;
           var ann = new Annotation();
           ann.code=comment.slice(2, -2);
           if(latest) {
             ann.previous = latest;
             latest.next = ann;
           }
+          var os = string;
+          var op = pointer;
+          string = ann.code;
+          ann.contents = readString();
+          string = os;
+          pointer = op;
+          sentence = olds;
           content.push(ann);
         }
+        break;
+      case "\t":
+        // At the moment, there's only one meaning -- a right align
+        // tab stop in an index. Expect more
+        if(inIndex){
+          var end = string.indexOf("\n");
+          var end2 = string.indexOf("</index>");
+          if(end===-1) end = string.length;
+          if(end2>-1 && end2 < end) end = end2;
+          var futureString = string.substring(end);
+          var futurePointer = pointer+end;
+          var r = new RightStop();
+          string = string.substring(1, end);
+          r.code = string;
+          r.content = readPara(true);
+          string = futureString;
+          pointer = futurePointer;
+          content.push(r);
+        } // if not, don't know what it means
         break;
       case "\n":
       case "\r":
@@ -887,7 +985,15 @@ function readString(){
         // heavily used code -- could be punctuation of some sort or
         // comment or music example spacer or single-character tag
         var punc = string.substring(1,3).match(/[,.¶:;()–-—!?\ ‘’]+/);
-        if(punc && punc[0] && punc[0].length>1){
+        if (string.substring(0,2) ==="{-"){
+          var close = string.indexOf("}");
+          content.push(new RemovedPunctuation(string.substring(2,close)));
+          consume(1+close);
+        } else if (string.substring(0,2) ==="{+"){
+          var close = string.indexOf("}");
+          content.push(new InsertedPunctuation(string.substring(2,close)));
+          consume(1+close);
+        } else if(punc && punc[0] && punc[0].length>1){
           content.push(new Punctuation(punc[0]));
           if(latest){
             latest.next = content[content.length-1];
@@ -1012,12 +1118,51 @@ function readOneOffTag(){
   }
 }
 
+function readSup(){
+  var el = new Span();
+  consume(1);
+  var end = string.indexOf("^");
+  var end2 = string.indexOf(" ");
+  var newString, newPointer;
+  if(end2!==-1 && (end===-1 || end2<end) && end2<8){
+    newString = string.substring(end2);
+    newPointer = pointer+end2;
+    string = string.substring(0, end2);
+  } else if(end===-1 || end>8){
+    // no "^" or " " or "^" is far removed
+    if(string.length){
+      newString = string.substring(1);
+      newPointer = pointer+1;
+      string = string.substring(0, 1);
+    } else {
+      return;
+    }
+  } else {
+    newString = string.substring(end+1);
+    newPointer = pointer+end;
+    string = string.substring(0,end);
+  }
+  el.type = "sup";
+  el.content = readString();
+  string = newString;
+  pointer = newPointer;
+  return el;
+}
+
 function readTag(){
   var loc = string.indexOf(">");
   if(loc > 0){
     if(string.substring(1,3)==="l/"){
       consume(4);
       return new Newline();
+    } else if (string.substring(1,8) === "nocount"){
+      // introduces non-counting content
+      consume(9);
+      return new NoCount();
+    } else if (string.substring(1,9) === "/nocount"){
+      // ends non-counting content
+      consume(10);
+      return new EndNoCount();
     } else if(string.substring(1,9) == "treatise"){
       consume(10);
 //      FIXME: For now, this is meaningless to me
@@ -1027,8 +1172,18 @@ function readTag(){
       return false;
     } else if(string.substring(1, 8)=="chapter"){
       // Close tag is meaningless here -- we are always in a chapter
-      consume(9);
-      return new Chapter();
+      var chap = new Chapter();
+      if(string.charAt(8)===":"){
+        consume(9);
+        consumeSpace();
+        loc = string.indexOf(">");
+        chap.chapter = string.substring(0,loc);
+        chapter = chap.chapter;
+        consume(loc+1);
+      } else {
+        consume(9);
+      }
+      return chap;
     }
     // else if(string.substring(1, 8)=="heading"){
     //   consume(9);
@@ -1047,6 +1202,13 @@ function readTag(){
       // chap.chapter -=1;
       // chapter -= 1;
       //return chap;
+    } else if (string.substring(1, 6)=="index") {
+      return readTabularIndex();
+      consume(loc+1);
+      return new Index();
+    } else if (string.substring(1, 7)=="/index") {
+      consume(loc+1);
+      return new ChapEnd();
     } else if (string.substring(1, 11)=="conclusion") {
       consume(loc+1);
       return new Conclusion();
@@ -1105,7 +1267,7 @@ function readTag(){
         if(tagend>5) {
           // we have some useful information
           var colon = string.indexOf(":");
-          var lbracket = string.indexOf("(");
+          var lbracket = -1; //;string.indexOf("(");
           if(lbracket>-1 && lbracket<tagend){
             var rbracket = string.indexOf(")");
             if(rbracket>-1 && rbracket<tagend){
@@ -1113,7 +1275,7 @@ function readTag(){
               m.side = trimString(string.substring(lbracket+1,rbracket));
             }
           } else {
-            m.side = trimstring(string.substring(colon+1, tagend));
+            m.margin = trimString(string.substring(colon+1, tagend));
           }
         }
         string = string.substring(tagend+1, end);
@@ -1121,9 +1283,37 @@ function readTag(){
         m.content = readPara();
         string = os;
         pointer = op;
+        consumeSpace(true);
         return m;
       }
       return false;
+    } else if(string.substring(1, 10)=="catchword" || string.substring(1,10)=="signature"){
+      var margType = string.substring(1, 10)
+      var end = string.indexOf("</"+margType+">");
+      if(end>10){
+        var c = new Catchword();
+        c.tag = margType;
+        var tagend = string.indexOf(">");
+        var os = string.substring(end+12);
+        var op = pointer+end+12;
+        if(tagend>10) {
+          // we have some useful information
+          var colon = string.indexOf(":");
+          if(colon>-1 && colon<tagend){
+            c.position = trimString(string.substring(colon+1, tagend));
+          }
+        }
+        string = string.substring(tagend+1, end);
+        c.code = string;
+        c.content = readPara();
+        string = os;
+        pointer = op;
+//        curCatchword = c;
+//        return c;
+      }
+      return false;
+    } else if (string.substring(1, 6)==="table"){
+      return readTable();
     } else if(string.substring(1, 8)=="newhand") {
       var end = string.indexOf("</newhand>");
       if(end>-1){
@@ -1195,6 +1385,83 @@ function readTag(){
   string = string.substring(1);
   return false;
 }
+function parseCols(columnString){
+  return columnString.split(/[ ,]+/);
+}
+function readTabularIndex(){
+  var index = new TabularIndex();
+  var bracket = string.indexOf(">");
+  if(bracket==-1) return false;
+  consume(bracket+1);
+  var close = string.indexOf("</index>");
+  var finalString = close===-1 ? "" : string.substring(close+8);
+  string = close===-1 ? string : string.substring(0, close);
+  consumeSpace();
+  index.rows = readTableLikeContent();
+  string=finalString;
+  return index;
+}
+function readTable(){
+  var table = new Table();
+  var colon = string.indexOf(":");
+  var bracket = string.indexOf(">");
+  if(colon>-1 && colon<bracket){
+    var cols = string.substring(colon+1, bracket);
+    table.columns = parseCols(trimString(cols));
+  }
+  consume(bracket+1);
+  var close = string.indexOf("</table>");
+  var finalstring = close===-1 ? "" : string.substring(close+8);
+  string = close===-1 ? string : string.substring(0, close);
+  consumeSpace();
+  table.rows = readTableLikeContent();
+  // var rows = string.split(/[\u0085\u2028\u2029\r\n]+/);
+  // for(var i=0; i<rows.length; i++){
+  //   if(/^\[-.*-\]/.exec(rows[i])) {
+  //     string = rows[i];
+  //     table.rows.push(readLocation());
+  //     rows[i] = string;
+  //   }
+  //   var row = new TableRow();
+  //   table.rows.push(row);
+  //   var cells = rows[i].split(/\t/);
+  //   for(var j=0; j<cells.length; j++){
+  //     string = cells[j];
+  //     var cellContent = new Span();
+  //     cellContent.type = "CellContents";
+  //     cellContent.content = readString();
+  //     row.cells.push(cellContent);
+  //   }
+  // }
+  string = finalstring;
+  return table;
+}
+function readTableLikeContent(){
+  // for table and index, split into rows and then cells
+  var rows = string.split(/[\u0085\u2028\u2029\r\n]+/);
+  var row;
+  var outrows = [];
+  for(var i=0; i<rows.length; i++){
+    if(/\S/.test(rows[i])){
+      row = new TableRow();
+      if(/^\[-.*-\]/.exec(rows[i])) {
+        string = rows[i];
+        outrows.push(readLocation());
+        rows[i] = string;
+      }
+      outrows.push(row);
+      var cells = rows[i].split(/\t/);
+      for(var j=0; j<cells.length; j++){
+        string = cells[j];
+        var cellContent = new Span();
+        cellContent.type = "CellContents";
+        cellContent.content = readString();
+        row.cells.push(cellContent);
+      }
+    }
+  }
+  return outrows;
+}
 
 function readLocation(){
   var locend = string.indexOf(']');
@@ -1209,8 +1476,10 @@ function readLocation(){
     } else if(columnp(locstring)){
       var chap = new Column();
       chap.location = locstring.substring(1, locstring.length -1);
+      consumeSpace();
       return chap;
     } else if(locstring == "-"){
+      consumeSpace();
       return new Space();
     } else if(locstring==="."){
       return new MicroSpace();
@@ -1286,7 +1555,7 @@ function consumeWitnesses(){
     } else if(cur==="^"){
       cur = string.charAt(0);
       consume(1);
-      curWit = new QualifiedWitness(curWit, cur==="c");
+      curWit = new QualifiedWitness(curWit, cur==="c", cur);
       witnesses.push(curWit);
       curWit = false;
     } else {
@@ -1549,7 +1818,7 @@ function findLocation(e){
     var code = document.getElementById('code');
     var loc = document.getElementById('code').selectionStart;
     var modcode = code.value.substring(0, loc);
-    var chaps = modcode.match(/(<chapter>|<prologue>|<conclusion>)/g);
+    var chaps = modcode.match(/(<chapter[^>]*>|<prologue>|<index>|<conclusion>)/g);
     var chap = modcode.lastIndexOf(chaps[chaps.length-1]);
     var pars = modcode.substring(chap).match(/[\r\n]+/g);
     if(pars){

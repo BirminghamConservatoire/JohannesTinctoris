@@ -92,8 +92,12 @@ span.twoline{
   float: left;
   padding-right: 10px;
 }
-span.large{
+span.large, tspan.large{
   font-size: 250%;
+}
+span.sup {
+  font-size: 80%;
+  vertical-align: super;
 }
 /* +0.5x spacing */
 /* #content.oneandahalfspacing{ */
@@ -232,7 +236,15 @@ span.large{
 .onecolumn {
   padding-right: 12em;
 }
-
+div.marginal{
+  position: absolute;
+}
+.floatingBreak .catchword.marginal {
+  position: absolute;
+  right: 0;
+  text-align: right;
+  color: black;
+}
 .twocolumn .marginalContent {
   margin: -2.2em -28em -100em 0em;
   /* margin: -1em -28em -100em 0em; */
@@ -247,6 +259,22 @@ span.large{
   padding-right: 0em;
   padding-left: 35em;
   float: right;
+}
+.marginalContent.musical {
+  margin-top: 0;
+  position: relative;
+  left: 0px; /* I don't know why, but it seems to work */
+}
+div.col.breaker + p.addTopSpaceForMarginal {
+  padding-top: 4ex;
+}
+
+.drawTo p div.marginal span.marginalContent, span.marginalContent{
+  margin: -2.2em 1ex -100em 0;
+  text-align: right
+}
+.drawTo p.onecolumn span.marginalContent.premusical, .drawTo p.twocolumn span.marginalContent.premusical{
+  margin-top: 1.2em;
 }
 #content{
   font-size: 100%;
@@ -280,6 +308,10 @@ span.strikethrough.spanblind{
 span.strikethrough, .strikethrough.text{
   text-decoration: line-through;
 }
+span.expunction {
+  color: #999;
+}
+
 span.red, .red.text, span.red *, .red.text *{
   color: red;
   fill: red;
@@ -311,6 +343,15 @@ span.correction .overwritten.m {
 }
 span.correction .correct.n {
   letter-spacing: 0.3em;
+}
+span.correction.removedPunctuation {
+  color: #999;
+}
+.red span.correction.removedPunctuation, .red span.correction span.overwritten.m, .red span.wordsplit, .red span.wordjoin {
+  color: #F99;
+}
+span.correction.insertedPunctuation {
+  font-weight: bold;
 }
 .wordsplit, .wordjoin{
   color: #999;
@@ -420,10 +461,19 @@ div.buttons {
   text-indent: -1ex;
 }
 
-.colend {
-  border-bottom: 2px dashed #99F;
+.colend, .TabularRow.colend .TabularCell {
+  /* border-bottom: 2px dashed #99F; */
+  border-bottom: none;
   margin-bottom: 0px;
   clear: both;
+}
+p.colend {
+  border-bottom: none;
+  margin-bottom: 2px;
+}
+p.colend.columnPara {
+  margin-top: 6px;
+  margin-bottom: 2px;
 }
 
 .col {
@@ -435,7 +485,7 @@ div.buttons {
   fill: #66C;
   padding-top: 0px;
   margin-top: 0px;
-  margin-right: 10px;
+  margin-right: 12px;
 } 
 
 .pag {
@@ -542,9 +592,19 @@ div.buttons {
   font-style: italic;
 }
 
+.hand{
+  cursor: pointer;
+}
+
+.index.tabular .TabularCell.r {
+  vertical-align: bottom;
+}
+
 .marginLoc{
   font-size: 0.7em;
-  vertical-align: super;
+  /* vertical-align: super; */
+  color: #888;
+  display: block;
 }
 
 /* svg.musicexample{ */
@@ -692,6 +752,15 @@ neumeJoin{
 }
 .text.red, .red .notegroup .mensural, .red.notegroup .mensural, text.etc.red{
   stroke: none;
+}
+
+.red.sigcongruent {
+  stroke: none;
+  fill: red;
+}
+.blue.sigcongruent {
+  stroke: none;
+  fill: blue;
 }
 
 .noitalic {
@@ -934,6 +1003,9 @@ svg{
   display: inline-block;
   vertical-align: text-top;
 }
+.drawTo{
+  position: relative;
+}
 .drawTo p{
   margin: 0.6em 0 0.6em 4px;
 }
@@ -973,6 +1045,12 @@ line.colend{
   stroke: #99F;
   stroke-width: 2px;
 }
+line.colend.inv{
+  stroke-dasharray: 10,10;
+  stroke: rgba(143, 143, 255, 0);
+  stroke-width: 2px;
+}
+
 /* AND NOW, REPLACING SOME OF THIS: FIXME: OLD CODE ABOVE*/
 /* .onecolumn { */
 /*   padding: 0 1ex 0 1ex; */
@@ -1063,8 +1141,51 @@ span.heading span.noitalic:first-child {
 }
 #TheTreatiseEditor .cursorLocator {
   position: fixed;
-  right: 0;
+  right: 3px;
   top: 0;
   margin: 3px;
   background: rgba(255,255,255,0.7);
+}
+.indexLine {
+  position: relative;
+}
+.right-stop {
+  position: absolute;
+}
+.right-stop {
+/*  right: 12em;*/
+right: 0;
+}
+
+div.tabular{
+  display: table;
+}
+div.tabular div.TabularRow{
+  display: table-row;
+}
+div.tabular div.TabularRow div.TabularCell{
+  display: table-cell;
+  padding-right: 4ex; 
+  padding-left: 1.5ex;
+  text-indent: -1.5ex;
+}
+div.tabular div.TabularRow div.TabularCell.r{
+  display: table-cell;
+  padding-left: 4ex; 
+  padding-right: 0.2ex;
+  text-align: right;
+}
+div.tabular div.TabularRow div.TabularCell.c{
+  display: table-cell;
+  padding-left: 0.2ex; 
+  padding-right: 0.2ex;
+  text-align: center;
+}
+.floatingBreak.col {
+  pointer-events: none;
+  position: absolute;
+  width: 98%;
+  border-top: 2px dashed #88F;
+  border-top: 2px dashed rgba(127, 127, 255 0.95);
+  color: rgba(127, 127, 255, 0.95);
 }

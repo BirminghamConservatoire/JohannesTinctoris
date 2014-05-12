@@ -136,6 +136,9 @@ function loadText(treatise, filename){
       url: rootpath()+"texts/"+treatise+"/"+filename+".txt",
       datatype: 'text/plain',
       failure: function(){ alert("Treatise file failed to load. Please contact project staff.");},
+      error: function(){
+        exampleSource = false;
+      },
       success: function(data){
         exampleSource = data;
       }

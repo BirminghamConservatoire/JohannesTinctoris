@@ -4,7 +4,8 @@ var variants = ["BU", "G", "Br1", "V"];
 editable = false;
 singlePaneMode = editorMode;
 nocache = true;
-infoButtons = !editorMode;
+//infoButtons = !editorMode;
+infoButtons = true;
 showtitle = false;
 copyTextDisplay = false;
 editorDisplay = "hide";
@@ -98,6 +99,9 @@ function romanReference(a, b, c){
     return "Prol.";
   } else if (b==="c"){
     return "Conc.";
+  } else if (!isFinite(b)){
+    console.log(b);
+    return b;
   }
   var ref = [];
   if(a && a!=="0") ref.push(roman(Number(a)).toUpperCase());
@@ -151,6 +155,9 @@ function jqNavSelect(tDoc, nav){
           case "Prologue":
             chapter = "p";
             break;
+          case "Index":
+            chapter = "Index";
+            break;
           case "Conclusion":
             chapter = "c";
             break;
@@ -158,8 +165,10 @@ function jqNavSelect(tDoc, nav){
             if(typeof(chapter)==="string"){
               // chapter = 0;
               chapter = 1;
-            } else {
+            } else if(isFinite(sbreak[b].tag.chapter)){
               chapter+=1;
+            } else {
+              chapter = sbreak[b].tag.chapter;
             }
             break;
           case "Section":
@@ -177,13 +186,18 @@ function jqNavSelect(tDoc, nav){
           ? (sbreak[0].head.length > 52 ? sbreak[0].head.substring(0, 50)+"…" : sbreak[0].head)
           : (tDoc.language ==="English" ? "Conclusion" : "Conclusio") ;
         reference = "Conc.";
+      } else if (sbreak[0].tag.code==="<index>"){
+        heading = sbreak[0].head 
+          ? (sbreak[0].head.length > 52 ? sbreak[0].head.substring(0, 50)+"…" : sbreak[0].head)
+          : (tDoc.language ==="English" ? "Index" : "Index") ;
+        reference = "Index";
       } else {
         heading = sbreak[0].head.length > 52 ? sbreak[0].head.substring(0, 50)+"…" : sbreak[0].head;
         reference = romanReference(book, chapter, section);
       }
       content = sbreak[0].tag;
-      currentp = pageSettings && book == pageSettings.settings.book
-        && chapter == pageSettings.settings.chapter 
+      currentp = pageSettings && book == pageSettings.settings.book-1
+        && chapter == pageSettings.settings.chapter -1
         && (!section || section == pageSettings.settings.section);
       if(tDoc.scrollpos.book && tDoc.scrollpos.book==book 
          && tDoc.scrollpos.chapter==chapter && tDoc.scrollpos.section==section){
@@ -353,6 +367,12 @@ function navPoints(tDoc){
           active = {para: p, index: i, tag: para.content[i], head: false};
           actives.push(active);
           books.push(active);
+//          allstructures.push(active);
+          break;
+        case "Index":
+          active = {para: p, index: i, tag: para.content[i], head: false};
+          actives.push(active);
+          chapters.push(active);
 //          allstructures.push(active);
           break;
         case "Prologue":
@@ -550,16 +570,21 @@ function applySourceText(source, treatise, pane, settings){
   }
   if(!source) source = texts[treatise].sources[0][0];
   var text = texts[treatise][source] || loadText(treatise, source);
-  var doc = new TreatiseDoc(text, pane);
-  doc.language = "Latin";
-  doc.docType = "Transcription";
-  doc.shortSource = source;
-  doc.group = treatise;
-  // var oldShowVars = showvariants;
-  // showvariants=true;
-  for(var s=0; s<settings.length; s++){
-    if(!/pane|source|group|language/.test(settings[s]))
-      doc[settings[s][0]] = settings[s][1];
+  if(text){
+    var doc = new TreatiseDoc(text, pane);
+    doc.language = "Latin";
+    doc.docType = "Transcription";
+    doc.shortSource = source;
+    doc.group = treatise;
+    // var oldShowVars = showvariants;
+    // showvariants=true;
+    for(var s=0; s<settings.length; s++){
+      if(!/pane|source|group|language/.test(settings[s]))
+        doc[settings[s][0]] = settings[s][1];
+    }
+  } else {
+    applyEditedText(treatise, pane, settings);
+    return;
   }
   docMap.addDoc(doc);
   // showvariants = oldShowVars;

@@ -7,14 +7,15 @@
 #navbox {
   /* padding: 0px; */
 }
-.drawTo.marginalia .onecolumn span.marginalContent, 
-.drawTo.marginalia .twocolumn span.marginalContent {
+.drawTo .onecolumn span.marginalContent, 
+.drawTo .twocolumn span.marginalContent {
   /* margin: -1em 0em -60em 0em; */
   /* margin-right: 0em; */
   padding-right: 0em;
-  margin: -1em -12em -100em 0em;
+  /* margin: -1em -8em -100em 0em; */
   /* padding-left: 12em; */
-  float: right;
+  /* float: right; */
+  /* text-align: right */
 }
 /* .onecolumn .marginalContent, .twocolumn .marginalContent { */
 /*   margin: -1em 0em -60em 0em; */
@@ -24,8 +25,8 @@
 /*   float: right; */
 /* } */
 
-.drawTo.marginalia div.para{
-  margin-right: 12em;
+.drawTo div.para{
+  margin-right: 8em;
 }
 
 #navbox * {

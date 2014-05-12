@@ -683,6 +683,12 @@ span.correction .overwritten.m {
 span.correction .correct.n {
   letter-spacing: 0.3em;
 }
+span.correction.removedPunctuation {
+  color: #999;
+}
+span.correction.insertedPunctuation {
+  font-weight: bold;
+}
 table.abbreviationsAndExpansions {
   border: none;
   border-collapse: collapse;

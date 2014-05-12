@@ -245,11 +245,11 @@ var extraInfoDisplay = "show";
 var infoDisplay = "hide";
 var infoButtons = false;
 var exampleSource = false;
-
 var docMap = false;
 
 // Current variable values (for context)
 //var tooltip = false;
+var timeouts = [];
 var scrollLock = false;
 var paneWidths = false;
 var maxWidth = 650;
@@ -279,9 +279,12 @@ var context = false;
 var currentExample = false;
 var currentReading = false;
 var curDoc = false;
+var curCatchword = false;
 var inHeading = false;
 var inTip = false;
 var inVerse = false;
+var inIndex = false;
+var noCount = false;
 var hang = false;
 var lastIsSentenceBreak = false;
 var lastIsHeading = false;
@@ -313,6 +316,7 @@ var drawingWidth;
 var currentType = "mensural";
 var currentSubType = "void";
 var dotPos = false;
+var dotNudge = true;
 var redline = false;
 var examples = [];
 var k1 = Math.cos(Math.PI/3) ;//0.866;
@@ -328,6 +332,7 @@ var underlays = [];
 var currenttextparent = false;
 var curtextitem = false;
 var pari = false;
+var systemContainsPageOrColumnBreak = false;
 //offset for editorial square bracket character
 var braceOff = 7.5;
 function musicStyle(){
@@ -422,14 +427,14 @@ function pitchgt(note1, note2){
 function staffPosition(obj){
   if(obj.pitch){
     return staffPosFromPitchString(obj.pitch);
-  } else if(obj.staffPos){
+  } else if(obj.staffPos || obj.staffPos===0){
     return obj.staffPos;
   } else {
     return false;
   }
 }
 function yPos(y, staffPos){
-  if(staffPos){
+  if(staffPos || staffPos===0){
     return y-((rastralSize*(staffPos-2))/2);
   } else {
     console.log(["Position error", pitch, examplei]);
@@ -490,10 +495,27 @@ function getAndSetPitch(object){
 }
 
 function getStaffPos(){
-  var pos = "0123456789ABCDEF".indexOf(string.charAt(0));
+  if("ABCDEF".indexOf(string.charAt(0))>-1) return getStaffPos2();
+  var pos = consumeIf(/[0-9]+/);
+  return Number(pos);
+}
+
+function getStaffPos2(){
+  var pos = "0123456789ABCDEFGHIJ".indexOf(string.charAt(0));
   if(pos != -1){
     string = string.substring(1);
     return pos;
+  } else {
+    return false;
+  }
+}
+
+function staffPosFromString(tempstring){
+  var val = /^[0-9]+/.exec(tempstring);
+  if(val){
+    return [Number(val[0]), val[0].length];
+  } else if("ABCDEF".indexOf(tempstring.charAt(0))>-1){
+    return ["ABCDEF".indexOf(tempstring.charAt(0))+10, 1];
   } else {
     return false;
   }
@@ -631,30 +653,32 @@ function consumeIf(search){
   }
 }
 
-function consumeSpace(){
+function consumeSpace(spacesOnly){
   // Remove space from string global variable. Return true if space is
   // removed
   var p = pointer;
   clearOneOffTags();
-  consumeSpace2();
+  consumeSpace2(spacesOnly);
   // return
   var slen = 0;
   while(string.length !==slen){
     slen = string.length;
     consumeStyleTags();
-    consumeSpace2();
+    consumeSpace2(spacesOnly);
   }
   return p===pointer ? false : true;
 }
 
-function consumeSpace2(){
-  var nextNonSpace = string.search(/\S/);
+function consumeSpace2(spacesOnly){
+  var regex = (spacesOnly ? /[^ ]/ : /\S/);
+  var nextNonSpace = string.search(regex);
   if(nextNonSpace == -1){
     pointer += string.length;
     string = "";
   } else {
     pointer += nextNonSpace;
-    string = string.substring(string.search(/\S/));
+    // string = string.substring(string.search(regex));
+    string = string.substring(nextNonSpace);
   }
 }
 
@@ -665,8 +689,13 @@ function unRead(value){
   pointer -= value.length;
 }
 
-function setDotPos(staffPos){
-  dotPos = (2 * Math.floor(staffPos/2)) + 1;
+function setDotPos(staffPos, down, nudge){
+  dotNudge = nudge ? true : false;
+  if(down){
+    dotPos = (2 * Math.floor(staffPos/2)) - 1;
+  }  else {
+    dotPos = (2 * Math.floor(staffPos/2)) + 1;
+  }
 }
 
 // b. Generic drawing
@@ -740,7 +769,7 @@ function drawLedgerLine(x, y, x2, extraClasses) {
 }
 
 function squareBracket(x, y, open, extraClasses){
-  return svgText(SVG, x, y, "editorial bracket"+extraClasses, 
+  return svgText(SVG, x, y+(rastralSize/15/prop), "editorial bracket"+extraClasses, 
                  false, braceStyle(), open ? "[" : "]");
 }
 
@@ -1079,10 +1108,11 @@ function sysBreak(){
   var width = sysWidths[sysNo];
   curx = lmargin;
 //  cury += rastralSize * 5 + 5;
-  cury += rastralSize * 3;
+  cury += rastralSize * (systemContainsPageOrColumnBreak ? 4 : 3);
   curx += rastralSize / 2;
   cury += currentLinecount * rastralSize;
   sysNo++;
+  systemContainsPageOrColumnBreak = false;
 }
 
 function sysBreak2(lastp){
@@ -1768,12 +1798,29 @@ function infoToggle(div){
   //FIXME: lame
   var parent = div.parentNode.parentNode;
   var show = $(div).hasClass("showing");
+  var heightChange = 0;
   for(var i=0; i<fields.length; i++){
-    if(show) {
-      $(parent).find(".info."+fields[i]).show();
-    } else {
-      $(parent).find(".info."+fields[i]).hide();
+    var infos = $(parent).find(".info."+fields[i]);
+    for(var j=0; j<infos.length; j++){
+      if(show){
+        $(infos[j]).show();
+        heightChange += infos[j].getBoundingClientRect().height;
+      } else {
+        heightChange -= infos[j].getBoundingClientRect().height;
+        $(infos[j]).hide();
+      }
     }
+//    if(show) {
+//    $(parent).find(".info."+fields[i]).show();
+//  } else {
+//    $(parent).find(".info."+fields[i]).hide();
+//  }
+  }
+  if(heightChange){
+    $(parent).find(".floatingBreak").each(function(){
+      var top = parseFloat(this.style.top);
+      this.style.top=top+heightChange+"px";
+    });
   }
 }
 
@@ -1832,12 +1879,18 @@ function docMapping(){
       this.fixButtons();
       return false;
     }
-    window.clearTimeout();
+    for(var ti=0; ti<timeouts.length; ti++){
+      window.clearTimeout(timeouts[ti]);
+    }
+    timeouts = [];
     wrapWidth = width;
 //    document.getElementById("tempdebug").innerHTML = wrapWidth;
-    setTimeout(function(args){
+    timeouts.push(setTimeout(function(args){
       for(var i=0; i<docMap.docs.length; i++){
-        if(docMap.docs[i].prevWidth != wrapWidth){
+        if(!docMap.docs[i].prevWidth 
+           || (docMap.docs[i].prevWidth != wrapWidth && docMap.docs[i].docType==="Transcription")
+          ){
+          // Commented line would shuffle things to make room. Not doing that now. FIXME: revisit
           docMap.docs[i].forceredraw = true;
           docMap.docs[i].draw();
         }
@@ -1846,7 +1899,7 @@ function docMapping(){
         }
       }
       fixHeight(true);
-    }, 30, [pos]);
+    }, 30, [pos]));
     this.fixButtons();
     return true;
   };
@@ -2021,7 +2074,7 @@ function docMapping(){
         //tGroup[i].setScrollPos(book, chapter, section, paragraph, offset, false);
       }
     }
-    window.setTimeout(function(){$(".drawTo").scroll(scroller120);}, 20);
+    timeouts.push(window.setTimeout(function(){$(".drawTo").scroll(scroller120);}, 20));
   };
   this.updateFromScroll = function(childPane){
     // FIXME: not called?
@@ -2092,6 +2145,8 @@ function docMapping(){
       fndiv.appendChild(document.createTextNode(info));
     } else if (info.objType==="Choice"){ 
       fndiv.appendChild(info.footnote());
+    } else if (info.objType==="Annotation"){
+      fndiv.appendChild(info.footnote());
     } else if (info){
       var frame = svg(100, 100);
       fndiv.appendChild(frame);
@@ -2126,7 +2181,7 @@ function checkScroll(){
   var scrollDiv = scrollLock;
   docMap.updateFromScroll(scrollDiv);
   scrollLock = "Scrolling";
-  window.setTimeout(function(){scrollLock=false;}, 1000);
+  timeouts.push(window.setTimeout(function(){scrollLock=false;}, 1000));
 }
 
 docMap = new docMapping();
@@ -2199,7 +2254,7 @@ function firstOccurrence(needle, index, array){
 }
 
 function findClose(closeChar, starti, parentheses){
-  if(!starti) starti = 0;
+  if(!starti && starti!=0) starti = 0;
   if(!parentheses) parentheses = [['"', '"'], ['{', '}'], ['(', ')']];
   var first = string.indexOf(closeChar, starti);
   var positions = {start: starti, index: 0, min: string.length, mini: false};
@@ -2212,7 +2267,7 @@ function findClose(closeChar, starti, parentheses){
 }
 
 function consumeTillClose(closeChar, starti, parentheses){
-  if(!starti) starti = 0;
+  if(!starti && starti!=0) starti = 0;
   if(!parentheses) parentheses = [['"', '"'], ['{', '}'], ['(', ')']];
   var close = findClose(closeChar, starti, parentheses);
   if(close===-1){
@@ -2224,7 +2279,7 @@ function consumeTillClose(closeChar, starti, parentheses){
 }
 
 function consumeTillOption(closeChars, starti, parentheses){
-  if(!starti) starti = 0;
+  if(!starti && starti!=0) starti = 0;
   if(!parentheses) parentheses = [['"', '"'], ['{', '}'], ['(', ')']];
   var best;
   for(var i=0; i<closeChars.length; i++){
@@ -2464,12 +2519,20 @@ function repeatDotArray(start, end){
   return result;
 }
 
+function thisisanindex(obj){
+  var pane = $(obj).parents("div.pane")[0];
+  var out = $(pane).find(".cursorLocator")[0];
+  out.innerHTML = "Index";
+  $(out).show();
+}
+
 function displayStatusBarReference(refobj){
   var meg = $(refobj).parents("div.musicexample");
   if(meg && meg.length) {
     displayStatusBarReferenceME(refobj, meg[0]);
   } else {
     var para = $(refobj).parents("div.para")[0];
+    if(!para) return;
     var pclass = /at-\S*/.exec(para.className)[0].substring(3);
     var loc = pclass.split("-");
     var sclass = /sentence-\S*/.exec(refobj.className)[0].substring(9);
@@ -2549,16 +2612,14 @@ function ColBreakWidth(a, width){
 function witnessAppliesTo(object, witness){
   // check whether things in *object* apply to *witness*
   if(object.appliesTo){
-    if(object.appliesTo.indexOf("MSS")>1){
+    if(object.appliesTo.indexOf("MSS")>-1){
       return true;
-    } 
+    }
     var item = false;
     for (var i=0; i<object.appliesTo.length; i++){
       item = object.appliesTo[i];
       if(typeof(item)==="string" && typeof(witness)==="string") {
-        if(item === witness){
-          return true;
-        }
+        if(witness===item) return true;
       } else if (typeof(witness)==="object"
                  && witness.objType==="Qualified Witness") {
         if(typeof(item)==="string"){
@@ -2566,6 +2627,8 @@ function witnessAppliesTo(object, witness){
         } else if(item.objType==="Qualified Witness") {
           if(witness.witness===item.witness 
              && item.corrected===witness.corrected){
+            if(foo==="please") console.log("qual");
+            console.log(true, 2);
             return true;
           }
         }
@@ -2590,7 +2653,7 @@ function staffDetailsForWitnesses(witnesses){
     result = [];
     for(var i=sofar.length-1; i>=0; i--){
       obj = sofar[i][1];
-      if(witnessAppliesTo(witnesses[j])){
+      if(witnessAppliesTo(obj, witnesses[j])){
         switch(obj.objType){
         case "Clef":
           if(!clef){
@@ -2648,7 +2711,12 @@ function matchStaves(staffing){
   return [witnesses, newS];
 }
 function defaultPresent(staffing){
-  return staffing.some(isDefaultStaffing);
+  for(var i=0; i<staffing.length; i++){
+    if(isDefaultStaffing(staffing[i])) return true;
+  }
+  return false;
+  var dP = staffing.some(isDefaultStaffing);
+  return dP;
 }
 
 function isDefaultStaffing(s){
@@ -2680,9 +2748,11 @@ function staffPairAgrees2(s1, s2){
     && staffEqual2(s1[3], s2[2], s1[0]);
 }
 function clefEqual(c1, c2){
-  if(!c1) console.log("c1 missing "+book+"."+chapter+"."+sentence);
-  if(!c2) console.log("c2 missing "+book+"."+chapter+"."+sentence);
+  // if(!c1) console.log("c1 missing "+book+"."+chapter+"."+sentence);
+  // if(!c2) console.log("c2 missing "+book+"."+chapter+"."+sentence);
   if(!c1 && !c2) return true;
+  if(!c1) return false; // FIXME: check why
+  if(!c2) return false;
   if(c1.erroneousClef) c1 = c1.erroneousClef;
   if(c2.erroneousClef) c2 = c2.erroneousClef;
   return c1.staffPos===c2.staffPos 
@@ -2723,4 +2793,133 @@ function witnessList(reading){
     }
   }
   return span;
+}
+
+function describeBreak(DOMObj, location){
+    // FIXME: not good for all situations 
+    var page, folio, column;
+    if(/.*[rv]/.test(location)){
+      // There is foliation (rather than page numbers)
+      var folLoc = location.search(/[rv]/);
+      DOMObj.appendChild(DOMSpan("pag", false, location.substring(0, folLoc)));
+      DOMObj.appendChild(DOMSpan("fol", false, location.substring(folLoc, folLoc+1)));
+      if(folLoc<location.length - 1) {
+        DOMObj.appendChild(DOMSpan("colspec", false, location.substring(folLoc+1)));
+      }
+    } else {
+      if(/[a-z]/.test(location)){
+        var colLoc = location.search(/[a-z]/);
+        DOMObj.appendChild(DOMSpan("pag", false, location.substring(0, colLoc)));
+        DOMObj.appendChild(DOMSpan("colspec", false, location.substring(colLoc)));
+      } else {
+        DOMObj.appendChild(DOMSpan("pag", false, location));
+      }
+    }
+  DOMObj.appendChild(DOMAnchor('column', 'cola'+location, false, false));
+  return DOMObj;
+}
+
+function allBreaks(){
+  var treatises = (docMap && docMap.docs.length) ? docMap.docs : [doc];
+  return treatises.reduce(function(p, el) 
+                          {return p.concat(el.breaks);}, []); 
+}
+
+function breakTop(breaker){
+  if(breaker.objType==="Column/Page") {
+    var parent =  $(breaker.DOMObj).offsetParent()[0];
+    var offset = $(breaker.DOMObj).parents('.tabular').length ? 0 : -4;
+    if(!$(parent).hasClass('drawTo')){
+      // FIXME: only one level of correction
+      offset+=$(parent).position().top;
+    }
+    var scrollPos = parent.scrollTop;
+    return Math.max(0, $(breaker.DOMObj).position().top +offset+scrollPos);
+  } else {
+    var div = $(breaker.line).parents('.musicexample')[0];
+    var divRelTop = $(div).position().top;
+    var divAbsTop = div.getBoundingClientRect().top;
+    var parent =  $(div).offsetParent()[0];
+    var scrollPos = parent.scrollTop;    
+    var breakerAbsTop = breaker.line.getBoundingClientRect().top;
+    var top = breakerAbsTop-divAbsTop+divRelTop;
+    return top-4+scrollPos;
+  }
+}
+function breakDrawTo(breaker){
+  if(breaker.objType==="Column/Page") return $(breaker.DOMObj).parents('.drawTo')[0];
+  else return $(breaker.line).parents('.drawTo')[0];
+}
+
+function replaceBreakers(){
+//  var breakers = $('.breaker');
+  var breakers = allBreaks();
+  var breakObjects = [];
+  var box, y, parent;
+  for(var i=0; i<breakers.length; i++){
+    // y = $(breakers[i]).position().top;
+    y = breakTop(breakers[i]);
+    // drawTo = $(breakers[i]).parents('.drawTo')[0];
+    drawTo = breakDrawTo(breakers[i]);
+    breakDiv = DOMDiv('floatingBreak col', false, false);
+    drawTo.appendChild(breakDiv);
+    breakDiv.style.top = y+"px";
+    describeBreak(breakDiv, breakers[i].location);
+    if(breakers[i].catchWord){
+      var catchDiv = breakers[i].catchWord.toHTML();
+      breakDiv.appendChild(catchDiv);
+      catchDiv.style.bottom = (10+catchDiv.getBoundingClientRect().height)+"px";
+    }
+  }
+}
+function WitnessHashName(wit){
+  if(wit.objType==="WitnessDescription"){
+    return "";
+  } else {
+    // FIXME: N.B. This is wrong (see below)
+    return "#"+(typeof(wit)==="string") ? wit : 
+      (wit.witness +(wit.witness.corrected ? "c" : "*"));
+  }
+}
+function TEIWitnesses(rdg, el){
+  var wits = "";
+  var rend = el.getAttribute("rend") || "";
+  var rends = [];
+  if(rdg.witnesses.length && rdg.witnesses[0]!=="MSS"){
+    for(var i=0; i<rdg.witnesses.length; i++){
+      if(i){
+        wits+=" ";
+      }
+      if(typeof(rdg.witnesses[i])==="string"){
+        wits+= "#"+rdg.witnesses[i];
+      } else if(rdg.witnesses[i].objType==="WitnessDescription"){
+        if(i){
+          // if(rend.length) rend+=" ";
+          // rend += WitnessHashName(rdg.witnesses[i-1])+":"
+          //   + rdg.witnesses[i].information;
+          rends.push(WitnessHashName(rdg.witnesses[i-1])+":"
+                    + rdg.witnesses[i].information);
+        }
+      } else if(rdg.witnesses[i].objType==="Qualified Witness"){
+        // FIXME: no, this should be add, ins, del or whatnot
+        wits+= "#"+rdg.witnesses[i].witness+(rdg.witnesses[i].corrected ? "c" : "*");
+      }
+    }
+    if(rend.length){
+      el.setAttribute("rend", rend+rends.join("; "));
+    }
+    el.setAttribute("wit", wits);
+  } else if (rdg.extraDescription==="ed." || rdg.description==="ed.") {
+    el.setAttribute("resp", "#ed");
+  } else if (rdg.witnesses[0]==="MSS") {
+    /*
+    for(var i=0; i<curDoc.sources.length; i++){
+      if(i) wits+=" ";
+      wits+="#"+curDoc.sources[i].id;
+    }
+    el.setAttribute("wit", wits);
+    */
+    el.setAttribute("wit", "#MSS");
+  }
+  return el;  
 }

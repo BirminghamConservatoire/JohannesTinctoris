@@ -3,6 +3,8 @@
 //  These are:
 //    * Book
 //    * BookEnd
+//    * Index
+//    * Table
 //    * Prologue
 //    * Conclusion
 //    * Chapter
@@ -44,6 +46,7 @@ function Book(){
   this.toText = function(){
     return this.code;
   };
+  this.toTEI = addSubdivision;
   this.toHTML = function(){
     return this.DOMObj;
   };
@@ -60,6 +63,240 @@ function BookEnd(){
     return false;
   };
 }
+function Index(){
+  this.objType = "Index";
+  this.code = "<index>";
+  this.special = false;
+  this.chapter = "Index";
+  this.next = false;
+  this.previous = false;
+  chapter = "Index";
+  paragraph = 0;
+  section = 0;
+  sentence = 0;
+  exampleno = 0;
+  inIndex = true;
+  this.toText = function(){ return this.code; };
+  this.toTEI = addSubdivision;
+  this.toHTML = function(){
+    inIndex = true;
+    return DOMAnchor('chapter', false, false, "ch-Index");
+  };
+}
+
+function Table(){
+  this.objType = "Table";
+  this.classes = [];
+  this.rows = [];
+  this.columns = false;
+  this.code = false;
+  this.book = book;
+  this.chapter = chapter;
+  this.section = section;
+  this.paragraph = paragraph;
+  this.textnodes = [];
+  this.sentence = sentence;
+  this.hang = false;
+  this.rowCount = function(){
+    return this.rows.length;
+  };
+  this.columnCount = function(){
+    var cols = 1;
+    for(var i=0; i<this.rows.length; i++){
+      if(this.rows[i].objType ==="TableRow"){
+        cols = Math.max(cols, this.rows[i].cells.length);
+      } 
+    }
+    return cols;
+  };
+  this.toText = function(){
+    var text = "\n"+this.classesToText();
+    for(var i=0; i<this.rows.length; i++){
+      text += typeof(this.rows[i])=="string" ? this.rows[i] : (this.rows[i].toText ? this.rows[i].toText() : "");
+    }
+    return text;
+  };
+  this.classesToText = function (){
+    var text = "";
+    for(var i=0; i<this.rows.length; i++){
+      if(i>0) text += 0;
+      text += "**"+this.rows[i]+"**";
+    }
+    return text;
+  };
+  this.columnClass = function(coli){
+    if(this.columns && this.columns.length>coli && this.columns[coli]){
+      return this.columns[coli];
+    }
+    return "";
+  };
+  this.toTEI = makeTEITable;
+  this.toHTML = function(){
+    this.DOMObj = DOMDiv('tabular'+" at-"+this.book+"-"
+                         +this.chapter+"-"+this.section+"-"+this.paragraph+" sentencefrom-"
+                         +this.sentence, false, false);
+//    this.DOMObjs = [document.createElement('p')];
+    // Paragraphs always begin with capitals unsuppressed. Probably.
+    uncapitalise = false;
+    var i=0;
+    var obj;
+//    var str = (this.hang ? "hang" : "");
+    var classString = "";
+    if(this.classes.length>0){
+      for(i=0; i<this.classes.length; i++){
+        if(i>0){
+          // str+= " ";
+        }
+        classString+= this.classes[i];
+      }
+    }
+    for(i=0; i<this.rows.length; i++){
+      currenttextparent = this;
+      pari = i;
+      if(typeof(this.rows[i]) == 'string'){
+        // NEVER HAPPENS (anymore)
+        // this.textnodes.push([i, document.createTextNode(this.rows[i])]);
+//        row.appendChild(this.textnodes[this.textnodes.length-1][1]);
+        console.log("Well, a string cropped up in a table");
+      } else if (this.rows[i].objType == "Column/Page" || 
+                 (typeof(this.rows[i].content) != "undefined" && 
+                  typeof(this.rows[i].content) == "Span" && 
+                  this.rows[i].content[0].objType == "Column/Page")) {
+//        this.DOMObj.appendChild(DOMTextEl('p', 'colend', false, false));
+        if(obj) obj.className += " colend";
+        var breakCaption = this.rows[i].toHTML();
+//        this.DOMObjs.push(breakCaption);
+        this.DOMObj.appendChild(breakCaption);
+      } else if (this.rows[i].objType == "MusicExample"){
+        // Never happens... or does it?
+        console.log("Music example in table!");
+      } else {
+        // TableRow
+        obj = this.rows[i].toHTML();
+        this.DOMObj.appendChild(obj);
+        obj.className += classString;
+      }
+    }
+    return this.DOMObj;
+  };
+  // Table
+}
+
+function TableRow(){
+  this.cells = [];
+  this.toTEI = function (doc, parent){
+    var row = doc.element("row");
+    parent.appendChild(row);
+    for(var i=0; i<this.cells.length; i++){
+      var cell = doc.element("cell");
+      row.appendChild(cell);
+      if(this.cells[i].toTEI){
+        this.cells[i].toTEI(doc, cell);
+      }
+    }
+  };
+  this.toHTML = function (){
+    var row = DOMDiv("TabularRow", false, false);
+    var cell = DOMDiv("TabularCell", false, false);
+    var table = currenttextparent;
+    for(var i=0; i<this.cells.length; i++){
+      cell.className += " "+table.columnClass(i);
+      cell.appendChild(this.cells[i].toHTML());
+      row.appendChild(cell);
+      cell = DOMDiv("TabularCell", false, false);
+    }
+    return row;
+  }
+}
+
+function TabularIndex(){
+  this.objType = "TabularIndex";
+  this.classes = [];
+  this.rows = [];
+  this.columns = ["l", "r"];
+  this.code = false;
+  this.book = false;
+  this.chapter = "Index";
+  this.previous = false;
+  chapter = 0;
+  section = 0;
+  paragraph = 0;
+  exampleno=0;
+  sentence = 0;
+  this.textnodes = [];
+  this.hang = false;
+  this.toText = function(){
+    var text = "\n"+this.classesToText();
+    return text;
+  };
+  this.rowCount = function(){
+    return this.rows.length;
+  };
+  this.columnCount = function(){ return 2; };
+  this.toTEI = makeTEITable; // ? enclose within a <div type='index'>?
+  this.classesToText = function (){
+    var text = "";
+    for(var i=0; i<this.classes.length; i++){
+      if(i>0) text += 0;
+      text += "**"+this.classes[i]+"**";
+    }
+    return text;
+  };
+  this.columnClass = function(coli){
+    if(this.columns && this.columns.length>coli && this.columns[coli]){
+      return this.columns[coli];
+    }
+    return "";
+  };
+  this.toHTML = function(){
+    inIndex = true;
+    this.DOMObj = DOMDiv('tabular index'+" at-"+this.book+"-"
+                         +this.chapter+"-"+this.section+"-"+this.paragraph+" sentencefrom-"
+                         +this.sentence, false, false);
+    this.DOMObj.appendChild(DOMAnchor('chapter', false, false, "ch-Index"));
+    // Paragraphs always begin with capitals unsuppressed. Probably.
+    uncapitalise = false;
+    var i=0;
+    var obj;
+//    var str = (this.hang ? "hang" : "");
+    var classString = "";
+    if(this.classes.length>0){
+      for(i=0; i<this.classes.length; i++){
+        if(i>0){
+          // str+= " ";
+        }
+        classString+= this.classes[i];
+      }
+    }
+    for(i=0; i<this.rows.length; i++){
+      currenttextparent = this;
+      pari = i;
+      if(typeof(this.rows[i]) == 'string'){
+        // NEVER HAPPENS (anymore)
+        console.log("Well, a string cropped up in a table");
+      } else if (this.rows[i].objType == "Column/Page" || 
+                 (typeof(this.rows[i].content) != "undefined" && 
+                  typeof(this.rows[i].content) == "Span" && 
+                  this.rows[i].content[0].objType == "Column/Page")) {
+        if(obj) obj.className += " colend";
+        var breakCaption = this.rows[i].toHTML();
+        this.DOMObj.appendChild(breakCaption);
+      } else if (this.rows[i].objType == "MusicExample"){
+        // Never happens... or does it?
+        console.log("Music example in table!");
+      } else {
+        // TableRow
+        obj = this.rows[i].toHTML();
+        this.DOMObj.appendChild(obj);
+        obj.className += classString;
+      }
+    }
+    inIndex = false;
+    return this.DOMObj;
+  };
+  // Table
+}
+
 function Prologue(){
   this.objType = "Prologue";
   this.code = "<prologue>";
@@ -73,6 +310,7 @@ function Prologue(){
   sentence = 0;
   exampleno = 0;
   this.DOMObj = DOMAnchor('chapter', false, false, "ch-prologue");
+  this.toTEI = addSubdivision;
   this.toText = function(){
     return this.code;
   }
@@ -92,6 +330,7 @@ function Conclusion(){
   section = 0;
   sentence = 0;
   exampleno = 0;
+  this.toTEI = addSubdivision;
   this.DOMObj = DOMAnchor('chapter', false, false, "ch-conclusion");
   this.toText = function(){
     return this.code;
@@ -116,6 +355,7 @@ function Chapter(){
   this.toText = function(){
     return this.code;
   };
+  this.toTEI = addSubdivision;
   this.toHTML = function(){
     return this.DOMObj = DOMAnchor('chapter', false, false, "ch-"+this.chapter);
   };
@@ -125,10 +365,12 @@ function ChapEnd(){
   this.code = "</chapter>";
   this.next = false;
   this.previous = false;
+  inIndex = false;
   this.toText = function(){
     return this.code;
   };
   this.toHTML = function(){
+    inIndex = false;
     return false;
   };
 }
@@ -142,6 +384,7 @@ function Section(){
   this.DOMObj = DOMAnchor('section', false, false, false);
   this.next = false;
   this.previous = false;
+  this.toTEI = addSubdivision;
   this.toText = function(){
     return this.code;
   };
@@ -160,6 +403,16 @@ function Heading(){
   this.toText = function(){
     return this.code;
   };
+  this.toTEI = function(doc, parent){
+    console.log("head");
+    el = document.createElement("head");
+    if(!parent) parent = doc.currentParent;
+    doc.prevParent = doc.currentParent;
+    parent.appendChild(el);
+    doc.currentParent = el;
+    console.log("heading");
+    return el;
+  }
   this.toHTML = function(){
     // FIXME;
     return false;
@@ -175,6 +428,13 @@ function HeadEnd(){
   this.toText = function(){
     return this.code;
   };
+  this.toTEI = function(doc, parent){
+    el = doc.currentParent;
+    if(doc.prevParent){
+      doc.currentParent = doc.prevParent;
+    };
+    return el;
+  };
   this.toHTML = function(){
     return false;
   };
@@ -184,9 +444,11 @@ function Column(){
   this.objType = "Column/Page";
   this.code = false;
   this.location = false;
-  this.DOMObj = DOMDiv('col', false, false);
+  this.DOMObj = DOMDiv('col breaker', false, false);
   this.next = false;
   this.previous = false;
+  this.catchWord = curCatchword;
+  curCatchword = false;
   this.toText = function(){
     return "[-"+this.location+"-]";
   };
@@ -212,12 +474,40 @@ function Column(){
     }
     return this.DOMObj;
   };
+  this.toTEI = function (doc, parent){
+    if(!parent) parent = doc.currentParent;
+    var el;
+    if(/^[A-Z]?[0-9]*(([rv][b-z])|[b-qs-uw-z])$/.exec(this.location)) {
+      // This is a column break without a page break
+      el = doc.element("cb");
+      el.setAttribute("n", this.location[this.location.length-1]);
+      parent.appendChild(el);
+    } else if(/^[A-Z]?[0-9]*[rv]?a$/.exec(this.location)){
+      // This is a page break in a multi-column
+      // layout. http://menota.org says both <pb> & <cb> are needed
+      el = doc.element("pb");
+      el.setAttribute("n", this.location.substring(0, this.location.length-1));
+      parent.appendChild(el);
+      el = doc.element("cb");
+      el.setAttribute("n", "a");
+      parent.appendChild(el);      
+    } else {
+      // This is a page break in a single-column source
+      el = doc.element("pb");
+      el.setAttribute("n", this.location);
+      parent.appendChild(el);
+    }
+  };
   this.toHTML = function(){
-    if (this.location) {
-      $(this.DOMObj).empty();
+    if(this.location) {
+      curDoc.breaks.push(this);
+      this.DOMObj = DOMDiv('col breaker', false, false);
+//      $(this.DOMObj).empty();
       this.DOMObj.id = "col"+this.location;
-      this.locationHTML();
-      this.DOMObj.appendChild(DOMAnchor('column', 'cola'+this.location, false, false));
+      //this.locationHTML();
+      // describeBreak(this.DOMObj, this.location);
+      // var anchor = DOMAnchor('column', 'cola'+this.location, false, false);
+      // this.DOMObj.appendChild(DOMAnchor('column', 'cola'+this.location, false, false));
     }
     return this.DOMObj;
   };
@@ -229,12 +519,17 @@ function Newline(){
   this.next = false;
   this.previous = false;
   inVerse++;
+  this.toTEI = function (doc, parent){
+    if(!parent) parent = doc.currentParent;
+    el = doc.element("lb");
+    parent.appendChild(el);
+  };
   this.toHTML = function(){
     return document.createElement("br");
   }
 }
 
-function Paragraph(){
+function Paragraph(suppressNodeNumbers){
   this.objType = "Paragraph";
   this.classes = [];
   this.content = [];
@@ -243,11 +538,12 @@ function Paragraph(){
   this.chapter = chapter;
   this.section = section;
   this.paragraph = paragraph++;
-  this.n = nodeNo++;
+  this.numberNodes = !suppressNodeNumbers;
+  this.n = suppressNodeNumbers ? nodeNo : nodeNo++;
   this.textnodes = [];
   this.sentence = sentence;
   this.hang = false;
-  nodes[this.n] = this;
+  if (!suppressNodeNumbers) nodes[this.n] = this;
   this.DOMObj = DOMDiv('para', 'node-'+this.n, false);
   this.DOMObjs = [document.createElement('p')];
   this.musicOnly = function(){
@@ -282,6 +578,44 @@ function Paragraph(){
     }
     return structures;
   }
+  this.toTEI = function(doc, parent, headless){
+    var tp = this.content.filter(textualContentp);
+    var el;
+    if(!parent) parent=(doc.currentParent || doc.body);
+    if(tp.length===0){
+      // There's no text here. Possibly music example.
+      for(var i=0; i<this.content.length; i++){
+        if(this.content[i].toTEI) this.content[i].toTEI(doc, parent);
+      }
+    } else
+       if(headless ||
+              (tp.length===1 
+               && tp[0].objType==="Span"
+               && (tp[0].type==="heading" 
+                   || tp[0].type==="treatiseTitle"))){
+      // Title, so no p
+      return this.content[0].toTEI(doc, parent);
+    }  else if (tp.length===1 
+              && tp[0].objType==="Span"
+              && (tp[0].type==="incipit"
+                  || tp[0].type==="explicit")){
+        el = doc.element("div");
+        el.setAttribute("type", tp[0].type);
+        parent.appendChild(el);
+        tp[0].toTEI(doc, el);
+        return el;
+    } else {
+      el = doc.element("p");
+      elo = el;
+      if(!parent) console.log(doc, parent);
+      parent.appendChild(el);
+      for(var i=0; i<this.content.length; i++){
+        if(this.content[i].toTEI) this.content[i].toTEI(doc, el);
+        if(el!==elo) console.log(el, elo, this.content[i]);
+      }
+      return el;
+    }
+  };
   this.toText = function(){
     var text = "\n"+this.classesToText();
     for(var i=0; i<this.content.length; i++){
@@ -301,7 +635,7 @@ function Paragraph(){
     this.DOMObj = DOMDiv('para'+" at-"+this.book+"-"
                          +this.chapter+"-"+this.section+"-"+this.paragraph+" sentencefrom-"
                          +this.sentence,
-                         'node-'+this.n, false);
+                         this.numberNodes ? 'node-'+this.n : false, false);
     this.DOMObjs = [document.createElement('p')];
     var para = this.DOMObjs[0];
     // Paragraphs always begin with capitals unsuppressed. Probably.
@@ -316,6 +650,7 @@ function Paragraph(){
         str+= this.classes[i];
       }
     }
+    if(inIndex) str += " IndexLine";
     para.className = str;
     this.DOMObj.appendChild(para);
     for(i=0; i<this.content.length; i++){
@@ -331,6 +666,7 @@ function Paragraph(){
                   this.content[i].content[0].objType == "Column/Page")) {
         var cn = para.className;
         para.className += " colend";
+        if(this.content.length===1) para.className += " columnPara";
         var breakCaption = this.content[i].toHTML();
         this.DOMObjs.push(breakCaption);
         this.DOMObj.appendChild(breakCaption);
@@ -340,7 +676,10 @@ function Paragraph(){
           this.DOMObjs.push(para);
           this.DOMObj.appendChild(para);
         }
-      } else if (this.content[i].objType == "MusicExample"){
+      } else if (this.content[i].objType==="MusicExample"){
+        if(i && this.content[i-1].objType==="Marginal"){
+          $(this.content[i-1].domObj).children(".marginalContent").addClass("premusical");
+        }
         var standalone = standalonep(this.content[i], this.content)
         var div = DOMDiv('musicexample dc'+desperatecounter
 //                         +(this.content.length == 1 ? " standalone" 
@@ -376,9 +715,38 @@ function Paragraph(){
         if(obj) para.appendChild(obj);
       }
     }
+    if(inIndex) this.DOMObj.className = this.DOMObj.className+" indexLine";
     return this.DOMObj;
   };
   // Paragraph
+}
+
+function NoCount(){
+  this.objType = "Non Counting";
+  noCount = this;
+  this.chapter = chapter;
+  this.book = book;
+  this.section = section;
+  this.sentence = sentence;
+  this.toText = function(){ return "<nocount>"};
+  this.toHTML = function(){
+    noCount = this;
+    return false;
+  };
+}
+function EndNoCount(){
+  this.objType = "Non Counting - ends";
+  this.noCount = noCount;
+  chapter = this.noCount.chapter;
+  book = this.noCount.book;
+  section = this.noCount.section;
+  sentence = this.noCount.sentence;
+  noCount = false;
+  this.toText = function(){ return "<nocount>"};
+  this.toHTML = function(){
+    noCount = false;
+    return false;
+  }
 }
 
 function Annotation(){
@@ -386,25 +754,44 @@ function Annotation(){
   this.code = false;
 //  this.domObj = DOMSpan("annotation", false, "‸");//*"
   this.domObj = DOMSpan("annotation", false, "*");
+  this.contents = [];
   this.next = false;
   this.previous = false;
   this.toText = function(){
     return "**"+this.code+"**";
   };
+  this.toTEI = function(doc, parent){
+    if(!parent) parent = (doc.parentNode || doc.body);
+    var el = doc.element("note");
+    el.setAttribute("type", "editorial");
+    el.setAttribute("resp", "#ed");
+    parent.appendChild(el);
+    el.appendChild(doc.text(this.code));
+  };
+  this.footnote = function(){
+    var obj = DOMSpan(false, false, false);
+    for (var i=0; i<this.contents.length; i++){
+      obj.appendChild(this.contents[i].toHTML());
+    }
+    return obj;
+  };
   this.toHTML = function(){
-    this.domObj.title = this.code;
-    $(this.domObj).mouseover(function(text) {
-      return function(e){
-        var tip = Tooltip(text);
-        this.title = "";
-        tip.style.position = "fixed";
-        tip.style.top = $(this).offset().top+10+"px";
-        tip.style.left = $(this).offset().left+10+"px";
-        tip.style.width = 200;
-      };
-    }(this.code));
-    $(this.domObj).mouseout(this.removeTooltip(this.code));
+    //addAnnotation(this.domObj, this.code, "Annotation");
+    addAnnotation(this.domObj, this, "Annotation");
     return this.domObj;
+    // this.domObj.title = this.code;
+    // $(this.domObj).mouseover(function(text) {
+    //   return function(e){
+    //     var tip = Tooltip(text);
+    //     this.title = "";
+    //     tip.style.position = "fixed";
+    //     tip.style.top = $(this).offset().top+10+"px";
+    //     tip.style.left = $(this).offset().left+10+"px";
+    //     tip.style.width = 200;
+    //   };
+    // }(this.code));
+    // $(this.domObj).mouseout(this.removeTooltip(this.code));
+    // return this.domObj;
   };
   this.removeTooltip = function(txt){
     return function(){
@@ -412,6 +799,27 @@ function Annotation(){
       this.title = txt;
     };
   };
+}
+
+function RightStop(){
+  this.objType = "Right Tab Stop";
+  this.code = false;
+  this.content = false;
+  this.domObj = DOMSpan("right-stop", false, false);
+  this.next = false;
+  this.previous = false;
+  this.toText = function(){
+    return "\t"+this.content.toText();
+  }
+  this.toHTML = function(){
+    var span = DOMSpan("right-aligned", false, false);
+    var p = $($(this.content.toHTML()).children()[0]).contents();
+    for(var i=0; i<p.length; i++){
+      span.appendChild(p[i]);
+    }
+    this.domObj.appendChild(span);
+    return this.domObj;    
+  }
 }
 
 function Marginal(){
@@ -439,28 +847,125 @@ function Marginal(){
     text += this.content.toText().substring(1);
     return text+"</marg>";
   };
+  this.locObject = function(parent){
+    parent.appendChild(document.createTextNode("["+this.margin
+                                               +(this.side ? "" : "]")));
+    if(this.side){
+      parent.appendChild(document.createElement("wbr"))
+      parent.appendChild(document.createTextNode("("+this.side+")"+"]"));
+    }
+    return parent;
+  };
   this.locString = function(){
     var descString = "";
     if(this.margin){
-      descString += this.margin;
+      descString += this.margin.replace(" ", " ");
       if(this.side){
-        descString += " ("+this.side+")";
+        descString += " ("+this.side+")";
       }
     }
     return descString;
   };
+  this.toTEI = function(doc, parent){
+    // Closest I can see is <note place="margin">
+    if(!parent) parent = (doc.parentNode || doc.body);
+    var el = doc.element("note");
+    el.setAttribute("place", "margin");
+    parent.appendChild(el);
+    var el2 = doc.element("desc"); // Is this right?
+    el2.appendChild(doc.text(this.locString()));
+    el.appendChild(el2);
+    if(this.content.toTEI) this.content.toTEI(doc, el, true);
+    return el;
+  };
   this.toHTML =function(){
     $(curDoc.drawTo).addClass("marginalia");
     var span = DOMSpan("marginalContent", false, false);
+    $(currenttextparent.DOMObj.lastElementChild).addClass("addTopSpaceForMarginal");
+//    span.appendChild(this.locObject(DOMSpan("marginLoc", false, "")));
+    span.appendChild(DOMSpan("marginLoc", false, "["+this.locString()+"]"));
 //    this.domObj.style.title = this.locString();
     var p = $($(this.content.toHTML()).children()[0]).contents();
     for(var i=0; i<p.length; i++){
       span.appendChild(p[i]);
     }
-    span.appendChild(DOMSpan("marginLoc", false, " ["+this.locString()+"] "));
+    // span.appendChild(DOMSpan("marginLoc", false, " ["+this.locString()+"] "));
     this.domObj.appendChild(span);
     return this.domObj;
   };
+}
+
+function Catchword(){
+  this.objType = "Catchword";
+  this.tag = "catchword"
+  this.code = false;
+  this.content = false;
+  this.position = false;
+  this.domObj = DOMDiv("catchword marginal", false, false);
+  this.next = false;
+  this.previous = false;
+  this.yOffset = false;
+  this.example = false;
+  curCatchword = this;
+  margins = true;
+  this.toText = function(){
+    // FIXME:
+    return "";
+  };
+  this.footnote = function(){
+    return DOMSpan("catchwordpos", false, this.position);
+  };
+  this.width = function(){ return 0;} // Just for music example
+  this.toTEI = function(doc, parent){
+    // Closest I can see is <note place="margin">
+    if(!parent) parent = (doc.parentNode || doc.body);
+    var el = doc.element("note");
+    el.setAttribute("place", "margin");
+    el.setAttribute("type", this.tag);
+    parent.appendChild(el);
+    var el2 = doc.element("desc"); // Is this right?
+    el2.appendChild(doc.text(this.position));
+    el.appendChild(el2);
+    if(this.content.toTEI) this.content.toTEI(doc, el);
+    return el;
+  };  
+  this.toHTML =function(){
+    $(curDoc.drawTo).addClass("marginalia");
+    var span = DOMSpan("marginalContent catchword", false, false);
+    if(this.example) $(span).addClass("musical");
+//    this.domObj.style.title = this.locString();
+    var p = $($(this.content.toHTML()).children()[0]).contents();
+    for(var i=0; i<p.length; i++){
+      span.appendChild(p[i]);
+    }
+    span.appendChild(DOMSpan(this.tag+" marginLoc", false, " ["+this.tag+"] "));
+//    addAnnotation(span, this, "catchword");
+    this.domObj.appendChild(span);
+    $(span).mouseover(function(text) {
+      return function(e){
+        var tip = Tooltip(text);
+        this.title = "";
+        tip.style.position = "fixed";
+        tip.style.top = $(this).offset().top+15+"px";
+        tip.style.left = this.getBoundingClientRect().right-100+"px";
+        tip.style.maxWidth = 300 +"px";
+      };
+    }(this.position));
+    $(span).mouseout(this.removeTooltip(this.code));
+    return this.domObj;
+  };
+  this.removeTooltip = function(txt){
+    return function(){
+      removeTooltip();
+      this.title = txt;
+    };
+  };
+  this.draw = function(){
+    // This is for a catchword in a music example
+    this.example = currentExample;
+    this.yOffset = cury;
+    currentExample.catchwords.push(this);
+  }
 }
 
 function textualContentp(element){
@@ -468,6 +973,7 @@ function textualContentp(element){
     case "Book":
     case "BookEnd":
     case "Prologue":
+    case "Index":
     case "Conclusion":
     case "Chapter":
     case "ChapEnd":
@@ -479,10 +985,13 @@ function textualContentp(element){
     case "ExampleComments":
     case "Annotation":
     case "Marginal":
-    case "Hand":
+//    case "Hand":
     case "SentenceBreak":
     case "MusicExample":
+    case "Blank Lines":
       return false;
+    case "Text":
+      return element.code.length && /\S/.test(element.code);
     default:
       return true;
   }
@@ -513,13 +1022,28 @@ function containsTextualContentp(element){
 }
 
 function standalonep(example, array){
-  if(example.parameters && example.parameters.spec === "full measure") {
+  if(example.parameters && 
+     (example.parameters.spec === "full measure"||
+      example.parameters.spec === "column measure")) {
     return true;
   } else if (example.parameters && example.parameters.spec === "in-line") {
     return false;
   } else {
-    return array.filter(textualContentp).length <=1;
+    return array.filter(textualContentp).length <=1 || exampleFollowsCol(example, array);
   }
+}
+
+function exampleFollowsCol(example, array){
+  // If there is no text between column/page break and example, this
+  // should be treated as standalone
+  var pos = array.indexOf(example);
+  for(var i=pos-1; i>=0; i--){
+    if(textualContentp(array[i])) return false;
+    if(array[i].objType==="Column") {
+      return true;
+    }
+  }
+  return false;
 }
 
 function textBlockToHTML(container, content, block){
@@ -539,12 +1063,16 @@ function textBlockToHTML(container, content, block){
       if(block.DOMObjs) block.DOMObjs.push(breakCaption);
       container.appendChild(breakCaption);
       if(i<content.length - 1){
-        container = document.createElement('p');
-        container.className = cn;
-        if(block.DOMObjs) block.DOMObjs.push(para);
-        container.appendChild(para);
+        newContainer = document.createElement(container.nodeName);
+        newContainer.className = cn;
+        if(block.DOMObjs) block.DOMObjs.push(newContainer);
+        container.appendChild(newContainer);
+//        container = newContainer;
       }
     } else if (content[i].objType == "MusicExample"){
+      if(i && content[i-1].objType==="Marginal"){
+        $(content[i-1].domObj).children(".marginalContent").addClass("premusical");
+      }
       var div = DOMDiv('musicexample dc'+desperatecounter
 //                         +(content.length == 1 ? " standalone" 
                          +(standalonep(content[i], content) ? " standalone" 
@@ -593,6 +1121,7 @@ function Span(){
   this.extra = false;
   this.next = false;
   this.previous = false;
+  this.endsWithPilcrow = false;
   this.realNext = function(){
     return this.content.length ? this.content[0] : this.next;
   };
@@ -629,10 +1158,92 @@ function Span(){
   this.extraClasses = function(){
     return this.extra ? " span"+this.extra: "";
   }
+  this.toTEI = function(doc, parent){
+    if(!parent) parent=(doc.currentParent || doc.body);
+    var el;
+    switch (this.type){
+      case "heading":
+      case "treatiseTitle":
+        el = doc.element("head");
+        el.setAttribute("type", this.type);
+        break;
+      case "twoline":
+      case "threeline":
+      case "fourline":
+      case "fiveline":
+      case "sixline":
+      case "sevenline":
+        el = doc.element("hi");
+        el.setAttribute("rend", "Drop-caps("
+                        +this.type+")");
+        break;
+      case "polychrome":
+      case "redline":
+      case "blueline":
+      case "yellowline":
+      case "underscore":
+        el = doc.element("hi");
+        el.setAttribute("rend", "Highlight("+this.type+")");
+        break;
+      case "red":
+      case "blue":
+      case "violet":
+      case "gold":
+        el = doc.element("hi");
+        el.setAttribute("rend", "Ink("+this.type+")");
+        break;
+      case "citation":
+        el = doc.element("ref");
+        break;
+      case "subheading":
+        // Is there really no more sensible way to indicate a
+        // non-structural heading? If I make this structural (using
+        // div), then the parent structure has to be fully divided --
+        // I can't put a mixture of p's and div's in.
+        el = doc.element("hi");
+        el.setAttribute("rend", "Subheading");
+        break;
+      case "verse":
+        // Very special case -- lines have to be enclosed
+        el = doc.element("div");
+        el.setAttribute("type", "verse");
+        parent.appendChild(el);
+        var el2 = doc.element("l");
+        var count = this.content.length;
+        el.appendChild(el2);
+        for(var i=0; i<count; i++){
+          if(this.content[i].objType==="Newline"){
+            if(i<count-1){
+              // Only make a new line if this isn't the last
+              el2 = doc.element("l");
+              el.appendChild(el2);
+            }
+          } else {
+            if(this.content[i].toTEI) this.content[i].toTEI(doc, el2);
+          }
+        }
+        return el;
+      case "incipit":
+      case "explicit":
+        // I think...
+        el = doc.element("p");
+        break;
+      default:
+        el = doc.element("span");
+        el.setAttribute("type", this.type);
+    }
+    if(el!==parent) parent.appendChild(el);
+    for(var i=0; i<this.content.length; i++){
+      if(this.content[i].toTEI) this.content[i].toTEI(doc, el);
+    }
+    return el;
+  };
   this.toHTML = function(){
     var span = document.createElement('span');
     span.className = this.type + this.extraClasses();
     this.DOMObj = textBlockToHTML(span, this.content, this);
+    var tp = this.content.filter(textualContentp);
+    if(tp.length && tp[tp.length-1].endsWithPilcrow) this.endsWithPilcrow = true;
     return this.DOMObj;
   };
 }
@@ -660,6 +1271,15 @@ function Hand(){
     }
     return text + "</newhand>";
   };
+  this.toTEI = function(doc, parent){
+    if(!parent) parent = (doc.parentNode || doc.body);
+    var el = doc.element("add");
+    parent.appendChild(el);
+    el.setAttribute("hand", "#"+this.id);
+    for(var i=0; i<this.content.length; i++){
+      if(this.content[i].toTEI) this.content[i].toTEI(doc, el);
+    }
+  }
   this.toHTML = function(){
     this.DOMObj.title = this.id + ": " + hands[this.id];
     for(var i=0; i<this.content.length; i++){
@@ -676,9 +1296,28 @@ function Hand(){
 function Space(){
   this.objType = "Space";
   this.code = "[-]";
-  this.DOMObj = DOMSpan('space', false, " ");
+  // this.DOMObj = DOMSpan('space', false, " ");
+  this.DOMObj = DOMSpan('space', false, " ");
   this.toText = function(){
     return this.code;
+  };
+  this.toTEI = function(doc, parent){
+    if(!parent) parent=(doc.currentParent || doc.body);
+    var lc = parent.lastElementChild;
+    if(lc && (lc.tagName==="space" || lc.tagName==="SPACE")
+       && lc.getAttribute("dim")==="horizontal"){
+      var q = lc.getAttribute("quantity");
+      if(q) {
+        lc.setAttribute("quantity", (12+parseInt(q, 10)));
+      } else console.log("Quantity missing from TEI <space>");
+    } else {
+      lc = doc.element("space");
+      parent.appendChild(lc);
+      lc.setAttribute("quantity", "12");
+      lc.setAttribute("dim", "horizontal");
+      lc.setAttribute("unit", "chars");
+    }
+    return lc;
   };
   this.toHTML = function(){
     return this.DOMObj;
@@ -690,6 +1329,24 @@ function MicroSpace(){
   this.DOMObj = DOMSpan('space micro', false, " ");
   this.toText = function(){
     return this.code;
+  };
+  this.toTEI = function(doc, parent){
+    if(!parent) parent=(doc.currentParent || doc.body);
+    var lc = parent.lastElementChild;
+    if(lc && (lc.tagName==="space" || lc.tagName==="SPACE")
+       && lc.getAttribute("dim")==="horizontal"){
+      var q = lc.getAttribute("quantity");
+      if(q) {
+        lc.setAttribute("quantity", 4+parseInt(q, 10));
+      } else console.log("Quantity missing from TEI <space>");
+    } else {
+      lc = doc.element("space");
+      parent.appendChild(lc);
+      lc.setAttribute("quantity", "4"); // FIXME: check proportion
+      lc.setAttribute("dim", "horizontal");
+      lc.setAttribute("unit", "chars");
+    }
+    return lc;
   };
   this.toHTML = function(){
     return this.DOMObj;
@@ -703,7 +1360,16 @@ function BlankLines(code){
   this.previous = false;
   this.toText = function(){
     return "["+this.code+"]";
-  }
+  };
+  this.toTEI = function(doc, parent){
+    if(!parent) parent=(doc.currentParent || doc.body);
+    var size = parseInt(this.code, 10);
+    var el = doc.element("space");
+    parent.appendChild(el);
+    el.setAttribute("quantity", isNaN(size) ? 1 : size);
+    el.setAttribute("dim", "vertical");
+    el.setAttribute("unit", "lines");    
+  };
   this.toHTML = function(){
     return DOMSpan('add blank', false, document.createTextNode("["+this.code+"]"));
   }
@@ -718,6 +1384,16 @@ function Add(){
   this.DOMObj = DOMSpan('add', false, false);
   this.toText = function(){
     return "["+this.code+"]";
+  };
+  this.toTEI = function(doc, parent){
+    if(!parent) parent=(doc.currentParent || doc.body);
+    var el = doc.element("add");
+    el.setAttribute("resp", "#ed");//FIXME: wrong, wrong, wrong
+    parent.appendChild(el);
+    for(var i=0; i<this.content.length; i++){
+      if(this.content[i].toTEI) this.content[i].toTEI(doc, el);
+    }
+    return el; 
   };
   this.toHTML = function(){
     this.DOMObj.innerHTML = '';
@@ -744,6 +1420,7 @@ function Text(text){
   this.sentence = (inHeading ? 0 : (inVerse ? inVerse : sentence));
   this.next = false;
   this.previous = false;
+  this.endsWithPilcrow = false;
   this.punctuation = function(){
     var str = /^\s*[,.:¶?!]/.exec(this.content);
     return str ? true : false;
@@ -759,7 +1436,13 @@ function Text(text){
   this.toText = function(){
     return this.code;
   };
-  this.toHTML = function(){
+  this.toTEI = function(doc, parent){
+    if(!parent) parent = (doc.parentNode || doc.body);
+    var el = this.textNode(doc.doc);
+    parent.appendChild(el);
+    return el;
+  };
+  this.textNode = function(doc){
     var closingSpaces = /\s*$/.exec(this.code)[0].length;
     var spaceAfterPunc = /[,.:¶?!]\s+$/.exec(this.code);
     var textNode = false;
@@ -767,30 +1450,67 @@ function Text(text){
     if(closingSpaces && trimPreInsSpaces(spaceAfterPunc)) {
       this.code = this.code.slice(0, 0-closingSpaces);
     }
-    if(/^\s/.test(this.code) && trimPostInsSpaces(this)){
-      this.code = this.code.slice(1);
+    if(/^\s/.test(this.code)){
+      if(trimPostInsSpaces(this)){
+        this.code = this.code.slice(1);
+      } else if(this.previous && this.previous.endsWithPilcrow){
+        // If we're following a pilcrow, use non-breaking space
+        this.code = "\u00a0"+this.code.slice(1);
+      }
     }
     if(this.removepunct) this.code = this.code.substring(/^\s*[,.:¶?!]/.exec(this.content)[0].length);
     if(uncapitalise && !this.overrideCapitalize){
       var firstPos = this.code.search(/\S/);
       if(firstPos<0){
-        this.DOMObj = document.createTextNode(" ");
-        if(!inTip // && !editorMode
-          ){
-          $(this.DOMObj).hover(function(){displayStatusBarReference(this);});
-        }
-        return this.DOMObj; // don't reset uncapitalize;
+        textNode = doc.createTextNode(" ");
       } else {
-        textNode = document.createTextNode(this.code.substring(0, firstPos+1).toLowerCase() + this.code.substring(firstPos+1));
+        textNode = doc.createTextNode((this.code.substring(0, firstPos+1).toLowerCase() + this.code.substring(firstPos+1)).replace("¶ ", "¶\u00a0"));
       }
     } else {
-      textNode = document.createTextNode(this.code);
+      textNode = doc.createTextNode(this.code.replace("¶ ", "¶\u00a0"));
     }
+    if(/¶$/.test(this.code)) this.endsWithPilcrow = true;
+    return textNode;
+  };
+  this.toHTML = function(){
+    // var closingSpaces = /\s*$/.exec(this.code)[0].length;
+    // var spaceAfterPunc = /[,.:¶?!]\s+$/.exec(this.code);
+    // var textNode = false;
+    // curtextitem = this;
+    // if(closingSpaces && trimPreInsSpaces(spaceAfterPunc)) {
+    //   this.code = this.code.slice(0, 0-closingSpaces);
+    // }
+    // if(/^\s/.test(this.code) && trimPostInsSpaces(this)){
+    //   this.code = this.code.slice(1);
+    // }
+    // if(this.removepunct) this.code = this.code.substring(/^\s*[,.:¶?!]/.exec(this.content)[0].length);
+    // if(uncapitalise && !this.overrideCapitalize){
+    //   var firstPos = this.code.search(/\S/);
+    //   if(firstPos<0){
+    //     this.DOMObj = document.createTextNode(" ");
+    //     if(!inTip && !noCount // && !editorMode
+    //       ){
+    //       $(this.DOMObj).hover(function(){displayStatusBarReference(this);});
+    //     }
+    //     return this.DOMObj; // don't reset uncapitalize;
+    //   } else {
+    //     textNode = document.createTextNode(this.code.substring(0, firstPos+1).toLowerCase() + this.code.substring(firstPos+1));
+    //   }
+    // } else {
+    //   textNode = document.createTextNode(this.code);
+    // }
     // this.DOMObj = DOMSpan('sentence-'+this.sentence, false, textNode);
+    var textNode = this.textNode(document);
     this.DOMObj = DOMSpan('sentence-'+(inVerse ? inVerse : this.sentence), false, textNode);
 //    if(!typeof(roman)=="undefined") $(this.DOMObj).hover(function(){displayReference(this, false);});
-    if(!inTip // && !editorMode
-      ) $(this.DOMObj).hover(function(){displayStatusBarReference(this, false);});
+    if(!inTip && !noCount // && !editorMode
+      ) {
+      if(inIndex){
+        $(this.DOMObj).hover(function(){thisisanindex(this)});
+      } else {
+        $(this.DOMObj).hover(function(){displayStatusBarReference(this, false);});
+      }
+    }
     uncapitalise = false;
     return this.DOMObj;
   };
@@ -823,6 +1543,29 @@ function SentenceBreak(){
   this.toHTML = function(){
     return false;
   }
+}
+
+function RemovedPunctuation(symbol){
+  this.objType="RemovedFullStop";
+  this.symbol = symbol;
+  this.toText = function(){
+    return "{-"+this.symbol+"}";
+  };
+  this.toHTML = function(){
+    return DOMSpan("correction removedPunctuation", false, this.symbol);
+  };
+}
+
+function InsertedPunctuation(symbol){
+  this.objType="InsertedFullStop";
+  this.symbol = symbol;
+  if(/[?!.]/.test(symbol)) sentence++;
+  this.toText = function(){
+    return "{+"+this.symbol+"}";
+  };
+  this.toHTML = function(){
+    return DOMSpan("correction insertedPunctuation", false, this.symbol);
+  };
 }
 
 function Punctuation(options){
@@ -862,8 +1605,17 @@ function Punctuation(options){
         }
         return this.modernDOM;
       } else {
-        return this.MSDOM = this.MS=== " " ? false : 
-          (this.MS==="¶" ? DOMSpan("noitalic pilcrow", false, this.MS) : document.createTextNode(this.MS));
+        if(this.MS==="¶"){
+          var span = DOMSpan("noitalic pilcrow", false, this.MS);
+          span.appendChild(document.createElement("wbr"));
+          return span;
+        } else if (this.MS===" "){
+          return false;
+        } else {
+          return document.createTextNode(this.MS);
+        }
+        // return this.MSDOM = this.MS=== " " ? false : 
+        //   (this.MS==="¶" ? DOMSpan("noitalic pilcrow", false, this.MS) : document.createTextNode(this.MS));
       }
 ;
     }
@@ -871,6 +1623,26 @@ function Punctuation(options){
   }
   this.toText = function(){
     return "{"+this.MS+this.modern+"}";
+  };
+  this.toTEI = function(doc, parent){
+    var choice = doc.element("choice");
+    var reg;
+    if(!parent) parent = (doc.parentNode || doc.body);
+    if(this.modern){
+      reg = doc.element("reg");
+      reg.setAttribute("type", "punctuation");
+      reg.setAttribute("subtype", "modern");
+      reg.appendChild(doc.text(this.modern));
+      choice.appendChild(reg);
+    }
+    if(this.MS){
+      reg = doc.element("reg");
+      reg.setAttribute("type", "punctuation");
+      reg.setAttribute("subtype", "manuscript");
+      reg.appendChild(doc.text(this.MS));
+      choice.appendChild(reg);
+    }
+    parent.appendChild(choice);
   };
   this.toHTML = function(){
     if(this.suppressDraw) return;
@@ -891,6 +1663,17 @@ function OptionalSpace(){
   this.objType="Optional Space";
   this.toText = function(){
     return "{ }";
+  };
+  this.toTEI = function(doc, parent){
+    var choice = doc.element("choice");
+    if(!parent) parent = (doc.parentNode || doc.body);
+    var reg = doc.element("reg");
+    reg.setAttribute("type", "punctuation");
+    reg.setAttribute("subtype", "manuscript");
+    reg.appendChild(doc.text(" "));
+    choice.appendChild(reg);
+    parent.appendChild(choice);
+    return choice;
   };
   this.toHTML = function(){
     if(punctuationStyle=="modern"){
@@ -916,7 +1699,10 @@ function WordSplit(){
   this.objType="Word Split";
   this.toText = function(){ return "{|}"};
   this.toHTML = function(){
-    return DOMSpan("wordsplit", false, "|");
+    // return DOMSpan("wordsplit", false, "|");
+    var span= DOMSpan("wordsplit", false, "|");
+    span.appendChild(document.createElement("wbr"));
+    return span;
   };
 }
 function WordJoin(){
@@ -934,8 +1720,8 @@ function Choice(){
   this.addReading = function(witnesses, content, description, extraDescription){
     this.content.push(new Reading(witnesses, content, description, extraDescription));
   };
-  this.addOmission = function(witnesses, extraDescription){
-    this.content.push(new Omission(witnesses, extraDescription));
+  this.addOmission = function(witnesses, type, extraDescription){
+    this.content.push(new Omission(witnesses, type, extraDescription));
   };
   this.addNilReading = function(witnesses){
     this.content.push(new NilReading(witnesses));
@@ -966,6 +1752,18 @@ function Choice(){
     } else {
       return this.content[0].textualStructures();
     }
+  };
+  this.toTEI = function(doc, parent){
+    var el;
+    if(!parent) parent=(doc.currentParent || doc.body);
+    el = doc.element('app');
+    parent.appendChild(el);
+    for(var i=0; i<this.content.length; i++){
+      if(this.content[i].toTEI) {
+        this.content[i].toTEI(doc, el, !(i || this.nonDefault()));
+      }
+    };
+    return el;
   };
   this.toHTML = function(){
     if(!showvariants) {
@@ -1004,13 +1802,14 @@ function Choice(){
   };
 }
 
-function QualifiedWitness(witness, corrected){
+function QualifiedWitness(witness, corrected, sup){
   this.objType = "Qualified Witness";
   this.witness = witness;
   this.corrected = corrected;
+  this.index = (sup==="i");
   this.toHTML = function(){
     var list = DOMSpan("variantWitness", false, this.witness);
-    list.appendChild(DOMSpan("correctionem", false, DOMTextEl("sup", false, false, this.corrected ? "c" : "*")));
+    list.appendChild(DOMSpan("correctionem", false, DOMTextEl("sup", false, false, (this.corrected ? "c" : (this.index ? "i" : "*")))));
     return list;
   };
 }
@@ -1068,6 +1867,28 @@ function Reading(witnesses, content, description, extraDescription){
     text+= this.witnesses.join(" ");
     return text;
   };
+  this.toTEI = function(doc, parent, isDefault){
+    var el;
+    if(!parent){
+      console.log("TEI error in Choice: no parent", this);
+      return;
+    }
+    if(this.witnesses[0]==="emend."){
+      el = doc.element("corr");
+      el.setAttribute("resp", "#ed");//FIXME: wrong, wrong, wrong
+    } else {
+      el = doc.element(isDefault ? "lem" : "rdg");
+      if(TEIWitnesses) {
+        TEIWitnesses(this, el);
+//        el.setAttribute("wit", TEIWitnesses(this.witnesses));
+      }
+    }
+    parent.appendChild(el);
+    for(var i=0; i<this.content.length; i++){
+      if(this.content[i].toTEI) this.content[i].toTEI(doc, el);
+    }
+    return el;
+  }
   this.contentToHTML = function(){
     var span = DOMSpan("variantReadingText", false, false);
     for(var i=0; i<this.content.length; i++){
@@ -1125,10 +1946,10 @@ function NilReading(witnesses, lDescription, rDescription){
   };
 }
 
-function Omission(witnesses, lDescription, rDescription){
+function Omission(witnesses, type, rDescription){
   this.objType = "Omission";
   this.witnesses = witnesses;
-  this.lDescription = lDescription;
+  this.lDescription = type;
   this.rDescription = rDescription;
   this.textualStructures = function(){
     return false;
@@ -1143,7 +1964,8 @@ function Omission(witnesses, lDescription, rDescription){
   };
   this.footnote = function(){
     var span = DOMSpan("variantReading", false, 
-                       DOMSpan("readingDesc", false, this.lDescription+" "));
+                       DOMSpan("readingDesc", false, this.lDescription+" "
+                              +(this.rDescription ? this.rDescription+" " : "")));
     span.appendChild(DOMSpan("variantWitnesses", false, witnessList(this)));
     return span;
   };
@@ -1175,6 +1997,12 @@ function BlankExample(){
   this.next = false;
   this.previous = false;
   this.DOMObj = DOMDiv('musicexample', false, false);
+  this.book = book;
+  this.chapter = chapter;
+  this.section = section;
+  this.exampleno = exampleno;
+  exampleno++;
+  this.atClass = "at-"+this.book+"-"+this.chapter+"-"+this.section+"-"+this.exampleno;
   this.toText = function(){
     return "{example}";
   };
@@ -1192,7 +2020,8 @@ function BlankExample(){
         this.musicExample.SVG = newSVG;
       }
       this.DOMObj.appendChild(newSVG);
-      this.DOMObj.className += " "+this.musicExample.atClass;
+//      this.DOMObj.className += " "+this.musicExample.atClass;
+      this.DOMObj.className += " "+this.atClass;
 //      div.appendChild(newSVG);
       examples.push([this.musicExample, newSVG]);
     } else {

@@ -10,6 +10,7 @@ var printHTMLHeaders= '\
   <script src="../../../GUIEditor/jquery.scrollTo-1.4.2.js"></script>\n\
 	<script src="../../../GUIEditor/debugger.js"></script>\n\
 	<script src="../../../GUIEditor/dom.js"></script>\n\
+  <script src="../../../ScriptLibrary/tei-classes.js"></script>\n\
   <script src="../..//path.js"></script>\n\
 	<script src="../../../GUIEditor/meidom.js"></script>\n\
 	<script src="../../../GUIEditor/base.js"></script>\n\

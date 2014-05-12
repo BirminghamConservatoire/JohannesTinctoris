@@ -81,7 +81,7 @@ function Note(){
     if(this.text){
       this.text.draw();
     } 
-    if(spos && this.rhythm) {
+    if((spos || spos===0) && this.rhythm) {
       var subType = half ? (half === 1 ? "lhalf" : "rhalf") : this.subType;
       this.domObj = svgGroup(SVG, "notegroup"+extraClasses+(editable ? " clickable" : "")
                              +(half ? " halffull"+half : ""), 
@@ -237,6 +237,7 @@ function Dot(){
       drawClasses(this.classList, this);
     }
     var pos = staffPosition(this) || dotPos || Math.floor(currentLinecount/4)*2+1;
+    if(dotNudge) pos -= 0.4;
     this.domObj = svgCircle(SVG, curx, yPos(cury,pos), rastralSize * 0.12, "drawndot mensural"+extraClasses);
     if(this.text){
       this.text.draw();
@@ -272,9 +273,12 @@ function SignumCongruentiae(){
     var pos = this.staffPos;
     if(!pos){
       if(this.flipped){
-        pos = this.staffPos || (dotPos-3) || (Math.floor(currentLinecount/4)*2-3);
+//        pos = this.staffPos || (dotPos-3) || (Math.floor(currentLinecount/4)*2-3);
+        pos = this.staffPos || (dotPos-1) || (Math.floor(currentLinecount/4)*2-3);
+        console.log("Flipped s.c. at", pos, this.staffPos, dotPos, currentLinecount);
       } else {
         pos = this.staffPos || (2+dotPos) || (Math.floor(currentLinecount/4)*2+3);
+        console.log("s.c. at", pos, this.staffPos, dotPos, currentLinecount);
       }
     }
     if(this.effects){
@@ -501,7 +505,29 @@ function LigatureNote(note){
       this.prevEvent(variant).varEndStaffPos(variant), 
       this.width(variant), this.lstem(variant), this.rstem(variant), 
       this.sup, (currentSubType==="black" || fullRule(this)), extraClasses);
-    setDotPos(staffPosition(this));
+    if(this.nextEvent(variant) 
+       && (staffPosition(this.nextEvent(variant)) - staffPosition(this)) > -1){
+      // If the notes are close, any dots may need to shift
+      if(staffPosition(this)%2){
+        // We're in a space. Only shift if they're one step apart
+        if((staffPosition(this.nextEvent(variant)) - staffPosition(this)) < 2){
+          setDotPos(staffPosition(this), false, true);
+        } else {
+          setDotPos(staffPosition(this));
+        }
+      } else {
+        // We're on a line. Move dots to below, rather than above, the
+        // line, if the gap is too small
+        if((staffPosition(this.nextEvent(variant)) - staffPosition(this)) < 2){
+          setDotPos(staffPosition(this), true);
+        } else {
+          setDotPos(staffPosition(this), false, true);
+        }
+      }
+    } else {
+      setDotPos(staffPosition(this));
+    }
+    // setDotPos(staffPosition(this));
     if(this.dot){
       oldx = curx;
       curx+=rastralSize/3;
@@ -520,7 +546,28 @@ function LigatureNote(note){
     obj = drawBox(this, this.prevEvent() && this.prevEvent().varEndStaffPos(), 
       this.width(), this.lstem(), this.rstem(), this.sup, 
       (currentSubType==="black" || fullRule(this)), extraClasses);
-    setDotPos(staffPosition(this));
+    if(this.nextEvent() 
+       && (staffPosition(this.nextEvent()) - staffPosition(this)) > -1){
+      // If the notes are close, any dots may need to shift
+      if(staffPosition(this)%2){
+        // We're in a space. Only shift if they're one step apart
+        if((staffPosition(this.nextEvent()) - staffPosition(this)) < 2){
+          setDotPos(staffPosition(this), false, true);
+        } else {
+          setDotPos(staffPosition(this));
+        }
+      } else {
+        // We're on a line. Move dots to below, rather than above, the
+        // line, if the gap is too small
+        if((staffPosition(this.nextEvent()) - staffPosition(this)) < 2){
+          setDotPos(staffPosition(this), true);
+        } else {
+          setDotPos(staffPosition(this), false, true);
+        }
+      }
+    } else {
+      setDotPos(staffPosition(this));
+    }
     if(this.dot){
       oldx = curx;
       curx+=rastralSize/3;
@@ -997,7 +1044,7 @@ function Oblique(){
       var oldx = curx;
       curx+=rastralSize/2.5;
       this.member(1, variant).dot.draw();
-      curx = oldx;
+      if(this.nextEvent()) curx = oldx;
     }
     return false;
   };
@@ -1454,6 +1501,9 @@ function LongRest() {
   this.domObj = false;
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
+  this.commentPos = function(){
+    return this.end+2;
+  };
   this.toText = function(){
     var text = "PL";
     if(this.start) {
@@ -1506,6 +1556,9 @@ function MaxRest() {
   this.domObj = false;
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
+  this.commentPos = function(){
+    return this.end+2;
+  };
   this.toText = function(){
     var text = "PL";
     if(this.start) {
@@ -1762,6 +1815,8 @@ function Clef() {
   this.editorial = false;
   this.appliesTo = false;
   this.erroneousClef = false;
+  this.stackedClef = false;// Redundant
+  this.stackedClefs = [];
   currentExample.staves.push([currentExample.events.length, this]);
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
@@ -1800,6 +1855,7 @@ function Clef() {
     }
     if(this.editorial) {
 //      curx -= rastralSize / 2 * prop;
+      curx += rastralSize / 1.2 * prop;
       var sb = squareBracket(curx, texty(braceOff, this.staffPos), true, extraClasses);
       curx+=sb.getBoundingClientRect().width;
     }
@@ -1845,9 +1901,10 @@ function Clef() {
       var sclass = solm.getAttributeNS(null, "class");
       solm.setAttributeNS(null, "class", sclass+" indicative sm1");
       $(solm).addClass("editorial");
+      curx -= (2 * rastralSize * prop) /3;
     } 
     if(this.editorial) {
-      curx -= rastralSize * prop;
+//      curx -= rastralSize * prop;
       var sb = squareBracket(curx, texty(braceOff, this.staffPos), false, extraClasses);
       curx += sb.getBoundingClientRect().width;
     } else {
@@ -1856,6 +1913,18 @@ function Clef() {
     if(this.erroneousClef){
       curx -= rastralSize*prop;
       this.erroneousClef.draw();
+      currentClef = this;
+    }
+    if(this.stackedClefs.length){
+      // Clef above clef. For now, left aligned, with spacing based on
+      // the widest
+      var finalx = curx;
+      for(var i=0; i<this.stackedClefs.length; i++){
+        curx = this.startX;
+        this.stackedClefs[i].draw();
+        curx = Math.max(finalx, curx);
+        // Lowest clef counts
+      }
       currentClef = this;
     }
     SVG = oldSVG;
@@ -1939,6 +2008,10 @@ function Staff() {
     } else {
       sysBreak();
     }
+    if(this.classList.length){
+//      extraClasses = classString(this.classList);
+      drawClasses(this.classList, this);
+    }
     var clef = findClef(this.extras);
     var solm = findSolm(this.extras);
     if(clef) clef.draw();
@@ -1950,11 +2023,15 @@ function Staff() {
 function Part(){
   this.objType = "Part";
   this.id = false;
+  this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
   this.toText = function(){
     return "<part: "+this.id+">";
   }
   this.width = function(){return 0;};
   this.draw = function(){
+    if(this.classList.length){
+      drawClasses(this.classList, this);
+    }
     return false;
   }
 }
@@ -2098,40 +2175,47 @@ function Comment(){
     return styles;
   };
   this.draw = function(){
-    var drawnx = curx;
-    this.startY = cury;
-    if(eventi==-1){
+    var star;
+    if(SVG.nodeName.toUpperCase()==="TEXT"){
+      star = svgSpan(SVG, "annotation musical underlay", false, "*");
+    } else {
+      var drawnx = curx;
+      this.startY = cury;
+      if(eventi==-1){
         drawnx = 0;
         this.startY -= rastralSize * currentLinecount / 2 - 11;
-    } else if(this == currentExample.events[eventi]) {
-      // We're not in a compound form (e.g. a ligature), and so this
-      // comment applies to the *previous* element
-      if(eventi==0){
-        drawnx = lmargin + rastralSize;
-      } else {
-        drawnx = currentExample.events[eventi-1].startX;// - (rastralSize*prop);//why?
-        if(typeof(currentExample.events[eventi-1].domObj)!="undefined" &&
-           currentExample.events[eventi-1].domObj && false){
-          // FIXME: round to a space
-          this.startY = Math.max(25, currentExample.events[eventi-1].domObj.getBoundingClientRect().top + 15);
-          this.startX = currentExample.events[eventi-1].domObj.getBoundingClientRect().left +3;
-        } else if(staffPosition(currentExample.events[eventi-1])){
-          this.startY -= yoffset(staffPosition(currentExample.events[eventi-1])+2)-11;
+      } else if(this == currentExample.events[eventi]) {
+        // We're not in a compound form (e.g. a ligature), and so this
+        // comment applies to the *previous* element
+        if(eventi==0){
+          drawnx = lmargin + rastralSize;
         } else {
-          this.startY -=  rastralSize * currentLinecount -11;
+          drawnx = currentExample.events[eventi-1].startX;// - (rastralSize*prop);//why?
+          if(typeof(currentExample.events[eventi-1].domObj)!="undefined" &&
+             currentExample.events[eventi-1].domObj && false){
+            // FIXME: round to a space
+            this.startY = Math.max(25, currentExample.events[eventi-1].domObj.getBoundingClientRect().top + 15);
+            this.startX = currentExample.events[eventi-1].domObj.getBoundingClientRect().left +3;
+          } else if(staffPosition(currentExample.events[eventi-1])){
+            this.startY -= yoffset(staffPosition(currentExample.events[eventi-1])+2)-11;
+          } else if (currentExample.events[eventi-1].commentPos) {
+            this.startY -= yoffset(currentExample.events[eventi-1].commentPos())-(rastralSize/2);
+          } else {
+            this.startY -=  rastralSize * currentLinecount -11;
+          }
+        }
+      } else {
+        // Compound form, so x position is taken care of. FIXME: For now, fudge height
+        if(currentExample.events[eventi].objType=="TextUnderlay"){
+          this.startY += rastralSize *2.5;
+        } else {
+          this.startY -= rastralSize * currentLinecount;
         }
       }
-    } else {
-      // Compound form, so x position is taken care of. FIXME: For now, fudge height
-      if(currentExample.events[eventi].objType=="TextUnderlay"){
-        this.startY += rastralSize *2.5;
-      } else {
-        this.startY -= rastralSize * currentLinecount;
-      }
+      this.startX = drawnx;
+      this.endY = this.startY - Math.floor(rastralSize * textScale * 2);
+      star = svgText(SVG, drawnx, this.startY, "annotation musical", false, false, "*");
     }
-    this.startX = drawnx;
-    this.endY = this.startY - Math.floor(rastralSize * textScale * 2);
-    var star = svgText(SVG, drawnx, this.startY, "annotation musical", false, false, "*");
     if(!star) alert("oo");
     var j = currentExample.comments.indexOf(this);
     if(j===-1){
@@ -2157,17 +2241,28 @@ function tooltipForComment(i, j, x, y){
 function ColumnStart(){
   this.objType = "ColumnStart";
   this.id = false;
+  this.location = false;
+  this.line= false;
+  this.tag = false
   this.startX = false;
+  this.startY = false;
+  this.catchWord = curCatchword;
+  curCatchword = false;
   this.toText = function() {
     return "[-"+this.id+"-]";
   };
   this.width = function() {return 0;};
   this.draw = function() {
+    this.location = this.id;
+    curDoc.breaks.push(this);
     // this setting just so the slot is filled. Not sure what it means in this context
     this.startX = curx;
-    var l = svgLine(SVG, 0, cury+(rastralSize*2), exWidth, cury+(rastralSize*2), "colend", false);
-    var t = svgText(SVG, exWidth-70, cury+rastralSize*3, "col", false, false, this.id);
-    currentExample.colbreaks.push([l,t]);
+    this.startY = cury+(rastralSize*2);
+    // Tell the system breaker to leave extra space
+    systemContainsPageOrColumnBreak = true;
+    this.line = svgLine(SVG, 0, cury+(rastralSize*2), 1, cury+(rastralSize*2), "colend inv", false); // Purely for later position use
+    // this.tag = svgText(SVG, exWidth-70, cury+rastralSize*3, "col", false, false, this.id);
+//    currentExample.colbreaks.push([this.line,this.tag]);
   };
 }
 
@@ -2202,6 +2297,10 @@ function TextUnderlay(){
   };
   this.draw = function(){
     this.startX = curx;
+    if(this.classList.length){
+      extraClasses = classString(this.classList);
+      drawClasses(this.classList, this);
+    }
     if(this == currentExample.events[eventi]){
       // If we're not in a compound form, we need to be positioned
       // beneath *previous* glyph
@@ -2224,10 +2323,11 @@ function TextUnderlay(){
     var pos = this.position;
     var hpos = /[lrc]/.exec(this.position);
     if(hpos) hpos = hpos[0];
-    var vpos = /[0-9]*/.exec(this.position);
+    var vpos = /-?[0-9]*/.exec(this.position);
     if(vpos) vpos = Number(vpos[0]);
     if(vpos){
-      ynudge = vpos*rastralSize/4;
+//      ynudge = vpos*rastralSize/4;
+      ynudge = vpos*rastralSize/2 +1;
     }
     var textBlock = SVG.nodeName.toUpperCase()==="TEXT" ? SVG 
       : svgText(SVG, curx, cury+rastralSize-ynudge, "textblock", false, false, false);
@@ -2311,6 +2411,47 @@ function RedClose(){
     // behaviour, but it will be correct if there tags are legal
     // XML-oid ones
     while(styles.pop()!= 'red' && styles.length);
+    return styles;
+  };
+  this.draw = function(){
+    currentExample.classes.addClass(this);
+    this.startX = curx;
+  };
+}
+
+function LargeOpen(){
+  this.objType = "LargeOpen";
+  this.classString = "large";
+  this.closes = false;
+  this.startX = false;
+  this.oneOff = false;
+  this.toText = function(){
+    return "<large>";
+  };
+  this.width = function(){ return 0;}
+  this.draw = function(){
+    currentExample.classes.addClass(this);
+    this.startX = curx;
+  };
+  this.updateStyles = function(styles){
+    styles.push('large');
+    return styles;
+  };
+  this.checkClose = function(){
+    return string.indexOf("</large>")>-1;
+  };
+}
+
+function LargeClose(){
+  this.objType = "LargeClose";
+  this.closes = "LargeOpen";
+  this.startX = false;
+  this.toText = function() {
+    return "</large>";
+  };
+  this.width = function() {return 0;};
+  this.updateStyles = function(styles){
+    while(styles.pop()!= 'large' && styles.length);
     return styles;
   };
   this.draw = function(){
@@ -2642,6 +2783,7 @@ function LedgerLineChange(){
   this.colour = false;
   this.startX = false;
   this.endX = false;
+  this.maxX = -10;
   this.startY = false;
   this.previous = false;
   this.domObj = false;
@@ -2654,8 +2796,14 @@ function LedgerLineChange(){
   }
   this.readComponents = function(string){
     var end = string.indexOf(">");
+    var end2 = string.indexOf("}");
     var comma = string.indexOf(",");
-    if(end===-1) return; // Unfinished tag;
+    if(end===-1) {
+      if(end2===-1) return;
+      end = end2;
+    } else if (end2>-1){
+      end = Math.min(end, end2);
+    }
     var num = parseInt(string.substring(4));
     if(num) {
       this.count = num;
@@ -2680,16 +2828,21 @@ function LedgerLineChange(){
                           };
   // Ledger Line Change
   this.finishLines = function(){
+    var e2 = currentExample.events[eventi-1];
+    var end2 = ((e2 && e2.domObj) ? e2.startX + e2.domObj.getBoundingClientRect().width : this.maxX);
+    var end = Math.max((this.endX || curx), end2, this.maxX);
+//    if(this.maxX && end<this.maxX) end=this.maxX;
     if(this.domObj){
       for(var i=0; i<this.domObj.length; i++){
-        this.domObj[i].setAttributeNS(null, "x2", this.endX || curx);
+        this.domObj[i].setAttributeNS(null, "x2", end);
       }
     }
     if(this.previous && this.previous.count!=0) this.previous.finishLines();
   };
   this.makeLines = function(){
-    var pos = this.count < 0 ? 2*(0-this.count)
-      : 2*(currentLinecount+2);
+    // var pos = this.count < 0 ? 2*(0-this.count)
+    //   : 2*(currentLinecount+2);
+    var pos = this.count<0 ? 4-2*Math.abs(this.count) : 2*(currentLinecount+2);
     this.domObj = [];
     colour = this.colour || currentStaffColour;
     for(var i=0; i<Math.abs(this.count); i++){
@@ -2700,7 +2853,7 @@ function LedgerLineChange(){
   this.draw = function(){
     if(!this.startX) this.startX = curx;
     if(!this.startY) this.startY = cury;
-    // First, draw this, but with 0 width
+    this.maxX = Math.max(this.maxX, curx);
     // Don't draw this, draw previous
     if(this.previous && this.previous.count!=0){
       if(!this.previous.endX) this.previous.endX = this.startX;
@@ -2710,9 +2863,15 @@ function LedgerLineChange(){
       }
     }
     if(!this.previous && curx===this.startX){
-      this.makeLines();
-      // This is the beginning of the ledger line. Give it some room
- //     curx += ld/2;
+      if(eventi<currentExample.events.length && ["Ligature", "Neume"].indexOf(currentExample.events[eventi].objType)>-1){
+        this.startX -= rastralSize/4;
+        this.makeLines();
+      } else {
+        this.makeLines();
+        curx += rastralSize/2;
+      }
+      // // This is the beginning of the ledger line. Give it some room, 
+      // curx += rastralSize/2;
     }
   };
   // Ledger Line Change
@@ -3125,14 +3284,25 @@ function MChoice(){
         }
       }
     }
-    currentclef = oldClef;
+    currentClef = oldClef;
   };
   // MChoice
   this.addTextReading = function(witnesses, string, description, description2){
     this.content.push(new MReading(witnesses, string?getSubText():[], description, description2));
   };
   this.addOmission = function(witnesses, description, description2, staffing){
-    this.content.push(new MOmission(witnesses, description, description2, staffing));
+    var agreement = stavesAgree(staffing);
+    var oldClef = currentClef;
+    var oldSolm = currentSolm;
+    var oldLines = currentLinecount;
+    var oldColour = currentStaffColour;
+    if(witnesses.length<=1 || agreement){
+      currentClef = staffing[0][1];
+      this.content.push(new MOmission(witnesses, description, description2, staffing));
+    } else {
+      this.content.push(new MOmission(witnesses, description, description2, false));
+    }
+    currentClef=oldClef;
   };
   this.addNilReading = function(witnesses){
     this.content.push(new MNilReading(witnesses));
@@ -3207,7 +3377,6 @@ function MChoice(){
     SVG = tipSVG;//svg(false, false);
     svgCSS(SVG, "jt-editor-v.css");
     this.note = SVG;
-    // console.log(currentExample.staves);
     var allText = this.content.every(function(el){
       return !el.content || el.content.every(function(el2){
         return el2.objType==="TextUnderlay" || el2.objType==="Text";
@@ -3236,7 +3405,6 @@ function MChoice(){
         var clef = this.clef.draw();
         var cclass = clef.getAttributeNS(null, "class");
         if(!typeof(cclass)==="string"){
-          console.log("ha");
           cclass = cclass.baseVal;
         }
         clef.setAttributeNS(null, "class", cclass+" indicative");
@@ -3248,7 +3416,6 @@ function MChoice(){
           if(solm) {
             var sclass = solm.getAttributeNS(null, "class");
             if(!typeof(cclass)==="string"){
-              console.log("ha2");
               cclass = cclass.baseVal;
             }
             solm.setAttributeNS(null, "class", sclass+" indicative sm2");
@@ -3639,7 +3806,7 @@ function ObliqueNoteChoice(){
         }
       }
     }
-    currentclef = oldClef;
+    currentClef = oldClef;
   };
   // this.addReading2 = function(witnesses, string, description){
   //   var rdg = new MReading(witnesses, string?nextMusic(this.oblique):[], description);
@@ -3954,7 +4121,7 @@ function MReading(witnesses, content, description, description2, staves){
     // Check that it isn't just a description
     if(this.content.length){
       if(drawPrep){
-        var clef = currentClef.draw(currentSolm);
+        if(currentClef) var clef = currentClef.draw(currentSolm);
         var cclass = clef.getAttributeNS(null, "class");
         clef.setAttributeNS(null, "class", cclass+" indicative");
         // if(currentSolm && currentSolm.members.length){
@@ -3978,7 +4145,7 @@ function MReading(witnesses, content, description, description2, staves){
     } else {
       svgSpan(description, "variantWitnesses variantWitness", false, this.witnesses.join(" "));
     }
-    curx = Math.max(curx, description.getBoundingClientRect().right);
+    curx = Math.max(curx, x-3+description.getBoundingClientRect().width);
     drawSystemLines(systemLines[0], systemLines[1], 
                     systemLines[4]-rastralSize*systemLines[1],
                     Math.max(systemLines[3]-10, 0), curx,
@@ -4062,14 +4229,13 @@ function MOmission(witnesses, description, description2, staves){
     var sc = currentStaffColour;
     var oc = currentClef;
     var os = currentSolm;
-    var oldSVG = SVG
+    if(!currentClef) debugger;
+    var oldSVG = SVG;
     if(this.staves && !defaultPresent(this.staves) && !this.clefp()){
       currentClef = this.staves[0][1];
       currentSolm = this.staves[0][2];
       currentLinecount = this.staves[0][3].varLines(this.witnesses[0]);
       currentStaffColour = this.staves[0][3].varColour(this.witnesses[0]);
-      // currentLinecount = this.staves[0][3].trueLines();
-      // currentStaffColour = this.staves[0][3].trueColour();
       drawPrep = true;
     }
     var block = svgGroup(SVG, "VariantReading music", false);
@@ -4108,7 +4274,9 @@ function MOmission(witnesses, description, description2, staves){
     staffGroup = oldstaff;
     return block;    
   };
-  this.draw = function(){};
+  this.draw = function(){
+    return false;
+  };
 }
 
 function ValueChoice(){
@@ -4178,7 +4346,23 @@ function Classes(){
     return false;
   };
   this.removeOneOffClasses = function(){
-    this.classes = this.classes.filter(function(el){return !el.oneOff;});
+    // this.classes = this.classes.filter(function(el){return !el.oneOff;});
+    var tempClasses = [];
+    for(var i=0; i<this.classes.length; i++){
+      if(this.classes[i].oneOff){
+        if(this.classes[i].objType && this.classes[i].objType==="LedgerLineChange" 
+           && this.classes[i].count!==0) {
+          var close = new LedgerLineChange();
+          close.count = 0;
+          close.oneOff = true;
+          close.previous = this.classes[i];
+          tempClasses.push(close)
+        } 
+      } else {
+        tempClasses.push(this.classes[i]);
+      }
+    }
+    this.classes = tempClasses;
   };
   this.addClass = function(newclass){
     if(newclass.specialCombiningRules){

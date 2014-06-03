@@ -171,6 +171,7 @@ function TreatiseDoc(text, outdiv){
     nodes = [];
     chapter = 0;
     book = 0;
+    prevBook = 0;
     section = 0;
     paragraph = 0;
     hands = [];
@@ -757,6 +758,7 @@ function TreatiseDoc(text, outdiv){
       });
     }
     replaceBreakers();
+    
     ///////////////////
     /*
     var TEIDoc = this.toTEI();
@@ -773,7 +775,7 @@ function TreatiseDoc(text, outdiv){
     $(this.drawTo).find('.infoButtons')[0].appendChild(link);
     // console.log(TEIDoc);
     // alert(TEIDoc.tree.innerHTML);
-    */
+  */
   };
   this.parse();
 //  this.draw();
@@ -815,7 +817,12 @@ function refreshExamples(examples){
       } else {
         // thisDiv.style.height = examples[i][1].height.baseVal.value+10+"px";
         // thisDiv.style.height = thisDiv.getBoundingClientRect().height+5+"px";
-        thisDiv.style.width = thisSVG.getBBox().width+2+"px";
+        if($(thisDiv).is(":visible")){
+          // console.log(this.SVG.getBBox().width, this.SVG.getBoundingClientRect().width, i);
+          thisDiv.style.width = thisSVG.getBBox().width+2+"px";
+        } else {
+          console.log("interesting", i);
+        }
         if(webkit){
           thisDiv.style.height = thisSVG.height.baseVal.value+"px";
         } else {
@@ -840,6 +847,8 @@ function refreshExamples(examples){
 }
 
 function readPara(suppressNodeNumbers){
+  var ob = book;
+  var oldChap = chapter;
   var para = new Paragraph(suppressNodeNumbers);
   consumeSpace();
   // FIXME: HACK!!! Broken by anything with an enclosed linebreak
@@ -860,8 +869,8 @@ function readPara(suppressNodeNumbers){
     para.classes.push("centre");
   }
   correctNexts(para);
-  para.book = book;
-  para.chapter = chapter;
+  para.book = book || ob;
+  para.chapter = chapter || oldChap;
   para.section = section;
   para.paragraph = paragraph;
   indent = false;
@@ -1218,6 +1227,12 @@ function readTag(){
       // chap.chapter -=1;
       // chapter -= 1;
       // return chap;
+    } else if (string.substring(1, 9)==="explicit"){
+      consume(loc+1);
+      return new Explicit();
+    } else if (string.substring(1, 10)=="/explicit") {
+      consume(loc+1);
+      return new ChapEnd();
     } else if (string.substring(1, 9)=="/chapter") {
       consume(loc+1);
       return new ChapEnd();
@@ -1288,7 +1303,7 @@ function readTag(){
       }
       return false;
     } else if(string.substring(1, 10)=="catchword" || string.substring(1,10)=="signature"){
-      var margType = string.substring(1, 10)
+      var margType = string.substring(1, 10);
       var end = string.indexOf("</"+margType+">");
       if(end>10){
         var c = new Catchword();
@@ -1309,7 +1324,7 @@ function readTag(){
         string = os;
         pointer = op;
 //        curCatchword = c;
-//        return c;
+        return c;
       }
       return false;
     } else if (string.substring(1, 6)==="table"){

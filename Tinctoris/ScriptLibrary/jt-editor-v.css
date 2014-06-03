@@ -252,6 +252,7 @@ div.marginal{
   padding-right: 0em;
   padding-left: 19em;
   float: right;
+  display: inline-block;
 }
 .onecolumn .marginalContent {
   margin: -2.2em -12em -100em 0em;
@@ -264,6 +265,7 @@ div.marginal{
   margin-top: 0;
   position: relative;
   left: 0px; /* I don't know why, but it seems to work */
+  display: inline-block;
 }
 div.col.breaker + p.addTopSpaceForMarginal {
   padding-top: 4ex;
@@ -272,6 +274,10 @@ div.col.breaker + p.addTopSpaceForMarginal {
 .drawTo p div.marginal span.marginalContent, span.marginalContent{
   margin: -2.2em 1ex -100em 0;
   text-align: right
+  display: inline-block;
+}
+span.marginalContent {
+  display: inline-block;
 }
 .drawTo p.onecolumn span.marginalContent.premusical, .drawTo p.twocolumn span.marginalContent.premusical{
   margin-top: 1.2em;
@@ -528,6 +534,9 @@ p.colend.columnPara {
   font-size: 120%;
   cursor: default;
 }
+.annotation{
+  color: black!important;
+}
 /* .annotation { */
 /*   color: blue; */
 /*   fill: blue; */
@@ -762,7 +771,9 @@ neumeJoin{
   stroke: none;
   fill: blue;
 }
-
+tspan.tspanSup {
+  font-size: 60%;
+}
 .noitalic {
   font-style: normal;
 }

@@ -142,6 +142,7 @@ var arsNovaVoid = {
                        l-125 -215q-29 59 -46 103t-23 112l-111 -215h-28z", [["em", 500]]),
   CClef: glyphFromD("M264 481v987h322v-389h-250v-209h250v-389h-322z\
                      M336 635h199v82h-199v-82zM336 1233h199v82h-199v-82z", clefMetrics),
+  CFullClef: glyphFromD("M264 481v987h322v-389h-250v-209h250v-389h-322z", clefMetrics),
   FClef: glyphFromD("M86 1120v733h72v-92h452v92h72v-1966l-72 -82v1407h-452v-92h-72z\
                      M158 1366h452v242h-452v-242z\
                      M872 1245q-4 8 -3 16q0 10 5 19l156 197q18 -18 45 -48t52.5 -64\
@@ -152,6 +153,14 @@ var arsNovaVoid = {
                       q-18 27 -37.5 53.5t-40.5 55.5q-23 31 -43.5 64.5t-36.5 68.5z\
                      M961 1290q16 -51 42.5 -92t55.5 -84l55 76q-16 49 -39.5 94t-58.5 84z\
                       M961 1784q16 -51 41.5 -92t54.5 -84l57 75q-16 49 -39.5 94.5t-58.5 84.5z", 
+                    [["defaultOffset", {x:240,y:1488}], ["advance", 1600]]),
+  FFullClef: glyphFromD("M86 1120v733h72v-92h452v92h72v-1966l-72\
+                         -82v1407h-452v-92h-72zM872 1245q-4 8 -3 16q0 10 5 19l156 197q18\
+                         -18 45 -48t52.5 -64t47 -69.5t29.5 -66.5q6 -16 -8 -25l-139\
+                         -170v-712l-49 -68v782q-37 51 -72 101.5t-64 107.5zM872 1739q-4\
+                         10 -4 18.5t4 16.5l136 170 v346l49 57v-403q16 -16 38.5 -43t44\
+                         -58t40 -61.5t24.5 -57.5q2 -4 2 -10q0 -10 -10 -16l-166 -201q-18\
+                         27 -37.5 53.5t-40.5 55.5q-23 31 -43.5 64.5t-36.5 68.5z",
                     [["defaultOffset", {x:240,y:1488}], ["advance", 1600]]),
   GClef: glyphFromD("M172 104c-28 -79 -15 -147 2 -223l-11 -19c-27 79 -37 154 -8 245\
                      c-14 1 -27 0 -40 -5c-57 -20 -84 -94 -57 -164s94 -110 150 -90\
@@ -353,6 +362,123 @@ var voidGlyphMap = {
   }
 };
 
+// FIXME: check this
+var fullGlyphMap = {
+  M: {
+    normal: {
+      base: arsNovaVoid.fullMaxima,
+      voided: arsNovaVoid.maxima,
+      lhalf: arsNovaVoid.leftMaxima,
+      rhalf: arsNovaVoid.rightMaxima,
+      filled: arsNovaVoid.maxima
+    },
+    flipped: {
+      base: arsNovaVoid.upFullMaxima,
+      voided: arsNovaVoid.upMaxima,
+      lhalf: arsNovaVoid.upLeftMaxima,
+      rhalf: arsNovaVoid.upRightMaxima,
+      filled: arsNovaVoid.upFullMaxima
+    }
+  },
+  L: {
+    normal: {
+      base: arsNovaVoid.fullLonga,
+      voided: arsNovaVoid.longa,
+      lhalf: arsNovaVoid.leftLonga,
+      rhalf: arsNovaVoid.rightLonga,
+      filled: arsNovaVoid.fullLonga
+    },
+    flipped: {
+      base: arsNovaVoid.upFullLonga,
+      voided: arsNovaVoid.upLonga,
+      lhalf: arsNovaVoid.upLeftLonga,
+      rhalf: arsNovaVoid.upRightLonga,
+      filled: arsNovaVoid.upFullLonga
+    }
+  },
+  B: {
+    rest: arsNovaVoid.breveRest,
+    normal: {
+      base: arsNovaVoid.fullBreve,
+      voided: arsNovaVoid.breve,
+      lhalf: arsNovaVoid.leftBreve,
+      rhalf: arsNovaVoid.rightBreve,
+      filled: arsNovaVoid.fullBreve
+    },                  
+    flipped: {          
+      base: arsNovaVoid.fullBreve,
+      voided: arsNovaVoid.breve,
+      lhalf: arsNovaVoid.leftBreve,
+      rhalf: arsNovaVoid.rightBreve,
+      filled: arsNovaVoid.fullBreve
+    }
+  },
+  S: {
+    rest: arsNovaVoid.semibreveRest,
+    normal: {           
+      base: arsNovaVoid.fullSemibreve,
+      voided: arsNovaVoid.semibreve,
+      lhalf: arsNovaVoid.semibreve,
+      rhalf: arsNovaVoid.semibreve,
+      filled: arsNovaVoid.fullSemibreve
+    },
+    flipped: {           
+      base: arsNovaVoid.fullSemibreve,
+      voided: arsNovaVoid.semibreve,
+      lhalf: arsNovaVoid.semibreve,
+      rhalf: arsNovaVoid.semibreve,
+      filled: arsNovaVoid.fullSemibreve
+    }
+  },
+  m: {
+    rest: arsNovaVoid.minimRest,
+    normal: {
+      base: arsNovaVoid.semiminim,
+      voided: arsNovaVoid.minim,
+      lhalf: arsNovaVoid.minim,
+      rhalf: arsNovaVoid.minim,
+      filled: arsNovaVoid.semiminim
+    },
+    flipped: {
+      base: arsNovaVoid.upSemiinim,
+      voided: arsNovaVoid.upMinim,
+      lhalf: arsNovaVoid.upMinim,
+      rhalf: arsNovaVoid.upMinim,
+      filled: arsNovaVoid.upSemiminim
+    }
+  },   
+  s:{
+    rest: arsNovaVoid.semiminimRest,
+    normal: {           
+      base: arsNovaVoid.voidSemi,
+      voided: arsNovaVoid.voidSemi,
+      lhalf: arsNovaVoid.semiminim,
+      rhalf: arsNovaVoid.semiminim,
+      filled: arsNovaVoid.semiminim
+    },
+    flipped: {           
+      base: arsNovaVoid.upSemiminim,
+      voided: arsNovaVoid.upFusa,
+      lhalf: arsNovaVoid.upSemiminim,
+      rhalf: arsNovaVoid.upSemiminim,
+      filled: arsNovaVoid.semiminim
+    }
+  },
+  f:{
+    normal:{
+      base: arsNovaVoid.voidFusa,
+      voided: arsNovaVoid.voidFusa,
+      filled: arsNovaVoid.fusa
+    },
+    flipped:{
+      base: arsNovaVoid.upVoidFusa,
+      voided: arsNovaVoid.upVoidFusa,
+      filled: arsNovaVoid.upFusa
+    },
+    rest: arsNovaVoid.fusaRest
+  }
+};
+
 var dothisagain = true;
 function getVoidState(v1, v2, v3){
   if(v1=="void"){
@@ -363,6 +489,29 @@ function getVoidState(v1, v2, v3){
     return v1;
   }
 }
+function getFullState(v1, v2, v3){
+  if(v1=="full"){
+    return v2 ? "voided" : (v3 ? "filled" : "base");
+  } else if (!v1){
+    return "base";
+  } else {
+    return v1;
+  }
+}
+function getNoteGlyph(subtype, shape, flipped, voidness, extraVoidness, filledness){
+  var glyphMap = (subtype==="void" ? voidGlyphMap : fullGlyphMap);
+  var state = (subtype==="void" ?
+               getVoidState(voidness, extraVoidness, filledness) :
+               getFullState(voidness, extraVoidness, filledness));
+  flipped = flipped ? "flipped" : "normal";
+//  var state = getVoidState(voidness, extraVoidness, filledness);
+  if(glyphMap && glyphMap[shape] && glyphMap[shape][flipped]){
+    return glyphMap[shape][flipped][state];
+  } else {
+    return false;
+  }
+}
+/*
 function getNoteGlyph(glyphMap, shape, flipped, voidness, extraVoidness, filledness){
   flipped = flipped ? "flipped" : "normal";
   var state = getVoidState(voidness, extraVoidness, filledness);
@@ -371,7 +520,7 @@ function getNoteGlyph(glyphMap, shape, flipped, voidness, extraVoidness, filledn
   } else {
     return false;
   }
-}
+}*/
 function getRestGlyph(glyphMap, shape){
   if(glyphMap && glyphMap[shape] && glyphMap[shape].rest){
     return glyphMap[shape].rest;

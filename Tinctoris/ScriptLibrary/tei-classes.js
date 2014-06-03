@@ -21,12 +21,19 @@ function TEIDoc(){
   this.prevParent = false;
   this.currentParent = this.treatise;
   this.doc = doc;
+  this.latestID = 0; // FIXME: suboptimal way of assigning IDs
   this.tree.appendChild(this.head);
   this.tree.appendChild(this.text);
   this.text.appendChild(this.body);
   this.body.appendChild(this.treatise);
+  this.IDGen = function(tag){
+    // FIXME: suboptimal way of assigning IDs
+    return this.latestID++;
+  };
   this.element = function(tag){
-    return this.doc.createElementNS("http://www.tei-c.org/ns/1.0", tag);
+    var el =  this.doc.createElementNS("http://www.tei-c.org/ns/1.0", tag);
+    el.setAttribute("xml:id", this.IDGen(tag));
+    return el;
   };
   this.serialize = function(){
     var serializer = new XMLSerializer();

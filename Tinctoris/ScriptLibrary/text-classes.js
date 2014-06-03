@@ -35,9 +35,10 @@
 function Book(){
   this.objType = "Book";
   this.code = "<book>";
-  this.book = book++;
+  this.book = ++prevBook;
   this.next = false;
   this.previous = false;
+  book = this.book;
   chapter = 0;
   section = 0;
   paragraph = 0;
@@ -56,6 +57,7 @@ function BookEnd(){
   this.code = "</book>";
   this.next = false;
   this.previous = false;
+  book=false;
   this.toText = function(){
     return this.code;
   };
@@ -320,7 +322,7 @@ function Prologue(){
 }
 function Conclusion(){
   this.objType = "Conclusion";
-  this.code = "</conclusion>";
+  this.code = "<conclusion>";
   this.special = false;
   this.chapter = "c";
   this.next = false;
@@ -332,6 +334,27 @@ function Conclusion(){
   exampleno = 0;
   this.toTEI = addSubdivision;
   this.DOMObj = DOMAnchor('chapter', false, false, "ch-conclusion");
+  this.toText = function(){
+    return this.code;
+  }
+  this.toHTML = function(){
+    return this.DOMObj;
+  }
+}
+function Explicit(){
+  this.objType = "Explicit";
+  this.code = "<explicit>";
+  this.special = false;
+  this.chapter = "e";
+  this.next = false;
+  this.previous = false;
+  chapter = "e";
+  paragraph = 0;
+  section = 0;
+  sentence = 0;
+  exampleno = 0;
+  this.toTEI = addSubdivision;
+  this.DOMObj = DOMAnchor('chapter', false, false, "ch-explicit");
   this.toText = function(){
     return this.code;
   }
@@ -404,7 +427,7 @@ function Heading(){
     return this.code;
   };
   this.toTEI = function(doc, parent){
-    console.log("head");
+//    console.log("head");
     el = document.createElement("head");
     if(!parent) parent = doc.currentParent;
     doc.prevParent = doc.currentParent;
@@ -940,6 +963,7 @@ function Catchword(){
     }
     span.appendChild(DOMSpan(this.tag+" marginLoc", false, " ["+this.tag+"] "));
 //    addAnnotation(span, this, "catchword");
+    $(this.domObj).empty();
     this.domObj.appendChild(span);
     $(span).mouseover(function(text) {
       return function(e){

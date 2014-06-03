@@ -14,6 +14,7 @@ function MusicExample(){
   this.marginSpace = false;
   this.marginalia = [];
   this.catchwords = [];
+  this.curCatchword = curCatchword;
   this.parameters = false;
   this.bbox = false;
   this.colbreaks = [];
@@ -21,6 +22,7 @@ function MusicExample(){
   this.chapter = chapter;
   this.section = section;
   this.exampleno = exampleno;
+  this.exampleBreaks = [];
   this.staves = [];
   exampleno++;
   this.atClass = "at-"+this.book+"-"+this.chapter+"-"+this.section+"-"+this.exampleno;
@@ -74,6 +76,12 @@ function MusicExample(){
           var c = new LigatureComment(next);
           currentExample.comments.push(c);
           this.events[this.events.length-1].members.push(c);
+          // I think this is necessary because otherwise we get two
+          // comments -- a ligature comment and a normal comment
+          next = c;
+          prev = next;
+          continue;
+          //
         } 
         if(next.objType==="TextUnderlay" && this.events.length
            && typeof(this.events[this.events.length-1].text) !=="undefined"
@@ -108,6 +116,7 @@ function MusicExample(){
     this.w2 = [];
     this.events = [];
     this.comments = [];
+    curCatchword = this.curCatchword;
     this.parse();
   };
   this.width = function(){
@@ -212,7 +221,7 @@ function MusicExample(){
     // out what's happening
     underlays = [];
     this.drawCount++;
-    this.catchwords = [];
+//    this.catchwords = [];
     currentClef = false;
     currentExample = this;
     var st = this.parameters.staff;
@@ -220,6 +229,7 @@ function MusicExample(){
     currentStaffColour = st ? st.trueColour() : "black";
     curx = lmargin;
     cury = topMargin;
+    lowPoint = cury+(rastralSize*2);
     currentType = this.parameters.notation;
     currentSubType = this.parameters.notationSubtype;
     currentRedline = false;
@@ -265,6 +275,7 @@ function MusicExample(){
       }
       if(this.events[eventi].objType && !this.events[eventi].params) {
         try {
+          if(currentRedline && removeRedlineBefore(this.events[eventi].classList)) currentRedline = false;
           this.events[eventi].draw();
           // this.events[eventi].draw(curx, cury); // obsolete
         } catch (x) {
@@ -340,7 +351,7 @@ function MusicExample(){
     // this.SVG.parentNode.style.width = maxx+(texted ? 25 : 5)+8+"px";
     if(!inTip // && !editorMode
       ){
-      $(this.SVG).hover(function(){displayStatusBarReference(this);});
+      $(this.SVG).hover(function(e){displayStatusBarReference(this, e);});
     }
     currentExample = false;
   };
@@ -393,8 +404,16 @@ function nextEvent() {
     case "s":
     case "f":
     case "F":
-    case "^":
       return nextNote();
+    case "^":
+      if (string.charAt(1)==="c"){
+        consume(1);
+        var custos = nextCustos();
+        custos.sup = true;
+        return custos;
+      } else {
+        return nextNote();
+      }
     case "p":
     case "v":
     case "l":
@@ -581,7 +600,7 @@ function nextChantNote(){
 
 function nextCustos(){
   var obj = new Custos();
-  string = string.substring(1);
+  consume(1);
   return getAndSetPitch(obj);
 }
 
@@ -910,7 +929,8 @@ function nextText (){
   var text = new TextUnderlay();
   var returnString = string.substring(end+taglength);
   string = string.substring(0, end);
-  text.components = getSubText();
+//  text.components = getSubText();
+  text.components = getString();
   string = returnString;
   return text;
 }
@@ -975,6 +995,108 @@ function getSubText (){
     }
   }
   return components;
+}
+function getString (){
+  // Parse contents of <text></text> or equivalently-syntaxed thing
+  // (e.g. a variant). This is a version of what was previously
+  // getSubText, a faster, but much less flexible function
+  var content = [];
+  var size = string.length;
+  var prev = false;
+  var next = false;
+  var braceEnd = false;
+  var currentCloses = false;
+  while(string.length >0){
+    prev = last(content);
+    if(currentCloses && prev!=currentCloses[currentCloses.length-1][0]){
+      // we have a self closing tag and a new thing after it
+      // FIXME: should probably check what's been added
+      for(var i=0; i<currentCloses.length; i++){
+        content.push(currentCloses[i][1]);
+      }
+      currentCloses = false;
+      prev = last(content);
+    }
+    switch(string.charAt(0)){
+      case "<":
+        next = getTag(consumeIf(/<[^<]*>/));
+        content.push(next);
+        break;
+      case "{":
+        var closePos = Math.min(string.indexOf("}"), string.length);
+        var tag = string.substring(1, closePos);
+        if(typeof(spans[tag])!=="undefined"){
+          next = getTag("<"+tag+">");
+          content.push(next);
+          if(!currentCloses) currentCloses = [];
+          currentCloses.push([next, getTag("</"+tag+">")]);
+          consume(closePos+1);
+        } else if (string.substring(1, 4)==="var") {
+          content.push(nextTextChoice());
+        } 
+        break;
+      case "^":
+        content.push(getMusicTextSup());
+        break;
+      case "*":
+        var commentBlock = consumeIf(/\*\*[^*]*\*\*/);
+        if(commentBlock){
+          next = new Comment();
+          next.content = commentBlock.substring(2, commentBlock.length-2);
+          currentExample.comments.push(next);
+          content.push(next);
+        }
+        // If it isn't a comment, it's part of a string, so continue
+      default:
+        if(prev && typeof(prev)==="string"){
+          content[content.length-1] = prev + string.charAt(0);
+        } else {
+          content.push(string.charAt(0));
+        }
+        consume(1);
+        break;
+    };
+    if(string.length === size){
+      console.log("Stuck: ", string);
+      if(prev && typeof(prev)==="string"){
+        content[content.length-1] = prev + string.charAt(0);
+      } else {
+        content.push(string.charAt(0));
+      }
+      consume(1);
+    }
+    size = string.length;
+  }
+  return content;
+}
+function getMusicTextSup(){
+  var el = new MESuper()
+  consume(1);
+  var end = string.indexOf("^");
+  var end2 = string.indexOf(" ");
+  var newString, newPointer;
+  if(end2!==-1 && (end===-1 || end2<end) && end2<8){
+    newString = string.substring(end2);
+    newPointer = pointer+end2;
+    string = string.substring(0, end2);
+  } else if(end===-1 || end>8){
+    // no "^" or " " or "^" is far removed
+    if(string.length){
+      newString = string.substring(1);
+      newPointer = pointer+1;
+      string = string.substring(0, 1);
+    } else {
+      return;
+    }
+  } else {
+    newString = string.substring(end+1);
+    newPointer = pointer+end;
+    string = string.substring(0,end);
+  }
+  el.text = string;
+  string = newString;
+  pointer = newPointer;
+  return el;
 }
 
 function getTag (tag){
@@ -1081,7 +1203,7 @@ function parseMensReading(fields){
   if(fields[0]==="(om.)"){
     return [false, new MOmission(wits, "om.", false, staffDetailsForWitnesses(wits))];
   } else {
-    return [false, new MReading(wits, [mens], "om.",
+    return [false, new MReading(wits, [mens], false,
                                false, staffDetailsForWitnesses(wits))];
   }
 }
@@ -1282,7 +1404,7 @@ function parseClef(spec, sub){
   var p = obj.staffPos;
   var anotherBit = spec.search(/\S/);
   if(anotherBit>-1){
-    console.log("clef has extra '"+spec+"'", anotherBit, spec.substring(anotherBit));
+//    console.log("clef has extra '"+spec+"'", anotherBit, spec.substring(anotherBit));
     if(spec.charAt(anotherBit)==="^"){
       obj.stackedClefs.push(parseClef(spec.substring(anotherbit+1), true));
     } else { 
@@ -1339,6 +1461,7 @@ function parseStaff(spec){
     // No variant
     staff.colour = colourp(spec[pointer]);
   }
+//  console.log(staff);
   return staff;
 }
 function linesp(string){
@@ -1388,6 +1511,12 @@ function nextInfo(){
             clef.stackedClefs.push(parseClef(fields[i].substring(1)));
           }
           return clef;
+        } else if(fields[2].charAt(0)==='['){
+          var clef = parseClef(fields[1]);
+          clef.erroneousClef = parseClef(fields[2]);
+          currentExample.staves.pop();
+          currentClef = clef;
+          return clef;
         }
         return parseClef("C8");
       }
@@ -1399,6 +1528,12 @@ function nextInfo(){
       obj = new Notation();
       obj.type = fields[0];
       obj.subtype = fields[1];
+      return obj;
+    case "newexample":
+      obj = new ExampleBreak();
+      currentExample.exampleBreaks.push(obj);
+      obj.exampleno = exampleno++;
+      currentExample.atClass += "/"+obj.exampleno;
       return obj;
     }
   }

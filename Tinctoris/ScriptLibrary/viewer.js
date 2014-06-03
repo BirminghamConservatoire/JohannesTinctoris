@@ -99,6 +99,8 @@ function romanReference(a, b, c){
     return "Prol.";
   } else if (b==="c"){
     return "Conc.";
+  } else if (b==="e"){
+    return "Expl.";
   } else if (!isFinite(b)){
     console.log(b);
     return b;
@@ -119,12 +121,15 @@ function getSelected(select){
 
 function jqNavSelect(tDoc, nav){
   var structures = navPoints(tDoc)[3];
-  var book = 0;
+  var book = false;
+  var prevBook = 0;
   var chapter = 0;
   var section = 0;
   var options = [];
   var content, reference, sbreak, option;
   var heading = [];
+  var pb, pc;
+  var bookValToUse = false;
   if (!nav) nav = document.getElementById("nav");
   var currentp = false;
   option = DOMAnchor("jump-to-start", false, 
@@ -149,8 +154,12 @@ function jqNavSelect(tDoc, nav){
       for(var b=0; b<sbreak.length; b++){
         switch (sbreak[b].tag.objType){
           case "Book":
-            book+=1;
+            book = book ? book+1 : prevBook+1;
+            prevBook = book;
             chapter=0;
+            break;
+          case "BookEnd":
+            book = false;
             break;
           case "Prologue":
             chapter = "p";
@@ -161,14 +170,17 @@ function jqNavSelect(tDoc, nav){
           case "Conclusion":
             chapter = "c";
             break;
+          case "Explicit":
+            chapter = "e";
+            break;
           case "Chapter":
-            if(typeof(chapter)==="string"){
+            if(typeof(chapter)==="string" && isFinite(sbreak[b].tag.chapter)){
               // chapter = 0;
               chapter = 1;
             } else if(isFinite(sbreak[b].tag.chapter)){
               chapter+=1;
             } else {
-              chapter = sbreak[b].tag.chapter;
+              chapter = sbreak[b].tag.chapter.replace("_", " ");
             }
             break;
           case "Section":
@@ -176,6 +188,18 @@ function jqNavSelect(tDoc, nav){
             break;
         }
       }
+      //
+      var ob = book;
+      if(book===false && Number(chapter)) {
+        book = prevBook;
+      } 
+      if(book===pb && chapter===pc) {
+        continue;
+      } else {
+        pb=book;
+        pc=chapter;
+      }
+      //
       if(sbreak[0].tag.code==="<prologue>"){
         heading = sbreak[0].head 
           ? (sbreak[0].head.length > 52 ? sbreak[0].head.substring(0, 50)+"…" : sbreak[0].head)
@@ -186,6 +210,11 @@ function jqNavSelect(tDoc, nav){
           ? (sbreak[0].head.length > 52 ? sbreak[0].head.substring(0, 50)+"…" : sbreak[0].head)
           : (tDoc.language ==="English" ? "Conclusion" : "Conclusio") ;
         reference = "Conc.";
+      } else if (sbreak[0].tag.code==="<explicit>"){
+        heading = sbreak[0].head 
+          ? (sbreak[0].head.length > 52 ? sbreak[0].head.substring(0, 50)+"…" : sbreak[0].head)
+          : "Explicit" ;
+        reference = "Expl.";
       } else if (sbreak[0].tag.code==="<index>"){
         heading = sbreak[0].head 
           ? (sbreak[0].head.length > 52 ? sbreak[0].head.substring(0, 50)+"…" : sbreak[0].head)
@@ -210,7 +239,7 @@ function jqNavSelect(tDoc, nav){
       // tDoc.scrollpos.section = book;
       var richref = DOMSpan(false, false, DOMTextEl("b", false, false, reference+"  "));
       if(heading) richref.appendChild(document.createTextNode(heading));
-      if(reference==="Prol."||reference==="Conc."){
+      if(reference==="Prol."||reference==="Conc."||reference==="Expl."){
         option = DOMAnchor("jump-"+book+"_"+reference.charAt(0).toLowerCase()+(currentp ? " selected" : ""),
                            false, richref);
       } else {
@@ -256,6 +285,9 @@ function jqNavSelect(tDoc, nav){
         $(this).data("tdoc").setScrollPos(s[0], s[1], s[2], 0, 0, true);
         
       });
+      //
+      book = ob;
+      //
     }
   }
   $(nav).change(function(e){
@@ -369,6 +401,12 @@ function navPoints(tDoc){
           books.push(active);
 //          allstructures.push(active);
           break;
+        case "BookEnd":
+          active = {para: p, index: i, tag: para.content[i], head: false};
+          actives.push(active);
+          books.push(active);
+//          allstructures.push(active);
+          break;
         case "Index":
           active = {para: p, index: i, tag: para.content[i], head: false};
           actives.push(active);
@@ -382,6 +420,12 @@ function navPoints(tDoc){
 //          allstructures.push(active);
           break;
         case "Conclusion":
+          active = {para: p, index: i, tag: para.content[i], head: false};
+          actives.push(active);
+          chapters.push(active);
+//          allstructures.push(active);
+          break;
+        case "Explicit":
           active = {para: p, index: i, tag: para.content[i], head: false};
           actives.push(active);
           chapters.push(active);

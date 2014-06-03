@@ -17,6 +17,7 @@ var yb = 6;
 var rhythms = {M: "maxima", L: "longa", B: "brevis",
                S: "semibrevis", m: "minima", s: "semiminima",
                f: "fusa"};
+var neumeForms = {p: "punctus", v: "virga"};
 var baseDictionary = 
   {void: {M: ["a", ya, 2.8*prop],//50.5, 2.8],
           L: ["s", ya, noteEn], 
@@ -27,6 +28,14 @@ var baseDictionary =
           f: ["k", yb, noteEn],
           c: ["~", yb, noteEn]},
    black: {M: ["a", ya, 2.8],
+          L: ["s", ya, noteEn], 
+          B: ["d", yb, noteEn],
+          S: ["f", yb, noteEn],
+          m: ["g", yb, noteEn],
+          s: ["h", yb, noteEn],
+          f: ["k", yb, noteEn],
+          c: ["~", yb, noteEn]},
+   full: {M: ["a", ya, 2.8],
           L: ["s", ya, noteEn], 
           B: ["d", yb, noteEn],
           S: ["f", yb, noteEn],
@@ -267,6 +276,7 @@ var doc = false;
 var complaint = [];
 var chapter = 0;
 var book = 0;
+var prevBook = 0;
 var section = 0;
 var paragraph = 0;
 var sentence = 0;
@@ -333,6 +343,7 @@ var currenttextparent = false;
 var curtextitem = false;
 var pari = false;
 var systemContainsPageOrColumnBreak = false;
+var lowPoint = false;
 //offset for editorial square bracket character
 var braceOff = 7.5;
 function musicStyle(){
@@ -397,6 +408,9 @@ function metrics(){
   };
 }
 
+function zerofunction (){
+  return 0;
+}
 //////////////////////////////////////////////////
 //
 // Utility functions:
@@ -497,7 +511,7 @@ function getAndSetPitch(object){
 function getStaffPos(){
   if("ABCDEF".indexOf(string.charAt(0))>-1) return getStaffPos2();
   var pos = consumeIf(/[0-9]+/);
-  return Number(pos);
+  return pos ? Number(pos) : false;
 }
 
 function getStaffPos2(){
@@ -617,7 +631,7 @@ function consumeStyleTags(){
         found = new LedgerLineChange();
         found.count = 0;
         found.oneOff = true;
-      }
+      } 
   }
   if(found) {
     currentExample.classes.addClass(found);
@@ -1111,6 +1125,7 @@ function sysBreak(){
   cury += rastralSize * (systemContainsPageOrColumnBreak ? 4 : 3);
   curx += rastralSize / 2;
   cury += currentLinecount * rastralSize;
+  lowPoint = cury+(rastralSize*2);
   sysNo++;
   systemContainsPageOrColumnBreak = false;
 }
@@ -1870,7 +1885,7 @@ function docMapping(){
     }
   };
   this.paneWidth = function(){
-    return Math.max(minWidth, Math.min(maxWidth, ($(window).width()-60) / this.panes.length))-30;
+    return Math.max(minWidth, Math.min(maxWidth, ($(window).width()-40) / this.panes.length))-30;
   };
   this.fixWidths = function(pos){
     if(this.hold) return false;
@@ -1886,6 +1901,7 @@ function docMapping(){
     wrapWidth = width;
 //    document.getElementById("tempdebug").innerHTML = wrapWidth;
     timeouts.push(setTimeout(function(args){
+      var totalW = 0;
       for(var i=0; i<docMap.docs.length; i++){
         if(!docMap.docs[i].prevWidth 
            || (docMap.docs[i].prevWidth != wrapWidth && docMap.docs[i].docType==="Transcription")
@@ -1897,7 +1913,14 @@ function docMapping(){
         if(args[0]) {
           retryScroll([args[0], docMap.docs[i].drawTo]);
         }
+        totalW+=parseInt(docMap.docs[i].out.style.width, 10)+4;
       }
+      var contentDiv = document.getElementById("content");
+      var currentW = contentDiv.getBoundingClientRect().width;
+      if(totalW>currentW || totalW<currentW-30){
+        // container either too big or far too small
+        contentDiv.style.width = (totalW+4)+"px";
+      } 
       fixHeight(true);
     }, 30, [pos]));
     this.fixButtons();
@@ -1993,8 +2016,8 @@ function docMapping(){
     }
   };
   this.setTreatisePos = function(treatise, book, chapter, section, paragraph, offset){
-    if(!this.treatisPos[treatise]) this.treatisPos[treatise] = {};
-    var tp = this.treatisPos[treatise];
+    if(!this.treatisePos[treatise]) this.treatisePos[treatise] = {};
+    var tp = this.treatisePos[treatise];
     if(tp.book!==book || tp.chapter!==chapter || tp.section!==section||tp.paragraph!==paragraph){
       tp.book=book;
       tp.chapter=chapter;
@@ -2315,11 +2338,20 @@ function relativeRight(element, parent){
   return element.getBBox().x+element.getBBox().width-parent.getBBox().x;
 }
 
-function underlayRight(){
+function underlayRight(position, show){
   if(underlays.length){
-    var spaceWidth = 1.3 * rastralSize * prop;
-    return relativeRight(underlays[underlays.length-1], SVG)+spaceWidth;
-  } else return 0;
+    var spaceWidth = 1.2 * rastralSize * prop;
+    var topy = cury-((Number(/-?[0-9]*/.exec(position), 10))*rastralSize/2 +1);
+    var bottomy = topy+rastralSize;
+    for(var i=underlays.length-1; i>=0; i--){
+      upos = underlays[i].getBBox().y+(rastralSize/2); // Why the last bit?
+      if(upos>topy && upos<bottomy){
+        return relativeRight(underlays[i], SVG)+spaceWidth;
+      }
+    }
+//    return relativeRight(underlays[underlays.length-1], SVG)+spaceWidth;
+  } 
+  return 0;
 }
 
 function punctuationp(obj){
@@ -2526,15 +2558,15 @@ function thisisanindex(obj){
   $(out).show();
 }
 
-function displayStatusBarReference(refobj){
+function displayStatusBarReference(refobj, event){
   var meg = $(refobj).parents("div.musicexample");
   if(meg && meg.length) {
-    displayStatusBarReferenceME(refobj, meg[0]);
+    displayStatusBarReferenceME(refobj, meg[0], event, meg);
   } else {
     var para = $(refobj).parents("div.para")[0];
     if(!para) return;
     var pclass = /at-\S*/.exec(para.className)[0].substring(3);
-    var loc = pclass.split("-");
+    var loc = pclass.replace("_", " ").split("-");
     var sclass = /sentence-\S*/.exec(refobj.className)[0].substring(9);
     var book = roman(Number(loc[0])).toUpperCase();;
     var chapter = isNaN(Number(loc[1])) ? loc[1] : roman(Number(loc[1]));
@@ -2542,24 +2574,34 @@ function displayStatusBarReference(refobj){
     var out = $(pane).find(".cursorLocator")[0];
     $(out).show();
     var outstring = book ? book+"." : "";
-    outstring += (chapter==="p" ? "Prol" : chapter);
+    outstring += (chapter==="p" ? "Prol" 
+                  : (chapter==="c" ? "Conc" 
+                     : (chapter==="e" ? "Expl" 
+                        : chapter)));
     out.innerHTML = outstring+"."+(Number(sclass)+1);
   }
 }
 
-function displayStatusBarReferenceME(refobj, musicex){
+function exampleNumberParse(string){
+  var exx = string.split("/");
+  return exx.length===1 
+    ? "ex"+(Number(exx[0], 10)+1) 
+    : "exx"+(Number(exx[0])+1)+"–"+(Number(exx[exx.length-1])+1);
+}
+
+function displayStatusBarReferenceME(refobj, musicex, event, test){
   var para = $(refobj).parents("div.para")[0];
   var pclass = /at-\S*/.exec(musicex.className)[0].substring(3);
-  var loc = pclass.split("-");
-  var book = roman(Number(loc[0])).toUpperCase();;
+  var loc = pclass.replace("_", " ").split("-");
+  var book = roman(Number(loc[0])).toUpperCase();
   var chapter = isNaN(Number(loc[1])) ? loc[1] : roman(Number(loc[1]));
-  var exno = loc.length>3 ? 1+Number(loc[3]) : "0";
+  var exno = loc.length>3 ? exampleNumberParse(loc[3]) : "0";
   var pane = $(para).parents("div.pane")[0];
   var out = $(pane).find(".cursorLocator")[0];
   $(out).show();
   var outstring = book ? book+"." : "";
   outstring += (chapter==="p" ? "Prol" : chapter);
-  out.innerHTML = outstring+".ex"+exno;  
+  out.innerHTML = outstring+"."+exno;  
 }
 
 function displayReference(refobj, out){
@@ -2571,7 +2613,10 @@ function displayReference(refobj, out){
   var chapter = isNaN(Number(loc[1])) ? loc[1] : roman(Number(loc[1]));
   var jump = $(para).parents("div.pane").find("a.jump-"+book+"_"+chapter);
   jump = jump && jump.length ? jump[0].innerHTML : 
-    (chapter == "p" ? "Prol. " : (chapter == "c" ? "Conc." : book+"."+chapter));
+    (chapter == "p" ? "Prol. " 
+     : (chapter == "c" ? "Conc." 
+        : (chapter == "e" ? "Expl." 
+           : book+"."+chapter)));
   if(!out){
     out = document.getElementById("cursorLocator");
     if(!out) {
@@ -2598,7 +2643,9 @@ function displayReference(refobj, out){
   }
 //  out.innerHTML = jump+""+(Number(sclass)+1);
   var outstring = book ? book+"." : "";
-  outstring += (chapter==="p" ? "Prol" : chapter);
+  outstring += (chapter==="p" ? "Prol"
+                : (chapter==="c" ? "Conc." 
+                   : (chapter==="e" ? "Expl." : chapter)));
   out.innerHTML = outstring+"."+(Number(sclass)+1);
 }
 
@@ -2684,10 +2731,22 @@ function staffDetailsForWitnesses(witnesses){
   return results;
 }
 
-function stavesAgree(staffing){
+function stavesAgreeOld(staffing){
+  // FIXME: redundant thanks to changes to how we split variants
   // The results of staffDetailsForWitnesses are of the form [wit,
   // clef, solm, staff]*. Here, we check if they're all the equivalent
   return (staffing && staffing.length) ? staffing.reduce(staffPairAgrees, true) : false;
+}
+function erroneousClefP(s){
+  return s[1].erroneousClef;
+}
+
+function stavesAgree(staffing){
+  // The results of staffDetailsForWitnesses are of the form [wit,
+  // clef, solm, staff]*. Here, we check if they're all the equivalent
+  if (staffing && staffing.length) {
+    return !staffing.some(erroneousClefP);
+  } else return false;
 }
 
 function matchStaves(staffing){
@@ -2753,8 +2812,24 @@ function clefEqual(c1, c2){
   if(!c1 && !c2) return true;
   if(!c1) return false; // FIXME: check why
   if(!c2) return false;
-  if(c1.erroneousClef) c1 = c1.erroneousClef;
-  if(c2.erroneousClef) c2 = c2.erroneousClef;
+  // ---
+  // Editorial clefs are problematic -- do we consider clefs equal if
+  // they are effectively the same, but look different given an error?
+
+  // Yes:
+  // if(c1.erroneousClef) c1 = c1.erroneousClef;
+  // if(c2.erroneousClef) c2 = c2.erroneousClef;
+
+  // No:
+  if(c1.erroneousClef || c2.erroneousClef){
+    if(c1.erroneousClef && c2.erroneousClef){
+      return c1.staffPos===c2.staffPos 
+        && c1.type===c2.type
+        && c1.erroneousClef.staffPos===c2.erroneousClef.staffPos 
+        && c1.erroneousClef.type===c2.erroneousClef.type;
+    } else return false;
+  }
+  // ---
   return c1.staffPos===c2.staffPos 
     && c1.type===c2.type;
 }
@@ -2912,14 +2987,19 @@ function TEIWitnesses(rdg, el){
   } else if (rdg.extraDescription==="ed." || rdg.description==="ed.") {
     el.setAttribute("resp", "#ed");
   } else if (rdg.witnesses[0]==="MSS") {
-    /*
-    for(var i=0; i<curDoc.sources.length; i++){
-      if(i) wits+=" ";
-      wits+="#"+curDoc.sources[i].id;
-    }
-    el.setAttribute("wit", wits);
-    */
     el.setAttribute("wit", "#MSS");
   }
   return el;  
+}
+
+function MEIAddPosition(obj, MEIObj){
+  // Adds pitch to MEI element, if available, and otherwise adds staff
+  // position
+  if(obj.pitch){
+    MEIObj.setAttribute("pname", obj.pitch.charAt(0).loLowerCase());
+    MEIObj.setAttribute("oct", 3+(Math.floor(notes.indexOf(obj.pitch) / 7)));
+  } else if(obj.staffPos){
+    MEIObj.setAttribute("loc", obj.staffPos-4);
+  }
+  return obj;
 }

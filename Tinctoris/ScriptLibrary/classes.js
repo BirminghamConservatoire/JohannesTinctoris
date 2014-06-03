@@ -1,5 +1,32 @@
 // Musical classes
+//
+// Classes have some methods in common:
+//
+//   * .width for width estimation (before drawing)
+// 
+//   * .negativeSpace In some cases inserted negative spaces
+//       (indicating tightly packed glyphs) are too tight or too
+//       loose. This method allows the default spaces to be
+//       overridden. It is called on the preceding glyph with the
+//       following glyph as an argument.
+//
+//   * .toText Experimental (=faulty) attempt to make parsing JJD's
+//       input language two way, allowing export. This is necessary
+//       for graphical editing.
+//
+//   * .toMEI Experimental (=incomplete) attempt to output to relevant
+//       MEI object. As with analogous .toMEI, this takes the TEI/MEI
+//       document and the parent element and appends the object to
+//       that parent. It's for the calling method to make sure that
+//       such behaviour is appropriate. The new element is (usually,
+//       unnecessarily) returned.
+//
+//   * .draw Draws the object to the SVG object referred to by the
+//       global variable <SVG>. The drawn object is returned.
+//
+///// Classes
 // 1. Notes, ligatures & neumes
+//
 
 function Note(){
   // Note is the basic class for sounding items. It's also used for
@@ -18,7 +45,8 @@ function Note(){
   this.voidnotes = false;
   this.subType = false;
   this.example = false;
-  this.dot = false; 
+  this.dot = false;
+  this.MEIObj = false;
   this.forceTail = false; // This is only for ligatures, but the parser will put it here
   // Copy current classes
   this.classList = [];
@@ -32,6 +60,13 @@ function Note(){
     }
     return width;
   };
+  this.negativeSpace = function(){
+    if("MLB".indexOf(this.rhythm)>-1){
+      return rastralSize/4;
+    } else {
+      return rastralSize/2;
+    }
+  };
   this.toText = function(){
     var text = "";
     if(this.sup) text+= "^";
@@ -40,11 +75,19 @@ function Note(){
     text += this.pitch ? this.pitch : this.staffPos.toString(16).toUpperCase();
     return text;
   };
-  this.MEINode = function(parentDoc){
-    if(this.pitch){
-      return PitchedMEINote(this.pitch, this.rhythm, false);
+  this.toMEI = function (doc, parent){
+    if(!parent) parent = doc.currentParent;
+    var el = doc.element("note");
+    el.setAttribute("dur", rhythms[this.rhythm]);
+    if(this.dot) this.dot.toTEI(doc, el);
+    MEIAddPosition(this, el);
+    if((voidRule(this) && currentSubType==="full") 
+       || (fullRule(this) && currentSubType==="void")){
+      el.setAttribute("coloration", "true");
     }
-    return false;
+    parent.appendChild(el);
+    this.MEIObj = el;
+    return el;
   };
   this.edit = function(event) {
     return durationSelector(this, event.pageX, event.pageY);
@@ -58,7 +101,7 @@ function Note(){
       curx = currentExample.events[eventi-1].startX;
     } else if(this.text && underlays.length){
       // Check for text issues
-      curx = Math.max(curx, underlayRight());
+      curx = Math.max(curx, underlayRight(this.text.position));
     }
     // put context into object to avoid trouble when drawing out of
     // order (first draw is always in order)
@@ -87,8 +130,9 @@ function Note(){
                              +(half ? " halffull"+half : ""), 
                              false);
       var obj;
-      if(getNoteGlyph(voidGlyphMap, this.rhythm, this.flipped, subType, this.voidnotes, this.fullnotes)){
-        myglyph = getNoteGlyph(voidGlyphMap, this.rhythm, this.flipped, subType, this.voidnotes, this.fullnotes);
+      if(getNoteGlyph(currentSubType, this.rhythm, this.flipped, subType, 
+                      this.voidnotes, this.fullnotes)){
+        myglyph = getNoteGlyph(currentSubType, this.rhythm, this.flipped, subType, this.voidnotes, this.fullnotes);
         var oldSVG = SVG;
         SVG = this.domObj;
         obj = myglyph.draw(curx, yPos(cury, spos), rastralSize, 
@@ -96,23 +140,23 @@ function Note(){
         SVG = oldSVG;
         curx+= myglyph.advanceWidth(rastralSize);
       } 
-      if(this.flipped){
-        var charData = this.voidnotes ?
-                         voidFlippedDictionary[subType][this.rhythm] :
-                         flippedDictionary[subType][this.rhythm];
-      } else {
-        var charData = this.voidnotes ?
-                         voidBaseDictionary[subType][this.rhythm] :
-                         baseDictionary[subType][this.rhythm];
-      }
       if(editable) {
         $(this.domObj).click(domClickfun(this.domObj, editObject(this), false, false, false));
         $(this.domObj).hover(shiftHoverToShift(this, 1), hoverOutShiftChecked());
       }
       if(!myglyph){
+        if(this.flipped){
+          var charData = this.voidnotes ?
+            voidFlippedDictionary[subType][this.rhythm] :
+            flippedDictionary[subType][this.rhythm];
+        } else {
+          var charData = this.voidnotes ?
+            voidBaseDictionary[subType][this.rhythm] :
+            baseDictionary[subType][this.rhythm];
+        }
         obj = svgText(this.domObj, curx, texty(charData[1]*prop, spos),
-             "mensural " + this.rhythm+(this.pitch ? this.pitch : spos), false,
-             musicStyle(), charData[0]);
+                      "mensural " + this.rhythm+(this.pitch ? this.pitch : spos), false,
+                      musicStyle(), charData[0]);
         curx += charData[2] * rastralSize;
       }
       setDotPos(spos);
@@ -133,6 +177,7 @@ function ChantNote(){
   this.startX = false;
   this.domObj = false;
   this.example = currentExample;
+  this.MEIObj = false;
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
   this.width = function(){
@@ -147,11 +192,16 @@ function ChantNote(){
   this.edit = function(event){
     return chantShapeSelector(this, event.pageX, event.pageY);
   };
-  this.MEINode = function(parentDoc){
-    if(this.pitch){
-      return PitchedMEINeume(this.pitch, this.rhythm, false);
-    }
-    return false;
+  this.toMEI = function (doc, parent){
+    if(!parent) parent = doc.currentParent;
+    var el = doc.element("uneume");
+    var note = doc.element("note");
+    el.setAttribute("name", neumeForms[this.rhythm]);
+    MEIAddPosition(this, el);
+    el.appendChild(note);
+    parent.appendChild(el);
+    this.MEIObj = el;
+    return el;
   };
   // ChantNote
   this.draw = function(){
@@ -161,7 +211,7 @@ function ChantNote(){
     if(this.text){
       curx-=rastralSize*0.6*prop;
       if(underlays.length){
-        curx = Math.max(curx, underlayRight());
+        curx = Math.max(curx, underlayRight(underlays[0].position));
       }
       this.text.draw();
       curx+=rastralSize*0.6*prop;
@@ -206,6 +256,7 @@ function Dot(){
   this.startX = false;
   this.text = false;
   this.domObj = false;
+  this.MEIObj = false;
   this.example = currentExample;
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
@@ -213,11 +264,25 @@ function Dot(){
     // return dotData[2]*rastralSize * prop;
     return this.augments ? rastralSize/2 : rastralSize;
   };
+  this.negativeSpace = function(next){
+    if(next && (next.objType=="Note" || next.objType.indexOf("Rest")>-1)){
+      return next.negativeSpace();
+    } else {
+      return rastralSize/2;
+    }
+  };
   this.toText = function(){
     return this.staffPos ? "."+this.staffPos.toString(16).toUpperCase() : ".";
   };
-  this.MEINode = function(parentDoc){
-    return MEIDot();
+  this.toMEI = function(doc, parent){
+    if(!parent) parent = doc.currentParent;
+    var el = doc.element("dot");
+    MEIAddPosition(this, el);
+    // ? form?
+    if(parent.tagName==="note") el.setAttribute("form", "aug");
+    parent.appendChild(el);
+    this.MEIObj = el;
+    return el;
   };
   this.draw = function(){
     var extraClasses = "";
@@ -229,7 +294,7 @@ function Dot(){
     }
     if(this.text && underlays.length){
       // Check for text issues
-      curx = Math.max(curx, underlayRight());
+      curx = Math.max(curx, underlayRight(this.text.position));
     }
     this.startX = curx;
     if(this.classList.length){
@@ -260,6 +325,7 @@ function SignumCongruentiae(){
   this.flipped = false;
   this.example = currentExample;
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
+  this.MEIObj = false;
   this.width = function(){
     return 0;
   };
@@ -275,10 +341,10 @@ function SignumCongruentiae(){
       if(this.flipped){
 //        pos = this.staffPos || (dotPos-3) || (Math.floor(currentLinecount/4)*2-3);
         pos = this.staffPos || (dotPos-1) || (Math.floor(currentLinecount/4)*2-3);
-        console.log("Flipped s.c. at", pos, this.staffPos, dotPos, currentLinecount);
+//        console.log("Flipped s.c. at", pos, this.staffPos, dotPos, currentLinecount);
       } else {
         pos = this.staffPos || (2+dotPos) || (Math.floor(currentLinecount/4)*2+3);
-        console.log("s.c. at", pos, this.staffPos, dotPos, currentLinecount);
+//        console.log("s.c. at", pos, this.staffPos, dotPos, currentLinecount);
       }
     }
     if(this.effects){
@@ -317,6 +383,17 @@ function Fermata(){
   this.toText = function(){
     return this.staffPos ? "."+this.staffPos.toString(16).toUpperCase() : ".";
   };
+  this.toMEI = function(){
+    if(!parent) parent = doc.currentParent;
+    var el = doc.element("fermata");
+    MEIAddPosition(this, el);
+    if(this.lengthens && this.lengthens.MEIObj 
+       && this.lengthens.MEIObj.getAttribute("xml:id")){
+      el.setAttribute("startid", this.lengthens.MEIObj.getAttribute("xml:id"));
+    }
+    parent.appendChild(el);
+    return el;
+  };
   this.draw = function(){
     var extraClasses = "";
     var oldx = 0;
@@ -347,6 +424,7 @@ function Custos(){
   this.pitch = false;
   this.startX = false;
   this.domObj = false;
+  this.sup = false;
   this.example = currentExample;
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
@@ -362,11 +440,22 @@ function Custos(){
     }
     return false;
   };
+  this.toMEI = function (doc, parent){
+    if(!parent) parent = doc.currentParent;
+    var el = doc.element("custos");
+    MEIAddPosition(this, el);
+    parent.appendChild(el);
+    this.MEIObj = el;
+    return el;
+  };
   this.draw = function() {
     var spos = staffPosition(this);
     if(this.classList.length){
       extraClasses = classString(this.classList);
       drawClasses(this.classList, this);
+    }
+    if(this.sup){
+      curx = currentExample.events[eventi-1].startX;
     }
     this.startX = curx;
     // Draw any underlaid text
@@ -493,6 +582,20 @@ function LigatureNote(note){
     return text;
   };
   // Ligature Note
+  this.toMEI = function(doc, parent){
+    if(!parent) parent = doc.currentParent;
+    var el = doc.element("note");
+    // FIXME: SUP?
+    el.setAttribute("dur", rhythms[this.rhythm]);
+    if(this.dot) this.dot.toTEI(doc, el);
+    MEIAddPosition(this, el);
+    if((voidRule(this) && currentSubType==="full") 
+       || (fullRule(this) && currentSubType==="void")){
+      el.setAttribute("coloration", "true");
+    }
+    parent.appendChild(el);
+  };
+  // Ligature Note
   this.drawVar = function(variant){
     var extraClasses = "", oldx, obj;
     // ?? Sup????
@@ -504,7 +607,7 @@ function LigatureNote(note){
     obj = drawBox(this, this.prevEvent(variant) && 
       this.prevEvent(variant).varEndStaffPos(variant), 
       this.width(variant), this.lstem(variant), this.rstem(variant), 
-      this.sup, (currentSubType==="black" || fullRule(this)), extraClasses);
+      this.sup, (currentSubType==="black" || currentSubType==="full" || fullRule(this)), extraClasses);
     if(this.nextEvent(variant) 
        && (staffPosition(this.nextEvent(variant)) - staffPosition(this)) > -1){
       // If the notes are close, any dots may need to shift
@@ -545,7 +648,7 @@ function LigatureNote(note){
     this.startX = curx;
     obj = drawBox(this, this.prevEvent() && this.prevEvent().varEndStaffPos(), 
       this.width(), this.lstem(), this.rstem(), this.sup, 
-      (currentSubType==="black" || fullRule(this)), extraClasses);
+      (currentSubType==="black" || currentSubType==="full" || fullRule(this)), extraClasses);
     if(this.nextEvent() 
        && (staffPosition(this.nextEvent()) - staffPosition(this)) > -1){
       // If the notes are close, any dots may need to shift
@@ -601,13 +704,21 @@ function LigatureComment(comment){
   this.drawVar = function(variant){
     return this.draw();
   };
+  this.toMEI = function(doc, parent){
+    if(!parent) parent = doc.currentParent;
+    var el = doc.element("annot");
+    el.appendChild(doc.text(this.content)); //FIXME: UPDATE FROM GENERIC COMMENTS (missing rich text)
+    // FIXME: what does this apply to ("plist" attribute)
+    return el;
+  };
   this.draw = function(){
     // FIXME: Check this -- it's nonsense to me at the moment
     if(!showtranslationnotes || !showtranscriptionnotes) {
       // WHICH??? One of these is relevant, but can't tell
       return false;
     }
-    var drawnx = curx;
+    var drawnx = curx - rastralSize/2;
+    // var drawnx = curx;
     this.startY = cury - rastralSize * currentLinecount;
     this.startX = drawnx;
     this.endY = this.startY - Math.floor(rastralSize * textScale * 2);
@@ -785,10 +896,27 @@ function Ligature(){
   this.addOblique = function(oblique){
     this.addEvent(oblique);
   };
+  this.oblique = function(){
+    // Are the only notes here in obliques? This matters for MEI
+    for(var i=0; i<this.members.length; i++){
+      if(this.members[i].objType==="LigatureNote") return false;
+    }
+    return true;
+  };
+  this.toMEI = function(doc, parent){
+    if(!parent) parent = doc.currentParent;
+    var el = doc.element("ligature");    
+    el.setAttribute("form", (this.oblique() ? "obliqua" : "recta"));
+    for(var i=0; i<this.members.length; i++){
+      if(this.members[i].toMEI) this.members[i].toMEI(doc, el);
+    }
+    parent.appendChild(el);
+    return el;
+  };
   this.drawVar = function(variant){
     // Check for text issues
     if(this.members[0].text && underlays.length){
-      curx = Math.max(curx, underlayRight());
+      curx = Math.max(curx, underlayRight(this.members[0].text.position));
     }
     curx += this.leftOverhang(variant) + 0.5 * prop * rastralSize;
     for(var i=0; i<this.members.length; i++){
@@ -932,8 +1060,8 @@ function Oblique(){
         return -1;      
     }
     if(this.member(0, variant).rhythm == "S"){
-      foo = this.prevEvent(variant);
-      if(this.prevEvent(variant) && this.prevEvent(variant).lstem(variant) == 1){
+      var prev = this.prevEvent(variant);
+      if(prev && prev.lstem(variant) == 1){
         return false;
       } else {
         return 1;
@@ -1099,11 +1227,11 @@ function ObliqueNote(note, index, oblique){
   };
   this.drawLStem = function(l){
     var m = metrics();
-    var stemLength = this.voidnotes || currentSubType=="void" 
+    var stemLength = this.voidnotes || currentSubType=="void" || currentSubType=="full" 
       ? m.stemLength : m.stemLength/4;
     // var offset = this.voidnotes  || currentSubType=="void" 
     //   ?  m.oblOffset+m.vThickness : m.hThickness/2;
-    var offset = this.voidnotes  || currentSubType=="void" 
+    var offset = this.voidnotes  || currentSubType=="void"  || currentSubType=="full" 
       ?  m.oblOffset*0.64 : m.hThickness/2;
     var extraClasses = "";
     var y = yPos(cury, staffPosition(this));
@@ -1138,11 +1266,11 @@ function ObliqueNote(note, index, oblique){
     if(this.index === 0){
       return drawObliqueStart(staffPosition(this), 
         staffPosition(this.nextEvent(variant)), 
-        (currentSubType==="black" || fullRule(this)), extraClasses);
+        (currentSubType==="black" || currentSubType==="full" || fullRule(this)), extraClasses);
     } else {
       return drawObliqueEnd(staffPosition(this), 
         staffPosition(this.prevEvent(variant)), 
-        (currentSubType==="black" || fullRule(this)), extraClasses);
+        (currentSubType==="black" || currentSubType==="full" || fullRule(this)), extraClasses);
     }
   };
   this.draw = function(other){
@@ -1157,11 +1285,13 @@ function ObliqueNote(note, index, oblique){
     if(this.index === 0){
       return drawObliqueStart(staffPosition(this), other ? staffPosition(other)
                                                   : staffPosition(this.nextEvent(false)), 
-                              (currentSubType==="black" || fullRule(this)), extraClasses);   
+                              (currentSubType==="black" || currentSubType==="full" || 
+                               fullRule(this)), extraClasses);   
     } else {
       return drawObliqueEnd(staffPosition(this), other ? staffPosition(other)
                                                  : staffPosition(this.prevEvent(false)),
-                              (currentSubType==="black" || fullRule(this)), extraClasses);
+                              (currentSubType==="black" || currentSubType==="full" || 
+                               fullRule(this)), extraClasses);
     }
   };
   // Oblique Note
@@ -1225,7 +1355,7 @@ function Neume(){
       if(item.objType=="TextUnderlay" || item.objType=="Comment"){
         curx -=rastralSize*0.6*prop;
         if(i===0 && underlays.length){
-          curx = Math.max(curx, underlayRight());            
+          curx = Math.max(curx, underlayRight(underlays[0].text.position));            
         }
         item.draw();
         curx +=rastralSize*0.6*prop;
@@ -1233,7 +1363,7 @@ function Neume(){
         if(item.text) {
           curx -=rastralSize*0.6*prop;
           if(i===0 && underlays.length){
-            curx = Math.max(curx, underlayRight());            
+            curx = Math.max(curx, underlayRight(underlays[0].text.position));
           }
           item.text.draw();
           curx +=rastralSize*0.6*prop;
@@ -1272,7 +1402,7 @@ function Neume(){
     var nudge = 0;
     // Can only really adject position of first note for text spacing
     if(this.members[0].text && underlays.length){
-      curx = Math.max(curx, underlayRight());
+      curx = Math.max(curx, underlayRight(this.members[0].text.position));
     }
     for(var i=0; i<this.members.length; i++){
       item = this.members[i];
@@ -1285,7 +1415,7 @@ function Neume(){
         if(item.text) {
           curx -=step*0.8;
           if(i===0 && underlays.length){
-            curx = Math.max(curx, underlayRight());
+            curx = Math.max(curx, underlayRight(item.text.position));
           }
           item.text.draw();
           curx +=step*0.8;
@@ -1435,6 +1565,7 @@ function Rest(){
   this.domObj = false;
   this.example = currentExample;
   this.index = eventi;
+  this.MEIObj = false;
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
   this.toText = function(){
@@ -1443,12 +1574,25 @@ function Rest(){
     if(this.staffPos) text += this.staffPos.toString(16).toUpperCase();
     return text;
   };
+  this.toMEI = function(doc, parent){
+    if(!parent) parent = doc.currentParent;
+    var el = doc.element("rest");
+    el.setAttribute("dur", rhythms[this.rhythm]);
+    if(this.dot) this.dot.toTEI(doc, el);
+    MEIAddPosition(this, el);
+    parent.appendChild(el);
+    this.MEIObj = el;
+    return el;
+  };
   this.width = function(){
     var width = 0;
     if(this.rhythm){
       width += restDictionary[this.rhythm][2]*rastralSize * prop;
     }
     return width;
+  };
+  this.negativeSpace = function(){
+    return rastralSize/5;
   };
   this.draw = function(){
     var extraClasses = "";
@@ -1515,6 +1659,20 @@ function LongRest() {
   this.width = function(){
     return 3*rastralSize / 2;
   };
+  this.negativeSpace = function(){
+    return rastralSize/5;
+  };
+  this.toMEI = function(doc, parent){
+    if(!parent) parent = doc.currentParent;
+    var el = doc.element("rest");
+    el.setAttribute("dur", "longa");
+    if(this.dot) this.dot.toTEI(doc, el);
+    // FIXME: How does position work?
+//    MEIAddPosition(this, el);
+    parent.appendChild(el);
+    this.MEIObj = el;
+    return el;
+  };
   this.draw = function(){
     var extraClasses = "";
     this.startX = curx;
@@ -1570,6 +1728,9 @@ function MaxRest() {
   };
   this.width = function() {
     return rastralSize * 2;
+  };
+  this.negativeSpace = function(){
+    return rastralSize/5;
   };
   this.draw = function(){
     this.domObj = svgGroup(SVG, "maxRestGroup", false);
@@ -1861,12 +2022,18 @@ function Clef() {
     }
     if(this.type && this.staffPos){
       curx -= rastralSize / 2 * prop;
-      if (currentType== "mensural" && currentSubType == "void"){
-        arsNovaVoid[this.type+"Clef"]
-          .draw(curx, cury-yoffset(this.staffPos), rastralSize, 
-                "mensural clef " +this.type+this.staffPos+(this.editorial ? " editorial" : "")
-                  +extraClasses);
-        curx+=arsNovaVoid[this.type+"Clef"].advanceWidth(rastralSize);
+      if(currentType==="mensural"){
+        var myChar;
+        if(currentSubType==="void"){
+          myChar = arsNovaVoid[this.type+"Clef"];
+        } else if (currentSubType==="full"){
+          myChar = arsNovaVoid[this.type+"Full"+"Clef"];
+          if(!myChar) myChar = arsNovaVoid[this.type+"Clef"];
+        }
+        myChar.draw(curx, cury-yoffset(this.staffPos), rastralSize, 
+                    "mensural clef " +this.type+this.staffPos+(this.editorial ? " editorial" : "")
+                    +extraClasses);
+        curx+=myChar.advanceWidth(rastralSize);
       } else if(currentType == "plainchant"){
         if(this.type == "F"){
           curx += rastralSize / 2 * prop;
@@ -1939,6 +2106,7 @@ function Staff() {
   this.lines = false;
   this.colour = false;
   this.extras = [];
+  this.params = false;
   this.appliesTo = false;
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
@@ -1964,10 +2132,33 @@ function Staff() {
     }
   };
   this.varColour = function(wit){
-    return ((typeof(this.colour)==="string" || !wit) 
-            ? this.colour
-            : witnessReading(wit, this.colour).value);
-  }
+    if(typeof(this.colour)==="string" || !wit){
+      return this.colour;
+    } else if (!this.colour){
+      // The staff doesn't change colour
+      var pos = currentExample.staves.indexOf(this);
+      for(var i=pos-1; i>=0; i--){
+        if(currentExample.staves[i].objType==="Staff"
+           && witnessAppliesTo(currentExample.staves[i], wit)
+           && currentExample.staves[i].colour){
+          return currentExample.staves[i].colour;
+        }
+      }
+      if(currentExample.parameters.staff && currentExample.parameters.staff.colour){
+        if(typeof(currentExample.parameters.staff.colour)==="string"){
+          return currentExample.parameters.staff.colour;
+        } else {
+          return witnessReading(wit, currentExample.parameters.staff.colour);
+        }
+      }
+      return false;
+    } else {
+      return witnessReading(wit, this.colour).value;
+    }
+    // return ((typeof(this.colour)==="string" || !wit) 
+    //         ? this.colour
+    //         : witnessReading(wit, this.colour).value);
+  };
   this.width = function(){return 0;};
   this.trueLines = function(){
     switch (typeof(this.lines)){
@@ -1984,6 +2175,37 @@ function Staff() {
         }
     }
   };
+  this.hasChoice = function(){
+    var c = findClef(this.extras);
+    var s = findSolm(this.extras);
+    return !((!c || c.objType == "Clef") && (!s || s.objType == "SolmizationSignature")
+      && typeof(this.lines) == "number" && typeof(this.colour) =="string");
+  };
+  // this.variantList = function (){
+  //   // FIXME:
+  //   return false;
+  // };
+  // this.noMatch = false // FIXME!!
+  // this.getDefaultClef = function(){};// !!!
+  // this.getDefaultSolmization();// !!!
+  // this.tip = function(tipSVG){
+  //   var oldSVG = SVG;
+  //   SVG = tipSVG;
+  //   svgCSS(SVG, "jt-editor-v.css");
+  //   this.note = SVG;
+  //   var vars = this.variantList();
+  //   var d = 40; // ?
+  //   curx = 0;
+  //   cury = rastralSize*9;
+  //   var bottom =0;
+  //   if(this.noMatch){
+  //     this.addTip(this.trueLines(), this.trueColour(), ["(ed.)"], 
+  //                 this.getDefaultClef(), this.getDefaultSolmization());
+  //     if(i>0) svgLine(SVG, curx, cury, curx, 10, "divider", false);
+  //     curx+=d;
+      
+  //   }
+  // };
   this.trueColour = function(){
     return typeof(this.colour) == "string" ? this.colour :
       (!this.colour ? "red" : this.colour.content[0].value);
@@ -2012,10 +2234,28 @@ function Staff() {
 //      extraClasses = classString(this.classList);
       drawClasses(this.classList, this);
     }
+    var oldSVG = SVG;
+    SVG = svgGroup(SVG, "prefGroup", false);
     var clef = findClef(this.extras);
     var solm = findSolm(this.extras);
-    if(clef) clef.draw();
+    if(clef) {clef.draw();
+             } 
     if(solm) solm.draw();
+    if(showvariants && this.hasChoice()){
+      // odd, but the easiest way to get params-like tip is to build a params object
+      if(!this.params){
+        this.params = new Parameters();
+        this.params.staff = this;
+        this.params.SVG = SVG;
+        this.params.clef = clef;
+        this.params.solmization = solm;
+        this.params.extras = this.extras;
+      }
+      addAnnotation(SVG, this.params, "staff");
+      SVG.style.fill = "#060";
+    //   addAnnotation(SVG, this, "staff");
+    }
+    SVG = oldSVG;
   };
   // Staff
 }
@@ -2081,7 +2321,7 @@ function Barline(){
   };
   this.drawFlash = function(){
     // FIXME!!
-    var start = (this.start || this.start===0) ? cury-yoffset(this.start) : cury-rastralSize;
+    var start = (this.start || this.start===0) ? cury-yoffset(this.start) : cury-yoffset(4);
     var end = (this.end || this.end===0) ? cury-yoffset(this.end)
                 : cury-(rastralSize*currentLinecount);
     svgLine(SVG, curx, start, curx, end, "barlineComponent", false);
@@ -2251,7 +2491,7 @@ function ColumnStart(){
   this.toText = function() {
     return "[-"+this.id+"-]";
   };
-  this.width = function() {return 0;};
+  this.width = zerofunction;
   this.draw = function() {
     this.location = this.id;
     curDoc.breaks.push(this);
@@ -2260,9 +2500,23 @@ function ColumnStart(){
     this.startY = cury+(rastralSize*2);
     // Tell the system breaker to leave extra space
     systemContainsPageOrColumnBreak = true;
-    this.line = svgLine(SVG, 0, cury+(rastralSize*2), 1, cury+(rastralSize*2), "colend inv", false); // Purely for later position use
+    // this.line = svgLine(SVG, 0, cury+(rastralSize*2), 1, cury+(rastralSize*2), "colend inv", false
+    this.line = svgLine(SVG, 0, lowPoint, 1, lowPoint, "colend inv", false); // Purely for later position use
     // this.tag = svgText(SVG, exWidth-70, cury+rastralSize*3, "col", false, false, this.id);
 //    currentExample.colbreaks.push([this.line,this.tag]);
+  };
+}
+
+function ExampleBreak(){
+  this.objType = "Example break";
+  this.id = false;
+  this.exampleno = false;
+  this.startX = false;
+  this.startY = false;
+  this.width = zerofunction;
+  this.draw = function(){
+    this.startX = curx;
+    this.startY = cury;
   };
 }
 
@@ -2317,7 +2571,7 @@ function TextUnderlay(){
         curx = lmargin;
       }
     } else {
-      curx = Math.max(curx, underlayRight());
+      curx = Math.max(curx, underlayRight(this.position));
     }
     var ynudge = 0;
     var pos = this.position;
@@ -2329,14 +2583,17 @@ function TextUnderlay(){
 //      ynudge = vpos*rastralSize/4;
       ynudge = vpos*rastralSize/2 +1;
     }
+    lowPoint = Math.max(lowPoint, cury+(2*rastralSize)-ynudge);
     var textBlock = SVG.nodeName.toUpperCase()==="TEXT" ? SVG 
       : svgText(SVG, curx, cury+rastralSize-ynudge, "textblock", false, false, false);
     var oldSVG = SVG;
     SVG = textBlock;
     var styles = new Array();
+    var dy = false;
     for(var i=0; i<this.components.length; i++){
       if(typeof(this.components[i]) == "string"){
-        if(this.components[i].length>0 && /\S+/.test(this.components[i])){
+        if(this.components[i].length>0// && /\S+/.test(this.components[i])
+          ){
           var txt = svgSpan(SVG, 
                             (styles.length ? textClasses(styles) :"text"), false,
                             ((this.components.length > i+1 
@@ -2344,6 +2601,10 @@ function TextUnderlay(){
                               && this.components[i+1].content[0].description.indexOf("ins.")>-1)
                              ? this.components[i].replace(/\s+$/g, '')
                              : this.components[i]));
+          if(dy){
+            txt.setAttributeNS(null, "dy", dy+"px");
+            dy=false;
+          }
           // FIXME: Unneccessary now?
           // var dx = txt.getBBox().width;
           // curx += dx;
@@ -2353,7 +2614,8 @@ function TextUnderlay(){
           this.components[i].textBlock = textBlock;
           this.components[i].styles = styles;
         }
-        this.components[i].draw();
+        this.components[i].draw(styles);
+        if(this.components[i].dy) dy = this.components[i].dy()*-1;
         styles = this.components[i].updateStyles(styles);
       }
     }
@@ -2373,6 +2635,23 @@ function TextUnderlay(){
     return textBlock;
   };
   // Text Underlay
+}
+
+function MESuper(){
+  this.objType = "MusicExampleSuperscript";
+  this.type = "text";
+  this.position = 0;
+  this.text = "";
+  this.startX = false;
+  this.width = function(){return 0;};
+  this.updateStyles = function (styles){return styles;};
+  this.dy = function (){return -rastralSize/2;};
+  this.draw = function(styles){
+    var txt = svgSpan(SVG, 
+                      "tspanSup "+(styles.length ? textClasses(styles) :"text"), false, this.text);
+    txt.setAttributeNS(null, "dy", this.dy()+"px");
+    return txt;
+  };
 }
 
 function RedOpen(){
@@ -2543,8 +2822,52 @@ function RedlineClose(){
     return styles;
   };
   this.draw = function(){
+    currentExample.classes.addClass(this);
     currentRedline = false;
     this.startX = curx;
+  };
+}
+
+function GenericOpen(){
+  this.objType = "GenericOpen";
+  this.startX = false;
+  this.oneOff = false;
+  this.tag = false;
+  this.toText = function() {
+    return "<"+tag+">";
+  };
+  this.width = function() { return 0;};
+  this.checkClose = function(){
+    return string.indexOf("</"+tag+">")>-1;
+  };
+  this.updateStyles = function(styles){
+    styles.push(tag);
+    return styles;
+  };
+  this.draw = function(){
+    currentExample.classes.addClass(this);
+    this.startX = curx;
+  };
+}
+function GenericClose(){
+  this.objType = "GenericOpen";  
+  this.startX = false;
+  this.tag = false;
+  this.toText = function() {
+    return "</"+tag+">";
+  };
+  this.width = function() { return 0;};
+  this.updateStyles = function(styles){
+    // remove styles until the red one is found. This may not be ideal
+    // behaviour, but it will be correct if there tags are legal
+    // XML-oid ones
+    while(styles.pop()!= tag && styles.length);
+    return styles;
+  };
+  this.draw = function(){
+    currentExample.classes.addClass(this);
+    this.startX = curx;
+    // FIXME: check that this works!
   };
 }
 
@@ -2614,7 +2937,12 @@ function NegativeSpace(){
       drawClasses(this.classList, this);
     }
     this.startX = curx;
-    curx -= rastralSize/2;
+    if(eventi && currentExample.events[eventi-1] && currentExample.events[eventi-1].negativeSpace){
+      var next = currentExample.events.length>eventi+1 ? currentExample.events[eventi+1] : false;
+      curx -= currentExample.events[eventi-1].negativeSpace(next);
+    } else {
+      curx -= rastralSize/2;
+    }
   };
 }
 
@@ -3240,6 +3568,11 @@ function MChoice(){
     this.classList = currentExample.classes.classes.slice(0);
   }
   this.addReading = function(witnesses, string, description, description2, staffing){
+    // A single reading may be split into several in cases where we
+    // want the clef/sig/staff information to be displayed
+    // separately. The exact rules for deciding this have changed at
+    // least twice so far, so the code for this function should be
+    // considered volatile.
     var agreement = stavesAgree(staffing);
     var isntdefault = this.content.length || description ==="ins." || 
         description==="ins. & del.";
@@ -3250,14 +3583,14 @@ function MChoice(){
     if(!isntdefault){
       // Simplest case. Accepted reading is always standardised
       this.content.push(new MReading(witnesses, string?nextMusic():[], description, 
-                                     description2, false));
+                                     description2, false, this));
     } else if (witnesses.length <=1 || agreement){
       // Easiest case: either all definitions are the same (AGREEMENT) or there's only one
       // Do staff stuff: 
       currentClef = staffing[0][1];
       // Then add reading
       this.content.push(new MReading(witnesses, string?nextMusic():[], description, description2, 
-                                     staffing));
+                                     staffing, this));
     } else {
       // Question 1: Is the variant insignificant
       var ostr = string;
@@ -3265,7 +3598,7 @@ function MChoice(){
       if(obj.length===1 && this.content[0].content.length===1
          && obj[0].pitch === this.content[0].content[0].pitch && defaultPresent(staffing)){
           // this is an insignificant variant, so don't worry about it
-        this.content.push(new MReading(witnesses, obj, description, false, false));
+        this.content.push(new MReading(witnesses, obj, description, false, false, this));
       } else {
         var split = matchStaves(staffing);
         var wits = split[0]
@@ -3279,7 +3612,7 @@ function MChoice(){
           for(var j=0; j<wits[i].length; j++){
             st.push([wits[i][j]].concat(staffings[i]));
           }
-          this.content.push(new MReading(wits[i], obj, description, description2, st));
+          this.content.push(new MReading(wits[i], obj, description, description2, st, this));
           string = ostr;
         }
       }
@@ -3492,7 +3825,6 @@ function MChoice(){
       }
       var oc = currentClef;
       if(showvariants && !this.params) {
-//        debugger;
         addAnnotation(click, this, "MusicalChoice");
         SVG = this.SVG;
       }
@@ -3938,14 +4270,18 @@ function ObliqueNoteChoice(){
   // ObliqueNoteChoice
 }
 
-function MReading(witnesses, content, description, description2, staves){
+function MReading(witnesses, content, description, description2, staves, choice){
   this.objType = "MusicalReading";
   this.witnesses = witnesses;
   this.content = content;
   this.description = description;
   this.description2 = description2;
   this.staves = staves;
+  this.choice = choice;
+  this.prev = (choice && choice.content.length) ? choice.content[choice.content.length-1]
+    : false;
   this.ligReading = false;
+  this.drawPrep = false;
   // we need to pull out staff, clef and solm information
   for(var i=content.length-1; i>=0; i--){
     if(content[i].objType == "Staff" ||
@@ -4100,13 +4436,12 @@ function MReading(witnesses, content, description, description2, staves){
     currentReading=this;
     var oldstaff = staffGroup;
     var oldSL = systemLines;
-    var drawPrep = false
     staffGroup = svgGroup(SVG, "Stafflines", false);
     var lc = currentLinecount;
     var sc = currentStaffColour;
     var oc = currentClef;
     var os = currentSolm;
-    var oldSVG = SVG
+    var oldSVG = SVG;
     if(this.staves && !defaultPresent(this.staves) && !this.clefp()){
       currentClef = this.staves[0][1];
       currentSolm = this.staves[0][2];
@@ -4114,13 +4449,13 @@ function MReading(witnesses, content, description, description2, staves){
       currentStaffColour = this.staves[0][3].varColour(this.witnesses[0]);
       // currentLinecount = this.staves[0][3].trueLines();
       // currentStaffColour = this.staves[0][3].trueColour();
-      drawPrep = true;
+      this.drawPrep = true;
     }
     systemLines = [staffGroup, currentLinecount, currentStaffColour, curx, cury];
     var block = svgGroup(SVG, "VariantReading music", false);
     // Check that it isn't just a description
     if(this.content.length){
-      if(drawPrep){
+      if(this.drawPrep || (this.prev && this.prev.drawPrep)){
         if(currentClef) var clef = currentClef.draw(currentSolm);
         var cclass = clef.getAttributeNS(null, "class");
         clef.setAttributeNS(null, "class", cclass+" indicative");
@@ -4357,7 +4692,9 @@ function Classes(){
           close.oneOff = true;
           close.previous = this.classes[i];
           tempClasses.push(close)
-        } 
+        } else if(this.classes[i].objType && this.classes[i].objType==="RedlineOpen"){
+          currentRedline = false;
+        }
       } else {
         tempClasses.push(this.classes[i]);
       }
@@ -4400,4 +4737,14 @@ function drawClasses (classes){
   for(var c=0; c<classes.length; c++){
     if(classes[c].draw) classes[c].draw();
   }
+}
+function removeRedlineBefore (classlist){
+  // This hack is necessary for reasons I don't understand, to remove
+  // a state variable whose reason for persisting is unclear.
+  for(var i=0; i<classlist.length; i++){
+    if(classlist[i].objType==="RedlineOpen"){
+      return false;
+    }
+  }
+  return true;
 }

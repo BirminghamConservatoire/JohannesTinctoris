@@ -292,6 +292,9 @@ div.databox{
 .ui-icon.my-ui-icon-plus{
   background-image: url('../Images/plus.png');
 }
+.ui-icon.my-ui-icon-minus{
+  background-image: url('../Images/minus.png');
+}
 .ui-icon.my-ui-icon-plus.inactive{
   background-color: #CCC;
 }
@@ -540,27 +543,7 @@ h2.title{
 /*   color: white; */
 /*   cursor: pointer */
 /* } */
-.infoshowhide{
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin: 4px;
-  padding: 2px;
-  font-size: 16px;
-  vertical-align: middle;
-  font-family: "Helvetica Neue", Helvetica, Verdana, Verdana, Geneva, sans-serif;
-  font-weight: bold;
-  font-style: italic;
-  text-align: center;
-  color: #FFF;
-  background-color: #0b2573;
-  border: 2px solid white;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.infoshowhide div{
-  margin-top: -5px;
-}
+
 /* .infoshowhide:hover{ */
 /*   border: 1px solid white; */
 /*   border:1px solid #D55; */
@@ -570,12 +553,6 @@ h2.title{
 /*   border:1px solid #A00; */
 /*   background-color: #900; */
 /* } */
-.infoshowhide:hover, .infoshowhide.showing:hover{
-  background-color: #66F;
-}
-.infoshowhide.showing{
-  background-color: #00F;
-}
 div.tickgroup.b{
   border-bottom: 2px solid white;
   padding: 5px 0;

@@ -73,7 +73,8 @@ function showNote(e){
   if(note && note.length) {
     note = $(note[0]).parents("p")[0].cloneNode(true);
     $(note).addClass("note");
-    note.id=id
+    if(!id) console.log("note id error");
+    note.id=id;
     note.insertBefore(DOMSpan("fn", false, index+""), note.firstChild);
     // note.insertBefore(anchor, note.firstChild);
     this.parentNode.insertBefore(note, this.nextSibling);

@@ -24,19 +24,34 @@ function MusicExample(){
   this.exampleno = exampleno;
   this.exampleBreaks = [];
   this.staves = [];
+  this.parts = [];
+	this.done = [];
+	this.UUIDs = {};
+	this.MEI = false;
+	this.MEILink = false;
+	this.MEIcoded = false;
+	this.VerovioLink = false;
+	this.featureLink = false;
   exampleno++;
   this.atClass = "at-"+this.book+"-"+this.chapter+"-"+this.section+"-"+this.exampleno;
   this.parse = function(){
     this.staves = [];
+    this.parts = [];
     var augmented = false;
     this.classes = new Classes();
     string = this.code;
+    // Hacky fix for the problem of double asterisks in **
+    // annotations: \** is converted to (the hopefully meaningless)
+    // @@@@, and then back later
+    string = string.replace(/\\\*\*/g, "@@@@");
     currentExample = this;
     initialStaffStar = false;
     var next;
     var length, prev;
+		var openParts =[];
     currentClef = false;
     currentSolm = false;
+		currentProp = 1;
     consumeSpace();
     this.parameters = getParameters();
     currentInfo = this.parameters;
@@ -50,6 +65,31 @@ function MusicExample(){
           prev.next = next;
           next.previous = prev;
         }
+				if(next.objType==="Part") {
+					currentProp = 1;
+					next.wordNo = this.events.length;
+					if(next.closes){
+						let lastEl = openParts.pop();
+						if(lastEl){
+							next.startEl = lastEl;
+							next.startEl.endEl = next;
+						} else {
+							console.log("missed", this.events.slice(this.events.length -10));
+						}
+					} else {
+						if(openParts.length){
+							let lowestOpen = openParts[openParts.length-1];
+							lowestOpen.contains.push(next);
+							next.parent = lowestOpen;
+						} else {
+							console.log(next.type);
+						}
+						openParts.push(next);
+					}
+				}
+				if(next.changesProportion && next.changesProportion()) currentProp = next.proportionChangesTo;
+				if(next.objType==="Part" && next.type==="part") this.parts.push(next);
+				if(next.objType==="MusicalChoice" && next.hasPart()) this.parts.push(next.hasPart());
         if(currentInfo){
           if(infop(next)){
             currentInfo.extras.push(next);
@@ -58,8 +98,20 @@ function MusicExample(){
           } else if(!ignorable(next)){
             currentInfo = false;
           }
-        } else if(next.objType == "Staff"){
+        } else if(next.objType==="Staff"){
+					if(prev.objType="Part" || prev.subType=="part"){
+						prev.staff = next;
+						next.part = prev;
+					}
           currentInfo = next;
+          for (var i=this.events.length-1; i>0; i--){
+            if(this.events[i].objType==="TextUnderlay"){
+              this.events[i].marginal="r";
+              break;
+            } else if(this.events[i].objType!="NegativeSpace"){
+              break;
+            }
+          }
         }
         if(next.objType==="SolmizationSignature" 
            && this.events.length && this.events[this.events.length-1].objType==="Clef"){
@@ -70,7 +122,13 @@ function MusicExample(){
         } else if(next.objType=="Fermata"){
           next.lengthens = augmented;
         } else if(next.objType==="SignumCongruentiae"){
-          next.effects = this.events[this.events.length-1];
+//          console.log(currentChoice, this.events[this.events.length-1]);
+          if(currentChoice){
+            console.log("it happened");
+            next.effects = currentChoice;
+          } else {
+            next.effects = this.events[this.events.length-1];
+          }
         } else if (next.objType==="Comment" && this.events.length && 
                    this.events[this.events.length-1].objType==="Ligature"){
           var c = new LigatureComment(next);
@@ -82,7 +140,11 @@ function MusicExample(){
           prev = next;
           continue;
           //
-        } 
+        } else if(next.objType=="MusicalChoice" && augmented 
+                  && next.content.length && !next.content[0].nonDefault()
+                  && next.content[0].content.length && next.content[0].content[0].objType==="Fermata"){
+          next.content[0].content[0].lengthens = augmented;
+        }
         if(next.objType==="TextUnderlay" && this.events.length
            && typeof(this.events[this.events.length-1].text) !=="undefined"
            && !this.events[this.events.length-1].text) {
@@ -93,7 +155,12 @@ function MusicExample(){
             // be fine, even if we add text, but not if the text
             // should alter the position of the note that the sig cong
             // attaches to. In that case, we'd draw it before adjusting the position.
-            this.events[this.events.length-1].text=next;
+						if(last(this.events).objType==="Dot" && last(this.events).augments){
+							// If a dot follows a note, put the text under the note
+							last(this.events).augments.text=next;
+						} else {
+							this.events[this.events.length-1].text=next;
+						}
           } else if (this.events.length>1){
             this.events[this.events.length-2].text=next;
           }
@@ -120,6 +187,7 @@ function MusicExample(){
     this.parse();
   };
   this.width = function(){
+		state = "finding width";
     if(this.swidth) {
       return this.swidth;
     } else {
@@ -150,8 +218,10 @@ function MusicExample(){
   };
   this.height = function(){
     // FIXME: clearly stupid
+		state = "finding height";
     var height = rastralSize * 
-      (typeof(this.parameters.staff) == "undefined" ? 1 : (this.parameters.staff.trueLines() + 4));
+      (!this.parameters.staff || typeof(this.parameters.staff) == "undefined" ? 
+       1 : (this.parameters.staff.trueLines() + 4));
     // for(var i=0; i<this.events.length; i++){
     //   if(this.events[i].objType == "Staff"){
     //     height += rastralSize * 9 + 5;
@@ -172,6 +242,7 @@ function MusicExample(){
   //    var x = lmargin +rastralSize/2;
     for(eventi=0; eventi<this.events.length; eventi++){
       if(this.events[eventi].objType == "Staff" 
+//         || (wrapWidth && sysWidths[sysWidths.length-1] >= this.targetWidth())){
          || (wrapWidth && sysWidths[sysWidths.length-1] >= this.targetWidth())){
 //             (wrapWidth - rastralSize*3 - lmargin-10)){
         sysWidths[sysWidths.length-1] += rastralSize * 2;
@@ -200,16 +271,367 @@ function MusicExample(){
         alert("error - "+JSON.stringify(this.events[i]));
       text += this.events[i].toText();
     }
-    text += "</example>";
+		if(standaloneEditor){
+			text += "</piece>";
+		} else {
+			text += "</example>";
+		}
     return text;
   };
-  this.toTEI = function(doc, parent){
-    if(!parent) parent=(doc.currentParent || doc.body);
-    parent.appendChild(doc.element("notatedMusic"));
+	this.toMEI = function(){
+		this.UUIDs = {};
+		var docObj = new MEIDoc();
+		var doc = docObj.doc;
+		var music = doc.createElementNS("http://www.music-encoding.org/ns/mei", "music");
+		var body =  doc.createElementNS("http://www.music-encoding.org/ns/mei", "body");
+		var mdiv = doc.createElementNS("http://www.music-encoding.org/ns/mei", "mdiv");
+    var mscore = doc.createElementNS("http://www.music-encoding.org/ns/mei", "score");
+    var msection = doc.createElementNS("http://www.music-encoding.org/ns/mei", "section");
+		var mscoredef = doc.createElementNS("http://www.music-encoding.org/ns/mei", "scoreDef");
+		var staffn = 1;
+		this.done = [];
+		docObj.tree.appendChild(music);
+		music.appendChild(body);
+		body.appendChild(mdiv);
+    mdiv.appendChild(mscore);
+		mscore.appendChild(mscoredef);
+		var msectionIsNew = true;
+//		mscore.appendChild(msection);
+//		msection.appendChild(mstaff);
+//		mstaff.appendChild(mlayer);
+    currentExample = this;
+    if(this.parameters && this.parameters.toMEI) {this.parameters.toMEI(doc, msection);}
+    this.appendStaffDefs(doc, mscoredef);
+		var started = false;
+		var extras = [];
+		var inExtra = false;
+		console.log("making MEI");
+		var currentPartes = [];
+		var currentParsi = 0;
+		var parti=0;
+		var sic = false;
+		var n=0;
     // more
+		for(var i=0; i<this.events.length; i++){
+			var prevLength = currentPartes.length;
+			if(this.events[i].objType==="Part"
+				 && this.events[i].type==="part"
+				 && !this.events[i].closes){
+				parti++;
+				n = Object.keys(this.voiceParts).indexOf(this.events[i].defaultName())+1;
+				currentParsi=0;
+				mstaff = doc.createElementNS("http://www.music-encoding.org/ns/mei", "staff");
+				mlayer = doc.createElementNS("http://www.music-encoding.org/ns/mei", "layer");
+				mstaff.setAttribute('n', n > -1 ? n : parti);
+				mstaff.appendChild(mlayer);
+				if(this.events[i].id){
+					mstaff.setAttribute('label', this.events[i].id);
+				}
+			} // else if (this.events[i].objType==="Part"
+			// 					 && this.events[i].type==="pars"
+			// 					 && !this.events[i].closes
+			// 					 && this.events[i].id==="sic") {
+			// 	var extraStaff = doc.createElementNS("http://www.music-encoding.org/ns/mei", "staff");
+			// 	mlayer = doc.createElementNS("http://www.music-encoding.org/ns/mei", "layer");
+			// 	extraStaff.setAttributeNS(null, 'n', parti);
+			// 	extraStaff.setAttributeNS(null, 'extra', 'true');
+			// 	extraStaff.appendChild(mlayer);
+			// 	extras.push([extraStaff, currentPartes.length]);
+			// 	inExtra = true;
+			// } 
+			else if (this.events[i].objType==="Part"
+								 && this.events[i].type==="pars"
+								 && !this.events[i].closes) {
+				// These partes are presented in sequence within a voice
+				sic = this.events[i].id==="sic" ? true : false;
+				if(parti===1) {
+					var msubsection = doc.createElementNS("http://www.music-encoding.org/ns/mei", "section");
+					currentPartes.push(msubsection);
+				} else {
+					msubsection = currentPartes[currentParsi];
+					if(!sic) currentParsi++;
+				}
+				mstaff = doc.createElementNS("http://www.music-encoding.org/ns/mei", "staff");
+				mlayer = doc.createElementNS("http://www.music-encoding.org/ns/mei", "layer");
+				mstaff.setAttribute('n', sic ? parti+10 : (n>-1 ? n : parti));
+				mstaff.appendChild(mlayer);
+				if(this.events[i].id){
+					mstaff.setAttribute('label', this.events[i].id);
+				}
+				inExtra = false;
+			} else if (this.events[i].objType==="Part"
+								 && this.events[i].type==="section"
+								 && !this.events[i].closes) {
+				currentParsi=0;
+				staffn = 0;
+				parti = 0;
+				msection = doc.createElementNS("http://www.music-encoding.org/ns/mei", "section");
+				msectionIsNew = true;
+				currentPartes = [];
+				if(this.events[i].id) msection.setAttribute('label', this.events[i].id);
+				inExtra = false;
+			} else if(this.events[i].toMEI && this.done.indexOf(this.events[i])===-1){
+				if(msection && msectionIsNew) mscore.appendChild(msection);
+				if(msubsection) {
+					msection.appendChild(msubsection);
+					if(mstaff) msubsection.appendChild(mstaff);
+				} else if(!inExtra){
+					if(mstaff) msection.appendChild(mstaff);
+				}
+				msectionIsNew = false;
+				mstaff = false;
+				msubsection = false;
+				this.events[i].toMEI(doc, mlayer);
+				started = true;
+			}
+		}
+		return docObj;
+	};
+	this.easyRhythms = function(){
+		var MEIDoc = this.toMEI();
+		var layerMens = [];
+		this.MEI = MEIDoc;
+		var sections = getAtomicSections(MEIDoc);
+		for(var i=0; i<sections.length; i++){
+			var layers = getLayers(sections[i]);
+			for(var layi=0; layi<layers.length; layi++){
+  			var sectionBlocks = getEventsByMensurationForSection(layers[layi], MEIDoc.doc,
+																														 layerMens.length>layi ? layerMens[layi] : false);
+				layerMens[layi] = sectionBlocks[sectionBlocks.length-1].mens;
+				beatIndependentDurations(sectionBlocks);
+				//	 			labelEasyDurationsAndStartTimes(sectionBlocks);
+				addAllStartTimes(sectionBlocks);
+				//var remaining = resolveForKnownStartingPoints(sectionBlocks);
+				//addAllStartTimes(sectionBlocks);
+				//simplestAlterations(sectionBlocks);
+				//addAllStartTimes(sectionBlocks);
+				var remaining = 1000000000;
+				var nextRemaining = afterTheEasyBits(sectionBlocks);
+				while(nextRemaining != 0 && remaining!=nextRemaining){
+					// Rerun this for as long as it makes a difference
+					// (i.e. resolves unsolved durations/start times)
+					console.log("unresolved count", remaining, nextRemaining);
+					remaining=nextRemaining;
+					nextRemaining = afterTheEasyBits(sectionBlocks);
+				}
+				console.log(remaining);
+				this.stupidVerovioStretch();
+				this.mensurStrich();
+				this.markResolved();
+				this.regenerateMEILinks();
+			}
+		}
+		return MEIDoc;
+	};
+	this.regenerateMEILinks = function(){
+		this.MEIcoded = btoa(this.MEI.serialize());
+		this.MEILink.setAttributeNS(null, 'href', "data:application/xml;base64,"
+																				+this.MEIcoded);
+		this.VerovioLink.setAttributeNS(null, 'href', 'viewer.html?mei='+encodeURI(this.MEIcoded));
+		this.featureLink.setAttributeNS(null, 'href', "data:text/csv;base64,"
+																		+btoa(makeFeatureSequencesForML(this.MEI, SIMPLEFEATURESET)));
+	};
+	this.stupidVerovioStretch = function(){
+		// Verovio can't do proportions
+		for(var e=0; e< this.events.length; e++){
+			if(this.events[e].objType==="Note" || this.events[e].objType==="Rest"){
+				var object = this.events[e].MEIObj;
+				if(object.getAttributeNS(null, 'dur.intermediate')
+					 && object.getAttributeNS(null, 'dur.intermediate')
+					 != object.getAttributeNS(null, 'dur.ges')
+					 && !object.getAttributeNS(null, 'stretched')){
+					// A proportion has been applied
+					var realised = object.getAttributeNS(null, 'dur.ges');
+					var implied = object.getAttributeNS(null, 'dur.intermediate');
+					var realno = Number(realised.substring(0, realised.length-1));
+					var implno = readDur(object);
+					var proportion = realno / implno;
+					var numb = Number(object.getAttributeNS(null, 'numbase'));
+					if(numb){
+						object.setAttributeNS(null, 'numbase', numb*proportion );
+						object.setAttributeNS(null, 'stretched', 'true');
+					} else {
+						object.setAttributeNS(null, 'numbase', proportion );
+						object.setAttributeNS(null, 'num', '1' );
+						object.setAttributeNS(null, 'stretched', 'true');						
+					}
+				}
+			}
+					 
+		}
+	};
+	this.mensurStrich = function(){
+		var old = Array.from(document.getElementsByClassName('mensurStrich'));
+		if(old) old.forEach(x => x.remove());
+		for(var e=0; e<this.events.length; e++){
+			if(this.events[e].objType==="Note" || this.events[e].objType==="Rest"){
+				var object = this.events[e].MEIObj;
+				if(object.getAttributeNS(null, 'onTheBreveBeat')
+					 || object.getAttributeNS(null, 'crossedABreveBeat')
+					 || parseInt(object.getAttributeNS(null, 'onTheBreveBeat'), 10)===0){
+					// We've crossed a breve beat
+					drawMensurStrich(this.events[e]);
+					if(object.getAttributeNS(null, 'onTheBreveBeat')
+						 && object.previousSibling && object.previousSibling.tagName!="barLine"){
+						let line = object.ownerDocument.createElementNS("http://www.music-encoding.org/ns/mei", "barLine");
+						line.setAttributeNS(null, "visible", "false");
+					  object.parentNode.insertBefore(line, object);
+					}
+				}
+			}
+		}
+	};
+	this.markResolved = function(){
+		for(var e=0; e<this.events.length; e++){
+			if(this.events[e].objType==="Note" || this.events[e].objType==="Rest"
+				 || this.events[e].objType==="MaxRest"  || this.events[e].objType==="LongRest"){
+				var MEIObj = this.events[e].MEIObj;
+				if(MEIObj.getAttributeNS(null, 'dur.ges')){
+					var DOMObj = this.events[e].domObj;
+					if(!DOMObj){
+						console.log("problem with", e, this.events[e]);
+						continue;
+					}
+					DOMObj.classList.add('resolved');
+					if(MEIObj.getAttributeNS(null, 'quality')){
+						DOMObj.classList.add(MEIObj.getAttributeNS(null, 'quality'));
+					}
+					if(MEIObj.getAttributeNS(null, 'rule')){
+						DOMObj.classList.add(MEIObj.getAttributeNS(null, 'rule'));
+					}
+				}
+			} else if(this.events[e].objType==="Ligature"){
+				if(this.events[e].members.every(isResolved)){
+					this.events[e].domObj.classList.add('resolved');
+				}
+			}
+		}
+	};
+  this.toTEI = function(doc, parent){
+		console.log("aaaaah");
+    if(!parent) parent=(doc.currentParent || doc.body);
+    var musicel = doc.element("notatedMusic");
+    var mdiv = doc.element("mei:mdiv");
+    var mscore = doc.element("mei:score");
+    var msection = doc.element("mei:section");
+    currentExample = this;
+    parent.appendChild(musicel);
+    musicel.appendChild(mdiv);
+    mdiv.appendChild(mscore);
+//    mscore.appendChild(msection);
+    if(this.parameters && this.parameters.toMEI) this.parameters.toMEI(doc, msection);
+    // more
+    //this.appendStaffDefs(doc, mscore);
+  };
+	this.gatherStaffs = function(parts){
+		var voices = {};
+		var voiceParts = this.parts.filter(x=>x.type=="part"&&!x.startEl);
+		for(var i=0; i<voiceParts.length; i++){
+			let name = voiceParts[i].defaultName();
+			if(voices[name]){
+				voices[name].push(voiceParts[i]);
+			} else {
+				voices[name] = [voiceParts[i]];
+			}
+		}
+		return voices;
+	};
+  this.appendStaffDefs = function(doc, el){
+    var group = doc.createElementNS("http://www.music-encoding.org/ns/mei", "staffGrp");
+		var counter = 1;
+		this.voiceParts = this.gatherStaffs(this.parts);
+		var voiceTypes = Object.keys(this.voiceParts);
+    el.appendChild(group);
+		if(voiceTypes.length){
+			for(var i=0; i<voiceTypes.length; i++){
+				group.appendChild(this.staffDefForPart(this.voiceParts[voiceTypes[i]][0], i+1, doc));
+			}
+		} else if(this.parts && this.parts.length){
+      for(var i=0; i<this.parts.length; i++){
+				if(!this.parts[i].closes && this.parts[i].type==="part") {
+					group.appendChild(this.staffDefForPart(this.parts[i], counter++, doc));
+				}
+      }
+    } else {
+			sd = doc.createElementNS("http://www.music-encoding.org/ns/mei", "staffDef");
+			var p = this.parameters;
+			var c = p.getClef();
+			sd.setAttributeNS(null, "n", 1);
+			console.log(p);
+			sd.setAttributeNS(null, "lines", (p.staff.trueLines() || 15));
+			if(c){
+				if(c.objType==="MusicalChoice"){
+					if(!c.nonDefault()){
+						this.done.push(c);
+						var clefs = c.content[0].content.filter(e => e.objType==='Clef');
+						if(clefs.length){
+							c = clefs[0]
+							sd.setAttributeNS(null, "clef.line", (c.staffPos/2) - 1);
+							sd.setAttributeNS(null, "clef.shape", (c.type || "C"));
+						}
+					}
+				} else {
+					sd.setAttributeNS(null, "clef.line", (c.staffPos/2) - 1);
+					sd.setAttributeNS(null, "clef.shape", (c.type || "C"));
+				}
+			}
+			group.appendChild(sd);
+		}
+	};
+  this.staffDefForPart = function(part, n, doc){
+    var sd = doc.createElementNS("http://www.music-encoding.org/ns/mei", "staffDef");
+    var relevantStaff = part.applicableStaff();
+    sd.setAttributeNS(null, "n", n);
+    sd.setAttributeNS(null, "lines", relevantStaff.trueLines());
+		if(part.id) {
+			sd.setAttributeNS(null, "label", part.defaultName());
+		}
+    return sd;
+  };
+  this.startingStaffForPart = function(part, pos){
+    
+  };
+  this.currentSolm = function(variant){
+    // We're not really keeping track of staves properly for cases
+    // where line breaks are automatic (because automatic system
+    // breaks came later). This method looks back to find an
+    // applicable solmisation signature. N.B. variant allows other
+    // uses to be made of this, but would normally just be false.
+    for(var j=eventi-1; j>=0; j--){
+      if(this.events[j].objType==="SolmizationSignature" 
+         && (!this.events[j].appliesTo
+             || (variant && this.events[j].appliesTo.indexOf(variant)>-1))){
+        // Easy – this is a normal signature and applies here
+        return this.events[j];
+      } else if(this.events[j].objType==="MusicalChoice" && !this.events[j].nonDefault()){
+        // Complicated – applicable signatures might be buried (probably not, though)
+        for(var k=this.events[j].content[0].content.length-1; k>=0; k--){
+          var obj = this.events[j].content[0].content[k];
+          if(obj.objType==="SolmizationSignature"){
+//            && (!obj.appliesTo
+//                || (variant || obj.appliesTo.indexOf(variant)>-1))){
+            return obj;
+          } else if(obj.objType==="MusicalChoice" && !obj.nonDefault()){
+            // Choice in a choice. If I defined this functionality
+            // sensibly (recursively), I could handle any depth of
+            // choices, but it's probably better to discourage using
+            // that in practice, and only implementing it if
+            // necessary. Plus, this patch is overdue...
+            for(var l=obj.content[0].content.length-1; l>=0; l--){
+              if(obj.content[0].content[l].objType==="SolmizationSignature"){
+//                 && (!obj.content[0].content[l].appliesTo
+//                    || (variant && obj.content[0].content[l].appliesTo.indexOf(variant)>-1))){
+                return obj.content[0].content[l];
+              }
+            }
+          }
+        }
+      }
+    }
+    console.log("missed");
+    return false;
   };
   this.draw = function(exampleSVG, force){
-//    alert(JSON.stringify(this));
 //    if(exampleSVG != this.SVG) alert("ok");
     // FIXME: 14/10/12 If this shows no alerts, remove this and all
     // svg passing
@@ -223,6 +645,8 @@ function MusicExample(){
     this.drawCount++;
 //    this.catchwords = [];
     currentClef = false;
+    currentSolm = false;
+		leaveSpace = false;
     currentExample = this;
     var st = this.parameters.staff;
     currentLinecount = st ? st.trueLines() : 1;
@@ -247,39 +671,102 @@ function MusicExample(){
     sysNo = 1;
     curx += rastralSize / 2;
     var mw = curx;
-//    cury += currentLinecount * rastralSize;
     var texted = false;
     var maxx = false;
     var remain = this.events.length;    
+    var nextBreak = this.indexOfStaffBreak();
+		var preRot;
     currentSystems.push(svgGroup(SVG, "Stafflines", false));
     this.parameters.draw();
+    var broken=false;
     for(eventi = 0; eventi<this.events.length; eventi++){
+      if(!broken && currentSolm && currentSolm.members.length && eventi>0) {
+        broken=true;
+      }
+      // console.log(this.events[eventi], curx);
       remain--;
-      if(wrapWidth && (curx>=this.targetWidth()-rastralSize ||
-                       (remain<3 && 
-                        curx>=this.targetWidth()-((this.events.length-eventi)*2*rastralSize)) ||
-                       (remain>1 && this.events[eventi+1].augments 
-                        && curx+this.events[eventi].width>=this.targetWidth()-rastralSize))){
+      if(eventi>nextBreak) nextBreak = this.indexOfStaffBreak(1+nextBreak);
+      if(wrapWidth && 
+         // when do we add a break? 
+         // 0. Not if the next item is a fermata or a dot of augmentation!
+         !this.events[eventi].lengthens 
+         && !(this.events[eventi].objType==="MusicalChoice" 
+              && !this.events[eventi].nonDefault() 
+              && this.events[eventi].content[0].content[0].lengthens)
+         && !this.events[eventi].augments
+				 && !(eventi && (this.events[eventi-1].objType=="SolmizationSignature"
+												 || this.events[eventi-1].objType=="MensuralSignature"
+												 || this.events[eventi-1].objType=="ProportionSign"))
+				 && this.events[eventi].objType!=="Barline"
+				 && !(eventi<this.events.length-2 && this.events[eventi+1].objType=="Barline")
+//				 && !(eventi<this.events.length-3 && this.events[eventi+2].objType=="Barline")
+				 && 
+         // 1. If x is close to the edge 
+         (curx>=this.targetWidth()-rastralSize 
+          ||
+          // 2. If we're there's a break point coming, but we'd need a
+          // break before then, break a little early
+          (nextBreak && nextBreak - eventi < 5 
+           && (curx>=this.targetWidth()-((nextBreak-eventi)*1.5*rastralSize)))
+          ||
+          // 3. If we're near the end, break a little early if a break
+          // will be needed.
+          (remain<3  
+           && 
+           curx>=this.targetWidth()-((this.events.length-eventi)*1.6*rastralSize)) 
+          ||
+          // 4. If breaking at the next opportunity would separate a note
+          // from its dot.
+          (remain>1 && this.events[eventi+1].augments 
+           && curx+this.events[eventi].width()>=this.targetWidth()-rastralSize)
+				  ||
+				  // 5. If the thing is a tacet (which is super wide) and pushes us over
+					(this.events[eventi].objType==="Tacet"
+					 && curx + this.events[eventi].width() > this.targetWidth()))){
          // wrapWidth-32){
         // The custos has to know the next (=current) note, so rewind
         // the pointer, briefly
         eventi-=1;
         var custos = new Custos();
         custos.draw();
+				if(this.events[eventi].classList){
+					// ledger lines
+					for(var l=0; l<this.events[eventi].classList.length; l++){
+						if(this.events[eventi].classList[l].objType==="LedgerLineChange"){
+							this.events[eventi].classList[l].coordinates.push(curx);
+						}
+					}
+				}
         eventi+=1;
         sysBreak2();
-        sysBreak();
+        sysBreak(false, leaveSpace);
         currentClef.draw();
+        //console.log(currentClef.appliesTo);
+        var realSolm = this.currentSolm(false);
+        if(realSolm) realSolm.draw();
         this.SVG.height.baseVal.value = this.SVG.height.baseVal.value 
           + (rastralSize*5)+5+(currentLinecount*rastralSize);
       }
-      if(this.events[eventi].objType && !this.events[eventi].params) {
+      if(this.events[eventi].objType && (!this.events[eventi].params || this.events[eventi].objType==="Staff")) {
         try {
           if(currentRedline && removeRedlineBefore(this.events[eventi].classList)) currentRedline = false;
-          this.events[eventi].draw();
+					if(this.events[eventi].objType==="Part" && this.events[eventi].staff) {
+//						console.log("Part will be displayed on new system");
+					} else if (this.events[eventi].objType==="UpsideDownOpen"){
+						preRot = SVG;
+						SVG = svgGroup(preRot, 'flippin', false);
+					} else if (this.events[eventi].objType==="UpsideDownClose"){
+						var box = SVG.getBBox();
+						var halfwayX = box.x + (box.width / 2);
+						var halfwayY = cury - (3*rastralSize);
+						SVG.setAttributeNS(null, "transform", "rotate(180, "+halfwayX+", "+halfwayY+")");
+						SVG = preRot;
+					} else {
+						this.events[eventi].draw();
+					}
           // this.events[eventi].draw(curx, cury); // obsolete
         } catch (x) {
-          // alert(x+" -- unnecessary error message 1");
+          console.log(x, this.events[eventi]);
         }
         if(this.events[eventi].objType == "TextUnderlay"
            || this.events[eventi].text){
@@ -311,16 +798,12 @@ function MusicExample(){
       }
       this.SVG.height.baseVal.value = Math.max(64, max-min + (texted ? 30 : 0));
     } else {
-//      if($.browser.webkit){
         var bbox = this.SVG.getBBox();
         this.bbox = bbox;
         var top = bbox.y < 0 ? bbox.y -1 : 0;
         var bottom = bbox.y+bbox.height+1;
         var height = bottom - top;
         if(top) {
-//          console.log(top); //-13=>4 -32=>10 -18=>-4 -32=>10
-//          this.SVG.parentNode.style.marginTop = top+5+"px";
-          //var nudge = rastralSize*-2.4;
           var nudge = rastralSize*-2.55;
           if($(this.SVG.parentNode).hasClass("inline")) {
             // this.SVG.parentNode.style.marginTop = "-35px";
@@ -354,12 +837,22 @@ function MusicExample(){
       $(this.SVG).hover(function(e){displayStatusBarReference(this, e);});
     }
     currentExample = false;
+    eventi = false;
+  };
+  this.indexOfStaffBreak = function(start){
+    for(var si=0; si<this.staves.length; si++){
+      if((!start || this.staves[si][0]>=start) && this.staves[si][1].objType==="Staff") {
+        return this.staves[si][0];
+      }
+    }
+    return false;
   };
   this.parse();
   currentExample = false;
 }
 
 function nextEvent() {
+  var obj;
   switch(string.charAt(0)){
     case "_":
       string = string.substring(1);
@@ -383,10 +876,11 @@ function nextEvent() {
     case "P":
       return nextRest();
     case "-":
-      var obj;
       string = string.substring(1);
       if(string.charAt(0)==="?") {
         obj = nextSignumCongruentiae(); 
+      } else if (string.charAt(0)==="*"){
+        obj = nextFermata();
       } else {
         obj = nextNote();
       }
@@ -428,9 +922,15 @@ function nextEvent() {
       }
     case "2":
     case "3":
+    case "4":
+    case "5":
+    case "6":
+    case "7":
+    case "8":
+    case "9":
       return nextRepeat();
     case "&":
-      var obj = new etc();
+      obj = new etc();
       string = string.substring(1);
       getAndSetPitch(obj);
       return obj;
@@ -452,11 +952,37 @@ function nextColRef(){
     return new PositiveSpace();
   } else {
     col.id = string.substring(startLength+1, loc);
+    parseColumn(col.id, col);
     string = string.substring(loc+endLength);
     return col;
   }
 }
 
+function nextComment(){
+  // Use text version
+  var os = string;
+  var op = pointer;
+  var octp = currentTextParent;
+  var end = string.indexOf("**", 2);
+  if(end < 2){
+    complaint.push("Unclosed comment"+string.substring(0, 10));
+    string = string.substring(2);
+    return false;
+  }
+  var ann = new Annotation();
+  // var ann = new Comment();
+  string = string.substring(2, end);
+  string = string.replace("@@@@", "**");
+  currentTextParent = ann;
+  ann.code = string;
+  ann.contents = readString();
+  string = os.substring(end+2);
+  pointer = op;
+  currentTextParent = octp;
+  currentExample.comments.push(ann);
+  return ann;
+}
+/*
 function nextComment(){
   var comment = new Comment();
   var end = string.indexOf("**", 2);
@@ -468,7 +994,7 @@ function nextComment(){
   currentExample.comments.push(comment);
   return comment;
 }
-
+*/
 
 function nextBarline(){
   var bar = new Barline();
@@ -584,9 +1110,11 @@ function nextNote(){
   obj.rhythm = getRhythm();
   obj.sup = sup;
   obj = getAndSetPitch(obj);
-  var tails = consumeIf(/[\/]?[+-]*/);
-  if(tails){
-    obj.forceTail = tails;
+  if(string.length===1 || string.charAt(1)===" "){
+    var tails = consumeIf(/[\/]?[+-]*/);
+    if(tails){
+      obj.forceTail = tails;
+    }
   }
   return obj;
 }
@@ -618,6 +1146,7 @@ function nextSignumCongruentiae(){
   var obj = new SignumCongruentiae;
   string = string.substring(1);
   obj.staffPos = getStaffPos();
+  if(currentChoice) obj.effects =currentChoice;
   return obj;
 }
 
@@ -640,6 +1169,10 @@ function nextTaglike(){
       return nextNeume();
     case "lig":
       return nextLigature();
+		case "rot180":
+			return new upsideDownOpen();
+		case "/rot180":
+			return new upsideDownClose();
     case "red":
       if(string.indexOf("</red>")==-1){
         complaint.push("Missing close tag for <red> around "+string);
@@ -676,6 +1209,16 @@ function nextTaglike(){
       return new FullOpen();
     case "/full":
       return new FullClose();
+		case "tacet":
+			var endPos = string.indexOf("</tacet>");
+			if(endPos===-1) {
+				complaint.push("missing close tag for tacet");
+				return false;
+			} else { 
+				return nextTacet(endPos);
+			}
+		case "tacet/":
+			return new Tacet();
     case "text":
     case "label":
       var thingy = nextText();
@@ -687,21 +1230,23 @@ function nextTaglike(){
       if(tag.substring(0, 4)=="text" || tag.substring(0, 5)=="label"){
         // text with position
         var thing = nextText();
-        if(tag.substring(0, 5)=="label") thing.type = "label";
-        var colon = tag.indexOf(":");
-        if(colon>-1){
-          thing.position = tag.substring(colon+1).trim();
-        }
         if(thing){
+          enrichText(tag, thing);
           return thing;
         }
       } else if (tag.substring(0, 4)=="part"){
-        var thing = new Part();
-        thing.id = parseInt(tag.substring(5));
+				var thing = nextPart("part", false, tag.substring(5));
         return thing;
       } else if (tag.substring(0, 5)=="/part"){
-        var thing = new Part();
-        return thing;
+				return nextPart("part", true, false);
+      } else if (tag.substring(0, 4)=="pars"){
+				return nextPart("pars", false, tag.substring(5));
+      } else if (tag.substring(0, 5)=="/pars"){
+				return nextPart("pars", true, false);
+      } else if (tag.substring(0, 7)=="section"){
+				return nextPart("section", false, tag.substring(8));
+      } else if (tag.substring(0, 8)=="/section"){
+				return nextPart("section", true, false);
       } else if (tag.substring(0, 9)=="catchword" || tag.substring(0, 9)=="signature"){
         var margType = tag.substring(0, 9);
         var end = string.indexOf("</"+margType+">");
@@ -834,15 +1379,18 @@ function nextLigature(){
   var strsize = string.length;
   var next = false;
   var prevevent = false;
+  var tag;
   while(strsize!=0){
-    if(consumeIf(/<(text|label):?.*?>/)){
+//		console.log(string);
+    if((tag=consumeIf(/<(text|label):?.*?>/))){
       //FIXME ignores meaning
       next = nextText();
+      enrichText(tag, next);
     } else if(consumeIf("<obl>")){
       next = nextOblique(ligature);
     } else if(string.substring(0,2) == "**"){
       next = nextComment();
-      next = new LigatureComment(next);
+//      next = new LigatureComment(next);
       currentExample.comments.push(next);
     } else if(string.charAt(0)=="<") {
       complaint.push("Unexpected item in the tagging area: "+string);
@@ -855,6 +1403,15 @@ function nextLigature(){
       if(string.charAt(0)=="."){
         next.dot = nextDot();
       }
+      if((string.charAt(0)==="-" && string.charAt(1)==="?") || string.charAt(0)==="?"){
+        var flipped = consumeIf("-");
+        next.signum = nextSignumCongruentiae();
+        next.signum.effects = next;
+        next.signum.flipped = flipped;
+      }
+    }
+    if(string.charAt(0)=="."){
+      next.dot = nextDot();
     }
     if(next){
 //      ligature.members.push(next);
@@ -887,15 +1444,28 @@ function nextOblique(ligature){
   consumeSpace();
   var strsize = string.length;
   var next = false;
+  var tag;
+	var prevNote = false;
   while(strsize!=0){
-    if(consumeIf(/<(text|label):?.*?>/)){
+    if((tag=consumeIf(/<(text|label):?.*?>/))){
       oblique.texts[oblique.members.length-1] = nextText();
+      enrichText(tag, oblique.texts[oblique.members.length-1]);
     } else if(string.substring(0,2) == "**"){
-      oblique.comments[oblique.members.length-1] = nextComment();
+      var obj = nextComment();
+      obj.ligature = oblique.ligature;
+      oblique.comments[oblique.members.length-1] = obj;
     } else if(string.substring(0,1) == "{"){
       // FIXME: do stuff
       next = nextObliqueNoteChoice(oblique);
-      oblique.extendMembers(next);
+			if(next.subType==="no notes"){
+				if(prevNote){
+					prevNote.otherBits.push(next);
+				} else {
+					console.log("broken Ligature", oblique);
+				}
+			} else {
+				oblique.extendMembers(next);
+			}
     } else {
       next = nextNote();
       if(next){
@@ -903,7 +1473,14 @@ function nextOblique(ligature){
         if(string.charAt(0)=="."){
           next.dot = nextDot();
         }
+				if((string.charAt(0)==="-" && string.charAt(1)==="?") || string.charAt(0)==="?"){
+					var flipped = consumeIf("-");
+					next.signum = nextSignumCongruentiae();
+					next.signum.effects = next;
+					next.signum.flipped = flipped;
+				}
         oblique.extendMembers(next);
+				prevNote = next;
       }
     }
     consumeSpace();
@@ -914,6 +1491,53 @@ function nextOblique(ligature){
   }
   string = returnString;
   return oblique;
+}
+function enrichText(tag, obj){
+	// Add info to textlike element based on the element tag
+  obj.type = tag.substring(0, 5)==="label" ? "label" : "text";
+  var colon = tag.indexOf(":");
+  if(colon>-1){
+    var tagPart = tag.substring(colon+1).trim();
+    if(tagPart.substring(0,3)==="rot"){
+      var tagBits = tagPart.substring(3).split(",");
+      obj.orientation = tagBits[0].trim();
+      obj.position = (tagBits.length>1 ? Number(tagBits[1].trim()) : 
+                      (obj.orientation==="90c" ? 12 : 4));
+    } else {
+      obj.position = tagPart;
+    }
+  }
+}
+function nextTacet(endPos){
+	// nice and simple. Tacet is a type of text, but is treated
+	// differently because it takes up horizontal space.
+	var tacet = new Tacet();
+	tacet.content = [];
+	var content = string.substring(0, endPos);
+	var finalString = string.substring(endPos+8);
+	var linebreak;
+	while ((linebreak = content.indexOf("<l/>"))>-1){
+		extendTacet(content.substring(0, linebreak), tacet);
+		content = content.substring(linebreak+4);
+	}
+	extendTacet(content, tacet)
+	string = finalString;
+	return tacet;
+}
+
+function extendTacet(content, tacet){
+	var os = string;
+	string = content;
+	if(/[<{*]/.test(string)){
+		var parts = getString();
+		if(parts){
+			tacet.content.push(parts);
+		}
+	} else {
+		tacet.content.push([string]);
+	}
+	string = os;
+	return tacet;
 }
 
 function nextText (){
@@ -1025,7 +1649,19 @@ function getString (){
       case "{":
         var closePos = Math.min(string.indexOf("}"), string.length);
         var tag = string.substring(1, closePos);
-        if(typeof(spans[tag])!=="undefined"){
+        if (tag==="|"){
+          content.push(new MusicWordSplit());
+          consume(closePos+1);
+        } else if (tag==="_"){
+          content.push(new MusicWordJoin());
+          consume(closePos+1);
+        } else if (tag===" "){
+          content.push(new MusicOptionalSpace());
+          consume(closePos+1);
+        } else if(tag.length===2 && /[,.¶:;()–\-\—!?\ ‘’]+/.test(tag)){
+          content.push(new MusicPunctuation(tag));
+          consume(closePos+1);
+        } else if(typeof(spans[tag])!=="undefined"){
           next = getTag("<"+tag+">");
           content.push(next);
           if(!currentCloses) currentCloses = [];
@@ -1045,6 +1681,7 @@ function getString (){
           next.content = commentBlock.substring(2, commentBlock.length-2);
           currentExample.comments.push(next);
           content.push(next);
+          continue;
         }
         // If it isn't a comment, it's part of a string, so continue
       default:
@@ -1122,7 +1759,14 @@ function getTag (tag){
     case "</large>": 
       return new LargeClose();
     default:
-      return false;
+      if(tag.charAt(1)==="/"){
+        var obj = new GenericClose();
+        obj.tag = tag.substring(2, tag.length-1);
+      } else {
+        var obj = new GenericOpen();
+        obj.tag = tag.substring(1, tag.length-1);
+      }
+      return obj;
   }
 }
 
@@ -1156,35 +1800,37 @@ function parseMens(spec){
   var obj = new MensuralSignature();
   var pointer = 0;
   if(!spec || !spec.length) return obj;
+	if(spec.charAt(0) == "(") {
+		obj.invisible=true;
+		pointer++;
+	}
   if(spec.charAt(0) == "[") {
     obj.editorial=true;
     pointer++;
   }
-  if(spec.charAt(spec.length-1)=="]") spec = spec.substring(0, spec.length-1);
+  if(spec.charAt(spec.length-1)=="]" || spec.charAt(spec.length-1)==")") spec = spec.substring(0, spec.length-1);
   if(spec.charAt(pointer)==="^"){
     obj.sup = true;
     pointer++;
   }
   if(spec.charAt(pointer)) {
-    obj.signature = spec.charAt(pointer);
+		var tempspec = spec.substring(pointer+1);
+		if(/^[2-9][0-9]/.test(tempspec)) {
+			obj.signature = spec.substring(pointer, pointer+2);
+			pointer++;
+		} else {
+			obj.signature = spec.charAt(pointer);
+		}
   } else return obj;
   pointer++;
   if(spec.charAt(pointer)) {
     obj.staffPos = staffPosFromString(spec.substring(pointer))[0];
-//    obj.staffPos = "0123456789ABCDEF".indexOf(spec.charAt(pointer));
   }
   return obj;
 }
 
-function parseMensOld(sig, pos){
-  var obj = new MensuralSignature();
-  if(!sig || sig === "0") return obj;
-  obj.signature = sig.charAt(0);
-  obj.staffPos = "0123456789ABCDEF".indexOf(pos);
-  return obj;
-}
 function parseMensReading(fields){
-  var mens;
+  var mens, wits;
   var signature = false;
   if(fields[0] === "(om.)"){
     mens = new MensuralSignature();
@@ -1196,10 +1842,11 @@ function parseMensReading(fields){
   }
   for(var i=1; i<fields.length; i++){
     if(fields[i].charAt(0) === '"' || fields[i].substring(0, 3) === '(om'){
-      return [fields.slice(i), new MReading(fields.slice(1, i), [mens], "")];
+			wits = fields.slice(1, i);
+      return [fields.slice(i), new MReading(wits, [mens], "", false, staffDetailsForWitnesses(wits), false)];
     } 
   }
-  var wits = fields.slice(1, fields.length);
+  wits = fields.slice(1, fields.length);
   if(fields[0]==="(om.)"){
     return [false, new MOmission(wits, "om.", false, staffDetailsForWitnesses(wits))];
   } else {
@@ -1210,13 +1857,38 @@ function parseMensReading(fields){
 function parseMensVar(fields){
   var obj = new MChoice();
   var nextM = parseMensReading(fields);
+	nextM.choice = obj;
   fields = nextM[0];
   while(fields){
     obj.content.push(nextM[1]);
     nextM = parseMensReading(fields);
+		nextM.choice = obj;
     fields = nextM[0];
   }
   obj.content.push(nextM[1]);
+  return obj;
+}
+
+function parseProp(propSpec, posSpec){
+  var propStrings = propSpec.split('/');
+  var propPositions = posSpec.split('-');
+  var obj, child;
+  if(propStrings.length===1){
+    obj = new ProportionSign();
+    obj.sign = propStrings[0];
+    obj.staffPos = staffPosFromString(propPositions[0])[0];
+  } else {
+    if (propStrings.length>2 || propStrings.length===0){
+      console.log("Stack of "+propStrings.length+" proportion signs!!", propSpec);
+    }
+    obj = new StackedProportionSigns();
+    for(var i=0; i<propStrings.length; i++){
+      child = new ProportionSign();
+      child.sign = propStrings[i];
+      child.staffPos = staffPosFromString(propPositions[propStrings.length-1-i])[0];
+      obj.signs.push(child);
+    }
+  } 
   return obj;
 }
 
@@ -1255,8 +1927,10 @@ function parseSolmReading(fields){
     if(field.charAt(0)==='"'){
       // Starting a solm sig
       if(from && (solm || i-from)){
+				var wits = fields.slice(from, i);
+        var staffing = staffDetailsForWitnesses(wits);
         return [fields.slice(i), 
-                new MReading(fields.slice(from, i), solm ? [solm] : [], descr)];
+                new MReading(fields.slice(from, i), solm ? [solm] : [], descr, false, staffing)];
       } else {
         if(field.charAt(field.length-1)==='"'){
           solm = parseSolm([field.substring(1, field.length-1)]);
@@ -1270,8 +1944,10 @@ function parseSolmReading(fields){
     } else if (fields[i].charAt(0)==='('){
       // starting a descr
       if(from && ((solm && i-from) || descr.length)){
+				var wits = fields.slice(from, i);
+        var staffing = staffDetailsForWitnesses(wits);
         return [fields.slice(i),
-                new MReading(fields.slice(from, i), solm ? [solm] : [], descr)];
+                new MReading(fields.slice(from, i), solm ? [solm] : [], descr, false, staffing)];
       } else {
         // relevant description
         finish = field.lastIndexOf(')');
@@ -1293,7 +1969,9 @@ function parseSolmReading(fields){
       // Witnesses. Do nothing
     }
   }
-  return [false, new MReading(fields.slice(from), solm ? [solm] : [], descr)];
+	var wits = fields.slice(from, i);
+  var staffing = staffDetailsForWitnesses(wits);
+  return [false, new MReading(fields.slice(from), solm ? [solm] : [], descr, false, staffing)];
 }
 
 function parseSolmVar(fields){
@@ -1317,7 +1995,10 @@ function parseClefReading(fields){
       if(from && (clef || i-from)){
         // either we've got a clef for this reading, or there is none
         // (and so there has been at least one witness listed)
-        return [fields.slice(i), new MReading(fields.slice(from, i), clef ? [clef] : [], descr)];
+        var wits = fields.slice(from, i);
+        var staffing = staffDetailsForWitnesses(wits);
+        // console.log(staffing);
+        return [fields.slice(i), new MReading(fields.slice(from, i), clef ? [clef] : [], descr, false, staffing)];
       } else {
         // Clef for this reading
         finish = fields[i].lastIndexOf('"');
@@ -1337,7 +2018,10 @@ function parseClefReading(fields){
       if(from && ((clef && i-from) || descr.length)) {
         // this either doesn't apply to the clef or there's already a
         // description
-        return [fields.slice(i), new MReading(fields.slice(from, i), clef ? [clef] : [], descr)];
+        var wits = fields.slice(from, i);
+        var staffing = staffDetailsForWitnesses(wits);
+        // console.log(wits);
+        return [fields.slice(i), new MReading(fields.slice(from, i), clef ? [clef] : [], descr, false, staffing)];
       } else {
         // relevant description
         finish = fields[i].lastIndexOf(')');
@@ -1346,7 +2030,10 @@ function parseClefReading(fields){
       }
     }
   }
-  return [false, new MReading(fields.slice(from, fields.length), clef ? [clef] : [], descr)];
+  var wits = fields.slice(from, fields.length);
+  var staffing = staffDetailsForWitnesses(wits);
+  // console.log(wits);
+  return [false, new MReading(fields.slice(from, fields.length), clef ? [clef] : [], descr, false, staffing)];
 }
 
 // function parseClefReading(fields){
@@ -1379,13 +2066,23 @@ function parseClef(spec, sub){
   currentClef = old; //Just in case isn't valid
   var clefs = /^(Gamma|C|F|G|E)/;
   var r;
+  if(spec.charAt(0)=="(") {
+		obj.invisible = true;
+		spec = spec.substring(1);
+		if(spec.charAt(spec.length-1)===")") spec = spec.substring(0, spec.length-1);
+	}
   if(spec.charAt(0)=="[") {
     obj.editorial=true;
     spec = spec.substring(1);
   } else {
-    if(sub) return false;
+    // Re-enabled 12/14. Not sure what effect commenting this'll have
+    // if(sub) return false;
   }
   if(spec.charAt(spec.length-1)=="]") spec = spec.substring(0, spec.length-1);
+	if(spec.charAt(0)=="l") {
+		obj.literal=true;
+		spec = spec.substring(1);
+	}
   r = clefs.exec(spec);
   if(!r) return false;
   obj.type = r[0];
@@ -1406,7 +2103,7 @@ function parseClef(spec, sub){
   if(anotherBit>-1){
 //    console.log("clef has extra '"+spec+"'", anotherBit, spec.substring(anotherBit));
     if(spec.charAt(anotherBit)==="^"){
-      obj.stackedClefs.push(parseClef(spec.substring(anotherbit+1), true));
+      obj.stackedClefs.push(parseClef(spec.substring(anotherBit+1), true));
     } else { 
       // Is an erroneous (and corrected) clef)
       obj.erroneousClef=parseClef(spec.substring(anotherBit), true);
@@ -1414,7 +2111,7 @@ function parseClef(spec, sub){
       currentExample.staves.pop();
     }
   }
-  currentClef = obj
+  currentClef = obj;
   return obj;
 }
 
@@ -1431,27 +2128,35 @@ function parseStaff(spec){
       val = linesp(spec[pointer]);
       pointer++;
       while(pointer< spec.length && !linesp(spec[pointer]) && !colourp(spec[pointer])){
-        wit.push(spec[pointer]);
+        var os = string;
+        string = spec[pointer];
+        wit.push(consumeWitnesses()[0]);
+        string = os;
+        // wit.push(spec[pointer]);
         pointer++;
       }
       staff.lines.addReading(wit, val, false);
       wit = [];
     }
-  } else {
+  } else if(!isNaN(parseInt(spec[0],10))){
     // No variant
     staff.lines = linesp(spec[0]);
     pointer++;
   }
   // now colour
   if(pointer>=spec.length){
-    staff.colour = false;
+//    staff.colour = defaultColour;
   } else if (spec[pointer].charAt(0)=='"'){
     staff.colour = new ValueChoice();
     while(pointer < spec.length){
       val = colourp(spec[pointer]);
       pointer++;
       while(!colourp(spec[pointer])){
-        wit.push(spec[pointer]);
+        var os = string;
+        string = spec[pointer];
+        wit.push(consumeWitnesses()[0]);
+        string = os;
+        // wit.push(spec[pointer]);
         pointer++;
       }
       staff.colour.addReading(wit, val, false);
@@ -1474,6 +2179,108 @@ function colourp(string){
   return string.match(/(black|red|blind|0)/) ? string.match(/(black|red|blind|0)/)[0] : false;
 }
 
+function nextPart(partType, closes, extra){
+	// This covers Part, pars and other boundaries in the flow. N.B. The
+	// <Part> object represents the tag, not the element (i.e. there is
+	// an open at the beginning and a close at the end, and nothing is
+	// 'contained')
+	var thing = new Part();
+	//	if(partType!="part")
+	thing.type = partType;
+	if(closes) {
+		// A close tag can't have any other information
+		thing.closes=true;
+		return thing;
+	}
+	var oldString = string;
+	string = extra;
+	// Format information for the text can be added, but only makes
+	// sense for single-source transcriptions. If we change our mind
+	// about this, and want to allow this info in variants, then the
+	// block that follows will need to be wrapped in the one after that.
+	var info = consumeIf(/\s*\{[^}v]*\}\s*/);
+	if(info) {
+		innerInfo = /{([^}]*)}/.exec(info)[1];
+		bits = /([^,\s]*)[,\s]*([^,\s]*)[,\s]*(.*)/.exec(innerInfo);
+		for(var i=1; i<4; i++){
+			if(bits[i].length){
+				if(!isNaN(parseInt(bits[i]))){
+					// This is positional info (goes with rotation component)
+					thing.position = parseInt(bits[i]);
+				} else if(bits[i].substring(0,3)==="rot"){
+					// The label is rotated
+					thing.orientation = bits[i].substring(3);
+					if(!thing.position) thing.position = thing.orientation==="90c" ? 12 : 4;
+				} else {
+					// colour or other presentational material
+					thing.style += " "+bits[i];
+				}
+			}
+		}
+	}
+	extra = string;
+	string = oldString;
+	// Part names/numbers can be per-source (i.e. for variants), so
+	// there may be need for a 'choice' structure
+	if(extra){
+		if(/{+/.test(extra) || /\*\*/.test(extra)){
+			// this is serious - we have full-blown critical apparatus stuff here
+			oldString = string;
+			string = extra;
+			thing.id = getString();
+			string = oldString;
+		} else if(/\s*"/.test(extra) || extra.indexOf("(om")>-1){
+			// variants are present
+			var obj = new MChoice();
+			obj.subType = "part";
+			var bits = extra.match(/[^{} :=]+/g);
+			var nextPart = nextPartnameReading(bits, partType, closes, obj);
+			bits = nextPart[0];
+			while(bits){
+				obj.content.push(nextPart[1]);
+				nextPart = nextPartnameReading(bits, partType, closes, obj);
+				bits = nextPart[0];
+			}
+			obj.content.push(nextPart[1]);
+			return obj;
+//			thing.id = extra;
+		} else {
+			thing.id = extra.trim();
+		}
+	}
+	return thing;
+}
+
+function nextPartnameReading(fields, partType, closes, choice){
+	var part = new Part();
+	var om = true;
+	part.type = partType;
+	if(fields[0].length>1 && fields[0] !== "(om.)"){
+		om = false;
+	} 
+	if(closes) part.closes=true;
+	for(var i=1; i<fields.length; i++){
+    if(fields[i].charAt(0) === '"' || fields[i].substring(0, 3) === '(om'){
+			if(om) {
+				return [fields.slice(i), new MOmission(fields.slice(1, i), "om",
+																							 false, staffDetailsForWitnesses(fields.slice(1, i)), choice)];
+			} else {
+				var value = fields[0].match(/[^"]+/)[0];
+				part.id = value;
+				return [fields.slice(i), new MReading(fields.slice(1, i), [part],
+																							false, false, staffDetailsForWitnesses(fields.slice(1, i)), choice)];
+			}
+		}
+	}
+	if(om){
+		return [false, new MOmission(fields.slice(1), "om",
+																 false, false, staffDetailsForWitnesses(fields.slice(1)), choice)];
+	} else {
+		part.id = fields[0].match(/[^"]+/)[0];
+		return [false, new MReading(fields.slice(1), [part],
+																false, false, staffDetailsForWitnesses(fields.slice(1)), choice)];
+	}
+}
 
 function nextInfo(){
   var info = consumeParenthesis();
@@ -1488,12 +2295,27 @@ function nextInfo(){
         return parseMensVar(fields.slice(1));
       } else if(fields[1].length==2){
         // new format
-        return parseMens(fields[1]);
+        var mens = parseMens(fields[1]);
+        if(fields.length>2 && fields[2].charAt(0)==="^") mens.sup = parseMens(fields[2]);
+        return mens;
       } else if(fields.length>1){
         return parseMens(fields[1], fields[2]);
       } else {
         return false;
       }
+    case "prop":
+      if(fields[1] && fields[2] && 
+         (fields[1].charAt(0)==='"' || fields[2].charAt(0)==='"' ||
+          fields[1].substring(0, 2)==='(o')){
+        return parsePropVar(fields.slice(1));
+      } else if(fields[1].length==2){
+        var prop = parseProp(fields[1], fields[2]);
+        return prop;
+      } else if(fields.length>1){
+        return parseProp(fields[1], fields[2]);
+      } else {
+        return false;
+      }        
     case "solm":
       if(fields[1].charAt(0)=='"'){
         return parseSolmVar(fields.slice(1));
@@ -1551,14 +2373,46 @@ function nextTextChoice(){
 function nextLigChoice(parent){
   var choice = new LigChoice();
   choice.ligature = parent;
-  return nextChoiceLikeThing(choice, false);
+  nextChoiceLikeThing(choice, false);
+	if(choice.content.length && choice.content[0] && choice.content[0].content && choice.content[0].content.length===1 && choice.content[0].content[0].objType==="SignumCongruentiae"){
+		choice.subType = "SignumCongruentiae";
+	}
+	return choice;
 }
 
 function nextObliqueNoteChoice(parent){
   var choice = new ObliqueNoteChoice();
   choice.ligature = parent.ligature;
   choice.oblique = parent;
-  return nextChoiceLikeThing(choice, false);
+	//  return nextChoiceLikeThing(choice, false);
+	nextChoiceLikeThing(choice, false);
+	var justNotes = true;
+	var anyNotes = false;
+	var newPrevNote = false;
+	for(var i=0; i<choice.content.length; i++){
+		newPrevNote = false;
+		if(!choice.content[i].content) continue;
+		for(var j=0; j<choice.content[i].content.length; j++){
+			if(choice.content[i].content[j].objType==="ObliqueNote"){
+				anyNotes = true;
+				newPrevNote = choice.content[i].content[j]
+			} else {
+				justNotes = false;
+				if(choice.content[i].content[j].objType==="SignumCongruentiae"){
+					// console.log("s.c. in a variant in an oblique");
+					choice.content[i].content[j].ligature = parent.ligature;
+				} else {
+					console.log("Unexpected item in oblique ligature area:", choice, choice.content[i].content[j]);
+				}
+			} 
+		}
+	}
+	if(justNotes) {
+		choice.subType = "notes only";
+	} else if (!anyNotes){
+		choice.subType = "no notes";
+	}
+	return choice;
 }
 
 function nextChoiceLikeThing(choice, textp){
@@ -1571,6 +2425,7 @@ function nextChoiceLikeThing(choice, textp){
   var prevLength = false;
   string = string.substring(5, locend); // 5 because of "{var="
   consumeSpace();
+  currentChoice = choice;
   while(string.length && prevLength != string.length){
     if(string.length>15 && book===1&&chapter===3) debug1 = false;
     prevLength = string.length;
@@ -1614,6 +2469,7 @@ function nextChoiceLikeThing(choice, textp){
   }
   currentClef = clef;
   string = finalString;
+  currentChoice = false;
   return choice;
 }
 
@@ -1695,11 +2551,11 @@ function nextChoiceLikeThing2(choice, textp){
   return choice;
 }
 
-
 function nextMusic(parent){
   var results = [];
   var length = false;
-  var next;
+  var next, prev, augmented;
+  //console.log(parent);
   if(!string.length && hackedString) {
     // This hack counteracts a weird disappearing string in .addReading
     string = hackedString;
@@ -1709,6 +2565,10 @@ function nextMusic(parent){
     length = string.length;
     next = nextEvent();
     if(next){
+      if(prev){
+        prev.next = next;
+        next.previous = prev;
+      }
       if(next.objType==="SolmizationSignature"
          && results.length && results[results.length-1].objType==="Clef"){
         results[results.length-1].solm = next;
@@ -1716,12 +2576,37 @@ function nextMusic(parent){
       if(parent){
         next = parent.enrichEvent(next, results);
       }
-      results.push(next);
+      if(next) {
+        if(next.objType=="Dot"){
+          next.augments = augmented;
+        } else if(next.objType=="Fermata"){
+          next.lengthens = augmented;
+        } else if(next.objType==="SignumCongruentiae"){
+//          console.log(currentChoice, this.events[this.events.length-1]);
+          if(currentChoice){
+            next.effects = currentChoice;
+          } else {
+            next.effects = this.events[this.events.length-1];
+          }
+        } else if (next.objType==="Comment" && this.events.length && 
+                   this.events[this.events.length-1].objType==="Ligature"){
+          var c = new LigatureComment(next);
+          currentExample.comments.push(c);
+          this.events[this.events.length-1].members.push(c);
+          // I think this is necessary because otherwise we get two
+          // comments -- a ligature comment and a normal comment
+          next = c;
+          prev = next;
+          continue;
+          //
+        } 
+        results.push(next);
+      }
     } else if(length == string.length){
       // We're stuck in a loop. Try to escape
       string = string.substring(1);
     }
-    consumeSpace();
+    augmented = consumeSpace() ? false : next;
   }
   return results;
 }
@@ -1730,17 +2615,21 @@ function getParameters(){
   var param = new Parameters();
   if(string.indexOf(">") != -1){
     // FIXME: DOOM!
-    param.spec = consumeIf(/\s*{[^}]*}\s*/);
-    if(!param.spec){ // old format without braces
-      param.spec = consumeIf(/[^,]*/);      
-    } else {
-      param.spec = param.spec.slice(1, -1);
-    }
-    param.specComment = new Comment();
-    param.specComment.content = param.spec;
-//    param.specComment.commentStyle = "#A6F";
-    currentExample.comments.push(param.specComment);
-    consumeIf(/\s*,\s*/);
+		if(!standaloneEditor){
+			param.spec = consumeIf(/\s*{[^}]*}\s*/);
+			if(!param.spec){ // old format without braces
+				param.spec = consumeIf(/[^,]*/);      
+			} else {
+				param.spec = param.spec.slice(1, -1);
+			}
+			param.specComment = new Comment();
+			param.specComment.content = param.spec;
+			//    param.specComment.commentStyle = "#A6F";
+			currentExample.comments.push(param.specComment);
+			consumeIf(/\s*,\s*/);
+		} else {
+			param.specComment = false;
+		}
     var next = nextInfo();
     while(next){
       if(Array.isArray(next)){

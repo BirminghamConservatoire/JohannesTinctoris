@@ -31,13 +31,34 @@ function setSpacing(value){
 $(document).ready(function(){
 //  $("#code").keyup(function(){
   function refreshFromCode(){
+    grabdomobjects();
     var code = document.getElementById("code").value;
     if(!doc || code.value!==doc.text){
       try {
-        doc = new TreatiseDoc(code, document.getElementById("content"));
-        doc.draw();
+        var content = document.getElementById("content");
+        var tp = content.scrollTop;
+				if(standaloneEditor){
+					try {
+						doc = new MusicHolder(code, document.getElementById("content"));
+					}
+					catch(e){
+						console.log(e.stack, "error parsing", doc);
+					}
+					try {
+						doc.draw();
+					}
+					catch(e){
+						console.log(e.stack);
+						console.log("error drawing",state, eventi, doc.example);
+					}
+				} else {
+					doc = new TreatiseDoc(code, document.getElementById("content"));
+					doc.draw();
+				}
+        content.scrollTop = tp;
       } catch (x) {
         // Do nothing if it breaks
+        console.log(x.stack, "error message 2");
 //        alert(x+" -- unneccesary error message 2");
       }
     }
@@ -45,6 +66,7 @@ $(document).ready(function(){
   $("#wrapspan").hide();
   
   $("#reparse").click(refreshFromCode);
+	$("#trivial").click(() => curDoc.example.easyRhythms());
   $("#code").keypress(function(e){
 //  $("#code").keydown(function(e){
     if(e.metaKey && !e.shiftKey && e.which===61){

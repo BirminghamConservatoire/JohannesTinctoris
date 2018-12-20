@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+  <title>Stupid test</title>
+  <style>
+    .row{
+    display: table-row;
+    }
+    .cell{
+    display: table-cell;
+    fill: black;
+    }
+    .table{
+      display: table;
+    }
+    .tableJoinLine{
+    stroke: black;
+    }
+  </style>
+  <script src="dom.js" type="text/javascript"></script>
+  <script src="diagrams.js" type="text/javascript"></script>
+</head>
+<body onload="javascript:initTest();">
+  <svg width="800" height="800" style="display:none">
+    <text class="row" x="200" y="100">
+      <tspan class="cell">a</tspan>
+      <tspan class="cell">b</tspan></text>
+    <text class="table" x="200" y="200">
+      <text class="row">z</text>
+      <tspan class="row" display="table-row">
+        <tspan class="cell">c</tspan>
+        <tspan class="cell">d</tspan></tspan>
+      <tspan class="row" display="table-row">
+        <tspan class="cell">e</tspan></tspan>
+      </text>
+  </svg>
+</body>
+</html>

@@ -92,8 +92,11 @@ span.twoline{
   float: left;
   padding-right: 10px;
 }
-span.large, tspan.large{
+span.large{
   font-size: 250%;
+}
+tspan.large{
+  font-size: 150%;
 }
 span.sup {
   font-size: 80%;
@@ -273,7 +276,7 @@ div.col.breaker + p.addTopSpaceForMarginal {
 
 .drawTo p div.marginal span.marginalContent, span.marginalContent{
   margin: -2.2em 1ex -100em 0;
-  text-align: right
+  text-align: right;
   display: inline-block;
 }
 span.marginalContent {
@@ -299,6 +302,11 @@ span.verse{
 span.underscore{
   text-decoration: underline;
 }
+span.redunderscore {
+  text-decoration: underline;
+  text-decoration-color: #F99;
+  -webkit-text-decoration: underline #F99;
+}
 span.strikethrough.spanred{
   background: url(redthrough.png) repeat-x center left;
   text-decoration: none;
@@ -314,8 +322,14 @@ span.strikethrough.spanblind{
 span.strikethrough, .strikethrough.text{
   text-decoration: line-through;
 }
-span.expunction {
+span.expunction, span.erasure {
   color: #999;
+}
+span.expunction span.red, span.red span.expunction,
+  span.expunction span.red *, span.red span.expunction *,
+  span.erasure span.red, span.red span.erasure,
+  span.erasure span.red *, span.red span.erasure *{
+  color: #F99;
 }
 
 span.red, .red.text, span.red *, .red.text *{
@@ -355,12 +369,14 @@ span.correction.removedPunctuation {
 }
 .red span.correction.removedPunctuation, .red span.correction span.overwritten.m, .red span.wordsplit, .red span.wordjoin {
   color: #F99;
+  stroke: #F99;
 }
 span.correction.insertedPunctuation {
   font-weight: bold;
 }
 .wordsplit, .wordjoin{
   color: #999;
+  stroke: #999;
 }
 pre p{
   margin-top: 16px;
@@ -536,6 +552,8 @@ p.colend.columnPara {
 }
 .annotation{
   color: black!important;
+  position: relative;
+  z-index: 140;
 }
 /* .annotation { */
 /*   color: blue; */
@@ -551,8 +569,39 @@ p.colend.columnPara {
   color: #060;
   fill: #060;
 }
-.variantGroup line, .variantGroup line.rest {
+.variantGroup line, .variantGroup line.rest{
   stroke: #060;
+}
+.variantGroup path, .variantGroup path.red  {
+  fill: #060;
+}
+#TheTreatiseEditor .choice, .variantGroup {
+  color: #0B0;
+  fill: #0B0;
+}
+#TheTreatiseEditor .variantGroup line, .variantGroup line.rest{
+  stroke: #0B0;
+}
+#TheTreatiseEditor .variantGroup path, .variantGroup path.red  {
+  fill: #0B0;
+}
+#TheTreatiseEditor .variantGroup .menssign {
+  fill: #0B0;
+}
+#TheTreatiseEditor .variantGroup .ligatureBox .ligatureVertical, #TheTreatiseEditor .variantGroup .ligatureBox .ligatureStem, 
+   .variantGroup .ligatureBox .ligatureHorizontal, .variantGroup .barline{
+  stroke: #060;
+}
+
+#TheTreatiseEditor .variantGroup .variantGroup, #TheTreatiseEditor .variantGroup .variantGroup path,
+#TheTreatiseEditor .variantGroup .variantGroup line, #TheTreatiseEditor .variantGroup .variantGroup path.red,
+#TheTreatiseEditor .variantGroup .variantGroup line.rest{
+  color: #00B!important;
+  fill: #00B!important;
+}
+#TheTreatiseEditor .variantGroup .musical.variants {
+  color: #00B!important;
+  fill: #00B!important;
 }
 
 .variants.highlight {
@@ -582,7 +631,7 @@ p.colend.columnPara {
 .tooltip, .popup {
 		/* display:none; */
 		background-color:#ffa;
-    z-index: 20;
+    z-index: 180;
 		border:1px solid #cc9;
 		padding:3px;
 		font-size:13px;
@@ -591,6 +640,10 @@ p.colend.columnPara {
 		box-shadow: 2px 2px 11px #666;
 /*    cursor: none;*/
 }
+.tooltip.clicked, .popup.clicked {
+	padding-right:25px;
+}
+
 .popup svg:before{
   content: attr(name);
   font-weight: bold;
@@ -712,7 +765,13 @@ neumeJoin{
   stroke: #060;
 }
 
-.variantGroup .variantGroup {
+.variantGroup .variantGroup, .variantGroup .variantGroup path,
+.variantGroup .variantGroup line, .variantGroup .variantGroup path.red,
+.variantGroup .variantGroup line.rest{
+  color: #006!important;
+  fill: #006!important;
+}
+.variantGroup .musical.variants {
   color: #006!important;
   fill: #006!important;
 }
@@ -793,7 +852,12 @@ tspan.tspanSup {
 .textblock {
   /* font-size: 120%; */
 }
-
+.part.textblock {
+		font-style: italic;
+}
+.textblock.r90a, .textblock.r90c {
+  font-size: 95%;
+}
 .variantReading .editorialDescription, .variantReading .readingDesc {
   font-style: italic;
   font-weight: normal;
@@ -826,6 +890,10 @@ tspan.tspanSup {
   font-size: 90%;
 }
 
+tspan.correctionem {
+  font-size: 80%;
+}
+
 .divider {
   stroke: #CDC;
   stroke-width: 1.5px;
@@ -834,6 +902,10 @@ tspan.tspanSup {
 .choice {
   color: #060;
   /* font-weight: bolder; */
+}
+
+span.choice span.choice {
+  color: #006!important;
 }
 
 .variants {
@@ -878,13 +950,28 @@ tspan.tspanSup {
 }
 
 .sourcedescription {
-  text-indent: 5ex;
+		text-indent: 3ex;
+		font-size: 95%;
+		padding-bottom: 6px;
 }
 
 .sourceidentifier {
   font-weight: bold;
   display: inline-block;
-  width: 15ex;
+  width: 9ex;
+	vertical-align: top;
+}
+.sourcedetails {
+		display: inline-block;
+		text-indent: 0;
+		width: 52ex;
+		vertical-align: top;
+}
+.sourceascription {
+		display: inline-block;
+		text-indent: 0;
+		width: 11ex;
+		vertical-align: top;
 }
 
 #buttonbox{
@@ -1035,7 +1122,8 @@ p.justMusic{
   border: 1px solid #A66;
 }
 .refglow, .refglow .menssign, .variantGroup.refglow .ligatureBox .ligatureHorizontal,
-    .refglow.variantGroup .ligatureBox .ligatureVertical, .refglow .ligatureVertical{
+    .refglow.variantGroup .ligatureBox .ligatureVertical, .refglow .ligatureVertical,
+    .refglow .sigcongruent{
   stroke-width: 1.2;
   stroke: #A00;
   fill: #A00;
@@ -1180,6 +1268,13 @@ div.tabular div.TabularRow div.TabularCell{
   padding-left: 1.5ex;
   text-indent: -1.5ex;
 }
+div.tabular > .choice, div.tabular > .choice > .variantReadingText {
+  display: table-row-group;
+}
+div.tabular div.TabularRow.continued div.TabularCell{
+  text-indent: 0;
+}
+
 div.tabular div.TabularRow div.TabularCell.r{
   display: table-cell;
   padding-left: 4ex; 
@@ -1192,11 +1287,133 @@ div.tabular div.TabularRow div.TabularCell.c{
   padding-right: 0.2ex;
   text-align: center;
 }
+.floatingBreak {
+  z-index: 100;
+  cursor: default;
+}
 .floatingBreak.col {
-  pointer-events: none;
+  /* pointer-events: none; */
   position: absolute;
   width: 98%;
   border-top: 2px dashed #88F;
   border-top: 2px dashed rgba(127, 127, 255 0.95);
   color: rgba(127, 127, 255, 0.95);
+}
+div#zoomedImageDiv{
+  position: fixed;
+  bottom: 15px;
+  z-index: 170;
+  background-color: #999;
+  border: 1px solid #933;
+  -moz-box-shadow: 4px 4px 4px #666;
+  -webkit-box-shadow: 4px 4px 4px #666;
+  box-shadow: 4px 4px 4px #666;
+}
+div.thumbdiv{
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  min-height: 10px;
+  min-width: 10px;
+  background-colour: rgba(255,255,0,0.5);
+}
+.infoshowhide{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 4px;
+  padding: 2px;
+  font-size: 16px;
+  vertical-align: middle;
+  font-family: "Helvetica Neue", Helvetica, Verdana, Verdana, Geneva, sans-serif;
+  font-weight: bold;
+  font-style: italic;
+  text-align: center;
+  color: #FFF;
+  background-color: #0b2573;
+  border: 2px solid white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.infoshowhide:hover, .infoshowhide.showing:hover{
+  background-color: #66F;
+}
+.infoshowhide.showing{
+  background-color: #00F;
+}
+.infoshowhide div{
+  margin-top: -5px;
+}
+.infoButtons .license{
+  padding: 0 10px;
+  vertical-align: middle;
+}
+* {
+  box-sizing: border-box;
+}
+.TBCloseButton{
+  background-image: url("../Images/cross-small.png");
+  background-position: center;
+  border: 1px solid #AAA;
+  border-radius: 4px;
+  float: left;
+  margin: 2px 4px 0px 4px;
+  /* padding: 2px; */
+  height: 16px;
+  width: 16px;
+}
+.TBCloseButton:hover{
+  /* border-color: #DDD; */
+  background-color: #F5F5DC;
+}
+.TBCloseButton.closepopup{
+ position: absolute;
+ top: 2px;
+ right: 2px;
+}
+.Commentary {
+  background-color: #DBEAFF;
+  border: 1px solid #B2D3FF;
+  padding: 5px;
+  border-radius: 12px;
+  margin-right: -8.5em;
+  margin-left: -0.5em;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 80%;
+}
+.Commentary.small {
+  display: inline-block!important;
+}
+.Commentary .Raw, .Commentary .two-sys{
+  max-height: 153px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin: 0 -0.5em;
+}
+.Commentary .ten-line-table{
+  max-height: 260px;
+  overflow-y: scroll;
+}
+.Commentary td {
+  padding: 5px;
+}
+.Commentary img {
+  max-width: 560px;
+  padding: 2px;
+  background-color: white;
+}
+.Commentary * {
+    font-family: Verdana, Geneva, sans-serif;
+
+}
+.Commentary .b {
+  font-weight: bold;
+}
+.resolved, .resolved * {
+		color: #999;
+		stroke: #999 !important;
+		fill: #999;
+}
+.invisible {
+		fill-opacity: 0.1;
 }

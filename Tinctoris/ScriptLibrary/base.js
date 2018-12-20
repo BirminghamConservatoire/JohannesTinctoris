@@ -211,8 +211,13 @@ var fermataData = ["Z", 36, prop];
 //
 // Constants
 var foo=false;
+var texts = {};
+var allTexts = {};
 //var editable = true;
 var editable = false;
+var standaloneEditor = false;
+var MEILinks = (document.location.href.indexOf('beta') >-1 ||
+								document.location.href.indexOf('localhost') > -1) ? true : false;
 var nocache = false;
 var titleBar = false;
 var showtitle = true;
@@ -221,6 +226,7 @@ var safari = /Safari/.test(navigator.userAgent);
 var webkit = /WebKit/.test(navigator.userAgent);
 var vertical;
 var leading = 20;
+var debug=false;
 // var topMargin = 40;
 //var topMargin = 25;
 var topMargin = 0;
@@ -232,6 +238,7 @@ var rastralSize = 10;
 var exWidth = 690;
 var localWidth = exWidth;
 var colours = {red: "#F00", black: "#000", blind: "#AAA"};
+var defaultColour = "black";
 var clefOffsets = {Gamma: 0, F: 6, C: 10, G: 14, E: 19};
 var notes = ["AA", "BB", "CC", "DD", "EE", "FF", "GG", 
   "A", "B", "C", "D", "E", "F", "G",
@@ -243,8 +250,11 @@ var notes = ["AA", "BB", "CC", "DD", "EE", "FF", "GG",
 var editorMode=false;
 var singlePaneMode = true;
 var showvariants = true;
+var showfacsimile = false;
+var showcommentary = true;
 var showtranslationnotes = true;
 var showtranscriptionnotes = true;
+var flattenOnExport = true;
 var punctuationStyle="modern";
 var editorDisplay = "show";
 var dateDisplay = "show";
@@ -258,12 +268,14 @@ var docMap = false;
 
 // Current variable values (for context)
 //var tooltip = false;
+var state = "initialising";
 var timeouts = [];
 var scrollLock = false;
 var paneWidths = false;
 var maxWidth = 650;
 var minWidth = 350;
 var sources = [];
+var commentary = false;
 var nodeNo = 0;
 var nodes = [];
 var textnodes = [];
@@ -290,16 +302,19 @@ var currentExample = false;
 var currentReading = false;
 var curDoc = false;
 var curCatchword = false;
+var currentTextParent = false;
 var inHeading = false;
 var inTip = false;
 var inVerse = false;
 var inIndex = false;
+var inCommentary = false;
 var noCount = false;
 var hang = false;
 var lastIsSentenceBreak = false;
 var lastIsHeading = false;
 var lastIsVerse = false;
 var oneOff=false;
+var leaveSpace=false;
 var handsmet = [];
 var examplei = false;
 var eventi = false;
@@ -314,6 +329,7 @@ var currentStaffColour = "";
 var currentSystem = false;
 var currentSystems = [];
 var currentInfo = false;
+var currentChoice = false;
 var suppressBreak = true;
 //var wrapWidth = 460;
 var wrapWidth = false;
@@ -321,6 +337,8 @@ var currentClef = false;
 var currentRedline = false;
 var currentSolm = false;
 var uncapitalise = false;
+var capitalise = false;
+var allowCapitalisation = false;
 var initialStaffStar = false;
 var drawingWidth;
 var currentType = "mensural";
@@ -329,6 +347,7 @@ var dotPos = false;
 var dotNudge = true;
 var redline = false;
 var examples = [];
+var commentaryTables = [];
 var k1 = Math.cos(Math.PI/3) ;//0.866;
 var k2 = Math.sin(Math.PI/3);//0.5;
 var textScale = 0.8;
@@ -340,6 +359,7 @@ var range = false;
 var desperatecounter = 0;
 var underlays = [];
 var currenttextparent = false;
+var currentTable = false;
 var curtextitem = false;
 var pari = false;
 var systemContainsPageOrColumnBreak = false;
@@ -411,6 +431,10 @@ function metrics(){
 function zerofunction (){
   return 0;
 }
+function identity (arg){
+  return arg;
+}
+
 //////////////////////////////////////////////////
 //
 // Utility functions:
@@ -766,6 +790,14 @@ function drawBarline(x, y, extras){
     "barline"+(extras ? extras : ""), false);
 }
 
+function drawMensurStrich(event){
+	var x = event.startX;
+	var y = event.startY;
+	svgLine(SVG, x-0.5, y-rastralSize, x-0.5, y, "barline breve mensurstrich", false);
+	svgLine(SVG, x-0.5, y-(rastralSize*5), x-0.5, y-(rastralSize*6),
+					"barline breve mensurstrich", false);
+}
+
 function drawSmallBarline(start, end, thickness, extras){
   var starty = cury - yoffset(start);
   var endy = cury - yoffset(end);
@@ -1118,16 +1150,23 @@ function bracedParam(str){
 
 // d. System break management
 
-function sysBreak(){
+function sysBreak(addSpace, moreSpace){
   var width = sysWidths[sysNo];
   curx = lmargin;
-//  cury += rastralSize * 5 + 5;
-  cury += rastralSize * (systemContainsPageOrColumnBreak ? 4 : 3);
+	//  cury += rastralSize * 5 + 5;
+	// cury jump is a product of several factors. Firstly a bit of margin
+//  cury += rastralSize * (systemContainsPageOrColumnBreak ? 4 : 3);
+  cury += rastralSize * (systemContainsPageOrColumnBreak ? 5 : 4);
   curx += rastralSize / 2;
+	// Then space for n lines
   cury += currentLinecount * rastralSize;
+	// then extra space (for part labels)
+	if(addSpace) cury+= rastralSize * 4;
+	if(moreSpace) cury+= rastralSize * 2;
   lowPoint = cury+(rastralSize*2);
   sysNo++;
   systemContainsPageOrColumnBreak = false;
+	leaveSpace = false;
 }
 
 function sysBreak2(lastp){
@@ -1148,27 +1187,31 @@ function nextPitch(){
   var components;
   for(var i=eventi+1; i< events.length; i++){
     event = events[i];
-    if(event.objType == "Note") {
-      return pitchAndPos(event);
-    } else if (event.objType == "ChantNote"){
-      return pitchAndPos(event);
-    } else if (event.objType == "Ligature"){
+		switch(event.objType){
+			case "Note":
+			case "ChantNote":
+				return pitchAndPos(event);
+			case "Ligature":
       // FIXME: not robust to clef changes
 //      var e = event.nextNote(-1);
-      var e = event.nthNote(0);
-      if(e.objType == "Oblique"){
-        e = e.members[0];
-      }
-      if(e) return pitchAndPos(e);
-    } else if (event.objType == "Neume"){
-      // FIXME: not robust to clef changes
-      var e = event.nextNote(-1);
-      if(e.objType == "ObliqueNeume"){
-        e = e.members[0];
-      }
-      if(e) return pitchAndPos(e);
-    }
-  }
+				var e = event.nthNote(0);
+				if(e.objType == "Oblique"){
+					e = e.members[0];
+				}
+				if(e) return pitchAndPos(e);
+				break;
+			case "Neume":
+				// FIXME: not robust to clef changes
+				var e = event.nextNote(-1);
+				if(e.objType == "ObliqueNeume"){
+					e = e.members[0];
+				}
+				if(e) return pitchAndPos(e);
+				break;
+			case "Part":
+				return false;
+		}
+  } 
 }
 
 function pitchAndPos(event){
@@ -1308,7 +1351,7 @@ function isInTip(obj){
 
 function subvariant(obj){
   if($(obj).parents("svg").length){
-    console.log("testing subvariant for "+obj.className);
+//    console.log("testing subvariant for "+obj.className);
     var parents=$(obj).parents();
     var par, parcl;
     for(var i=0; i<parents.length; i++){
@@ -1335,14 +1378,21 @@ function showAnnotation(obj, clicked){
     $(fndiv).show();
     fndiv.style.position = "fixed";
     fndiv.style.left = obj.getBoundingClientRect().left+"px";
-    if(obj.tagName==="SPAN"){
+		if(standaloneEditor) fndiv.style.left = obj.getBoundingClientRect().right+"px";
+    if(obj.tagName==="SPAN" || (obj.tagName==="DIV" && $(obj).hasClass("TabularRow"))){
       if(subvariant(obj)){
+        var fntop = false;
         if(isInTip(obj)){
-          fndiv.style.top = $(obj).parents(".popup")[0].getBoundingClientRect().bottom+5+"px";
+          fntop = $(obj).parents(".popup")[0].getBoundingClientRect().bottom+5;
         } else {
-          fndiv.style.top = obj.getBoundingClientRect().bottom+
-            fndiv.getBoundingClientRect().height+5+"px";
+          fntop = obj.getBoundingClientRect().bottom+
+            fndiv.getBoundingClientRect().height+5;
         }
+        var rect = fndiv.getBoundingClientRect();
+        if(fntop+rect.height>window.innerHeight){
+          fntop = obj.getBoundingClientRect().top-5-(2* rect.height);
+        }
+        fndiv.style.top = fntop+"px";
       } else {
         fndiv.style.top = obj.getBoundingClientRect().bottom+"px";
       }
@@ -1350,7 +1400,24 @@ function showAnnotation(obj, clicked){
       fndiv.style.top = ($(obj).parents("SVG")[0].getBoundingClientRect().bottom
                          +fndiv.getBoundingClientRect().height)+"px";
     } else {
-      fndiv.style.top = $(obj).parents("SVG")[0].getBoundingClientRect().bottom+"px";
+      var candidateBox = $(obj).parents("SVG")[0].getBoundingClientRect();
+      var drawTo = $(obj).parents(".drawTo")[0];
+      if(drawTo && candidateBox.bottom < (drawTo.scrollHeight - drawTo.scrollTop -100)){
+        if(candidateBox.bottom < drawTo.scrollTop - 100){
+          fndiv.style.top = candidateBox.bottom+"px";
+        } else if (candidateBox.top > (drawTo.scrollTop+100)){
+          fndiv.style.bottom = (candidateBox.top - drawTo.scrollTop - $(drawTo).offset().top)+"px";
+        } else {
+          fndiv.style.top = "50px";
+        }
+      } else {
+				var fnheight = fndiv.getBoundingClientRect().height;
+				if(candidateBox.top>fnheight) {
+					fndiv.style.top = (candidateBox.top-fndiv.getBoundingClientRect().height)+"px";
+				} else {
+					fndiv.style.top = (obj.getBoundingClientRect().bottom+10)+"px";
+				}
+      }
     }
   }
   englow(fndiv, obj);
@@ -1630,7 +1697,7 @@ function valueText(value){
   }
 };
 
-var ignorables = ["TextUnderlay", "Comment", "Part"];
+var ignorables = ["TextUnderlay", "Comment", "Part", "Tacet"];
 function ignorable(object){
   // return true if the presence of this object shouldn't ban using
   // later symbols in prefatory information
@@ -1669,6 +1736,7 @@ function findClef(extras){
   return false;
 }
 function findSolm(extras){
+  if(!extras) return false;
   for(var i=0; i<extras.length; i++){
     if(solmp(extras[i])) return extras[i];
   }
@@ -1790,6 +1858,48 @@ function ligatureDrawingKit(ligarray){
   }
 }
 
+function drawRichText(textBlock, components){
+	// Given the bits of a formatted text object, draw it to textBlock.
+	// textBlock is assumed to be a <text> element in an SVG and to have
+	// been positioned already
+	var dy = false;
+	var styles = new Array();
+	var oldSVG = SVG;
+	SVG = textBlock;
+	for(var i=0; i<components.length; i++){
+		var current = components[i]
+		if(typeof(current)=="string"){
+			if(current.length>0){
+				if(components.length>i+1
+					 && components[i+1].objType==="MusicalChoice"
+					 && components[i+1].content[0].description
+					 && components[i+1].content[0].description.indexOf("ins.")>-1){
+					var textSpan = svgSpan(SVG, styles ? textClasses(styles) : "text", false, current.replace(/\s+%/g, ''));
+				} else {
+					textSpan = svgSpan(SVG, styles ? textClasses(styles) : "text", false, current);
+				}
+				if(dy) {
+					txt.setAttributeNS(null, 'dy', dy+'px');
+					dy = false;
+				}
+			} else {
+				console.log("WARNING: empty text string at ", eventi);
+			}
+		} else if(current){
+			// FIXME: why is that in doubt? Why not else?
+			if(current.objType==="MusicalChoice"){
+				current.textBlock = textBlock;
+				current.styles = styles;
+			}
+			current.draw(styles);
+			if(current.dy) dy=current.dy()*-1;
+			styles = current.updateStyles(styles);
+		}
+	}
+	SVG = oldSVG;
+	return textBlock;
+}
+
 function listeq(l1, l2){
   // returns true if every item in l1 is == every item in l2
   return l1.every(function(el, i, a){return el==l2[i];});
@@ -1861,15 +1971,20 @@ function docMapping(){
       }
     }
     fixHeight(true);
-    this.fixButtons();
+    //this.fixButtons();
+  };
+  this.prepScrolls = function(){
+    for(var i=0; i<docMap.docs.length; i++){
+      docMap.docs[i].scrollFromURL();
+    }
   };
   this.fixButtons = function(){
     // Disable + button if there's no space for an extra pane
     // FIXME: convenient, but misplaced bit:
-    document.getElementById("content").style.minWidth = (10+(this.docs.length * maxWidth)) + "px";
+//    document.getElementById("content").style.minWidth = (10+(this.docs.length * maxWidth)) + "px";
     var addButtons = $(".TBaddPaneButton");
-    if(window.screen.availWidth < ((1 + this.docs.length) * maxWidth)){
-      console.log(["a", window.screen.availWidth, (1 + this.docs.length),maxWidth, addButtons.length]);
+//    if(window.screen.availWidth < ((1 + this.docs.length) * maxWidth)){
+    if(window.screen.availWidth < this.clientWidth()+maxWidth){
       // not enough space
       addButtons.menu("collapseAll", null, true);
       addButtons.menu("disable");
@@ -1887,13 +2002,20 @@ function docMapping(){
   this.paneWidth = function(){
     return Math.max(minWidth, Math.min(maxWidth, ($(window).width()-40) / this.panes.length))-30;
   };
+  this.clientWidth = function(){
+    var maxr = 0;
+    for(var p=0; p<this.panes.length; p++){
+      maxr = Math.max(maxr, this.panes[p][1].getBoundingClientRect().right);
+    }
+    return maxr;
+  };
   this.fixWidths = function(pos){
     if(this.hold) return false;
     var width = this.paneWidth();
-    if(width===wrapWidth) {
-      this.fixButtons();
-      return false;
-    }
+    //if(width===wrapWidth) {
+    //  this.fixButtons();
+    //  return false;
+    //}
     for(var ti=0; ti<timeouts.length; ti++){
       window.clearTimeout(timeouts[ti]);
     }
@@ -1904,7 +2026,7 @@ function docMapping(){
       var totalW = 0;
       for(var i=0; i<docMap.docs.length; i++){
         if(!docMap.docs[i].prevWidth 
-           || (docMap.docs[i].prevWidth != wrapWidth && docMap.docs[i].docType==="Transcription")
+           || (docMap.docs[i].prevWidth > wrapWidth && docMap.docs[i].docType==="Transcription")
           ){
           // Commented line would shuffle things to make room. Not doing that now. FIXME: revisit
           docMap.docs[i].forceredraw = true;
@@ -1913,17 +2035,18 @@ function docMapping(){
         if(args[0]) {
           retryScroll([args[0], docMap.docs[i].drawTo]);
         }
-        totalW+=parseInt(docMap.docs[i].out.style.width, 10)+4;
+        totalW+=docMap.docs[i].actualWidth+5;
       }
       var contentDiv = document.getElementById("content");
-      var currentW = contentDiv.getBoundingClientRect().width;
-      if(totalW>currentW || totalW<currentW-30){
+      var currentW = parseInt(contentDiv.style.width, 10);
+      if(!currentW || isNaN(currentW) || totalW>currentW || totalW<currentW-30){
         // container either too big or far too small
-        contentDiv.style.width = (totalW+4)+"px";
+        console.log("resizing", currentW, totalW, totalW>currentW, totalW<currentW-30);
+        contentDiv.style.width = (totalW+12)+"px";
       } 
       fixHeight(true);
+      //docMap.fixButtons();
     }, 30, [pos]));
-    this.fixButtons();
     return true;
   };
   this.addTreatise = function(doc){
@@ -1954,8 +2077,9 @@ function docMapping(){
       applyTranslatedText(treatise, pane, false, []);
     } else {
       sname = /SS\S*SS/.exec(DOMObj.className)[0];
+      s = prevDoc.showfacs ? [["showfacs", "true"]] : [];
       $(pane).empty();
-      applySourceText(sname.substring(2, sname.length-2), treatise, pane, []);
+      applySourceText(sname.substring(2, sname.length-2), treatise, pane, s);
     }
     this.removeDoc(prevDoc);
     this.updatePanes();
@@ -1968,6 +2092,7 @@ function docMapping(){
       pageSettings.updateSetting("pane"+i, panedoc.docType);
       if(panedoc.docType==="Transcription") {
         pageSettings.updateSetting("source"+i, panedoc.shortSource);
+        if(panedoc.showfacs) pageSettings.updateSetting("showfacs"+i, panedoc.showfacs);
       } else if (pageSettings.settings["source"+i]){
         pageSettings.removeSetting("source"+i);
       }
@@ -1975,11 +2100,15 @@ function docMapping(){
         pageSettings.updateSetting("treatise"+i, panedoc.group);
       if(panedoc.showvars!==showvariants)
         pageSettings.updateSetting("showvars"+i, panedoc.showvars);
+      if(panedoc.showfacs!==pageSettings.settings["showfacs"+i])
+        pageSettings.updateSetting("showfacs"+i, panedoc.showfacs);
+      if(panedoc.showcommentary!==pageSettings.settings["showcommentary"+i])
+        pageSettings.updateSetting("showcommentary"+i, panedoc.showcommentary);
       if(panedoc.MSPunctuation!==(punctuationStyle==="MS"))
         pageSettings.updateSetting("MSPunctuation"+i, panedoc.MSPunctuation);
     }
     while(pageSettings.settings["pane"+i]){
-      var fields = ["pane", "source", "treatise", "showvars", "MSPunctuation"];
+      var fields = ["pane", "source", "treatise", "showvars", "MSPunctuation", "showfacs", "showcommentary"];
       for(var j=0; j<fields.length; j++){
         if(pageSettings.settings[fields[j]+i]){
           pageSettings.removeSetting(fields[j]+i);
@@ -2000,6 +2129,8 @@ function docMapping(){
       applyEditedText(treatise, pane, []);
     } else if($(DOMObj).hasClass("translation")){
       applyTranslatedText(treatise, pane, false, []);
+    } else if($(DOMObj).hasClass("facsimile")){
+      applyFacsimile(treatise, pane, false, []);
     } else {
       sname = /SS\S*SS/.exec(DOMObj.className)[0];
       applySourceText(sname.substring(2, sname.length-2), treatise, pane, []);
@@ -2008,7 +2139,7 @@ function docMapping(){
     this.updatePageSettings();
     var scrolled = this.fixWidths(pos);
     fixHeight(true);
-    this.fixButtons();
+    //this.fixButtons();
     if(!scrolled){
       for(var i=0; i<this.docs.length; i++){
         pos.simpleScroll(this.docs[i].drawTo);
@@ -2032,8 +2163,10 @@ function docMapping(){
     var options = texts[doc.group].sources;
     ul.appendChild(this.treatiseViewEntry("Edited Latin", 
       "edited"+ (docString=="Edited Latin" ? " selected" : "")));
-    ul.appendChild(this.treatiseViewEntry("English Translation", 
-      "translation "+doc.language+(docString=="Translation" ? " selected" : "")));
+    if(texts[doc.group].translation){
+      ul.appendChild(this.treatiseViewEntry("English Translation", 
+        "translation "+doc.language+(docString=="Translation" ? " selected" : "")));
+    }
     for(var i=0; i<options.length; i++){
       ul.appendChild(this.treatiseViewEntry(options[i][1] +" ("+options[i][0]+")", 
         "transcription SS"+options[i][0]+"SS"
@@ -2154,7 +2287,8 @@ function docMapping(){
       fn.style.left = (this.docCode(doc)==="a" ? pane.getBoundingClientRect().right : 10)+"px";
     }
   };
-  this.addPopup = function(info, referrer, ptype, tDoc){
+}
+docMapping.prototype.addPopup = function(info, referrer, ptype, tDoc){
     var fn = tDoc.footnotes;
     var code = this.docCode(tDoc);
     var fndiv = DOMDiv('popup '+ptype+" stream-"+code, id, false);
@@ -2168,7 +2302,7 @@ function docMapping(){
       fndiv.appendChild(document.createTextNode(info));
     } else if (info.objType==="Choice"){ 
       fndiv.appendChild(info.footnote());
-    } else if (info.objType==="Annotation"){
+    } else if (info.objType==="Annotation" || info.objType.indexOf("Comment")>-1){
       fndiv.appendChild(info.footnote());
     } else if (info){
       var frame = svg(100, 100);
@@ -2187,12 +2321,11 @@ function docMapping(){
     $(fndiv).mouseleave(popUnglow);
     $(referrer).data("fn", fndiv);
     $(fndiv).hide();
-  };
-}
+};
 function scroller120(e){
   var pane = e.delegateTarget;
   var paras = $(pane).children(".para");
-  var currentPara = paras[firstVisible(paras, $(pane).offset().top)];
+  var currentPara = paras[firstVisible(paras, $(pane).offset().top+50)];
 //  var location = /at-\S*/.exec(currentPara.className)[0].split("-").slice(1).map(Number);
   var location = /at-\S*/.exec(currentPara.className)[0].split("-").slice(1);
   var doc = docMap.docForPane(this.parentNode);
@@ -2334,17 +2467,25 @@ function specialTogglePunct(select){
 }
 
 function relativeRight(element, parent){
-//  return element.getBoundingClientRect().right - parent.getBoundingClientRect().left;
-  return element.getBBox().x+element.getBBox().width-parent.getBBox().x;
+//  console.log(element, element.getBoundingClientRect().right);
+  return element.getBoundingClientRect().right - parent.getBoundingClientRect().left;
+  //return element.getBBox().x+element.getBBox().width-parent.getBBox().x;
 }
 
 function underlayRight(position, show){
   if(underlays.length){
-    var spaceWidth = 1.2 * rastralSize * prop;
+    // var spaceWidth = 1.4 * rastralSize * prop;
+    var spaceWidth = 0.1 * rastralSize * prop;
     var topy = cury-((Number(/-?[0-9]*/.exec(position), 10))*rastralSize/2 +1);
     var bottomy = topy+rastralSize;
     for(var i=underlays.length-1; i>=0; i--){
-      upos = underlays[i].getBBox().y+(rastralSize/2); // Why the last bit?
+			try {
+				// This is in a try because it will break if the underlay is
+				// in an undrawn tooltip
+				upos = underlays[i].getBBox().y+(rastralSize/2); // Why the last bit?
+			} catch (e){
+				continue;
+			}
       if(upos>topy && upos<bottomy){
         return relativeRight(underlays[i], SVG)+spaceWidth;
       }
@@ -2429,7 +2570,7 @@ function trimPostInsSpaces(baseText){
 
 function newPart(item){
   var prev = item.previous;
-  if(prev.objType==="Part") console.log("Weird part-related error");
+//  if(prev.objType==="Part") console.log("Weird part-related error", item, prev, exampleno);
   while(prev){
     if(prev.objType==="Part"){
       return true;
@@ -2476,7 +2617,8 @@ function correctContainer(container){
       container.previous = last(container.content);
     }
   } else if(container.objType ==="Choice" || container.objType ==="MusicalChoice"){
-    if(!container.nonDefault()){
+    if(!container.nonDefault() && container.content 
+        && container.content.length && container.content[0].content){
       if(container.content[0].content.length){
         container.next = container.content[0].content[0];
         container.previous = last(container.content[0].content);
@@ -2513,7 +2655,7 @@ function nextTextItem(item, withinPara, parStart){
   // objects.
   var cand = item.next;
   var parpart = parStart ? parStart : pari;
-  if(!cand){
+  while(!cand){
     if(withinPara || (parpart+1>=curDoc.contents.length)) return false;
     parpart++;
     cand = curDoc.contents[parpart].content[0];
@@ -2553,10 +2695,70 @@ function repeatDotArray(start, end){
 
 function thisisanindex(obj){
   var pane = $(obj).parents("div.pane")[0];
+  if(!pane) {
+    console.log("Error finding note parent for", obj);
+    return;
+  }
   var out = $(pane).find(".cursorLocator")[0];
   out.innerHTML = "Index";
   $(out).show();
 }
+
+function containingBreak(breaks, y, low, high){
+  // binary search
+  var mid = Math.floor((low+high)/2);
+  if(high<=low) return breaks[mid];
+  if(breaks[mid].top<=y && breaks[mid].height+breaks[mid].top>=y){
+    return breaks[mid];
+  } else if (breaks[mid].top > y){
+    return containingBreak(breaks, y, low, mid-1);
+  } else {
+    return containingBreak(breaks, y, mid+1, high);
+  }
+}
+
+function showZoomForHover(event){
+  var curBreak = false;
+  var parentOffsetObj = event.currentTarget;
+  // FIXME: this is most likely to be the same as last time, so why not cache?
+  if(document.elementFromPoint(event.clientX, event.clientY)===parentOffsetObj){
+    return;
+  }
+  var doc = docMap.docForPane(parentOffsetObj.parentNode);
+  if(!doc.showfacs) return;
+  if(doc && doc.shortSource){
+    var drawToTop = $(doc.drawTo).offset().top;
+//    var pointerY = event.clientY - doc.drawToTop+parentOffsetObj.scrollTop;
+    var pointerY = event.clientY - drawToTop+parentOffsetObj.scrollTop;
+    // FIXME: finding a number by walking rather than binary search is stupid
+    // FIXME: doc.breaks is text then music, so it isn't in a useful order
+    // for(var i=0; i<doc.breaks.length; i++){
+    //   if(doc.breaks[i].top<=pointerY && 
+    //      doc.breaks[i].top+doc.breaks[i].height>=pointerY){
+    //     curBreak = doc.breaks[i];
+    //     break;
+    //   }
+    // }
+    curBreak=containingBreak(doc.breaks, pointerY, 0, doc.breaks.length-1);
+    if(curBreak){
+      // we know what column we're in and where we are in it
+      var proportion = (pointerY - curBreak.top) / curBreak.height;
+      if(zoomer) {
+        $(zoomer.div).show();
+        if(zoomer.prevDoc!==doc){
+          zoomer.doc = doc;
+          zoomer.prevDoc = doc;
+          zoomer.image = false;
+        } 
+      } else {
+        initialiseZoomDiv();
+      }
+      reposition(doc);
+      zoomerMoveFromText(event, curBreak, curBreak.xProp(), 
+                         proportion, false, curBreak.margins());
+    } 
+  } 
+};
 
 function displayStatusBarReference(refobj, event){
   var meg = $(refobj).parents("div.musicexample");
@@ -2658,13 +2860,15 @@ function ColBreakWidth(a, width){
 
 function witnessAppliesTo(object, witness){
   // check whether things in *object* apply to *witness*
-  if(object.appliesTo){
-    if(object.appliesTo.indexOf("MSS")>-1){
+  var applies = object.appliesTo ? object.appliesTo : (object.witnesses ? object.witnesses : false);
+  if(applies){
+    if(applies.indexOf("MSS")>-1 
+       || (witness==="MSS" && applies.indexOf("ed")===-1)){
       return true;
     }
     var item = false;
-    for (var i=0; i<object.appliesTo.length; i++){
-      item = object.appliesTo[i];
+    for (var i=0; i<applies.length; i++){
+      item = applies[i];
       if(typeof(item)==="string" && typeof(witness)==="string") {
         if(witness===item) return true;
       } else if (typeof(witness)==="object"
@@ -2673,9 +2877,10 @@ function witnessAppliesTo(object, witness){
           if(witness.witness===item) return true;
         } else if(item.objType==="Qualified Witness") {
           if(witness.witness===item.witness 
-             && item.corrected===witness.corrected){
-            if(foo==="please") console.log("qual");
-            console.log(true, 2);
+             && item.corrected===witness.corrected
+             && item.sup===witness.sup){
+            // if(foo==="please") console.log("qual");
+            // console.log(true, 2);
             return true;
           }
         }
@@ -2738,7 +2943,9 @@ function stavesAgreeOld(staffing){
   return (staffing && staffing.length) ? staffing.reduce(staffPairAgrees, true) : false;
 }
 function erroneousClefP(s){
-  return s[1].erroneousClef;
+  // It's possible for there to be no clef. FIXME: Goodness knows what
+  // we do in that case
+  return s[1] && s[1].erroneousClef;
 }
 
 function stavesAgree(staffing){
@@ -2774,10 +2981,80 @@ function defaultPresent(staffing){
     if(isDefaultStaffing(staffing[i])) return true;
   }
   return false;
-  var dP = staffing.some(isDefaultStaffing);
-  return dP;
+  // var dP = staffing.some(isDefaultStaffing);
+  // return dP;
 }
-
+function containerThing(variant, container, typeString){
+  if(!container.content) console.trace();
+  for(var i=container.content.length-1; i>=0; i--){
+    if(container.content[i].objType===typeString){
+      return container.content[i];
+    } else if(container.content[i].objType==="MusicalChoice"){
+      var applicable = variant ? container.content[i].applicableReading(variant) 
+        : (container.nonDefault() ? false : container.content[i].content[0]);
+      if(applicable && applicable.objType!=="MusicalOmission"){
+        var cc = containerThing(variant, applicable, typeString);
+        if(cc) return cc;
+      }
+    }
+  }
+  return false;
+}
+function currentThingForVar(variant, typeString) {
+	// Used for preparatory stave for variant pop-ups. We need to know
+	// relevant clef/solm/mens. The type of thing we're looking for is
+	// <typeString>, and <variant> is either the specific variant we
+	// need it for or <false>, in which case, any *default* option will
+	// do.
+//  if(!currentExample || eventi>currentExample.events.length) debugger;
+  if(currentExample && currentExample.events.length===0) return false;
+  var start = (eventi || eventi===0) ? eventi - 1 : (currentExample ? currentExample.events.length -1 : false);
+  if((!start && start!==0) || start<0) return false;
+  var i = start;
+  var prevEvent = currentExample.events[start];
+  if(!prevEvent) {
+    return false;
+  }
+  var skip = false;
+  while(skip || (prevEvent=prevMObj(variant, prevEvent))){
+    // previous is dodgy for choices, so sometimes, we need to do it ourselves
+    if(!prevEvent){
+      return false;
+    }
+    skip = false;
+    if(prevEvent.objType===typeString){
+      return prevEvent;
+    } else if (prevEvent.objType==="MusicalChoice"){
+      var applicable = variant ? prevEvent.applicableReading(variant) 
+        : (prevEvent.nonDefault() ? false : prevEvent.content[0]);
+      if(applicable && applicable.objType!=="MusicalOmission"){
+        var cc = containerThing(variant, applicable, typeString);
+        if(cc) return cc;
+      }
+      prevEvent=eventBefore(prevEvent);
+      skip=true;
+    }
+  }
+  return false;
+}
+function currentClefForVar(variant){
+  return currentThingForVar(variant, 'Clef');
+}
+function eventBefore(event){
+  return currentExample.events[currentExample.events.indexOf(event)-1];
+}
+function prevMObj(variant, obj){
+  if(obj && typeof(obj.previous)!=="undefined" && obj.previous){
+    return obj.previous;
+  } else {
+    // console.log(obj, "has no .previous");
+    if(currentExample){
+      var loc = currentExample.events.indexOf(obj);
+      if(loc>0) return currentExample.events[loc-1];
+    }
+    return false;
+  }
+}
 function isDefaultStaffing(s){
   return clefEqual(s[1], currentClef)
     && solmEqual(s[2], currentSolm)
@@ -2869,7 +3146,72 @@ function witnessList(reading){
   }
   return span;
 }
-
+function SVGWitnessList(reading, parent){
+  var span = svgSpan(parent, "variantWitnessList", false, false);
+  for(var i=0; i<reading.witnesses.length; i++){
+//    if(i){
+    span.appendChild(svgSpan(span, "", false, " "));
+//    }
+    if(typeof(reading.witnesses[i])==="string"){
+      span.appendChild(svgSpan(span, "variantWitness", false, reading.witnesses[i]));
+    } else if(reading.witnesses[i].objType==="WitnessDescription" || 
+              reading.witnesses[i].objType==="Qualified Witness"){
+      span.appendChild(reading.witnesses[i].toSVG(span));
+    }
+  }
+  return span;
+}
+function WitnessListString(witnesses){
+	var WString = "";
+  for(var i=0; i<reading.witnesses.length; i++){
+		if(i>0) WString += " ";
+		if(typeof(reading.witnesses[i])==="string"){
+			WString += reading.witnesses[i];
+		} else {
+			WString += reading.witnesses[i].witness + (this.corrected ? "c" : (this.index ? "i" : "*"));
+		}
+	}
+}
+function fromRoman(numeral) {
+  // read roman numeral (based on rosetta code example)
+  var codes = [['M', 1000], ['CM', 900], ['D',  500], ['CD', 400], 
+               ['C',  100], ['XC',  90], ['L',  50],  ['XL',  40],  
+               ['X',   10], ['IX',   9], ['V',   5],  ['IV',   4],   
+               ['I',    1]]; 
+  var total = 0
+  for (var i=0; i<codes.length; ++i) {
+    while(numeral.substring(0, codes[i][0].length)===code[i][0]){
+      total += codes[i][1];
+      numeral = numeral.substring(codes[i][0].length);
+    }
+  }
+  return total;
+}
+function openingString(loc){
+  var simpleFoliation = /^[0-9]+[rv][a-z]?[A-E]?$/.test(loc);
+  var gathering = /^[A-Z]+[0-9]+[rv][a-z]?$/.text(loc);
+  var romanFoliation = /^[IVXLCDM]+[rv][a-z]?$/.test(loc);
+  var isVerso = loc.indexOf('v')!=-1;
+  if(simpleFoliation){
+    var pageNo = parseInt(loc, 10);
+    if(isVerso){
+      return pageNo+"v-"+(pageNo+1)+"r";
+    } else {
+      return (pageNo-1)+"v-"+pageNo+"r";
+    }
+  } else if(romanFoliation){
+    var numeral = /[IVXLCDM]/.exec(loc)[0];
+    var pageNo = fromRoman(numeral);
+    if(isVerso){
+      return numeral+"v-"+roman(pageNo+1).toUpper()+"r";
+    } else {
+      return roman(pageNo-1).toUpper()+"v-"+numeral+"r";
+    }
+  }
+  // FIXME: other cases not yet present, so not an issue. Guessing the
+  // next folio in a gathering is not easy, whilst page numbers are
+  // unlikely to come up for now.
+}
 function describeBreak(DOMObj, location){
     // FIXME: not good for all situations 
     var page, folio, column;
@@ -2925,26 +3267,49 @@ function breakDrawTo(breaker){
   if(breaker.objType==="Column/Page") return $(breaker.DOMObj).parents('.drawTo')[0];
   else return $(breaker.line).parents('.drawTo')[0];
 }
-
-function replaceBreakers(){
-//  var breakers = $('.breaker');
-  var breakers = allBreaks();
+function setBreakTop(br){
+  br.top = breakTop(br);
+}
+function setBreakTops(breakers){
+  for(var i=0; i<breakers.length; i++){
+    breakers[i].top = breakTop(breakers[i]);
+  }
+  return breakers;
+}
+function breakTopHigher(br1, br2){
+  return br1.top-br2.top;
+}
+function replaceBreakersForTreatise(doc){
+  if(!doc.breaks.length) return;
+  var breakers = doc.breaks.slice();
+  breakers.forEach(setBreakTop);
+  breakers = breakers.sort(breakTopHigher);
   var breakObjects = [];
   var box, y, parent;
+  breakers[breakers.length-1].height = doc.drawTo.scrollHeight 
+    - breakers[breakers.length-1].top;
   for(var i=0; i<breakers.length; i++){
-    // y = $(breakers[i]).position().top;
-    y = breakTop(breakers[i]);
-    // drawTo = $(breakers[i]).parents('.drawTo')[0];
+    if(i){
+      breakers[i-1].height = breakers[i].top-breakers[i-1].top;
+      breakers[i-1].nextStart = breakers[i];
+    }
     drawTo = breakDrawTo(breakers[i]);
     breakDiv = DOMDiv('floatingBreak col', false, false);
     drawTo.appendChild(breakDiv);
-    breakDiv.style.top = y+"px";
+    breakDiv.style.top = breakers[i].top+"px";
     describeBreak(breakDiv, breakers[i].location);
     if(breakers[i].catchWord){
       var catchDiv = breakers[i].catchWord.toHTML();
       breakDiv.appendChild(catchDiv);
       catchDiv.style.bottom = (10+catchDiv.getBoundingClientRect().height)+"px";
     }
+    $(breakDiv).data("breaker", breakers[i]);
+  }  
+};
+function replaceBreakers(){
+  var treatises = (docMap && docMap.docs.length) ? docMap.docs : [doc];
+  for(var i=0; i<treatises.length; i++){
+    replaceBreakersForTreatise(treatises[i]);
   }
 }
 function WitnessHashName(wit){
@@ -2996,10 +3361,87 @@ function MEIAddPosition(obj, MEIObj){
   // Adds pitch to MEI element, if available, and otherwise adds staff
   // position
   if(obj.pitch){
-    MEIObj.setAttribute("pname", obj.pitch.charAt(0).loLowerCase());
-    MEIObj.setAttribute("oct", 3+(Math.floor(notes.indexOf(obj.pitch) / 7)));
+		var pname = obj.pitch.charAt(0).toLowerCase();
+    MEIObj.setAttributeNS(null, "pname", pname);
+    MEIObj.setAttributeNS(null, "oct", 1+(Math.floor((notes.indexOf(obj.pitch)+5) / 7)));
   } else if(obj.staffPos){
     MEIObj.setAttribute("loc", obj.staffPos-4);
   }
   return obj;
+}
+function breakerxProp(){
+  // proportion of thumbnail's width to discard from left of image
+  if(/^[A-Z]?[0-9]*[rv]?a$/.exec(this.location)){
+    // Multicolumn spec, but first column
+    return 0;
+  } else if (/^[A-Z]?[0-9]*[rv]?b$/.exec(this.location)){
+    // second column of something. FIXME: For now, assume 2 column
+    return 0.5;
+  } else {
+    // fixme: Stupid
+    return 0;
+  }
+};
+function breakerTwoCols(){
+  if(/^[A-Z]?[0-9]*[rv]?[ab]$/.exec(this.location)){
+    // multicolumn. FIXME: assume two column
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function breakerMargins(){
+  if(/^[A-Z]*[0-9]*r[ab]?/.exec(this.location)){
+    return texts[this.doc.shortSource].margins.recto ? 
+      texts[this.doc.shortSource].margins.recto : false;
+  } else if (/^[A-Z]*[0-9]*v[ab]?/.exec(this.location)){
+    return texts[this.doc.shortSource].margins.verso ? 
+      texts[this.doc.shortSource].margins.verso : false;
+  }
+}
+function sizeReaderFn(i, j){
+  return function(){
+    zoomer.image.widths[i] = this.width;
+    zoomer.image.heights[j] = this.height;
+    zoomer.image.drawNow(i, j);
+  };
+};
+function getSize(image, i, j){
+  var fakeImage = new Image();
+  fakeImage.src = $(image).attr("src");
+  // Add a reference to the original.
+  // Get accurate measurements from that.
+  $(fakeImage).load(function(){
+    if(this.width) zoomer.image.widths[i] = this.width;
+    if(this.height) zoomer.image.heights[j] = this.height;
+    console.log("getSize", i, j);
+    zoomer.image.drawNow(i, j);
+  });
+}
+
+function selfFun(x){
+	return x;
+}
+
+function uuid() {
+    function randomDigit() {
+        if (crypto && crypto.getRandomValues) {
+            var rands = new Uint8Array(1);
+            crypto.getRandomValues(rands);
+            return (rands[0] % 16).toString(16);
+        } else {
+            return ((Math.random() * 16) | 0).toString(16);
+        }
+    }
+    var crypto = window.crypto || window.msCrypto;
+    return 'xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx'.replace(/x/g, randomDigit);
+}
+
+function addUUIDs(event, mei, document){
+	var ID = event.UUID ? event.UUID : "ID"+uuid();
+	event.UUID = ID;
+	mei.setAttribute("xml:id", ID);
+	if(!document.UUIDs) document.UUIDs = {};
+	document.UUIDs[ID] = {event: event, mei: mei};
 }

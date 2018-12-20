@@ -1,0 +1,38 @@
+@font-face {
+    font-family: 'ArsNovaVoidRegular';
+    src: url('../GUIEditor/arsnovavoid-webfont.eot');
+    src: url('../GUIEditor/arsnovavoid-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../GUIEditor/arsnovavoid-webfont.woff') format('woff'),
+         url('../GUIEditor/arsnovavoid-webfont.ttf') format('truetype'),
+         url('../GUIEditor/arsnovavoid-webfont.svg#ArsNovaVoidRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ArsNovaBlackRegular';
+    src: url('../GUIEditor/arsnova-black-web.eot');
+    src: url('../GUIEditor/arsnova-black-web.eot?#iefix') format('embedded-opentype'),
+         url('../GUIEditor/arsnova-black-web.woff') format('woff'),
+         url('../GUIEditor/arsnova-black-web.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ArsNovaExtraRegular';
+    src: url('../GUIEditor/arsnovaxtra-webfont.eot');
+    src: url('../GUIEditor/arsnovaxtra-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../GUIEditor/arsnovaxtra-webfont.woff') format('woff'),
+         url('../GUIEditor/arsnovaxtra-webfont.ttf') format('truetype'),
+         url('../GUIEditor/arsnovaxtra-webfont.svg#ArsNovaXtraRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+ }
+@font-face {
+    font-family: 'mensuration';
+    src: url('../GUIEditor/mensuration.eot');
+    src: url('../GUIEditor/mensuration.eot?#iefix') format('embedded-opentype'),
+         url('../GUIEditor/mensuration.woff') format('woff'),
+         url('../GUIEditor/mensuration.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

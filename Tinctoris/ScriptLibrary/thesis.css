@@ -1,0 +1,35 @@
+div.toc {
+	font-size: 85%;
+  width: calc(100%-20px);
+  margin: 2px 6px 2px 2px;
+  cursor: pointer;
+}
+div.toc2 {
+	padding-left: 48px;
+  text-indent: -30px;
+}
+div.toc1 {
+	padding-left: 12px;
+  text-indent: -12px;
+  hyphens: auto;
+}
+.toc ul {
+  list-style-type: none;
+}
+div.toc1 span, div.toc2 span {
+  cursor: pointer;
+}
+.content .contentbox > div {
+  display: none;
+}
+.contentbox table, .contentbox table td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+div.toc1 span:hover, div.toc2 span:hover {
+  color: #CC2414;
+}
+div.current {
+  color: #CC2414;
+  font-weight: bold;
+}

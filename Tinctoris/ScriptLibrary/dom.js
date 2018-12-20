@@ -27,6 +27,27 @@ function DOMRow(cname, id){
 function DOMCell(cname, id, content){
   return DOMTextEl('td', cname, id, content);
 }
+function DOMCopyTable(table){
+  var copy = DOMTable();
+  if(table.className){
+    copy.className = table.className;
+  }
+  var rows = $(table).find("tr");
+  for(var i=0; i<rows.length; i++){
+    var rowCopy = DOMRow();
+    copy.appendChild(rowCopy);
+    var cells = $(rows[i]).find("td");
+    for(var j=0; j<cells.length; j++){
+      var cellCopy = DOMCell();
+      rowCopy.appendChild(cellCopy);
+      var cn = cells[j].childNodes;
+      for(var mm=0; mm<cn.length; mm++){
+        cellCopy.appendChild(cn[mm].cloneNode(true));
+      }
+    }
+  }
+  return copy;
+}
 function DOMDiv(cname, id, content){
   return DOMTextEl('div', cname, id, content);  
 }

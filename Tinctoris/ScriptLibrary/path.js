@@ -20,6 +20,22 @@ function pathSettings(search, fragment, localOnlyIndex){
   this.local = localOnlyIndex;
   this.searchString = false;
   this.fragmentString = false;
+  this.date = function(){
+    if(this.settings.date){
+      var bits = this.settings.date.split("-");
+      if(!bits) return false;
+      bits.reverse();
+      if(bits.length===1) bits.push("12");
+      if(bits.length===2) bits.push("31");
+      if(bits[2].length===1) bits[2] = "0"+bits[2];
+      if(bits[1].length===1) bits[1] = "0"+bits[1];
+      var dateString = bits.join("-")+"T23:59:59";
+      console.log(dateString);
+      return Date.parse(dateString);
+    } else {
+      return false;
+    }
+  };
   this.getSearchString = function(refresh){
     if(refresh || !this.searchString) 
       this.searchString = makeVarString(this.settings, this.search, "?");
@@ -75,7 +91,9 @@ function pathSettings(search, fragment, localOnlyIndex){
         aItKey = aCouples[nKeyId].split("=");
         val = aItKey.length > 1 ? unescape(aItKey[1]) : "";
         // Guess at data type. May have to maintain a list...
-        if(parseInt(val) || parseInt(val)===0) val = parseInt(val);
+        if(Number(val) && (parseInt(val) || parseInt(val)===0)) val = parseInt(val);
+        if(val==="true") val = true;
+        if(val==="false") val = false;
         this.settings[unescape(aItKey[0])] = val;
       }
     }
@@ -120,9 +138,9 @@ function pathSettings(search, fragment, localOnlyIndex){
 }
 
 var pageSettings = new pathSettings(["transcribeexx", "translationNotes", "transcriptionNotes"],
-    ["MSPunctuation", "showvars", "pane", "source", "language", "book", "chapter", 
+    ["MSPunctuation", "showvars", "showfacs", "showcommentary", "pane", "source", "language", "date", "book", "chapter", 
      "section", "paragraph", "treatise", "hashlink"],
-                               5);
+                               8);
 function rootpath(){
   var string = window.location.pathname;
   var pos = string.indexOf("/texts/") == -1 

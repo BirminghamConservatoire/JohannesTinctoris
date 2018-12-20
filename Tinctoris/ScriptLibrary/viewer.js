@@ -102,7 +102,6 @@ function romanReference(a, b, c){
   } else if (b==="e"){
     return "Expl.";
   } else if (!isFinite(b)){
-    console.log(b);
     return b;
   }
   var ref = [];
@@ -552,10 +551,12 @@ function findEnglishText(treatise, pane){
 }
 
 function refreshWidths(){
+  if(!docMap || !docMap.docs || !docMap.docs.length) return;
   var count = $(domobj['Content']).children.length;
   var currentWidth = 0;
   for(var i=0; i<docMap.docs.length; i++){
-    currentWidth += parseInt(docMap.docs[i].out.style.width) + 15;
+    // currentWidth += parseInt(docMap.docs[i].out.style.width) + 15;
+    currentWidth += parseInt(docMap.docs[i].out.getBoundingClientRect().width) + 10;
   }
   domobj['Content'].style.width = currentWidth+20+"px";
 }
@@ -575,6 +576,24 @@ function applyEditedText(treatise, pane, settings){
     document.getElementById("content").appendChild(pane);
   }
   var text = texts[treatise].edited || loadText(treatise, "edited");
+  if(pageSettings.date() && allTexts[treatise]){
+    console.log(pageSettings.date());
+    var dstr = texts[treatise].exportYear+"-"
+      +(texts[treatise].exportMonth<10 ? "0": "")+texts[treatise].exportMonth+"-"
+      +(texts[treatise].exportDay<10 ? "0" : "") + texts[treatise].exportDay 
+      + "T00:00:00";
+    if(Date.parse(dstr)>pageSettings.date()){
+      var keys = Object.keys(allTexts[treatise].edited).reverse();
+      var tempTxt = text;
+      for(var i=0; i<keys.length; i++){
+        if(((Number(keys[i])-2208988800)*1000)< pageSettings.date()){
+          tempTxt = allTexts[treatise].edited[i];
+          break;
+        } 
+      }
+//      text = tempTxt;
+    }
+  }
   var doc = new TreatiseDoc(text, pane);
   doc.language = "Latin";
   doc.docType = "Edited";
@@ -602,6 +621,12 @@ function applyTranslatedText(treatise, pane, language, settings){
     doc[settings[s][0]] = settings[s][1];
   }
   doc.exampleSource = texts[treatise].edited || loadText(treatise, "edited");
+  if(texts[treatise].commentary) {
+    var cs = new CommentarySet();
+    doc.commentaries = cs;
+    cs.populate(doc, texts[treatise].commentary);
+//    doc.commentary = $.parseHTML(texts[treatise].commentary);
+  }
   docMap.addDoc(doc);
 }
 
@@ -792,6 +817,7 @@ function getText(){
   }
   docMap.unhold();
   fixHeight(true);
+  docMap.prepScrolls();
 }
 
 function getTextDefault(){
@@ -820,10 +846,13 @@ function getTextDefault(){
 // }
 function updateMenuSettings(){
   // This looks stupid, but toggleClass requires pure boolean objects
+  // FIXME: THIS IS STUPID
   // $("#showVariants").toggleClass("checked", pageSettings.settings.showvars ? true : false);
   // $("#hideVariants").toggleClass("checked", pageSettings.settings.showvars ? false : true);
   $("#displayvars").toggleClass("checked", pageSettings.settings.showvars ? true : false);
   $("#hidevars").toggleClass("checked", pageSettings.settings.showvars ? false : true);
+  $("#displayfacs").toggleClass("checked", pageSettings.settings.showfacs ? true : false);
+  $("#hidefacs").toggleClass("checked", pageSettings.settings.showfacs ? false : true);
   $("#MSPunct").toggleClass("checked", pageSettings.settings.MSPunctuation ? true : false);
   $("#modernPunct").toggleClass("checked", pageSettings.settings.MSPunctuation ? false : true);
   // $("#MSPunctuation").toggleClass("checked", pageSettings.settings.MSPunctuation ? true : false);
@@ -873,6 +902,8 @@ function fixHeight(ignorewidth){
 
 function predrawInit(){
   showvariants = pageSettings.settings.showvars;
+  showfacsimile = pageSettings.settings.showfacs;
+  showcommentary = pageSettings.settings.showcommentary;
   punctuationStyle = pageSettings.settings.MSPunctuation ? "MS" : "modern";
   updateMenuSettings();
   fixHeight(true);
@@ -922,8 +953,8 @@ function Position(book, chapter, section, paragraph, offset){
   this.simpleScroll = function(div){
     var par = $(div).find(this.atClass());
     var pane = div.parentNode;
-    if(par.length && Number(this.book)){
-      var ref = romanReference(this.book, this.chapter, this.section).replace(".", "_");
+    if(par.length && Number(this.book) || Number(this.book)===0){
+      var ref = romanReference(this.book, this.chapter, this.section).replace(/[.]/g, "_");
       $(div).scrollTo(par[0], {axis: "y", offset: {left: 0, top: -offset}});
       // now update location
       $(pane).find(".loctext").html(ref);
@@ -947,6 +978,7 @@ function currentPosition(div){
 }
 
 function simpleScrollTo(div, offset, book, chap, sect, para){
+  if(book==='false') book=0;
   var shortcut = $(div).children(".para.at-"+book+"-"+chap+"-"+(sect ? sect : 0)+"-"+para);
   if(shortcut.length){
     var ref = romanReference(book, chap, sect);
@@ -977,17 +1009,37 @@ function simpleScrollTo(div, offset, book, chap, sect, para){
     }
   }
 }
+function scrollByUnreliablePara(loc, sentence, drawDiv, offset){
+  if($(drawDiv).children(".para.at-"+loc[0]+"-"+loc[1]+"-"+(loc[2] ? loc[2] : 0)+"-"+loc[3]).length){
+    simpleScrollTo(drawDiv, offset, loc[0], loc[1], loc[2], loc[3]);
+  } else {
+    var sentenceMatches = $(drawDiv).children(".para[class*='at-"+loc[0]+"-"+loc[1]+"']").find(".sentence-"+sentence);
+    if(sentenceMatches.length){
+      $(drawDiv).scrollTo(sentenceMatches[0], {axis: "y", offset: {left: 0, top: -offset}});
+    }
+  }
+}
 function alignVersions(e){
   if(e.altKey){
-    var loc2=locationInTreatise(e.delegateTarget);
-    var loc = /at-\S*/.exec(e.delegateTarget.className)[0].split("-").slice(1).map(Number);
+//    var loc2=locationInTreatise(e.delegateTarget);
+    // Location string in paragraph class:
+    var locs = /at-\S*/.exec(e.delegateTarget.className)[0].split("-").slice(1);
+    // Usually, they're all numbers:
+    var loc = locs.map(Number);
+    // But they might be prologue or whatever, in which case, we do want the string:
+    if(isNaN(loc[1])) loc[1] = locs[1];
     var div = e.delegateTarget.parentNode;
     var offset = $(e.delegateTarget).offset().top - $(div).offset().top;
     var treatise = docMap.docForPane(div.parentNode).group;
     var docs = docMap.treatises[treatise];
     for(var i=0; i<docs.length; i++){
       if(docs[i].drawTo != div){
-        simpleScrollTo(docs[i].drawTo, offset, loc[0], loc[1], loc[2], loc[3]);
+        // var sent = Number(e.delegateTarget.className.substring(e.delegateTarget.className.indexOf("sentencefrom-")+13));
+        // var pdiv = $(docs[i].drawTo).children(".para[class*='at-"+loc[0]+"-"+loc[1]+"']:has(.sentence-"+sent+")");
+        // console.log(sent, pdiv[0].className, loc, pdiv[0].childNodes[0].childNodes, e.delegateTarget.className);
+//        simpleScrollTo(docs[i].drawTo, offset, loc[0], loc[1], loc[2], loc[3]);
+        scrollByUnreliablePara(loc, Number(e.delegateTarget.className.substring(e.delegateTarget.className.indexOf("sentencefrom-")+13)), docs[i].drawTo, offset);
+        // $(docs[i].drawTo).scrollTo(pdiv, {axis: "y", offset: {left: 0, top: -offset}});
         docs[i].scrollpos.book = loc[0];
         docs[i].scrollpos.chapter = loc[1];
         docs[i].scrollpos.section = loc[2];

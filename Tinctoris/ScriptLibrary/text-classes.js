@@ -32,12 +32,15 @@
 //    * Choice
 //    * Source
 //
+//  Classes and methods for diagrams:
+//
 function Book(){
   this.objType = "Book";
   this.code = "<book>";
   this.book = ++prevBook;
   this.next = false;
   this.previous = false;
+  this.n = this.book;
   book = this.book;
   chapter = 0;
   section = 0;
@@ -72,6 +75,7 @@ function Index(){
   this.chapter = "Index";
   this.next = false;
   this.previous = false;
+  this.n = "Index";
   chapter = "Index";
   paragraph = 0;
   section = 0;
@@ -140,16 +144,18 @@ function Table(){
 //    this.DOMObjs = [document.createElement('p')];
     // Paragraphs always begin with capitals unsuppressed. Probably.
     uncapitalise = false;
+    capitalise = false;
+    currentTable = this;
     var i=0;
     var obj;
 //    var str = (this.hang ? "hang" : "");
-    var classString = "";
+    var className = "";
     if(this.classes.length>0){
       for(i=0; i<this.classes.length; i++){
         if(i>0){
           // str+= " ";
         }
-        classString+= this.classes[i];
+        className+= this.classes[i];
       }
     }
     for(i=0; i<this.rows.length; i++){
@@ -172,13 +178,38 @@ function Table(){
       } else if (this.rows[i].objType == "MusicExample"){
         // Never happens... or does it?
         console.log("Music example in table!");
+      } else if (this.rows[i].objType==="Choice"){
+        if(!showvariants){
+          if(this.rows[i].nonDefault()){
+            // Accepted version has no row here
+            continue;
+          } else {
+            obj = this.rows[i].content[0].content[0].toHTML();
+            this.DOMObj.appendChild(obj);
+            obj.className += className;
+            continue;
+          }
+        } else {
+          var el;
+          var ins = this.rows[i].nonDefault();
+          if(ins){
+            el = DOMSpan(ins ? "choice ins variants" : "variants", false, "‸");
+          } else {
+            el = this.rows[i].content[0].content[0].toHTML();
+            el.className+=" choice variantReadingText";
+          }
+          addAnnotation(el, this.rows[i], "Choice");
+          this.DOMObj.appendChild(el);
+          el.className += className;
+        }
       } else {
         // TableRow
         obj = this.rows[i].toHTML();
         this.DOMObj.appendChild(obj);
-        obj.className += classString;
+        obj.className += className;
       }
     }
+    currentTable = false;
     return this.DOMObj;
   };
   // Table
@@ -186,6 +217,7 @@ function Table(){
 
 function TableRow(){
   this.cells = [];
+  this.isContinuation = false;
   this.toTEI = function (doc, parent){
     var row = doc.element("row");
     parent.appendChild(row);
@@ -198,9 +230,10 @@ function TableRow(){
     }
   };
   this.toHTML = function (){
-    var row = DOMDiv("TabularRow", false, false);
+    var row = DOMDiv("TabularRow"+(this.isContinuation ? " continued" : ""), 
+                     false, false);
     var cell = DOMDiv("TabularCell", false, false);
-    var table = currenttextparent;
+    var table = currentTable;
     for(var i=0; i<this.cells.length; i++){
       cell.className += " "+table.columnClass(i);
       cell.appendChild(this.cells[i].toHTML());
@@ -208,7 +241,7 @@ function TableRow(){
       cell = DOMDiv("TabularCell", false, false);
     }
     return row;
-  }
+  };
 }
 
 function TabularIndex(){
@@ -252,6 +285,7 @@ function TabularIndex(){
   };
   this.toHTML = function(){
     inIndex = true;
+    currentTable = this;
     this.DOMObj = DOMDiv('tabular index'+" at-"+this.book+"-"
                          +this.chapter+"-"+this.section+"-"+this.paragraph+" sentencefrom-"
                          +this.sentence, false, false);
@@ -261,13 +295,13 @@ function TabularIndex(){
     var i=0;
     var obj;
 //    var str = (this.hang ? "hang" : "");
-    var classString = "";
+    var className = "";
     if(this.classes.length>0){
       for(i=0; i<this.classes.length; i++){
         if(i>0){
           // str+= " ";
         }
-        classString+= this.classes[i];
+        className+= this.classes[i];
       }
     }
     for(i=0; i<this.rows.length; i++){
@@ -290,10 +324,11 @@ function TabularIndex(){
         // TableRow
         obj = this.rows[i].toHTML();
         this.DOMObj.appendChild(obj);
-        obj.className += classString;
+        obj.className += className;
       }
     }
     inIndex = false;
+    currentTable = false;
     return this.DOMObj;
   };
   // Table
@@ -311,6 +346,7 @@ function Prologue(){
   section = 0;
   sentence = 0;
   exampleno = 0;
+  this.n = "prologue";
   this.DOMObj = DOMAnchor('chapter', false, false, "ch-prologue");
   this.toTEI = addSubdivision;
   this.toText = function(){
@@ -327,6 +363,7 @@ function Conclusion(){
   this.chapter = "c";
   this.next = false;
   this.previous = false;
+  this.n = "conclusion";
   chapter = "c";
   paragraph = 0;
   section = 0;
@@ -336,10 +373,10 @@ function Conclusion(){
   this.DOMObj = DOMAnchor('chapter', false, false, "ch-conclusion");
   this.toText = function(){
     return this.code;
-  }
+  };
   this.toHTML = function(){
     return this.DOMObj;
-  }
+  };
 }
 function Explicit(){
   this.objType = "Explicit";
@@ -348,6 +385,7 @@ function Explicit(){
   this.chapter = "e";
   this.next = false;
   this.previous = false;
+  this.n = "explicit";
   chapter = "e";
   paragraph = 0;
   section = 0;
@@ -357,10 +395,10 @@ function Explicit(){
   this.DOMObj = DOMAnchor('chapter', false, false, "ch-explicit");
   this.toText = function(){
     return this.code;
-  }
+  };
   this.toHTML = function(){
     return this.DOMObj;
-  }
+  };
 }
 
 function Chapter(){
@@ -374,6 +412,7 @@ function Chapter(){
   section = 0;
   sentence = 0;
   exampleno = 0;
+  this.n = this.chapter;
   this.DOMObj = false;
   this.toText = function(){
     return this.code;
@@ -408,6 +447,7 @@ function Section(){
   this.next = false;
   this.previous = false;
   this.toTEI = addSubdivision;
+  this.n = this.section;
   this.toText = function(){
     return this.code;
   };
@@ -435,7 +475,7 @@ function Heading(){
     doc.currentParent = el;
     console.log("heading");
     return el;
-  }
+  };
   this.toHTML = function(){
     // FIXME;
     return false;
@@ -470,6 +510,12 @@ function Column(){
   this.DOMObj = DOMDiv('col breaker', false, false);
   this.next = false;
   this.previous = false;
+  this.doc = false;
+  this.top = false;
+  this.height = false;
+  this.startPos = false;
+  this.endPos = false;
+  this.nextStart = false;
   this.catchWord = curCatchword;
   curCatchword = false;
   this.toText = function(){
@@ -497,6 +543,12 @@ function Column(){
     }
     return this.DOMObj;
   };
+  this.side = function(){
+    return /^[A-Z]*[0-9]*[rv]?/.exec(this.location)[0];
+  };
+  this.xProp = breakerxProp;
+  this.margins = breakerMargins;
+  this.twoCols = breakerTwoCols;
   this.toTEI = function (doc, parent){
     if(!parent) parent = doc.currentParent;
     var el;
@@ -521,7 +573,10 @@ function Column(){
       parent.appendChild(el);
     }
   };
+  this.imageFilename = imageFilenameForBreaker;
+  this.thumbFilename = thumbFilenameForBreaker;
   this.toHTML = function(){
+    this.doc = curDoc;
     if(this.location) {
       curDoc.breaks.push(this);
       this.DOMObj = DOMDiv('col breaker', false, false);
@@ -544,12 +599,12 @@ function Newline(){
   inVerse++;
   this.toTEI = function (doc, parent){
     if(!parent) parent = doc.currentParent;
-    el = doc.element("lb");
+    var el = doc.element("lb");
     parent.appendChild(el);
   };
   this.toHTML = function(){
     return document.createElement("br");
-  }
+  };
 }
 
 function Paragraph(suppressNodeNumbers){
@@ -595,12 +650,12 @@ function Paragraph(suppressNodeNumbers){
       if(simpleTextualContentp(this.content[i])){
         structures.push(this.content[i]);
       } else if (containsTextualContentp(this.content[i])) {
-        var substructure = this.content[i].textualStructures();
+        substructure = this.content[i].textualStructures();
         if(substructure && substructure.length) structures = structures.concat(substructure);
       } 
     }
     return structures;
-  }
+  };
   this.toTEI = function(doc, parent, headless){
     var tp = this.content.filter(textualContentp);
     var el;
@@ -608,8 +663,12 @@ function Paragraph(suppressNodeNumbers){
     if(tp.length===0){
       // There's no text here. Possibly music example.
       for(var i=0; i<this.content.length; i++){
-        if(this.content[i].toTEI) this.content[i].toTEI(doc, parent);
-      }
+        if(this.content[i].toTEI) {
+          // FIXME!!
+          //this.content[i].toTEI(doc, parent);
+          return this.content[i].toTEI(doc, parent);
+        }
+      }      
     } else
        if(headless ||
               (tp.length===1 
@@ -618,24 +677,31 @@ function Paragraph(suppressNodeNumbers){
                    || tp[0].type==="treatiseTitle"))){
       // Title, so no p
       return this.content[0].toTEI(doc, parent);
-    }  else if (tp.length===1 
-              && tp[0].objType==="Span"
-              && (tp[0].type==="incipit"
-                  || tp[0].type==="explicit")){
-        el = doc.element("div");
+    }  else if ((tp.length===1 
+                 && tp[0].objType==="Span"
+                 && (tp[0].type==="incipit"
+                     || tp[0].type==="explicit"))
+                || doc.hasParaParent(parent)){
+        el = doc.element("seg");
         el.setAttribute("type", tp[0].type);
         parent.appendChild(el);
         tp[0].toTEI(doc, el);
         return el;
     } else {
-      el = doc.element("p");
-      elo = el;
-      if(!parent) console.log(doc, parent);
-      parent.appendChild(el);
-      for(var i=0; i<this.content.length; i++){
-        if(this.content[i].toTEI) this.content[i].toTEI(doc, el);
-        if(el!==elo) console.log(el, elo, this.content[i]);
+      if(this.content.length===1 && this.content[0].objType==="Span" 
+         && this.content[0].type==="verse"){
+        el = this.content[0].toTEI(doc, el);
+      } else {
+        el = doc.element("p");
+        var elo = el;
+        if(!parent) console.log(doc, parent);
+        parent.appendChild(el);
+        for(var i=0; i<this.content.length; i++){
+          if(this.content[i].toTEI) this.content[i].toTEI(doc, el);
+          if(el!==elo) console.log(el, elo, this.content[i]);
+        }
       }
+      el.setAttribute("n", this.paragraph);
       return el;
     }
   };
@@ -703,13 +769,23 @@ function Paragraph(suppressNodeNumbers){
         if(i && this.content[i-1].objType==="Marginal"){
           $(this.content[i-1].domObj).children(".marginalContent").addClass("premusical");
         }
-        var standalone = standalonep(this.content[i], this.content)
+        var standalone = standalonep(this.content[i], this.content);
         var div = DOMDiv('musicexample dc'+desperatecounter
 //                         +(this.content.length == 1 ? " standalone" 
                          +(standalone ? " standalone" : " inline")+" "+this.content[i].atClass,
                          false, false);
         if(margin) this.content[i].marginSpace = true;
         this.content[i].reset();
+				if(MEILinks && standalone){
+					try {
+						var anchor = DOMAnchor('MEI', 'link-ex'+this.counter, 'MEI', "data:application/xml;base64,"+btoa(this.content[i].toMEI().serialize()));
+						anchor.setAttributeNS(null, 'download', (curDoc.shortTitle || curDoc.title).replace(/\s+/, '-') + '--' + roman(this.book).toUpperCase()+'-'+roman(this.chapter)+'-'+'ex'+(this.content[i].exampleno+1)+'.mei');
+						para.appendChild(anchor);
+					}
+					catch(e){
+						console.log(e);
+					}
+				}
         if(this.content[i].SVG && false){
           var newSVG = this.content[i].SVG;
         } else {
@@ -721,6 +797,7 @@ function Paragraph(suppressNodeNumbers){
         desperatecounter++;
         if(i+1<this.content.length 
            && (this.content[i+1].objType==="text"
+               || this.content[i+1].objType==="Span"
                || this.content[i+1].objType==="Punctuation")
            && punctuationp(this.content[i+1])){
           // Don't want line break here
@@ -733,6 +810,10 @@ function Paragraph(suppressNodeNumbers){
         div.appendChild(newSVG);
         examples.push([this.content[i], newSVG]);
         if(this.content.length===1) para.className+=" justMusic";
+      } else if(this.content[i].objType==="SVGTable") {
+        var obj = svg(1000,1000);
+        para.appendChild(obj);
+        this.content[i].toHTML(obj);
       } else {
         var obj = this.content[i].toHTML();
         if(obj) para.appendChild(obj);
@@ -751,7 +832,7 @@ function NoCount(){
   this.book = book;
   this.section = section;
   this.sentence = sentence;
-  this.toText = function(){ return "<nocount>"};
+  this.toText = function(){ return "<nocount>";};
   this.toHTML = function(){
     noCount = this;
     return false;
@@ -765,14 +846,15 @@ function EndNoCount(){
   section = this.noCount.section;
   sentence = this.noCount.sentence;
   noCount = false;
-  this.toText = function(){ return "<nocount>"};
+  this.toText = function(){ return "<nocount>";};
   this.toHTML = function(){
     noCount = false;
     return false;
-  }
+  };
 }
 
 function Annotation(){
+  // N.B. classes.js adds methods to this prototype for musical annotations
   this.objType = "Annotation";
   this.code = false;
 //  this.domObj = DOMSpan("annotation", false, "‸");//*"
@@ -780,6 +862,9 @@ function Annotation(){
   this.contents = [];
   this.next = false;
   this.previous = false;
+  this.startY = false;
+  this.startX = false;
+  this.classList = (currentExample && currentExample.classes) ? currentExample.classes.classes.slice(0) : [];
   this.toText = function(){
     return "**"+this.code+"**";
   };
@@ -800,7 +885,13 @@ function Annotation(){
   };
   this.toHTML = function(){
     //addAnnotation(this.domObj, this.code, "Annotation");
+    var ouc = uncapitalise;
+    var oc = capitalise;
+    uncapitalise = false;
+    capitalise = false;
     addAnnotation(this.domObj, this, "Annotation");
+    uncapitalise=ouc;
+    capitalise = oc;
     return this.domObj;
     // this.domObj.title = this.code;
     // $(this.domObj).mouseover(function(text) {
@@ -833,7 +924,7 @@ function RightStop(){
   this.previous = false;
   this.toText = function(){
     return "\t"+this.content.toText();
-  }
+  };
   this.toHTML = function(){
     var span = DOMSpan("right-aligned", false, false);
     var p = $($(this.content.toHTML()).children()[0]).contents();
@@ -842,7 +933,7 @@ function RightStop(){
     }
     this.domObj.appendChild(span);
     return this.domObj;    
-  }
+  };
 }
 
 function Marginal(){
@@ -874,7 +965,7 @@ function Marginal(){
     parent.appendChild(document.createTextNode("["+this.margin
                                                +(this.side ? "" : "]")));
     if(this.side){
-      parent.appendChild(document.createElement("wbr"))
+      parent.appendChild(document.createElement("wbr"));
       parent.appendChild(document.createTextNode("("+this.side+")"+"]"));
     }
     return parent;
@@ -914,13 +1005,14 @@ function Marginal(){
     }
     // span.appendChild(DOMSpan("marginLoc", false, " ["+this.locString()+"] "));
     this.domObj.appendChild(span);
+    curDoc.marginals.push([this, span]);
     return this.domObj;
   };
 }
 
 function Catchword(){
   this.objType = "Catchword";
-  this.tag = "catchword"
+  this.tag = "catchword";
   this.code = false;
   this.content = false;
   this.position = false;
@@ -938,7 +1030,7 @@ function Catchword(){
   this.footnote = function(){
     return DOMSpan("catchwordpos", false, this.position);
   };
-  this.width = function(){ return 0;} // Just for music example
+  this.width = function(){ return 0;}; // Just for music example
   this.toTEI = function(doc, parent){
     // Closest I can see is <note place="margin">
     if(!parent) parent = (doc.parentNode || doc.body);
@@ -989,7 +1081,7 @@ function Catchword(){
     this.example = currentExample;
     this.yOffset = cury;
     currentExample.catchwords.push(this);
-  }
+  };
 }
 
 function textualContentp(element){
@@ -1055,6 +1147,26 @@ function standalonep(example, array){
   } else {
     return array.filter(textualContentp).length <=1 || exampleFollowsCol(example, array);
   }
+}
+
+function maybeNewSentenceCheck(contentSoFar){
+  // If there is an inline music example, followed by whitespace or
+  // nothing, following text is a new sentence iff the text (or the
+  // editorially favoured reading of it) begins
+  // with a capital.
+  // This function simply checks contentSoFar to see if it ends with
+  // an inline music example and (optionally) whitespace.
+  for(var i=contentSoFar.length-1; i>=0; i--){
+    if(contentSoFar[i].objType==="MusicExample" 
+       && contentSoFar[i].parameters.spec==="in-line"){
+      return true;
+    } else if(contentSoFar[i].objType==="text" && /^\s*$/.exec(contentSoFar[i].content)){
+      continue;
+    } else {
+      return false;
+    }
+  }
+  return false;
 }
 
 function exampleFollowsCol(example, array){
@@ -1152,6 +1264,10 @@ function Span(){
   this.realPrevious = function(){
     return this.content.length ? this.content[this.content.length-1] : this.previous;
   };
+  this.punctuation = function(){
+    var str = /^\s*[,.:¶?!]/.exec(this.content);
+    return str ? true : false;
+  };
   this.textualStructures = function(){
     var structures = [];
     var substructure = false;
@@ -1159,7 +1275,7 @@ function Span(){
       if(simpleTextualContentp(this.content[i])){
         structures.push(this.content[i]);
       } else if (containsTextualContentp(this.content[i])) {
-        var substructure = this.content[i].textualStructures();
+        substructure = this.content[i].textualStructures();
         if(substructure && substructure.length) structures = structures.concat(substructure);
       } 
     }
@@ -1181,7 +1297,7 @@ function Span(){
   };
   this.extraClasses = function(){
     return this.extra ? " span"+this.extra: "";
-  }
+  };
   this.toTEI = function(doc, parent){
     if(!parent) parent=(doc.currentParent || doc.body);
     var el;
@@ -1229,7 +1345,8 @@ function Span(){
         break;
       case "verse":
         // Very special case -- lines have to be enclosed
-        el = doc.element("div");
+//        el = doc.element("div");
+        el = doc.element("lg");
         el.setAttribute("type", "verse");
         parent.appendChild(el);
         var el2 = doc.element("l");
@@ -1250,10 +1367,15 @@ function Span(){
       case "incipit":
       case "explicit":
         // I think...
-        el = doc.element("p");
+        if(doc.hasParaParent(parent)){
+          el = doc.element("seg");
+          el.setAttribute("type", this.type);
+        } else {
+          el = doc.element("p");
+        }
         break;
       default:
-        el = doc.element("span");
+        el = doc.element("seg");
         el.setAttribute("type", this.type);
     }
     if(el!==parent) parent.appendChild(el);
@@ -1303,7 +1425,7 @@ function Hand(){
     for(var i=0; i<this.content.length; i++){
       if(this.content[i].toTEI) this.content[i].toTEI(doc, el);
     }
-  }
+  };
   this.toHTML = function(){
     this.DOMObj.title = this.id + ": " + hands[this.id];
     for(var i=0; i<this.content.length; i++){
@@ -1396,7 +1518,7 @@ function BlankLines(code){
   };
   this.toHTML = function(){
     return DOMSpan('add blank', false, document.createTextNode("["+this.code+"]"));
-  }
+  };
 }
 
 function Add(){
@@ -1448,7 +1570,7 @@ function Text(text){
   this.punctuation = function(){
     var str = /^\s*[,.:¶?!]/.exec(this.content);
     return str ? true : false;
-  }
+  };
   this.separatePunctuation = function(){
     this.removepunct = true;
     return document.createTextNode(/^\s*[,.:¶?!]/.exec(this.content)[0].slice(-1));
@@ -1469,6 +1591,8 @@ function Text(text){
   this.textNode = function(doc){
     var closingSpaces = /\s*$/.exec(this.code)[0].length;
     var spaceAfterPunc = /[,.:¶?!]\s+$/.exec(this.code);
+    var lastIsStop = /[.?!]\s*$/.exec(this.code);
+    var capitalisable = /^\s[a-z]/.exec(this.code) && punctuationStyle==="modern";
     var textNode = false;
     curtextitem = this;
     if(closingSpaces && trimPreInsSpaces(spaceAfterPunc)) {
@@ -1490,49 +1614,30 @@ function Text(text){
       } else {
         textNode = doc.createTextNode((this.code.substring(0, firstPos+1).toLowerCase() + this.code.substring(firstPos+1)).replace("¶ ", "¶\u00a0"));
       }
+    } else if (capitalise && capitalisable && allowCapitalisation){
+      var firstPos = this.code.search(/\S/);
+      if(firstPos<0){
+        textNode = doc.createTextNode(" ");
+      } else {
+        textNode = doc.createTextNode((this.code.substring(0, firstPos+1).toUpperCase() + this.code.substring(firstPos+1)).replace("¶ ", "¶\u00a0"));
+      }      
     } else {
       textNode = doc.createTextNode(this.code.replace("¶ ", "¶\u00a0"));
     }
     if(/¶$/.test(this.code)) this.endsWithPilcrow = true;
+    capitalise = lastIsStop;
     return textNode;
   };
   this.toHTML = function(){
-    // var closingSpaces = /\s*$/.exec(this.code)[0].length;
-    // var spaceAfterPunc = /[,.:¶?!]\s+$/.exec(this.code);
-    // var textNode = false;
-    // curtextitem = this;
-    // if(closingSpaces && trimPreInsSpaces(spaceAfterPunc)) {
-    //   this.code = this.code.slice(0, 0-closingSpaces);
-    // }
-    // if(/^\s/.test(this.code) && trimPostInsSpaces(this)){
-    //   this.code = this.code.slice(1);
-    // }
-    // if(this.removepunct) this.code = this.code.substring(/^\s*[,.:¶?!]/.exec(this.content)[0].length);
-    // if(uncapitalise && !this.overrideCapitalize){
-    //   var firstPos = this.code.search(/\S/);
-    //   if(firstPos<0){
-    //     this.DOMObj = document.createTextNode(" ");
-    //     if(!inTip && !noCount // && !editorMode
-    //       ){
-    //       $(this.DOMObj).hover(function(){displayStatusBarReference(this);});
-    //     }
-    //     return this.DOMObj; // don't reset uncapitalize;
-    //   } else {
-    //     textNode = document.createTextNode(this.code.substring(0, firstPos+1).toLowerCase() + this.code.substring(firstPos+1));
-    //   }
-    // } else {
-    //   textNode = document.createTextNode(this.code);
-    // }
-    // this.DOMObj = DOMSpan('sentence-'+this.sentence, false, textNode);
     var textNode = this.textNode(document);
     this.DOMObj = DOMSpan('sentence-'+(inVerse ? inVerse : this.sentence), false, textNode);
 //    if(!typeof(roman)=="undefined") $(this.DOMObj).hover(function(){displayReference(this, false);});
     if(!inTip && !noCount // && !editorMode
       ) {
       if(inIndex){
-        $(this.DOMObj).hover(function(){thisisanindex(this)});
-      } else {
-        $(this.DOMObj).hover(function(){displayStatusBarReference(this, false);});
+        $(this.DOMObj).hover(function(){thisisanindex(this);});
+      } else if (!inCommentary){
+        $(this.DOMObj).hover(function(e){displayStatusBarReference(this, e);});
       }
     }
     uncapitalise = false;
@@ -1566,7 +1671,7 @@ function SentenceBreak(){
   };
   this.toHTML = function(){
     return false;
-  }
+  };
 }
 
 function RemovedPunctuation(symbol){
@@ -1611,10 +1716,10 @@ function Punctuation(options){
     var DOMObj = this.toHTML();
     this.suppressDraw = true;
     return DOMObj;
-  }
+  };
   this.getDOMObj = function(){
     // Caching is an issue. FIXME: for now, disable it
-    var refresh = true
+    var refresh = true;
     if(refresh){
       if(punctuationStyle==="modern") {
         switch(this.modern){
@@ -1644,7 +1749,7 @@ function Punctuation(options){
 ;
     }
     return punctuationStyle=="modern" ? this.modernDOM : this.MSDOM;
-  }
+  };
   this.toText = function(){
     return "{"+this.MS+this.modern+"}";
   };
@@ -1669,10 +1774,14 @@ function Punctuation(options){
     parent.appendChild(choice);
   };
   this.toHTML = function(){
-    if(this.suppressDraw) return;
+    if(this.suppressDraw) return false;
+    capitalise = false;
     if(punctuationStyle == "modern" && ".?!¶".indexOf(this.modern)==-1 && this.MS!="¶") {
       uncapitalise = this.modern;
     } else {
+      if(punctuationStyle==="modern" && ".?!".indexOf(this.modern)>-1){
+        capitalise = true;
+      }
       uncapitalise = false;
     }
     if(punctuationStyle=="both"){
@@ -1699,9 +1808,18 @@ function OptionalSpace(){
     parent.appendChild(choice);
     return choice;
   };
+	this.draw = function(styles){
+		console.log("ysy");
+		if(punctuationStyle=="modern"){
+			return false;
+		} else {
+			return svgSpan(SVG, 'punct '+(styles.length ? textClasses(styles) :"MSpace")
+                     , false, " ");
+		}
+	}
   this.toHTML = function(){
     if(punctuationStyle=="modern"){
-      return;
+      return false;
     } else {
       return DOMSpan("punct MSSpace", false, " ");
     }
@@ -1717,11 +1835,11 @@ function CorrectedM(){
     var parent = DOMSpan("correction m-to-n", false, mbit);
     parent.appendChild(DOMSpan("correct n", false, "n"));
     return parent;
-  }
+  };
 }
 function WordSplit(){
   this.objType="Word Split";
-  this.toText = function(){ return "{|}"};
+  this.toText = function(){ return "{|}";};
   this.toHTML = function(){
     // return DOMSpan("wordsplit", false, "|");
     var span= DOMSpan("wordsplit", false, "|");
@@ -1731,7 +1849,7 @@ function WordSplit(){
 }
 function WordJoin(){
   this.objType="Word Join";
-  this.toText = function(){ return "{_}"};
+  this.toText = function(){ return "{_}";};
   this.toHTML = function(){
     return DOMSpan("wordjoin", false, "_");
   };
@@ -1802,6 +1920,7 @@ function Choice(){
     var i = 0;
     var ins = this.nonDefault();
     if(!ins) {
+      if(!this.content.length) console.log(this, "dying");
       el = this.content[0].contentToHTML();
       if(el){
         span.appendChild(el);
@@ -1826,15 +1945,27 @@ function Choice(){
   };
 }
 
+
 function QualifiedWitness(witness, corrected, sup){
   this.objType = "Qualified Witness";
   this.witness = witness;
   this.corrected = corrected;
   this.index = (sup==="i");
+  this.sup = sup;
   this.toHTML = function(){
     var list = DOMSpan("variantWitness", false, this.witness);
     list.appendChild(DOMSpan("correctionem", false, DOMTextEl("sup", false, false, (this.corrected ? "c" : (this.index ? "i" : "*")))));
     return list;
+  };
+  this.toSVG = function(parent){
+    var span = svgSpan(parent, "variantWitness", false, this.witness);
+//    var text = this.corrected ? "c" : (this.index ? "i" : "*");
+    var text = this.corrected ? "c" : (this.index ? "i" : this.sup);
+    var c = svgSpan(span, "correctionem", false, text);
+    c.setAttribute("dy", -rastralSize / 2);
+    var corr = svgSpan(span, false, false, " ");
+    corr.setAttribute("dy", rastralSize / 2);
+    return span;
   };
 }
 
@@ -1873,7 +2004,7 @@ function Reading(witnesses, content, description, extraDescription){
       } 
     }
     return structures;
-  }
+  };
   this.toText = function(){
     var text = "";
     if(this.description) text += "("+this.description+")";
@@ -1895,7 +2026,7 @@ function Reading(witnesses, content, description, extraDescription){
     var el;
     if(!parent){
       console.log("TEI error in Choice: no parent", this);
-      return;
+      return false;
     }
     if(this.witnesses[0]==="emend."){
       el = doc.element("corr");
@@ -1912,7 +2043,7 @@ function Reading(witnesses, content, description, extraDescription){
       if(this.content[i].toTEI) this.content[i].toTEI(doc, el);
     }
     return el;
-  }
+  };
   this.contentToHTML = function(){
     var span = DOMSpan("variantReadingText", false, false);
     for(var i=0; i<this.content.length; i++){
@@ -1999,16 +2130,26 @@ function Source(id, details){
   this.objType = "SourceSpec";
   //FIXME: stupid
   this.id = id;
-  this.details = details;
+	this.ascription = false;
+	if(/\t/.exec(details)){
+		var info = details.split(/\t/);
+		this.details = trimString(info[0]);
+		this.ascription = trimString(info[1]);
+	} else {
+		this.details = details;
+	}
   this.next = false;
   this.previous = false;
   this.toText = function(){
-    return this.id+"\t"+this.details+"\n";
+    var str = this.id+"\t"+this.details;
+		if(this.ascription) str += "\t"+this.ascription;
+		return str+"\n";
   };
   this.toHTML = function(){
     var div = DOMDiv("sourcedescription", false, false);
     div.appendChild(DOMSpan("sourceidentifier", false, this.id));
     div.appendChild(DOMSpan("sourcedetails", false, this.details));
+		if(this.ascription) div.appendChild(DOMSpan("sourceascription", false, this.ascription));
     return div;
   };
 }
@@ -2025,6 +2166,7 @@ function BlankExample(){
   this.chapter = chapter;
   this.section = section;
   this.exampleno = exampleno;
+  this.commentary = false;
   exampleno++;
   this.atClass = "at-"+this.book+"-"+this.chapter+"-"+this.section+"-"+this.exampleno;
   this.toText = function(){
@@ -2055,3 +2197,504 @@ function BlankExample(){
     return this.DOMObj;
   };
 }
+
+function CommentarySet(){
+  this.objType="CommentarySet";
+  this.commentaries = [];
+  this.doc = false;
+  this.table = function(n){
+    if(this.commentaries[n] && !this.commentaries[n].className){
+      // There's one commentary table per entry
+      return this.commentaries[n];
+    } else {
+      for(var i=0; i<this.commentaries.length; i++){
+        var no = Number(this.commentaries[i].className);
+        if(no && no===n){
+          return this.commentaries[i];
+        } else if (no && no > n){
+          return false;
+        }
+      }
+      console.log("Commentary miss: ", n);
+      return false;
+    }
+  };
+  this.populate = function(doc, url){
+    this.doc = doc;
+    $.ajax({
+        async: true,
+        url: url,
+        datatype: 'html',
+        failure: function(){
+          console.log("Commentary data not loaded");
+        },
+        success: function(data){
+          var html = $.parseHTML(data);
+          var tables = [];
+          for (var i=0; i<html.length; i++){
+            if(html[i].tagName==="TABLE") {
+              tables.push(html[i]);
+            } else {
+              var t = $(html[i]).find("table");
+              for(var j=0; j<t.length; j++){
+                tables.push(t[j]);
+              }
+            }
+          }
+          // console.log(html);
+          // var tables = $(html).find("table");
+          doc.commentaries.commentaries = tables.map(DOMCopyTable);
+          $(doc.cog).removeClass("greyed");
+          doc.refreshCommentary();
+        }
+    });
+  };
+}
+
+function CommentaryTable(){
+  this.objectType = "CommentaryTable";
+  this.n = false;
+  this.domObj = false;
+  this.comment = function(){
+    if(!curDoc.commentaries) return false;
+    return curDoc.commentaries.table(this.n+1);
+  };
+  this.toText = function() { return false; };
+  this.toTEI = function(doc, parent) { return false;};
+  this.fillContainer = function(){
+    var com = this.comment();
+    if(curDoc.showcommentary && com){
+      com = com.cloneNode(true);
+      var tableDiv = DOMDiv("ten-line-table", false, com);
+      $(this.domObj).show();
+      // minimise button
+      var button = DOMSpan("ui-icon my-ui-icon-minus", false, false);
+      this.domObj.appendChild(button);
+      $(button).click(function(){
+          $(this.nextSibling.nextSibling.nextSibling).show();
+          $(this).hide();
+          $(this.nextSibling).hide();
+          $(this.nextSibling.nextSibling).hide();
+          $(this.parentNode).toggleClass("small");
+      });
+      // then image
+      var img = DOMDiv("two-sys", false, 
+        DOMImage(false, false, "commentary-"+(this.n+1)+".png"));
+      this.domObj.appendChild(img);
+      $(img).hide();
+      // and now the commentary
+      this.domObj.appendChild(tableDiv);
+      // hide the commentary and the button, shrink the container
+      $(tableDiv).hide();
+      $(button).hide();
+      $(this.domObj).toggleClass("small");
+      // maximise button
+      button = DOMSpan("ui-icon my-ui-icon-plus", false, false);
+      this.domObj.appendChild(button);
+      $(button).click(function(){
+          $(this.previousSibling).show();
+          $(this.previousSibling.previousSibling).show(); 
+          $(this.previousSibling.previousSibling.previousSibling).show(); 
+          $(this).hide();
+          $(this.parentNode).toggleClass("small");
+      });
+      return this.domObj;     
+    } else {
+//      console.log("fail", this.n);
+      $(this.domObj).hide();
+      return false;
+    }
+  };
+  this.toHTML = function(){
+    if(this.domObj) return this.domObj;
+    this.domObj = DOMDiv("Commentary", false, false);
+    /*$(this.domObj).hide();*/
+    return this.domObj;
+  };
+}
+
+function Commentary(){
+  this.objType = "Commentary";
+  this.code = false;
+  this.content = false;
+  this.info = false;
+  this.domObj = DOMDiv("Commentary", false, false);
+  this.next = false;
+  this.previous = false;
+  this.toText = function(){
+    var text = "<commentary";
+    if(this.info){
+      text += ":";
+      text += " "+this.info;
+    }
+    text += ">";
+    text += this.content.toText().substring(1);
+    return text+"</commentary>";
+  };
+  this.toTEI = function(doc, parent){
+    return false; // at least for now
+  };
+  this.toHTML =function(){
+    $(curDoc.cog).removeClass("greyed");
+    if(showcommentary && this.content){
+      inCommentary = true;
+      this.domObj = DOMDiv("Commentary", false, false);
+      var p = $(this.content.toHTML()).children()[0];
+      this.domObj.appendChild(p);
+      $(p).hide();
+      $(this.domObj).toggleClass("small");
+      var button = DOMSpan("ui-icon my-ui-icon-plus", false, false);
+      this.domObj.appendChild(button);
+      $(button).click(function(){
+          $(this.previousSibling).show();
+          $(this).hide();
+          $(this.parentNode).toggleClass("small");
+      });
+      button = DOMSpan("ui-icon my-ui-icon-minus", false, false);
+      p.insertBefore(button, p.firstChild);
+      $(button).click(function(){
+          $(this.parentNode.nextSibling).show();
+          $(this.parentNode).hide();
+          $(this.parentNode.parentNode).toggleClass("small");
+      });      
+      inCommentary = false;
+      return this.domObj;
+    } else return false;
+  };
+}
+function RawHTML(){
+  this.objType = "Raw HTML";
+  this.code = false;
+  this.domObj = false;
+  this.next = false;
+  this.previous = false;
+  this.toText = function(){
+    return this.domObj.outerHTML;
+  };
+  this.toTEI = function(doc, parent){
+    return false; // at least for now (see commentary)
+  };
+  this.toHTML =function(){
+    return this.domObj;
+  };
+}
+////////////////////////////////////////
+///
+// Diagrams
+//
+function DiagramTable(){
+  this.objType = "SVGTable";
+  this.svg = false;
+  this.domObj = false;
+  this.rows = [];
+  this.height = 0;
+  this.leftWidth = 0;
+  this.rightWidth = 0;
+  this.padding = 3;
+  this.draw = drawTable;
+  this.toHTML = this.draw;
+  this.setRows = setRows;//function(rows) {this.rows=rows;}
+}
+function DiagramCell(table){
+  this.objType = "SingleCell";
+  this.content = [];
+  this.table = table;
+  this.height = cellHeight;
+  this.width = 0;
+  this.domObj = false;
+  this.attachmentPoints = simpleCellAttachmentPoints;
+  this.draw = drawCell;
+  this.adjust = adjustCell;
+}
+function DiagramMultiCell(table){
+  this.objType = "MultiCell";
+  this.content = [];
+  this.domObj = false;
+  this.table = table;
+  this.height = cellHeight;
+  this.width = 0;
+  this.attachmentPoints = multiCellAttachmentPoints;
+  this.draw = drawMultiCell;
+  this.adjust = adjustMultiCell;
+}
+function DiagramRow(table){
+  this.objType = "Right Diagram Row";
+  this.RContent = false;
+  this.LContent = false;
+  this.RCell = false;
+  this.LCell = false;
+  this.domObj = false;
+  this.table = table;
+  this.padding = false;
+  this.x = false;
+  this.y = false;
+  this.lWidth = 0;
+  this.rWidth = 0;
+  this.connectionType = "Line";
+  this.draw = drawRDiagramRow;
+  this.width = twoColumnWidth;
+  this.height = rowHeight;
+  this.join = drawJoin;
+  this.joinLine = joinLine;
+  this.adjustCells = adjustCells;
+}
+function drawJoin(){
+  if(this.connectionType==="Line"){
+    this.joinLine(this.domObj, this.LContent, this.RContent);
+  }
+}
+function simpleCellAttachmentPoints(side){
+  var br = this.domObj.getBoundingClientRect();
+  if(side==="L"){
+    return [{x:this.x+this.width+(this.table.padding/2), y:br.top}];
+  } else if (side==="R"){
+    return [{x:this.x-(this.table.padding/2), y:br.top}];
+  }
+  console.log("Join line broken");
+    return [{x:br.right, y:br.top+(br.height/2)}];
+}
+function multiCellAttachmentPoints(side){
+  var points = [];
+  for(var i=0; i<this.content.length; i++){
+    points.push(this.content[i].attachmentPoints(side)[0]);
+  }
+  return points;
+}
+function joinLine(svgEl, cellL, cellR){
+  var attachLeft = cellL.attachmentPoints("L");
+  var attachRight = cellR.attachmentPoints("R");
+  for(var i=0; i<attachLeft.length; i++){
+    for(var j=0; j<attachRight.length; j++){
+      svgLine(svgEl, attachLeft[i].x, attachLeft[i].y,
+             attachRight[j].x, attachRight[j].y, "tableJoinLine", false);
+    }
+  }
+}
+function drawCell(svgEl, x, y){
+  this.domObj = svgText(svgEl, x, y, 'table-cell single', false, false);
+  this.y = y;
+  this.x = x;
+  for(var i=0; i<this.content.length; i++){
+    if(typeof(this.content[i])==="string"){
+      svgSpan(this.domObj, false, false, this.content[i]);
+    } else {
+      this.content[i].toSVG(this.domObj, y);
+    }
+  }
+  this.domObj.setAttributeNS(null, 'y', y);
+  this.domObj.setAttributeNS(null, 'x', x);
+  var bc = this.domObj.getBoundingClientRect();
+//  this.height = bc.height;
+  this.width = bc.width;
+  this.bottom = bc.bottom;
+  return this.domObj;
+}
+function cellHeight(){
+  if(this.bc && this.bc.height!==0) return this.bc.height;
+  this.bc = this.domObj.getBoundingClientRect();
+  console.log(this.bc);
+  return this.bc.height;
+}
+function drawMultiCell(svgEl, x, y){
+  //var y=svgEl.getBoundingClientRect().bottom + this.padding;//??wtf??
+  this.y = y;
+  this.x = x;
+  this.domObj = svgEl;
+  for(var i=0; i<this.content.length; i++){
+    this.content[i].draw(svgEl, x, y);
+    y+=this.content[i].height();
+    this.width = Math.max(this.width, this.content[i].domObj.getBoundingClientRect().width);
+  }
+  //this.height = y - this.y;
+}
+function drawRDiagramRow(svgEl, y){
+  this.domObj = svgGroup(svgEl, "classification row rightwards");
+  this.y = y;
+  this.LCell = svgGroup(this.domObj, "parent cell");
+  this.LContent.domObj = this.LCell;
+  this.LContent.draw(this.LCell, 0, y);
+  this.lWidth = this.LContent.width;
+  this.RCell = svgGroup(this.domObj, "parent cell");
+  this.RContent.draw(this.RCell, this.lWidth, y);
+  this.rWidth = this.RContent.width;
+}
+function adjustCells(leftWidth){
+  this.LContent.adjust(false, this.RContent);
+  this.RContent.adjust(leftWidth, this.LContent);
+  this.join(this.svg, this.LContent, this.RContent);
+}
+function adjustCell(x, otherContent){
+  var nodes = this.domObj.childNodes;
+  if(x || x===0){
+    this.x = x;
+    //nodes[0].setAttributeNS(null, "x", x);
+    if(nodes.length) {
+      nodes[0].setAttributeNS(null, "x", x);
+    } else {
+      this.domObj.setAttributeNS(null, "x", x);
+    }
+  }
+  if(otherContent && otherContent.objType==="MultiCell") {
+    this.y = otherContent.y + (otherContent.height()/2) - (this.height()/2);
+    if(nodes.length) {
+      nodes[0].setAttributeNS(null, "y", this.y);
+    } else {
+      this.domObj.setAttributeNS(null, "y", this.y);
+    }
+//    nodes[0].setAttributeNS(null, "y", this.y);
+  }
+}
+function adjustMultiCell(x, otherContent){
+  this.x = x;
+  for(var i=0; i<this.content.length; i++){
+    this.content[i].adjust(x, false);
+  }
+}
+function twoColumnWidth(){
+  return this.RCell.x+this.rWidth+this.padding;
+}
+function rowHeight(){
+  return Math.max(this.RContent.height(), this.LContent.height());
+}
+function drawTable(svgObj){
+  this.svg = svgObj;
+  this.domObj = svgGroup(svgObj, "table", false);
+  var y = 10;
+  for(var i=0; i<this.rows.length; i++){
+    this.rows[i].draw(this.domObj, y);
+    this.leftWidth = Math.max(this.leftWidth, this.rows[i].lWidth);
+    this.rightWidth = Math.max(this.rightWidth, this.rows[i].rWidth);
+    y += this.rows[i].height();
+  }
+  this.height = y;
+  for(i=0; i<this.rows.length; i++){
+    this.rows[i].adjustCells(this.leftWidth + (this.padding * 3));
+  }
+  return this.svg;
+}
+function makeCell(data, table){
+  var cell, subcell;
+  if(typeof(data)==="string"){
+    cell = new DiagramCell(table);
+    cell.content.push(data);
+  } else {
+    cell = new DiagramMultiCell(table);
+    for(var i=0; i<data.length; i++){
+      subcell = new DiagramCell(table);
+      subcell.content.push(data[i]);
+      cell.content.push(subcell);
+    }
+  }
+  return cell;
+}
+function setRows(rows){
+  var prevRow = false;
+  var cell;
+  for(var i=0; i<rows.length; i++){
+    // only interested in two-column layout for now
+    var LContent = rows[i].cells.length && rows[i].cells[0].content.length 
+                     ? rows[i].cells[0].content : false;
+    var RContent = rows[i].cells.length > 1 && rows[i].cells[1].content.length 
+                     ? rows[i].cells[1].content : false;
+    if(LContent && RContent || ((LContent || RContent) && !prevRow)){
+      var newRow = new DiagramRow(this);
+      prevRow = newRow;
+      this.rows.push(newRow);
+      cell = new DiagramCell(this);
+      newRow.LContent = cell;
+      if(LContent) cell.content = LContent;
+      cell = new DiagramCell(this);
+      newRow.RContent = cell;
+      if(RContent) cell.content = RContent;
+    } else if(LContent){
+      cell = new DiagramCell(this);
+      cell.content = LContent;
+      if(prevRow.LContent.objType==="MultiCell"){
+        prevRow.LContent.content.push(cell);
+      } else {
+        var newCell = new DiagramMultiCell(this);
+        newCell.content.push(prevRow.LContent);
+        newCell.content.push(cell);
+        prevRow.LContent = newCell;
+      }
+    } else if(RContent){
+      cell = new DiagramCell(this);
+      cell.content = RContent;
+      if(prevRow.RContent.objType==="MultiCell"){
+        prevRow.RContent.content.push(cell);
+      } else {
+        var newCell = new DiagramMultiCell(this);
+        newCell.content.push(prevRow.RContent);
+        newCell.content.push(cell);
+        prevRow.RContent = newCell;
+      }
+    }
+  }
+}
+function makeTable(tArray){
+  var table = new DiagramTable();
+  var row, mcell, scell;
+  for(var i=0; i<tArray.length; i++){
+    row = new DiagramRow(table);
+    row.LContent = makeCell(tArray[i][0], table);
+    row.RContent = makeCell(tArray[i][1], table);
+    table.rows.push(row);
+  }
+  return table;
+}
+var table;
+function initTest(){
+  var data = [[["a", "b", "c"], "abc"], [["d", "efg"], "defg"], 
+    ["foo", ["f", "o", "o"]]];
+  table = makeTable(data);
+  var svgObj = svg(800, 800);
+  document.body.appendChild(svgObj);
+  table.draw(svgObj);
+}
+function textBlockToSVG(container, content, block){
+  // SVG analogue of the ToHTML version
+  console.log("yo", content);
+  for(var i=0; i<content.length; i++){
+    if(content[i].objType =="Column/Page"|| 
+      (typeof(content[i].content) != "undefined" && 
+       typeof(content[i].content) == "Span" && 
+       content[i].content[0].objType == "Column/Page")) {
+      // I think this is either a break or a variant with a break
+      var cn = container.className;
+      container.className += " colend";
+      // var breakCaption = content[i].toSVG(); // FIXME: doesn't exist
+      // if(block.DOMObjs) block.DOMObjs.push(breakCaption);
+      // container.appendChild(breakCaption);
+    } else if(content[i].toSVG){
+      var obj = content[i].toSVG();
+      if(obj) {
+        container.appendChild(obj);
+      }
+      console.log(container);
+    } else if (typeof(content[i])==="string"){
+      svgSpan(container, false, false, content[i]);
+    } else {
+      console.log("No appropriate method for", content[i]);
+    }
+  }
+  return container;
+}
+Span.prototype.toSVG = function(parent){
+  var span = svgSpan(parent);
+  span.className = this.type+this.extraClasses();
+  console.log(span);
+  this.DOMObj = textBlockToSVG(span, this.content, this);
+  return this.DOMObj;
+};
+Text.prototype.toSVG = function(parent){
+  this.DOMObj = svgSpan(parent, false, false, this.code);
+  return this.DOMObj;
+};
+Add.prototype.toSVG = function(parent){
+  var newContent = ["["];
+  newContent.concat(this.content);
+  newContent.push("]");
+  this.DOMObj = svgSpan(parent, "add");
+  this.DOMObj = textBlockToSVG(this.DOMObj, newContent, this);
+  return this.DOMObj;
+};

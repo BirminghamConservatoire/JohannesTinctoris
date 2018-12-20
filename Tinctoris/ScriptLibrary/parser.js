@@ -12,6 +12,7 @@ var spans = {
   "highlight": "yellowline",
   "strikethrough": "strikethrough",
   "expunction": "expunction",
+  "erasure": "erasure",
   "insertabove": "insertabove",
   "large": "large",
   "underscore": "underscore",
@@ -23,6 +24,7 @@ var spans = {
   "7line": "sevenline",
   "title": "treatiseTitle",
   "heading": "heading",
+  "italic": "italic",
   "subheading": "subheading"};
 var reverseSpans = {
   "red": "red",
@@ -35,6 +37,7 @@ var reverseSpans = {
   "yellowline": "highlight",
   "strikethrough": "strikethrough",
   "expunction": "expunction",
+  "erasure": "erasure",
   "insertabove": "insertabove",
   "large": "large",
   "underscore": "underscore",
@@ -45,6 +48,7 @@ var reverseSpans = {
   "sixline": "6line",
   "treatiseTitle": "title",
   "heading": "heading",
+  "italic": "italic",
   "subheading": "subheading"};
 
 function findExample(){
@@ -84,16 +88,23 @@ function TreatiseDoc(text, outdiv){
   this.prevWidth = false;
   this.forceredraw = true;
   this.showvars = showvariants || false;
+  this.showfacs = showfacsimile || false;
+  this.showcommentary = showcommentary || false;
   this.footnotes = [];
   this.shortSource = false;
   this.contents = [];
   this.exampleSource = false;
+  this.commentary = false;
+  this.commentaries = false;
+  this.commentaryTables = [];
   this.examples = [];
   this.leaves = [];
   this.breaks = [];
   this.structures = false;
   this.out = outdiv ? outdiv : document.getElementById('content');
   this.drawTo = this.out;
+  this.cog = false;
+  this.drawToTop = false;
   this.docType = false;
   this.title = false;
   this.shortTitle = false;
@@ -104,6 +115,7 @@ function TreatiseDoc(text, outdiv){
   this.translator = false;
   this.copy = false;
   this.source = false;
+  this.fullImages = false;
   this.established = false;
   this.basefile = false;
   this.basefiles = false;
@@ -118,9 +130,34 @@ function TreatiseDoc(text, outdiv){
   this.marg = false;
   this.curCatchword = false;
   this.blobURL = false;
+  this.lowestMarginal = false;
+  this.marginals = [];
+  this.actualWidth = false;
+	this.UUIDs = {};
+  this.marginalCheck = function(div){
+    // NOT USED
+    var rect = div.getBoundingClientRect();
+    if(this.lowestMarginal &&
+       this.lowestMarginal > rect.top){
+      // -29 because the default margin-top is -31
+      div.style.marginTop = (this.lowestMarginal-rect.top-29)+"px"; 
+    }
+    this.lowestMarginal = rect.bottom;
+  };
+  this.fixMarginalia = function(){
+    var prev, rect;
+    for(var i=0; i<this.marginals.length; i++){
+      rect = this.marginals[i][1].getBoundingClientRect();
+      if(prev && prev.bottom>=rect.top-4){
+        this.marginals[i][0].domObj.style.marginTop = (prev.bottom-rect.top+4)+"px";
+        rect = this.marginals[i][1].getBoundingClientRect();
+      }
+      prev = rect;
+    }
+  };
   this.edition = function(){
     return this.language!=="Latin" || this.source.length;
-  }
+  };
   this.setScrollPos = function(book, chapter, section, paragraph, offset, scroll){
     if(this.scrollpos.book===book && this.scrollpos.chapter===chapter
        && this.scrollpos.section===section && this.scrollpos.paragraph===paragraph){
@@ -260,6 +297,17 @@ function TreatiseDoc(text, outdiv){
       nextfield = consumeIf(/[^:\r\n]*:/);
     }
   };
+  this.hasImages = function(){
+    return this.shortSource && texts[this.shortSource]
+      && texts[this.shortSource].thumbFile;
+  };
+  this.thumbFile = function(breaker){
+    return texts[this.shortSource].thumbFile(breaker);
+  };
+  this.createThumb = createThumbForDoc;
+  this.imageFile = function(breaker){
+    return texts[this.shortSource].zoomFile(breaker);
+  };
   this.headerText = function(){
     var text = (this.title ? this.title : "")+"\n";
     if(this.shortTitle) text += "Short-title: "+this.shortTitle+"\n";
@@ -307,7 +355,7 @@ function TreatiseDoc(text, outdiv){
     infoButton("i", ["editor", "checkedby", "enteredby", "approvedby","dateestablished",
                      "source", "sources", "translator", "copytext","script", "columns", "running"], 
                ib, infoDisplay == "show", "infoDisplay");
-  }
+  };
   this.infoButtons = function(){
     var ib = this.drawTo.appendChild(DOMDiv('infoButtons'), false, false);
     if(this.editor || this.entered || this.checked || this.approved){
@@ -359,11 +407,9 @@ function TreatiseDoc(text, outdiv){
     // FIXME: only if there are other panes?
     this.closeButton(bar);
     // Maximise button
-    // this.maximiseButton(bar);
     // Title (FIXME: Add treatise navigation)
     var displayTitle = DOMDiv("titlebarheader", false, 
       DOMSpan("titlebartitle", false, (this.shortTitle ? this.shortTitle : this.title)+" "));
-    // displayTitle.appendChild(document.createElement("br"));
     var menu = DOMTextEl("ul", "titlebarmenubar MenuBarH", false, false);
     displayTitle.appendChild(menu);
     // View/language
@@ -410,19 +456,27 @@ function TreatiseDoc(text, outdiv){
     bar.appendChild(ul2);
     this.settingsMenu(ul);
     $(ul2).menu({icons: {submenu: "gear"}});
-    if(this.docType!=="Edited") {
+    this.cog = ul2;
+    if(this.docType!=="Edited" && !(this.shortSource && texts[this.shortSource] && texts[this.shortSource].zoomFile)) {
       $(ul2).addClass("greyed");
     }
     $(this.out).addClass("contentcontainer");
     this.out.appendChild(bar);
     this.drawTo = DOMDiv("drawTo", false, false);
     this.out.appendChild(this.drawTo);
+    this.drawTo.addEventListener("mousemove", showZoomForHover);
+    this.drawTo.addEventListener("mouseout", zoomerOut);
+    // this.drawTo.addEventListener("scroll", showZoomForHover);
+	  this.drawTo.addEventListener("mousewheel", showZoomForHover, false);
+	  // Firefox
+	  this.drawTo.addEventListener("DOMMouseScroll", showZoomForHover, false);
+
     $(menu).menubar({menuIcon: true, buttons: true});
     // location
     var l = DOMDiv("cursorLocator", false, false);
     bar.appendChild(l);
     $(l).hide();
-    $(this.out).mouseleave(function(e){$(this).find(".cursorLocator").hide()});
+    $(this.out).mouseleave(function(e){$(this).find(".cursorLocator").hide();});
   };
   this.settingsMenu = function(ul){
     var item;
@@ -502,6 +556,83 @@ function TreatiseDoc(text, outdiv){
         fixHeight(true);
         pos.simpleScroll(doc.drawTo);
       });
+    } else if(this.shortSource && texts[this.shortSource] && texts[this.shortSource].zoomFile){
+      // Transcript with facsimile images
+      // showfacs
+      item = DOMListItem(false, false, 
+                         DOMAnchor("settingsmenuoption facsoptions showfacs"+
+                                   (this.showfacs ? " checked" : ""),
+                                   false, "Show facsimile"));
+      ul.appendChild(item);
+      $(item).data("doc", this);
+      $(item).click(function (e){
+        var anchor = $(this).find("a");
+        if(anchor.hasClass("checked")) return;
+        anchor.addClass("checked");
+        $(this.parentNode).find(".hidefacs").removeClass("checked");
+        var doc = $(this).data("doc");
+        doc.showfacs = true;
+        showfacsimile=true;
+        docMap.updatePageSettings();
+      });
+      // hidefacs
+      item = DOMListItem(false, false, DOMAnchor("settingsmenuoption facsoptions hidefacs"+
+                                                 (this.showfacs ? "" : " checked"),
+                                                 false, "Hide facsimile"));
+      ul.appendChild(item);
+      $(item).data("doc", this);
+      $(item).click(function (e){
+        var anchor = $(this).find("a");
+        if(anchor.hasClass("checked")) return;
+        var doc = $(this).data("doc");
+        anchor.addClass("checked");
+        $(this.parentNode).find(".showfacs").removeClass("checked");
+        doc.showfacs = false;
+        showfacsimile=false;
+        docMap.updatePageSettings();
+      });
+    } else if(this.docType=="Translation"){
+      item = DOMListItem(false, false, 
+                         DOMAnchor("settingsmenuoption commentoptions showcommentary"+
+                                   (this.showcommentary ? " checked" : ""),
+                                   false, "Show commentary"));
+      ul.appendChild(item);
+      $(item).data("doc", this);
+      $(item).click(function (e){
+        var anchor = $(this).find("a");
+        if(anchor.hasClass("checked")) return;
+        var doc = $(this).data("doc");
+        var pos = currentPosition(doc.drawTo);
+        anchor.addClass("checked");
+        $(this.parentNode).find(".hidecommentary").removeClass("checked");
+        doc.showcommentary = true;
+        doc.forceredraw = true;
+        showcommentary=true;
+        docMap.updatePageSettings();
+        doc.draw();
+        fixHeight(true);
+        pos.simpleScroll(doc.drawTo);
+      });      
+      item = DOMListItem(false, false, DOMAnchor("settingsmenuoption commentoptions hidecommentary"+
+                                                 (this.showcommentary ? "" : " checked"),
+                                                 false, "Hide commentary"));
+      ul.appendChild(item);
+      $(item).data("doc", this);
+      $(item).click(function (e){
+        var anchor = $(this).find("a");
+        if(anchor.hasClass("checked")) return;
+        var doc = $(this).data("doc");
+        var pos = currentPosition(doc.drawTo);
+        anchor.addClass("checked");
+        $(this.parentNode).find(".showcommentary").removeClass("checked");
+        doc.showcommentary = false;
+        doc.forceredraw = true;
+        showcommentary=false;
+        docMap.updatePageSettings();
+        doc.draw();
+        fixHeight(true);
+        pos.simpleScroll(doc.drawTo);
+      });
     } else {
       // FIXME: why doesn't it work?
       ul.appendChild(DOMListItem(false, false, "no options"));  
@@ -529,10 +660,18 @@ function TreatiseDoc(text, outdiv){
       }
       if(docMap.panes.length===1) return;
       var doc = $(this).data("doc");
+      doc.clearFootnotes();
       $(doc.out).remove();
       $("#cursorLocator").remove();
       docMap.removeDoc(doc);
     });
+  };
+  this.refreshCommentary = function(){
+    if(!(this.commentaryTables && this.commentaries && this.commentaries.commentaries)) {
+    }
+    for(var i=0; i<this.commentaryTables.length; i++){
+      this.commentaryTables[i].fillContainer();
+    }
   };
   this.writeHeaders = function(){
     if(this.title && showtitle){
@@ -601,6 +740,8 @@ function TreatiseDoc(text, outdiv){
     resetAnnotations();
     resetDebugger();
     sources = this.sources;
+    commentary = this.commentaries;
+    commentaryTables = [];
     complaint = [];
     pointer = 0;
     string = text;
@@ -612,12 +753,22 @@ function TreatiseDoc(text, outdiv){
     margin = false;
     var tS = [];
     while(string!=""){
-      try{
         var para = readPara();
         if(para){
           para.hang = hang;
           hang = false;
           this.contents.push(para);
+          paragraph+=(para.code.match(/¶¶/g)||[]).length;
+          if(para.musicOnly()) sentence--;
+        }
+/*      try{
+        var para = readPara();
+        if(para){
+          para.hang = hang;
+          hang = false;
+          this.contents.push(para);
+          paragraph+=(para.code.match(/¶¶/g)||[]).length;
+//          console.log(para.book, para.chapter, para.paragraph, (para.code.match(/¶¶/g)||[]).length);
           if(para.musicOnly()) sentence--;
           // this.textualStructures.push(para.textualStructures());
         }
@@ -626,11 +777,20 @@ function TreatiseDoc(text, outdiv){
         var para = new Paragraph(true);
         para.contents.push(new Text("Error"));
         this.contents.push(para);
-      }
+      }*/
     }
     if(margin) this.marg = true;
     margin = false;
+    this.commentaryTables = commentaryTables;
+    this.refreshCommentary();
     this.hands = hands;
+  };
+  this.scrollFromURL = function(){
+    if(pageSettings.settings.book || pageSettings.settings.chapter){
+      this.setScrollPos(pageSettings.settings.book ? Math.max(pageSettings.settings.book, 1) : 0,
+                        pageSettings.settings.chapter ? pageSettings.settings.chapter : 0, 0, 
+                        pageSettings.settings.para ? pageSettings.settings.para : 0, 0, true);
+    }
   };
   this.toTEI = function(){
     var ocd = curDoc;
@@ -667,12 +827,18 @@ function TreatiseDoc(text, outdiv){
       //FIXME: broken
       punctuationStyle = punctuationStyle=="both" ? "both" : (this.MSPunctuation ? "MS" : "modern");
     // }
+    if((this.docType==="Edited" || !this.docType) && punctuationStyle ==="modern"){
+      allowCapitalisation = true;
+    } else{
+      allowCapitalisation = false;
+    }
     $(this.out).empty();
     if(titleBar) {
       this.titleBar();
     } else {
       $(this.out).addClass("drawTo");
     }
+    this.drawToTop = $(this.drawTo).offset().top;
     this.writeHeaders();
     if(this.exampleSource) matchExamples(this, this.exampleSource);
     currenttextparent = this;
@@ -681,8 +847,10 @@ function TreatiseDoc(text, outdiv){
       var domEl = this.contents[texti].toHTML();
       if(domEl){
         this.drawTo.appendChild(domEl);
+        //domEl.addEventListener("mousemove", showZoomForHover);
       }
     }
+    this.fixMarginalia();
     if(this.columns==2){
       $(this.out).find("p").removeClass("onecolumn");
       $(this.out).find("p").addClass("twocolumn");
@@ -698,9 +866,14 @@ function TreatiseDoc(text, outdiv){
       this.prevWidth = Math.max(this.maxWidth+15, wrapWidth);
       this.drawTo.style.width = this.prevWidth+"px";
       this.out.style.width = (this.prevWidth+marg)+"px";
+      this.actualWidth = this.prevWidth+marg;
+      refreshWidths();
     } else {
 //      this.drawTo.style.width = this.out.getBoundingClientRect().width-8+"px";
       //    this.out.style.width = Math.max(this.maxWidth+5, 450)+"px";
+      this.actualWidth = this.drawTo.getBoundingClientRect().width;
+      this.out.style.width = (this.prevWidth+marg)+"px";
+      refreshWidths();
     }
     for(var comp=0; comp<complaint.length; comp++){
       writeToDebugger("<p>"+complaint[comp]+"</p>");
@@ -709,12 +882,13 @@ function TreatiseDoc(text, outdiv){
       $("div.para").dblclick(alignVersions);
     }
     this.forceredraw = false;
-    // if(pageSettings.settings.book || pageSettings.settings.chapter){
+    //if(pageSettings.settings.book || pageSettings.settings.chapter){
     //   this.setScrollPos(pageSettings.settings.book ? Math.max(pageSettings.settings.book, 1) - 1 : 0,
     //                     pageSettings.settings.chapter ? pageSettings.settings.chapter : 0, 0, 0, 0, true);
     // }
     showvariants = oldshowvariants;
     punctuationStyle = oldpunctuationStyle;
+    if(this.hasImages() && false) this.createThumb();
     $(".marginal").css("width", (this.drawTo.getBoundingClientRect().width-20)+"px");
     $(".punctuationswitch").click(function(){
       var pos = $(doc.drawTo).offset();
@@ -758,24 +932,30 @@ function TreatiseDoc(text, outdiv){
       });
     }
     replaceBreakers();
-    
+    this.refreshCommentary();
     ///////////////////
-    /*
-    var TEIDoc = this.toTEI();
+    if(!editorMode
+//       && false
+      ){
+      var TEIDoc = this.toTEI();
     // /*
 //     var serializer = new XMLSerializer();
 // //    var fileContent = [TEIDoc.tree.outerHTML];
 //     var fileContent = [serializer.serializeToString(TEIDoc.doc)];
     // var blob = new Blob(fileContent, {type: "application/xml"});
-    var blob = TEIDoc.blobify();
-    var url = window.URL || window.webkitURL; // get rid of this when suffix removed in releases
-    if(this.blobURL) url.revokeObjectURL(this.blobURL);
-    this.blobURL = url.createObjectURL(blob);
-    var link = DOMAnchor('TEI', false, "TEI", this.blobURL);
-    $(this.drawTo).find('.infoButtons')[0].appendChild(link);
-    // console.log(TEIDoc);
-    // alert(TEIDoc.tree.innerHTML);
-  */
+      var blob = TEIDoc.blobify();
+      var url = window.URL || window.webkitURL; // get rid of this when suffix removed in releases
+      if(this.blobURL) url.revokeObjectURL(this.blobURL);
+      this.blobURL = url.createObjectURL(blob);
+      var link = DOMAnchor('TEI', false, "TEI", this.blobURL);
+      var infobuttons = $(this.drawTo).find('.infoButtons')[0];
+      infobuttons.appendChild(link);
+      var img = DOMImage(false, false, "https://i.creativecommons.org/l/by-nc/4.0/80x15.png");
+      var license = DOMAnchor('license', false, img, "http://creativecommons.org/licenses/by-nc/4.0/");
+      img.setAttribute("alt", "All text in this edition is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License");
+      license.setAttribute("title","All text in this edition is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License");
+      infobuttons.appendChild(license);
+    }
   };
   this.parse();
 //  this.draw();
@@ -860,6 +1040,7 @@ function readPara(suppressNodeNumbers){
   }
   var code = string.substring(0, end);
   para.code = code;
+  currentTextParent=para; 
   ///////
   para.content = readString();
   if(indent){
@@ -890,6 +1071,7 @@ function readString(){
     switch(string.charAt(0)){
       case "<":
         fresh = readTag();
+        sb = lastIsSentenceBreak;
         if(fresh){
           if(latest){
             fresh.previous = latest;
@@ -940,11 +1122,14 @@ function readString(){
           }
           var os = string;
           var op = pointer;
+          var octp = currentTextParent;  
+          currentTextParent=ann;
           string = ann.code;
           ann.contents = readString();
           string = os;
           pointer = op;
           sentence = olds;
+          currentTextParent=octp;
           content.push(ann);
         }
         break;
@@ -976,8 +1161,8 @@ function readString(){
           // Sentence breaks in headings don't count
           sentence++;
         }
-        lastIsHeading=false
-        lastIsVerse=false
+        lastIsHeading=false;
+        lastIsVerse=false;
         sb=false;
         return content;
       case "[":
@@ -993,7 +1178,7 @@ function readString(){
       case "{":
         // heavily used code -- could be punctuation of some sort or
         // comment or music example spacer or single-character tag
-        var punc = string.substring(1,3).match(/[,.¶:;()–-—!?\ ‘’]+/);
+        var punc = string.substring(1,3).match(/[,.¶:;()–\-\—!?\ ‘’]+/);
         if (string.substring(0,2) ==="{-"){
           var close = string.indexOf("}");
           content.push(new RemovedPunctuation(string.substring(2,close)));
@@ -1003,12 +1188,13 @@ function readString(){
           content.push(new InsertedPunctuation(string.substring(2,close)));
           consume(1+close);
         } else if(punc && punc[0] && punc[0].length>1){
+//					console.log(string.substring(0,4), punc, latest);
           content.push(new Punctuation(punc[0]));
           if(latest){
             latest.next = content[content.length-1];
             latest.next.previous = latest;
           }
-          consumeIf(/\{[,.¶:;()–-—!?\ ‘’]+\}/);
+          consumeIf(/\{[,.¶:;()–\-\—!?\ ‘’]+\}/);
         } else if (punc && string.substring(0,3) ==="{ }"){
           content.push(new OptionalSpace());
           consume(3);
@@ -1031,17 +1217,24 @@ function readString(){
           consume(3);
           consumeSpace();
         } else if(consumeIf("{example}")){
-          content.push(new BlankExample());
+          var ex = new BlankExample();
+          content.push(ex);
           if(latest){
             latest.next = content[content.length-1];
             latest.next.previous = latest;
           }
+          var nex = new CommentaryTable();
+          nex.n = ex.exampleno;
+          content.push(nex);
+          commentaryTables.push(nex);
+          ex.next = nex;
+          nex.previous = ex;
         } else if(consumeIf("{hang}")){
           hang=true;
         } else if(knownTag()) {
           content.push(readOneOffTag());
         } else {
-          content.push(readChoice());
+          content.push(readChoice(maybeNewSentenceCheck(content)));
           if(latest){
             latest.next = content[content.length-1];
             latest.next.previous = latest;
@@ -1053,15 +1246,18 @@ function readString(){
       case "!":
       case "?":
         // if(string.length>1 && !/[\n\r\f]/.test(string.charAt(1))) sentence++;
-        if(string.length>1) sentence++;
+        if(string.length>1 || currentTextParent.objType==="Span") sentence++;
       default:
         sb=/["'”’‘“]/.test(string.charAt(0)) ? sb : /[?!.]/.test(string.charAt(0));
         if(latest && latest.objType == 'text' && !/[?!.]/.test(latest.content)){
           content[content.length -1].addChar(string.charAt(0));
         } else {
+          if(maybeNewSentenceCheck(content) && /^\s*[A-Z]/.exec(string)){
+              sentence++;
+          }
           if(/^\s*[_]/.exec(string)){
+            var newtext = /^\s/.exec(string) ? new Text(" ") : new Text("");
             consumeSpace();
-            var newtext = new Text(" ");
             newtext.overrideCapitalize = true;
             content.push(newtext);
             if(latest){
@@ -1110,6 +1306,8 @@ function readOneOffTag(){
     if(typeof(spans[tag])!=="undefined"){
       var span = new Span();
       span.type = spans[tag];
+      var octp=currentTextParent;
+      currentTextParent=span;
       consume(tagends+1);
       consumeSpace();
       if(/[<{]/.test(string.charAt(0))){
@@ -1120,6 +1318,7 @@ function readOneOffTag(){
         span.content.push(new Text(string.charAt(0)));
         consume(1);
       }
+      currentTextParent=octp;
       return span;
     }
   } else{
@@ -1144,7 +1343,7 @@ function readSup(){
       newPointer = pointer+1;
       string = string.substring(0, 1);
     } else {
-      return;
+      return false;
     }
   } else {
     newString = string.substring(end+1);
@@ -1152,9 +1351,12 @@ function readSup(){
     string = string.substring(0,end);
   }
   el.type = "sup";
+  var octp = currentTextParent;  
+  currentTextParent=el;
   el.content = readString();
   string = newString;
   pointer = newPointer;
+  currentTextParent=octp;  
   return el;
 }
 
@@ -1213,11 +1415,13 @@ function readTag(){
       //return chap;
     } else if (string.substring(1, 6)=="index") {
       return readTabularIndex();
-      consume(loc+1);
-      return new Index();
+      // consume(loc+1);
+      // return new Index();
     } else if (string.substring(1, 7)=="/index") {
       consume(loc+1);
       return new ChapEnd();
+    } else if (string.substring(1, 15)=="tabularDiagram") {
+      return readTabularDiagram();
     } else if (string.substring(1, 11)=="conclusion") {
       consume(loc+1);
       return new Conclusion();
@@ -1302,6 +1506,49 @@ function readTag(){
         return m;
       }
       return false;
+    } else if(string.substring(1, 4)=="img"){
+      var end = string.indexOf("</img>");
+      var end2 = string.indexOf("/>");
+      if(end2>-1 && end2<end) end=end2;
+      if(end>4){
+        var o = new RawHTML();
+        o.code = string.substring(0, end+6);
+        string = string.substring(end+6);
+        var parent = DOMDiv('Raw', false, $.parseHTML(o.code)[0]);
+        o.domObj = parent;
+        pointer = pointer + end + 6;
+        return o;
+      }
+      return false;
+    }else if (string.substring(1, 11)==="commentary"){
+      var end = string.indexOf("</commentary>");
+      if(end>11){
+        var c = new Commentary();
+        var tagend = string.indexOf(">");
+        var os = string.substring(end+13);
+        var op = pointer+end+13;
+        var och = chapter;
+        var ob = book;
+        var osc = section;
+        var ost = sentence;
+        if(tagend>5) {
+          // we have some useful information
+          var colon = string.indexOf(":");
+          c.info = string.substring(colon+1, tagend);
+        }
+        string = string.substring(tagend+1, end);
+        c.code = string;
+        c.content = readPara();
+        string = os;
+        pointer = op;
+        chapter = och;
+        book = ob;
+        section = osc;
+        sentence = ost;
+        consumeSpace(true);
+        return c;
+      }
+      return false;
     } else if(string.substring(1, 10)=="catchword" || string.substring(1,10)=="signature"){
       var margType = string.substring(1, 10);
       var end = string.indexOf("</"+margType+">");
@@ -1346,7 +1593,10 @@ function readTag(){
         var os = string.substring(end+10);
         var op = pointer +end+10;
         string = string.substring(loc+1, end);
+        var octp = currentTextParent;  
+        currentTextParent=span;
         span.content = readString();
+        currentTextParent = octp;  
         string = os;
         pointer = op;
         return span;
@@ -1377,6 +1627,8 @@ function readTag(){
         }
         if(extra) span.extra = extra;
         var oldstring = string;
+        var octp = currentTextParent;
+        currentTextParent=span;
         op = pointer;
         string = content;
         span.code = string;
@@ -1384,15 +1636,16 @@ function readTag(){
         string = oldstring.substring(fake ? string.length : locend+(tag.length+3));
         pointer = op+locend+(fake ? 0 : tag.length+3);
         if(tag==="heading") {
+          inHeading=false;
           lastIsHeading = true;
           sentence = 0;
         }
         if(tag==="verse"){
           lastIsVerse = true;
         }
-        inHeading = false;
         if(inVerse) sentence = inVerse;
         inVerse = false;
+        currentTextParent = octp;
         return span;
       }
     }
@@ -1402,6 +1655,24 @@ function readTag(){
 }
 function parseCols(columnString){
   return columnString.split(/[ ,]+/);
+}
+function readTabularDiagram(){
+  var diag = new DiagramTable();
+  var colon = string.indexOf(":");
+  var bracket = string.indexOf(">");
+  if(bracket==-1) return false;
+  if(colon>-1 && colon<bracket){
+    var extras = string.substring(colon+1, bracket);
+    // FIXME: do something with this
+  }
+  consume(bracket+1);
+  var close = string.indexOf("</tabularDiagram>");
+  var finalString = close===-1 ? "" : string.substring(close+8);
+  string = close===-1 ? string : string.substring(0, close);
+  consumeSpace();
+  diag.setRows(readTableLikeContent());
+  string = finalString;
+  return diag;
 }
 function readTabularIndex(){
   var index = new TabularIndex();
@@ -1430,26 +1701,120 @@ function readTable(){
   string = close===-1 ? string : string.substring(0, close);
   consumeSpace();
   table.rows = readTableLikeContent();
-  // var rows = string.split(/[\u0085\u2028\u2029\r\n]+/);
-  // for(var i=0; i<rows.length; i++){
-  //   if(/^\[-.*-\]/.exec(rows[i])) {
-  //     string = rows[i];
-  //     table.rows.push(readLocation());
-  //     rows[i] = string;
-  //   }
-  //   var row = new TableRow();
-  //   table.rows.push(row);
-  //   var cells = rows[i].split(/\t/);
-  //   for(var j=0; j<cells.length; j++){
-  //     string = cells[j];
-  //     var cellContent = new Span();
-  //     cellContent.type = "CellContents";
-  //     cellContent.content = readString();
-  //     row.cells.push(cellContent);
-  //   }
-  // }
   string = finalstring;
   return table;
+}
+function readRowCells(row, rowstring, outrows){
+  var cells = rowstring.split(/\t/);
+  for(var j=0; j<cells.length; j++){
+    string = cells[j];
+    var cellContent = new Span();
+    var octp = currentTextParent;  
+    currentTextParent=cellContent;
+    var content = readString();
+    currentTextParent = octp;
+    cellContent.type = "CellContents";
+    for(var celli=0; celli<content.length; celli++){
+      if(content[celli].objType ==="Column/Page"){
+        // A break in the middle of a cell has wider effects
+        // FIXME: what about in paragraph/span?
+        var bp = row.cells.length;
+        row.cells.push(cellContent);
+        // new row is column break
+        if(outrows) outrows.push(content[celli]);
+        // now we start a new (continuation) row
+        row = new TableRow();
+        row.isContinuation = true;
+        if(outrows) outrows.push(row);
+        for(var cellj=0; cellj<bp; cellj++){
+          // Make empty cells
+          cellContent = new Span();
+          cellContent.type = "CellContents";
+          row.cells.push(cellContent);
+        }
+        cellContent = new Span();
+        cellContent.type = "CellContents";
+      } else {
+        cellContent.content.push(content[celli]);
+      }
+      // cellContent.content = readString();
+      //   row.cells.push(cellContent);
+    }
+    row.cells.push(cellContent);
+  }
+  if(outrows) {
+    return outrows;
+  } else return row;
+}
+
+function readRowVariant(row, str, outrows){
+  // Whole-row variants in tables are troublesome because of the
+  // complexity of handling multiple cells. In an ideal world,
+  // variants spanning parts of cells on multiple rows, or overflowing
+  // the table would be allowable, but for now, it'll just be whole
+  // individual rows.
+  var os = string;
+  string = str;
+  var starts = string.indexOf("{var");
+  var locend = findClose("}", starts+1);
+  var choice = new Choice();
+  outrows.push(choice);
+  var prevLength = string.length;
+  var stringTemp;
+  string = string.substring(starts+5, locend);
+  while(string.length && prevLength!=string.length){
+    prevLength = string.length;
+    var lDescription = consumeDescription();
+    var readingString = consumeReadingString();
+    var rDescription = consumeDescription();
+    var description = lDescription || rDescription; // FIXME: Check this
+    var witnesses = consumeWitnesses();
+    var row;
+    stringTemp = string;
+    string = readingString;
+    switch(description){
+      case "nil":
+        choice.addNilReading(witnesses, lDescription, rDescription);
+        break;
+      case "ins.":
+        // Now what?
+        row = new TableRow();
+        choice.addReading(witnesses, string ? [readRowCells(row, string)] : [], lDescription, rDescription);
+        break;
+      case "om.":
+      case "transp.":
+      case "transp. and expanded":
+        choice.addOmission(witnesses, lDescription, rDescription);
+        break;
+      default:
+        row = new TableRow();
+        choice.addReading(witnesses, string ? [readRowCells(row, string)] : [], lDescription, rDescription);
+        break;
+    }
+    string = stringTemp;
+  }
+  string = os;
+  return outrows;
+}
+
+function rowVariant(str){
+  // Returns true if string is a single variant
+  var os = string;
+  string = str;
+  var varstarts = string.indexOf("{var");
+  if(varstarts===-1) {
+    string = os;
+    return false;
+  }
+  var close = findClose("}", varstarts+1);
+  if(/\S/.test(string.substring(close+1))
+     || /\S/.test(string.substring(0, varstarts))) {
+    string = os;
+    return false;
+  }
+  string = os;
+  if(debug) console.log("variant spotted in ", str);
+  return true;
 }
 function readTableLikeContent(){
   // for table and index, split into rows and then cells
@@ -1465,13 +1830,10 @@ function readTableLikeContent(){
         rows[i] = string;
       }
       outrows.push(row);
-      var cells = rows[i].split(/\t/);
-      for(var j=0; j<cells.length; j++){
-        string = cells[j];
-        var cellContent = new Span();
-        cellContent.type = "CellContents";
-        cellContent.content = readString();
-        row.cells.push(cellContent);
+      if(rowVariant(rows[i])){
+        outrows = readRowVariant(row, rows[i], outrows);
+      } else {
+        outrows = readRowCells(row, rows[i], outrows);
       }
     }
   }
@@ -1489,10 +1851,11 @@ function readLocation(){
     } else if(sectionp(locstring)){
       return new Section();
     } else if(columnp(locstring)){
-      var chap = new Column();
-      chap.location = locstring.substring(1, locstring.length -1);
+      var col = new Column();
+      // chap.location = locstring.substring(1, locstring.length -1);
+      parseColumn(locstring.substring(1, locstring.length -1), col);
       consumeSpace();
-      return chap;
+      return col;
     } else if(locstring == "-"){
       consumeSpace();
       return new Space();
@@ -1507,9 +1870,12 @@ function readLocation(){
       add.code = locstring;
       var oldstring = string;
       var op = pointer;
+      var octp = currentTextParent;  
+      currentTextParent=add;
       string = locstring;
 //      add.content.push(locstring);
       add.content = readString();
+      currentTextParent = octp;  
       string = oldstring;
       pointer = op;
       return add;
@@ -1546,7 +1912,7 @@ function consumeWitnesses(){
   consume(1);
   while(cur!==":" && cur!=="}"){
     if(prevlength===string.length) {
-      console.log(["iteration number "+i+" of consumeWitnesses reported no witnesses at char `"+cur+"`", 
+      if(debug) console.log(["iteration number "+i+" of consumeWitnesses reported no witnesses at char `"+cur+"`", 
                    string, i, orig, cur, witnesses]);
       return witnesses;
     }
@@ -1558,7 +1924,7 @@ function consumeWitnesses(){
       consume(1);
       while(cur!==")" && cur!=="}" && cur!==":"){
         description += cur;
-        var cur = string.charAt(0);
+        cur = string.charAt(0);
         consume(1);
       }
       if(description.length){
@@ -1593,7 +1959,7 @@ function consumeWitnesses(){
   return witnesses;
 }
 
-function readChoice(){
+function readChoice(maybeNewSentence){
   var locend = findClose("}", 1);
   var finalString = string.substring(locend+1);
   var finalPos = pointer+locend+1;
@@ -1601,6 +1967,8 @@ function readChoice(){
   var prevLength = string.length;
   var showme = false;
   var stringTemp = false;
+  var octp = currentTextParent;
+  currentTextParent=choice;
   string = string.substring(5, locend);
   consumeSpace();
   while(string.length && prevLength != string.length){
@@ -1626,11 +1994,14 @@ function readChoice(){
         choice.addOmission(witnesses, lDescription, rDescription);
         break;
       default:
+        if(maybeNewSentence && string && /\s*[A-Z]/.exec(string)) sentence++;
         choice.addReading(witnesses, string ? readString() : [], lDescription, rDescription);
         break;
     }
     string = stringTemp;
+    maybeNewSentence = false;
   }
+  currentTextParent = octp;
   string = finalString;
   pointer = finalPos;
   return choice;
@@ -1645,6 +2016,8 @@ function readChoice2(){
   var finalPos = pointer+locend+1;
   var readingString, reading, witnesses, quoteloc, braceloc, description, stringTemp, extraDescription;
   var choice = new Choice();
+  var octp = currentTextParent;
+  currentTextParent=choice;
   var prevLength = string.length; // Obviously wrong, but that's
                                   // deliberate -- we want the loop to
                                   // run at least once
@@ -1717,6 +2090,7 @@ function readChoice2(){
   }
   string = finalString;
   pointer = finalPos;
+  currentTextParent = octp;
   return choice;
 }
 
@@ -1732,6 +2106,21 @@ function chapterp(tag){
 
 function columnp(tag){
   return tag.match(/-[^\[\]]*-/);
+}
+
+function parseColumn (colSpec, col){
+  var colHeightPos = colSpec.search(/[A-Z]*$/);
+  if(colHeightPos===-1){
+    // Normal case
+  } else {
+    //column height is specified
+    col.startPos = colSpec.charAt(colHeightPos);
+    if(colSpec.length> colHeightPos+1){
+      col.endPos = colSpec.charAt(colHeightPos+1);
+    }
+    col.location = colSpec.substring(0, colHeightPos);
+    col.id = col.location;
+  }
 }
 
 function resize() {
@@ -1886,4 +2275,15 @@ function matchExamples(treatise, text){
     // recursion
     count = grabExamples(treatise.contents[i], count, fullExamples);
   }
+}
+function HTMLParser(aHTMLString){
+  var html = document.implementation.createDocument("http://www.w3.org/1999/xhtml", "html", null),
+    body = document.createElementNS("http://www.w3.org/1999/xhtml", "body");
+  html.documentElement.appendChild(body);
+
+  body.appendChild(Components.classes["@mozilla.org/feed-unescapehtml;1"]
+    .getService(Components.interfaces.nsIScriptableUnescapeHTML)
+    .parseFragment(aHTMLString, false, null, body));
+
+  return body;
 }

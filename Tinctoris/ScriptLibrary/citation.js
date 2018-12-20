@@ -303,10 +303,10 @@ function bSearchForPos(pos, a, max, min){
   if(max<min){
     return 0; // something wrong
   } else {
-    var mid = Math.floor(max+min/2);
+    var mid = Math.floor((max+min)/2);
     var midpos = a[mid].getBoundingClientRect().top;
     if(midpos > pos){
-      return bSearchForPos(pos, a, mid-1, min)
+      return bSearchForPos(pos, a, mid-1, min);
     } else if (midpos < pos){
       // Value in top part. Check whether this is the last reference
       // before pos first

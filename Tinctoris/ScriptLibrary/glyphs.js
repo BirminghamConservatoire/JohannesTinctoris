@@ -35,7 +35,9 @@ function PathCommand(components){
         return pos%2===1;
     }
   };
-  this.stringed = function(scale, xoff, yoff){
+}
+
+PathCommand.prototype.stringed = function(scale, xoff, yoff){
     // Take a scaling factor and offset coordinates and generates the
     // necessary path command string
     var isx, fact, off, cmp;
@@ -54,8 +56,8 @@ function PathCommand(components){
       }
     }
     return str;
-  };
-}
+};
+
 var tempvar = true;
 function Glyph(commands){
   // Think of this as a detached font glyph. <commands> is an array of
@@ -73,8 +75,8 @@ function Glyph(commands){
   this.path = function(size, xoff, yoff){
     var path = "";
     var scale = (size && this.em) ? size / this.em : 1;
-    var xoff = (scale*this.defaultOffset.x) + (xoff ? xoff : 0);
-    var yoff = (scale*this.defaultOffset.y) + (yoff ? yoff : 0);
+    xoff = (scale*this.defaultOffset.x) + (xoff ? xoff : 0);
+    yoff = (scale*this.defaultOffset.y) + (yoff ? yoff : 0);
     for(var i=0; i<this.commands.length; i++){
       path += this.commands[i].stringed(scale, xoff, yoff);
     }
@@ -109,7 +111,7 @@ function glyphFromD(dAttribute, atts){
   // a complete font of similarly-sized glyphs to be specified more
   // succinctly.
   var step1 = breakD(dAttribute);
-  var commands = step1.map(function (el) {return breakBits(el)});
+  var commands = step1.map(function (el) {return breakBits(el);});
   var glyph = new Glyph(commands);
   if(defaultMetrics){
     for(var i=0; i<defaultMetrics.length; i++){
@@ -137,3 +139,11 @@ var fermataGlyph = glyphFromD("M-352 -178q0 530 340 870q315 315 757 316q451 0 78
 // fermataGlyph.draw(curx, cury, pointSize, ClassName);
 // fermataGlyph.advanceWidth(pointSize)
 // etc. 
+
+// Now let's try it upside down (this was from TC's a tablature font, so
+// doesn't have an inverted form in the source).
+var invertedFermataGlyph = glyphFromD("M-352 178q0 -530 340 -870q315 -315 757 -316q451 0 781 342q326 344 325 811q0 217 -82 433q-25 66 -26 65l-86 131q-46 12 -98 12q-131 0 -285 -63q145 -96 274 -301q135 -213 135 -369q0 -272 -129 -364q-238 -176 -403 -232q-160 -55 -406 -55q-324 0 -620 186 q-330 209 -330 496q0 152 139 356q135 197 285 273q-92 92 -287 92q-76 0 -118 -57q-86 -117 -109 -140q-57 -225 -57 -430zM575 236l136 74q129 0 207 -78v-202q-6 -70 -144 -70q-84 0 -131 35q-49 31 -68 31v210z", 
+  [["advance", 2475], // How much space to leave right (bounding rect can be calculated, but this var allow space to be reserved)
+   ["em", 2475], // scaling unit. Fairly arbitrary, but will be the same for all glyphs in font
+   ["defaultOffset", {x:500, y:1300}], // self-explanatory -- where to put it
+   ["leftmost", 352]]); // where the left extremity is

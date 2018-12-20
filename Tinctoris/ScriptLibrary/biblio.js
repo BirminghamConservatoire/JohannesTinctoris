@@ -1,4 +1,5 @@
 function highlightHashedRef(){
+  if(!window.location.hash.length) return;
   var cited = $(".contentbox "+window.location.hash).parents("div");
   if(cited && cited.length){
     $(cited[0]).addClass("cited");

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+		<title>Verovio preview</title>
+		<script src="http://www.verovio.org/javascript/latest/verovio-toolkit.js"></script>
+		<script>
+			var data = new URLSearchParams(document.location.search.substring(1));
+			console.log(document.location.search);
+			console.log(data.length);
+			var MEI = atob(decodeURI(document.location.search.substring(5)));
+			console.log(MEI);
+			var vrvToolkit = new verovio.toolkit();
+			var svg = vrvToolkit.renderData(MEI, {noLayout:1, scale:40, spacingStaff:4});
+			window.setTimeout(function(){
+				document.getElementById('music').innerHTML = svg;
+			}, 1000);
+		</script>
+	</head>
+	<body>
+		<div id='music'></div>
+	</body>
+</html>

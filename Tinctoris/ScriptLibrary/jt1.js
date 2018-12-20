@@ -1,12 +1,12 @@
 var settings = {language: "Latin",
 	variants: false,
+	facs: false,
 	MSPunctuation: false,
 	transcribe: false,
 	translationNotes: false,
 	transcriptionNotes: false};
 // Useful DOM objects
 var domobj = [];
-var texts = {};
 var baseDir = "TestSite";
 
 var foo=false;
@@ -83,6 +83,8 @@ function firstVisible(divs, val){
 function grabdomobjects(){
   domobj['showV'] = document.getElementById("displayvars");
   domobj['hideV'] = document.getElementById("hidevars");
+  domobj['showF'] = document.getElementById("showfacs");
+  domobj['hideF'] = document.getElementById("hidefacs");
   domobj['MS'] = document.getElementById("MSPunct");
   domobj['Modern'] = document.getElementById("ModernPunct");
   domobj['Edited'] = document.getElementById("edited");
@@ -127,14 +129,12 @@ function followHash(){
 }
 function hashChange(){
   pageSettings = new pathSettings(["transcribeexx", "translationNotes", "transcriptionNotes"],
-    ["MSPunctuation", "showvars", "pane", "source", "language", "book", "chapter", 
+    ["MSPunctuation", "showvars", "showfacs", "pane", "source", "language", "book", "chapter", 
      "section", "paragraph", "treatise", "hashlink"],
                                5);
   followHash();
 }
 $(document).ready(function(){
-//	var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"SpryAssets/SpryMenuBarDownHover.gif", imgRight:"SpryAssets/SpryMenuBarRightHover.gif"});
-  // $("#MenuBar1").menubar({menuIcon: true, buttons: true});
 	var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"../../SpryAssets/SpryMenuBarDownHover.gif", imgRight:"../../SpryAssets/SpryMenuBarRightHover.gif"});
 	var Accordion1 = new Spry.Widget.Accordion("Accordion1");
   grabdomobjects();
@@ -155,38 +155,6 @@ $(document).ready(function(){
     predrawInit();
     getText();
   }
-	// $(".options a").click(function(e){
-	// 	$(".options a").removeClass("checked");
-	// 	$(this).addClass("checked");
-  //   pageSettings.updateSetting("language", this.id);
-  //   if(window.location.toString().indexOf("/texts/")==-1){
-  //     e.stopImmediatePropagation();
-  //   } else {
-  //     // FIXME: this is a forward reference
-  //     var pane = document.getElementById("leftcontentpane") || document.getElementById("content");
-  //     var paras = $(pane).children(".para");
-  //     var obj, offset, loc;
-  //     if(paras.length){
-  //       obj = paras[firstVisible(paras, $(pane).offset().top)];
-  //       offset = $(obj).offset().top - $(pane).offset().top;
-  //       loc = locationInTreatise(obj);
-  //     } else {
-  //       alert([$(pane).children(".para").length, pane.innerHTML]);
-  //     }
-  //     getText();
-  //     if(loc){
-  //       if(document.getElementById("rightcontentpane")){
-  //         simpleScrollTo(document.getElementById("rightcontentpane"), offset, loc[0], loc[1], loc[2], loc[3]);
-  //         simpleScrollTo(document.getElementById("leftcontentpane"), offset, loc[0], loc[1], loc[2], loc[3]);
-  //       } else if(document.getElementById("leftcontentpane")){
-  //         simpleScrollTo(document.getElementById("leftcontentpane"), offset, loc[0], loc[1], loc[2], loc[3]);
-  //       } else {
-  //         simpleScrollTo(document.getElementById("content"), offset, loc[0], loc[1], loc[2], loc[3]);
-  //       }
-  //     }
-  //   }
-  //   return false;
-	// });
 });
 $(window).load(function(){
   var news = document.getElementById("news");

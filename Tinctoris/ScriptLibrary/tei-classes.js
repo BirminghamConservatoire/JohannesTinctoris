@@ -8,14 +8,15 @@ function TEIDoc(){
   this.tree = doc.createElementNS("http://www.tei-c.org/ns/1.0", "TEI");
   // "http://www.w3.org/1999/xhtml", "TEI");
   this.tree.setAttribute("version", "5.0");
-//  this.tree.setAttribute("xmlns", "http://www.tei-c.org/ns/1.0");
+  this.tree.setAttribute("xmlns:mei", "http://www.music-encoding.org/ns/mei");
+  this.tree.setAttribute("xmlns", "http://www.tei-c.org/ns/1.0");
 //  this.head = doc.createElement("teiHeader");
   this.head = doc.createElementNS("http://www.tei-c.org/ns/1.0", "teiHeader");
   this.text = doc.createElementNS("http://www.tei-c.org/ns/1.0", "text");
   this.body = doc.createElementNS("http://www.tei-c.org/ns/1.0", "body");
   this.treatise = doc.createElementNS("http://www.tei-c.org/ns/1.0", "div");
   this.treatise.setAttribute("type", "treatise");
-  var piElem = doc.createProcessingInstruction("xml", "version='1.0' encoding='UTF8'");
+  var piElem = doc.createProcessingInstruction("xml", "version='1.0' encoding='UTF-8'");
   doc.appendChild(this.tree);
   doc.insertBefore(piElem, this.tree);
   this.prevParent = false;
@@ -28,12 +29,25 @@ function TEIDoc(){
   this.body.appendChild(this.treatise);
   this.IDGen = function(tag){
     // FIXME: suboptimal way of assigning IDs
-    return this.latestID++;
+    return "id."+this.latestID++;
   };
   this.element = function(tag){
-    var el =  this.doc.createElementNS("http://www.tei-c.org/ns/1.0", tag);
+    if(tag.indexOf(":")>-1){
+      var el = this.doc.createElement(tag);
+    } else {
+      var el = this.doc.createElementNS("http://www.tei-c.org/ns/1.0", tag);
+    }
     el.setAttribute("xml:id", this.IDGen(tag));
     return el;
+  };
+  this.hasParaParent = function(element){
+    if(element.nodeName==="p" || element.nodeName==="P"){
+      return true;
+    } else if (!element.parentNode) {
+      return false;
+    } else {
+      return this.hasParaParent(element.parentNode);
+    }
   };
   this.serialize = function(){
     var serializer = new XMLSerializer();
@@ -63,7 +77,8 @@ function TEIDoc(){
     if(treatise.editor){
       el = this.element("editor");
       el.appendChild(document.createTextNode(treatise.editor));
-      el.setAttribute("xml:id", "#ed");//For now -- bug in Safari
+      // FIXME: this needs to be a proper cross-ref
+      // el.setAttribute("xml:id", "ed");//For now -- bug in Safari
 //      el.setAttributeNS("http://www.w3.org/XML/1998/namespace", "id", "ed");
       titleSt.appendChild(el);
     } else if (treatise.entered){
@@ -88,6 +103,11 @@ function TEIDoc(){
     el2.appendChild(document.createTextNode("This document is made available under CC BY-NC-ND"));
     var sourceDesc = this.element("sourceDesc");
     fileDesc.appendChild(sourceDesc);
+    // var seriesStatement = this.element("seriesStmt");
+    // var sTitle = this.element("p");
+    // sTitle.appendChild(document.createTextNode("Johannes Tinctoris: Complete Theoretical Works"));
+    // seriesStatement.appendChild(sTitle);
+    // fileDesc.appendChild(seriesStatement);
     if(treatise.sources.length){
       el = this.element("listWit");
       // el.setAttributeNS("http://www.w3.org/XML/1998/namespace", "id", "MSS");
@@ -102,6 +122,12 @@ function TEIDoc(){
         el2.appendChild(document.createTextNode(treatise.sources[i].details));
         el.appendChild(el2);
       }
+    } else if (treatise.docType==="Translation") {
+      var ptr  = this.element("ptr");
+      var bibl = this.element("bibl");
+      ptr.setAttributeNS(null, 'target', 'http://earlymusictheory.org/texts/'+treatise.group+'/');
+      bibl.appendChild(ptr);
+      sourceDesc.appendChild(bibl);
     }
     if(treatise.script){
       var msDesc = this.element('msDesc');
@@ -141,6 +167,7 @@ function TEIDoc(){
     var newdiv = this.element("div");
     var level = hierarchy[obj.objType.toLowerCase()];
     newdiv.setAttribute("type", obj.objType.toLowerCase());
+    newdiv.setAttribute("n", obj.n);
     while(par && par.tagName!=="BODY" && par.tagName!=="body" 
           && hierarchy[par.getAttribute("type")]>level){
       par = this.currentParent.parentNode;
@@ -161,7 +188,7 @@ function TEIDoc(){
     }
     this.currentParent = newdiv;
     return newdiv;
-  }
+  };
 }
 function addSubdivision(TEI){
   TEI.addSubdivision(this);
@@ -180,3 +207,33 @@ function makeTEITable(doc, parent){
   }
   return el;
 };
+
+function MEIDoc(title){
+	this.doc = document.implementation.createDocument("http://www.music-encoding.org/ns/mei", "", null);
+	this.tree = this.doc.createElementNS("http://www.music-encoding.org/ns/mei","MEI");
+	this.doc.appendChild(this.tree);
+	this.tree.setAttribute("meiversion", "3.0.0");
+	this.head = this.doc.createElementNS("http://www.music-encoding.org/ns/mei", "meiHead");
+	var titleel = this.doc.createElementNS("http://www.music-encoding.org/ns/mei", "title");
+	if(title){
+		console.log(title);
+		var t = this.doc.createTextNode(title ? title : "");
+		titleel.appendChild(t);
+	}
+	var titlestmt = this.doc.createElementNS("http://www.music-encoding.org/ns/mei", "titleStmt");
+	var filedesc = this.doc.createElementNS("http://www.music-encoding.org/ns/mei", "fieldesc");
+	titlestmt.appendChild(titleel);
+	this.head.appendChild(filedesc);
+	filedesc.appendChild(titlestmt);
+	this.tree.appendChild(this.head);
+	var pubstmt =  this.doc.createElementNS("http://www.music-encoding.org/ns/mei", "pubStmt");
+	filedesc.appendChild(pubstmt);
+	this.serialize = function(){
+    var serializer = new XMLSerializer();
+    return serializer.serializeToString(this.doc);
+  };
+  this.blobify = function(){
+    var content = [this.serialize()];
+    return new Blob([this.serialize()], {type: "application/xml"});
+  };
+}

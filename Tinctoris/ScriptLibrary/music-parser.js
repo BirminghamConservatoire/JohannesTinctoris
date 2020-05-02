@@ -31,7 +31,6 @@ function MusicExample(){
 	this.MEILink = false;
 	this.MEIcoded = false;
 	this.VerovioLink = false;
-	this.featureLink = false;
   exampleno++;
   this.atClass = "at-"+this.book+"-"+this.chapter+"-"+this.section+"-"+this.exampleno;
   this.parse = function(){
@@ -428,8 +427,6 @@ function MusicExample(){
 		this.MEILink.setAttributeNS(null, 'href', "data:application/xml;base64,"
 																				+this.MEIcoded);
 		this.VerovioLink.setAttributeNS(null, 'href', 'viewer.html?mei='+encodeURI(this.MEIcoded));
-		this.featureLink.setAttributeNS(null, 'href', "data:text/csv;base64,"
-																		+btoa(makeFeatureSequencesForML(this.MEI, SIMPLEFEATURESET)));
 	};
 	this.stupidVerovioStretch = function(){
 		// Verovio can't do proportions

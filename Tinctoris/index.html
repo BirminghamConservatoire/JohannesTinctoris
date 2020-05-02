@@ -39,6 +39,7 @@
       var w = document.getElementById("warn");
       w.innerHTML = "<span>Browser Note</span>";
       w.onclick = showNote;
+  console.log("warned");
     }
   </script>
 </head>
@@ -49,7 +50,7 @@
   <div class="header">
   	<div class="imagebox" id="EMT"><a href="../#"><img src="Images/EMT logo full.png" id="EMTLogo" alt="Early Music Theory Logo" name="EMTLogo"  /></a> </div>
     <div class="imagebox" id="projectlogo"><a href="#"><img src="Images/JT CTW Title main.png" id="JTLogo"  alt="Tinctoris EditonLogo" /></a></div>
-    <div class="imagebox right" id="Team">
+    <div class="imagebox right QuickLinks" id="Team">
       <!-- <a href="#"><img src="Images/masthead_team.png" id="JTTeam" alt="Team: Ronald Woodley, Jeffrey Dean & David Lewis" /></a> -->
       <!-- FIXME: not accessible -->
       <a href="Project/ProjectTeam/#">
@@ -68,6 +69,9 @@
         </tr>
       </table>
       </a>
+          <a href="http://earlymusictheory.org/blog" id="QLBlog"></a>
+          <div class="ql-divider"></div>
+          <a href="http://earlymusictheory.org/Tinctoris" id="QLHome"></a>      
     </div>
   </div>
   <div class="nav">
@@ -75,13 +79,7 @@
 			<div class="tabl">
    	 		<div class="frontpagemenu">
   				<ul id="MenuBar1" class="MenuBarHorizontal">
-    				<li><a href="#" class="MenuBarItemSubmenu">Home</a>
-            <ul>
-              <li><a href="#">Project Home</a></li>
-              <li><a href="../#">Early Music Theory Home</a></li>
-              <li><a href="../blog/#">Blog</a></li>
-            </ul>
-          </li>
+            <li><a class="MenuBarItem" href="http://earlymusictheory.org/Tinctoris">Home</a></li>
           <li><a class="MenuBarItemSubmenu" href="#">Project</a>
             <ul>
               <li><a href="Project/ProjectTeam/#">Project Team</a></li>
@@ -103,11 +101,11 @@
               <li><a class="placeholder" href="#">Expositio manus</a></li>
               <li><a class="placeholder" href="#">De natura et proprietate tonorum</a></li>
               <li><a href="texts/denotisetpausis/#">De notis et pausis</a></li>
-              <li><a class="placeholder" href="#">De regulari valore notarum</a></li>
+              <li><a href="texts/deregularivalorenotarum/#">De regulari valore notarum</a></li>
               <li><a href="texts/deimperfectionenotarum/#">De imperfectione notarum musicalium</a></li>
-              <li><a class="placeholder" href="#">De alteratione notarum</a></li>
+              <li><a href="texts/dealterationenotarum/#">De alteratione notarum</a></li>
               <li><a href="texts/depunctis/#">De punctis</a></li>
-              <li><a class="placeholder" href="#">De arte contrapuncti</a></li>
+              <li><a href="texts/deartecontrapuncti/#">De arte contrapuncti</a></li>
               <li><a class="placeholder" href="#">Proportionale musices</a></li>
               <li><a class="placeholder" href="#">Diffinitorium musice</a></li>
               <li><a class="placeholder" href="#">Complexus effectuum musices</a></li>
@@ -124,7 +122,6 @@
             <ul>
               <li><a href="Help/#">Guide to the site</a></li>
               <li><a href="Project/ProjectTeam/#">Contact</a></li>
-              <li><a class="ref-2014" href="help/REF-2014/#">REF 2014</a></li>
             </ul>
           </li>
         </ul>
@@ -137,7 +134,7 @@
     <!-- <div class="contentbox"> -->
       <!-- <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/EarlyMusicTheor"  data-widget-id="377471649013972992">Tweets by @EarlyMusicTheor</a> -->
       <!-- <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> -->
-      <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/EarlyMusTheory"  data-widget-id="377471649013972992">Tweets by @EarlyMusTheory</a>
+      <a class="twitter-timeline" data-dnt="true" height="300px" href="https://twitter.com/EarlyMusTheory"  data-widget-id="377471649013972992">Tweets by @EarlyMusTheory</a>
       <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
       <div id="warn"></div>
       <!-- <div id="Accordion1" class="Accordion" tabindex="0"> -->
@@ -160,6 +157,11 @@
       <!--   </div> -->
       <!-- </div> -->
     <!-- </div> -->
+    <div id="cookies">We don't store any information with your browser
+    when you visit, but Twitter does. This can be prevented only by
+    avoiding pages with a Twitter feed – currently only this page
+    and the EMT homepage.</div>
+    </div>
   </div>
   <div class="content">
 

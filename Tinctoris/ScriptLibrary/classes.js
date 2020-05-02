@@ -2962,8 +2962,10 @@ function Part(){
 			if(this.orientation){
 				var vpos = this.position * rastralSize / 2 + 1;
 				var clock = this.orientation==="90c";
-				console.log(this.orientation, clock);
-				textBlock = svgText(SVG, clock ? lmargin-10 : lmargin, cury+rastralSize-vpos,
+//				console.log(this.orientation, clock);
+				// textBlock = svgText(SVG, clock ? lmargin-10 : lmargin, cury+rastralSize-vpos,
+				// 										"part textblock r"+this.orientation, false, false, false);
+				textBlock = svgText(SVG, lmargin-10, cury+rastralSize-vpos,
 														"part textblock r"+this.orientation, false, false, false);
 				this.domObj = textBlock;
 				if(typeof(this.id)==="string"){
@@ -2983,6 +2985,7 @@ function Part(){
 						}
 					}
 				}
+				/*
 				if(clock){
 					var box = textBlock.getBBox();
 					console.log("yo", box);
@@ -2995,7 +2998,7 @@ function Part(){
 //														 +(vpos * rastralSize / 2)+", "+rastralSize+")");
         } else {
 					console.log("Unsupported rotation: ". this.orientation);
-				}
+				}*/
 				return textBlock;
 			} else {
 				ypos = !$(SVG).parents("#content").length ? cury-(6*rastralSize) : cury-(8*rastralSize) ;
@@ -3523,8 +3526,12 @@ function TextUnderlay(){
     var vpos = /-?[0-9]*/.exec(this.position);
     if(vpos) vpos = Number(vpos[0]);
     if(vpos){
-//      ynudge = vpos*rastralSize/4;
-      ynudge = vpos*rastralSize/2 +1;
+			//      ynudge = vpos*rastralSize/4;
+			if(this.orientation){
+				ynudge = vpos*rastralSize/2;
+			} else {
+				ynudge = vpos*rastralSize/2 +1;
+			}
 			if(vpos<-6) leaveSpace = true;
     }
     lowPoint = Math.max(lowPoint, cury+(2*rastralSize)-ynudge);
@@ -3586,9 +3593,9 @@ function TextUnderlay(){
           this.startX = curx+rastralSize*2; // currentExample.width();
           SVG.setAttributeNS(null, "x", this.startX);
         }
-        SVG.setAttributeNS(null, "transform", "rotate(90, "
-                           +this.startX+", "+(cury+rastralSize)+") translate(-"
-                           +(this.staffPos * rastralSize / 2)+")");
+        // SVG.setAttributeNS(null, "transform", "rotate(90, "
+        //                    +this.startX+", "+(cury+rastralSize)+") translate(-"
+        //                    +(this.staffPos * rastralSize / 2)+")");
       } else if(this.orientation==="90a"){
         var actualx = curx;
         if(this.marginal==="l") {
@@ -3602,9 +3609,9 @@ function TextUnderlay(){
           SVG.setAttributeNS(null, "x", this.startX);
         }
         var actualy = cury+rastralSize-ynudge;
-        SVG.setAttributeNS(null, "transform", "rotate(-90, "
-                           +actualx+", "+actualy+") translate("
-                           +(this.staffPos * rastralSize / 2)+", "+rastralSize+")");
+        // SVG.setAttributeNS(null, "transform", "rotate(-90, "
+        //                    +actualx+", "+actualy+") translate("
+        //                    +(this.staffPos * rastralSize / 2)+", "+rastralSize+")");
       } else if(this.orientation==="180") {
 				var width = SVG.getBBox().width;
 				var height = SVG.getBBox().height;

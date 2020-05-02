@@ -311,6 +311,12 @@ Spry.Widget.MenuBar.prototype.showSubmenu = function(menu)
 			this.createIframeLayer(menu);
 		}
 	}
+  //////////
+  // Make menu height sensible
+  var start = menu.getBoundingClientRect().top;
+  var end = window.innerHeight;
+  menu.style.maxHeight = (end-start)+"px";
+  // 
 	this.addClassName(this.element, this.activeClass);
 };
 

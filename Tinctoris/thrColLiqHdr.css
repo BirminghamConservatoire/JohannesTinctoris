@@ -121,6 +121,13 @@ body.edition, .edition .container{
 	padding: 0;
 	margin: 20px 5px;
 }
+.sidebar1 #cookies {
+  font-size: 70%;
+  margin-top: -2px;
+  bottom: 4px;
+  color: #666;
+  background: none;
+}
 .content .contentbox {
 	padding: 20px;
 }
@@ -229,6 +236,7 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 	display: block;
 }
 .shortHeader #projectlogo a{
+  width: 631px;
   margin: 12px auto auto auto;
 }
 .shortHeader #EMT{
@@ -237,8 +245,21 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 .shortHeader #EMTLogo{
   margin: 0;
 }
-#projectlogo{
-	width: 50%;
+#projectlogo {
+  width: 412px;
+}
+.shortHeader #projectlogo {
+  width: 631px;
+}
+@media screen and (min-width: 1262px) {
+  .header.shortHeader #projectlogo{
+	  width: 50%;
+  }
+}
+@media screen and (min-width: 824px) {
+  .header:not(.shortHeader) #projectlogo{
+	  width: 50%;
+  }
 }
 #EMT{
 	width: 15%;
@@ -327,13 +348,26 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 }
 .frontpagemenu #MenuBar1 li .MenuBarSubmenuVisible li {
 	font-size: 14px;
+	/* width: 175px; */
 	width: 175px;
+	/* width: 185px; */
 	text-align: left;
 	font-weight: normal;
 }
-#MenuBar1 > li > a.MenuBarItemSubmenu {
+.frontpagemenu #MenuBar1 li .MenuBarSubmenuVisible li a{
+  padding-right: -11px;
+  width: 175px;
+}
+
+#MenuBar1 > li > a.MenuBarItemSubmenu, #MenuBar1 > li > a.MenuBarItem {
 	font-weight: bold;
 }
+.MenuBarSubmenuVisible {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 600px;
+}
+
 #textMenu > li > a.notes{
   font-style: italic;
   /* text-align: right; */
@@ -383,6 +417,7 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 }
 ul.MenuBarHorizontal .MenuBarSubmenuVisible{
 	width: 177px;
+	/* width: 187px; */
 }
 ul.MenuBarHorizontal a.MenuBarItemSubmenu
 {
@@ -392,6 +427,14 @@ ul.MenuBarHorizontal a.MenuBarItemSubmenu
 	background-image: url(SpryAssets/SpryMenuBarDown.gif), -o-linear-gradient(to top, #CCC, #CCC, #E2E2E2, #E2E2E2, #E2E2E2);
 	background-repeat: no-repeat;
 	background-position: 95% 50%;
+}
+ul.MenuBarHorizontal a.MenuBarItem
+{
+	background-image: -moz-linear-gradient(to top, #CCC, #CCC, #E2E2E2, #E2E2E2, #E2E2E2);
+	background-image: -webkit-linear-gradient(bottom, #CCC 40%, #E2E2E2 60%);
+	background-image: -o-linear-gradient(to top, #CCC, #CCC, #E2E2E2, #E2E2E2, #E2E2E2);
+	/* background-repeat: no-repeat; */
+	/* background-position: 95% 50%; */
 }
 .AccordionFocused{
 	outline-color: #cc817a;
@@ -409,6 +452,9 @@ ul.MenuBarHorizontal a.MenuBarItemSubmenu
   border-collapse: collapse;
   border: none;
   margin: 52px 0 0 0;
+}
+.QuickLinks .team{
+  margin: 15px 0 0 auto;
 }
 .team td{
   padding: 0;
@@ -439,6 +485,93 @@ ul.MenuBarHorizontal a.MenuBarItemSubmenu
 }
 #DavidLewis:hover{
   background-image: url(Images/DL-red.png);
+}
+#QLBlog{
+  background-image: url("Images/JT Project blog blue %282015 06%29.png");
+  margin: 24px 0 0 0;
+  height: 19px;
+  width: 80px;
+  float: right;
+  display: block;
+}
+div.ql-divider{
+  border-right: 2px solid #0B2573;
+  float: right;
+  width: 4px;
+  margin: 19px 4px 0 4px;
+  height: 25px;
+}
+#QLHome{
+  background-image: url("Images/JT Project home blue %282015 06%29.png");
+  margin: 24px 0 0 0;
+  height: 19px;
+  width: 80px;
+  float: right;
+  display: block;
+}
+#QLBlog:hover{
+  background-image: url("Images/JT Project blog red %282015 06%29.png");
+}
+#QLHome:hover{
+  background-image: url("Images/JT Project home red %282015 06%29.png");
+}
+#QuickLinks{
+  width: 80px;
+  margin-right: 4px;
+}
+div.ql-divider{
+  display: none;
+}
+.shortHeader #QLHome{
+  display: none;
+  margin-top:24px;
+}
+.shortHeader #QLBlog{
+  margin-top:24px;
+}
+.shortHeader div.ql-divider{
+  margin-top:19px;
+}
+.header:not(.shortHeader) #QLHome{
+  margin-top: 17px;
+}
+.header:not(.shortHeader) #QLBlog{
+  margin-top: 17px;
+  margin-right: 50px;
+}
+.header:not(.shortHeader) div.ql-divider {
+  margin-top: 13px
+}
+
+@media screen and (max-width: 975px){
+  .shortHeader #QuickLinks {
+    display: none;
+  }
+}
+@media screen and (min-width: 700px){
+  .header:not(.shortHeader) #QuickLinks {
+    width: 172px;
+    margin-right: 0;
+  }
+  .header:not(.shortHeader) div.ql-divider{
+    display: block;
+  }
+  .header:not(.shortHeader) #QLHome {
+    display: block;
+  }
+}
+/* @media screen and (min-width: 1098px){ */
+@media screen and (min-width: 1004px){ 
+  #QuickLinks {
+    width: 172px;
+    margin-right: 0;
+  }
+  div.ql-divider{
+    display: block;
+  }
+  .shortHeader #QLHome {
+    display: block;
+  }
 }
 .marginalCitation{
   position: absolute;
@@ -547,6 +680,17 @@ p > img {
 .preamble a {
   font-style: normal;
 }
+.blockquote {
+  margin-left: 7ex;
+  margin-right: 8ex;
+}
+.blockquote.hasref {
+  margin-bottom: 0px;
+}
+.quoteref {
+  text-align: right;
+  margin-right: 8ex;
+}
 /* .minibiog a:hover{ */
 /*   text-decoration: underline; */
 /* } */
@@ -604,6 +748,11 @@ div.helpshot.h716 {
   padding: 6px;
   border-radius: 12px;
   width: 728px;
+}
+div.helpshot.h309 {
+  padding: 6px;
+  border-radius: 12px;
+  width: 812px;
 }
 div.helpshot.h821 {
   padding: 6px;

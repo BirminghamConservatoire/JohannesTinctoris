@@ -1,5 +1,5 @@
 allTexts.deimperfectionenotarum = {};
-if(!allTexts.treatises) texts.treatises = [];
+if(!allTexts.treatises) allTexts.treatises = [];
 allTexts.treatises.push("deimperfectionenotarum");
 allTexts.deimperfectionenotarum.exportYear = 2014;
 allTexts.deimperfectionenotarum.exportMonth = 4;
@@ -237,7 +237,8 @@ Quoad {var="tercium" Br1 G : "tertium" V BU}{.:} {var="quotienscunque" (ed.) : "
 <conclusion><heading>{¶ } Operis conclusio. {var=(ins.) "Capitulum 10" Br1^i}</heading>\n\
 Et hec de notarum musicalium imperfectionibus dicta sufficiant{.;} in quibus si aliquid imperfecte positum inveniatur{.,} omnes precor in hac arte divina {var="perfectos" V BU Br1 : "professos" G} ut amore perfectiori velint id perficere{.,} quo Deus ille {var="scientiarum" V BU G : "scienciarum" Br1} dominus{ ,} qui opus imperfectionis non novit{ ,} eos beatitudine perfectissima remunerare dignetur. {var=(ins.) "Amen." G}</conclusion>\n\
 <explicit>{var="{¶ } Finit tractatus de imperfectione notarum musicalium" V BU : "Explicit" Br1 G}.</explicit></treatise>';
-allTexts.deimperfectionenotarum.translation = {};allTexts.deimperfectionenotarum.translation.english = [];
+allTexts.deimperfectionenotarum.translation = {};
+allTexts.deimperfectionenotarum.translation.english = [];
 allTexts.deimperfectionenotarum.translation.english[3590438400] = 'De imperfectione notarum\n\
 Translator: Ronald Woodley\n\
 Checked by: Jeffrey J. Dean\n\
@@ -460,7 +461,7 @@ As to the third: whenever a dot of division is applied to any note either on its
 <conclusion><heading>The conclusion of this work</heading>\n\
 And these things said on the imperfections of musical notes should suffice; in which, if anything should be found to have been set down imperfectly, I pray that all those perfected in this divine art may be willing to perfect it as with a more perfect love, so that God himself, Lord of all knowledge, who knows no need of imperfection, may deem them worthy of being rewarded with his most perfect blessing.</conclusion>\n\
 <explicit>Here ends the treatise on the imperfections of musical notes.</explicit></treatise>';
-texts.deimperfectionenotarum.V = [];
+allTexts.deimperfectionenotarum.V = [];
 allTexts.deimperfectionenotarum.V[3602188800] = 'De imperfectione notarum\n\
 Data entry: Jeffrey J. Dean\n\
 Checked by:\n\
@@ -675,7 +676,7 @@ Running heads: (verso) De imperfectione (recto) notarum\n\
 {4line}{blue}ET hec de notarum musicalium imperfectionibus dicta sufficiant. in quibus si aliquid imperfecte positum inveniatur omnes precor in hac arte divina perfectos ut amore perfectiori velint id perficere quo deus ille scientiarum dominus qui opus imperfectionis non novit{|}eos beatitudine perfectissima remunerare dignetur:·</conclusion>\n\
 [3 blank lines]\n\
 <explicit>{blue}¶ <red>Finit tractatus de imperfectione notarum musicalium</red></explicit>**Continues "nunc de alteratione earundem incipit:".**';
-texts.deimperfectionenotarum.G = [];
+allTexts.deimperfectionenotarum.G = [];
 allTexts.deimperfectionenotarum.G[3567801600] = 'De imperfectione notarum\n\
 Data entry: Jeffrey J. Dean\n\
 Checked by:\n\
@@ -832,7 +833,7 @@ Running heads: [none]\n\
 <redline>E</redline>t hec de notarum musicalium imperfectionibus dicta sufficiant. in quibus si aliquid imperfecte positum inveniatur omnes precor in hac arte divina professos ut amore perfectiori velint id perficere, quo deus ille scientiarum dominus, qui opus imperfectionis non novit eos beatitudine perfectissima remunerare dignetur <redline>A</redline>men.</conclusion>\n\
 [blank line]\n\
 <explicit>[-]<red>§</red> <redline>E</redline>xplicit. <red>. § .</red></explicit>';
-texts.deimperfectionenotarum.Br1 = [];
+allTexts.deimperfectionenotarum.Br1 = [];
 allTexts.deimperfectionenotarum.Br1[3602188800] = 'De imperfectione notarum\n\
 Data entry: Jeffrey J. Dean\n\
 Checked by:\n\
@@ -1078,7 +1079,7 @@ Running heads: [none]\n\
 <2line><blue>E</blue></2line><redline>T</redline> hec de notarum musicalium imperfectionibus dicta sufficiant <redline>I</redline>n quibus si aliquid imperfecte positum inveniatur omnes precor in hac arte divina perfectos, ut amore perfectiori velint id perficere, quo deus ille scienciarum dominus qui opus imperfectionis non novit, eos beatitudine perfectissima remunerare dignetur.</conclusion>\n\
 [3 blank lines]\n\
 <explicit>[-] <redline>E</redline>xplicit</explicit>';
-texts.deimperfectionenotarum.BU = [];
+allTexts.deimperfectionenotarum.BU = [];
 allTexts.deimperfectionenotarum.BU[3602188800] = 'De imperfectione notarum\n\
 Data entry: Jeffrey J. Dean\n\
 Checked by:\n\

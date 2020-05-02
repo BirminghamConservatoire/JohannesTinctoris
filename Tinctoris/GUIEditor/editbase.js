@@ -77,3 +77,7 @@ function UpDown(object, d, event){
   $(downarrow).click(pitchOrHeightShift(object, -d));
 }
 
+var domobj = [];
+function grabdomobjects(){
+  domobj['Content'] = document.getElementById("content");
+}

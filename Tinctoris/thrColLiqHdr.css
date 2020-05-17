@@ -164,6 +164,9 @@ body.edition, .edition .container{
 .content ul, .content ol { 
 	padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
 }
+.content ul ul {
+	padding-bottom: 0;
+}
 
 /* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
 ul.nav {
@@ -293,6 +296,11 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 	min-height: 36px;
 	margin: 0 auto 10px auto;
 	width: 842px;
+}
+.frontpagemenu.fourblock{
+	min-height: 36px;
+	margin: 0 auto 10px auto;
+	width: 562px;
 }
 .frontpagemenu > ul > li {
 	height: 36px;
@@ -867,4 +875,10 @@ img.logo {
   padding: 12px;
   background-color: #FFF;
   margin-left: 24px;
+}
+.microsite {
+	padding: 0 1em;
+	border-left: 4px #cc2414 solid;
+	margin-top: 1em;
+	margin-bottom: 1em;
 }

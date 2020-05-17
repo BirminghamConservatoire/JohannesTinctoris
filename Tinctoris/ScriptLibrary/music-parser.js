@@ -310,6 +310,9 @@ function MusicExample(){
 		var parti=0;
 		var sic = false;
 		var n=0;
+		var mstaff = false;
+		// I don't know why this isn't happening later, but adding this unbreaks things [DL 05/20]
+		var mlayer = doc.createElementNS("http://www.music-encoding.org/ns/mei", "layer");
     // more
 		for(var i=0; i<this.events.length; i++){
 			var prevLength = currentPartes.length;
@@ -380,6 +383,7 @@ function MusicExample(){
 				msectionIsNew = false;
 				mstaff = false;
 				msubsection = false;
+				if(!mlayer) console.log(this.events[i]);
 				this.events[i].toMEI(doc, mlayer);
 				started = true;
 			}
@@ -505,7 +509,7 @@ function MusicExample(){
 		}
 	};
   this.toTEI = function(doc, parent){
-		console.log("aaaaah");
+		// FIXME: Old code, probably not valid MEI or TEI
     if(!parent) parent=(doc.currentParent || doc.body);
     var musicel = doc.element("notatedMusic");
     var mdiv = doc.element("mei:mdiv");
@@ -538,6 +542,7 @@ function MusicExample(){
 		var counter = 1;
 		this.voiceParts = this.gatherStaffs(this.parts);
 		var voiceTypes = Object.keys(this.voiceParts);
+		var  sd;
     el.appendChild(group);
 		if(voiceTypes.length){
 			for(var i=0; i<voiceTypes.length; i++){

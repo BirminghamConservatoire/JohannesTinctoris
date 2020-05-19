@@ -3039,6 +3039,8 @@ function Barline(){
   this.end = false;
   this.multiple = 1;
   this.startX = false;
+	this.domObj = false;
+	this.UUID = "ID"+uuid()
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
   this.toText = function(){
@@ -3052,6 +3054,9 @@ function Barline(){
   };
   this.width = function(){return rastralSize*this.multiple / 3;};
   this.draw = function() {
+		this.domObj = svgGroup(SVG, "barline", this.UUID);
+		var oldSVG = SVG;
+		SVG = this.domObj;
     var extraClasses = currentType ==="plainchant" ? " chantbar " : "";
     this.startX = curx;
     if(this.classList.length){
@@ -3072,6 +3077,7 @@ function Barline(){
       }
       curx += rastralSize * 1 / 3;
     }
+		SVG = oldSVG;
   };
   this.drawFlash = function(){
     // FIXME!!

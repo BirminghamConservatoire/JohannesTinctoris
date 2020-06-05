@@ -58,17 +58,6 @@ function gcd(a,b) {
   return b ? gcd(b, a % b) : Math.abs(a);
 }
 
-/** 
- * Name space manager function. Takes a prefix and returns the URL for
- * that name space. In this case, though, pretty much hard-wired.
- * @param {String} prefix The namespace prefix to retrieve as a URL
- */
-function nsResolver(prefix){
-  var ns = {
-    mei: "http://www.music-encoding.org/ns/mei"
-  }
-  return ns[prefix] || null;
-}
 
 /////////////////////////////
 //
@@ -96,7 +85,11 @@ function nsResolver(prefix){
  * @return {Boolean} 
  */
 function hasNoSections(x){
-  return x.childElementCount!==0 &amp;&amp; this.evaluate('count(mei:section)', x, nsResolver).numberValue===0;
+	if(this.evaluate){
+		return x.childElementCount!==0 &amp;&amp; this.evaluate('count(mei:section)', x, nsResolver).numberValue===0;
+	} else {
+		return x.childElementCount!==0 &amp;&amp; !x.getElementsByTagName('section').length;
+	}
 }
 
 /**
@@ -121,6 +114,7 @@ function getLayers(section){
 	return Array.from(sections);
 }
 
+var idDictionary = {};
 /**
  * Creates an array of mensurally coherent blocks, each an object with
  * mensuration and events attributes.
@@ -131,11 +125,17 @@ function getLayers(section){
  * cases, if none is specified).
  */
 function getEventsByMensurationForSection(section, doc, prevMens){
-	var ni = doc.createNodeIterator(section, NodeFilter.SHOW_ALL);
+	if(doc.createNodeIterator){
+		var ni = doc.createNodeIterator(section, NodeFilter.SHOW_ALL);
+		var next = ni.nextNode();
+	} else {
+		var bucket = section.getElementsByTagName('*');
+		var pointer = 0;
+		var next = bucket[pointer];
+	}
 	var foo = [];
-	var block = {mens: prevMens, events: foo};
+	var block = {mens: prevMens, events: foo, prevPropMultiplier: 1};
 	var blocks = [block];
-	var next = ni.nextNode();
 	while(next){
 		switch(next.tagName){
 			case 'mensur':
@@ -171,10 +171,56 @@ function getEventsByMensurationForSection(section, doc, prevMens){
 			case 'note':
 			case 'dot':
 				foo.push(next);
+				idDictionary[next.getAttributeNS(null, "id")] = block;
 		}
-		next = ni.nextNode();
+		if(ni){
+			next = ni.nextNode();
+		} else {
+			pointer++;
+			next = pointer &lt; bucket.length ? bucket[pointer]: false;
+		}
 	}
 	return blocks	
+}
+
+/**
+ * Given an element, find its applicable 'block' (mensurally-coherent
+ * section) and, if there is a proportion that should apply, returns
+ * the factor. Uses the idDictionary global.
+ * @param {DOMObject} el mei:note or mei:rest
+ * @returns {Number} 
+ */
+function proportionMultiplier(el){
+	var block = idDictionary[el.getAttributeNS(null, 'id')];
+	// if(block.prop) console.log("so", blockProportionMultiplier(block));
+	// return blockProportionMultiplier(block);
+	if(block.prop){
+		if(block.prop.getAttributeNS(null, 'multiplier')){
+			return Number(block.prop.getAttributeNS(null, 'multiplier'));
+		} else {
+			return propProportionMultiplier(block.prop);
+		}
+	} else return 1;
+}
+/**
+ * Given a proportion-specifying element, give its implied multiplier
+ */
+function propProportionMultiplier(el){
+	var num = el.getAttributeNS(null, 'num') || 1;
+	var div = el.getAttributeNS(null, 'numbase') || 1;
+	return Number(num) / Number(div);
+}
+/**
+ * Give proportion multiplier for a block given the current and
+ * previous proportion state.
+ * @param {} block
+ * @returns {} 
+ */
+function blockProportionMultiplier(block){
+	var newFactor = block.prop ? propProportionMultiplier(block.prop) : 1;
+	var oldFactor = block.prevPropMultiplier || 1;
+	if(block.prop) console.log("and we have ", block, newFactor, oldFactor);
+	return newFactor * oldFactor;
 }
 
 /////////////////////////////
@@ -191,8 +237,31 @@ function getEventsByMensurationForSection(section, doc, prevMens){
  * @param {Boolean} dot Is there a dot of augmentation?
  */
 function writeDur(num, el, dot){
-	if(dot) el.setAttributeNS(null, 'dur.ges', (1.5*num)+'b');
-	else el.setAttributeNS(null, 'dur.ges', num+'b');
+/*	if(dot) el.setAttributeNS(null, 'dur.ges', (1.5*num)+'b');
+		else el.setAttributeNS(null, 'dur.ges', num+'b');*/
+	var scaledNum = num * proportionMultiplier(el);
+	if(dot) {
+		// looks like num and numbase, in Verovio at least, excludes dots,
+		// and duration calculations exclude separate elemnt dots
+		//		num *= 1.5;
+		el.setAttributeNS(null, 'dots', 1);
+		el.setAttributeNS(null, 'dur.intermediate', (num*1.5)+'b');
+		el.setAttributeNS(null, 'dur.ges', (scaledNum*1.5)+'b');
+	} else {
+		el.setAttributeNS(null, 'dur.ges', scaledNum+'b');
+		el.setAttributeNS(null, 'dur.intermediate', num+'b');
+	}
+	// This is for Verovio. Needs fixing.
+	var defaultLength = dupleMinimCountFromElement(el);
+	if(defaultLength){
+		if(Math.floor(num)!= num){
+			// FIXME: use lcd
+			num *= 12;
+			defaultLength *= 12;
+		}
+		el.setAttributeNS(null, 'num', defaultLength);
+		el.setAttributeNS(null, 'numbase', num);
+	} 
 }
 
 /**
@@ -218,9 +287,10 @@ function leveleq(e1, e2){
  *
  */
 function writeSimpleImperfection(el, mens, rule){
-	el.setAttributeNS(null, 'dur.ges', (2 * simpleMinims(el, mens) / 3) + 'b');
-	el.setAttributeNS(null, 'num', 2);
-	el.setAttributeNS(null, 'numbase', 3);
+	//	el.setAttributeNS(null, 'dur.ges', (2 * simpleMinims(el, mens) / 3) + 'b');
+	writeDur((2 * simpleMinims(el, mens) / 3), el, false);
+//	el.setAttributeNS(null, 'num', 2);
+//	el.setAttributeNS(null, 'numbase', 3);
 	el.setAttributeNS(null, 'dur.quality', 'imperfectio');
 	el.setAttributeNS(null, 'quality', 'i');
 	el.setAttributeNS(null, 'rule', rule);
@@ -240,8 +310,8 @@ function writeImperfection(el, reduceBy, mens, rule){
 	var factor = gcd(defaultDur, reduceBy);
 	var finalDur = defaultDur - reduceBy
 	writeDur(finalDur, el, false);
-	el.setAttributeNS(null, 'num', finalDur / factor);
-	el.setAttributeNS(null, 'numbase', defaultDur / factor);
+//	el.setAttributeNS(null, 'num', finalDur / factor);
+//	el.setAttributeNS(null, 'numbase', defaultDur / factor);
 	el.setAttributeNS(null, 'dur.quality', 'imperfectio');
 	el.setAttributeNS(null, 'quality', 'i');
 	el.setAttributeNS(null, 'rule', rule);	
@@ -256,9 +326,10 @@ function writeImperfection(el, reduceBy, mens, rule){
  * (written to element as @rule)
  */
 function writeAlteration(el, mens, rule){
-	el.setAttributeNS(null, 'dur.ges', (2 * simpleMinims(el, mens)) + 'b');
-	el.setAttributeNS(null, 'num', 2);
-	el.setAttributeNS(null, 'numbase', 1);
+	//	el.setAttributeNS(null, 'dur.ges', (2 * simpleMinims(el, mens)) + 'b');
+	writeDur((2 * simpleMinims(el, mens)), el, false);
+//	el.setAttributeNS(null, 'num', 2);
+//	el.setAttributeNS(null, 'numbase', 1);
 	el.setAttributeNS(null, 'dur.quality', 'alteratio');
 	el.setAttributeNS(null, 'quality', 'a');
 	el.setAttributeNS(null, 'rule', rule);
@@ -271,7 +342,7 @@ function writeAlteration(el, mens, rule){
  * @return {Integer}
  */
 function readDur(el){
-	var str = el.getAttributeNS(null, 'dur.ges');
+	var str = el.getAttributeNS(null, 'dur.intermediate');
 	return str ? Number(str.substring(0, str.length-1)) : false;
 }
 
@@ -289,6 +360,21 @@ function readDur(el){
 function noteIntFromDur(dur){
 	return ['semifusa', 'fusa', 'semiminima', 'minima', 'semibrevis', 'brevis', 'longa', 'maxima'].indexOf(dur);
 }
+
+/**
+ * @num and @numbase seem to be relative to a purely imperfect
+ * interpretation of note division. This function takes an element and
+ * returns the number of minims it would consist of if all notes
+ * divided into two parts. For notes shorter than a minim, it returns false
+ * @param {DOMElement} el An mei:note or mei:rest
+ * @returns {Integer | Boolean} 
+ */
+function dupleMinimCountFromElement(el){
+	var level = noteInt(el);
+	if(level&lt;3) return false;
+	return Math.pow(2, level-3);
+}
+
 /**
  * Return the duration level of a note or rest as an integer (semifusa=0, semibrevis=4, maxima=7)
  * @param {DOMObject} el mei:note or mei:rest (or other object with mei:@dur
@@ -532,7 +618,7 @@ function isAlterable(el, mensur){
  * @returns {} 
  */
 function alterableLevels(mens){
-	var ms = mensSummary(mens);
+	var ms = mensurSummary(mens);
 	var als = [];
 	for(var i=0; i&lt;4; i++){
 		if(ms[i]===3){
@@ -597,7 +683,12 @@ function imperfectingLevels(element, mensur){
 			break;
 		}
 	}
-	return perf ? minimStructures(mensum, perf) : [];
+//	console.log(mensum, elLevel, perf, minimStructures(mensum));
+	if(perf || perf===0){
+		var possibilities = [1].concat(minimStructures(mensum, perf));
+		return possibilities;
+	}
+	return [];
 }
 
 /**
@@ -683,8 +774,8 @@ function windowDuration(events, mens){
 	for(var i=0; i&lt;events.length; i++){
 		var event = events[i];
 		if(event.tagName==="note"||event.tagName==="rest"){
-			if(event.getAttributeNS(null, 'dur.ges')) {
-				var durString = event.getAttributeNS(null, 'dur.ges');
+			if(event.getAttributeNS(null, 'dur.intermediate')) {
+				var durString = event.getAttributeNS(null, 'dur.intermediate');
 				var dur = new Number(durString.substring(0, durString.length-1));
 				if(definite) duration.definite += dur;
 				duration.bareMinimum += dur;
@@ -789,7 +880,6 @@ function actOnColoration(sectionBlocks){
 						&amp;&amp; sectionBlocks[b].events[e+1].getAttributeNS(null, 'form')==='aug';
 				writeDur(simpleMinims(event, mens) * 2/3, event, augmentedDot);
 				event.setAttributeNS(null, 'rule', 'coloration');
-//				prev.setAttributeNS(null, 'dur.ges', 1.5 * simpleMinims(prev, mens, 0));
 			}
 		}
 	}
@@ -895,7 +985,7 @@ function simplestAlterations(sectionBlocks){
 									// Yay, it's an alteration
 									writeDur(2 * simpleMinims(event, mens), event);
 									event.setAttributeNS(null, 'quality', 'a');
-									event.setAttributeNS(null, 'rule', 'A.2');
+									event.setAttributeNS(null, 'rule', 'A.2b');
 								}
 								break;
 							} else if(target&lt;0){
@@ -959,17 +1049,23 @@ function checkForGeneralAlteration(event, index, events, mens){
 	var starts = indexOfPrevLongerOrDot(level, index, events);
 	var leftWindow = events.slice(starts+1, index);
 	var durations = windowDuration(leftWindow, mens);
+	//	var defaultLength = proportionMultiplier(event) * simpleMinims(event, mens);
+	var defaultLength = simpleMinims(event, mens);
 	if(durations.definite || durations.bareMinimum == 0){
-		if(durations.definite==simpleMinims(event, mens)){
+		if(durations.definite==defaultLength){
 			writeAlteration(event, mens, 'A.2');
 		} else {
-			event.setAttributeNS(null, 'rule', 'A.xx');
-			event.setAttributeNS(null, 'dur.ges', simpleMinims(event, mens)+'b');			
+			if(event.getAttributeNS(null, 'mensurBlockStartsAt')==="20") console.log("x", leftWindow, durations);
+			event.setAttributeNS(null, 'rule', 'A.xxx');
+//			event.setAttributeNS(null, 'dur.ges', simpleMinims(event, mens)+'b');
+			writeDur(simpleMinims(event, mens), event, false);
 		}
-	} else if(durations.bareMinimum > simpleMinims(event, mens)){
+	} else if(durations.bareMinimum > defaultLength){
 		// not altered
-		event.setAttributeNS(null, 'rule', 'A.xx');
-		event.setAttributeNS(null, 'dur.ges', simpleMinims(event, mens)+'b');			
+		if(event.getAttributeNS(null, 'mensurBlockStartsAt')==="20") console.log("z", durations);
+		event.setAttributeNS(null, 'rule', 'A.xxz');
+//		event.setAttributeNS(null, 'dur.ges', simpleMinims(event, mens)+'b');			
+		writeDur(simpleMinims(event, mens), event, false);
 	}
 	return event;
 }
@@ -996,6 +1092,7 @@ function firstBeatImperfectionCheck(event, window, mens){
 	var duration = windowDuration(window, mens);
 //	if(level==5) console.log(event, duration);
 	var imperfectionPossibilities = imperfectingLevels(event, mens);
+//	console.log(imperfectionPossibilities);
 	if(duration.definite){
 		while(imperfectionPossibilities.length){
 			var nextToTry = imperfectionPossibilities.pop();
@@ -1007,7 +1104,8 @@ function firstBeatImperfectionCheck(event, window, mens){
 				if(isAlterable(window[window.length-1], mens)){
 					event.setAttributeNS(null, 'rule', 'I.5');
 					event.setAttributeNS(null, 'quality', 'p');
-					event.setAttributeNS(null, 'dur.ges', simpleMinims(event, mens)+'b');
+//					event.setAttributeNS(null, 'dur.ges', simpleMinims(event, mens)+'b');
+					writeDur(simpleMinims(event, mens), event, false);
 					event.setAttributeNS(null, 'comment', 'trusting in alteration');
 				} else {
 					writeImperfection(event, nextToTry, mens, 'I.5-add');
@@ -1018,10 +1116,11 @@ function firstBeatImperfectionCheck(event, window, mens){
 			} else if (imperfectingUnits===3 || imperfectingUnits===6 || imperfectingUnits===9){
 				event.setAttributeNS(null, 'rule', 'I.6');
 				event.setAttributeNS(null, 'quality', 'p');
-				event.setAttributeNS(null, 'dur.ges', simpleMinims(event, mens)+'b');
+//				event.setAttributeNS(null, 'dur.ges', simpleMinims(event, mens)+'b');
+				writeDur(simpleMinims(event, mens), event, false);
 				return false;
 			} else if (imperfectingUnits>3){
-					writeImperfection(event, nextToTry, mens, 'I.4b');
+				writeImperfection(event, nextToTry, mens, 'I.4b');
 				return true;
 			}
 		}
@@ -1043,16 +1142,18 @@ function firstBeatImperfectionCheck(event, window, mens){
 		event.setAttributeNS(null, 'comment', 'trusting in alteration');		
 	} else if(duration.bareMinimum > 3 * imperfectionPossibilities[imperfectionPossibilities.length-1]){
 		var imperfector = imperfectionPossibilities[imperfectionPossibilities.length-1];
-		writeImperfection(event, imperfector, mens, 'I.4b');
+		writeImperfection(event, imperfector, mens, 'I.4bi');
 		event.setAttributeNS(null, 'defaultminims', simpleMinims(event, mens));
 		event.setAttributeNS(null, 'imperfectedBy', imperfector);
 		return true;		
 	} else if(duration.approximateMinimum > 3 * imperfectionPossibilities[imperfectionPossibilities.length-1]){
 		var imperfector = imperfectionPossibilities[imperfectionPossibilities.length-1];
-		writeImperfection(event, imperfector, mens, 'I.4b');
+		writeImperfection(event, imperfector, mens, 'I.4bii');
 		event.setAttributeNS(null, 'defaultminims', simpleMinims(event, mens));
 		event.setAttributeNS(null, 'imperfectedBy', imperfector);
 		return true;		
+	} else {
+		console.log('failed to resolve', event, mens, duration);
 	}
 }
 
@@ -1185,7 +1286,8 @@ function secondBeatAlteration(event, index, events, mens){
 	// second beat is special...
 	event.setAttributeNS(null, 'rule', 'A.1');
 	event.setAttributeNS(null, 'quality', 'a');
-	event.setAttributeNS(null, 'dur.ges', simpleMinims(event, mens)*2+'b');
+	writeDur(2*simpleMinims(event, mens), event, false);
+//	event.setAttributeNS(null, 'dur.ges', simpleMinims(event, mens)*2+'b');
 	return event;
 }
 
@@ -1345,7 +1447,9 @@ function beatIndependentDurations(sectionBlocks){
  * @param {Array} sectionBlocks Array of all the coherent areas of
  * mensurations in a section
  *
- */ 
+ */
+var propNum = false;
+var propDiv = false;
 function afterTheEasyBits(sectionBlocks){
 	// Now we know many durations and starting points, but not all,
 	// iterate through, looking for more context-dependent resolutions.
@@ -1434,157 +1538,283 @@ function afterTheEasyBits(sectionBlocks){
 	}
 	return unresolved;
 }
-/////////////////
+
+/////////////////////////////
 //
-// Not used
-/*
-function startsABreve(object){
-	return object.getAttributeNS(null, 'onTheBreveBeat')
-		|| object.getAttributeNS(null, 'crossedABreveBeat')
-		|| parseInt(object.getAttributeNS(null, 'onTheBreveBeat'), 10)===0;
-}
+// Features for machine learning
+//
+// MEI walk
 
-function blockEnds(sectionBlock){
-	for(var i=sectionBlock.events.length-1; i>=0; i++){
-		if(sectionBlock.events[i].tagName==='rest' ||sectionBlock.events[i].tagName==='note'){
-			if(sectionBlock.events[i].getAttributeNS(null, 'dur.ges') &amp;&amp;
-				 sectionBlock.events[i].getAttributeNS(null, 'startsAt')){
-				return addTime(sectionBlock.events[i], 
-											 parseInt(sectionBlock.events[i].getAttributeNS(null, 'startsAt'), 10));
-			} else return false;
-				
-		}
-			 
-	}
-}
-function addTime(el, current){
-	var dur = readDur(el);
-	if(dur &amp;&amp; (current || current===0)) {
-		return current+dur;
-	} else return false;
-}
-
-function imperfectionFromAhead(element, sequence, mensur){
-	return imperfectionFromBag(element, sequence, mensur);
-}
-function imperfectionFromAheadHorizon(element, index, sequence, mensur){
-	var bag=[];
-	var elLevel = noteInt(element);
-	for(var j=index-1; j>=0; j++){
-		if(sequence[j].tagname==="dot"){
-			if(sequence[j].getAttributeNS(null, 'form'==="aug")){
-				bag.push(sequence[j]);
-			} else return bag;
-		} else if(noteInt(sequence[j])>=elLevel){
-			return bag;
-		} else {
-			bag.push(sequence[j]);
-		}
-	}
-	return bag;
-}
-
-function imperfectionFromBag(element, sequence, mensur){
-	// Simplest imperfection
-	var mensum = mensurSummary(mensur);
-	var possibleLevels = imperfectingLevels(element, mensur);
-	var bagDuration = sequence.map(x=>simpleMinims(x, mensur)).reduce((x, t)=>x+t, 0);
-	var imperfectionLevels = possibleLevels.filter(x=>x&lt;=bagDuration);
-	if(imperfectionLevels.length){
-		return imperfectionLevels[imperfectionLevels.length-1];
-	} else return false;
-}
-
-function imperfectorInBag(element, sequence, mensur){
-	// Simplest imperfection
-	var mensum = mensurSummary(mensur);
-	var elLevel = noteInt(element) - 3;
-	var candidateLevels = [];
-	for(var i=elLevel; i>=0; i--){
-		if(mensum[i]===3) candidateLevels.push(i);
-	}
-	var possibles = sequence.filter((x)=>candidateLevels.indexOf(noteInt(x)-3)>-1);
-	if(possibles.length) return possibles[0];
-	return false;
-}
-
-function imperfectionHorizon(element, index, sequence){
-	var bag = [];
-	var elLevel = noteInt(element);
-	for(var j=index+1; j&lt;sequence.length; j++){
-		if(sequence[j].tagName==="dot"){
-			if(sequence[j].getAttributeNS(null, 'form')==="aug"){
-				bag.push(sequence[j]);
-			} else return bag;
-		} else if (noteInt(sequence[j])>=elLevel){
-			return bag;
-		} else {
-			bag.push(sequence[j]);
-		}
-	}
-	return bag;
-}
-
-function regPerfectLevels(mens){
-	var ms = mensSummary(mens);
-	var rp = [];
-	for(var i=1; i&lt;5; i++){
-		if(rp.length || ms[i-1]===3){
-			rp.push(i+3);
-		}
-	}
-	return rp;	
-}
-function perfectLevelsAsWhole(mens){
-	var ms = mensSummary(mens);
-	var pl = [];
-	for(var i=1; i&lt;5; i++){
-		if(ms[i-1]===3){
-			pl.push(i+3);
-		}
-	}
-	return pl;	
-}
-function simpleAlterations(sectionBlocks){
-	for(var b=0; b&lt;sectionBlocks.length; b++){
-		var mens = sectionBlocks[b].mens;
-		var als = alterableLevels(mens);
-		var pls = regPerfectLevels(mens);
-		for(var e=0; e&lt;ssectionBlocks[b].events.length; e++){
-			var event = sectionBlocks[b].events[e];
-			if(!event.getAttributeNS(null, 'dur.ges') &amp;&amp; event.tagName==="note"){
-				// Note without duration decision
-				var level = noteInt(event);
-				if(als.indexOf(level)>-1){
-					// This is a note on a level that might make it alterable
-					if(e+1&lt;sectionBlocks[b].events.length){
-						var nextEvent = sectionBlocks[b].events[e+1];
-						var nextLevel = nextEvent &amp;&amp; noteInt(sectionBlocks[b].events[e+1]);
-						if(nextEvent &amp;&amp; nextLevel===level+1){
-							// Alteration is possible
-							
-						} else {
-							// Alteration is not possible
-							writeDur(simpleMinims(event, mens), event,
-											 (nextEvent &amp;&amp; nextEvent.tagName==="dot"
-												&amp;&amp; nextEvent.getAttributeNS(null, 'form')==='aug'));
+function makeFeatureSequencesForML(MEIDoc, noHeaders=false, featureset=SIMPLEFEATURESET){
+	// First, get sections that do not themselves contain sections (so
+	// are leaf nodes in terms of document structure
+	var sections = getAtomicSections(MEIDoc);
+	var features = [];
+	var layerMens = [];
+	var standardHeader = noHeaders ? [] : makeARFFHeader(featureset);
+	var defaultMens = getStaffDefMens(MEIDoc);
+	for (var seci=0; seci&lt;sections.length; seci++){
+		var layers = getLayers(sections[seci]);
+		if(!layerMens.length) layerMens = layers.map(l=>getMatchingStaffDef(l, defaultMens));
+//		var sectionFeatures = [];
+//		features.push(sectionFeatures);
+		for(var layi=0; layi&lt;layers.length; layi++){
+			var layer = layers[layi];
+			// var layerFeatures = [];
+			// sectionFeatures.push(layerFeatures);
+			var blocks = getEventsByMensurationForSection(layer, MEIDoc.doc, layerMens.length > layi? layerMens[layi] : false);
+			layerMens[layi] = blocks[blocks.length-1].mens;
+			for(var blocki=0; blocki&lt;blocks.length; blocki++){
+				var block = blocks[blocki];
+				// var blockFeatures = [];
+				// var blockFeatureObj = {arr: blockFeatures, str: standardHeader};
+				// layerFeatures.push(blockFeatureObj);
+				// I'm taking a block (musical unit with a single mensuration as a separate thing
+				for(var eventi=0; eventi&lt;block.events.length; eventi++){
+					var event = block.events[eventi];
+					if(event.tagName==="note"){
+//						var eventFeatures = [event.getAttribute("xml:id")];
+						var eventFeatures = [];
+						features.push(eventFeatures);
+						for(var featurei=0; featurei&lt;featureset.length; featurei++){
+//							console.log(eventFeatures.length, block, "&lt;-------");
+							featureset[featurei].calculate(event, eventi, block, eventFeatures);
 						}
+						standardHeader.push(eventFeatures.join(","));
 					}
-				} else if (pls.indexOf(level)===-1){
-					// Not alterable, but duple (which means we know its length
-					writeDur(simpleMinims(event, mens), event, ((e+1)&lt;sectionBlocks[b].length
-																											&amp;&amp; sectionBlocks[b].events[e+1].tagName==="dot"
-																											&amp;&amp; sectionBlocks[b].events[e+1].getAttributeNS(null, 'form')==='aug'));
 				}
 			}
 		}
 	}
+	return standardHeader.join("\n") + "\n";
+}
+exports.makeFeatureSequencesForML = makeFeatureSequencesForML;
+
+function getStaffDefMens(doc){
+	// Staffdef has all the appropriate attributes to pretend to be a mensur
+	// N.B. Assumes one per staff (i.e. no changes)
+	sds = doc.doc.documentElement.getElementsByTagName('staffDef');
+	mens = [];
+	Array.prototype.forEach.call(sds, sd=>{
+		mens[Number(sd.getAttributeNS(null, 'n'))] = sd;
+	});
+	return mens;
+}
+function getMatchingStaffDef(layer, staffDefs){
+	return staffDefs[getStaffNo(layer)];
+}
+function getStaffNo(element){
+	var parent = element.parentNode;
+	while(parent){
+		if(parent.tagname!=='staff') return Number(parent.getAttributeNS(null, 'n'));
+		parent = parent.parentNode;
+	}
+}
+function addFeatureDatum(event, index, block, features){
+	features.push(this.test(event, index, block, features));
+}
+function attributeEq(obj, key, value){
+	return obj.getAttributeNS(null, key) &amp;&amp; obj.getAttributeNS(null, key)==value;
+}
+function attributeTestFun(key, value){
+	return function(obj){return attributeEq(obj, key, value) ? '1' : '0'};
+}
+function attributeValueFun(key){
+	return function(obj) {
+		if(obj.getAttributeNS(null, key))
+			return obj.getAttributeNS(null, key);
+		else
+			return "-";
+	}
+}
+function simAnteSim(e1, e2){
+	return ((e1.tagName==="note" || e1.tagName=="rest")
+					&amp;&amp; (e1.tagName==="note" || e1.tagName=="rest")
+					&amp;&amp; e1.getAttributeNS(null, 'dur')===e2.getAttributeNS(null, 'dur')) ? "1" : "0"
+}
+function eventLevel(){
+	if(this.tagName==='note' || this.tagName==='rest') return noteInt(this);
+	return '-';
+}
+function displacedSuccessiveEventsFun(fun, displacement, def){
+	return function(e, i, b){
+		return (i+displacement>0 &amp;&amp; i+displacement+1&lt;b.events.length
+						? fun.apply(null, [b.events[i+displacement], b.events[i+1+displacement]])
+						: (def ? def : '-'));
+	}
+}
+function displacedEventFun(fun, displacement){
+	return function(e, i, b) {
+		return (i+displacement>0 &amp;&amp; i+displacement&lt;b.events.length) ? fun.apply(b.events[i+displacement], [b.events[i+displacement],e,i,b]) : '-'};
+}
+function displacedBooleanEventFun(fun, displacement){
+	return function(e, i, b) {
+		return (i+displacement>0 &amp;&amp; i+displacement&lt;b.events.length) ? (fun.apply(b.events[i+displacement], [b.events[i+displacement],e,i,b]) ? '1' : '0') : '0'};
+}
+function displacedEventFunGenerator(fun){
+	return function(displacement){
+		return function(e, i, b) {
+			return (i+displacement>0 &amp;&amp; i+displacement&lt;b.events.length) ? fun.apply(b.events[i+displacement], [b.events[i+displacement],e,i,b]) : '-';
+		}
+	}
+}
+function displacedBooleanEventFunGenerator(fun){
+	return function(displacement) {
+		return function(e, i, b) {
+			return (i+displacement>0 &amp;&amp; i+displacement&lt;b.events.length) ? (fun.apply(b.events[i+displacement], [b.events[i+displacement],e,i,b]) ? '1' : '0') : '0';
+		}
+	}
+}
+function comparisonBooleanFunGenerator(fun){
+	return function(displacement){
+		return function(e, i, b){
+			return (i+displacement>0 &amp;&amp; i+displacement&lt;b.events.length)
+				? (fun.apply(null, [b.events[i+displacement], e, i, b]) ? '1' : '0')
+				: '0';
+		}
+	}
+}
+function comparisonFunGenerator(fun){
+	return function(displacement){
+		return function(e, i, b){
+			return (i+displacement>0 &amp;&amp; i+displacement&lt;b.events.length)
+				? fun.apply(null, [b.events[i+displacement], e, i, b])
+				: '-';
+		}
+	}
+}
+function last(arr){
+	return arr[arr.length-1];
+}
+function durationBefore(event, index, block){
+	var events = block.events;
+	var level = noteInt(event);
+	var starts = indexOfPrevLongerOrDot(level, index, events);
+	var leftWindow = events.slice(starts+1, index);
+	if(leftWindow.length===0) return 0;
+	var durations = windowDuration(leftWindow, block.mens);
+	var dur = durations.definite ? durations.definite
+			: (durations.approximation ? durations.approximation
+				 : durations.minimum ? durations.minimum : false);
+	if(!dur &amp;&amp; dur!==0) return '-';
+	var baseDur = last(imperfectingLevels(event, block.mens));
+	var units  = dur / baseDur;
+	if([0, 1, 2, 3, 6, 9].indexOf(units)>-1) return units;
+	if(units>3) return 'long';
+	else return 'odd';
+}
+function durationAfter(event, index, block){
+	var events = block.events;
+	var level = noteInt(event);
+	var ends = indexOfNextSameOrLongerOrDot(level, index, events);
+	var rightWindow = ends ? events.slice(index+1, ends) : events.slice(index+1);
+	if(rightWindow.length===0) return 0;
+	var durations = windowDuration(rightWindow, block.mens);
+	var dur = durations.definite ? durations.definite
+			: (durations.approximation ? durations.approximation
+				 : durations.minimum ? durations.minimum : false);
+	if(!dur &amp;&amp; dur!==0) return '-';
+	var baseDur = last(imperfectingLevels(event, block.mens));
+	var units  = dur / baseDur;
+	if([0, 1, 2, 3, 6, 9].indexOf(units)>-1) return units;
+	if(units>3) return 'long';
+	else return 'odd';
 }
 
+function canImperfectCurrent(shorter, longer, i, block){
+	var shortLevel = noteInt(shorter);
+	var longLevel = noteInt(longer);
+	if(shortLevel &lt; longLevel){
+		return canImperfect(noteInt(shorter), noteInt(longer), mensurSummary(block.mens));
+	} else return false;
+}
+function levelDifference(a, b){
+	return (noteOrRest(a) &amp;&amp; noteOrRest(b)) ?  noteInt(b) - noteInt(a) : '-';
+}
+function levelTestFun(levelAdjust){
+	return function(event, index, block){
+		var eventLevel = noteInt(event)+levelAdjust;
+		if(eventLevel &lt; 4) return '0';
+		return mensurSummary(block.mens)[eventLevel-4]=='3' ? '1' : '0';
+	}
+}
 
+function Feature(name, type, mainfun, testfun){
+	this.name = name;
+	this.type = type;
+	this.ARFFType = function(){
+		switch(this.type){
+			case "boolean":
+				return "{1,0}";
+			case "numeric":
+				return "NUMERIC";
+			default:
+				return this.type;
+		}
+	}
+	this.test = testfun;
+	this.calculate = mainfun;
+}
 
+const ID = new Feature("ID", "string", addFeatureDatum, attributeValueFun("xml:id"));
+const QUALITY = new Feature("Quality", "{-,a,p,i}", addFeatureDatum, attributeValueFun("quality"));
+const SIMPLER_QUALITY = new Feature("Quality", "{-,a,i}", addFeatureDatum, (e)=>(e.getAttributeNS(null, 'quality') &amp;&amp; e.getAttributeNS(null, 'quality')!=='p') ? e.getAttributeNS(null, 'quality') : '-');
+const COLORATION = new Feature("Colored", "boolean", addFeatureDatum,
+															 attributeTestFun("coloration", "true"));
+const REG_PERFECT = new Feature("RegularlyPerfect", "boolean", addFeatureDatum,
+																function(e, i, b, f){ return regularlyPerfect(e, b.mens) ? 1 : 0});
+const ALTERABLE = new Feature("Alterable", "boolean", addFeatureDatum, (e, i, b)=>isAlterable(e, b.mens) ? "1" : "0");
+const TRIPLE_LEVEL = new Feature("Triple", "boolean", addFeatureDatum, levelTestFun(0));
+const TRIPLE_LEVELS_DOWN_3 = new Feature("TripleLevelsDown3", "boolean", addFeatureDatum, levelTestFun(-3));
+const TRIPLE_LEVELS_DOWN_2 = new Feature("TripleLevelsDown2", "boolean", addFeatureDatum, levelTestFun(-2));
+const TRIPLE_LEVELS_DOWN_1 = new Feature("TripleLevelsDown1", "boolean", addFeatureDatum, levelTestFun(-1));
+const TRIPLE_LEVELS_UP_1 = new Feature("TripleLevelsUp1", "boolean", addFeatureDatum, levelTestFun(1));
+const TRIPLE_LEVELS_UP_2 = new Feature("TripleLevelsUp2", "boolean", addFeatureDatum, levelTestFun(2));
+const TRIPLE_LEVELS_UP_3 = new Feature("TripleLevelsUp3", "boolean", addFeatureDatum, levelTestFun(3));
+const NOTE_LEVEL = new Feature("NoteLevel", "{0,1,2,3,4,5,6,7}", addFeatureDatum, noteInt);
+const DURATION_AFTER = new Feature("DurationAfter", "{-,0,1,2,3,6,9,long,odd}", addFeatureDatum, durationAfter);
+const DURATION_BEFORE = new Feature("DurationBefore", "{-,0,1,2,3,6,9,long,odd}", addFeatureDatum, durationBefore);
 
+function makeFeatures(name, mainfun, range="{1,0}", windowSize=7, include0=false, ffun=addFeatureDatum){
+	var fset = [];
+	for(var i=-windowSize; i&lt;=windowSize; i++){
+		if(include0 || i){
+			fset.push(new Feature(name+"_"+i, range, ffun, mainfun(i)));
+		}
+	}
+	return fset;	
+}
+
+var NOTE_LEVELS = makeFeatures("NoteLevel", displacedEventFunGenerator(eventLevel), "{-,0,1,2,3,4,5,6,7}");
+var DIV_DOTS = makeFeatures("DivDots", displacedBooleanEventFunGenerator(divisionDot));
+var AUG_DOTS = makeFeatures("AugDots", displacedBooleanEventFunGenerator(augDot));
+var ANTE_SIM = makeFeatures("AnteSim", displacedBooleanEventFunGenerator(simAnteSim),"{0,1}", 7,true);
+var CAN_IMPERFECT = makeFeatures("CanImperfect", comparisonBooleanFunGenerator(canImperfectCurrent));
+var NOTE_LEVEL_DIFF = makeFeatures("RelativeNoteLevel", comparisonFunGenerator(levelDifference), "{-,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7}");
+/*
+var windowSize = 7;
+for(var i=-windowSize; i&lt;=windowSize; i++){
+	if(i){
+		NOTE_LEVELS.push(new Feature("NoteLevel_"+i, "{-,0,1,2,3,4,5,6,7}", addFeatureDatum, displacedEventFun(eventLevel, i)));
+		DIV_DOTS.push(new Feature("DivDots_"+i, "{0,1}", addFeatureDatum, displacedBooleanEventFun(divisionDot, i)));
+		AUG_DOTS.push(new Feature("AugDots_"+i, "{0,1}", addFeatureDatum, displacedBooleanEventFun(augDot, i)));
+	}
+	ANTE_SIM.push(new Feature("AnteSim_"+i, "{0,1}", addFeatureDatum, displacedSuccessiveEventsFun(simAnteSim, i, '0')));
+}*/
+var SIMPLEFEATURESET = [ID, ALTERABLE, COLORATION, REG_PERFECT, TRIPLE_LEVEL, TRIPLE_LEVELS_DOWN_3, TRIPLE_LEVELS_DOWN_2, TRIPLE_LEVELS_DOWN_1, TRIPLE_LEVELS_UP_1, TRIPLE_LEVELS_UP_2, TRIPLE_LEVELS_UP_3, ...NOTE_LEVELS, ...DIV_DOTS, ...AUG_DOTS,...ANTE_SIM, ...CAN_IMPERFECT, ...NOTE_LEVEL_DIFF, DURATION_BEFORE, DURATION_AFTER, SIMPLER_QUALITY];
+/*
+for(i=0; i&lt;NOTE_LEVELS.length; i++){
+	SIMPLEFEATURESET.push(NOTE_LEVELS[i]);
+}
+SIMPLEFEATURESET.push(QUALITY);
 */
+function makeARFFHeader(featureset){
+	var out = ["% 1. Mensuration data", "%", "% 2. Code: David Lewis", "%   Editions, various, including Jeffrey J. Dean, Christian Goursaud, Ronald Woodley, Martha Thomae", "@RELATION Mensuration", ""];
+	out = out.concat(featureset.map(x=>"@ATTRIBUTE "+x.name+" "+x.ARFFType()));
+	out.push("");
+	out.push("@DATA");
+	return out;
+}
 </code></pre>
         </article>
     </section>
@@ -1595,13 +1825,13 @@ function simpleAlterations(sectionBlocks){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#actOnColoration">actOnColoration</a></li><li><a href="global.html#actOnDots">actOnDots</a></li><li><a href="global.html#addBreveBoundariesForBlock">addBreveBoundariesForBlock</a></li><li><a href="global.html#addStartTimesForBlock">addStartTimesForBlock</a></li><li><a href="global.html#afterTheEasyBits">afterTheEasyBits</a></li><li><a href="global.html#allUnalterableImperfectLevels">allUnalterableImperfectLevels</a></li><li><a href="global.html#alterableLevels">alterableLevels</a></li><li><a href="global.html#anteSim">anteSim</a></li><li><a href="global.html#augDot">augDot</a></li><li><a href="global.html#beatIndependentDurations">beatIndependentDurations</a></li><li><a href="global.html#beatOfDur">beatOfDur</a></li><li><a href="global.html#beatOfUnit">beatOfUnit</a></li><li><a href="global.html#beatUnitStructure">beatUnitStructure</a></li><li><a href="global.html#breveDifference">breveDifference</a></li><li><a href="global.html#canImperfect">canImperfect</a></li><li><a href="global.html#checkForGeneralAlteration">checkForGeneralAlteration</a></li><li><a href="global.html#divisionDot">divisionDot</a></li><li><a href="global.html#divisionLikeRests">divisionLikeRests</a></li><li><a href="global.html#firstBeatAlteration">firstBeatAlteration</a></li><li><a href="global.html#firstBeatImperfection">firstBeatImperfection</a></li><li><a href="global.html#firstBeatImperfectionCheck">firstBeatImperfectionCheck</a></li><li><a href="global.html#firstPerfectLevel">firstPerfectLevel</a></li><li><a href="global.html#gcd">gcd</a></li><li><a href="global.html#getAtomicSections">getAtomicSections</a></li><li><a href="global.html#getEventsByMensurationForSection">getEventsByMensurationForSection</a></li><li><a href="global.html#getLayers">getLayers</a></li><li><a href="global.html#hasNoSections">hasNoSections</a></li><li><a href="global.html#imperfectingLevels">imperfectingLevels</a></li><li><a href="global.html#indexOfNextDot">indexOfNextDot</a></li><li><a href="global.html#indexOfNextSameOrLongerOrDot">indexOfNextSameOrLongerOrDot</a></li><li><a href="global.html#indexOfPrevLongerOrDot">indexOfPrevLongerOrDot</a></li><li><a href="global.html#isAlterable">isAlterable</a></li><li><a href="global.html#labelRests">labelRests</a></li><li><a href="global.html#leveleq">leveleq</a></li><li><a href="global.html#mensurSummary">mensurSummary</a></li><li><a href="global.html#midBeatAlteration">midBeatAlteration</a></li><li><a href="global.html#midBeatImperfection">midBeatImperfection</a></li><li><a href="global.html#minimStructures">minimStructures</a></li><li><a href="global.html#noteInt">noteInt</a></li><li><a href="global.html#noteIntFromDur">noteIntFromDur</a></li><li><a href="global.html#noteOrRest">noteOrRest</a></li><li><a href="global.html#notePerfectAsWhole">notePerfectAsWhole</a></li><li><a href="global.html#nsResolver">nsResolver</a></li><li><a href="global.html#readDur">readDur</a></li><li><a href="global.html#regularlyPerfect">regularlyPerfect</a></li><li><a href="global.html#secondBeatAlteration">secondBeatAlteration</a></li><li><a href="global.html#secondBeatImperfection">secondBeatImperfection</a></li><li><a href="global.html#simpleMinims">simpleMinims</a></li><li><a href="global.html#simplestAlterations">simplestAlterations</a></li><li><a href="global.html#solidBlock">solidBlock</a></li><li><a href="global.html#thirdBeatAlteration">thirdBeatAlteration</a></li><li><a href="global.html#thirdBeatImperfection">thirdBeatImperfection</a></li><li><a href="global.html#windowDuration">windowDuration</a></li><li><a href="global.html#writeAlteration">writeAlteration</a></li><li><a href="global.html#writeDur">writeDur</a></li><li><a href="global.html#writeImperfection">writeImperfection</a></li><li><a href="global.html#writeSimpleImperfection">writeSimpleImperfection</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Barline.html">Barline</a></li><li><a href="BlueClose.html">BlueClose</a></li><li><a href="BlueOpen.html">BlueOpen</a></li><li><a href="ChantNote.html">ChantNote</a></li><li><a href="Clef.html">Clef</a></li><li><a href="ColumnStart.html">ColumnStart</a></li><li><a href="Comment.html">Comment</a></li><li><a href="Custos.html">Custos</a></li><li><a href="Dot.html">Dot</a></li><li><a href="etc.html">etc</a></li><li><a href="ExampleBreak.html">ExampleBreak</a></li><li><a href="Fermata.html">Fermata</a></li><li><a href="FullClose.html">FullClose</a></li><li><a href="FullOpen.html">FullOpen</a></li><li><a href="GenericClose.html">GenericClose</a></li><li><a href="GenericOpen.html">GenericOpen</a></li><li><a href="HalfFullClose.html">HalfFullClose</a></li><li><a href="HalfFullOpen.html">HalfFullOpen</a></li><li><a href="LargeClose.html">LargeClose</a></li><li><a href="LargeOpen.html">LargeOpen</a></li><li><a href="LedgerLineChange.html">LedgerLineChange</a></li><li><a href="Ligature.html">Ligature</a></li><li><a href="LigatureComment.html">LigatureComment</a></li><li><a href="LigatureNote.html">LigatureNote</a></li><li><a href="LigChoice.html">LigChoice</a></li><li><a href="LongRest.html">LongRest</a></li><li><a href="MaxRest.html">MaxRest</a></li><li><a href="MChoice.html">MChoice</a></li><li><a href="MensuralSignature.html">MensuralSignature</a></li><li><a href="MESuper.html">MESuper</a></li><li><a href="MNilReading.html">MNilReading</a></li><li><a href="MReading.html">MReading</a></li><li><a href="MusicExample.html">MusicExample</a></li><li><a href="MusicOptionalSpace.html">MusicOptionalSpace</a></li><li><a href="MusicPunctuation.html">MusicPunctuation</a></li><li><a href="MusicWordJoin.html">MusicWordJoin</a></li><li><a href="MusicWordSplit.html">MusicWordSplit</a></li><li><a href="NegativeSpace.html">NegativeSpace</a></li><li><a href="Neume.html">Neume</a></li><li><a href="NeumeItem.html">NeumeItem</a></li><li><a href="Notation.html">Notation</a></li><li><a href="Note.html">Note</a></li><li><a href="Oblique.html">Oblique</a></li><li><a href="ObliqueNeume.html">ObliqueNeume</a></li><li><a href="ObliqueNote.html">ObliqueNote</a></li><li><a href="ObliqueNoteChoice.html">ObliqueNoteChoice</a></li><li><a href="Parameters.html">Parameters</a></li><li><a href="Part.html">Part</a></li><li><a href="PositiveSpace.html">PositiveSpace</a></li><li><a href="ProportionSign.html">ProportionSign</a></li><li><a href="RedClose.html">RedClose</a></li><li><a href="RedlineClose.html">RedlineClose</a></li><li><a href="RedlineOpen.html">RedlineOpen</a></li><li><a href="RedOpen.html">RedOpen</a></li><li><a href="Repeat.html">Repeat</a></li><li><a href="Rest.html">Rest</a></li><li><a href="SignumCongruentiae.html">SignumCongruentiae</a></li><li><a href="SolmizationSign.html">SolmizationSign</a></li><li><a href="SolmizationSignature.html">SolmizationSignature</a></li><li><a href="StackedProportionSigns.html">StackedProportionSigns</a></li><li><a href="Staff.html">Staff</a></li><li><a href="StrikethroughClose.html">StrikethroughClose</a></li><li><a href="StrikethroughOpen.html">StrikethroughOpen</a></li><li><a href="Tacet.html">Tacet</a></li><li><a href="TextUnderlay.html">TextUnderlay</a></li><li><a href="upsideDownClose.html">upsideDownClose</a></li><li><a href="upsideDownOpen.html">upsideDownOpen</a></li><li><a href="ValueChoice.html">ValueChoice</a></li><li><a href="ValueReading.html">ValueReading</a></li><li><a href="VoidClose.html">VoidClose</a></li><li><a href="VoidOpen.html">VoidOpen</a></li></ul><h3>Global</h3><ul><li><a href="global.html#actOnColoration">actOnColoration</a></li><li><a href="global.html#actOnDots">actOnDots</a></li><li><a href="global.html#addBreveBoundariesForBlock">addBreveBoundariesForBlock</a></li><li><a href="global.html#addStartTimesForBlock">addStartTimesForBlock</a></li><li><a href="global.html#allUnalterableImperfectLevels">allUnalterableImperfectLevels</a></li><li><a href="global.html#alterableLevels">alterableLevels</a></li><li><a href="global.html#anteSim">anteSim</a></li><li><a href="global.html#augDot">augDot</a></li><li><a href="global.html#beatIndependentDurations">beatIndependentDurations</a></li><li><a href="global.html#beatOfDur">beatOfDur</a></li><li><a href="global.html#beatOfUnit">beatOfUnit</a></li><li><a href="global.html#beatUnitStructure">beatUnitStructure</a></li><li><a href="global.html#blockProportionMultiplier">blockProportionMultiplier</a></li><li><a href="global.html#breveDifference">breveDifference</a></li><li><a href="global.html#canImperfect">canImperfect</a></li><li><a href="global.html#checkForGeneralAlteration">checkForGeneralAlteration</a></li><li><a href="global.html#colourp">colourp</a></li><li><a href="global.html#consumeParenthesis">consumeParenthesis</a></li><li><a href="global.html#divisionDot">divisionDot</a></li><li><a href="global.html#divisionLikeRests">divisionLikeRests</a></li><li><a href="global.html#dupleMinimCountFromElement">dupleMinimCountFromElement</a></li><li><a href="global.html#enrichText">enrichText</a></li><li><a href="global.html#extendTacet">extendTacet</a></li><li><a href="global.html#firstBeatAlteration">firstBeatAlteration</a></li><li><a href="global.html#firstBeatImperfection">firstBeatImperfection</a></li><li><a href="global.html#firstBeatImperfectionCheck">firstBeatImperfectionCheck</a></li><li><a href="global.html#firstPerfectLevel">firstPerfectLevel</a></li><li><a href="global.html#gcd">gcd</a></li><li><a href="global.html#getAtomicSections">getAtomicSections</a></li><li><a href="global.html#getEventsByMensurationForSection">getEventsByMensurationForSection</a></li><li><a href="global.html#getLayers">getLayers</a></li><li><a href="global.html#getMusicTextSup">getMusicTextSup</a></li><li><a href="global.html#getParameters">getParameters</a></li><li><a href="global.html#getString">getString</a></li><li><a href="global.html#getSubText">getSubText</a></li><li><a href="global.html#getTag">getTag</a></li><li><a href="global.html#hasNoSections">hasNoSections</a></li><li><a href="global.html#imperfectingLevels">imperfectingLevels</a></li><li><a href="global.html#indexOfNextDot">indexOfNextDot</a></li><li><a href="global.html#indexOfNextSameOrLongerOrDot">indexOfNextSameOrLongerOrDot</a></li><li><a href="global.html#indexOfPrevLongerOrDot">indexOfPrevLongerOrDot</a></li><li><a href="global.html#isAlterable">isAlterable</a></li><li><a href="global.html#labelRests">labelRests</a></li><li><a href="global.html#leveleq">leveleq</a></li><li><a href="global.html#linesp">linesp</a></li><li><a href="global.html#mensurSummary">mensurSummary</a></li><li><a href="global.html#midBeatAlteration">midBeatAlteration</a></li><li><a href="global.html#midBeatImperfection">midBeatImperfection</a></li><li><a href="global.html#minimStructures">minimStructures</a></li><li><a href="global.html#nextBarline">nextBarline</a></li><li><a href="global.html#nextChantNote">nextChantNote</a></li><li><a href="global.html#nextChoice">nextChoice</a></li><li><a href="global.html#nextChoiceLikeThing">nextChoiceLikeThing</a></li><li><a href="global.html#nextChoiceLikeThing2">nextChoiceLikeThing2</a></li><li><a href="global.html#nextColRef">nextColRef</a></li><li><a href="global.html#nextComment">nextComment</a></li><li><a href="global.html#nextCustos">nextCustos</a></li><li><a href="global.html#nextDot">nextDot</a></li><li><a href="global.html#nextEvent">nextEvent</a></li><li><a href="global.html#nextFermata">nextFermata</a></li><li><a href="global.html#nextInfo">nextInfo</a></li><li><a href="global.html#nextLigature">nextLigature</a></li><li><a href="global.html#nextLigChoice">nextLigChoice</a></li><li><a href="global.html#nextLongRest">nextLongRest</a></li><li><a href="global.html#nextMusic">nextMusic</a></li><li><a href="global.html#nextNeume">nextNeume</a></li><li><a href="global.html#nextNote">nextNote</a></li><li><a href="global.html#nextOblique">nextOblique</a></li><li><a href="global.html#nextObliqueNeume">nextObliqueNeume</a></li><li><a href="global.html#nextObliqueNoteChoice">nextObliqueNoteChoice</a></li><li><a href="global.html#nextPart">nextPart</a></li><li><a href="global.html#nextPartnameReading">nextPartnameReading</a></li><li><a href="global.html#nextRepeat">nextRepeat</a></li><li><a href="global.html#nextRest">nextRest</a></li><li><a href="global.html#nextSignumCongruentiae">nextSignumCongruentiae</a></li><li><a href="global.html#nextSolmSign">nextSolmSign</a></li><li><a href="global.html#nextTacet">nextTacet</a></li><li><a href="global.html#nextTaglike">nextTaglike</a></li><li><a href="global.html#nextText">nextText</a></li><li><a href="global.html#nextTextChoice">nextTextChoice</a></li><li><a href="global.html#noteInt">noteInt</a></li><li><a href="global.html#noteIntFromDur">noteIntFromDur</a></li><li><a href="global.html#noteOrRest">noteOrRest</a></li><li><a href="global.html#notePerfectAsWhole">notePerfectAsWhole</a></li><li><a href="global.html#nsResolver">nsResolver</a></li><li><a href="global.html#parseClef">parseClef</a></li><li><a href="global.html#parseClefReading">parseClefReading</a></li><li><a href="global.html#parseClefVar">parseClefVar</a></li><li><a href="global.html#parseMens">parseMens</a></li><li><a href="global.html#parseMensReading">parseMensReading</a></li><li><a href="global.html#parseProp">parseProp</a></li><li><a href="global.html#parseSolm">parseSolm</a></li><li><a href="global.html#parseSolmReading">parseSolmReading</a></li><li><a href="global.html#parseSolmVar">parseSolmVar</a></li><li><a href="global.html#parseStaff">parseStaff</a></li><li><a href="global.html#propNum">propNum</a></li><li><a href="global.html#proportionMultiplier">proportionMultiplier</a></li><li><a href="global.html#propProportionMultiplier">propProportionMultiplier</a></li><li><a href="global.html#readDur">readDur</a></li><li><a href="global.html#regularlyPerfect">regularlyPerfect</a></li><li><a href="global.html#secondBeatAlteration">secondBeatAlteration</a></li><li><a href="global.html#secondBeatImperfection">secondBeatImperfection</a></li><li><a href="global.html#simpleMinims">simpleMinims</a></li><li><a href="global.html#simplestAlterations">simplestAlterations</a></li><li><a href="global.html#solidBlock">solidBlock</a></li><li><a href="global.html#thirdBeatAlteration">thirdBeatAlteration</a></li><li><a href="global.html#thirdBeatImperfection">thirdBeatImperfection</a></li><li><a href="global.html#windowDuration">windowDuration</a></li><li><a href="global.html#writeAlteration">writeAlteration</a></li><li><a href="global.html#writeDur">writeDur</a></li><li><a href="global.html#writeImperfection">writeImperfection</a></li><li><a href="global.html#writeSimpleImperfection">writeSimpleImperfection</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Oct 09 2018 18:05:54 GMT+0100 (BST)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Fri Jun 05 2020 17:46:29 GMT+0200 (GMT+02:00)
 </footer>
 
 <script> prettyPrint(); </script>

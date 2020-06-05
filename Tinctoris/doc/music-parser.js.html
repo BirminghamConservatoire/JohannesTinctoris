@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: music-parser.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: music-parser.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * Music parser
  * 
  * @fileoverview Contains the parser for the music examples and pieces
@@ -133,9 +161,9 @@ function MusicExample(){
 						openParts.push(next);
 					}
 				}
-				if(next.changesProportion && next.changesProportion()) currentProp = next.proportionChangesTo;
-				if(next.objType==="Part" && next.type==="part") this.parts.push(next);
-				if(next.objType==="MusicalChoice" && next.hasPart()) this.parts.push(next.hasPart());
+				if(next.changesProportion &amp;&amp; next.changesProportion()) currentProp = next.proportionChangesTo;
+				if(next.objType==="Part" &amp;&amp; next.type==="part") this.parts.push(next);
+				if(next.objType==="MusicalChoice" &amp;&amp; next.hasPart()) this.parts.push(next.hasPart());
         if(currentInfo){
           if(infop(next)){
             currentInfo.extras.push(next);
@@ -160,7 +188,7 @@ function MusicExample(){
           }
         }
         if(next.objType==="SolmizationSignature" 
-           && this.events.length && this.events[this.events.length-1].objType==="Clef"){
+           &amp;&amp; this.events.length &amp;&amp; this.events[this.events.length-1].objType==="Clef"){
           this.events[this.events.length-1].solm = next;
         }
         if(next.objType=="Dot"){
@@ -175,7 +203,7 @@ function MusicExample(){
           } else {
             next.effects = this.events[this.events.length-1];
           }
-        } else if (next.objType==="Comment" && this.events.length && 
+        } else if (next.objType==="Comment" &amp;&amp; this.events.length &amp;&amp; 
                    this.events[this.events.length-1].objType==="Ligature"){
           var c = new LigatureComment(next);
           currentExample.comments.push(c);
@@ -186,14 +214,14 @@ function MusicExample(){
           prev = next;
           continue;
           //
-        } else if(next.objType=="MusicalChoice" && augmented 
-                  && next.content.length && !next.content[0].nonDefault()
-                  && next.content[0].content.length && next.content[0].content[0].objType==="Fermata"){
+        } else if(next.objType=="MusicalChoice" &amp;&amp; augmented 
+                  &amp;&amp; next.content.length &amp;&amp; !next.content[0].nonDefault()
+                  &amp;&amp; next.content[0].content.length &amp;&amp; next.content[0].content[0].objType==="Fermata"){
           next.content[0].content[0].lengthens = augmented;
         }
-        if(next.objType==="TextUnderlay" && this.events.length
-           && typeof(this.events[this.events.length-1].text) !=="undefined"
-           && !this.events[this.events.length-1].text) {
+        if(next.objType==="TextUnderlay" &amp;&amp; this.events.length
+           &amp;&amp; typeof(this.events[this.events.length-1].text) !=="undefined"
+           &amp;&amp; !this.events[this.events.length-1].text) {
           if(this.events[this.events.length-1].objType !== "SignumCongruentiae"){
             // FIXME: This is a painful hack. sig cong is treated by
             // the system as an event in its own right, that happens
@@ -201,7 +229,7 @@ function MusicExample(){
             // be fine, even if we add text, but not if the text
             // should alter the position of the note that the sig cong
             // attaches to. In that case, we'd draw it before adjusting the position.
-						if(last(this.events).objType==="Dot" && last(this.events).augments){
+						if(last(this.events).objType==="Dot" &amp;&amp; last(this.events).augments){
 							// If a dot follows a note, put the text under the note
 							last(this.events).augments.text=next;
 						} else {
@@ -244,7 +272,7 @@ function MusicExample(){
       this.setSysWidths();
       return this.swidth;
       var w = 0;
-      for(var e=0;e<this.events.length; e++){
+      for(var e=0;e&lt;this.events.length; e++){
         var w2 = this.events[e].startX ? this.events[e].startX : 0;
         w2 += typeof(this.events[e].width) != "undefined" ? this.events[e].width() : 0;
         w = Math.max(w, w2);
@@ -262,9 +290,9 @@ function MusicExample(){
    * @param x
    * @param y */
   this.commentsTip = function(x, y){
-    for(var i=0; i<this.comments.length; i++){
-      if(x>=this.comments[i].startX && x<=this.comments[i].endX
-         && y>=this.comments[i].endY && y<=this.comments[i].startY){
+    for(var i=0; i&lt;this.comments.length; i++){
+      if(x>=this.comments[i].startX &amp;&amp; x&lt;=this.comments[i].endX
+         &amp;&amp; y>=this.comments[i].endY &amp;&amp; y&lt;=this.comments[i].startY){
         return Tooltip(this.comments[i].content);
       } 
     }
@@ -280,7 +308,7 @@ function MusicExample(){
     var height = rastralSize * 
       (!this.parameters.staff || typeof(this.parameters.staff) == "undefined" ? 
        1 : (this.parameters.staff.trueLines() + 4));
-    // for(var i=0; i<this.events.length; i++){
+    // for(var i=0; i&lt;this.events.length; i++){
     //   if(this.events[i].objType == "Staff"){
     //     height += rastralSize * 9 + 5;
     //   }
@@ -302,10 +330,10 @@ function MusicExample(){
     sysWidths = [rastralSize + this.parameters.width()];
     this.swidth = 0;
   //    var x = lmargin +rastralSize/2;
-    for(eventi=0; eventi<this.events.length; eventi++){
+    for(eventi=0; eventi&lt;this.events.length; eventi++){
       if(this.events[eventi].objType == "Staff" 
-//         || (wrapWidth && sysWidths[sysWidths.length-1] >= this.targetWidth())){
-         || (wrapWidth && sysWidths[sysWidths.length-1] >= this.targetWidth())){
+//         || (wrapWidth &amp;&amp; sysWidths[sysWidths.length-1] >= this.targetWidth())){
+         || (wrapWidth &amp;&amp; sysWidths[sysWidths.length-1] >= this.targetWidth())){
 //             (wrapWidth - rastralSize*3 - lmargin-10)){
         sysWidths[sysWidths.length-1] += rastralSize * 2;
         if(sysWidths[sysWidths.length-1]+lmargin>SVG.width){
@@ -330,16 +358,16 @@ function MusicExample(){
    */
   this.toText = function(){
     var text = this.parameters.toText();
-    for(var i=0; i<this.events.length; i++){
+    for(var i=0; i&lt;this.events.length; i++){
       if(i>0) text += " ";
       if(typeof(this.events[i].toText) == "undefined") 
         alert("error - "+JSON.stringify(this.events[i]));
       text += this.events[i].toText();
     }
 		if(standaloneEditor){
-			text += "</piece>";
+			text += "&lt;/piece>";
 		} else {
-			text += "</example>";
+			text += "&lt;/example>";
 		}
     return text;
   };
@@ -368,7 +396,7 @@ function MusicExample(){
 //		msection.appendChild(mstaff);
 //		mstaff.appendChild(mlayer);
     currentExample = this;
-    if(this.parameters && this.parameters.toMEI) {this.parameters.toMEI(doc, msection);}
+    if(this.parameters &amp;&amp; this.parameters.toMEI) {this.parameters.toMEI(doc, msection);}
     this.appendStaffDefs(doc, mscoredef);
 		var started = false;
 		var extras = [];
@@ -383,11 +411,11 @@ function MusicExample(){
 		// I don't know why this isn't happening later, but adding this unbreaks things [DL 05/20]
 		var mlayer = doc.createElementNS("http://www.music-encoding.org/ns/mei", "layer");
     // more
-		for(var i=0; i<this.events.length; i++){
+		for(var i=0; i&lt;this.events.length; i++){
 			var prevLength = currentPartes.length;
 			if(this.events[i].objType==="Part"
-				 && this.events[i].type==="part"
-				 && !this.events[i].closes){
+				 &amp;&amp; this.events[i].type==="part"
+				 &amp;&amp; !this.events[i].closes){
 				parti++;
 				n = Object.keys(this.voiceParts).indexOf(this.events[i].defaultName())+1;
 				currentParsi=0;
@@ -399,9 +427,9 @@ function MusicExample(){
 					mstaff.setAttribute('label', this.events[i].id);
 				}
 			} // else if (this.events[i].objType==="Part"
-			// 					 && this.events[i].type==="pars"
-			// 					 && !this.events[i].closes
-			// 					 && this.events[i].id==="sic") {
+			// 					 &amp;&amp; this.events[i].type==="pars"
+			// 					 &amp;&amp; !this.events[i].closes
+			// 					 &amp;&amp; this.events[i].id==="sic") {
 			// 	var extraStaff = doc.createElementNS("http://www.music-encoding.org/ns/mei", "staff");
 			// 	mlayer = doc.createElementNS("http://www.music-encoding.org/ns/mei", "layer");
 			// 	extraStaff.setAttributeNS(null, 'n', parti);
@@ -411,8 +439,8 @@ function MusicExample(){
 			// 	inExtra = true;
 			// } 
 			else if (this.events[i].objType==="Part"
-								 && this.events[i].type==="pars"
-								 && !this.events[i].closes) {
+								 &amp;&amp; this.events[i].type==="pars"
+								 &amp;&amp; !this.events[i].closes) {
 				// These partes are presented in sequence within a voice
 				sic = this.events[i].id==="sic" ? true : false;
 				if(parti===1) {
@@ -431,8 +459,8 @@ function MusicExample(){
 				}
 				inExtra = false;
 			} else if (this.events[i].objType==="Part"
-								 && this.events[i].type==="section"
-								 && !this.events[i].closes) {
+								 &amp;&amp; this.events[i].type==="section"
+								 &amp;&amp; !this.events[i].closes) {
 				currentParsi=0;
 				staffn = 0;
 				parti = 0;
@@ -441,8 +469,8 @@ function MusicExample(){
 				currentPartes = [];
 				if(this.events[i].id) msection.setAttribute('label', this.events[i].id);
 				inExtra = false;
-			} else if(this.events[i].toMEI && this.done.indexOf(this.events[i])===-1){
-				if(msection && msectionIsNew) mscore.appendChild(msection);
+			} else if(this.events[i].toMEI &amp;&amp; this.done.indexOf(this.events[i])===-1){
+				if(msection &amp;&amp; msectionIsNew) mscore.appendChild(msection);
 				if(msubsection) {
 					msection.appendChild(msubsection);
 					if(mstaff) msubsection.appendChild(mstaff);
@@ -466,9 +494,9 @@ function MusicExample(){
 		var layerMens = [];
 		this.MEI = MEIDoc;
 		var sections = getAtomicSections(MEIDoc);
-		for(var i=0; i<sections.length; i++){
+		for(var i=0; i&lt;sections.length; i++){
 			var layers = getLayers(sections[i]);
-			for(var layi=0; layi<layers.length; layi++){
+			for(var layi=0; layi&lt;layers.length; layi++){
   			var sectionBlocks = getEventsByMensurationForSection(layers[layi], MEIDoc.doc,
 																														 layerMens.length>layi ? layerMens[layi] : false);
 				layerMens[layi] = sectionBlocks[sectionBlocks.length-1].mens;
@@ -481,7 +509,7 @@ function MusicExample(){
 				//addAllStartTimes(sectionBlocks);
 				var remaining = 1000000000;
 				var nextRemaining = afterTheEasyBits(sectionBlocks);
-				while(nextRemaining != 0 && remaining!=nextRemaining){
+				while(nextRemaining != 0 &amp;&amp; remaining!=nextRemaining){
 					// Rerun this for as long as it makes a difference
 					// (i.e. resolves unsolved durations/start times)
 					console.log("unresolved count", remaining, nextRemaining);
@@ -509,13 +537,13 @@ function MusicExample(){
    */
 	this.stupidVerovioStretch = function(){
 		// Verovio can't do proportions
-		for(var e=0; e< this.events.length; e++){
+		for(var e=0; e&lt; this.events.length; e++){
 			if(this.events[e].objType==="Note" || this.events[e].objType==="Rest"){
 				var object = this.events[e].MEIObj;
 				if(object.getAttributeNS(null, 'dur.intermediate')
-					 && object.getAttributeNS(null, 'dur.intermediate')
+					 &amp;&amp; object.getAttributeNS(null, 'dur.intermediate')
 					 != object.getAttributeNS(null, 'dur.ges')
-					 && !object.getAttributeNS(null, 'stretched')){
+					 &amp;&amp; !object.getAttributeNS(null, 'stretched')){
 					// A proportion has been applied
 					var realised = object.getAttributeNS(null, 'dur.ges');
 					var implied = object.getAttributeNS(null, 'dur.intermediate');
@@ -541,7 +569,7 @@ function MusicExample(){
 	this.mensurStrich = function(){
 		var old = Array.from(document.getElementsByClassName('mensurStrich'));
 		if(old) old.forEach(x => x.remove());
-		for(var e=0; e<this.events.length; e++){
+		for(var e=0; e&lt;this.events.length; e++){
 			if(this.events[e].objType==="Note" || this.events[e].objType==="Rest"){
 				var object = this.events[e].MEIObj;
 				if(object.getAttributeNS(null, 'onTheBreveBeat')
@@ -550,7 +578,7 @@ function MusicExample(){
 					// We've crossed a breve beat
 					drawMensurStrich(this.events[e]);
 					if(object.getAttributeNS(null, 'onTheBreveBeat')
-						 && object.previousSibling && object.previousSibling.tagName!="barLine"){
+						 &amp;&amp; object.previousSibling &amp;&amp; object.previousSibling.tagName!="barLine"){
 						let line = object.ownerDocument.createElementNS("http://www.music-encoding.org/ns/mei", "barLine");
 						line.setAttributeNS(null, "visible", "false");
 					  object.parentNode.insertBefore(line, object);
@@ -561,7 +589,7 @@ function MusicExample(){
   };
   /** markedResolved */
 	this.markResolved = function(){
-		for(var e=0; e<this.events.length; e++){
+		for(var e=0; e&lt;this.events.length; e++){
 			if(this.events[e].objType==="Note" || this.events[e].objType==="Rest"
 				 || this.events[e].objType==="MaxRest"  || this.events[e].objType==="LongRest"){
 				var MEIObj = this.events[e].MEIObj;
@@ -604,7 +632,7 @@ function MusicExample(){
     musicel.appendChild(mdiv);
     mdiv.appendChild(mscore);
 //    mscore.appendChild(msection);
-    if(this.parameters && this.parameters.toMEI) this.parameters.toMEI(doc, msection);
+    if(this.parameters &amp;&amp; this.parameters.toMEI) this.parameters.toMEI(doc, msection);
     // more
     //this.appendStaffDefs(doc, mscore);
   };
@@ -614,8 +642,8 @@ function MusicExample(){
    */
 	this.gatherStaffs = function(parts){
 		var voices = {};
-		var voiceParts = this.parts.filter(x=>x.type=="part"&&!x.startEl);
-		for(var i=0; i<voiceParts.length; i++){
+		var voiceParts = this.parts.filter(x=>x.type=="part"&amp;&amp;!x.startEl);
+		for(var i=0; i&lt;voiceParts.length; i++){
 			let name = voiceParts[i].defaultName();
 			if(voices[name]){
 				voices[name].push(voiceParts[i]);
@@ -637,12 +665,12 @@ function MusicExample(){
 		var  sd;
     el.appendChild(group);
 		if(voiceTypes.length){
-			for(var i=0; i<voiceTypes.length; i++){
+			for(var i=0; i&lt;voiceTypes.length; i++){
 				group.appendChild(this.staffDefForPart(this.voiceParts[voiceTypes[i]][0], i+1, doc));
 			}
-		} else if(this.parts && this.parts.length){
-      for(var i=0; i<this.parts.length; i++){
-				if(!this.parts[i].closes && this.parts[i].type==="part") {
+		} else if(this.parts &amp;&amp; this.parts.length){
+      for(var i=0; i&lt;this.parts.length; i++){
+				if(!this.parts[i].closes &amp;&amp; this.parts[i].type==="part") {
 					group.appendChild(this.staffDefForPart(this.parts[i], counter++, doc));
 				}
       }
@@ -704,19 +732,19 @@ function MusicExample(){
     // uses to be made of this, but would normally just be false.
     for(var j=eventi-1; j>=0; j--){
       if(this.events[j].objType==="SolmizationSignature" 
-         && (!this.events[j].appliesTo
-             || (variant && this.events[j].appliesTo.indexOf(variant)>-1))){
+         &amp;&amp; (!this.events[j].appliesTo
+             || (variant &amp;&amp; this.events[j].appliesTo.indexOf(variant)>-1))){
         // Easy – this is a normal signature and applies here
         return this.events[j];
-      } else if(this.events[j].objType==="MusicalChoice" && !this.events[j].nonDefault()){
+      } else if(this.events[j].objType==="MusicalChoice" &amp;&amp; !this.events[j].nonDefault()){
         // Complicated – applicable signatures might be buried (probably not, though)
         for(var k=this.events[j].content[0].content.length-1; k>=0; k--){
           var obj = this.events[j].content[0].content[k];
           if(obj.objType==="SolmizationSignature"){
-//            && (!obj.appliesTo
+//            &amp;&amp; (!obj.appliesTo
 //                || (variant || obj.appliesTo.indexOf(variant)>-1))){
             return obj;
-          } else if(obj.objType==="MusicalChoice" && !obj.nonDefault()){
+          } else if(obj.objType==="MusicalChoice" &amp;&amp; !obj.nonDefault()){
             // Choice in a choice. If I defined this functionality
             // sensibly (recursively), I could handle any depth of
             // choices, but it's probably better to discourage using
@@ -724,8 +752,8 @@ function MusicExample(){
             // necessary. Plus, this patch is overdue...
             for(var l=obj.content[0].content.length-1; l>=0; l--){
               if(obj.content[0].content[l].objType==="SolmizationSignature"){
-//                 && (!obj.content[0].content[l].appliesTo
-//                    || (variant && obj.content[0].content[l].appliesTo.indexOf(variant)>-1))){
+//                 &amp;&amp; (!obj.content[0].content[l].appliesTo
+//                    || (variant &amp;&amp; obj.content[0].content[l].appliesTo.indexOf(variant)>-1))){
                 return obj.content[0].content[l];
               }
             }
@@ -740,7 +768,7 @@ function MusicExample(){
 //    if(exampleSVG != this.SVG) alert("ok");
     // FIXME: 14/10/12 If this shows no alerts, remove this and all
     // svg passing
-    // if(this.drawCount>1 && !force){
+    // if(this.drawCount>1 &amp;&amp; !force){
     //   alert("oh really?");
     //   return;
     // }
@@ -784,50 +812,50 @@ function MusicExample(){
     currentSystems.push(svgGroup(SVG, "Stafflines", false));
     this.parameters.draw();
     var broken=false;
-    for(eventi = 0; eventi<this.events.length; eventi++){
-      if(!broken && currentSolm && currentSolm.members.length && eventi>0) {
+    for(eventi = 0; eventi&lt;this.events.length; eventi++){
+      if(!broken &amp;&amp; currentSolm &amp;&amp; currentSolm.members.length &amp;&amp; eventi>0) {
         broken=true;
       }
       // console.log(this.events[eventi], curx);
       remain--;
       if(eventi>nextBreak) nextBreak = this.indexOfStaffBreak(1+nextBreak);
-      if(wrapWidth && 
+      if(wrapWidth &amp;&amp; 
          // when do we add a break? 
          // 0. Not if the next item is a fermata or a dot of augmentation!
          !this.events[eventi].lengthens 
-         && !(this.events[eventi].objType==="MusicalChoice" 
-              && !this.events[eventi].nonDefault() 
-              && this.events[eventi].content[0].content[0].lengthens)
-         && !this.events[eventi].augments
-				 && !(eventi && (this.events[eventi-1].objType=="SolmizationSignature"
+         &amp;&amp; !(this.events[eventi].objType==="MusicalChoice" 
+              &amp;&amp; !this.events[eventi].nonDefault() 
+              &amp;&amp; this.events[eventi].content[0].content[0].lengthens)
+         &amp;&amp; !this.events[eventi].augments
+				 &amp;&amp; !(eventi &amp;&amp; (this.events[eventi-1].objType=="SolmizationSignature"
 												 || this.events[eventi-1].objType=="MensuralSignature"
 												 || this.events[eventi-1].objType=="ProportionSign"))
-				 && this.events[eventi].objType!=="Barline"
-				 && !(eventi<this.events.length-2 && this.events[eventi+1].objType=="Barline")
-//				 && !(eventi<this.events.length-3 && this.events[eventi+2].objType=="Barline")
-				 && 
+				 &amp;&amp; this.events[eventi].objType!=="Barline"
+				 &amp;&amp; !(eventi&lt;this.events.length-2 &amp;&amp; this.events[eventi+1].objType=="Barline")
+//				 &amp;&amp; !(eventi&lt;this.events.length-3 &amp;&amp; this.events[eventi+2].objType=="Barline")
+				 &amp;&amp; 
          // 1. If x is close to the edge 
          (curx>=this.targetWidth()-rastralSize 
           ||
           // 2. If we're there's a break point coming, but we'd need a
           // break before then, break a little early
-          (nextBreak && nextBreak - eventi < 5 
-           && (curx>=this.targetWidth()-((nextBreak-eventi)*1.5*rastralSize)))
+          (nextBreak &amp;&amp; nextBreak - eventi &lt; 5 
+           &amp;&amp; (curx>=this.targetWidth()-((nextBreak-eventi)*1.5*rastralSize)))
           ||
           // 3. If we're near the end, break a little early if a break
           // will be needed.
-          (remain<3  
-           && 
+          (remain&lt;3  
+           &amp;&amp; 
            curx>=this.targetWidth()-((this.events.length-eventi)*1.6*rastralSize)) 
           ||
           // 4. If breaking at the next opportunity would separate a note
           // from its dot.
-          (remain>1 && this.events[eventi+1].augments 
-           && curx+this.events[eventi].width()>=this.targetWidth()-rastralSize)
+          (remain>1 &amp;&amp; this.events[eventi+1].augments 
+           &amp;&amp; curx+this.events[eventi].width()>=this.targetWidth()-rastralSize)
 				  ||
 				  // 5. If the thing is a tacet (which is super wide) and pushes us over
 					(this.events[eventi].objType==="Tacet"
-					 && curx + this.events[eventi].width() > this.targetWidth()))){
+					 &amp;&amp; curx + this.events[eventi].width() > this.targetWidth()))){
          // wrapWidth-32){
         // The custos has to know the next (=current) note, so rewind
         // the pointer, briefly
@@ -836,7 +864,7 @@ function MusicExample(){
         custos.draw();
 				if(this.events[eventi].classList){
 					// ledger lines
-					for(var l=0; l<this.events[eventi].classList.length; l++){
+					for(var l=0; l&lt;this.events[eventi].classList.length; l++){
 						if(this.events[eventi].classList[l].objType==="LedgerLineChange"){
 							this.events[eventi].classList[l].coordinates.push(curx);
 						}
@@ -852,10 +880,10 @@ function MusicExample(){
         this.SVG.height.baseVal.value = this.SVG.height.baseVal.value 
           + (rastralSize*5)+5+(currentLinecount*rastralSize);
       }
-      if(this.events[eventi].objType && (!this.events[eventi].params || this.events[eventi].objType==="Staff")) {
+      if(this.events[eventi].objType &amp;&amp; (!this.events[eventi].params || this.events[eventi].objType==="Staff")) {
         try {
-          if(currentRedline && removeRedlineBefore(this.events[eventi].classList)) currentRedline = false;
-					if(this.events[eventi].objType==="Part" && this.events[eventi].staff) {
+          if(currentRedline &amp;&amp; removeRedlineBefore(this.events[eventi].classList)) currentRedline = false;
+					if(this.events[eventi].objType==="Part" &amp;&amp; this.events[eventi].staff) {
 //						console.log("Part will be displayed on new system");
 					} else if (this.events[eventi].objType==="UpsideDownOpen"){
 						preRot = SVG;
@@ -882,12 +910,12 @@ function MusicExample(){
     }
     if(this.classes.classes.length) drawClasses(this.classes.classes, false);
     sysBreak2(true);
-    for(var w=0; w<this.w2.length; w++){
+    for(var w=0; w&lt;this.w2.length; w++){
       drawSystemLines(currentSystems[w], this.w2[w][2], this.w2[w][1], lmargin, 
         this.w2[w][0], this.w2[w][3]);
       maxx = Math.max(this.w2[w][0], maxx);
     }
-    for(var coli=0; coli<this.colbreaks.length; coli++){
+    for(var coli=0; coli&lt;this.colbreaks.length; coli++){
       ColBreakWidth(this.colbreaks[coli], mw);
     }
     var box = this.SVG.getBoundingClientRect();
@@ -896,16 +924,16 @@ function MusicExample(){
       // FIXME: Certainly still causes brokenness
 //      this.SVG.height.baseVal.value = 64;
       var max= false, min=false, b;
-      for(var n=0; n<SVG.childNodes.length; n++){
+      for(var n=0; n&lt;SVG.childNodes.length; n++){
         b=SVG.childNodes[n].getBoundingClientRect();
-        if(b.top && (!min || b.top<min)) min = b.top;
-        if(b.bottom && (!max || b.bottom>max)) max = b.bottom;
+        if(b.top &amp;&amp; (!min || b.top&lt;min)) min = b.top;
+        if(b.bottom &amp;&amp; (!max || b.bottom>max)) max = b.bottom;
       }
       this.SVG.height.baseVal.value = Math.max(64, max-min + (texted ? 30 : 0));
     } else {
         var bbox = this.SVG.getBBox();
         this.bbox = bbox;
-        var top = bbox.y < 0 ? bbox.y -1 : 0;
+        var top = bbox.y &lt; 0 ? bbox.y -1 : 0;
         var bottom = bbox.y+bbox.height+1;
         var height = bottom - top;
         if(top) {
@@ -937,7 +965,7 @@ function MusicExample(){
 //       this.SVG.width.baseVal.value = this.SVG.getBBox().
 //     }
     // this.SVG.parentNode.style.width = maxx+(texted ? 25 : 5)+8+"px";
-    if(!inTip // && !editorMode
+    if(!inTip // &amp;&amp; !editorMode
       ){
       $(this.SVG).hover(function(e){displayStatusBarReference(this, e);});
     }
@@ -945,8 +973,8 @@ function MusicExample(){
     eventi = false;
   };
   this.indexOfStaffBreak = function(start){
-    for(var si=0; si<this.staves.length; si++){
-      if((!start || this.staves[si][0]>=start) && this.staves[si][1].objType==="Staff") {
+    for(var si=0; si&lt;this.staves.length; si++){
+      if((!start || this.staves[si][0]>=start) &amp;&amp; this.staves[si][1].objType==="Staff") {
         return this.staves[si][0];
       }
     }
@@ -970,7 +998,7 @@ function nextEvent() {
       return nextColRef();
     case "|":
       return nextBarline();
-    case "<":
+    case "&lt;":
       return nextTaglike();
     case "{":
       if(string.substring(0,5) == "{var="){
@@ -1038,7 +1066,7 @@ function nextEvent() {
     case "8":
     case "9":
       return nextRepeat();
-    case "&":
+    case "&amp;":
       obj = new etc();
       string = string.substring(1);
       getAndSetPitch(obj);
@@ -1081,7 +1109,7 @@ function nextComment(){
   var op = pointer;
   var octp = currentTextParent;
   var end = string.indexOf("**", 2);
-  if(end < 2){
+  if(end &lt; 2){
     complaint.push("Unclosed comment"+string.substring(0, 10));
     string = string.substring(2);
     return false;
@@ -1103,7 +1131,7 @@ function nextComment(){
 function nextComment(){
   var comment = new Comment();
   var end = string.indexOf("**", 2);
-  if(end < 2){
+  if(end &lt; 2){
     complaint.push("Unclosed comment"+string.substring(0, 10));
   }
   comment.content = string.substring(2, end);
@@ -1189,7 +1217,7 @@ function nextRest(){
 function nextLongRest(){
   var start = getStaffPos();
   var rest = false;
-  if(start && consumeIf("-")){
+  if(start &amp;&amp; consumeIf("-")){
     var end = getStaffPos();
     if(end){
       if(consumeIf("x")){
@@ -1215,7 +1243,7 @@ function nextRepeat(){
   if(string.charAt(1) !=":") return false;
   consume(2);
   obj.start = getStaffPos();
-  if(obj.start && consumeIf("-")){
+  if(obj.start &amp;&amp; consumeIf("-")){
     obj.end = getStaffPos();
     while(string.charAt(0)==="-" || string.charAt(0)==="+"){
       var pos;
@@ -1330,29 +1358,29 @@ function nextTaglike(){
 		case "/rot180":
 			return new upsideDownClose();
     case "red":
-      if(string.indexOf("</red>")==-1){
-        complaint.push("Missing close tag for <red> around "+string);
+      if(string.indexOf("&lt;/red>")==-1){
+        complaint.push("Missing close tag for &lt;red> around "+string);
       }
       return new RedOpen();
     case "/red":
       return new RedClose();
     case "large":
-      if(string.indexOf("</large>")==-1){
-        complaint.push("Missing close tag for <large> around "+string);
+      if(string.indexOf("&lt;/large>")==-1){
+        complaint.push("Missing close tag for &lt;large> around "+string);
       }
       return new LargeOpen();
     case "/large":
       return new LargeClose();
     case "blue":
-      if(string.indexOf("</blue>")==-1){
-        complaint.push("Missing close tag for <blue> around "+string);
+      if(string.indexOf("&lt;/blue>")==-1){
+        complaint.push("Missing close tag for &lt;blue> around "+string);
       }
       return new BlueOpen();
     case "/blue":
       return new BlueClose();
     case "redline":
-      if(string.indexOf("</redline>")==-1){
-        complaint.push("Missing close tag for <red> around "+string);
+      if(string.indexOf("&lt;/redline>")==-1){
+        complaint.push("Missing close tag for &lt;red> around "+string);
       }
       return new RedlineOpen();
     case "/redline":
@@ -1366,7 +1394,7 @@ function nextTaglike(){
     case "/full":
       return new FullClose();
 		case "tacet":
-			var endPos = string.indexOf("</tacet>");
+			var endPos = string.indexOf("&lt;/tacet>");
 			if(endPos===-1) {
 				complaint.push("missing close tag for tacet");
 				return false;
@@ -1405,7 +1433,7 @@ function nextTaglike(){
 				return nextPart("section", true, false);
       } else if (tag.substring(0, 9)=="catchword" || tag.substring(0, 9)=="signature"){
         var margType = tag.substring(0, 9);
-        var end = string.indexOf("</"+margType+">");
+        var end = string.indexOf("&lt;/"+margType+">");
         if(end>-1){
           var os = string.substring(end+12);
           var c = new Catchword();
@@ -1427,7 +1455,7 @@ function nextTaglike(){
  * @returns {Neume} neume
  */
 function nextNeume(){
-  var end = string.indexOf("</neume>");
+  var end = string.indexOf("&lt;/neume>");
   if(end == -1){
     complaint.push("Unclosed neume at: " + string);
     return false;
@@ -1442,10 +1470,10 @@ function nextNeume(){
   consumeSpace();
   while(string.length != 0){
     strsize = string.length;
-    if(consumeIf("<obl>")){
+    if(consumeIf("&lt;obl>")){
       next = nextObliqueNeume();
-//    } else if(string.substring(0, 6)=="<text>"){
-    } else if(consumeIf(/<(text|label):?.*?>/)){
+//    } else if(string.substring(0, 6)=="&lt;text>"){
+    } else if(consumeIf(/&lt;(text|label):?.*?>/)){
       next = nextText();
     } else if (string.substring(0,2)=="**"){
       next = nextComment();
@@ -1457,9 +1485,9 @@ function nextNeume(){
       next.rtail = consumeIf("t") ? true : false;
     }
     if(next){
-      if(next.objType==="TextUnderlay" && neume.members.length
-         && typeof(neume.members[neume.members.length-1].text) !==undefined
-         && !neume.members[neume.members.length-1].text){
+      if(next.objType==="TextUnderlay" &amp;&amp; neume.members.length
+         &amp;&amp; typeof(neume.members[neume.members.length-1].text) !==undefined
+         &amp;&amp; !neume.members[neume.members.length-1].text){
         neume.members[neume.members.length-1].text = next;
       } else {
         neume.members.push(next);
@@ -1470,7 +1498,7 @@ function nextNeume(){
     if(string.length == strsize){
       // stuck in a loop. Break out somehow
       complaint.push("Broken at '"+string.substring(0, 10)
-                      +" in neume processing.</br>");
+                      +" in neume processing.&lt;/br>");
       string = string.substring(1);
     }
   }
@@ -1482,9 +1510,9 @@ function nextNeume(){
  * @returns {ObliqueNeume} oblique neume
  */
 function nextObliqueNeume(){
-  var end = string.indexOf("</obl>");
+  var end = string.indexOf("&lt;/obl>");
   if(end == -1){
-    complaint.push("Please repair unmatched <obl> somewhere near: "+string);
+    complaint.push("Please repair unmatched &lt;obl> somewhere near: "+string);
     string = "";
     return false;
   }
@@ -1495,7 +1523,7 @@ function nextObliqueNeume(){
   string = string.substring(0, end);
   consumeSpace();
   while(string.length != 0) {
-    if(consumeIf(/<(text|label):?.*?>/)){
+    if(consumeIf(/&lt;(text|label):?.*?>/)){
       oblique.texts[oblique.members.length-1] = nextText();
     } else if(string.substring(0,2) == "**"){
       oblique.comments[oblique.members.length-1] = nextComment();
@@ -1512,7 +1540,7 @@ function nextObliqueNeume(){
     if(string.length == strsize){
       // stuck in a loop. Break out somehow
       complaint.push("Broken at '"+string.substring(0, 10)
-                      +" in neume processing.</br>");
+                      +" in neume processing.&lt;/br>");
       string = string.substring(1);
     }
       strsize = string.length;
@@ -1522,18 +1550,18 @@ function nextObliqueNeume(){
 }
 
 /** @function nextLigature
- * @summary Parses <lig>-Tag into Ligature objects
+ * @summary Parses &lt;lig>-Tag into Ligature objects
  * @returns {Ligature} ligature with notes
  */
 function nextLigature(){
-  var end = string.indexOf("</lig>");
+  var end = string.indexOf("&lt;/lig>");
   if(end == -1){
     complaint.push("Please repair somewhere near: "+string);
     string = "";
     return false;
   }
-  var brokentest1 = string.search(/<lig>/);
-  if(brokentest1!=-1 && brokentest1<end){
+  var brokentest1 = string.search(/&lt;lig>/);
+  if(brokentest1!=-1 &amp;&amp; brokentest1&lt;end){
     complaint.push("Please repair somewhere near: "+string);
     return false;
   }
@@ -1548,17 +1576,17 @@ function nextLigature(){
   var tag;
   while(strsize!=0){
 //		console.log(string);
-    if((tag=consumeIf(/<(text|label):?.*?>/))){
+    if((tag=consumeIf(/&lt;(text|label):?.*?>/))){
       //FIXME ignores meaning
       next = nextText();
       enrichText(tag, next);
-    } else if(consumeIf("<obl>")){
+    } else if(consumeIf("&lt;obl>")){
       next = nextOblique(ligature);
     } else if(string.substring(0,2) == "**"){
       next = nextComment();
 //      next = new LigatureComment(next);
       currentExample.comments.push(next);
-    } else if(string.charAt(0)=="<") {
+    } else if(string.charAt(0)=="&lt;") {
       complaint.push("Unexpected item in the tagging area: "+string);
       return false;
     } else if(string.substring(0,5)=="{var="){
@@ -1569,7 +1597,7 @@ function nextLigature(){
       if(string.charAt(0)=="."){
         next.dot = nextDot();
       }
-      if((string.charAt(0)==="-" && string.charAt(1)==="?") || string.charAt(0)==="?"){
+      if((string.charAt(0)==="-" &amp;&amp; string.charAt(1)==="?") || string.charAt(0)==="?"){
         var flipped = consumeIf("-");
         next.signum = nextSignumCongruentiae();
         next.signum.effects = next;
@@ -1587,7 +1615,7 @@ function nextLigature(){
     if(string.length == strsize){
       // stuck in a loop. Break out somehow
       complaint.push("Broken at '"+string.substring(0, 10)
-                      +" in ligature processing.</br>");
+                      +" in ligature processing.&lt;/br>");
       string = string.substring(1);
     }
     strsize = string.length;
@@ -1597,14 +1625,14 @@ function nextLigature(){
 }
 
 /** @function nextOblique
- * @summary Parses <obl> tag
+ * @summary Parses &lt;obl> tag
  * @param {Ligature} ligature
  * @returns {Oblique} oblique object with content
  */
 function nextOblique(ligature){
-  var end = string.indexOf("</obl>");
+  var end = string.indexOf("&lt;/obl>");
   if(end == -1){
-    complaint.push("Please repair unmatched <obl> somewhere near: "+string);
+    complaint.push("Please repair unmatched &lt;obl> somewhere near: "+string);
     string = "";
     return false;
   }
@@ -1618,7 +1646,7 @@ function nextOblique(ligature){
   var tag;
 	var prevNote = false;
   while(strsize!=0){
-    if((tag=consumeIf(/<(text|label):?.*?>/))){
+    if((tag=consumeIf(/&lt;(text|label):?.*?>/))){
       oblique.texts[oblique.members.length-1] = nextText();
       enrichText(tag, oblique.texts[oblique.members.length-1]);
     } else if(string.substring(0,2) == "**"){
@@ -1644,7 +1672,7 @@ function nextOblique(ligature){
         if(string.charAt(0)=="."){
           next.dot = nextDot();
         }
-				if((string.charAt(0)==="-" && string.charAt(1)==="?") || string.charAt(0)==="?"){
+				if((string.charAt(0)==="-" &amp;&amp; string.charAt(1)==="?") || string.charAt(0)==="?"){
 					var flipped = consumeIf("-");
 					next.signum = nextSignumCongruentiae();
 					next.signum.effects = next;
@@ -1700,7 +1728,7 @@ function nextTacet(endPos){
 	var content = string.substring(0, endPos);
 	var finalString = string.substring(endPos+8);
 	var linebreak;
-	while ((linebreak = content.indexOf("<l/>"))>-1){
+	while ((linebreak = content.indexOf("&lt;l/>"))>-1){
 		extendTacet(content.substring(0, linebreak), tacet);
 		content = content.substring(linebreak+4);
 	}
@@ -1718,7 +1746,7 @@ function nextTacet(endPos){
 function extendTacet(content, tacet){
 	var os = string;
 	string = content;
-	if(/[<{*]/.test(string)){
+	if(/[&lt;{*]/.test(string)){
 		var parts = getString();
 		if(parts){
 			tacet.content.push(parts);
@@ -1735,12 +1763,12 @@ function extendTacet(content, tacet){
  * @returns {TextUnderlay} text
  */
 function nextText (){
-  var t = string.indexOf("</text>");
-  var l = string.indexOf("</label>");
+  var t = string.indexOf("&lt;/text>");
+  var l = string.indexOf("&lt;/label>");
   // This looks complicated, but we want -1 if both are -1, otherwise,
   // we want the one that isn't -1 or the lower of the two otherwise
-  var end = ((t >-1 && t<l) || l===-1) ? t : l;
-  var taglength = ((t >-1 && t<l) || l===-1) ? 7 : 8;
+  var end = ((t >-1 &amp;&amp; t&lt;l) || l===-1) ? t : l;
+  var taglength = ((t >-1 &amp;&amp; t&lt;l) || l===-1) ? 7 : 8;
   if(end === -1){
     return false;
   }
@@ -1754,28 +1782,28 @@ function nextText (){
 }
 
 /** @function getSubText
- * @summary parse contents of a <text></text> block or equivalently-syntaxed thing (e.g. a variant)
+ * @summary parse contents of a &lt;text>&lt;/text> block or equivalently-syntaxed thing (e.g. a variant)
  * @returns {Array} components
  */
 function getSubText (){
-  // parse contents of a <text></text> block or equivalently-syntaxed
+  // parse contents of a &lt;text>&lt;/text> block or equivalently-syntaxed
   // thing (e.g. a variant)
   var components = [];
   var strsize = string.length;
   var next = false;
-  var tagpos = string.indexOf("<");
+  var tagpos = string.indexOf("&lt;");
   var commentpos = string.indexOf("**");
   var varpos = string.indexOf("{");
   while(strsize != 0){
-    if(varpos!=-1 && (commentpos == -1 || varpos<commentpos) 
-       && (tagpos ==-1 || varpos < tagpos)) {
+    if(varpos!=-1 &amp;&amp; (commentpos == -1 || varpos&lt;commentpos) 
+       &amp;&amp; (tagpos ==-1 || varpos &lt; tagpos)) {
       if(varpos) components.push(string.substring(0,varpos));
       string = string.substring(varpos);
       end = string.indexOf("}");
       if(typeof(spans[string.substring(1, end)])!=="undefined"){
-        components.push(getTag("<"+string.substring(1, end)+">"));
+        components.push(getTag("&lt;"+string.substring(1, end)+">"));
         components.push(string.substring(end+1, end+2));
-        components.push(getTag("</"+string.substring(1, end)+">"));
+        components.push(getTag("&lt;/"+string.substring(1, end)+">"));
         string = string.substring(end+2);
       } else {
 //        console.log("fail");
@@ -1785,14 +1813,14 @@ function getSubText (){
       }
       // A variant can invalidate more or less anything that follows, so...
       varpos = string.indexOf("{");
-      tagpos = string.indexOf("<"); // just to check it wasn't in the comment;
+      tagpos = string.indexOf("&lt;"); // just to check it wasn't in the comment;
       commentpos = string.indexOf("**");
-    } else if(commentpos != -1 && (commentpos < tagpos || tagpos == -1)){
+    } else if(commentpos != -1 &amp;&amp; (commentpos &lt; tagpos || tagpos == -1)){
         components.push(string.substring(0,commentpos));
         string = string.substring(commentpos);
         components.push(nextComment());
         varpos = string.indexOf("{");
-        tagpos = string.indexOf("<"); // just to check it wasn't in the comment;
+        tagpos = string.indexOf("&lt;"); // just to check it wasn't in the comment;
         commentpos = string.indexOf("**");
     } else {
       if(tagpos > 0){
@@ -1802,17 +1830,17 @@ function getSubText (){
         components.push(string);
         return components;
       }
-      next = getTag(consumeIf(/<[^>]*>/));
+      next = getTag(consumeIf(/&lt;[^>]*>/));
       if(next){
         if(next.objType.indexOf("Open") != -1
            // Open tag
-           && !next.checkClose()){
+           &amp;&amp; !next.checkClose()){
           complaint.push("Missing close tag for "+next.objType+" around "+string);
         }
         components.push(next);
       }
       varpos = string.indexOf("{");
-      tagpos = string.indexOf("<"); // just to check it wasn't in the comment;
+      tagpos = string.indexOf("&lt;"); // just to check it wasn't in the comment;
       commentpos = string.indexOf("**");
     }
   }
@@ -1821,12 +1849,12 @@ function getSubText (){
 
 /**
  * @function getString
- * @summary Parse contents of <text></text> or equivalently-syntaxed thing (e.g. a variant). 
+ * @summary Parse contents of &lt;text>&lt;/text> or equivalently-syntaxed thing (e.g. a variant). 
  * This is a version of what was previously getSubText, a faster, but much less flexible function
  * @returns {Array} content
  */
 function getString (){
-  // Parse contents of <text></text> or equivalently-syntaxed thing
+  // Parse contents of &lt;text>&lt;/text> or equivalently-syntaxed thing
   // (e.g. a variant). This is a version of what was previously
   // getSubText, a faster, but much less flexible function
   var content = [];
@@ -1837,18 +1865,18 @@ function getString (){
   var currentCloses = false;
   while(string.length >0){
     prev = last(content);
-    if(currentCloses && prev!=currentCloses[currentCloses.length-1][0]){
+    if(currentCloses &amp;&amp; prev!=currentCloses[currentCloses.length-1][0]){
       // we have a self closing tag and a new thing after it
       // FIXME: should probably check what's been added
-      for(var i=0; i<currentCloses.length; i++){
+      for(var i=0; i&lt;currentCloses.length; i++){
         content.push(currentCloses[i][1]);
       }
       currentCloses = false;
       prev = last(content);
     }
     switch(string.charAt(0)){
-      case "<":
-        next = getTag(consumeIf(/<[^<]*>/));
+      case "&lt;":
+        next = getTag(consumeIf(/&lt;[^&lt;]*>/));
         content.push(next);
         break;
       case "{":
@@ -1863,14 +1891,14 @@ function getString (){
         } else if (tag===" "){
           content.push(new MusicOptionalSpace());
           consume(closePos+1);
-        } else if(tag.length===2 && /[,.¶:;()–\-\—!?\ ‘’]+/.test(tag)){
+        } else if(tag.length===2 &amp;&amp; /[,.¶:;()–\-\—!?\ ‘’]+/.test(tag)){
           content.push(new MusicPunctuation(tag));
           consume(closePos+1);
         } else if(typeof(spans[tag])!=="undefined"){
-          next = getTag("<"+tag+">");
+          next = getTag("&lt;"+tag+">");
           content.push(next);
           if(!currentCloses) currentCloses = [];
-          currentCloses.push([next, getTag("</"+tag+">")]);
+          currentCloses.push([next, getTag("&lt;/"+tag+">")]);
           consume(closePos+1);
         } else if (string.substring(1, 4)==="var") {
           content.push(nextTextChoice());
@@ -1890,7 +1918,7 @@ function getString (){
         }
         // If it isn't a comment, it's part of a string, so continue
       default:
-        if(prev && typeof(prev)==="string"){
+        if(prev &amp;&amp; typeof(prev)==="string"){
           content[content.length-1] = prev + string.charAt(0);
         } else {
           content.push(string.charAt(0));
@@ -1900,7 +1928,7 @@ function getString (){
     };
     if(string.length === size){
       console.log("Stuck: ", string);
-      if(prev && typeof(prev)==="string"){
+      if(prev &amp;&amp; typeof(prev)==="string"){
         content[content.length-1] = prev + string.charAt(0);
       } else {
         content.push(string.charAt(0));
@@ -1922,7 +1950,7 @@ function getMusicTextSup(){
   var end = string.indexOf("^");
   var end2 = string.indexOf(" ");
   var newString, newPointer;
-  if(end2!==-1 && (end===-1 || end2<end) && end2<8){
+  if(end2!==-1 &amp;&amp; (end===-1 || end2&lt;end) &amp;&amp; end2&lt;8){
     newString = string.substring(end2);
     newPointer = pointer+end2;
     string = string.substring(0, end2);
@@ -1952,25 +1980,25 @@ function getMusicTextSup(){
  */
 function getTag (tag){
   switch(tag){
-    case "<red>":
+    case "&lt;red>":
       return new RedOpen();
-    case "</red>":
+    case "&lt;/red>":
       return new RedClose();
-    case "<blue>":
+    case "&lt;blue>":
       return new BlueOpen();
-    case "</blue>":
+    case "&lt;/blue>":
       return new BlueClose();
-    case "<redline>":
+    case "&lt;redline>":
       return new RedlineOpen();
-    case "</redline>":
+    case "&lt;/redline>":
       return new RedlineClose();
-    case "<strikethrough>":
+    case "&lt;strikethrough>":
       return new StrikethroughOpen();
-    case "</strikethrough>":
+    case "&lt;/strikethrough>":
       return new StrikethroughClose();
-    case "<large>":
+    case "&lt;large>":
       return new LargeOpen();
-    case "</large>": 
+    case "&lt;/large>": 
       return new LargeClose();
     default:
       if(tag.charAt(1)==="/"){
@@ -1995,11 +2023,11 @@ function consumeParenthesis(){
                     ? "}" 
                     : openchar == "(" 
                         ? ")" 
-                        : openchar == "<" ? ">" :
+                        : openchar == "&lt;" ? ">" :
                             openchar == "[" ? "]" : false;
   if(!closechar) return false;
   var score = 1;
-  for(var i=1; i<string.length; i++){
+  for(var i=1; i&lt;string.length; i++){
     if(string.charAt(i) == openchar) {
       score++;
     } else if(string.charAt(i) == closechar){
@@ -2067,7 +2095,7 @@ function parseMensReading(fields){
     // This is an error. See if a blank works as a recovery strategy
     mens = new MensuralSignature();
   }
-  for(var i=1; i<fields.length; i++){
+  for(var i=1; i&lt;fields.length; i++){
     if(fields[i].charAt(0) === '"' || fields[i].substring(0, 3) === '(om'){
 			wits = fields.slice(1, i);
       return [fields.slice(i), new MReading(wits, [mens], "", false, staffDetailsForWitnesses(wits), false)];
@@ -2121,7 +2149,7 @@ function parseProp(propSpec, posSpec){
       console.log("Stack of "+propStrings.length+" proportion signs!!", propSpec);
     }
     obj = new StackedProportionSigns();
-    for(var i=0; i<propStrings.length; i++){
+    for(var i=0; i&lt;propStrings.length; i++){
       child = new ProportionSign();
       child.sign = propStrings[i];
       child.staffPos = staffPosFromString(propPositions[propStrings.length-1-i])[0];
@@ -2140,7 +2168,7 @@ function parseSolm(signs){
   var solm, pitch, nextChar;
   var obj = new SolmizationSignature();
   if(!signs[0] || signs[0] === "0" || signs[0] === '"0"') return obj;
-  for(var i=0; i<signs.length; i++){
+  for(var i=0; i&lt;signs.length; i++){
     nextChar = 0;
     solm = new SolmizationSign();
     if(signs[i].charAt(0) == "^") {
@@ -2172,11 +2200,11 @@ function parseSolm(signs){
  */
 function parseSolmReading(fields){
   var solm=false, closed, signs=[], start, finish, last, from, descr="", field;
-  for(var i=0; i<fields.length; i++){
+  for(var i=0; i&lt;fields.length; i++){
     field = fields[i];
     if(field.charAt(0)==='"'){
       // Starting a solm sig
-      if(from && (solm || i-from)){
+      if(from &amp;&amp; (solm || i-from)){
 				var wits = fields.slice(from, i);
         var staffing = staffDetailsForWitnesses(wits);
         return [fields.slice(i), 
@@ -2193,7 +2221,7 @@ function parseSolmReading(fields){
       }
     } else if (fields[i].charAt(0)==='('){
       // starting a descr
-      if(from && ((solm && i-from) || descr.length)){
+      if(from &amp;&amp; ((solm &amp;&amp; i-from) || descr.length)){
 				var wits = fields.slice(from, i);
         var staffing = staffDetailsForWitnesses(wits);
         return [fields.slice(i),
@@ -2250,9 +2278,9 @@ function parseSolmVar(fields){
  */
 function parseClefReading(fields){
   var clef = false, descr="", from=false, finish;
-  for(var i=0; i<fields.length; i++){
+  for(var i=0; i&lt;fields.length; i++){
     if(fields[i].charAt(0) =='"'){
-      if(from && (clef || i-from)){
+      if(from &amp;&amp; (clef || i-from)){
         // either we've got a clef for this reading, or there is none
         // (and so there has been at least one witness listed)
         var wits = fields.slice(from, i);
@@ -2262,7 +2290,7 @@ function parseClefReading(fields){
       } else {
         // Clef for this reading
         finish = fields[i].lastIndexOf('"');
-        if(!finish && (fields[i+1].charAt(0)=="[" || fields[i+1].charAt(0)=="^")){
+        if(!finish &amp;&amp; (fields[i+1].charAt(0)=="[" || fields[i+1].charAt(0)=="^")){
           // Erroneous clef, specified in form "C6 [C8]"
           
           finish = fields[i+1].lastIndexOf('"');
@@ -2275,7 +2303,7 @@ function parseClefReading(fields){
         }
       }
     } else if(fields[i].charAt(0)==='('){
-      if(from && ((clef && i-from) || descr.length)) {
+      if(from &amp;&amp; ((clef &amp;&amp; i-from) || descr.length)) {
         // this either doesn't apply to the clef or there's already a
         // description
         var wits = fields.slice(from, i);
@@ -2298,7 +2326,7 @@ function parseClefReading(fields){
 
 // function parseClefReading(fields){
 //   var clef = parseClef(fields[0].substring(1, fields[0].length-1));
-//   for(var i=1; i<fields.length; i++){
+//   for(var i=1; i&lt;fields.length; i++){
 //     if(fields[i].charAt(0) =='"'){
 //       return [fields.slice(i), new MReading(fields.slice(1, i), [clef], "")];
 //     }
@@ -2402,10 +2430,10 @@ function parseStaff(spec){
   // First: lines
   if(spec[0].charAt(0)=='"'){
     staff.lines = new ValueChoice();
-    while(pointer< spec.length && !colourp(spec[pointer])){
+    while(pointer&lt; spec.length &amp;&amp; !colourp(spec[pointer])){
       val = linesp(spec[pointer]);
       pointer++;
-      while(pointer< spec.length && !linesp(spec[pointer]) && !colourp(spec[pointer])){
+      while(pointer&lt; spec.length &amp;&amp; !linesp(spec[pointer]) &amp;&amp; !colourp(spec[pointer])){
         var os = string;
         string = spec[pointer];
         wit.push(consumeWitnesses()[0]);
@@ -2426,7 +2454,7 @@ function parseStaff(spec){
 //    staff.colour = defaultColour;
   } else if (spec[pointer].charAt(0)=='"'){
     staff.colour = new ValueChoice();
-    while(pointer < spec.length){
+    while(pointer &lt; spec.length){
       val = colourp(spec[pointer]);
       pointer++;
       while(!colourp(spec[pointer])){
@@ -2454,10 +2482,10 @@ function parseStaff(spec){
  * @returns {boolean}
  */
 function linesp(string){
-  return (!isNaN(parseInt(string)) && parseInt(string))
+  return (!isNaN(parseInt(string)) &amp;&amp; parseInt(string))
     || 
     (!isNaN(parseInt(string.substring(1, string.length-1)))
-      && parseInt(string.substring(1, string.length-1)));
+      &amp;&amp; parseInt(string.substring(1, string.length-1)));
 }
 
 /** @function colourp
@@ -2471,7 +2499,7 @@ function colourp(string){
 
 /** @function nextPart
  * @summary This covers Part, pars and other boundaries in the flow. N.B. The
- * <Part> object represents the tag, not the element (i.e. there is
+ * &lt;Part> object represents the tag, not the element (i.e. there is
  * an open at the beginning and a close at the end, and nothing is
  * 'contained')
  * @param {?} partType 
@@ -2481,7 +2509,7 @@ function colourp(string){
  */
 function nextPart(partType, closes, extra){
 	// This covers Part, pars and other boundaries in the flow. N.B. The
-	// <Part> object represents the tag, not the element (i.e. there is
+	// &lt;Part> object represents the tag, not the element (i.e. there is
 	// an open at the beginning and a close at the end, and nothing is
 	// 'contained')
 	var thing = new Part();
@@ -2502,7 +2530,7 @@ function nextPart(partType, closes, extra){
 	if(info) {
 		innerInfo = /{([^}]*)}/.exec(info)[1];
 		bits = /([^,\s]*)[,\s]*([^,\s]*)[,\s]*(.*)/.exec(innerInfo);
-		for(var i=1; i<4; i++){
+		for(var i=1; i&lt;4; i++){
 			if(bits[i].length){
 				if(!isNaN(parseInt(bits[i]))){
 					// This is positional info (goes with rotation component)
@@ -2563,11 +2591,11 @@ function nextPartnameReading(fields, partType, closes, choice){
 	var part = new Part();
 	var om = true;
 	part.type = partType;
-	if(fields[0].length>1 && fields[0] !== "(om.)"){
+	if(fields[0].length>1 &amp;&amp; fields[0] !== "(om.)"){
 		om = false;
 	} 
 	if(closes) part.closes=true;
-	for(var i=1; i<fields.length; i++){
+	for(var i=1; i&lt;fields.length; i++){
     if(fields[i].charAt(0) === '"' || fields[i].substring(0, 3) === '(om'){
 			if(om) {
 				return [fields.slice(i), new MOmission(fields.slice(1, i), "om",
@@ -2601,14 +2629,14 @@ function nextInfo(){
     var fields = info.match(/[^{}, :=]+/g);
     switch(fields[0]){
     case "mens":
-      if(fields[1] && fields[2] && 
+      if(fields[1] &amp;&amp; fields[2] &amp;&amp; 
          (fields[1].charAt(0)==='"' || fields[2].charAt(0)==='"' ||
           fields[1].substring(0, 2)==='(o')){
         return parseMensVar(fields.slice(1));
       } else if(fields[1].length==2){
         // new format
         var mens = parseMens(fields[1]);
-        if(fields.length>2 && fields[2].charAt(0)==="^") mens.sup = parseMens(fields[2]);
+        if(fields.length>2 &amp;&amp; fields[2].charAt(0)==="^") mens.sup = parseMens(fields[2]);
         return mens;
       } else if(fields.length>1){
         return parseMens(fields[1], fields[2]);
@@ -2616,7 +2644,7 @@ function nextInfo(){
         return false;
       }
     case "prop":
-      if(fields[1] && fields[2] && 
+      if(fields[1] &amp;&amp; fields[2] &amp;&amp; 
          (fields[1].charAt(0)==='"' || fields[2].charAt(0)==='"' ||
           fields[1].substring(0, 2)==='(o')){
         return parsePropVar(fields.slice(1));
@@ -2641,7 +2669,7 @@ function nextInfo(){
         } else if (fields[2].charAt(0)=== '^'){
           //stacked clefs
           var clef = parseClef(fields[1]);
-          for(var i=2; i<fields.length; i++){
+          for(var i=2; i&lt;fields.length; i++){
             clef.stackedClefs.push(parseClef(fields[i].substring(1)));
           }
           return clef;
@@ -2699,7 +2727,7 @@ function nextLigChoice(parent){
   var choice = new LigChoice();
   choice.ligature = parent;
   nextChoiceLikeThing(choice, false);
-	if(choice.content.length && choice.content[0] && choice.content[0].content && choice.content[0].content.length===1 && choice.content[0].content[0].objType==="SignumCongruentiae"){
+	if(choice.content.length &amp;&amp; choice.content[0] &amp;&amp; choice.content[0].content &amp;&amp; choice.content[0].content.length===1 &amp;&amp; choice.content[0].content[0].objType==="SignumCongruentiae"){
 		choice.subType = "SignumCongruentiae";
 	}
 	return choice;
@@ -2719,10 +2747,10 @@ function nextObliqueNoteChoice(parent){
 	var justNotes = true;
 	var anyNotes = false;
 	var newPrevNote = false;
-	for(var i=0; i<choice.content.length; i++){
+	for(var i=0; i&lt;choice.content.length; i++){
 		newPrevNote = false;
 		if(!choice.content[i].content) continue;
-		for(var j=0; j<choice.content[i].content.length; j++){
+		for(var j=0; j&lt;choice.content[i].content.length; j++){
 			if(choice.content[i].content[j].objType==="ObliqueNote"){
 				anyNotes = true;
 				newPrevNote = choice.content[i].content[j]
@@ -2763,8 +2791,8 @@ function nextChoiceLikeThing(choice, textp){
   string = string.substring(5, locend); // 5 because of "{var="
   consumeSpace();
   currentChoice = choice;
-  while(string.length && prevLength != string.length){
-    if(string.length>15 && book===1&&chapter===3) debug1 = false;
+  while(string.length &amp;&amp; prevLength != string.length){
+    if(string.length>15 &amp;&amp; book===1&amp;&amp;chapter===3) debug1 = false;
     prevLength = string.length;
     lDescription = consumeDescription();
     readingString = consumeReadingString();
@@ -2825,11 +2853,11 @@ function nextChoiceLikeThing2(choice, textp){
   var clef = currentClef;
   var prevLength = false;
   string = string.substring(5, locend); // 5 because of "{var="
-  while(string.length && prevLength != string.length){
+  while(string.length &amp;&amp; prevLength != string.length){
     prevLength = string.length;
     quoteloc = string.indexOf('"');
     braceloc = string.indexOf('(');
-    if(braceloc != -1 && (braceloc < quoteloc || quoteloc==-1)){
+    if(braceloc != -1 &amp;&amp; (braceloc &lt; quoteloc || quoteloc==-1)){
       string = string.substring(braceloc);
       // this clause begins with an editorial comment
 //      description = consumeIf(/\(.*?\)/).slice(1, -1);
@@ -2904,7 +2932,7 @@ function nextMusic(parent){
   var length = false;
   var next, prev, augmented;
   //console.log(parent);
-  if(!string.length && hackedString) {
+  if(!string.length &amp;&amp; hackedString) {
     // This hack counteracts a weird disappearing string in .addReading
     string = hackedString;
   }
@@ -2918,7 +2946,7 @@ function nextMusic(parent){
         next.previous = prev;
       }
       if(next.objType==="SolmizationSignature"
-         && results.length && results[results.length-1].objType==="Clef"){
+         &amp;&amp; results.length &amp;&amp; results[results.length-1].objType==="Clef"){
         results[results.length-1].solm = next;
       }
       if(parent){
@@ -2936,7 +2964,7 @@ function nextMusic(parent){
           } else {
             next.effects = this.events[this.events.length-1];
           }
-        } else if (next.objType==="Comment" && this.events.length && 
+        } else if (next.objType==="Comment" &amp;&amp; this.events.length &amp;&amp; 
                    this.events[this.events.length-1].objType==="Ligature"){
           var c = new LigatureComment(next);
           currentExample.comments.push(c);
@@ -3014,3 +3042,26 @@ function getParameters(){
   string = string.substring(string.indexOf(">")+1);
   return param;
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Barline.html">Barline</a></li><li><a href="BlueClose.html">BlueClose</a></li><li><a href="BlueOpen.html">BlueOpen</a></li><li><a href="ChantNote.html">ChantNote</a></li><li><a href="Clef.html">Clef</a></li><li><a href="ColumnStart.html">ColumnStart</a></li><li><a href="Comment.html">Comment</a></li><li><a href="Custos.html">Custos</a></li><li><a href="Dot.html">Dot</a></li><li><a href="etc.html">etc</a></li><li><a href="ExampleBreak.html">ExampleBreak</a></li><li><a href="Fermata.html">Fermata</a></li><li><a href="FullClose.html">FullClose</a></li><li><a href="FullOpen.html">FullOpen</a></li><li><a href="GenericClose.html">GenericClose</a></li><li><a href="GenericOpen.html">GenericOpen</a></li><li><a href="HalfFullClose.html">HalfFullClose</a></li><li><a href="HalfFullOpen.html">HalfFullOpen</a></li><li><a href="LargeClose.html">LargeClose</a></li><li><a href="LargeOpen.html">LargeOpen</a></li><li><a href="LedgerLineChange.html">LedgerLineChange</a></li><li><a href="Ligature.html">Ligature</a></li><li><a href="LigatureComment.html">LigatureComment</a></li><li><a href="LigatureNote.html">LigatureNote</a></li><li><a href="LigChoice.html">LigChoice</a></li><li><a href="LongRest.html">LongRest</a></li><li><a href="MaxRest.html">MaxRest</a></li><li><a href="MChoice.html">MChoice</a></li><li><a href="MensuralSignature.html">MensuralSignature</a></li><li><a href="MESuper.html">MESuper</a></li><li><a href="MNilReading.html">MNilReading</a></li><li><a href="MReading.html">MReading</a></li><li><a href="MusicExample.html">MusicExample</a></li><li><a href="MusicOptionalSpace.html">MusicOptionalSpace</a></li><li><a href="MusicPunctuation.html">MusicPunctuation</a></li><li><a href="MusicWordJoin.html">MusicWordJoin</a></li><li><a href="MusicWordSplit.html">MusicWordSplit</a></li><li><a href="NegativeSpace.html">NegativeSpace</a></li><li><a href="Neume.html">Neume</a></li><li><a href="NeumeItem.html">NeumeItem</a></li><li><a href="Notation.html">Notation</a></li><li><a href="Note.html">Note</a></li><li><a href="Oblique.html">Oblique</a></li><li><a href="ObliqueNeume.html">ObliqueNeume</a></li><li><a href="ObliqueNote.html">ObliqueNote</a></li><li><a href="ObliqueNoteChoice.html">ObliqueNoteChoice</a></li><li><a href="Parameters.html">Parameters</a></li><li><a href="Part.html">Part</a></li><li><a href="PositiveSpace.html">PositiveSpace</a></li><li><a href="ProportionSign.html">ProportionSign</a></li><li><a href="RedClose.html">RedClose</a></li><li><a href="RedlineClose.html">RedlineClose</a></li><li><a href="RedlineOpen.html">RedlineOpen</a></li><li><a href="RedOpen.html">RedOpen</a></li><li><a href="Repeat.html">Repeat</a></li><li><a href="Rest.html">Rest</a></li><li><a href="SignumCongruentiae.html">SignumCongruentiae</a></li><li><a href="SolmizationSign.html">SolmizationSign</a></li><li><a href="SolmizationSignature.html">SolmizationSignature</a></li><li><a href="StackedProportionSigns.html">StackedProportionSigns</a></li><li><a href="Staff.html">Staff</a></li><li><a href="StrikethroughClose.html">StrikethroughClose</a></li><li><a href="StrikethroughOpen.html">StrikethroughOpen</a></li><li><a href="Tacet.html">Tacet</a></li><li><a href="TextUnderlay.html">TextUnderlay</a></li><li><a href="upsideDownClose.html">upsideDownClose</a></li><li><a href="upsideDownOpen.html">upsideDownOpen</a></li><li><a href="ValueChoice.html">ValueChoice</a></li><li><a href="ValueReading.html">ValueReading</a></li><li><a href="VoidClose.html">VoidClose</a></li><li><a href="VoidOpen.html">VoidOpen</a></li></ul><h3>Global</h3><ul><li><a href="global.html#actOnColoration">actOnColoration</a></li><li><a href="global.html#actOnDots">actOnDots</a></li><li><a href="global.html#addBreveBoundariesForBlock">addBreveBoundariesForBlock</a></li><li><a href="global.html#addStartTimesForBlock">addStartTimesForBlock</a></li><li><a href="global.html#allUnalterableImperfectLevels">allUnalterableImperfectLevels</a></li><li><a href="global.html#alterableLevels">alterableLevels</a></li><li><a href="global.html#anteSim">anteSim</a></li><li><a href="global.html#augDot">augDot</a></li><li><a href="global.html#beatIndependentDurations">beatIndependentDurations</a></li><li><a href="global.html#beatOfDur">beatOfDur</a></li><li><a href="global.html#beatOfUnit">beatOfUnit</a></li><li><a href="global.html#beatUnitStructure">beatUnitStructure</a></li><li><a href="global.html#blockProportionMultiplier">blockProportionMultiplier</a></li><li><a href="global.html#breveDifference">breveDifference</a></li><li><a href="global.html#canImperfect">canImperfect</a></li><li><a href="global.html#checkForGeneralAlteration">checkForGeneralAlteration</a></li><li><a href="global.html#colourp">colourp</a></li><li><a href="global.html#consumeParenthesis">consumeParenthesis</a></li><li><a href="global.html#divisionDot">divisionDot</a></li><li><a href="global.html#divisionLikeRests">divisionLikeRests</a></li><li><a href="global.html#dupleMinimCountFromElement">dupleMinimCountFromElement</a></li><li><a href="global.html#enrichText">enrichText</a></li><li><a href="global.html#extendTacet">extendTacet</a></li><li><a href="global.html#firstBeatAlteration">firstBeatAlteration</a></li><li><a href="global.html#firstBeatImperfection">firstBeatImperfection</a></li><li><a href="global.html#firstBeatImperfectionCheck">firstBeatImperfectionCheck</a></li><li><a href="global.html#firstPerfectLevel">firstPerfectLevel</a></li><li><a href="global.html#gcd">gcd</a></li><li><a href="global.html#getAtomicSections">getAtomicSections</a></li><li><a href="global.html#getEventsByMensurationForSection">getEventsByMensurationForSection</a></li><li><a href="global.html#getLayers">getLayers</a></li><li><a href="global.html#getMusicTextSup">getMusicTextSup</a></li><li><a href="global.html#getParameters">getParameters</a></li><li><a href="global.html#getString">getString</a></li><li><a href="global.html#getSubText">getSubText</a></li><li><a href="global.html#getTag">getTag</a></li><li><a href="global.html#hasNoSections">hasNoSections</a></li><li><a href="global.html#imperfectingLevels">imperfectingLevels</a></li><li><a href="global.html#indexOfNextDot">indexOfNextDot</a></li><li><a href="global.html#indexOfNextSameOrLongerOrDot">indexOfNextSameOrLongerOrDot</a></li><li><a href="global.html#indexOfPrevLongerOrDot">indexOfPrevLongerOrDot</a></li><li><a href="global.html#isAlterable">isAlterable</a></li><li><a href="global.html#labelRests">labelRests</a></li><li><a href="global.html#leveleq">leveleq</a></li><li><a href="global.html#linesp">linesp</a></li><li><a href="global.html#mensurSummary">mensurSummary</a></li><li><a href="global.html#midBeatAlteration">midBeatAlteration</a></li><li><a href="global.html#midBeatImperfection">midBeatImperfection</a></li><li><a href="global.html#minimStructures">minimStructures</a></li><li><a href="global.html#nextBarline">nextBarline</a></li><li><a href="global.html#nextChantNote">nextChantNote</a></li><li><a href="global.html#nextChoice">nextChoice</a></li><li><a href="global.html#nextChoiceLikeThing">nextChoiceLikeThing</a></li><li><a href="global.html#nextChoiceLikeThing2">nextChoiceLikeThing2</a></li><li><a href="global.html#nextColRef">nextColRef</a></li><li><a href="global.html#nextComment">nextComment</a></li><li><a href="global.html#nextCustos">nextCustos</a></li><li><a href="global.html#nextDot">nextDot</a></li><li><a href="global.html#nextEvent">nextEvent</a></li><li><a href="global.html#nextFermata">nextFermata</a></li><li><a href="global.html#nextInfo">nextInfo</a></li><li><a href="global.html#nextLigature">nextLigature</a></li><li><a href="global.html#nextLigChoice">nextLigChoice</a></li><li><a href="global.html#nextLongRest">nextLongRest</a></li><li><a href="global.html#nextMusic">nextMusic</a></li><li><a href="global.html#nextNeume">nextNeume</a></li><li><a href="global.html#nextNote">nextNote</a></li><li><a href="global.html#nextOblique">nextOblique</a></li><li><a href="global.html#nextObliqueNeume">nextObliqueNeume</a></li><li><a href="global.html#nextObliqueNoteChoice">nextObliqueNoteChoice</a></li><li><a href="global.html#nextPart">nextPart</a></li><li><a href="global.html#nextPartnameReading">nextPartnameReading</a></li><li><a href="global.html#nextRepeat">nextRepeat</a></li><li><a href="global.html#nextRest">nextRest</a></li><li><a href="global.html#nextSignumCongruentiae">nextSignumCongruentiae</a></li><li><a href="global.html#nextSolmSign">nextSolmSign</a></li><li><a href="global.html#nextTacet">nextTacet</a></li><li><a href="global.html#nextTaglike">nextTaglike</a></li><li><a href="global.html#nextText">nextText</a></li><li><a href="global.html#nextTextChoice">nextTextChoice</a></li><li><a href="global.html#noteInt">noteInt</a></li><li><a href="global.html#noteIntFromDur">noteIntFromDur</a></li><li><a href="global.html#noteOrRest">noteOrRest</a></li><li><a href="global.html#notePerfectAsWhole">notePerfectAsWhole</a></li><li><a href="global.html#nsResolver">nsResolver</a></li><li><a href="global.html#parseClef">parseClef</a></li><li><a href="global.html#parseClefReading">parseClefReading</a></li><li><a href="global.html#parseClefVar">parseClefVar</a></li><li><a href="global.html#parseMens">parseMens</a></li><li><a href="global.html#parseMensReading">parseMensReading</a></li><li><a href="global.html#parseProp">parseProp</a></li><li><a href="global.html#parseSolm">parseSolm</a></li><li><a href="global.html#parseSolmReading">parseSolmReading</a></li><li><a href="global.html#parseSolmVar">parseSolmVar</a></li><li><a href="global.html#parseStaff">parseStaff</a></li><li><a href="global.html#propNum">propNum</a></li><li><a href="global.html#proportionMultiplier">proportionMultiplier</a></li><li><a href="global.html#propProportionMultiplier">propProportionMultiplier</a></li><li><a href="global.html#readDur">readDur</a></li><li><a href="global.html#regularlyPerfect">regularlyPerfect</a></li><li><a href="global.html#secondBeatAlteration">secondBeatAlteration</a></li><li><a href="global.html#secondBeatImperfection">secondBeatImperfection</a></li><li><a href="global.html#simpleMinims">simpleMinims</a></li><li><a href="global.html#simplestAlterations">simplestAlterations</a></li><li><a href="global.html#solidBlock">solidBlock</a></li><li><a href="global.html#thirdBeatAlteration">thirdBeatAlteration</a></li><li><a href="global.html#thirdBeatImperfection">thirdBeatImperfection</a></li><li><a href="global.html#windowDuration">windowDuration</a></li><li><a href="global.html#writeAlteration">writeAlteration</a></li><li><a href="global.html#writeDur">writeDur</a></li><li><a href="global.html#writeImperfection">writeImperfection</a></li><li><a href="global.html#writeSimpleImperfection">writeSimpleImperfection</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Fri Jun 05 2020 17:46:29 GMT+0200 (GMT+02:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

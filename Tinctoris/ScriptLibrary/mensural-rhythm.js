@@ -30,17 +30,6 @@ function gcd(a,b) {
   return b ? gcd(b, a % b) : Math.abs(a);
 }
 
-/** 
- * Name space manager function. Takes a prefix and returns the URL for
- * that name space. In this case, though, pretty much hard-wired.
- * @param {String} prefix The namespace prefix to retrieve as a URL
- */
-function nsResolver(prefix){
-  var ns = {
-    mei: "http://www.music-encoding.org/ns/mei"
-  }
-  return ns[prefix] || null;
-}
 
 /////////////////////////////
 //

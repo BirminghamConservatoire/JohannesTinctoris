@@ -1,4 +1,32 @@
-/** @file Musical classes
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: classes.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: classes.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** @file Musical classes
 * Classes have some methods in common:
 *   * .width for width estimation (before drawing)
 *   * .negativeSpace In some cases inserted negative spaces
@@ -16,7 +44,7 @@
 *       such behaviour is appropriate. The new element is (usually,
 *       unnecessarily) returned.
 *   * .draw Draws the object to the SVG object referred to by the
-*       global variable <SVG>. The drawn object is returned.
+*       global variable &lt;SVG>. The drawn object is returned.
 */
 
 /// util functions
@@ -24,7 +52,7 @@ function keepStyles(styles){ return styles;};
 function zeroWidth(){ return 0;};
 
 ///// Classes
-// 1. Notes, ligatures & neumes
+// 1. Notes, ligatures &amp; neumes
 //
 
 /** @class
@@ -74,7 +102,7 @@ function Note(){
   /** @member {Note} */
   // Copy current classes
   this.classList = [];
-  if(currentExample.classes && currentExample.classes.classes.length){
+  if(currentExample.classes &amp;&amp; currentExample.classes.classes.length){
     this.classList = currentExample.classes.classes.slice(0);
   }
   this.width = function(){
@@ -120,8 +148,8 @@ function Note(){
     MEIAddPosition(this, el);
 		if(this.rhythm==="s"){
 		}
-    if((voidRule(this) && currentSubType==="full") 
-       || (fullRule(this) && currentSubType==="void")){
+    if((voidRule(this) &amp;&amp; currentSubType==="full") 
+       || (fullRule(this) &amp;&amp; currentSubType==="void")){
       el.setAttribute("coloration", "true");
     }
     parent.appendChild(el);
@@ -153,7 +181,7 @@ function Note(){
       } else {
         curx = currentExample.events[eventi-1].startX;
       }
-    } else if(this.text && underlays.length){
+    } else if(this.text &amp;&amp; underlays.length){
       // Check for text issues
       curx = Math.max(curx, underlayRight(this.text.position));
     }
@@ -165,7 +193,7 @@ function Note(){
     this.voidnotes = voidRule(this);//voidnotesp(this);
     this.fullnotes = fullRule(this);
     var half = halfFullRule(this);
-    if(half && (!this.rhythm || !/[M|L|B]/.exec(this.rhythm))) half = false;
+    if(half &amp;&amp; (!this.rhythm || !/[M|L|B]/.exec(this.rhythm))) half = false;
     this.example = currentExample;
     var extraClasses = "";
     // Now check for styles
@@ -178,7 +206,7 @@ function Note(){
     if(this.text){
       this.text.draw();
     } 
-    if((spos || spos===0) && this.rhythm) {
+    if((spos || spos===0) &amp;&amp; this.rhythm) {
       var subType = half ? (half === 1 ? "lhalf" : "rhalf") : this.subType;
       this.domObj = svgGroup(SVG, "notegroup"+extraClasses+(editable ? " clickable" : "")
                              +(half ? " halffull"+half : ""), 
@@ -282,7 +310,7 @@ function ChantNote(){
                            +extraClasses, false);
     var prevSVG = SVG;
     SVG = this.domObj;
-    if(spos && this.rhythm){
+    if(spos &amp;&amp; this.rhythm){
       if (currentSubType.toLowerCase() == "hufnagel"){
         drawRhombus(curx, yPos(cury, spos), false, false, this.rhythm=="v");
       } else if(this.rhythm=="l"){
@@ -323,7 +351,7 @@ function Dot(){
     return this.augments ? rastralSize/2 : rastralSize;
   };
   this.negativeSpace = function(next){
-    if(next && (next.objType=="Note" || next.objType.indexOf("Rest")>-1)){
+    if(next &amp;&amp; (next.objType=="Note" || next.objType.indexOf("Rest")>-1)){
       return next.negativeSpace();
     } else {
       return rastralSize/2;
@@ -337,8 +365,8 @@ function Dot(){
 		// note. There's no easy, guaranteed way to know it's an
 		// augmentation, but our editorial practice is to show vertical
 		// displacement for perfection dots.
-		return this.augments && (!this.staffPos  || this.staffPos===this.augments.staffPos
-														 || (this.augments.staffPos % 2 === 0 && Math.abs(this.staffPos-this.augments.staffPos<2)));
+		return this.augments &amp;&amp; (!this.staffPos  || this.staffPos===this.augments.staffPos
+														 || (this.augments.staffPos % 2 === 0 &amp;&amp; Math.abs(this.staffPos-this.augments.staffPos&lt;2)));
 	};
   this.toMEI = function(doc, parent){
     if(!parent) parent = doc.currentParent;
@@ -359,7 +387,7 @@ function Dot(){
     } else {
       curx -= rastralSize/12;
     }
-    if(this.text && underlays.length){
+    if(this.text &amp;&amp; underlays.length){
       // Check for text issues
       curx = Math.max(curx, underlayRight(this.text.position));
     }
@@ -445,7 +473,7 @@ function SignumCongruentiae(){
 //        console.log("s.c. at", pos, this.staffPos, dotPos, currentLinecount);
       }
     }
-    if(this.effects && !variant && $(SVG).parents("#content").length){
+    if(this.effects &amp;&amp; !variant &amp;&amp; $(SVG).parents("#content").length){
 			console.log("step1", this.effects.subType, this.effects.objType);
       oldx = curx;
       if(this.effects.objType==="MusicalChoice"){
@@ -459,7 +487,7 @@ function SignumCongruentiae(){
           }
         }
       } else if(this.effects.objType==="Ligature Choice"){
-        if(currentReading && !$(SVG).parents("#content").length){
+        if(currentReading &amp;&amp; !$(SVG).parents("#content").length){
           var opos = currentReading.content.indexOf(this);
           if(opos===0){
             curx = currentExample.events[eventi-1].startX;
@@ -520,8 +548,8 @@ function Fermata(){
     var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "fermata");
 		addUUIDs(this, el, curDoc);
     MEIAddPosition(this, el);
-    if(this.lengthens && this.lengthens.MEIObj 
-       && this.lengthens.MEIObj.getAttribute("xml:id")){
+    if(this.lengthens &amp;&amp; this.lengthens.MEIObj 
+       &amp;&amp; this.lengthens.MEIObj.getAttribute("xml:id")){
       el.setAttribute("startid", this.lengthens.MEIObj.getAttribute("xml:id"));
     }
     parent.appendChild(el);
@@ -536,7 +564,7 @@ function Fermata(){
     } else {
       pos = staffPosition(this) || (2+dotPos) || (Math.floor(currentLinecount/4)*2+3);
     }
-    if(!$(SVG).parents("#content").length && $(this.lengthens.domObj).parents("#content").length){
+    if(!$(SVG).parents("#content").length &amp;&amp; $(this.lengthens.domObj).parents("#content").length){
 //      console.log(SVG!=$(this.lengthens.domObj).parents("SVG")[0]);
       this.lengthens.draw();
     }
@@ -636,7 +664,7 @@ function Custos(){
 }
 
 function compoundNotep(obj){
-  return obj.objType != "TextUnderlay" && obj.objType != "Comment";
+  return obj.objType != "TextUnderlay" &amp;&amp; obj.objType != "Comment";
 }
 
 /** @class */
@@ -692,14 +720,14 @@ function LigatureNote(note){
     }
     // Now check for semibreve stem
     if(this.rhythm == "S"){
-      if(this.prevEvent(variant).rhythm == "S" && this.prevEvent(variant).lstem(variant)){
+      if(this.prevEvent(variant).rhythm == "S" &amp;&amp; this.prevEvent(variant).lstem(variant)){
         return false;
       } else {
         return 1;
       }
-    } else if (this.rhythm == "B" &&
-               (!this.prevEvent(variant) && this.nextEvent(variant)
-                 && this.nextEvent(variant).varStartStaffPos(variant) < staffPosition(this))){
+    } else if (this.rhythm == "B" &amp;&amp;
+               (!this.prevEvent(variant) &amp;&amp; this.nextEvent(variant)
+                 &amp;&amp; this.nextEvent(variant).varStartStaffPos(variant) &lt; staffPosition(this))){
       return -1;
     } else {
       return false;
@@ -711,14 +739,14 @@ function LigatureNote(note){
       case "+":
         return true;
     }
-    if(!this.sup && (this.rhythm == "L" || this.rhythm == "M")){
+    if(!this.sup &amp;&amp; (this.rhythm == "L" || this.rhythm == "M")){
       // *might* be a stem
       if(!this.prevEvent(variant)){
-        if(this.nextEvent(variant) && this.nextEvent(variant).varStartStaffPos(variant) > staffPosition(this))
+        if(this.nextEvent(variant) &amp;&amp; this.nextEvent(variant).varStartStaffPos(variant) > staffPosition(this))
           return true;
       } else if(!this.nextEvent(variant)){
 //        console.log("path c", this, this.prevEvent(variant));
-        if(this.prevEvent(variant).varEndStaffPos(variant) < staffPosition(this))
+        if(this.prevEvent(variant).varEndStaffPos(variant) &lt; staffPosition(this))
           return true;
       } else {
         // Middle long or maxima always has tail
@@ -743,8 +771,8 @@ function LigatureNote(note){
 		addUUIDs(this, el, curDoc);
     if(this.dot) this.dot.toMEI(doc, el);
     MEIAddPosition(this, el);
-    if((voidRule(this) && currentSubType==="full") 
-       || (fullRule(this) && currentSubType==="void")){
+    if((voidRule(this) &amp;&amp; currentSubType==="full") 
+       || (fullRule(this) &amp;&amp; currentSubType==="void")){
       el.setAttribute("coloration", "true");
     }
 		this.MEIObj = el;
@@ -764,16 +792,16 @@ function LigatureNote(note){
     }
     curx = this.startX;
 //    console.log(this, this.prevEvent(variant), variant);
-    obj = drawBox(this, this.prevEvent(variant) && 
+    obj = drawBox(this, this.prevEvent(variant) &amp;&amp; 
       this.prevEvent(variant).varEndStaffPos(variant), 
       this.width(variant), this.lstem(variant), this.rstem(variant), 
       this.sup, (currentSubType==="black" || currentSubType==="full" || fullRule(this)), extraClasses);
     if(this.nextEvent(variant) 
-       && (staffPosition(this.nextEvent(variant)) - staffPosition(this)) > -1){
+       &amp;&amp; (staffPosition(this.nextEvent(variant)) - staffPosition(this)) > -1){
       // If the notes are close, any dots may need to shift
       if(staffPosition(this)%2){
         // We're in a space. Only shift if they're one step apart
-        if((staffPosition(this.nextEvent(variant)) - staffPosition(this)) < 2){
+        if((staffPosition(this.nextEvent(variant)) - staffPosition(this)) &lt; 2){
           setDotPos(staffPosition(this), false, true);
         } else {
           setDotPos(staffPosition(this));
@@ -781,7 +809,7 @@ function LigatureNote(note){
       } else {
         // We're on a line. Move dots to below, rather than above, the
         // line, if the gap is too small
-        if((staffPosition(this.nextEvent(variant)) - staffPosition(this)) < 2){
+        if((staffPosition(this.nextEvent(variant)) - staffPosition(this)) &lt; 2){
           setDotPos(staffPosition(this), true);
         } else {
           setDotPos(staffPosition(this), false, true);
@@ -811,11 +839,11 @@ function LigatureNote(note){
       this.text.draw();
     } 
     if(this.nextEvent() 
-       && (staffPosition(this.nextEvent()) - staffPosition(this)) > -1){
+       &amp;&amp; (staffPosition(this.nextEvent()) - staffPosition(this)) > -1){
       // If the notes are close, any dots may need to shift
       if(staffPosition(this)%2){
         // We're in a space. Only shift if they're one step apart
-        if((staffPosition(this.nextEvent()) - staffPosition(this)) < 2){
+        if((staffPosition(this.nextEvent()) - staffPosition(this)) &lt; 2){
           setDotPos(staffPosition(this), false, true);
         } else {
           setDotPos(staffPosition(this));
@@ -823,7 +851,7 @@ function LigatureNote(note){
       } else {
         // We're on a line. Move dots to below, rather than above, the
         // line, if the gap is too small
-        if((staffPosition(this.nextEvent()) - staffPosition(this)) < 2){
+        if((staffPosition(this.nextEvent()) - staffPosition(this)) &lt; 2){
           setDotPos(staffPosition(this), true);
         } else {
           setDotPos(staffPosition(this), false, true);
@@ -836,7 +864,7 @@ function LigatureNote(note){
       this.signum.draw();
     }
     curx = this.startX;
-    obj = drawBox(this, this.prevEvent() && this.prevEvent().varEndStaffPos(), 
+    obj = drawBox(this, this.prevEvent() &amp;&amp; this.prevEvent().varEndStaffPos(), 
       this.width(), this.lstem(), this.rstem(), this.sup, 
       (currentSubType==="black" || currentSubType==="full" || fullRule(this)), extraClasses);
     if(this.dot){
@@ -891,7 +919,7 @@ function LigatureComment(comment){
     // var drawnx = curx;
     // this.startY = cury - rastralSize * currentLinecount;
     // var prev = prevNote;
-    // var drawnx = (prev && prev.startX) || curx;
+    // var drawnx = (prev &amp;&amp; prev.startX) || curx;
     var drawny = yPos(cury, dotPos+2);
     this.startX = drawnx;
     this.startY = drawny;
@@ -946,12 +974,12 @@ function Ligature(){
     }
   };
   this.toText = function(){
-    var text = "<lig>";
-    for(var i=0; i<this.members.length; i++){
+    var text = "&lt;lig>";
+    for(var i=0; i&lt;this.members.length; i++){
       if(i>0) text += " ";
       text += this.members[i].toText();
     }
-    return text+"</lig>";
+    return text+"&lt;/lig>";
   };
   this.lastNoteIndexp = function(index){
     return !this.nextNote(index);
@@ -960,7 +988,7 @@ function Ligature(){
     return !this.prevNote(index);
   };
   this.nextNote = function(index){
-    for(var i=index+1; i<this.members.length; i++){
+    for(var i=index+1; i&lt;this.members.length; i++){
 //      if(this.members[i].objType != "TextUnderlay"){
       if(compoundNotep(this.members[i])){
         return this.members[i];
@@ -980,7 +1008,7 @@ function Ligature(){
   this.nthNote = function(n){
     var i=0;
     var ith=0;
-    while(i<this.members.length){
+    while(i&lt;this.members.length){
       if(compoundNotep(this.members[i])){
         if(ith==n){
           return this.members[i];
@@ -1032,7 +1060,7 @@ function Ligature(){
     }
     if(e.objType == "Note") alert(this.str+" err-02");
     e = e.nextEvent(variant);
-    if (e & e.rhythm == "M" && e.sup) return rastralSize;
+    if (e &amp; e.rhythm == "M" &amp;&amp; e.sup) return rastralSize;
     return 0; 
   };
   this.addEvent = function(event){
@@ -1051,7 +1079,7 @@ function Ligature(){
     if(this.lastEventObj){
       this.lastEventObj.nextEventObj = event;
       event.prevEventObj = this.lastEventObj;
-      for(var c=0; c<event.content.length; c++){
+      for(var c=0; c&lt;event.content.length; c++){
         if(event.content[c].objType!=="MusicalOmission"){
           event.content[c].content[0].prevEventObj = this.lastEventObj;
         }
@@ -1096,7 +1124,7 @@ function Ligature(){
   };
   this.oblique = function(){
     // Are the only notes here in obliques? This matters for MEI
-    for(var i=0; i<this.members.length; i++){
+    for(var i=0; i&lt;this.members.length; i++){
       if(this.members[i].objType==="LigatureNote") return false;
     }
     return true;
@@ -1109,7 +1137,7 @@ function Ligature(){
     var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "ligature");
     el.setAttribute("form", (this.oblique() ? "obliqua" : "recta"));
 		addUUIDs(this, el, curDoc);
-    for(var i=0; i<this.members.length; i++){
+    for(var i=0; i&lt;this.members.length; i++){
       if(this.members[i].toMEI) this.members[i].toMEI(doc, el);
     }
     parent.appendChild(el);
@@ -1117,11 +1145,11 @@ function Ligature(){
   };
   this.drawVar = function(variant){
     // Check for text issues
-    if(this.members[0].text && underlays.length){
+    if(this.members[0].text &amp;&amp; underlays.length){
       curx = Math.max(curx, underlayRight(this.members[0].text.position));
     }
     curx += this.leftOverhang(variant) + 0.5 * prop * rastralSize;
-    for(var i=0; i<this.members.length; i++){
+    for(var i=0; i&lt;this.members.length; i++){
       if(this.members[i].drawVar) {
         this.members[i].drawVar(variant);
       }  else {
@@ -1145,7 +1173,7 @@ function Ligature(){
       extraClasses = classString(this.classList);
       drawClasses(this.classList, this);
     }
-    for(var i=0; i<this.members.length; i++){
+    for(var i=0; i&lt;this.members.length; i++){
 //			console.log("lig", i, curx);
       this.members[i].draw();
     }
@@ -1211,13 +1239,13 @@ function Oblique(){
       event.prevEventObj.nextEventObj = event;
       if(this.members[0].objType !=="ObliqueNote") {
         this.members[0].nextEventObj = event;
-        for(var i=0; i<this.members[0].content.length; i++){
+        for(var i=0; i&lt;this.members[0].content.length; i++){
           this.members[0].content[i].content[0].nextEventObj = event;
         }
       }
     }
     if(event.objType==="ObliqueNote Choice"){
-      for(var i=0; i<event.content.length; i++){
+      for(var i=0; i&lt;event.content.length; i++){
         if(event.content[i].objType==="MusicalOmission"){
 					// Lord knows
 				} else if (event.content[i].content.length == 2){
@@ -1234,18 +1262,18 @@ function Oblique(){
     this.members.push(event);
   };
   this.toText = function(){
-    var text = "<obl>";
-    for(var i=0; i<this.members.length; i++){
+    var text = "&lt;obl>";
+    for(var i=0; i&lt;this.members.length; i++){
       if(i>0) text += " ";
       text += this.members[i].toText();
       if(this.texts[i]) text += this.texts[i].toText();
       if(this.comments[i]) text += this.comments[i].toText();
     }
-    return text + "</obl>";
+    return text + "&lt;/obl>";
   };
 	this.toMEI = function(doc, parent){
     if(!parent) parent = doc.currentParent;
-		for(var i=0; i<this.members.length; i++){
+		for(var i=0; i&lt;this.members.length; i++){
 			if(this.members[i].toMEI){
 				this.members[i].toMEI(doc, parent);
 			}
@@ -1286,12 +1314,12 @@ function Oblique(){
     }
     if(this.member(0, variant).rhythm == "S"){
       var prev = this.prevEvent(variant);
-      if(prev && prev.lstem(variant) == 1){
+      if(prev &amp;&amp; prev.lstem(variant) == 1){
         return false;
       } else {
         return 1;
       }
-    } else if (!this.prevEvent(variant) && this.member(0, variant).rhythm == "B"){
+    } else if (!this.prevEvent(variant) &amp;&amp; this.member(0, variant).rhythm == "B"){
       return -1;
     }
     return false;
@@ -1303,15 +1331,15 @@ function Oblique(){
 		// Not as harmful as it sounds. Support function for this.member –
 		// create a list of all member notes and the variants they apply to.
 		var m = [];
-		for(var i=0; i<this.members.length; i++){
+		for(var i=0; i&lt;this.members.length; i++){
 			var member = this.members[i];
 			if(member.objType==="ObliqueNote") {
 				m.push(member);
 			} else if (member.objType==="ObliqueNote Choice"){
-				for(var j=0; j<member.content.length; j++){
+				for(var j=0; j&lt;member.content.length; j++){
 					var reading = member.content[j];
-					if(reading.content && (!variant || reading.applies(variant))){
-						for(var k=0; k<reading.content.length; k++){
+					if(reading.content &amp;&amp; (!variant || reading.applies(variant))){
+						for(var k=0; k&lt;reading.content.length; k++){
 							if(reading.content[k].objType==="ObliqueNote" || reading.content[k].objType==="Note"){
 								m.push(reading.content[k]);
 							}
@@ -1325,7 +1353,7 @@ function Oblique(){
   // Oblique
   this.member = function(i, variant){
     // var e = this.forwardEvent(variant);
-    // for(var j=0; j<i; j++){
+    // for(var j=0; j&lt;i; j++){
     //   e = e.nextEvent(variant);
     // }
     // return e;
@@ -1349,7 +1377,7 @@ function Oblique(){
     var m0 = this.member(0, variant);
     var m1 = this.member(1, variant);
     // Draw oblique bit
-    if(!(m0&&m1)) return false;
+    if(!(m0&amp;&amp;m1)) return false;
 		if(m0.choice){
 			if(m1.choice){
         if(variant || !showvariants){
@@ -1437,7 +1465,7 @@ function Oblique(){
     // var ppos = this.prevEvent(variant).staffPos;
     var ppos = staffPosition(this.prevEvent(variant));
     // Join
-    if(ppos && Math.abs(ppos-m0.staffPos)>1){
+    if(ppos &amp;&amp; Math.abs(ppos-m0.staffPos)>1){
       var met = metrics();
       var offset = currentSubType == "void" ? 
                      met.oblOffset+met.vThickness :
@@ -1528,8 +1556,8 @@ function ObliqueNote(note, index, oblique){
     el.setAttributeNS(null, "dur", rhythms[this.rhythm]);
     if(this.dot) this.dot.toMEI(doc, el);
     MEIAddPosition(this, el);
-    if((voidRule(this) && currentSubType==="full") 
-       || (fullRule(this) && currentSubType==="void")){
+    if((voidRule(this) &amp;&amp; currentSubType==="full") 
+       || (fullRule(this) &amp;&amp; currentSubType==="void")){
       el.setAttribute("coloration", "true");
     }
 		this.MEIObj = el;
@@ -1577,7 +1605,7 @@ function ObliqueNote(note, index, oblique){
       drawClasses(this.classList, this);
     }
 		var ocx = curx;
-		for(var i=0; i<this.otherBits.length; i++){
+		for(var i=0; i&lt;this.otherBits.length; i++){
 			if(variant) {
 				this.otherBits[i].drawVar(variant);
 			} else {
@@ -1603,7 +1631,7 @@ function ObliqueNote(note, index, oblique){
       extraClasses = classString(this.classList);
       drawClasses(this.classList, this);
     }
-		for(var i=0; i<this.otherBits.length; i++){
+		for(var i=0; i&lt;this.otherBits.length; i++){
 			var ocx = curx;
 			this.otherBits[i].draw();
 			curx = ocx;
@@ -1630,18 +1658,18 @@ function Neume(){
   this.members = [];
   this.before = false;
   this.toText= function(){
-    var text = "<neume>";
-    for(var i=0; i<this.members.length; i++){
+    var text = "&lt;neume>";
+    for(var i=0; i&lt;this.members.length; i++){
       if(i>0) text +=" ";
       text += this.members[i].toText();
     }
-    return text + "</neume>";
+    return text + "&lt;/neume>";
   };
   this.width = function(){
     return (this.members.length+3/2)*rastralSize /2;
   };
   this.nextNote = function(index){
-    for(var i=index+1; i<this.members.length; i++){
+    for(var i=index+1; i&lt;this.members.length; i++){
       if(compoundNotep(this.members[i])){
 //      if(this.members[i].objType != "TextUnderlay"){
         return this.members[i];
@@ -1677,11 +1705,11 @@ function Neume(){
   // Neume
   this.drawHufnagel = function(){
     var item, extraClasses = "";
-    for(var i=0; i<this.members.length; i++){
+    for(var i=0; i&lt;this.members.length; i++){
       item = this.members[i];
       if(item.objType=="TextUnderlay" || item.objType=="Comment"){
         curx -=rastralSize*0.6*prop;
-        if(i===0 && underlays.length){
+        if(i===0 &amp;&amp; underlays.length){
           curx = Math.max(curx, underlayRight(item.position));            
         }
         item.draw();
@@ -1689,7 +1717,7 @@ function Neume(){
       } else {
         if(item.text) {
           curx -=rastralSize*0.6*prop;
-          if(i===0 && underlays.length){
+          if(i===0 &amp;&amp; underlays.length){
             curx = Math.max(curx, underlayRight(item.position));
           }
           item.text.draw();
@@ -1728,10 +1756,10 @@ function Neume(){
     curx += step;
     var nudge = 0;
     // Can only really adject position of first note for text spacing
-    if(this.members[0].text && underlays.length){
+    if(this.members[0].text &amp;&amp; underlays.length){
       curx = Math.max(curx, underlayRight(this.members[0].text.position));
     }
-    for(var i=0; i<this.members.length; i++){
+    for(var i=0; i&lt;this.members.length; i++){
       item = this.members[i];
       if(item.objType=="TextUnderlay" || item.objType == "Comment"){
         var oldx = curx;
@@ -1741,7 +1769,7 @@ function Neume(){
       } else if (item.objType == "NeumeItem"){
         if(item.text) {
           curx -=step*0.8;
-          if(i===0 && underlays.length){
+          if(i===0 &amp;&amp; underlays.length){
             curx = Math.max(curx, underlayRight(item.text.position));
           }
           item.text.draw();
@@ -1832,14 +1860,14 @@ function ObliqueNeume(){
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
   this.toText = function(){
-    var text = "<obl>";
-    for(var i=0; i<2; i++){
+    var text = "&lt;obl>";
+    for(var i=0; i&lt;2; i++){
       if(i>0) text += " ";
       text += this.members[i].toText();
       if(this.texts[i]) text += " "+this.texts[i].toText();
       if(this.comments[i]) text += " "+this.comments[i].toText();
     }
-    return text + "</obl>";
+    return text + "&lt;/obl>";
   };
   this.drawTexts = function(){
     if(this.texts[0]){
@@ -1937,10 +1965,10 @@ function Rest(){
     }
     //curx -= rastralSize /2;
     curx -= rastralSize /3;
-    if(spos && this.rhythm) {
+    if(spos &amp;&amp; this.rhythm) {
       this.domObj = svgGroup(SVG, 
         "restGroup"+extraClasses+(editable ? " clickable" : ""), false);
-      // if(this.staffPos <= 2){
+      // if(this.staffPos &lt;= 2){
       //   drawLedgerLine(curx, cury);
       // }
       if(this.staffPos % 2 == 0){
@@ -2114,7 +2142,7 @@ function MaxRest() {
     switch(end - start){
       default:
         // FIXME: Make group?
-        for(var i=0; i<this.multiple; i++) {
+        for(var i=0; i&lt;this.multiple; i++) {
           var oldSVG = SVG;
           SVG = this.domObj;
           drawSmallBarline(start, end, 2, className);
@@ -2172,7 +2200,7 @@ function MensuralSignature(){
   this.width = function(){
 		if(this.invisible) return 0;
 		if(this.signature.length > 1) return noteEn * this.signature.length;
-    if(this.signature && mensDictionary[this.signature]){
+    if(this.signature &amp;&amp; mensDictionary[this.signature]){
       return mensDictionary[this.signature][2] * rastralSize * prop - 2/3*rastralSize
         + (this.editorial ? 2*rastralSize : 0);
     } else return 0;
@@ -2231,7 +2259,7 @@ function MensuralSignature(){
 			}
 			return false;
 		}
-    if(this.sup && eventi>0 && !this.sup.objType){
+    if(this.sup &amp;&amp; eventi>0 &amp;&amp; !this.sup.objType){
       var oldcurx=curx;
       curx = currentExample.events[eventi-1].startX;
       // FIXME: do something smarter
@@ -2245,7 +2273,7 @@ function MensuralSignature(){
       extraClasses = classString(this.classList);
       drawClasses(this.classList, this);
     }
-    if(this.signature && this.staffPos && this.signature.length){
+    if(this.signature &amp;&amp; this.staffPos &amp;&amp; this.signature.length){
       // FIXME: HACK!!! (for kerning -- RW's glyphs have leading space)
 //      curx -= 2*rastralSize/3;
       var charData;
@@ -2271,7 +2299,7 @@ function MensuralSignature(){
         };
         curx += charData[2] * rastralSize * prop;
       } else {
-				for(var i=0; i<this.signature.length; i++){
+				for(var i=0; i&lt;this.signature.length; i++){
 					if(arsNovaVoid[this.signature[i]+"Mens"]){
 						arsNovaVoid[this.signature[i]+"Mens"].draw(curx, cury-yoffset(this.staffPos), rastralSize, 
 																											 "mensural menssign "+this.signature+this.staffPos+extraClasses);
@@ -2290,7 +2318,7 @@ function MensuralSignature(){
       if(editable){
         $(SVG).hover(shiftHoverToShift(this, 2), hoverOutShiftChecked());
       }
-      if(this.sup && this.sup.objType){
+      if(this.sup &amp;&amp; this.sup.objType){
         this.sup.draw();
       }
       SVG = oldSVG;
@@ -2322,7 +2350,7 @@ function ProportionSign(){
   this.toText = function(){
     return "{prop: "+this.sign+", "+this.staffPos.toString(16).toUpperCase()+"}"; };
   this.width = function(){
-    if(this.sign && mensDictionary[this.signature]){
+    if(this.sign &amp;&amp; mensDictionary[this.signature]){
       return mensDictionary[this.sign][2] * rastralSize * prop - 2/3*rastralSize;
     } else return 0;
   };
@@ -2337,7 +2365,7 @@ function ProportionSign(){
 		this.MEIObj = el;
 	}
   this.draw = function(){
-    if(this.text && underlays.length){
+    if(this.text &amp;&amp; underlays.length){
       // Check for text issues
       curx = Math.max(curx, underlayRight(this.text.position));
     }
@@ -2350,7 +2378,7 @@ function ProportionSign(){
       extraClasses = classString(this.classList);
       drawClasses(this.classList, this);
     }
-    if(this.sign && this.staffPos && this.sign.length) {
+    if(this.sign &amp;&amp; this.staffPos &amp;&amp; this.sign.length) {
       var charData;
       var oldSVG = SVG;
       var obj;
@@ -2361,7 +2389,7 @@ function ProportionSign(){
         // versions. 3-digit signs won't happen
         curx -= rastralSize/2;
       }
-      for(var i=0; i<this.sign.length; i++){
+      for(var i=0; i&lt;this.sign.length; i++){
         if((obj = arsNovaVoid[this.sign.charAt(i)+"Mens"])){
           obj.draw(curx, cury-yoffset(this.staffPos), rastralSize, 
             "proportion mensural propsign "+this.sign.charAt(i)+ extraClasses);
@@ -2401,7 +2429,7 @@ function StackedProportionSigns(){
   this.toText = function(){
     var text = "{prop: ";
     var textTail = ",";
-    for(var i=0; i<this.signs.length; i++){
+    for(var i=0; i&lt;this.signs.length; i++){
       if(i){
         text +="/";
         textTail+="-";
@@ -2413,7 +2441,7 @@ function StackedProportionSigns(){
   };
   this.width = function(){
     var max = 0;
-    for(var i=0; i<this.signs.length; i++){
+    for(var i=0; i&lt;this.signs.length; i++){
       max = Math.max(this.signs[i].width(), max);
     }
     return max;
@@ -2422,14 +2450,14 @@ function StackedProportionSigns(){
 		if(!parent) parent = doc.currentParent;
 		var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "proport");
 		parent.appendChild(el);
-		if(this.signs[0] && this.signs[0].objType==='ProportionSign') el.setAttributeNS(null, 'num', this.signs[0].sign);
-		if(this.signs[1] && this.signs[1].objType==='ProportionsSign') el.setAttributeNS(null, 'numbase', this.signs[1].sign);
+		if(this.signs[0] &amp;&amp; this.signs[0].objType==='ProportionSign') el.setAttributeNS(null, 'num', this.signs[0].sign);
+		if(this.signs[1] &amp;&amp; this.signs[1].objType==='ProportionsSign') el.setAttributeNS(null, 'numbase', this.signs[1].sign);
 		el.setAttributeNS(null, 'multiplier', this.proportionChangesTo);		
 		addUUIDs(this, el, curDoc);
 		this.MEIObj = el;
 	}
   this.draw = function(){
-    if(this.text && underlays.length){
+    if(this.text &amp;&amp; underlays.length){
       // Check for text issues
       curx = Math.max(curx, underlayRight(this.text.position));
     }
@@ -2438,7 +2466,7 @@ function StackedProportionSigns(){
     var nextX = curx;
     this.domObj = svgGroup(SVG, "ProportionStackGroup", this.UUID);
     SVG = this.domObj;
-    for(var i=0; i<this.signs.length; i++){
+    for(var i=0; i&lt;this.signs.length; i++){
       this.signs[i].draw();
       if(curx>nextX) nextX = curx;
       curx = this.startX;
@@ -2469,7 +2497,7 @@ function SolmizationSignature() {
   this.toText = function(){
     var text = "{solm: ";
     if(this.members.length) {
-      for(var i=0; i<this.members.length; i++){
+      for(var i=0; i&lt;this.members.length; i++){
         if(i>0) text += " ";
         text += this.members[i].toText();
       }
@@ -2490,7 +2518,7 @@ function SolmizationSignature() {
     var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "keySig");
 		addUUIDs(this, el, curDoc);
 		parent.appendChild(el);
-		for(var i=0; i<this.members.length; i++){
+		for(var i=0; i&lt;this.members.length; i++){
 			this.members[i].toMEI(doc, el);
 		}
 		return el;
@@ -2507,11 +2535,11 @@ function SolmizationSignature() {
       this.text.draw();
     }
     var lastx = curx;
-    for(var i=0;i< this.members.length; i++){
+    for(var i=0;i&lt; this.members.length; i++){
       this.members[i].draw();
       // Remember the widest glyph
       lastx = Math.max(lastx, curx);
-      if(i<this.members.length - 1 && this.members[i+1].sup) curx = this.members[i].startX;
+      if(i&lt;this.members.length - 1 &amp;&amp; this.members[i+1].sup) curx = this.members[i].startX;
     }
     // Use the widest spacing
     curx = lastx;
@@ -2537,7 +2565,7 @@ function SolmizationSign(){
     return this.symbol + (this.pitch || this.staffPos.toString(16).toUpperCase());
   };
   this.width = function(){
-    if(this.symbol && solmDictionary[this.symbol]){
+    if(this.symbol &amp;&amp; solmDictionary[this.symbol]){
       return solmDictionary[this.symbol][2] * rastralSize;
     } else return 0;
   };
@@ -2551,13 +2579,13 @@ function SolmizationSign(){
 	};
   this.draw = function(){
     var extraClasses = "";
-    var pos = this.staffPos || (this.pitch && staffPosFromPitchString(this.pitch));
+    var pos = this.staffPos || (this.pitch &amp;&amp; staffPosFromPitchString(this.pitch));
     this.startX = curx;
     if(this.classList.length){
       extraClasses = classString(this.classList);
       drawClasses(this.classList, this);
     }
-    if(this.symbol && pos){
+    if(this.symbol &amp;&amp; pos){
       if((this.domObj = arsNovaVoid[this.symbol+"Solm"])){
         this.domObj.draw(curx, cury-yoffset(pos), rastralSize,
                          "mensural solmisation "+this.symbol+extraClasses);
@@ -2627,7 +2655,7 @@ function Clef() {
     return this.staffPos - clefOffsets[this.type];
   };
   this.width = function(){
-    if(!this.invisible && this.type && clefDictionary[this.type]){
+    if(!this.invisible &amp;&amp; this.type &amp;&amp; clefDictionary[this.type]){
       return clefDictionary[this.type][2] * rastralSize - rastralSize / 2 * prop
         + (this.editorial ? 2*rastralSize : 0);
     } else return 0;
@@ -2655,7 +2683,7 @@ function Clef() {
       var sb = squareBracket(curx, texty(braceOff, this.staffPos), true, extraClasses);
       curx+=sb.getBoundingClientRect().width;
     }
-    if(this.type && this.staffPos){
+    if(this.type &amp;&amp; this.staffPos){
       curx -= rastralSize / 2 * prop;
       if(currentType==="mensural"){
         var myChar;
@@ -2691,10 +2719,10 @@ function Clef() {
     if(editable){
       $(this.domObj).hover(shiftHoverToShift(this, 2), hoverOutShiftChecked());
     }
-    if(!this.params && currentSolm && currentSolm.members.length 
-       && !this.solm && currentReading && !followedBySolm(this)) {
+    if(!this.params &amp;&amp; currentSolm &amp;&amp; currentSolm.members.length 
+       &amp;&amp; !this.solm &amp;&amp; currentReading &amp;&amp; !followedBySolm(this)) {
       solm = currentSolm.draw();
-    } else if(prepsolm && ((prepsolm.objType==="SolmizationSignature"&& prepsolm.members.length)
+    } else if(prepsolm &amp;&amp; ((prepsolm.objType==="SolmizationSignature"&amp;&amp; prepsolm.members.length)
                            || (prepsolm.objType==="MusicalReading"))){
       // Happens in reading. Has to precede erroneous clef (if
       // present), so has to be here.
@@ -2722,7 +2750,7 @@ function Clef() {
       // Clef above clef. For now, left aligned, with spacing based on
       // the widest
       var finalx = curx;
-      for(var i=0; i<this.stackedClefs.length; i++){
+      for(var i=0; i&lt;this.stackedClefs.length; i++){
         curx = this.startX;
         this.stackedClefs[i].draw();
         curx = Math.max(finalx, curx);
@@ -2762,10 +2790,10 @@ function Staff() {
       case "undefined":
         return 1;
       default:
-        if(wit && wit!=="MSS"){
+        if(wit &amp;&amp; wit!=="MSS"){
           var wr = witnessReading(wit, this.lines).value;
           if(wr) return wr;
-          for(var i=0; i<this.lines.content.length; i++){
+          for(var i=0; i&lt;this.lines.content.length; i++){
             if(this.lines.content[i].witnesses.indexOf("MSS")>-1){
               return this.lines.content[i].value;
             }
@@ -2785,12 +2813,12 @@ function Staff() {
       var pos = currentExample.staves.indexOf(this);
       for(var i=pos-1; i>=0; i--){
         if(currentExample.staves[i].objType==="Staff"
-           && witnessAppliesTo(currentExample.staves[i], wit)
-           && currentExample.staves[i].colour){
+           &amp;&amp; witnessAppliesTo(currentExample.staves[i], wit)
+           &amp;&amp; currentExample.staves[i].colour){
           return currentExample.staves[i].colour;
         }
       }
-      if(currentExample.parameters.staff && currentExample.parameters.staff.colour){
+      if(currentExample.parameters.staff &amp;&amp; currentExample.parameters.staff.colour){
         if(typeof(currentExample.parameters.staff.colour)==="string"){
           return currentExample.parameters.staff.colour;
         } else {
@@ -2824,8 +2852,8 @@ function Staff() {
   this.hasChoice = function(){
     var c = findClef(this.extras);
     var s = findSolm(this.extras);
-    return !((!c || c.objType == "Clef") && (!s || s.objType == "SolmizationSignature")
-      && typeof(this.lines) == "number" && (!this.colour || 
+    return !((!c || c.objType == "Clef") &amp;&amp; (!s || s.objType == "SolmizationSignature")
+      &amp;&amp; typeof(this.lines) == "number" &amp;&amp; (!this.colour || 
                                             typeof(this.colour) =="string"));
   };
   // this.variantList = function (){
@@ -2889,7 +2917,7 @@ function Staff() {
       clef.draw();
     } 
     if(solm) solm.draw();
-    if(showvariants && this.hasChoice()){
+    if(showvariants &amp;&amp; this.hasChoice()){
       // odd, but the easiest way to get params-like tip is to build a params object
       if(!this.params){
         this.params = new Parameters();
@@ -2932,11 +2960,11 @@ function Part(){
   //currentExample.parts.push(this);
   this.toText = function(){
 		if(this.closes){
-			return "</"+this.level+">";
+			return "&lt;/"+this.level+">";
 		} else if(this.id){
-			return "<"+this.level+": "+this.id+">";
+			return "&lt;"+this.level+": "+this.id+">";
 		} else {
-			return "<"+this.level+">";
+			return "&lt;"+this.level+">";
 		}
   };
 	this.defaultName = function(){
@@ -2946,7 +2974,7 @@ function Part(){
 			return this.id;
 		} else {
 			let label="";
-			for(eli=0; eli<this.id.length; eli++){
+			for(eli=0; eli&lt;this.id.length; eli++){
 				let el = this.id[eli];
 				if(typeof(el)=="string"){
 					if(eli==0){
@@ -3004,7 +3032,7 @@ function Part(){
     if(this.classList.length){
       drawClasses(this.classList, this);
     }
-		if(this.type=="part" && this.id && ((typeof(this.id)==="string" && !/^\s*\d+\s*/.test(this.id)) || typeof(this.id)!="string")){
+		if(this.type=="part" &amp;&amp; this.id &amp;&amp; ((typeof(this.id)==="string" &amp;&amp; !/^\s*\d+\s*/.test(this.id)) || typeof(this.id)!="string")){
 			// This is a part with a part name. Show it.
 			// If this is a tooltip, display it lower to avoid clash with
 			// witnesses list
@@ -3020,7 +3048,7 @@ function Part(){
 				if(typeof(this.id)==="string"){
 					newText = svgSpan(textBlock, "text"+ this.style,false, this.id);
 				} else {
-					for(var i=0; i<this.id.length; i++){
+					for(var i=0; i&lt;this.id.length; i++){
 						if(typeof(this.id[i])==="string"){
 							newText = svgSpan(textBlock, "text", this.style, this.id);
 						} else {
@@ -3058,7 +3086,7 @@ function Part(){
 					newText = svgSpan(textBlock, "text", this.style, this.id);
 				} else {
 					var styles = new Array();
-					for(var i=0; i<this.id.length; i++){
+					for(var i=0; i&lt;this.id.length; i++){
 						if(typeof(this.id[i])==="string"){
 							newText = svgSpan(textBlock, "text", this.style, this.id[i]);
 						} else {
@@ -3095,7 +3123,7 @@ function Barline(){
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
   this.toText = function(){
     var text = "|";
-    for(var i=1; i<this.multiple; i++){
+    for(var i=1; i&lt;this.multiple; i++){
       text += "|";
     }
     if(this.start) text += this.start.toString(16).toUpperCase();
@@ -3117,8 +3145,8 @@ function Barline(){
       this.drawFlash();
     } else {
 //      this.startX = curx;
-      for(var i=0; i<this.multiple; i++){
-        if((this.start || this.start==0) && this.end){
+      for(var i=0; i&lt;this.multiple; i++){
+        if((this.start || this.start==0) &amp;&amp; this.end){
           drawPartialBarline(curx, cury, this.start, this.end, extraClasses);
         } else {
           drawBarline(curx, cury, extraClasses);
@@ -3138,7 +3166,7 @@ function Barline(){
     curx += rastralSize / 6;
     svgLine(SVG, curx, start, curx, end, "barlineComponent red", false);
     curx += rastralSize / 6;
-    for(var i=0; i<this.multiple-1; i++){
+    for(var i=0; i&lt;this.multiple-1; i++){
       svgLine(SVG, curx, start, curx, end, "barlineComponent");
       curx += rastralSize / 6;
     }
@@ -3188,16 +3216,16 @@ function Repeat(){
       drawClasses(this.classList, this);
     }
     var className = "mensural repeat"+extraClasses;
-    for(var i=0; i<this.ldots.length; i++){
+    for(var i=0; i&lt;this.ldots.length; i++){
       svgCircle(SVG, curx, cury-yoffset(this.ldots[i]), radius, 
                 "repeatdot mensural"+extraClasses);
     }
     curx += step;
-    for(var i=0; i<this.multiple; i++) {
+    for(var i=0; i&lt;this.multiple; i++) {
       drawSmallBarline(start, end, 2, className);
       curx += step;
     }
-    for(var i=0; i<this.rdots.length; i++){
+    for(var i=0; i&lt;this.rdots.length; i++){
       svgCircle(SVG, curx, cury-yoffset(this.rdots[i]), radius, 
                 "repeatdot mensural"+extraClasses);
     }
@@ -3226,10 +3254,10 @@ Annotation.prototype.draw = function(){
       if(eventi==0){
         drawnx = lmargin + rastralSize;
       } else if(currentExample.events[eventi-1].objType==="Part"
-								&&
+								&amp;&amp;
 								((typeof(currentExample.events[eventi-1].id)==="string"
-									&& !/^\s*\d+\s*/.test(this.id))
-								 || (currentExample.events[eventi-1].id && typeof(currentExample.events[eventi-1].id)!="string"))){
+									&amp;&amp; !/^\s*\d+\s*/.test(this.id))
+								 || (currentExample.events[eventi-1].id &amp;&amp; typeof(currentExample.events[eventi-1].id)!="string"))){
 				console.log(currentExample.events[eventi-1]);
 				var prevBox = currentExample.events[eventi-1].domObj.getBBox();
 				this.startX = prevBox.x +prevBox.width;
@@ -3238,8 +3266,8 @@ Annotation.prototype.draw = function(){
 			} else {
         drawnx = currentExample.events[eventi-1].startX;// - (rastralSize*prop);//why?
         this.startX = drawnx;
-        if(typeof(currentExample.events[eventi-1].domObj)!="undefined" &&
-           currentExample.events[eventi-1].domObj && false){
+        if(typeof(currentExample.events[eventi-1].domObj)!="undefined" &amp;&amp;
+           currentExample.events[eventi-1].domObj &amp;&amp; false){
           // removed because it's slow
           // FIXME: round to a space
           var rect = currentExample.events[eventi-1].domObj.getBoundingClientRect();
@@ -3327,18 +3355,18 @@ function Comment(){
         if(eventi==0){
           drawnx = lmargin + rastralSize;
         } else if(currentExample.events[eventi-1].objType==="Part"
-									&&
+									&amp;&amp;
 									((typeof(currentExample.events[eventi-1].id)==="string"
-									  && !/^\s*\d+\s*/.test(this.id))
-									 || (this.id && typeof(this.id)!="string"))){
+									  &amp;&amp; !/^\s*\d+\s*/.test(this.id))
+									 || (this.id &amp;&amp; typeof(this.id)!="string"))){
 					prevObj = currentExample.events[eventi-1].domObj.getBBox();
 					this.startX = prevObj.x +prevObj.width+rastralSize;
 					this.startY = prevObj.y;
 					drawnx = this.startX;
 				} else {
           drawnx = currentExample.events[eventi-1].startX;// - (rastralSize*prop);//why?
-          if(typeof(currentExample.events[eventi-1].domObj)!="undefined" &&
-             currentExample.events[eventi-1].domObj && false){
+          if(typeof(currentExample.events[eventi-1].domObj)!="undefined" &amp;&amp;
+             currentExample.events[eventi-1].domObj &amp;&amp; false){
             // removed because it's slow
             // FIXME: round to a space
             var rect = currentExample.events[eventi-1].domObj.getBoundingClientRect();
@@ -3476,8 +3504,8 @@ function TextUnderlay(){
   this.updateStyles = selfFun;
 	this.MEIObj = false;
 	this.changesProportion = function(){
-		if(this.type==="label" && typeof(this.components[0])=="string"
-				&& this.components[0].toLowerCase()=="crescit in duplum"){
+		if(this.type==="label" &amp;&amp; typeof(this.components[0])=="string"
+				&amp;&amp; this.components[0].toLowerCase()=="crescit in duplum"){
 			this.proportionChangesTo = this.prevProportion / 2;
 			return this.proportionChangesTo;
 		} else {
@@ -3485,20 +3513,20 @@ function TextUnderlay(){
 		}
 	}
   this.toText = function(){
-    var text = "<text>";
-    for(var i=0;i<this.components.length; i++){
+    var text = "&lt;text>";
+    for(var i=0;i&lt;this.components.length; i++){
       if(typeof(this.components[i]) == "string"){
         text += this.components[i];
       } else {
         text += this.components[i].toText();
       }
     }
-    return text + "</text>";
+    return text + "&lt;/text>";
   };
 	this.justGiveMeText = function(){
 		// Just grabbing all the text strings. Usually the wrong answer.
 		var text = "";
-    for(var i=0;i<this.components.length; i++){
+    for(var i=0;i&lt;this.components.length; i++){
       if(typeof(this.components[i]) == "string"){
         text += this.components[i];
       } else if(this.components[i].justGiveMeText){
@@ -3522,8 +3550,8 @@ function TextUnderlay(){
 			parent.appendChild(el);
 			this.MEIObj = el;
 			el.appendChild(doc.createTextNode(this.justGiveMeText()));
-			if(this.type==="label" && typeof(this.components[0])=="string"
-				 && this.components[0].toLowerCase()=="crescit in duplum"){
+			if(this.type==="label" &amp;&amp; typeof(this.components[0])=="string"
+				 &amp;&amp; this.components[0].toLowerCase()=="crescit in duplum"){
 				var el2 = doc.createElementNS("http://www.music-encoding.org/ns/mei", "proport");
 				parent.appendChild(el2);
 				el2.setAttributeNS(null, 'numbase', '2');
@@ -3548,7 +3576,7 @@ function TextUnderlay(){
   };
   this.negativeSpace = function(next){
     var rg = this.referenceGlyph();
-    if(rg && rg.negativeSpace) {
+    if(rg &amp;&amp; rg.negativeSpace) {
       return rg.negativeSpace(next);
     } else return false;
   };
@@ -3571,7 +3599,7 @@ function TextUnderlay(){
         }
         curx = currentExample.events[eventi-1].startX;
       }
-      if(curx < lmargin){
+      if(curx &lt; lmargin){
         curx = lmargin;
       }
     } else {
@@ -3592,7 +3620,7 @@ function TextUnderlay(){
 			} else {
 				ynudge = vpos*rastralSize/2 +1;
 			}
-			if(vpos<-6) leaveSpace = true;
+			if(vpos&lt;-6) leaveSpace = true;
     }
     lowPoint = Math.max(lowPoint, cury+(2*rastralSize)-ynudge);
     var textBlock = SVG.nodeName.toUpperCase()==="TEXT" ? SVG 
@@ -3602,16 +3630,16 @@ function TextUnderlay(){
     SVG = textBlock;
 /*    var styles = new Array();
     var dy = false;
-    for(var i=0; i<this.components.length; i++){
+    for(var i=0; i&lt;this.components.length; i++){
       if(typeof(this.components[i]) == "string"){
-        if(this.components[i].length>0// && /\S+/.test(this.components[i])
+        if(this.components[i].length>0// &amp;&amp; /\S+/.test(this.components[i])
           ){
           var txt = svgSpan(SVG, 
                             (styles.length ? textClasses(styles) :"text"), false,
                             ((this.components.length > i+1 
-                              && this.components[i+1].objType==="MusicalChoice"
-                              && this.components[i+1].content[0].description
-                              && this.components[i+1].content[0].description.indexOf("ins.")>-1)
+                              &amp;&amp; this.components[i+1].objType==="MusicalChoice"
+                              &amp;&amp; this.components[i+1].content[0].description
+                              &amp;&amp; this.components[i+1].content[0].description.indexOf("ins.")>-1)
                              ? this.components[i].replace(/\s+$/g, '')
                              : this.components[i]));
           if(dy){
@@ -3676,7 +3704,7 @@ function TextUnderlay(){
 				var width = SVG.getBBox().width;
 				var height = SVG.getBBox().height;
         this.startX = curx + width;
-				if(typeof(last(this.components))=="string" && /[,.¶:;()–\-\—!?‘’]/.test(last(last(this.components)))) this.startX -= 0.55*rastralSize;
+				if(typeof(last(this.components))=="string" &amp;&amp; /[,.¶:;()–\-\—!?‘’]/.test(last(last(this.components)))) this.startX -= 0.55*rastralSize;
         if(this.marginal==="l") {
           this.startX = lmargin;
         }
@@ -3694,11 +3722,11 @@ function TextUnderlay(){
 			}
     }
     SVG = oldSVG;
-    if(!this.orientation && !this.marginal) curx = this.startX;
+    if(!this.orientation &amp;&amp; !this.marginal) curx = this.startX;
 //    if(this.orientation) curx+=rastralSize*2;
     if($(SVG).parent("#content")) underlays.push(textBlock);
 		// experimental:
-		if(eventi && (currentExample.events[eventi-1].objType==="TextUnderlay")){
+		if(eventi &amp;&amp; (currentExample.events[eventi-1].objType==="TextUnderlay")){
 			curx = currentExample.events[eventi-1].prevCurX;
 		}
     return textBlock;
@@ -3725,7 +3753,7 @@ function Tacet(){
 	this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
 	this.width = function() {
 		var width = 0;
-		for(var l=0; l<this.content.length; l++){
+		for(var l=0; l&lt;this.content.length; l++){
 			var line = this.content[l];
 			width = Math.max(width, 2 + line.reduce((l, x) => l + textwidth(x), 0));
 		}
@@ -3733,8 +3761,8 @@ function Tacet(){
 	}
 	this.updateStyles = selfFun;
 	this.toText = function() {
-		if(this.content==="Tacet") return "<tacet/>";
-		else return "<tacet>"+this.content.join("<l/>")+"</tacet>";
+		if(this.content==="Tacet") return "&lt;tacet/>";
+		else return "&lt;tacet>"+this.content.join("&lt;l/>")+"&lt;/tacet>";
 	};
 	this.draw = function(){
 		this.startX = curx;
@@ -3746,7 +3774,7 @@ function Tacet(){
 		var ynudge =  (6 * rastralSize / 2 + 1)
 		var y = cury - ynudge;
 		this.domObj = svgGroup(SVG, 'tacet '+extraClasses, false);
-		for (var i=0; i<this.content.length; i++){
+		for (var i=0; i&lt;this.content.length; i++){
 			var newText = svgText(this.domObj, this.startX, y, "textblock tacet", false, false, false);
 			drawRichText(newText, this.content[i]);
 			curx = Math.max(curx, newText.getBBox().x + newText.getBBox().width + rastralSize);
@@ -3783,7 +3811,7 @@ function RedOpen(){
   this.startX = false;
   this.oneOff = false;
   this.toText = function() {
-    return "<red>";
+    return "&lt;red>";
   };
   this.width = zeroWidth;
   this.draw = function(){
@@ -3795,7 +3823,7 @@ function RedOpen(){
     return styles;
   };
   this.checkClose = function(){
-    return string.indexOf("</red>")>-1;
+    return string.indexOf("&lt;/red>")>-1;
   };
 }
 
@@ -3805,14 +3833,14 @@ function RedClose(){
   this.closes = "RedOpen";
   this.startX = false;
   this.toText = function() {
-    return "</red>";
+    return "&lt;/red>";
   };
   this.width = zeroWidth
   this.updateStyles = function(styles){
     // remove styles until the red one is found. This may not be ideal
     // behaviour, but it will be correct if there tags are legal
     // XML-oid ones
-    while(styles.pop()!= 'red' && styles.length);
+    while(styles.pop()!= 'red' &amp;&amp; styles.length);
     return styles;
   };
   this.draw = function(){
@@ -3829,7 +3857,7 @@ function LargeOpen(){
   this.startX = false;
   this.oneOff = false;
   this.toText = function(){
-    return "<large>";
+    return "&lt;large>";
   };
   this.width = zeroWidth
   this.draw = function(){
@@ -3841,7 +3869,7 @@ function LargeOpen(){
     return styles;
   };
   this.checkClose = function(){
-    return string.indexOf("</large>")>-1;
+    return string.indexOf("&lt;/large>")>-1;
   };
 }
 
@@ -3851,11 +3879,11 @@ function LargeClose(){
   this.closes = "LargeOpen";
   this.startX = false;
   this.toText = function() {
-    return "</large>";
+    return "&lt;/large>";
   };
   this.width = zeroWidth;
   this.updateStyles = function(styles){
-    while(styles.pop()!= 'large' && styles.length);
+    while(styles.pop()!= 'large' &amp;&amp; styles.length);
     return styles;
   };
   this.draw = function(){
@@ -3872,7 +3900,7 @@ function BlueOpen(){
   this.startX = false;
   this.oneOff = false;
   this.toText = function() {
-    return "<blue>";
+    return "&lt;blue>";
   };
   this.width = zeroWidth;
   this.draw = function(){
@@ -3884,7 +3912,7 @@ function BlueOpen(){
     return styles;
   };
   this.checkClose = function(){
-    return string.indexOf("</blue>")>-1;
+    return string.indexOf("&lt;/blue>")>-1;
   };
 }
 
@@ -3894,14 +3922,14 @@ function BlueClose(){
   this.closes = "BlueOpen";
   this.startX = false;
   this.toText = function() {
-    return "</blue>";
+    return "&lt;/blue>";
   };
   this.width = zeroWidth;
   this.updateStyles = function(styles){
     // remove styles until the red one is found. This may not be ideal
     // behaviour, but it will be correct if there tags are legal
     // XML-oid ones
-    while(styles.pop()!= 'blue' && styles.length);
+    while(styles.pop()!= 'blue' &amp;&amp; styles.length);
     return styles;
   };
   this.draw = function(){
@@ -3916,7 +3944,7 @@ function RedlineOpen(){
   this.startX = false;
   this.oneOff = false;
   this.toText = function() {
-    return "<redline>";
+    return "&lt;redline>";
   };
   this.width = zeroWidth;
   this.draw = function(){
@@ -3930,7 +3958,7 @@ function RedlineOpen(){
   };
   this.checkClose = function(){
     // currentExample.classes.addClass(this);
-    return string.indexOf("</redline>")>-1;
+    return string.indexOf("&lt;/redline>")>-1;
   };
 }
 
@@ -3940,14 +3968,14 @@ function RedlineClose(){
   this.closes = "RedlineOpen";
   this.startX = false;
   this.toText = function() {
-    return "</redline>";
+    return "&lt;/redline>";
   };
   this.width = zeroWidth;
   this.updateStyles = function(styles){
     // remove styles until the red one is found. This may not be ideal
     // behaviour, but it will be correct if there tags are legal
     // XML-oid ones
-    while(styles.pop()!= 'redline' && styles.length);
+    while(styles.pop()!= 'redline' &amp;&amp; styles.length);
     return styles;
   };
   this.draw = function(){
@@ -3964,11 +3992,11 @@ function GenericOpen(){
   this.oneOff = false;
   this.tag = false;
   this.toText = function() {
-    return "<"+tag+">";
+    return "&lt;"+tag+">";
   };
   this.width = zeroWidth;
   this.checkClose = function(){
-    return string.indexOf("</"+this.tag+">")>-1;
+    return string.indexOf("&lt;/"+this.tag+">")>-1;
   };
   this.updateStyles = function(styles){
     styles.push(this.tag);
@@ -3986,14 +4014,14 @@ function GenericClose(){
   this.startX = false;
   this.tag = false;
   this.toText = function() {
-    return "</"+this.tag+">";
+    return "&lt;/"+this.tag+">";
   };
   this.width = zeroWidth;
   this.updateStyles = function(styles){
     // remove styles until the red one is found. This may not be ideal
     // behaviour, but it will be correct if there tags are legal
     // XML-oid ones
-    while(styles.pop()!= this.tag && styles.length);
+    while(styles.pop()!= this.tag &amp;&amp; styles.length);
     return styles;
   };
   this.draw = function(){
@@ -4009,11 +4037,11 @@ function StrikethroughOpen(){
   this.startX = false;
   this.oneOff = false;
   this.toText = function() {
-    return "<strikethrough>";
+    return "&lt;strikethrough>";
   };
   this.width = zeroWidth;
   this.checkClose = function(){
-    return string.indexOf("</strikethrough>")>-1;
+    return string.indexOf("&lt;/strikethrough>")>-1;
   };
   this.updateStyles = function(styles){
     styles.push('strikethrough');
@@ -4031,14 +4059,14 @@ function StrikethroughClose(){
   this.objType = "StrikeThroughClose";
   this.startX = false;
   this.toText = function() {
-    return "</strikethrough>";
+    return "&lt;/strikethrough>";
   };
   this.width = zeroWidth;
   this.updateStyles = function(styles){
     // remove styles until the red one is found. This may not be ideal
     // behaviour, but it will be correct if there tags are legal
     // XML-oid ones
-    while(styles.pop()!= 'strikethrough' && styles.length);
+    while(styles.pop()!= 'strikethrough' &amp;&amp; styles.length);
     return styles;
   };
   this.draw = function(){
@@ -4053,7 +4081,7 @@ function upsideDownOpen(){
 	this.objType = "UpsideDownOpen";
 	this.startX = false;
 	this.toText = function(){
-		return "<rot180>";
+		return "&lt;rot180>";
 	}
 	this.width = zeroWidth;
 	this.updateStyles = keepStyles;
@@ -4065,7 +4093,7 @@ function upsideDownClose(){
 	this.objType = "UpsideDownClose";
 	this.startX = false;
 	this.toText = function(){
-		return "</rot180>";
+		return "&lt;/rot180>";
 	}
 	this.width = zeroWidth;
 	this.updateStyles = keepStyles;
@@ -4081,7 +4109,7 @@ function NegativeSpace(){
   this.objType = "NegativeSpace";
   this.startX = false;
   this.classList = [];
-  if(currentExample.classes && currentExample.classes.classes.length){
+  if(currentExample.classes &amp;&amp; currentExample.classes.classes.length){
     this.classList = currentExample.classes.classes.slice(0);
   }
   this.toText = function(){
@@ -4096,7 +4124,7 @@ function NegativeSpace(){
       drawClasses(this.classList, this);
     }
     this.startX = curx;
-    if(eventi && currentExample.events[eventi-1] && currentExample.events[eventi-1].negativeSpace){
+    if(eventi &amp;&amp; currentExample.events[eventi-1] &amp;&amp; currentExample.events[eventi-1].negativeSpace){
       var next = currentExample.events.length>eventi+1 ? currentExample.events[eventi+1] : false;
       curx -= currentExample.events[eventi-1].negativeSpace(next);
     } else {
@@ -4110,7 +4138,7 @@ function PositiveSpace(){
   this.objType = "PositiveSpace";
   this.startX = false;
   this.classList = [];
-  if(currentExample.classes && currentExample.classes.classes.length){
+  if(currentExample.classes &amp;&amp; currentExample.classes.classes.length){
     this.classList = currentExample.classes.classes.slice(0);
   }
   this.toText = function() {
@@ -4209,17 +4237,17 @@ function MusicPunctuation(options){
 
 /** @class */
 function etc(){
-  this.objType = "&c.";
+  this.objType = "&amp;c.";
   this.staffPos = false;
   this.pitch = false;
   this.startX = false;
   this.domObj = false;
   this.classList = [];
-  if(currentExample.classes && currentExample.classes.classes.length){
+  if(currentExample.classes &amp;&amp; currentExample.classes.classes.length){
     this.classList = currentExample.classes.classes.slice(0);
   }
   this.toText = function(){
-    return "{&c.}"+this.pitch ? this.pitch : this.staffPos.toString(16).toUpperCase();
+    return "{&amp;c.}"+this.pitch ? this.pitch : this.staffPos.toString(16).toUpperCase();
   };
   this.width = function(){
     return 4*rastralSize;
@@ -4233,7 +4261,7 @@ function etc(){
       drawClasses(this.classList, this);
     }
     this.domObj = svgText(SVG, this.startX, texty(rastralSize/3, staffPosition(this)), 
-                          "etc "+extraClasses, false, etcStyle(), "&c.");
+                          "etc "+extraClasses, false, etcStyle(), "&amp;c.");
     curx += this.domObj.getBoundingClientRect().width;
     return this.domObj;
   };
@@ -4245,7 +4273,7 @@ function VoidOpen(){
   this.startX = false;
   this.oneOff = false;
   this.toText = function() {
-    return "<void>";
+    return "&lt;void>";
   };
   this.width = function() {return 0;};
   this.updateStyles = function(styles){
@@ -4253,7 +4281,7 @@ function VoidOpen(){
     return styles;
   };
   this.checkClose = function(){
-    return string.indexOf("</void>")>-1;
+    return string.indexOf("&lt;/void>")>-1;
   };
   this.draw = function(){
     currentExample.classes.addClass(this);
@@ -4269,14 +4297,14 @@ function VoidClose(){
   this.closes = "VoidOpen";
   this.oneOff = false;
   this.toText = function() {
-    return "</void>";
+    return "&lt;/void>";
   };
   this.width = function() {return 0;};
   this.updateStyles = function(styles){
     // remove styles until the red one is found. This may not be ideal
     // behaviour, but it will be correct if there tags are legal
     // XML-oid ones
-    while(styles.pop()!= 'void' && styles.length);
+    while(styles.pop()!= 'void' &amp;&amp; styles.length);
     return styles;
   };
   this.draw = function(){
@@ -4292,11 +4320,11 @@ function FullOpen(){
   this.startX = false;
   this.oneOff = false;
   this.toText = function() {
-    return "<full>";
+    return "&lt;full>";
   };
   this.width = function() {return 0;};
   this.checkClose = function(){
-    return string.indexOf("</full>")>-1;
+    return string.indexOf("&lt;/full>")>-1;
   };
   this.draw = function(){
     currentExample.classes.addClass(this);
@@ -4312,7 +4340,7 @@ function FullClose(){
   this.closes = "FullOpen";
   this.oneOff = false;
   this.toText = function() {
-    return "</full>";
+    return "&lt;/full>";
   };
   this.width = function() {return 0;};
   this.draw = function(){
@@ -4329,11 +4357,11 @@ function HalfFullOpen(){
   this.oneOff = false;
   this.side = 2;
   this.toText = function() {
-    return "<"+this.side+"halffull>";
+    return "&lt;"+this.side+"halffull>";
   };
   this.width = function() {return 0;};
   this.checkClose = function(){
-    return string.indexOf("</"+this.side+"halffull>")>-1;
+    return string.indexOf("&lt;/"+this.side+"halffull>")>-1;
   };
   this.draw = function(){
     currentExample.classes.addClass(this);
@@ -4348,7 +4376,7 @@ function HalfFullClose(){
   this.closes = "HalfFullOpen";
   this.oneOff = false;
   this.toText = function() {
-    return "</full>";
+    return "&lt;/full>";
   };
   this.width = function() {return 0;};
   this.draw = function(){
@@ -4380,7 +4408,7 @@ function LedgerLineChange(){
   this.oneOff = false;
   // Copy current classes
   this.classList = [];
-  if(currentExample.classes && currentExample.classes.classes.length){
+  if(currentExample.classes &amp;&amp; currentExample.classes.classes.length){
     this.classList = currentExample.classes.classes.slice(0);
   }
   this.readComponents = function(string){
@@ -4396,7 +4424,7 @@ function LedgerLineChange(){
     var num = parseInt(string.substring(4));
     if(num) {
       this.count = num;
-      if(comma>-1 && comma<end){
+      if(comma>-1 &amp;&amp; comma&lt;end){
         this.colour = string.substring(comma+1, end).trim();
       }
     }
@@ -4411,7 +4439,7 @@ function LedgerLineChange(){
     }
   };
   this.toText = function(){
-    return "<ll>"; // FIXME
+    return "&lt;ll>"; // FIXME
   };
   this.width = function() {return 0;//  ld/2;//FIXME
                           };
@@ -4419,37 +4447,37 @@ function LedgerLineChange(){
   this.finishLines = function(){
     var e2 = currentExample.events[eventi-1];
 		var e2box = e2.domObj.getBBox();
-    var end2 = ((e2 && e2.domObj) ? e2box.width + e2box.x : this.maxX);
+    var end2 = ((e2 &amp;&amp; e2.domObj) ? e2box.width + e2box.x : this.maxX);
     var end = Math.max((this.endX || curx), end2, this.maxX);
-//    if(this.maxX && end<this.maxX) end=this.maxX;
+//    if(this.maxX &amp;&amp; end&lt;this.maxX) end=this.maxX;
     // if(this.domObj){
-    //   for(var i=0; i<this.domObj.length; i++){
+    //   for(var i=0; i&lt;this.domObj.length; i++){
     //     this.domObj[i].setAttributeNS(null, "x2", end);
     //   }
     // }
 		/// Testing
-		for(var j=0; j<this.coordinates.length; j+=2){
+		for(var j=0; j&lt;this.coordinates.length; j+=2){
 			var l = this.coordinates[j][0];
 			var r = (this.coordinates.length===j+1) ? end2 : this.coordinates[j+1];
 			var y = this.coordinates[j][1];
-			var pos = this.count<0 ? 4-2*Math.abs(this.count) : 2*(currentLinecount + 2);
+			var pos = this.count&lt;0 ? 4-2*Math.abs(this.count) : 2*(currentLinecount + 2);
 			var colour = this.colour || currentStaffColour;
 			var bag = [];
-			for(var i=0; i<Math.abs(this.count); i++){
+			for(var i=0; i&lt;Math.abs(this.count); i++){
 				bag.push(drawLedgerLine(l, y-yoffset(pos), r + 1, " "+colour));
 				pos+=2;
 			}
 		}
 		/// End testing
-		if(this.previous && this.previous.count!=0) this.previous.finishLines();
+		if(this.previous &amp;&amp; this.previous.count!=0) this.previous.finishLines();
   };
   this.makeLines = function(){
-    // var pos = this.count < 0 ? 2*(0-this.count)
+    // var pos = this.count &lt; 0 ? 2*(0-this.count)
     //   : 2*(currentLinecount+2);
-    var pos = this.count<0 ? 4-2*Math.abs(this.count) : 2*(currentLinecount+2);
+    var pos = this.count&lt;0 ? 4-2*Math.abs(this.count) : 2*(currentLinecount+2);
     this.domObj = [];
     colour = this.colour || currentStaffColour;
-    for(var i=0; i<Math.abs(this.count); i++){
+    for(var i=0; i&lt;Math.abs(this.count); i++){
       this.domObj.push(drawLedgerLine(this.startX, this.startY - yoffset(pos), this.startX+5, " "+colour));
       pos += 2;
     }
@@ -4468,7 +4496,7 @@ function LedgerLineChange(){
 			if(!tip) this.coordinates.push([curx-rastralSize/4, cury]);
 		}
     if(!this.startY) this.startY = cury;
-		if(this.maxX && this.maxX>curx){
+		if(this.maxX &amp;&amp; this.maxX>curx){
 			// we've changed system
 //			this.coordinates.push(this.maxX);
 			if(!tip) this.coordinates.push([curx, cury]);
@@ -4476,16 +4504,16 @@ function LedgerLineChange(){
 		}
     this.maxX = Math.max(this.maxX, curx);
     // Don't draw this, draw previous
-    if(this.previous && this.previous.count!=0){
+    if(this.previous &amp;&amp; this.previous.count!=0){
       if(!this.previous.endX) this.previous.endX = this.startX;
     // Don't draw anything till we reach the end
-      if(this.count===0 && this.startX===curx){
+      if(this.count===0 &amp;&amp; this.startX===curx){
         this.previous.finishLines();
       }
     }
-    if(!this.previous && curx===this.startX){
-      if(eventi>-1 && eventi<currentExample.events.length 
-         && ["Ligature", "Neume"].indexOf(currentExample.events[eventi].objType)>-1){
+    if(!this.previous &amp;&amp; curx===this.startX){
+      if(eventi>-1 &amp;&amp; eventi&lt;currentExample.events.length 
+         &amp;&amp; ["Ligature", "Neume"].indexOf(currentExample.events[eventi].objType)>-1){
         this.startX -= rastralSize/4;
 //        this.makeLines();
       } else {
@@ -4535,9 +4563,9 @@ function Parameters(){
   };
   this.toText = function(){
 		if(standaloneEditor) {
-			var text = "<piece: ";
+			var text = "&lt;piece: ";
 		} else {
-			var text = "<example: {" + valueText(this.spec) + "}";
+			var text = "&lt;example: {" + valueText(this.spec) + "}";
 		}
     if(this.notation) {
       text += ", {"+valueText(this.notation)+": "+valueText(this.notationSubtype)+"}";
@@ -4578,14 +4606,14 @@ function Parameters(){
   this.hasChoice = function(){
     var c = this.getClef();
     var s = this.getSolmization();
-    return !((!c || c.objType == "Clef") && (!s || s.objType == "SolmizationSignature")
-      && typeof(this.staff.lines) == "number" && typeof(this.staff.colour) =="string");
+    return !((!c || c.objType == "Clef") &amp;&amp; (!s || s.objType == "SolmizationSignature")
+      &amp;&amp; typeof(this.staff.lines) == "number" &amp;&amp; typeof(this.staff.colour) =="string");
   };
   this.annotations = function(){
     var c = this.getClef();
     var s = this.getSolmization();
-    if((!c || c.objType == "Clef") && (!s || s.objType == "SolmizationSignature")
-      && typeof(this.staff.lines) == "number" && typeof(this.staff.colour) =="string"){
+    if((!c || c.objType == "Clef") &amp;&amp; (!s || s.objType == "SolmizationSignature")
+      &amp;&amp; typeof(this.staff.lines) == "number" &amp;&amp; typeof(this.staff.colour) =="string"){
       // No annotation needed (because there's no variant or there is
       // a variant attached to clef)
       return;
@@ -4608,8 +4636,8 @@ function Parameters(){
     if(showvariants){
       this.annotations();
     }
-    if(this.specComment && this.specComment.content!=="full measure"
-			 && this.specComment.content!=="in-line") {
+    if(this.specComment &amp;&amp; this.specComment.content!=="full measure"
+			 &amp;&amp; this.specComment.content!=="in-line") {
       this.specComment.draw();
     }
     var oldSVG = SVG;
@@ -4623,14 +4651,14 @@ function Parameters(){
       thisclef.draw();
     }
     if((thissolm = this.getSolmization())){
-      if(!(thissolm.clefp && thissolm.clefp())) {
+      if(!(thissolm.clefp &amp;&amp; thissolm.clefp())) {
 				//				console.log("0>", thissolm);
         thissolm.draw();
       } else {
         console.log(["Solm error?", thissolm]);
       }
     }
-    if(showvariants && this.hasChoice()){
+    if(showvariants &amp;&amp; this.hasChoice()){
       SVG.style.fill = "#060";
       addAnnotation(SVG, this, "staff");
       SVG = this.SVG;
@@ -4683,12 +4711,12 @@ function Parameters(){
     var colour = this.staff.trueColour();
     var p = this;
     return function (v1, v2){
-      if(v1[0][0] == lines && v1[0][1]==colour
-         && v1[0][2] == clef && v1[0][3]==solm){
+      if(v1[0][0] == lines &amp;&amp; v1[0][1]==colour
+         &amp;&amp; v1[0][2] == clef &amp;&amp; v1[0][3]==solm){
         p.noMatch = false;
         return -1;
-      } else if (v2[0][0] == lines && v2[0][1]==colour
-         && v2[0][2] == clef && v2[0][3]==solm){
+      } else if (v2[0][0] == lines &amp;&amp; v2[0][1]==colour
+         &amp;&amp; v2[0][2] == clef &amp;&amp; v2[0][3]==solm){
         p.noMatch = false;
         return 1;
       } else {
@@ -4703,14 +4731,14 @@ function Parameters(){
     var found;
     var sources = getSources();
 		var infoPresent = [false, false, false, false];
-    for (var i=0; i<sources.length; i++){
+    for (var i=0; i&lt;sources.length; i++){
       pars = this.getWitOptions(sources[i].id);
 			infoPresent = pars.map((x, i) => infoPresent[i] || x);
       if(typeof(pars[0])==="undefined") {
         continue;
       }
       found = false;
-      for(var j=0; j<vars.length; j++){
+      for(var j=0; j&lt;vars.length; j++){
         if(listeq(pars, vars[j][0])){
           found = true;
           vars[j][1].push(sources[i].id);
@@ -4722,7 +4750,7 @@ function Parameters(){
       }
     }
 		//TEST
-		vars = vars.filter((x) => (!infoPresent[0] || x[0][0]) && (!infoPresent[1] || x[0][1]) && (!infoPresent[2] || x[0][2]) && (!infoPresent[3] || x[0][3]));
+		vars = vars.filter((x) => (!infoPresent[0] || x[0][0]) &amp;&amp; (!infoPresent[1] || x[0][1]) &amp;&amp; (!infoPresent[2] || x[0][2]) &amp;&amp; (!infoPresent[3] || x[0][3]));
 		//
     vars.sort(this.varSortFunction()) ;
     return vars;
@@ -4749,7 +4777,7 @@ function Parameters(){
       bottom = Math.max(bottom, this.staff.trueLines());
     }
 //    tempx = curx+d;
-    for(var i=0; i<vars.length; i++){
+    for(var i=0; i&lt;vars.length; i++){
       if(i>0) svgLine(SVG, curx, cury, curx, 10, "divider", false);
       this.addTip(vars[i][0][0], vars[i][0][1], vars[i][1], vars[i][0][2], vars[i][0][3]);
       bottom = Math.max(bottom, vars[i][0][0]);
@@ -4783,22 +4811,22 @@ function Parameters(){
     curx += 15;
     var c = currentClef;
     if(clef) {
-      if(solm && solm!=clef
-//				 && ((solm.objType==="MusicalReading" && solm.content[0].members.length)
-//             || (solm.objType==="SolmizationSignature" && solm.members.length))){
-				 && (solm.objType==="MusicalReading"
-             || solm.objType==="SolmizationSignature" && solm.members.length)){
+      if(solm &amp;&amp; solm!=clef
+//				 &amp;&amp; ((solm.objType==="MusicalReading" &amp;&amp; solm.content[0].members.length)
+//             || (solm.objType==="SolmizationSignature" &amp;&amp; solm.members.length))){
+				 &amp;&amp; (solm.objType==="MusicalReading"
+             || solm.objType==="SolmizationSignature" &amp;&amp; solm.members.length)){
         if(clef.objType==="MusicalReading"){
           clef.draw(false, false, solm);
         } else {
           clef.draw(solm);
         }
       } else {
-//				if(eventi<0) console.log(clef, solm, witnesses);
+//				if(eventi&lt;0) console.log(clef, solm, witnesses);
         clef.draw();
       }
     }
-//    if(solm && solm!=clef) solm.draw();
+//    if(solm &amp;&amp; solm!=clef) solm.draw();
 //    SVG = oldSVG;
     curx = Math.max(curx, oldx+width);
     drawSystemLines(staff, lines, cury -lines*rastralSize, oldx+10, curx, colour);
@@ -4808,30 +4836,30 @@ function Parameters(){
     var witnesses = [];
     var wit, i, j;
     if(typeof(this.staff.lines) != "number"){
-      for(i=0; i<this.staff.lines.content.length; i++){
-        for(j=0; j<this.staff.lines.content[i].witnesses.length; j++){
+      for(i=0; i&lt;this.staff.lines.content.length; i++){
+        for(j=0; j&lt;this.staff.lines.content[i].witnesses.length; j++){
           wit = this.staff.lines.content[i].witnesses[j];
-          if(wit != "MSS" && wit != "emend.") {
+          if(wit != "MSS" &amp;&amp; wit != "emend.") {
             witnesses.push(wit);
           }
         }
       }
     }
     if(typeof(this.staff.colour) != "string"){
-      for(i=0; i<this.staff.colour.content.length; i++){
-        for(j=0; j<this.staff.colour.content[i].witnesses.length; j++){
+      for(i=0; i&lt;this.staff.colour.content.length; i++){
+        for(j=0; j&lt;this.staff.colour.content[i].witnesses.length; j++){
           wit = this.staff.colour.content[i].witnesses[j];
-          if(wit != "MSS" && wit != "emend." && witnesses.indexOf(wit) == -1) {
+          if(wit != "MSS" &amp;&amp; wit != "emend." &amp;&amp; witnesses.indexOf(wit) == -1) {
             witnesses.push(wit);
           }
         }
       }
     }
-    if(this.clef && this.clef.objType != "Clef"){
-      for(i=0; i<this.clef.content.length; i++){
-        for(j=0; j<this.clef.content[i].witnesses.length; j++){
+    if(this.clef &amp;&amp; this.clef.objType != "Clef"){
+      for(i=0; i&lt;this.clef.content.length; i++){
+        for(j=0; j&lt;this.clef.content[i].witnesses.length; j++){
           wit = this.clef.content[i].witnesses[j];
-          if(wit != "MSS" && wit != "emend." && witnesses.indexOf(wit) == -1) {
+          if(wit != "MSS" &amp;&amp; wit != "emend." &amp;&amp; witnesses.indexOf(wit) == -1) {
             witnesses.push(wit);
           }
         }
@@ -4880,7 +4908,7 @@ function MChoice(){
   this.lines = currentLinecount;
   this.staffColour = currentStaffColour.length ? currentStaffColour : defaultColour;
 //  this.clef = currentClef;
-  // this.solm = currentSolm && currentSolm.members.length ? currentSolm : false;
+  // this.solm = currentSolm &amp;&amp; currentSolm.members.length ? currentSolm : false;
   this.clef = currentClefForVar(false);
   this.solm = currentThingForVar(false, "SolmizationSignature");
   this.params = false;
@@ -4891,7 +4919,7 @@ function MChoice(){
   this.content = [];
   this.note = false;
   this.classList = [];
-  if(currentExample.classes && currentExample.classes.classes.length){
+  if(currentExample.classes &amp;&amp; currentExample.classes.classes.length){
     this.classList = currentExample.classes.classes.slice(0);
   }
   this.addReading = function(witnesses, string, description, description2, staffing){
@@ -4902,7 +4930,7 @@ function MChoice(){
     // considered volatile.
     var agreement = stavesAgree(staffing);
     var isntdefault = this.content.length || description ==="ins." || 
-        description==="ins. & del.";
+        description==="ins. &amp; del.";
     var oldClef = currentClef;
     var oldSolm = currentSolm;
     var oldLines = currentLinecount;
@@ -4911,7 +4939,7 @@ function MChoice(){
       // Simplest case. Accepted reading is always standardised
       this.content.push(new MReading(witnesses, string?nextMusic():[], description, 
                                      description2, false, this));
-    } else if (witnesses.length <=1 || agreement){
+    } else if (witnesses.length &lt;=1 || agreement){
       // Easiest case: either all definitions are the same (AGREEMENT) or there's only one
       // Do staff stuff: 
       currentClef = staffing[0][1];
@@ -4922,21 +4950,21 @@ function MChoice(){
       // Question 1: Is the variant insignificant
       var ostr = string;
       var obj = nextMusic();
-      if(obj.length===1 && this.content[0].content.length===1
-         && obj[0].pitch === this.content[0].content[0].pitch && defaultPresent(staffing)){
+      if(obj.length===1 &amp;&amp; this.content[0].content.length===1
+         &amp;&amp; obj[0].pitch === this.content[0].content[0].pitch &amp;&amp; defaultPresent(staffing)){
           // this is an insignificant variant, so don't worry about it
         this.content.push(new MReading(witnesses, obj, description, false, false, this));
       } else {
         var split = matchStaves(staffing);
         var wits = split[0];
         var staffings = split[1];
-        for(var i=0; i<wits.length; i++){
+        for(var i=0; i&lt;wits.length; i++){
           currentClef = staffings[i][0];
           string = ostr;
           hackedString = ostr; // Why do I need this?! string disappears otherwise!!!
           obj = nextMusic();
           var st = [];
-          for(var j=0; j<wits[i].length; j++){
+          for(var j=0; j&lt;wits[i].length; j++){
             st.push([wits[i][j]].concat(staffings[i]));
           }
           this.content.push(new MReading(wits[i], obj, description, description2, st, this));
@@ -4956,7 +4984,7 @@ function MChoice(){
     var oldSolm = currentSolm;
     var oldLines = currentLinecount;
     var oldColour = currentStaffColour;
-    if(witnesses.length<=1 || agreement){
+    if(witnesses.length&lt;=1 || agreement){
       currentClef = staffing[0][1];
       this.content.push(new MOmission(witnesses, description, description2, staffing));
     } else {
@@ -4968,7 +4996,7 @@ function MChoice(){
     this.content.push(new MNilReading(witnesses));
   };
   this.width = function(){
-    return this.content.length && this.content[0] ? this.content[0].width() : 0;
+    return this.content.length &amp;&amp; this.content[0] ? this.content[0].width() : 0;
   };
   this.infop = function(){
     // Find out if this contains useful prefatory info
@@ -4978,14 +5006,14 @@ function MChoice(){
     return false;
   };
   this.applicableReading = function(variant){
-    for(var i=0; i<this.content.length; i++){
+    for(var i=0; i&lt;this.content.length; i++){
       if(typeof(this.content[i].applies)=="undefined") debugger;
       if(this.content[i].applies(variant)) return this.content[i];
     }
     return false;
   };
   this.addParams = function(params){
-    for(var i=0; i<this.content.length; i++){
+    for(var i=0; i&lt;this.content.length; i++){
       if(infop(this.content[i].content[0])){
         this.content[i].content[0].params = params;
       }
@@ -5003,7 +5031,7 @@ function MChoice(){
   };
   this.clefp = function(variant){
     if(variant){
-      for(var i=0; i<this.content.length; i++){
+      for(var i=0; i&lt;this.content.length; i++){
         if(!this.content[i].applies) debugger;
         if(this.content[i].applies(variant)){
           // Default object
@@ -5017,7 +5045,7 @@ function MChoice(){
   };
   this.solmp = function(variant){
     if(variant){
-      for(var i=0; i< (variant? this.content.length : 1); i++){
+      for(var i=0; i&lt; (variant? this.content.length : 1); i++){
         if(!this.content[i].applies) debugger;
         if(this.content[i].applies(variant)){
           // Default object
@@ -5031,12 +5059,12 @@ function MChoice(){
   };
 	this.overPrevious = function(){
 		var op = false;
-		for(var i=0; i<this.content.length; i++){
+		for(var i=0; i&lt;this.content.length; i++){
 			if(this.content[i].objType==="MusicalReading"){
-				for(var j=0; j<this.content[i].content.length; j++){
+				for(var j=0; j&lt;this.content[i].content.length; j++){
 					op = true;
 					if(this.content[i].content[j].objType !== "SignumCongruentiae"
-						 && this.content[i].content[j].objType !== "Fermata") {
+						 &amp;&amp; this.content[i].content[j].objType !== "Fermata") {
 						return false;
 					}
 				}
@@ -5047,7 +5075,7 @@ function MChoice(){
   this.toText = function(){
     // FIXME:!!
     var string = "{var=";
-    for(var i=0; i<this.content.length; i++){
+    for(var i=0; i&lt;this.content.length; i++){
       if(i>0) string+= " : ";
       string+= this.content[i].toText();
     }
@@ -5080,7 +5108,7 @@ function MChoice(){
       var x = 0;
       curx = 0;
       var y = 20;
-      for(var i=0; i<this.content.length; i++){
+      for(var i=0; i&lt;this.content.length; i++){
         var block = this.content[i].footnoteText(x,y, i+1==this.content.length);
         var size = block.getBoundingClientRect();
         var size2 = block.getBBox();
@@ -5096,7 +5124,7 @@ function MChoice(){
       cury = rastralSize * 10;
       var start = curx;
       var staff = svgGroup(SVG, "Stafflines", false);
-      if(this.clef && !this.clefp() && !(this.content[0].needsChange())) {
+      if(this.clef &amp;&amp; !this.clefp() &amp;&amp; !(this.content[0].needsChange())) {
         var pc = false;//currentClefForVar(false);
         var clef = pc ? pc.draw() : this.clef.draw();
         var cclass = clef.getAttributeNS(null, "class");
@@ -5105,8 +5133,8 @@ function MChoice(){
         }
         clef.setAttributeNS(null, "class", cclass+" indicative");
       }
-      if(this.solm && this.solm.members.length &&!this.solmp() && !(this.content[0].needsChange()) && !newPart(this.content[0].content[0])) {
-        if(!(this.solm.clefp && this.solm.clefp())){
+      if(this.solm &amp;&amp; this.solm.members.length &amp;&amp;!this.solmp() &amp;&amp; !(this.content[0].needsChange()) &amp;&amp; !newPart(this.content[0].content[0])) {
+        if(!(this.solm.clefp &amp;&amp; this.solm.clefp())){
           // Looks crazy, but true if it's an MChoice
           var solm = this.solm.draw();
           if(solm) {
@@ -5120,14 +5148,14 @@ function MChoice(){
           }
         }
       }
-      // <<MChoice.tip() continued>>
+      // &lt;&lt;MChoice.tip() continued>>
       var prevx = curx;
       var olc, osc;
       staffGroup = staff;
       drawSystemLines(staff, currentLinecount, cury-rastralSize*currentLinecount, 0, curx-10, "a "+currentStaffColour);
       systemLines = [staffGroup, currentLinecount, currentStaffColour, curx-10, cury];
 			// Now we can loop through the variants and draw them.
-      for(var i=0; i<this.content.length; i++){
+      for(var i=0; i&lt;this.content.length; i++){
         if(i>0) svgLine(SVG, curx - 10, cury, curx - 10, 0, "divider", false);
         olc = currentLinecount;
         osc = currentStaffColour;
@@ -5151,15 +5179,15 @@ function MChoice(){
   };
   // MChoice
   this.nonDefault = function(){
-    return this.content.length &&
+    return this.content.length &amp;&amp;
       (this.content[0].description == "ins." 
-       || this.content[0].description == "ins. & del.");
+       || this.content[0].description == "ins. &amp; del.");
   };
 	this.hasPart = function(){
 		// Does this have new voice information for MEI export?
 		if(this.nonDefault()) return false;
 		if(this.content.length){
-			for(var i=0; i<this.content[0].content.length; i++){
+			for(var i=0; i&lt;this.content[0].content.length; i++){
 				if(this.content[0].content[i].objType==="Part"){
 					return this.content[0].content[i];
 				}
@@ -5171,7 +5199,7 @@ function MChoice(){
 		if(!parent) parent = doc.currentParent;
 		if(flattenOnExport){
 			if(!this.nonDefault()){
-				if(this.content[0] && this.content[0].toMEI) {
+				if(this.content[0] &amp;&amp; this.content[0].toMEI) {
 					return this.content[0].toMEI(doc, parent);
 				}
 			}
@@ -5179,7 +5207,7 @@ function MChoice(){
 		} else {
 			var choiceel = doc.createElementNS("http://www.music-encoding.org/ns/mei", "choice");
 			var readingel = false;
-			for(var i=0; i<this.content.length; i++){
+			for(var i=0; i&lt;this.content.length; i++){
 				if(this.content[i].objType!=="MusicalOmission"){
 					if(this.nonDefault() || i ){
 						readingel = doc.createElementNS("http://www.music-encoding.org/ns/mei", "rdg");
@@ -5231,7 +5259,7 @@ function MChoice(){
       }
       var oc = currentClef;
       var os = currentSolm;
-      if(showvariants && !this.params) {
+      if(showvariants &amp;&amp; !this.params) {
         addAnnotation(click, this, "MusicalChoice");
         SVG = this.SVG;
       }
@@ -5259,7 +5287,7 @@ function LigChoice(){
   this.lines = currentLinecount;
   this.staffColour = currentStaffColour.length ? currentStaffColour : defaultColour;
   //this.clef = currentClef;
-  //this.solm = currentSolm && currentSolm.members.length ? currentSolm : false;
+  //this.solm = currentSolm &amp;&amp; currentSolm.members.length ? currentSolm : false;
   this.clef = currentClefForVar(false);
   this.solm = currentThingForVar(false, "SolmizationSignature");
   this.domObj = false;
@@ -5271,12 +5299,12 @@ function LigChoice(){
   this.nextEventObj = false;
   this.note = false;
   this.nonDefault = function(){
-    return this.content.length &&
+    return this.content.length &amp;&amp;
       (this.content[0].description == "ins." 
-       || this.content[0].description == "ins. & del.");
+       || this.content[0].description == "ins. &amp; del.");
   };
   this.applicableReading = function(variant){
-    for(var i=0; i<this.content.length; i++){
+    for(var i=0; i&lt;this.content.length; i++){
       if(!this.content[i].applies) debugger;
       if(this.content[i].applies(variant)) return this.content[i];
     }
@@ -5310,12 +5338,12 @@ function LigChoice(){
     // we need and 2) whether this reading should become several
     // readings
     var agreement = stavesAgree(staffing);
-    var isntdefault = this.content.length || description==="ins." || description==="ins. & del.";
+    var isntdefault = this.content.length || description==="ins." || description==="ins. &amp; del.";
     var oldClef = currentClef;
     var oldSolm = currentSolm;
     var oldLines = currentLinecount;
     var oldColour = currentStaffColour;
-    if(witnesses.length<=1 || agreement || !isntdefault){
+    if(witnesses.length&lt;=1 || agreement || !isntdefault){
       // Easy case: either there's no conflict betwen definitions,
       // only one definition, or this is the main reading. In the last
       // case, using a different clef to the main one would
@@ -5330,8 +5358,8 @@ function LigChoice(){
       // first need to parse the string.
       var ostr = string;
       var obj = nextMusic(this.ligature);
-      if(obj.length===1 && this.content[0].content.length===1
-         && obj[0].pitch===this.content[0].pitch && defaultPresent(staffing)){
+      if(obj.length===1 &amp;&amp; this.content[0].content.length===1
+         &amp;&amp; obj[0].pitch===this.content[0].pitch &amp;&amp; defaultPresent(staffing)){
         this.content.push(new MReading(witnesses, (string ? nextMusic(this.ligature) : []),
                                        description, description2, false));
       } else {
@@ -5363,7 +5391,7 @@ function LigChoice(){
   this.toText = function(){
     // FIXME:!!
     var string = "{var=";
-    for(var i=0; i<this.content.length; i++){
+    for(var i=0; i&lt;this.content.length; i++){
       if(i>0) string+= " : ";
       string+= this.content[i].toText();
     }
@@ -5379,13 +5407,13 @@ function LigChoice(){
     cury = rastralSize * 10;
     var start = curx;
     var staff = svgGroup(SVG, "Stafflines", false);
-    if(this.clef && !(this.content[0].needsChange() || this.nonDefault())) {
+    if(this.clef &amp;&amp; !(this.content[0].needsChange() || this.nonDefault())) {
       var clef = this.clef.draw();
       var cclass = clef.getAttributeNS(null, "class");
       clef.setAttributeNS(null, "class", cclass+" indicative");
     }
-    if(this.solm && !(this.content[0].needsChange())) {
-      if(!(this.solm.clefp && this.solm.clefp())){
+    if(this.solm &amp;&amp; !(this.content[0].needsChange())) {
+      if(!(this.solm.clefp &amp;&amp; this.solm.clefp())){
         // Looks crazy, but true if it's an MChoice
         var solm = this.solm.draw();
         if(solm) {
@@ -5401,7 +5429,7 @@ function LigChoice(){
     drawSystemLines(staff, this.lines, cury, 0, curx, this.staffColour);
     cury = tempy;
     var prevx = curx;
-    for(var i=0; i<this.content.length; i++){
+    for(var i=0; i&lt;this.content.length; i++){
 			// draw a divider before content if not first reading
       if(i>0) svgLine(SVG, curx - 10, cury, curx-10, 0, "divider", false);
       var block = this.content[i].footnote(curx, 20, this.ligature);
@@ -5465,7 +5493,7 @@ function ObliqueNoteChoice(){
   this.lines = currentLinecount;
   this.staffColour = currentStaffColour.length ? currentStaffColour : defaultColour;
   this.clef = currentClef;
-  this.solm = currentSolm && currentSolm.members.length ? currentSolm : false;
+  this.solm = currentSolm &amp;&amp; currentSolm.members.length ? currentSolm : false;
   this.domObj = false;
   this.textBlock = false;
   this.SVG = false;
@@ -5475,12 +5503,12 @@ function ObliqueNoteChoice(){
   this.nextEventObj = false;
   this.note = false;
   this.nonDefault = function(){
-    return this.content.length &&
+    return this.content.length &amp;&amp;
       (this.content[0].description == "ins." 
-       || this.content[0].description == "ins. & del.");
+       || this.content[0].description == "ins. &amp; del.");
   };
   this.applicableReading = function(variant){
-    for(var i=0; i<this.content.length; i++){
+    for(var i=0; i&lt;this.content.length; i++){
       if(!this.content[i].applies) debugger;
       if(this.content[i].applies(variant)) return this.content[i];
     }
@@ -5513,7 +5541,7 @@ function ObliqueNoteChoice(){
     // duplicate, more or less of other choice methods
     var agreement = stavesAgree(staffing);
     var isntdefault = this.content.length || description === "ins." || 
-        description==="ins. & del.";
+        description==="ins. &amp; del.";
     var oldClef = currentClef;
     var oldSolm = currentSolm;
     var oldLines = currentLinecount;
@@ -5522,7 +5550,7 @@ function ObliqueNoteChoice(){
       // Simplest case. Accepted reading is always standardised
       this.content.push(new MReading(witnesses, string?nextMusic(this.oblique):[], description, 
                                      description2, false, this));
-    } else if (witnesses.length <=1 || agreement){
+    } else if (witnesses.length &lt;=1 || agreement){
       // Easiest case: either all definitions are the same (AGREEMENT) or there's only one
       // Do staff stuff: 
       currentClef = staffing[0][1];
@@ -5533,21 +5561,21 @@ function ObliqueNoteChoice(){
       // Question 1: Is the variant insignificant
       var ostr = string;
       var obj = nextMusic(this.oblique);
-      if(obj.length===1 && this.content[0].content.length===1
-         && obj[0].pitch === this.content[0].content[0].pitch && defaultPresent(staffing)){
+      if(obj.length===1 &amp;&amp; this.content[0].content.length===1
+         &amp;&amp; obj[0].pitch === this.content[0].content[0].pitch &amp;&amp; defaultPresent(staffing)){
           // this is an insignificant variant, so don't worry about it
         this.content.push(new MReading(witnesses, obj, description, false, false, this));
       } else {
         var split = matchStaves(staffing);
         var wits = split[0];
         var staffings = split[1];
-        for(var i=0; i<wits.length; i++){
+        for(var i=0; i&lt;wits.length; i++){
           currentClef = staffings[i][0];
           string = ostr;
           hackedString = ostr; // Why do I need this?! string disappears otherwise!!!
           obj = nextMusic();
           var st = [];
-          for(var j=0; j<wits[i].length; j++){
+          for(var j=0; j&lt;wits[i].length; j++){
             st.push([wits[i][j]].concat(staffings[i]));
           }
           this.content.push(new MReading(wits[i], obj, description, description2, st, this));
@@ -5577,7 +5605,7 @@ function ObliqueNoteChoice(){
     return false;
     // FIXME: Think this through!
     if(variant){
-      for(var i=0; i<variant? this.content.length : 1; i++){
+      for(var i=0; i&lt;variant? this.content.length : 1; i++){
         if(!this.content[i].applies) debugger;
         if(this.content[i].applies(variant)){
           // Default object
@@ -5596,7 +5624,7 @@ function ObliqueNoteChoice(){
   this.toText = function(){
     // FIXME:!!
     var string = "{var=";
-    for(var i=0; i<this.content.length; i++){
+    for(var i=0; i&lt;this.content.length; i++){
       if(i>0) string+= " : ";
       string+= this.content[i].toText();
     }
@@ -5611,13 +5639,13 @@ function ObliqueNoteChoice(){
     cury = rastralSize * 10;
     var start = curx;
     var staff = svgGroup(SVG, "Stafflines", false);
-    if(this.clef && !(this.content[0].needsChange() || this.nonDefault())) {		
+    if(this.clef &amp;&amp; !(this.content[0].needsChange() || this.nonDefault())) {		
         var clef = this.clef.draw();
         var cclass = clef.getAttributeNS(null, "class");
         clef.setAttributeNS(null, "class", cclass+" indicative");
     }
-    if(this.solm &&!this.solmp() && !(this.content[0].needsChange())) {
-      if(!(this.solm.clefp && this.solm.clefp())){
+    if(this.solm &amp;&amp;!this.solmp() &amp;&amp; !(this.content[0].needsChange())) {
+      if(!(this.solm.clefp &amp;&amp; this.solm.clefp())){
         // Looks crazy, but true if it's an MChoice
         var solm = this.solm.draw();
         if(solm) {
@@ -5633,7 +5661,7 @@ function ObliqueNoteChoice(){
     drawSystemLines(staff, this.lines, cury, 0, curx, this.staffColour);
     cury = tempy;
     var prevx = curx;
-    for(var i=0; i<this.content.length; i++){
+    for(var i=0; i&lt;this.content.length; i++){
 			// draw a divider before content if not first reading
       if(i>0) svgLine(SVG, curx - 10, cury, curx-10, 10, "divider", false);
       var block = this.content[i].footnote(curx, 20, this.ligature);
@@ -5657,7 +5685,7 @@ function ObliqueNoteChoice(){
     if(this.prevEventObj){
       rdg.content[0].prevEventObj = this.prevEventObj;
     }
-    for(var i=0; i<rdg.content.length; i++){
+    for(var i=0; i&lt;rdg.content.length; i++){
       obj = rdg.content[i].drawVar(variant);
       obj.style.fill = "#704";
     }
@@ -5699,7 +5727,7 @@ function MReading(witnesses, content, description, description2, staves, choice)
   this.description2 = description2;
   this.staves = staves;
   this.choice = choice;
-  this.prev = (choice && choice.content.length) ? choice.content[choice.content.length-1]
+  this.prev = (choice &amp;&amp; choice.content.length) ? choice.content[choice.content.length-1]
     : false;
 	//  this.ligReading = false;// not used
   this.eventi = false;
@@ -5723,7 +5751,7 @@ function MReading(witnesses, content, description, description2, staves, choice)
   };
   this.width = function (){
     var width = 0;
-    for (var i=0; i<this.content.length; i++){
+    for (var i=0; i&lt;this.content.length; i++){
       if(this.content[i]){
 				if(this.content[i]==="string"){
 					width += this.content[i].length*rastralSize;
@@ -5735,7 +5763,7 @@ function MReading(witnesses, content, description, description2, staves, choice)
     return width;
   };
   this.nonDefault = function(){
-    return this.description == "ins." || this.description == "ins. & del.";
+    return this.description == "ins." || this.description == "ins. &amp; del.";
   };
   this.applies = function(variant){
     if(variant){
@@ -5745,7 +5773,7 @@ function MReading(witnesses, content, description, description2, staves, choice)
         return true;
       } else {
         return witnessAppliesTo(this, variant);
-        for(var i=0; i<this.witnesses.length; i++){
+        for(var i=0; i&lt;this.witnesses.length; i++){
           if(witnessAppliesTo(this.witnesses[i], variant)) return true;
         }
         return false;
@@ -5756,7 +5784,7 @@ function MReading(witnesses, content, description, description2, staves, choice)
   };
   this.clefp = function(){
     // FIXME: Doesn't feel right -- what if there're notes first?
-    for(var i=0; i<this.content.length; i++){
+    for(var i=0; i&lt;this.content.length; i++){
       if(this.content[i].objType == "Clef"){
         return this.content[i];
       } else if(!(infop(this.content[i]) || ignorable(this.content[i]))){
@@ -5767,7 +5795,7 @@ function MReading(witnesses, content, description, description2, staves, choice)
   };
   this.solmp = function(){
     // FIXME: Doesn't feel right -- what if there're notes first?
-    for(var i=0; i<this.content.length; i++){
+    for(var i=0; i&lt;this.content.length; i++){
       if(this.content[i].objType == "SolmizationSignature"){
         return this.content[i];
       }
@@ -5782,8 +5810,8 @@ function MReading(witnesses, content, description, description2, staves, choice)
     if(this.description) text += "("+this.description+")";
     if(this.content.length) {
       text += '"';
-      for(var i=0; i<this.content.length; i++){
-        if(typeof(this.content[i])=='string' && this.content[i].length>0){
+      for(var i=0; i&lt;this.content.length; i++){
+        if(typeof(this.content[i])=='string' &amp;&amp; this.content[i].length>0){
           // This probably never exists?
           text+=this.content[i];
         }else if (content[i]){
@@ -5800,7 +5828,7 @@ function MReading(witnesses, content, description, description2, staves, choice)
   this.sketchText = function(styles){
     var obj = [];
     var span;
-    for (var i=0; i<this.content.length; i++){
+    for (var i=0; i&lt;this.content.length; i++){
       if(typeof(this.content[i])=="string"){
         // .content is almost always an array containing just a single string
         span = svgSpan(false, styles.length ? textClasses(styles) :"text", false,
@@ -5822,7 +5850,7 @@ function MReading(witnesses, content, description, description2, staves, choice)
     SVG = block;
     var text = this.sketchText(["variantReading"]);
     SVG = OLDSVG;
-    for(var i=0; i<text.length; i++){
+    for(var i=0; i&lt;text.length; i++){
 //      block.appendChild(text[i]);
     }
     if(this.description2) svgSpan(block, "descriptionFinal", false, " "+this.description2);
@@ -5837,10 +5865,10 @@ function MReading(witnesses, content, description, description2, staves, choice)
     return block;
   };
   this.needsChange = function(){
-    return this.staves && !defaultPresent(this.staves);
+    return this.staves &amp;&amp; !defaultPresent(this.staves);
   };
 	this.toMEI = function(doc, parent){
-		for(var i=0; i<this.content.length; i++){
+		for(var i=0; i&lt;this.content.length; i++){
 			if(this.content[i].toMEI){
 				this.content[i].toMEI(doc, parent);
 			}
@@ -5855,9 +5883,9 @@ function MReading(witnesses, content, description, description2, staves, choice)
     var oldSVG = SVG;
     SVG = svgEl;
     var ligs = [];
-    for (var i=0; i<this.content.length; i++){
+    for (var i=0; i&lt;this.content.length; i++){
       this.eventi = i;
-      if((typeof(this.content[i].ligature) != "undefined" && this.content[i].ligature && fn)){
+      if((typeof(this.content[i].ligature) != "undefined" &amp;&amp; this.content[i].ligature &amp;&amp; fn)){
         if(ligs.indexOf(this.content[i].ligature)==-1){
           obj.push(this.content[i].ligature.drawVar(this.witnesses[0]));
           ligs.push(this.content[i].ligature);
@@ -5870,7 +5898,7 @@ function MReading(witnesses, content, description, description2, staves, choice)
           obj.push(this.content[i].draw());
           SVG = backup;
         } else if (this.clefp() || this.solmp()){
-          if(this.content[i].objType==="Clef" && prepsolm){
+          if(this.content[i].objType==="Clef" &amp;&amp; prepsolm){
             obj.push(this.content[i].draw(prepsolm));
           } else {
             obj.push(this.content[i].draw());
@@ -5895,9 +5923,9 @@ function MReading(witnesses, content, description, description2, staves, choice)
     var oc = currentClef;
     var os = currentSolm;
     var oldSVG = SVG;
-    if(this.staves && !defaultPresent(this.staves)){// && !this.clefp()){
+    if(this.staves &amp;&amp; !defaultPresent(this.staves)){// &amp;&amp; !this.clefp()){
       currentLinecount = false;
-      for(var i=0; i<this.witnesses.length; i++){
+      for(var i=0; i&lt;this.witnesses.length; i++){
         // linecount should be as close to accepted reading as possible
         var vl = this.staves[0][3].varLines(this.witnesses[i]);
         if(!currentLinecount || (Math.abs(lc-currentLinecount) > Math.abs(lc-vl))){
@@ -5919,8 +5947,8 @@ function MReading(witnesses, content, description, description2, staves, choice)
     SVG = block;
     // Check that it isn't just a description [e.g. (om.) ? ]
     if(this.content.length){
-      if(this.drawPrep || (this.prev && this.prev.drawPrep)){
-        var ccfv = (this.witnesses && this.witnesses.length) 
+      if(this.drawPrep || (this.prev &amp;&amp; this.prev.drawPrep)){
+        var ccfv = (this.witnesses &amp;&amp; this.witnesses.length) 
           ? currentClefForVar(this.witnesses[0])
 						: currentClefForVar(false);
 				clef = false;
@@ -5931,7 +5959,7 @@ function MReading(witnesses, content, description, description2, staves, choice)
 					var cclass = clef.getAttributeNS(null, "class");
 					clef.setAttributeNS(null, "class", cclass+" indicative");
 				}
-        // if(currentSolm && currentSolm.members.length){
+        // if(currentSolm &amp;&amp; currentSolm.members.length){
         //   var solm = currentSolm.draw();
         //   if(solm) {
         //     var sclass = solm.getAttributeNS(null, "class");
@@ -5955,7 +5983,7 @@ function MReading(witnesses, content, description, description2, staves, choice)
                            ? "Special" 
                            : ""),
                        false, "");
-    for(var w=0; w<this.witnesses.length; w++){
+    for(var w=0; w&lt;this.witnesses.length; w++){
       if(w) span.appendChild(document.createTextNode(" "));
       if(typeof(this.witnesses[w])==="string"){
         span.appendChild(document.createTextNode(this.witnesses[w]));
@@ -5990,7 +6018,7 @@ function MReading(witnesses, content, description, description2, staves, choice)
     if(typeof(txtBlock) == "undefined" || !txtBlock) {
       obj = svgGroup(SVG, showvariants ? 'variantGroup' : 'invisibleVariantGroup', false);
       this.sketch(obj, false, prepsolm);
-      // for(var i=0; i<stuff.length; i++){
+      // for(var i=0; i&lt;stuff.length; i++){
       //   if(stuff[i]){
       //     obj.appendChild(stuff[i]);
       //   }
@@ -5998,7 +6026,7 @@ function MReading(witnesses, content, description, description2, staves, choice)
     } else {
       obj = svgSpan(txtBlock, showvariants ? 'variantGroup' : 'invisibleVariantGroup', false);
       var stuff = this.sketchText(styles);
-      for(var i=0; i<stuff.length; i++){
+      for(var i=0; i&lt;stuff.length; i++){
         obj.appendChild(stuff[i]);
       }
     }
@@ -6051,7 +6079,7 @@ function MOmission(witnesses, description, description2, staves, choice){
         return true;
       } else {
         return witnessAppliesTo(this, variant);
-        for(var i=0; i<this.witnesses.length; i++){
+        for(var i=0; i&lt;this.witnesses.length; i++){
           if(witnessAppliesTo(this.witnesses[i], variant)) return true;
         }
         return false;
@@ -6088,7 +6116,7 @@ function MOmission(witnesses, description, description2, staves, choice){
     var os = currentSolm;
     if(!currentClef) debugger;
     var oldSVG = SVG;
-    if(this.staves && !defaultPresent(this.staves) && !this.clefp()){
+    if(this.staves &amp;&amp; !defaultPresent(this.staves) &amp;&amp; !this.clefp()){
       currentClef = this.staves[0][1];
       currentSolm = this.staves[0][2];
       currentLinecount = this.staves[0][3].varLines(this.witnesses[0]);
@@ -6102,7 +6130,7 @@ function MOmission(witnesses, description, description2, staves, choice){
         var cclass = clef.getAttributeNS(null, "class");
         clef.setAttributeNS(null, "class", cclass+" indicative");
       }
-      if(currentSolm && currentSolm.members.length){
+      if(currentSolm &amp;&amp; currentSolm.members.length){
         var solm = currentSolm.draw();
         if(solm) {
           var sclass = solm.getAttributeNS(null, "class");
@@ -6157,7 +6185,7 @@ function ValueChoice(){
   };
   this.toText = function(){
     var string = "{var=";
-    for(var i=0; i<this.content.length; i++){
+    for(var i=0; i&lt;this.content.length; i++){
       if(i>0) string+= " : ";
       string+= this.content[i].toText();
     }
@@ -6182,14 +6210,14 @@ function ValueReading(witnesses, value, description){
 
 function witnessReading(witness, choice, MSSToAll, allToMSS, edToAll, allToEd){
   var ws;
-  for(var i=0;i<choice.content.length; i++){
+  for(var i=0;i&lt;choice.content.length; i++){
     ws = choice.content[i].witnesses;
-    for(var w=0; w<ws.length; w++){
-      if(witness===ws[w] || (witness==="MSS" && MSSToAll) || (ws[w]==="MSS" && allToMSS)
-         || (witness==="ed" && edToAll) || (ws[w]==="ed" && allToEd)
-         || (witness.objType==="Qualified Witness" && typeof(ws[w])==="string" && witness.witness===ws[w])
-         || (witness.objType==="Qualified Witness" && ws[w].objType==="Qualified Witness" 
-             && witness.witness===ws[w].witness && witness.corrected===ws[w].corrected)){
+    for(var w=0; w&lt;ws.length; w++){
+      if(witness===ws[w] || (witness==="MSS" &amp;&amp; MSSToAll) || (ws[w]==="MSS" &amp;&amp; allToMSS)
+         || (witness==="ed" &amp;&amp; edToAll) || (ws[w]==="ed" &amp;&amp; allToEd)
+         || (witness.objType==="Qualified Witness" &amp;&amp; typeof(ws[w])==="string" &amp;&amp; witness.witness===ws[w])
+         || (witness.objType==="Qualified Witness" &amp;&amp; ws[w].objType==="Qualified Witness" 
+             &amp;&amp; witness.witness===ws[w].witness &amp;&amp; witness.corrected===ws[w].corrected)){
         return choice.content[i];
       }
     }
@@ -6212,7 +6240,7 @@ function Classes(){
     return this.classes.length;
   };
   this.present = function(tag){
-    for(var i=0; i<this.classes.length; i++){
+    for(var i=0; i&lt;this.classes.length; i++){
       if(this.classes[i].objType===tag){
         return i;
       }
@@ -6222,16 +6250,16 @@ function Classes(){
   this.removeOneOffClasses = function(){
     // this.classes = this.classes.filter(function(el){return !el.oneOff;});
     var tempClasses = [];
-    for(var i=0; i<this.classes.length; i++){
+    for(var i=0; i&lt;this.classes.length; i++){
       if(this.classes[i].oneOff){
-        if(this.classes[i].objType && this.classes[i].objType==="LedgerLineChange" 
-           && this.classes[i].count!==0) {
+        if(this.classes[i].objType &amp;&amp; this.classes[i].objType==="LedgerLineChange" 
+           &amp;&amp; this.classes[i].count!==0) {
           var close = new LedgerLineChange();
           close.count = 0;
           close.oneOff = true;
           close.previous = this.classes[i];
           tempClasses.push(close);
-        } else if(this.classes[i].objType && this.classes[i].objType==="RedlineOpen"){
+        } else if(this.classes[i].objType &amp;&amp; this.classes[i].objType==="RedlineOpen"){
           currentRedline = false;
         }
       } else {
@@ -6273,14 +6301,14 @@ function classString (classes){
 }
 
 function drawClasses (classes){
-  for(var c=0; c<classes.length; c++){
+  for(var c=0; c&lt;classes.length; c++){
     if(classes[c].draw) classes[c].draw();
   }
 }
 function removeRedlineBefore (classlist){
   // This hack is necessary for reasons I don't understand, to remove
   // a state variable whose reason for persisting is unclear.
-  for(var i=0; i<classlist.length; i++){
+  for(var i=0; i&lt;classlist.length; i++){
     if(classlist[i].objType==="RedlineOpen"){
       return false;
     }
@@ -6291,7 +6319,7 @@ function isResolved(ligel){
 	switch(ligel.objType){
 		case 'LigatureNote':
 		case 'ObliqueNote':
-			if(ligel.MEIObj && ligel.MEIObj.getAttributeNS(null, 'dur.ges')){
+			if(ligel.MEIObj &amp;&amp; ligel.MEIObj.getAttributeNS(null, 'dur.ges')){
 				return true;
 			}
 			break;
@@ -6304,3 +6332,26 @@ function isResolved(ligel){
 	return false;
 }
 
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Barline.html">Barline</a></li><li><a href="BlueClose.html">BlueClose</a></li><li><a href="BlueOpen.html">BlueOpen</a></li><li><a href="ChantNote.html">ChantNote</a></li><li><a href="Clef.html">Clef</a></li><li><a href="ColumnStart.html">ColumnStart</a></li><li><a href="Comment.html">Comment</a></li><li><a href="Custos.html">Custos</a></li><li><a href="Dot.html">Dot</a></li><li><a href="etc.html">etc</a></li><li><a href="ExampleBreak.html">ExampleBreak</a></li><li><a href="Fermata.html">Fermata</a></li><li><a href="FullClose.html">FullClose</a></li><li><a href="FullOpen.html">FullOpen</a></li><li><a href="GenericClose.html">GenericClose</a></li><li><a href="GenericOpen.html">GenericOpen</a></li><li><a href="HalfFullClose.html">HalfFullClose</a></li><li><a href="HalfFullOpen.html">HalfFullOpen</a></li><li><a href="LargeClose.html">LargeClose</a></li><li><a href="LargeOpen.html">LargeOpen</a></li><li><a href="LedgerLineChange.html">LedgerLineChange</a></li><li><a href="Ligature.html">Ligature</a></li><li><a href="LigatureComment.html">LigatureComment</a></li><li><a href="LigatureNote.html">LigatureNote</a></li><li><a href="LigChoice.html">LigChoice</a></li><li><a href="LongRest.html">LongRest</a></li><li><a href="MaxRest.html">MaxRest</a></li><li><a href="MChoice.html">MChoice</a></li><li><a href="MensuralSignature.html">MensuralSignature</a></li><li><a href="MESuper.html">MESuper</a></li><li><a href="MNilReading.html">MNilReading</a></li><li><a href="MReading.html">MReading</a></li><li><a href="MusicExample.html">MusicExample</a></li><li><a href="MusicOptionalSpace.html">MusicOptionalSpace</a></li><li><a href="MusicPunctuation.html">MusicPunctuation</a></li><li><a href="MusicWordJoin.html">MusicWordJoin</a></li><li><a href="MusicWordSplit.html">MusicWordSplit</a></li><li><a href="NegativeSpace.html">NegativeSpace</a></li><li><a href="Neume.html">Neume</a></li><li><a href="NeumeItem.html">NeumeItem</a></li><li><a href="Notation.html">Notation</a></li><li><a href="Note.html">Note</a></li><li><a href="Oblique.html">Oblique</a></li><li><a href="ObliqueNeume.html">ObliqueNeume</a></li><li><a href="ObliqueNote.html">ObliqueNote</a></li><li><a href="ObliqueNoteChoice.html">ObliqueNoteChoice</a></li><li><a href="Parameters.html">Parameters</a></li><li><a href="Part.html">Part</a></li><li><a href="PositiveSpace.html">PositiveSpace</a></li><li><a href="ProportionSign.html">ProportionSign</a></li><li><a href="RedClose.html">RedClose</a></li><li><a href="RedlineClose.html">RedlineClose</a></li><li><a href="RedlineOpen.html">RedlineOpen</a></li><li><a href="RedOpen.html">RedOpen</a></li><li><a href="Repeat.html">Repeat</a></li><li><a href="Rest.html">Rest</a></li><li><a href="SignumCongruentiae.html">SignumCongruentiae</a></li><li><a href="SolmizationSign.html">SolmizationSign</a></li><li><a href="SolmizationSignature.html">SolmizationSignature</a></li><li><a href="StackedProportionSigns.html">StackedProportionSigns</a></li><li><a href="Staff.html">Staff</a></li><li><a href="StrikethroughClose.html">StrikethroughClose</a></li><li><a href="StrikethroughOpen.html">StrikethroughOpen</a></li><li><a href="Tacet.html">Tacet</a></li><li><a href="TextUnderlay.html">TextUnderlay</a></li><li><a href="upsideDownClose.html">upsideDownClose</a></li><li><a href="upsideDownOpen.html">upsideDownOpen</a></li><li><a href="ValueChoice.html">ValueChoice</a></li><li><a href="ValueReading.html">ValueReading</a></li><li><a href="VoidClose.html">VoidClose</a></li><li><a href="VoidOpen.html">VoidOpen</a></li></ul><h3>Global</h3><ul><li><a href="global.html#actOnColoration">actOnColoration</a></li><li><a href="global.html#actOnDots">actOnDots</a></li><li><a href="global.html#addBreveBoundariesForBlock">addBreveBoundariesForBlock</a></li><li><a href="global.html#addStartTimesForBlock">addStartTimesForBlock</a></li><li><a href="global.html#allUnalterableImperfectLevels">allUnalterableImperfectLevels</a></li><li><a href="global.html#alterableLevels">alterableLevels</a></li><li><a href="global.html#anteSim">anteSim</a></li><li><a href="global.html#augDot">augDot</a></li><li><a href="global.html#beatIndependentDurations">beatIndependentDurations</a></li><li><a href="global.html#beatOfDur">beatOfDur</a></li><li><a href="global.html#beatOfUnit">beatOfUnit</a></li><li><a href="global.html#beatUnitStructure">beatUnitStructure</a></li><li><a href="global.html#blockProportionMultiplier">blockProportionMultiplier</a></li><li><a href="global.html#breveDifference">breveDifference</a></li><li><a href="global.html#canImperfect">canImperfect</a></li><li><a href="global.html#checkForGeneralAlteration">checkForGeneralAlteration</a></li><li><a href="global.html#colourp">colourp</a></li><li><a href="global.html#consumeParenthesis">consumeParenthesis</a></li><li><a href="global.html#divisionDot">divisionDot</a></li><li><a href="global.html#divisionLikeRests">divisionLikeRests</a></li><li><a href="global.html#dupleMinimCountFromElement">dupleMinimCountFromElement</a></li><li><a href="global.html#enrichText">enrichText</a></li><li><a href="global.html#extendTacet">extendTacet</a></li><li><a href="global.html#firstBeatAlteration">firstBeatAlteration</a></li><li><a href="global.html#firstBeatImperfection">firstBeatImperfection</a></li><li><a href="global.html#firstBeatImperfectionCheck">firstBeatImperfectionCheck</a></li><li><a href="global.html#firstPerfectLevel">firstPerfectLevel</a></li><li><a href="global.html#gcd">gcd</a></li><li><a href="global.html#getAtomicSections">getAtomicSections</a></li><li><a href="global.html#getEventsByMensurationForSection">getEventsByMensurationForSection</a></li><li><a href="global.html#getLayers">getLayers</a></li><li><a href="global.html#getMusicTextSup">getMusicTextSup</a></li><li><a href="global.html#getParameters">getParameters</a></li><li><a href="global.html#getString">getString</a></li><li><a href="global.html#getSubText">getSubText</a></li><li><a href="global.html#getTag">getTag</a></li><li><a href="global.html#hasNoSections">hasNoSections</a></li><li><a href="global.html#imperfectingLevels">imperfectingLevels</a></li><li><a href="global.html#indexOfNextDot">indexOfNextDot</a></li><li><a href="global.html#indexOfNextSameOrLongerOrDot">indexOfNextSameOrLongerOrDot</a></li><li><a href="global.html#indexOfPrevLongerOrDot">indexOfPrevLongerOrDot</a></li><li><a href="global.html#isAlterable">isAlterable</a></li><li><a href="global.html#labelRests">labelRests</a></li><li><a href="global.html#leveleq">leveleq</a></li><li><a href="global.html#linesp">linesp</a></li><li><a href="global.html#mensurSummary">mensurSummary</a></li><li><a href="global.html#midBeatAlteration">midBeatAlteration</a></li><li><a href="global.html#midBeatImperfection">midBeatImperfection</a></li><li><a href="global.html#minimStructures">minimStructures</a></li><li><a href="global.html#nextBarline">nextBarline</a></li><li><a href="global.html#nextChantNote">nextChantNote</a></li><li><a href="global.html#nextChoice">nextChoice</a></li><li><a href="global.html#nextChoiceLikeThing">nextChoiceLikeThing</a></li><li><a href="global.html#nextChoiceLikeThing2">nextChoiceLikeThing2</a></li><li><a href="global.html#nextColRef">nextColRef</a></li><li><a href="global.html#nextComment">nextComment</a></li><li><a href="global.html#nextCustos">nextCustos</a></li><li><a href="global.html#nextDot">nextDot</a></li><li><a href="global.html#nextEvent">nextEvent</a></li><li><a href="global.html#nextFermata">nextFermata</a></li><li><a href="global.html#nextInfo">nextInfo</a></li><li><a href="global.html#nextLigature">nextLigature</a></li><li><a href="global.html#nextLigChoice">nextLigChoice</a></li><li><a href="global.html#nextLongRest">nextLongRest</a></li><li><a href="global.html#nextMusic">nextMusic</a></li><li><a href="global.html#nextNeume">nextNeume</a></li><li><a href="global.html#nextNote">nextNote</a></li><li><a href="global.html#nextOblique">nextOblique</a></li><li><a href="global.html#nextObliqueNeume">nextObliqueNeume</a></li><li><a href="global.html#nextObliqueNoteChoice">nextObliqueNoteChoice</a></li><li><a href="global.html#nextPart">nextPart</a></li><li><a href="global.html#nextPartnameReading">nextPartnameReading</a></li><li><a href="global.html#nextRepeat">nextRepeat</a></li><li><a href="global.html#nextRest">nextRest</a></li><li><a href="global.html#nextSignumCongruentiae">nextSignumCongruentiae</a></li><li><a href="global.html#nextSolmSign">nextSolmSign</a></li><li><a href="global.html#nextTacet">nextTacet</a></li><li><a href="global.html#nextTaglike">nextTaglike</a></li><li><a href="global.html#nextText">nextText</a></li><li><a href="global.html#nextTextChoice">nextTextChoice</a></li><li><a href="global.html#noteInt">noteInt</a></li><li><a href="global.html#noteIntFromDur">noteIntFromDur</a></li><li><a href="global.html#noteOrRest">noteOrRest</a></li><li><a href="global.html#notePerfectAsWhole">notePerfectAsWhole</a></li><li><a href="global.html#nsResolver">nsResolver</a></li><li><a href="global.html#parseClef">parseClef</a></li><li><a href="global.html#parseClefReading">parseClefReading</a></li><li><a href="global.html#parseClefVar">parseClefVar</a></li><li><a href="global.html#parseMens">parseMens</a></li><li><a href="global.html#parseMensReading">parseMensReading</a></li><li><a href="global.html#parseProp">parseProp</a></li><li><a href="global.html#parseSolm">parseSolm</a></li><li><a href="global.html#parseSolmReading">parseSolmReading</a></li><li><a href="global.html#parseSolmVar">parseSolmVar</a></li><li><a href="global.html#parseStaff">parseStaff</a></li><li><a href="global.html#propNum">propNum</a></li><li><a href="global.html#proportionMultiplier">proportionMultiplier</a></li><li><a href="global.html#propProportionMultiplier">propProportionMultiplier</a></li><li><a href="global.html#readDur">readDur</a></li><li><a href="global.html#regularlyPerfect">regularlyPerfect</a></li><li><a href="global.html#secondBeatAlteration">secondBeatAlteration</a></li><li><a href="global.html#secondBeatImperfection">secondBeatImperfection</a></li><li><a href="global.html#simpleMinims">simpleMinims</a></li><li><a href="global.html#simplestAlterations">simplestAlterations</a></li><li><a href="global.html#solidBlock">solidBlock</a></li><li><a href="global.html#thirdBeatAlteration">thirdBeatAlteration</a></li><li><a href="global.html#thirdBeatImperfection">thirdBeatImperfection</a></li><li><a href="global.html#windowDuration">windowDuration</a></li><li><a href="global.html#writeAlteration">writeAlteration</a></li><li><a href="global.html#writeDur">writeDur</a></li><li><a href="global.html#writeImperfection">writeImperfection</a></li><li><a href="global.html#writeSimpleImperfection">writeSimpleImperfection</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Fri Jun 05 2020 17:46:29 GMT+0200 (GMT+02:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

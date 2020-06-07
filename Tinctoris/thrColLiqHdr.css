@@ -265,8 +265,9 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
   }
 }
 #EMT{
-	width: 15%;
-  min-width: 193px;
+	/* width: 15%; */
+  /* min-width: 193px; */
+	width: max(20%, 225px);
 }
 .bloglink {
   float:right;

@@ -882,3 +882,21 @@ img.logo {
 	margin-top: 1em;
 	margin-bottom: 1em;
 }
+.pubDate {
+	text-align: center;
+	font-size: 95%;
+}
+h2.editors {
+	font-weight: bold;
+	text-align: center;
+	font-size: 98%;
+}
+p.abstract {
+	/* text-align: justify; */
+	padding: 0 6.5em 1em 4em;
+	font-size: 97%;
+}
+h1.longTitle {
+	font-size: 180%;
+	padding-top: 1em;
+}

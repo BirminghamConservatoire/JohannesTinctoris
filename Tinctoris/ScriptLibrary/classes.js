@@ -77,6 +77,7 @@ function Note(){
   if(currentExample.classes && currentExample.classes.classes.length){
     this.classList = currentExample.classes.classes.slice(0);
   }
+  /** width */
   this.width = function(){
     var width = 0;
     if(this.rhythm){
@@ -84,6 +85,10 @@ function Note(){
     }
     return width;
   };
+  /** 
+   * These positions may seem oddly left-tilted, but the coordinate
+   * is to the left of the comment *, not the centre
+  */
   this.commentPos = function(){
     // These positions may seem oddly left-tilted, but the coordinate
     // is to the left of the comment *, not the centre
@@ -96,6 +101,7 @@ function Note(){
       return [this.startX + (2*rastralSize/3), yPos(cury, staffPosition(this))];
     }
   };
+  /** negativeSpace */
   this.negativeSpace = function(){
     if("MLB".indexOf(this.rhythm)>-1){
       return rastralSize/6;
@@ -103,6 +109,7 @@ function Note(){
       return rastralSize/2;
     }
   };
+  /** Writes note tot text */
   this.toText = function(){
     var text = "";
     if(this.sup) text+= "^";
@@ -111,6 +118,7 @@ function Note(){
     text += this.pitch ? this.pitch : this.staffPos.toString(16).toUpperCase();
     return text;
   };
+  /** Writes Note as MEI element */
   this.toMEI = function (doc, parent){
     if(!parent) parent = doc.currentParent;
     var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "note");
@@ -129,10 +137,11 @@ function Note(){
     this.MEIObj = el;
     return el;
   };
+  /** edit Note */
   this.edit = function(event) {
     return durationSelector(this, event.pageX, event.pageY);
   };
-  // Note
+  /** Draw Note to SVG */
   this.draw = function(){
     var myglyph = false;
     var spos = staffPosition(this);
@@ -225,29 +234,43 @@ function Note(){
 
 /** @class */
 function ChantNote(){
+  /** @member {ChantNote} */
   this.objType = "ChantNote";
+  /** @member {ChantNote} */
   this.text = false;
+  /** @member {ChantNote} */
   this.staffPos = false;
+  /** @member {ChantNote} */
   this.pitch = false;
+  /** @member {ChantNote} */
   this.rhythm = false; // Misnamed
+  /** @member {ChantNote} */
   this.startX = false;
+  /** @member {ChantNote} */
   this.domObj = false;
+  /** @member {ChantNote} */
   this.example = currentExample;
+  /** @member {ChantNote} */
   this.MEIObj = false;
+  /** @member {ChantNote} */
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
+  /** width */
   this.width = function(){
     return rastralSize;
   };
+  /** Writes ChantNote to text */
   this.toText = function(){
     var text = "";
     if(this.rhythm) text += this.rhythm;
     text += this.pitch ? this.pitch : this.staffPos.toString(16).toUpperCase();
     return text;
   };
+  /** Edits ChantNote */
   this.edit = function(event){
     return chantShapeSelector(this, event.pageX, event.pageY);
   };
+  /** Writes ChantNote to MEI element */
   this.toMEI = function (doc, parent){
     if(!parent) parent = doc.currentParent;
     var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "uneume");
@@ -260,7 +283,7 @@ function ChantNote(){
     this.MEIObj = el;
     return el;
   };
-  // ChantNote
+  /** Draws ChantNote to SVG */
   this.draw = function(){
     var extraClasses = "";
     var spos = staffPosition(this);
@@ -306,22 +329,33 @@ function ChantNote(){
 
 /** @class */
 function Dot(){
+  /** @member {Dot} */
   this.objType = "Dot";
 // If pitched
 //  this.pitch = false;
+  /** @member {Dot} */
   this.augments = false;
+  /** @member {Dot} */
   this.staffPos = false;
+  /** @member {Dot} */
   this.startX = false;
+  /** @member {Dot} */
   this.text = false;
+  /** @member {Dot} */
   this.domObj = false;
+  /** @member {Dot} */
   this.MEIObj = false;
+  /** @member {Dot} */
   this.example = currentExample;
+  /** @member {Dot} */
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
+  /** width */
   this.width = function(){
     // return dotData[2]*rastralSize * prop;
     return this.augments ? rastralSize/2 : rastralSize;
   };
+  /** negativeSpace */
   this.negativeSpace = function(next){
     if(next && (next.objType=="Note" || next.objType.indexOf("Rest")>-1)){
       return next.negativeSpace();
@@ -329,9 +363,16 @@ function Dot(){
       return rastralSize/2;
     }
   };
+  /** Writes Dot to text */
   this.toText = function(){
     return this.staffPos ? "."+this.staffPos.toString(16).toUpperCase() : ".";
   };
+  /** reallyAugments
+   * The augments slot just means that the dot follows a
+   * note. There's no easy, guaranteed way to know it's an
+   * augmentation, but our editorial practice is to show vertical
+   * displacement for perfection dots.
+   */
 	this.reallyAugments = function(){
 		// The augments slot just means that the dot follows a
 		// note. There's no easy, guaranteed way to know it's an
@@ -339,7 +380,8 @@ function Dot(){
 		// displacement for perfection dots.
 		return this.augments && (!this.staffPos  || this.staffPos===this.augments.staffPos
 														 || (this.augments.staffPos % 2 === 0 && Math.abs(this.staffPos-this.augments.staffPos<2)));
-	};
+  };
+  /** Writes Dot as MEI element */
   this.toMEI = function(doc, parent){
     if(!parent) parent = doc.currentParent;
     var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "dot");
@@ -351,6 +393,7 @@ function Dot(){
     this.MEIObj = el;
     return el;
   };
+  /** Draws dot to SVG */
   this.draw = function(){
     var extraClasses = "";
     // curx -= this.augments ? 0.6 * prop * rastralSize : 0.4 * prop * rastralSize;
@@ -385,26 +428,43 @@ function Dot(){
 
 /** @class */
 function SignumCongruentiae(){
+  /** @member {SignumCongruentiae} */
   this.objType = "SignumCongruentiae";
+  /** @member {SignumCongruentiae} */
   this.effects = false;
+  /** @member {SignumCongruentiae} */
   this.staffPos = false;
+  /** @member {SignumCongruentiae} */
   this.startX = false;
+  /** @member {SignumCongruentiae} */
   this.text = false;
+  /** @member {SignumCongruentiae} */
   this.domObj = false;
+  /** @member {SignumCongruentiae} */
   this.flipped = false;
+  /** @member {SignumCongruentiae} */
   this.example = currentExample;
+  /** @member {SignumCongruentiae} */
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
+  /** @member {SignumCongruentiae} */
   this.MEIObj = false;
+  /** @member {SignumCongruentiae} */
   this.prevEventObj = false;
+  /** @member {SignumCongruentiae} */
   this.nextEventObj = false;
+  /** method */
   this.forwardEvent = function(variant){return this;};
+  /** method */
   this.backwardEvent = function(variant){return this;};
+  /** method */
   this.prevEvent = function(variant){
     return this.prevEventObj ? this.prevEventObj.backwardEvent(variant) : false;
   };
+  /** method */
   this.nextEvent = function(variant){
     return this.nextEventObj ? this.nextEventObj.forwardEvent(variant) : false;
   };
+  /** method */
   this.varStartStaffPos = function(variant){ 
     // FIXME: This is needed rarely, but the logic is not quite right
     var n = this.nextEvent(variant);
@@ -414,6 +474,7 @@ function SignumCongruentiae(){
       return false;
     }
   };
+  /** method */
   this.varEndStaffPos = function(variant){ 
     // FIXME: This is needed rarely, but the logic is not quite
     // right. Caller doesn't expect false at this point, for example
@@ -425,11 +486,14 @@ function SignumCongruentiae(){
       return false;
     }
   };
+  /** @member {SignumCongruentiae} */
   this.width = zeroWidth;
+  /** Writes signum congruentiae to text */
   this.toText = function(){
     // FIXME: fake
     return "?"+this.staffPos ? this.staffPos : "";
   };
+  /** Draws Signum Congruentiae to SVG */
   this.draw = function(variant){
     var extraClasses = "";
     var oldx = 0;
@@ -500,21 +564,33 @@ function SignumCongruentiae(){
 
 /** @class */
 function Fermata(){
+  /** @member {Fermata} */
   this.objType = "Fermata";
+  /** @member {Fermata} */
   this.lengthens = false;
+  /** @member {Fermata} */
   this.staffPos = false;
+  /** @member {Fermata} */
   this.startX = false;
+  /** @member {Fermata} */
   this.text = false;
+  /** @member {Fermata} */
   this.domObj = false;
+  /** @member {Fermata} */
   this.flipped = false;
+  /** @member {Fermata} */
   this.example = currentExample;
+  /** @member {Fermata} */
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
+  /** width */
   this.width = function(){
     return dotData[2]*rastralSize * prop;
   };
+  /** Writes Fermata to text */
   this.toText = function(){
     return this.staffPos ? "."+this.staffPos.toString(16).toUpperCase() : ".";
   };
+  /** Writes fermata as MEI element */
   this.toMEI = function(doc, parent){
     if(!parent) parent = doc.currentParent;
     var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "fermata");
@@ -527,6 +603,7 @@ function Fermata(){
     parent.appendChild(el);
     return el;
   };
+  /** Draws Fermata to SVG */
   this.draw = function(){
     var extraClasses = "";
     var oldx = 0;
@@ -564,29 +641,47 @@ function Fermata(){
 /** @class */
 function Custos(){
   // Self explanatory. Generally behaves like a note.
+  /** @member {Custos} */
   this.objType = "Custos";
+  /** @member {Custos} */
   this.text = false;
+  /** @member {Custos} */
   this.staffPos = false;
+  /** @member {Custos} */
   this.staffPosGuessed = false;
+  /** @member {Custos} */
   this.pitch = false;
+  /** @member {Custos} */
   this.startX = false;
+  /** @member {Custos} */
   this.domObj = false;
+  /** @member {Custos} */
   this.sup = false;
+  /** @member {Custos} */
   this.example = currentExample;
   // Copy current classes
+  /** @member {Custos} */
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
+  /** width */
   this.width = function(){
     return 2.5*rastralSize;
   };
+  /** writes custos to text
+   * @returns {string} text
+   */
   this.toText = function(){
     return "c"+this.staffPosGuessed ? "" : this.staffPos.toString(16).toUpperCase();
   };
+  /** @returns pitched MEI custos */
   this.MEINode = function(parentDoc){
     if(this.pitch){
       return PitchedMEICustos(this.pitch, this.rhythm, false);
     }
     return false;
   };
+  /** Writes custos to MEI element
+   *  @returns element
+   */
   this.toMEI = function (doc, parent){
     if(!parent) parent = doc.currentParent;
     var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "custos");
@@ -596,6 +691,7 @@ function Custos(){
     this.MEIObj = el;
     return el;
   };
+  /** draws custos to SVG */
   this.draw = function() {
     var spos = staffPosition(this);
     if(this.classList.length){
@@ -635,52 +731,92 @@ function Custos(){
   // Custos
 }
 
+/** @function compoundNotep
+ * @summary Checks if object is not TextUnderlay and not Comment
+ * @param {?} object
+ * @returns {boolean} 
+ */
 function compoundNotep(obj){
   return obj.objType != "TextUnderlay" && obj.objType != "Comment";
 }
 
 /** @class */
 function LigatureNote(note){
+  /** @member {LigatureNote} */
   this.objType = "LigatureNote";
+  /** @member {LigatureNote} */
   this.text = note.text;
+  /** @member {LigatureNote} */
   this.staffPos = note.staffPos;
+  /** @member {LigatureNote} */
   this.pitch = note.pitch;
+  /** @member {LigatureNote} */
   this.rhythm = note.rhythm;
+  /** @member {LigatureNote} */
   this.sup = note.sup;
+  /** @member {LigatureNote} */
   this.forceTail = note.forceTail;
+  /** @member {LigatureNote} */
   this.startX = false;
+  /** @member {LigatureNote} */
   this.startY = false;
+  /** @member {LigatureNote} */
   this.domObj = false;
+  /** @member {LigatureNote} */
   this.dot = false;
-	this.MEIObj = false;
+  /** @member {LigatureNote} */
+  this.MEIObj = false;
+  /** @member {LigatureNote} */
   this.signum=false;
+  /** @member {LigatureNote} */
   this.voidnotes = note.voidnotes;
+  /** @member {LigatureNote} */
   this.subType = note.subType;
+  /** @member {LigatureNote} */
   this.example = note.example;
+  /** @member {LigatureNote} */
   this.ligature = false;
+  /** @member {LigatureNote} */
   this.index = false;
+  /** @member {LigatureNote} */
   this.prevEventObj = false;
+  /** @member {LigatureNote} */
   this.nextEventObj = false;
+  /** @member {LigatureNote} */
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
+  /** forwardEvent */
   this.forwardEvent = function(variant){return this;};
+  /** backward Event */
   this.backwardEvent = function(variant){return this;};
+  /** previous event */
   this.prevEvent = function(variant){
     return this.prevEventObj ? this.prevEventObj.backwardEvent(variant) : false;
   };
+  /** next event */
   this.nextEvent = function(variant){
     return this.nextEventObj ? this.nextEventObj.forwardEvent(variant) : false;
   };
+  /** width */
   this.width = function(){
     return this.rhythm == "M" ? 19/10*rastralSize : rastralSize;
   };
+  /** variant start staff position
+   * @param variant
+   */
   this.varStartStaffPos = function(variant){ 
     return staffPosition(this);
 //    return this.staffPos;
   };
+  /** variant end staff position
+   * @param variant
+   */
   this.varEndStaffPos = function(variant){ 
     return staffPosition(this);
   };
+  /** lstem
+   * @param variant
+   */
   // Ligature Note
   this.lstem = function(variant){
     // First check for forcing by editor
@@ -705,6 +841,9 @@ function LigatureNote(note){
       return false;
     }
   };
+  /** rstem
+   * @param variant
+   */
   this.rstem = function(variant){
     // First check for forcing by editor
     switch(this.forceTail){
@@ -727,6 +866,7 @@ function LigatureNote(note){
     } 
     return false;
   };
+  /** Writes LigatureNote to text */
   this.toText = function(){
     var text = "";
     if(this.sup) text+= "^";
@@ -735,6 +875,7 @@ function LigatureNote(note){
     return text;
   };
   // Ligature Note
+  /** Writes LigatureNote as MEI element */
   this.toMEI = function(doc, parent){
     if(!parent) parent = doc.currentParent;
     var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "note");
@@ -751,6 +892,9 @@ function LigatureNote(note){
     parent.appendChild(el);
   };
   // Ligature Note
+  /** draw variant
+   * @param variant
+   */
   this.drawVar = function(variant){
     var extraClasses = "", oldx, obj;
     // ?? Sup????
@@ -799,6 +943,7 @@ function LigatureNote(note){
     }
     return obj;
   };
+  /** draw LigatureNote to SVG */
   this.draw = function(){
     var extraClasses = "", oldx, obj;
     if(this.classList.length){
@@ -852,24 +997,40 @@ function LigatureNote(note){
 
 /** @class */
 function LigatureComment(comment){
+  /** @member {LigatureComment} */
   this.objType = "LigatureComment";
+  /** @member {LigatureComment} */
   this.content = comment.content;
+  /** @member {LigatureComment} */
   this.width = zeroWidth;
+  /** @member {LigatureComment} */
   this.startX = false;
+  /** @member {LigatureComment} */
   this.commentStyle = commentStyle;
+  /** @member {LigatureComment} */
   this.endX = false;
+  /** @member {LigatureComment} */
   this.startY = false;
+  /** @member {LigatureComment} */
   this.endY = false;
+  /** @member {LigatureComment} */
   this.ligature = false;
+  /** @member {LigatureComment} */
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
+  /** to text */
   this.toText = function(){
     return "**"+this.content+"**";
   };
+  /** @member {LigatureComment} */
   this.updateStyles = keepStyles;
+  /** draw variant
+   * @param variant
+   */
   this.drawVar = function(variant){
     return this.draw();
   };
+  /** to mei */
   this.toMEI = function(doc, parent){		
     if(!parent) parent = doc.currentParent;
     var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "annot");
@@ -877,10 +1038,11 @@ function LigatureComment(comment){
 		addUUIDs(this, el, curDoc);
     // FIXME: what does this apply to ("plist" attribute)
     return el;
-  };
+  };/** footnote */
   this.footnote = function(){
     return DOMSpan(false, false, this.content);
   };
+  /** draw to SVG */
   this.draw = function(){
     // FIXME: Check this -- it's nonsense to me at the moment
     if(!showtranslationnotes || !showtranscriptionnotes) {
@@ -910,18 +1072,32 @@ function LigatureComment(comment){
   // Ligature Comment
 }
 
-/** @class */
+/** @class
+ * @summary Container object for Note and Oblique objects in ligature.
+ */
 function Ligature(){
   // Container object for Note and Oblique objects in ligature.
+  /** @member {Ligature} */
   this.objType = "Ligature";
+  /** @member {Ligature} */
   this.str = false;
+  /** @member {Ligature} */
   this.members = [];
+  /** @member {Ligature} */
   this.startX = false;
+  /** @member {Ligature} */
   this.fake = false;
+  /** @member {Ligature} */
   this.firstEventObj = false;
+  /** @member {Ligature} */
   this.lastEventObj = false;
+  /** @member {Ligature} */
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
+  /** enrich event
+   * @param event
+   * @param eventlist
+   */
   this.enrichEvent = function(event, eventlist){
     if(event.objType == "Note"){
       event = new LigatureNote(event);
@@ -945,6 +1121,7 @@ function Ligature(){
       return event;
     }
   };
+  /** to text */
   this.toText = function(){
     var text = "<lig>";
     for(var i=0; i<this.members.length; i++){
@@ -953,12 +1130,15 @@ function Ligature(){
     }
     return text+"</lig>";
   };
+  /** last note index p */
   this.lastNoteIndexp = function(index){
     return !this.nextNote(index);
   };
+  /** first note index p */
   this.firstNoteIndexp = function(index){
     return !this.prevNote(index);
   };
+  /** next note */
   this.nextNote = function(index){
     for(var i=index+1; i<this.members.length; i++){
 //      if(this.members[i].objType != "TextUnderlay"){
@@ -968,6 +1148,7 @@ function Ligature(){
     }
     return false;
   };
+  /** previous note */
   this.prevNote = function(index){
     for(var i=index-1; i>=0; i--){
       if(compoundNotep(this.members[i])){
@@ -977,6 +1158,7 @@ function Ligature(){
     return false;
   };
   // Ligature
+  /** nth note */
   this.nthNote = function(n){
     var i=0;
     var ith=0;
@@ -991,18 +1173,21 @@ function Ligature(){
     }
     return false;
   };
+  /** previous position */
   this.prevPos = function(index){
     var note = this.prevNote(index);
     if(note){
       return note.objType == "Oblique" ? staffPosition(note.members[1]) : oblElementStaffPos(note);
     } else return false;
   };
+  /** next position */
   this.nextPos = function(index){
     var note = this.nextNote(index);
     if(note){
       return note.objType == "Oblique" ? staffPosition(note.members[0]) : oblElementStaffPos(note);
     } else return false;
   };
+  /** width */
   this.width = function(){
     // FIXME: clearly wrong
     return this.members.reduce(function(p, e, i, a){
@@ -1017,10 +1202,16 @@ function Ligature(){
                                      return p+ e.width();
                                  } return p;}, 0) + rastralSize;
   };
+  /** first event
+   * @param variant
+   */
   this.firstEvent = function(variant){
     return this.firstEventObj.forwardEvent(variant);
   };
   // Ligature
+  /** left overhang
+   * @param variant
+   */
   this.leftOverhang = function(variant){
     var e = this.firstEvent(variant);
     if(!e || e.objType == "ObliqueNote" || e.rhythm == "M") return 0;
@@ -1035,6 +1226,9 @@ function Ligature(){
     if (e & e.rhythm == "M" && e.sup) return rastralSize;
     return 0; 
   };
+  /** add event
+   * @param event
+   */
   this.addEvent = function(event){
     if(this.lastEventObj){
       this.lastEventObj.nextEventObj = event;
@@ -1047,6 +1241,9 @@ function Ligature(){
     this.members.push(event);
     return event;
   };
+  /** add choice
+   * @param event
+   */
   this.addChoice = function(event){
     if(this.lastEventObj){
       this.lastEventObj.nextEventObj = event;
@@ -1064,6 +1261,9 @@ function Ligature(){
     this.members.push(event);
     return event;
   };
+  /** add element
+   * @param el
+   */
   this.addElement = function(el){
     switch(el.objType){
       case "LigatureNote":
@@ -1087,13 +1287,22 @@ function Ligature(){
     };
   };
   // Ligature
+  /** add note
+   * @param {Note} note
+   */
   this.addNote = function(note){
     note = new LigatureNote(note);
     this.addEvent(note);
   };
+  /** add Oblique
+   * @param {Oblique} oblique
+   */
   this.addOblique = function(oblique){
     this.addEvent(oblique);
   };
+  /** oblique
+   * @summary Are the only notes here in obliques? This matters for MEI
+   */
   this.oblique = function(){
     // Are the only notes here in obliques? This matters for MEI
     for(var i=0; i<this.members.length; i++){
@@ -1101,9 +1310,13 @@ function Ligature(){
     }
     return true;
   };
+  /** variant end staff position
+   * @param variant
+   */
   this.varEndStaffPos = function(variant){
     return this.members[this.members.length-1].varEndStaffPos(variant);
   };
+  /** to MEI */
   this.toMEI = function(doc, parent){
     if(!parent) parent = doc.currentParent;
     var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "ligature");
@@ -1115,6 +1328,7 @@ function Ligature(){
     parent.appendChild(el);
     return el;
   };
+  /** draw variant */
   this.drawVar = function(variant){
     // Check for text issues
     if(this.members[0].text && underlays.length){
@@ -1130,9 +1344,11 @@ function Ligature(){
     }
     curx+=rastralSize/2;
   };
+  /** negative space */
   this.negativeSpace = function(){
     return rastralSize/6;
   };
+  /** draw to SVG */
   this.draw = function(){
     curx += this.leftOverhang(false) + 0.5 * prop * rastralSize;
     var tempSVG = SVG;
@@ -1163,31 +1379,57 @@ function Ligature(){
 function Oblique(){
   // Oblique symbols in ligatures have only two members to worry
   // about. See below for the equivalent structure in neumes.
+  /** @member {Oblique} */
   this.objType = "Oblique";
+  /** @member {Oblique} */
   this.members = [];
+  /** @member {Oblique} */
   this.texts = [false, false];
+  /** @member {Oblique} */
   this.comments = [false, false]; //why two?
+  /** @member {Oblique} */
   this.before = false;
+  /** @member {Oblique} */
   this.startX = false;//curx;
+  /** @member {Oblique} */
   this.ligature = false;
+  /** @member {Oblique} */
   this.prevEventObj = false;
+  /** @member {Oblique} */
   this.nextEventObj = false;
+  /** @member {Oblique} */
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
+  /** forward Event
+   * @param variant
+   */
   this.forwardEvent = function(variant){
     return this.members[0] ? this.members[0].forwardEvent(variant) : this.nextEvent(variant);
   };
+  /** backward event
+   * @param variant
+   */
   this.backwardEvent = function(variant){
     return this.members[1] ? this.members[1].backwardEvent(variant) :
       (this.members[0] ? this.members[0].backwardEvent(variant) :
        this.membersthis.prevEvent(variant));
   };
+  /** previous event
+   * @param variant
+   */
   this.prevEvent = function(variant){
     return this.prevEventObj ? this.prevEventObj.backwardEvent(variant) : false;
   };
+  /** next event
+   * @param variant
+   */
   this.nextEvent = function(variant){
     return this.nextEventObj ? this.nextEventObj.forwardEvent(variant) : false;
   };
+  /** enrich event
+   * @param event
+   * @param eventlist
+   */
   this.enrichEvent = function(event, eventlist){
     if(event.objType == "Note"){
       event = new ObliqueNote(event);
@@ -1201,6 +1443,9 @@ function Oblique(){
     return event;
   };
   // Oblique
+  /** extend members
+   * @param event
+   */
   this.extendMembers = function(event){
     if(event.objType=="ObliqueNote") {
       event.index = this.members.length;
@@ -1250,12 +1495,14 @@ function Oblique(){
 				this.members[i].toMEI(doc, parent);
 			}
 		}
-	}
+  }
+  /** width */
   this.width = function(){
     return oWidth(this.member(0, false).staffPos, this.member(1, false).staffPos);
 //        rastralSize * prop + rastralSize * prop * Math.abs(this.members[1].staffPos - this.members[0].staffPos) / 4;
   };
   // Oblique
+  /** draws text */
   this.drawTexts = function(){
     if(this.texts[0]){
       this.texts[0].draw();
@@ -1266,6 +1513,7 @@ function Oblique(){
       curx -= rastralSize;
     }
   };
+  /** draw comments */
   this.drawComments = function(){
     if(this.comments[0]){
       this.comments[0].draw();
@@ -1276,6 +1524,9 @@ function Oblique(){
       curx -= rastralSize;
     }
   };
+  /** lstem
+   * @param variant
+   */
   this.lstem = function(variant){
     // check forceTail
     switch(this.member(0, variant).forceTail){
@@ -1296,9 +1547,17 @@ function Oblique(){
     }
     return false;
   };
+  /** rstem 
+   * @param variant
+  */
   this.rstem = function(variant){
     return this.member(1, variant).rhythm=="L" || this.member(1, variant).forceTail == "+";
   };
+  /** flattened members
+   * @summary Not as harmful as it sounds. Support function for this.member –
+   * create a list of all member notes and the variants they apply to.
+   * @param variant
+   */
 	this.flattenedMembers = function(variant){
 		// Not as harmful as it sounds. Support function for this.member –
 		// create a list of all member notes and the variants they apply to.
@@ -1323,6 +1582,10 @@ function Oblique(){
 		return m;
 	};
   // Oblique
+  /** member
+   * @param i
+   * @param variant
+   */
   this.member = function(i, variant){
     // var e = this.forwardEvent(variant);
     // for(var j=0; j<i; j++){
@@ -1339,9 +1602,15 @@ function Oblique(){
     }
 		*/
   };
+  /** width
+   * @param variant
+   */
   this.width = function(variant){
     return oWidth(this.member(0, variant).staffPos, this.member(1, variant).staffPos);
   };
+  /** draw variant
+   * @param variant
+   */
   this.drawVar = function(variant){
     this.startX = curx;
     this.drawTexts(variant);
@@ -1466,36 +1735,67 @@ function Oblique(){
     }
     return false;
   };
+  /** draw to SVG
+   * @param prevPos
+   * @param semi
+   */
   this.draw = function(prevPos, semi){
     this.drawVar(false);
   };
   // Oblique
 }
 
-/** @class */
+/** @class
+ * @summary Takes a normal note and generates more specialised object
+ * @param note
+ * @param index
+ * @param oblique
+ */
 function ObliqueNote(note, index, oblique){
   // Takes a normal note and generates more specialised object
+  /** @member {ObliqueNote} */
   this.objType = "ObliqueNote";
+  /** @member {ObliqueNote} */
   this.text = note.text;
+  /** @member {ObliqueNote} */
   this.staffPos = note.staffPos;
+  /** @member {ObliqueNote} */
   this.before = false;
+  /** @member {ObliqueNote} */
   this.pitch = note.pitch;
+  /** @member {ObliqueNote} */
   this.rhythm = note.rhythm;
+  /** @member {ObliqueNote} */
   this.startX = false;
+  /** @member {ObliqueNote} */
   this.startY = false;
+  /** @member {ObliqueNote} */
   this.domObj = false;
+  /** @member {ObliqueNote} */
   this.voidnotes = note.voidnotes;
+  /** @member {ObliqueNote} */
   this.subType = note.subType;
+  /** @member {ObliqueNote} */
   this.dot = false;
+  /** @member {ObliqueNote} */
   this.example = note.example;
+  /** @member {ObliqueNote} */
   this.forceTail = note.forceTail;
+  /** @member {ObliqueNote} */
   this.oblique = oblique;
+  /** @member {ObliqueNote} */
   this.ligature = false;
+  /** @member {ObliqueNote} */
   this.index = false;
-	this.otherBits = [];
+  /** @member {ObliqueNote} */
+  this.otherBits = [];
+  /** @member {ObliqueNote} */
   this.prevEventObj = false;
+  /** @member {ObliqueNote} */
   this.nextEventObj = false;
-	this.MEIObj = false;
+  /** @member {ObliqueNote} */
+  this.MEIObj = false;
+  /** @member {ObliqueNote} */
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
   this.forwardEvent = function(variant){return this;};
@@ -6206,6 +6506,7 @@ function witnessReading(witness, choice, MSSToAll, allToMSS, edToAll, allToEd){
 // Misc
 //
 
+/** @class */
 function Classes(){
   this.classes = [];
   this.render = function(){

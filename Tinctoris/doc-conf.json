@@ -17,11 +17,16 @@
         "monospaceLinks": true
     },
     "opts": {
-        "template": "templates/default",
+        "template": "./node_modules/docdash/",
         "encoding": "utf8",
         "destination": "./doc/",
         "recurse": true,
         "tutorials": "./doc_md"
+    },
+    "docdash": {
+        "sectionOrder": ["Tutorials","Classes","Globals"],
+        "collapse": true,
+        "search": true
     }
 }
 

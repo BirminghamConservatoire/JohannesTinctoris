@@ -1,23 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="utf-8">
-    <title>JSDoc: Class: TextUnderlay</title>
-
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+    <title>TextUnderlay - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
 
-<div id="main">
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
 
-    <h1 class="page-title">Class: TextUnderlay</h1>
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h3>Tutorials</h3><ul><li><a href="tutorial-MusicEntry.html">MusicEntry</a></li></ul><h3>Classes</h3><ul><li><a href="Barline.html">Barline</a></li><li><a href="BlueClose.html">BlueClose</a></li><li><a href="BlueOpen.html">BlueOpen</a></li><li><a href="ChantNote.html">ChantNote</a><ul class='methods'><li data-type='method' style='display: none;'><a href="ChantNote.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="ChantNote.html#edit">edit</a></li><li data-type='method' style='display: none;'><a href="ChantNote.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="ChantNote.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="ChantNote.html#width">width</a></li></ul></li><li><a href="Classes.html">Classes</a></li><li><a href="Clef.html">Clef</a></li><li><a href="ColumnStart.html">ColumnStart</a></li><li><a href="Comment.html">Comment</a></li><li><a href="Custos.html">Custos</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Custos.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="Custos.html#MEINode">MEINode</a></li><li data-type='method' style='display: none;'><a href="Custos.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="Custos.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="Custos.html#width">width</a></li></ul></li><li><a href="Dot.html">Dot</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Dot.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="Dot.html#negativeSpace">negativeSpace</a></li><li data-type='method' style='display: none;'><a href="Dot.html#reallyAugments">reallyAugments</a></li><li data-type='method' style='display: none;'><a href="Dot.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="Dot.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="Dot.html#width">width</a></li></ul></li><li><a href="etc.html">etc</a></li><li><a href="ExampleBreak.html">ExampleBreak</a></li><li><a href="Fermata.html">Fermata</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Fermata.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="Fermata.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="Fermata.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="Fermata.html#width">width</a></li></ul></li><li><a href="FullClose.html">FullClose</a></li><li><a href="FullOpen.html">FullOpen</a></li><li><a href="GenericClose.html">GenericClose</a></li><li><a href="GenericOpen.html">GenericOpen</a></li><li><a href="HalfFullClose.html">HalfFullClose</a></li><li><a href="HalfFullOpen.html">HalfFullOpen</a></li><li><a href="LargeClose.html">LargeClose</a></li><li><a href="LargeOpen.html">LargeOpen</a></li><li><a href="LedgerLineChange.html">LedgerLineChange</a></li><li><a href="Ligature.html">Ligature</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Ligature.html#addChoice">addChoice</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#addElement">addElement</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#addEvent">addEvent</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#addNote">addNote</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#addOblique">addOblique</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#drawVar">drawVar</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#enrichEvent">enrichEvent</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#firstEvent">firstEvent</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#firstNoteIndexp">firstNoteIndexp</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#lastNoteIndexp">lastNoteIndexp</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#leftOverhang">leftOverhang</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#negativeSpace">negativeSpace</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#nextNote">nextNote</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#nextPos">nextPos</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#nthNote">nthNote</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#oblique">oblique</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#prevNote">prevNote</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#prevPos">prevPos</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#varEndStaffPos">varEndStaffPos</a></li><li data-type='method' style='display: none;'><a href="Ligature.html#width">width</a></li></ul></li><li><a href="LigatureComment.html">LigatureComment</a><ul class='methods'><li data-type='method' style='display: none;'><a href="LigatureComment.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="LigatureComment.html#drawVar">drawVar</a></li><li data-type='method' style='display: none;'><a href="LigatureComment.html#footnote">footnote</a></li><li data-type='method' style='display: none;'><a href="LigatureComment.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="LigatureComment.html#toText">toText</a></li></ul></li><li><a href="LigatureNote.html">LigatureNote</a><ul class='methods'><li data-type='method' style='display: none;'><a href="LigatureNote.html#backwardEvent">backwardEvent</a></li><li data-type='method' style='display: none;'><a href="LigatureNote.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="LigatureNote.html#drawVar">drawVar</a></li><li data-type='method' style='display: none;'><a href="LigatureNote.html#forwardEvent">forwardEvent</a></li><li data-type='method' style='display: none;'><a href="LigatureNote.html#lstem">lstem</a></li><li data-type='method' style='display: none;'><a href="LigatureNote.html#nextEvent">nextEvent</a></li><li data-type='method' style='display: none;'><a href="LigatureNote.html#prevEvent">prevEvent</a></li><li data-type='method' style='display: none;'><a href="LigatureNote.html#rstem">rstem</a></li><li data-type='method' style='display: none;'><a href="LigatureNote.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="LigatureNote.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="LigatureNote.html#varEndStaffPos">varEndStaffPos</a></li><li data-type='method' style='display: none;'><a href="LigatureNote.html#varStartStaffPos">varStartStaffPos</a></li><li data-type='method' style='display: none;'><a href="LigatureNote.html#width">width</a></li></ul></li><li><a href="LigChoice.html">LigChoice</a></li><li><a href="LongRest.html">LongRest</a></li><li><a href="MaxRest.html">MaxRest</a></li><li><a href="MChoice.html">MChoice</a></li><li><a href="MensuralSignature.html">MensuralSignature</a></li><li><a href="MESuper.html">MESuper</a></li><li><a href="MNilReading.html">MNilReading</a></li><li><a href="MReading.html">MReading</a></li><li><a href="MusicExample.html">MusicExample</a><ul class='methods'><li data-type='method' style='display: none;'><a href="MusicExample.html#appendStaffDefs">appendStaffDefs</a></li><li data-type='method' style='display: none;'><a href="MusicExample.html#commentsDiv">commentsDiv</a></li><li data-type='method' style='display: none;'><a href="MusicExample.html#commentsTip">commentsTip</a></li><li data-type='method' style='display: none;'><a href="MusicExample.html#easyRhythms">easyRhythms</a></li><li data-type='method' style='display: none;'><a href="MusicExample.html#gatherStaffs">gatherStaffs</a></li><li data-type='method' style='display: none;'><a href="MusicExample.html#height">height</a></li><li data-type='method' style='display: none;'><a href="MusicExample.html#markResolved">markResolved</a></li><li data-type='method' style='display: none;'><a href="MusicExample.html#mensurStrich">mensurStrich</a></li><li data-type='method' style='display: none;'><a href="MusicExample.html#parse">parse</a></li><li data-type='method' style='display: none;'><a href="MusicExample.html#regenerateMEILinks">regenerateMEILinks</a></li><li data-type='method' style='display: none;'><a href="MusicExample.html#reset">reset</a></li><li data-type='method' style='display: none;'><a href="MusicExample.html#setSysWidths">setSysWidths</a></li><li data-type='method' style='display: none;'><a href="MusicExample.html#staffDefForPart">staffDefForPart</a></li><li data-type='method' style='display: none;'><a href="MusicExample.html#startingStaffForPart">startingStaffForPart</a></li><li data-type='method' style='display: none;'><a href="MusicExample.html#stupidVerovioStretch">stupidVerovioStretch</a></li><li data-type='method' style='display: none;'><a href="MusicExample.html#targetWidth">targetWidth</a></li><li data-type='method' style='display: none;'><a href="MusicExample.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="MusicExample.html#toTEI">toTEI</a></li><li data-type='method' style='display: none;'><a href="MusicExample.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="MusicExample.html#width">width</a></li></ul></li><li><a href="MusicOptionalSpace.html">MusicOptionalSpace</a></li><li><a href="MusicPunctuation.html">MusicPunctuation</a></li><li><a href="MusicWordJoin.html">MusicWordJoin</a></li><li><a href="MusicWordSplit.html">MusicWordSplit</a></li><li><a href="NegativeSpace.html">NegativeSpace</a></li><li><a href="Neume.html">Neume</a></li><li><a href="NeumeItem.html">NeumeItem</a></li><li><a href="Notation.html">Notation</a></li><li><a href="Note.html">Note</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Note.html#commentPos">commentPos</a></li><li data-type='method' style='display: none;'><a href="Note.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="Note.html#edit">edit</a></li><li data-type='method' style='display: none;'><a href="Note.html#negativeSpace">negativeSpace</a></li><li data-type='method' style='display: none;'><a href="Note.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="Note.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="Note.html#width">width</a></li></ul></li><li><a href="Oblique.html">Oblique</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Oblique.html#backwardEvent">backwardEvent</a></li><li data-type='method' style='display: none;'><a href="Oblique.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="Oblique.html#drawComments">drawComments</a></li><li data-type='method' style='display: none;'><a href="Oblique.html#drawTexts">drawTexts</a></li><li data-type='method' style='display: none;'><a href="Oblique.html#drawVar">drawVar</a></li><li data-type='method' style='display: none;'><a href="Oblique.html#enrichEvent">enrichEvent</a></li><li data-type='method' style='display: none;'><a href="Oblique.html#extendMembers">extendMembers</a></li><li data-type='method' style='display: none;'><a href="Oblique.html#flattenedMembers">flattenedMembers</a></li><li data-type='method' style='display: none;'><a href="Oblique.html#forwardEvent">forwardEvent</a></li><li data-type='method' style='display: none;'><a href="Oblique.html#lstem">lstem</a></li><li data-type='method' style='display: none;'><a href="Oblique.html#member">member</a></li><li data-type='method' style='display: none;'><a href="Oblique.html#nextEvent">nextEvent</a></li><li data-type='method' style='display: none;'><a href="Oblique.html#prevEvent">prevEvent</a></li><li data-type='method' style='display: none;'><a href="Oblique.html#rstem">rstem</a></li><li data-type='method' style='display: none;'><a href="Oblique.html#width">width</a></li><li data-type='method' style='display: none;'><a href="Oblique.html#width">width</a></li></ul></li><li><a href="ObliqueNeume.html">ObliqueNeume</a></li><li><a href="ObliqueNote.html">ObliqueNote</a></li><li><a href="ObliqueNoteChoice.html">ObliqueNoteChoice</a></li><li><a href="Parameters.html">Parameters</a></li><li><a href="Part.html">Part</a></li><li><a href="PositiveSpace.html">PositiveSpace</a></li><li><a href="ProportionSign.html">ProportionSign</a></li><li><a href="RedClose.html">RedClose</a></li><li><a href="RedlineClose.html">RedlineClose</a></li><li><a href="RedlineOpen.html">RedlineOpen</a></li><li><a href="RedOpen.html">RedOpen</a></li><li><a href="Repeat.html">Repeat</a></li><li><a href="Rest.html">Rest</a></li><li><a href="SignumCongruentiae.html">SignumCongruentiae</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SignumCongruentiae.html#backwardEvent">backwardEvent</a></li><li data-type='method' style='display: none;'><a href="SignumCongruentiae.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="SignumCongruentiae.html#forwardEvent">forwardEvent</a></li><li data-type='method' style='display: none;'><a href="SignumCongruentiae.html#nextEvent">nextEvent</a></li><li data-type='method' style='display: none;'><a href="SignumCongruentiae.html#prevEvent">prevEvent</a></li><li data-type='method' style='display: none;'><a href="SignumCongruentiae.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="SignumCongruentiae.html#varEndStaffPos">varEndStaffPos</a></li><li data-type='method' style='display: none;'><a href="SignumCongruentiae.html#varStartStaffPos">varStartStaffPos</a></li></ul></li><li><a href="SolmizationSign.html">SolmizationSign</a></li><li><a href="SolmizationSignature.html">SolmizationSignature</a></li><li><a href="StackedProportionSigns.html">StackedProportionSigns</a></li><li><a href="Staff.html">Staff</a></li><li><a href="StrikethroughClose.html">StrikethroughClose</a></li><li><a href="StrikethroughOpen.html">StrikethroughOpen</a></li><li><a href="Tacet.html">Tacet</a></li><li><a href="TextUnderlay.html">TextUnderlay</a></li><li><a href="upsideDownClose.html">upsideDownClose</a></li><li><a href="upsideDownOpen.html">upsideDownOpen</a></li><li><a href="ValueChoice.html">ValueChoice</a></li><li><a href="ValueReading.html">ValueReading</a></li><li><a href="VoidClose.html">VoidClose</a></li><li><a href="VoidOpen.html">VoidOpen</a></li></ul>undefined<h3>Global</h3><ul><li><a href="global.html#actOnColoration">actOnColoration</a></li><li><a href="global.html#actOnDots">actOnDots</a></li><li><a href="global.html#addAllStartTimes">addAllStartTimes</a></li><li><a href="global.html#addBreveBoundariesForBlock">addBreveBoundariesForBlock</a></li><li><a href="global.html#addStartTimesForBlock">addStartTimesForBlock</a></li><li><a href="global.html#allUnalterableImperfectLevels">allUnalterableImperfectLevels</a></li><li><a href="global.html#alterableLevels">alterableLevels</a></li><li><a href="global.html#anteSim">anteSim</a></li><li><a href="global.html#augDot">augDot</a></li><li><a href="global.html#beatIndependentDurations">beatIndependentDurations</a></li><li><a href="global.html#beatOfDur">beatOfDur</a></li><li><a href="global.html#beatOfUnit">beatOfUnit</a></li><li><a href="global.html#beatUnitStructure">beatUnitStructure</a></li><li><a href="global.html#blockProportionMultiplier">blockProportionMultiplier</a></li><li><a href="global.html#breveDifference">breveDifference</a></li><li><a href="global.html#canImperfect">canImperfect</a></li><li><a href="global.html#checkForGeneralAlteration">checkForGeneralAlteration</a></li><li><a href="global.html#colourp">colourp</a></li><li><a href="global.html#compoundNotep">compoundNotep</a></li><li><a href="global.html#consumeParenthesis">consumeParenthesis</a></li><li><a href="global.html#divisionDot">divisionDot</a></li><li><a href="global.html#divisionLikeRests">divisionLikeRests</a></li><li><a href="global.html#dupleMinimCountFromElement">dupleMinimCountFromElement</a></li><li><a href="global.html#enrichText">enrichText</a></li><li><a href="global.html#extendTacet">extendTacet</a></li><li><a href="global.html#firstBeatAlteration">firstBeatAlteration</a></li><li><a href="global.html#firstBeatImperfection">firstBeatImperfection</a></li><li><a href="global.html#firstBeatImperfectionCheck">firstBeatImperfectionCheck</a></li><li><a href="global.html#firstPerfectLevel">firstPerfectLevel</a></li><li><a href="global.html#gcd">gcd</a></li><li><a href="global.html#getAtomicSections">getAtomicSections</a></li><li><a href="global.html#getEventsByMensurationForSection">getEventsByMensurationForSection</a></li><li><a href="global.html#getLayers">getLayers</a></li><li><a href="global.html#getMusicTextSup">getMusicTextSup</a></li><li><a href="global.html#getParameters">getParameters</a></li><li><a href="global.html#getString">getString</a></li><li><a href="global.html#getSubText">getSubText</a></li><li><a href="global.html#getTag">getTag</a></li><li><a href="global.html#hasNoSections">hasNoSections</a></li><li><a href="global.html#imperfectingLevels">imperfectingLevels</a></li><li><a href="global.html#indexOfNextDot">indexOfNextDot</a></li><li><a href="global.html#indexOfNextSameOrLongerOrDot">indexOfNextSameOrLongerOrDot</a></li><li><a href="global.html#indexOfPrevLongerOrDot">indexOfPrevLongerOrDot</a></li><li><a href="global.html#isAlterable">isAlterable</a></li><li><a href="global.html#labelRests">labelRests</a></li><li><a href="global.html#leveleq">leveleq</a></li><li><a href="global.html#linesp">linesp</a></li><li><a href="global.html#mensurSummary">mensurSummary</a></li><li><a href="global.html#midBeatAlteration">midBeatAlteration</a></li><li><a href="global.html#midBeatImperfection">midBeatImperfection</a></li><li><a href="global.html#minimStructures">minimStructures</a></li><li><a href="global.html#nextBarline">nextBarline</a></li><li><a href="global.html#nextChantNote">nextChantNote</a></li><li><a href="global.html#nextChoice">nextChoice</a></li><li><a href="global.html#nextChoiceLikeThing">nextChoiceLikeThing</a></li><li><a href="global.html#nextChoiceLikeThing2">nextChoiceLikeThing2</a></li><li><a href="global.html#nextColRef">nextColRef</a></li><li><a href="global.html#nextComment">nextComment</a></li><li><a href="global.html#nextCustos">nextCustos</a></li><li><a href="global.html#nextDot">nextDot</a></li><li><a href="global.html#nextEvent">nextEvent</a></li><li><a href="global.html#nextFermata">nextFermata</a></li><li><a href="global.html#nextInfo">nextInfo</a></li><li><a href="global.html#nextLigature">nextLigature</a></li><li><a href="global.html#nextLigChoice">nextLigChoice</a></li><li><a href="global.html#nextLongRest">nextLongRest</a></li><li><a href="global.html#nextMusic">nextMusic</a></li><li><a href="global.html#nextNeume">nextNeume</a></li><li><a href="global.html#nextNote">nextNote</a></li><li><a href="global.html#nextOblique">nextOblique</a></li><li><a href="global.html#nextObliqueNeume">nextObliqueNeume</a></li><li><a href="global.html#nextObliqueNoteChoice">nextObliqueNoteChoice</a></li><li><a href="global.html#nextPart">nextPart</a></li><li><a href="global.html#nextPartnameReading">nextPartnameReading</a></li><li><a href="global.html#nextRepeat">nextRepeat</a></li><li><a href="global.html#nextRest">nextRest</a></li><li><a href="global.html#nextSignumCongruentiae">nextSignumCongruentiae</a></li><li><a href="global.html#nextSolmSign">nextSolmSign</a></li><li><a href="global.html#nextTacet">nextTacet</a></li><li><a href="global.html#nextTaglike">nextTaglike</a></li><li><a href="global.html#nextText">nextText</a></li><li><a href="global.html#nextTextChoice">nextTextChoice</a></li><li><a href="global.html#noteInt">noteInt</a></li><li><a href="global.html#noteIntFromDur">noteIntFromDur</a></li><li><a href="global.html#noteOrRest">noteOrRest</a></li><li><a href="global.html#notePerfectAsWhole">notePerfectAsWhole</a></li><li><a href="global.html#nsResolver">nsResolver</a></li><li><a href="global.html#parseClef">parseClef</a></li><li><a href="global.html#parseClefReading">parseClefReading</a></li><li><a href="global.html#parseClefVar">parseClefVar</a></li><li><a href="global.html#parseMens">parseMens</a></li><li><a href="global.html#parseMensReading">parseMensReading</a></li><li><a href="global.html#parseProp">parseProp</a></li><li><a href="global.html#parseSolm">parseSolm</a></li><li><a href="global.html#parseSolmReading">parseSolmReading</a></li><li><a href="global.html#parseSolmVar">parseSolmVar</a></li><li><a href="global.html#parseStaff">parseStaff</a></li><li><a href="global.html#propNum">propNum</a></li><li><a href="global.html#proportionMultiplier">proportionMultiplier</a></li><li><a href="global.html#propProportionMultiplier">propProportionMultiplier</a></li><li><a href="global.html#readDur">readDur</a></li><li><a href="global.html#regularlyPerfect">regularlyPerfect</a></li><li><a href="global.html#secondBeatAlteration">secondBeatAlteration</a></li><li><a href="global.html#secondBeatImperfection">secondBeatImperfection</a></li><li><a href="global.html#simpleMinims">simpleMinims</a></li><li><a href="global.html#simplestAlterations">simplestAlterations</a></li><li><a href="global.html#solidBlock">solidBlock</a></li><li><a href="global.html#thirdBeatAlteration">thirdBeatAlteration</a></li><li><a href="global.html#thirdBeatImperfection">thirdBeatImperfection</a></li><li><a href="global.html#windowDuration">windowDuration</a></li><li><a href="global.html#writeAlteration">writeAlteration</a></li><li><a href="global.html#writeDur">writeDur</a></li><li><a href="global.html#writeImperfection">writeImperfection</a></li><li><a href="global.html#writeSimpleImperfection">writeSimpleImperfection</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">TextUnderlay</h1>
+    
 
     
 
@@ -28,34 +46,24 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>TextUnderlay<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2>
+        TextUnderlay
+        </h2>
         
     
 </header>
 
 <article>
-    <div class="container-overview">
     
+        <div class="container-overview">
         
+            
 
     
 
-    
     <h4 class="name" id="TextUnderlay"><span class="type-signature"></span>new TextUnderlay<span class="signature">()</span><span class="type-signature"></span></h4>
-    
 
     
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -63,34 +71,34 @@
 <dl class="details">
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="classes.js.html">classes.js</a>, <a href="classes.js.html#line3762">line 3762</a>
     </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
     
 
     
@@ -119,18 +127,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
     
-    </div>
 
     
 
     
 
     
-
+    
     
 
-    
+     
 
     
 
@@ -148,19 +169,25 @@
 
 
 
+    
+    
 </div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Barline.html">Barline</a></li><li><a href="BlueClose.html">BlueClose</a></li><li><a href="BlueOpen.html">BlueOpen</a></li><li><a href="ChantNote.html">ChantNote</a></li><li><a href="Classes.html">Classes</a></li><li><a href="Clef.html">Clef</a></li><li><a href="ColumnStart.html">ColumnStart</a></li><li><a href="Comment.html">Comment</a></li><li><a href="Custos.html">Custos</a></li><li><a href="Dot.html">Dot</a></li><li><a href="etc.html">etc</a></li><li><a href="ExampleBreak.html">ExampleBreak</a></li><li><a href="Fermata.html">Fermata</a></li><li><a href="FullClose.html">FullClose</a></li><li><a href="FullOpen.html">FullOpen</a></li><li><a href="GenericClose.html">GenericClose</a></li><li><a href="GenericOpen.html">GenericOpen</a></li><li><a href="HalfFullClose.html">HalfFullClose</a></li><li><a href="HalfFullOpen.html">HalfFullOpen</a></li><li><a href="LargeClose.html">LargeClose</a></li><li><a href="LargeOpen.html">LargeOpen</a></li><li><a href="LedgerLineChange.html">LedgerLineChange</a></li><li><a href="Ligature.html">Ligature</a></li><li><a href="LigatureComment.html">LigatureComment</a></li><li><a href="LigatureNote.html">LigatureNote</a></li><li><a href="LigChoice.html">LigChoice</a></li><li><a href="LongRest.html">LongRest</a></li><li><a href="MaxRest.html">MaxRest</a></li><li><a href="MChoice.html">MChoice</a></li><li><a href="MensuralSignature.html">MensuralSignature</a></li><li><a href="MESuper.html">MESuper</a></li><li><a href="MNilReading.html">MNilReading</a></li><li><a href="MReading.html">MReading</a></li><li><a href="MusicExample.html">MusicExample</a></li><li><a href="MusicOptionalSpace.html">MusicOptionalSpace</a></li><li><a href="MusicPunctuation.html">MusicPunctuation</a></li><li><a href="MusicWordJoin.html">MusicWordJoin</a></li><li><a href="MusicWordSplit.html">MusicWordSplit</a></li><li><a href="NegativeSpace.html">NegativeSpace</a></li><li><a href="Neume.html">Neume</a></li><li><a href="NeumeItem.html">NeumeItem</a></li><li><a href="Notation.html">Notation</a></li><li><a href="Note.html">Note</a></li><li><a href="Oblique.html">Oblique</a></li><li><a href="ObliqueNeume.html">ObliqueNeume</a></li><li><a href="ObliqueNote.html">ObliqueNote</a></li><li><a href="ObliqueNoteChoice.html">ObliqueNoteChoice</a></li><li><a href="Parameters.html">Parameters</a></li><li><a href="Part.html">Part</a></li><li><a href="PositiveSpace.html">PositiveSpace</a></li><li><a href="ProportionSign.html">ProportionSign</a></li><li><a href="RedClose.html">RedClose</a></li><li><a href="RedlineClose.html">RedlineClose</a></li><li><a href="RedlineOpen.html">RedlineOpen</a></li><li><a href="RedOpen.html">RedOpen</a></li><li><a href="Repeat.html">Repeat</a></li><li><a href="Rest.html">Rest</a></li><li><a href="SignumCongruentiae.html">SignumCongruentiae</a></li><li><a href="SolmizationSign.html">SolmizationSign</a></li><li><a href="SolmizationSignature.html">SolmizationSignature</a></li><li><a href="StackedProportionSigns.html">StackedProportionSigns</a></li><li><a href="Staff.html">Staff</a></li><li><a href="StrikethroughClose.html">StrikethroughClose</a></li><li><a href="StrikethroughOpen.html">StrikethroughOpen</a></li><li><a href="Tacet.html">Tacet</a></li><li><a href="TextUnderlay.html">TextUnderlay</a></li><li><a href="upsideDownClose.html">upsideDownClose</a></li><li><a href="upsideDownOpen.html">upsideDownOpen</a></li><li><a href="ValueChoice.html">ValueChoice</a></li><li><a href="ValueReading.html">ValueReading</a></li><li><a href="VoidClose.html">VoidClose</a></li><li><a href="VoidOpen.html">VoidOpen</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-MusicEntry.html">MusicEntry</a></li></ul><h3>Global</h3><ul><li><a href="global.html#actOnColoration">actOnColoration</a></li><li><a href="global.html#actOnDots">actOnDots</a></li><li><a href="global.html#addAllStartTimes">addAllStartTimes</a></li><li><a href="global.html#addBreveBoundariesForBlock">addBreveBoundariesForBlock</a></li><li><a href="global.html#addStartTimesForBlock">addStartTimesForBlock</a></li><li><a href="global.html#allUnalterableImperfectLevels">allUnalterableImperfectLevels</a></li><li><a href="global.html#alterableLevels">alterableLevels</a></li><li><a href="global.html#anteSim">anteSim</a></li><li><a href="global.html#augDot">augDot</a></li><li><a href="global.html#beatIndependentDurations">beatIndependentDurations</a></li><li><a href="global.html#beatOfDur">beatOfDur</a></li><li><a href="global.html#beatOfUnit">beatOfUnit</a></li><li><a href="global.html#beatUnitStructure">beatUnitStructure</a></li><li><a href="global.html#blockProportionMultiplier">blockProportionMultiplier</a></li><li><a href="global.html#breveDifference">breveDifference</a></li><li><a href="global.html#canImperfect">canImperfect</a></li><li><a href="global.html#checkForGeneralAlteration">checkForGeneralAlteration</a></li><li><a href="global.html#colourp">colourp</a></li><li><a href="global.html#compoundNotep">compoundNotep</a></li><li><a href="global.html#consumeParenthesis">consumeParenthesis</a></li><li><a href="global.html#divisionDot">divisionDot</a></li><li><a href="global.html#divisionLikeRests">divisionLikeRests</a></li><li><a href="global.html#dupleMinimCountFromElement">dupleMinimCountFromElement</a></li><li><a href="global.html#enrichText">enrichText</a></li><li><a href="global.html#extendTacet">extendTacet</a></li><li><a href="global.html#firstBeatAlteration">firstBeatAlteration</a></li><li><a href="global.html#firstBeatImperfection">firstBeatImperfection</a></li><li><a href="global.html#firstBeatImperfectionCheck">firstBeatImperfectionCheck</a></li><li><a href="global.html#firstPerfectLevel">firstPerfectLevel</a></li><li><a href="global.html#gcd">gcd</a></li><li><a href="global.html#getAtomicSections">getAtomicSections</a></li><li><a href="global.html#getEventsByMensurationForSection">getEventsByMensurationForSection</a></li><li><a href="global.html#getLayers">getLayers</a></li><li><a href="global.html#getMusicTextSup">getMusicTextSup</a></li><li><a href="global.html#getParameters">getParameters</a></li><li><a href="global.html#getString">getString</a></li><li><a href="global.html#getSubText">getSubText</a></li><li><a href="global.html#getTag">getTag</a></li><li><a href="global.html#hasNoSections">hasNoSections</a></li><li><a href="global.html#imperfectingLevels">imperfectingLevels</a></li><li><a href="global.html#indexOfNextDot">indexOfNextDot</a></li><li><a href="global.html#indexOfNextSameOrLongerOrDot">indexOfNextSameOrLongerOrDot</a></li><li><a href="global.html#indexOfPrevLongerOrDot">indexOfPrevLongerOrDot</a></li><li><a href="global.html#isAlterable">isAlterable</a></li><li><a href="global.html#labelRests">labelRests</a></li><li><a href="global.html#leveleq">leveleq</a></li><li><a href="global.html#linesp">linesp</a></li><li><a href="global.html#mensurSummary">mensurSummary</a></li><li><a href="global.html#midBeatAlteration">midBeatAlteration</a></li><li><a href="global.html#midBeatImperfection">midBeatImperfection</a></li><li><a href="global.html#minimStructures">minimStructures</a></li><li><a href="global.html#nextBarline">nextBarline</a></li><li><a href="global.html#nextChantNote">nextChantNote</a></li><li><a href="global.html#nextChoice">nextChoice</a></li><li><a href="global.html#nextChoiceLikeThing">nextChoiceLikeThing</a></li><li><a href="global.html#nextChoiceLikeThing2">nextChoiceLikeThing2</a></li><li><a href="global.html#nextColRef">nextColRef</a></li><li><a href="global.html#nextComment">nextComment</a></li><li><a href="global.html#nextCustos">nextCustos</a></li><li><a href="global.html#nextDot">nextDot</a></li><li><a href="global.html#nextEvent">nextEvent</a></li><li><a href="global.html#nextFermata">nextFermata</a></li><li><a href="global.html#nextInfo">nextInfo</a></li><li><a href="global.html#nextLigature">nextLigature</a></li><li><a href="global.html#nextLigChoice">nextLigChoice</a></li><li><a href="global.html#nextLongRest">nextLongRest</a></li><li><a href="global.html#nextMusic">nextMusic</a></li><li><a href="global.html#nextNeume">nextNeume</a></li><li><a href="global.html#nextNote">nextNote</a></li><li><a href="global.html#nextOblique">nextOblique</a></li><li><a href="global.html#nextObliqueNeume">nextObliqueNeume</a></li><li><a href="global.html#nextObliqueNoteChoice">nextObliqueNoteChoice</a></li><li><a href="global.html#nextPart">nextPart</a></li><li><a href="global.html#nextPartnameReading">nextPartnameReading</a></li><li><a href="global.html#nextRepeat">nextRepeat</a></li><li><a href="global.html#nextRest">nextRest</a></li><li><a href="global.html#nextSignumCongruentiae">nextSignumCongruentiae</a></li><li><a href="global.html#nextSolmSign">nextSolmSign</a></li><li><a href="global.html#nextTacet">nextTacet</a></li><li><a href="global.html#nextTaglike">nextTaglike</a></li><li><a href="global.html#nextText">nextText</a></li><li><a href="global.html#nextTextChoice">nextTextChoice</a></li><li><a href="global.html#noteInt">noteInt</a></li><li><a href="global.html#noteIntFromDur">noteIntFromDur</a></li><li><a href="global.html#noteOrRest">noteOrRest</a></li><li><a href="global.html#notePerfectAsWhole">notePerfectAsWhole</a></li><li><a href="global.html#nsResolver">nsResolver</a></li><li><a href="global.html#parseClef">parseClef</a></li><li><a href="global.html#parseClefReading">parseClefReading</a></li><li><a href="global.html#parseClefVar">parseClefVar</a></li><li><a href="global.html#parseMens">parseMens</a></li><li><a href="global.html#parseMensReading">parseMensReading</a></li><li><a href="global.html#parseProp">parseProp</a></li><li><a href="global.html#parseSolm">parseSolm</a></li><li><a href="global.html#parseSolmReading">parseSolmReading</a></li><li><a href="global.html#parseSolmVar">parseSolmVar</a></li><li><a href="global.html#parseStaff">parseStaff</a></li><li><a href="global.html#propNum">propNum</a></li><li><a href="global.html#proportionMultiplier">proportionMultiplier</a></li><li><a href="global.html#propProportionMultiplier">propProportionMultiplier</a></li><li><a href="global.html#readDur">readDur</a></li><li><a href="global.html#regularlyPerfect">regularlyPerfect</a></li><li><a href="global.html#secondBeatAlteration">secondBeatAlteration</a></li><li><a href="global.html#secondBeatImperfection">secondBeatImperfection</a></li><li><a href="global.html#simpleMinims">simpleMinims</a></li><li><a href="global.html#simplestAlterations">simplestAlterations</a></li><li><a href="global.html#solidBlock">solidBlock</a></li><li><a href="global.html#thirdBeatAlteration">thirdBeatAlteration</a></li><li><a href="global.html#thirdBeatImperfection">thirdBeatImperfection</a></li><li><a href="global.html#windowDuration">windowDuration</a></li><li><a href="global.html#writeAlteration">writeAlteration</a></li><li><a href="global.html#writeDur">writeDur</a></li><li><a href="global.html#writeImperfection">writeImperfection</a></li><li><a href="global.html#writeSimpleImperfection">writeSimpleImperfection</a></li></ul>
-</nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Fri Jun 12 2020 11:11:38 GMT+0200 (GMT+02:00)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Fri Jun 12 2020 11:49:28 GMT+0200 (GMT+02:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
 </body>
 </html>

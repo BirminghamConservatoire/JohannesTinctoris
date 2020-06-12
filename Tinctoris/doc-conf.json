@@ -21,12 +21,16 @@
         "encoding": "utf8",
         "destination": "./doc/",
         "recurse": true,
-        "tutorials": "./doc_md"
+        "tutorials": "./doc_md",
+        "readme": "readme.md"
     },
     "docdash": {
-        "sectionOrder": ["Tutorials","Classes","Globals"],
+        "sectionOrder": ["Tutorials","Modules","Classes","Globals"],
         "collapse": true,
-        "search": true
+        "search": true,
+        "scopeInOutputPath": false,
+        "nameInOutputPath": false,
+        "versionInOutputPath": false
     }
 }
 

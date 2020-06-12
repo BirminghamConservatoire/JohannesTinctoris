@@ -8,6 +8,7 @@
  *  have positions correct, dots classified and implicit mensuration
  *  resolved (although the system will attempt to guess major and
  *  minor modus from rests).
+ * @module mensural-rhythm
  */
 
 /////////////////////////////

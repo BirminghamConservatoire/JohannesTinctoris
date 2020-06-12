@@ -1,0 +1,7144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>music-parser - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h3>Tutorials</h3><ul><li><a href="tutorial-MusicEntry.html">MusicEntry</a></li></ul><h3>Modules</h3><ul><li><a href="module-mensural-rhythm.html">mensural-rhythm</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~actOnColoration">actOnColoration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~actOnDots">actOnDots</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~addAllStartTimes">addAllStartTimes</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~addBreveBoundariesForBlock">addBreveBoundariesForBlock</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~addStartTimesForBlock">addStartTimesForBlock</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~allUnalterableImperfectLevels">allUnalterableImperfectLevels</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~alterableLevels">alterableLevels</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~anteSim">anteSim</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~augDot">augDot</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~beatIndependentDurations">beatIndependentDurations</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~beatOfDur">beatOfDur</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~beatOfUnit">beatOfUnit</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~beatUnitStructure">beatUnitStructure</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~blockProportionMultiplier">blockProportionMultiplier</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~breveDifference">breveDifference</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~canImperfect">canImperfect</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~checkForGeneralAlteration">checkForGeneralAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~divisionDot">divisionDot</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~divisionLikeRests">divisionLikeRests</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~dupleMinimCountFromElement">dupleMinimCountFromElement</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~firstBeatAlteration">firstBeatAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~firstBeatImperfection">firstBeatImperfection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~firstBeatImperfectionCheck">firstBeatImperfectionCheck</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~firstPerfectLevel">firstPerfectLevel</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~gcd">gcd</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~getAtomicSections">getAtomicSections</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~getEventsByMensurationForSection">getEventsByMensurationForSection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~getLayers">getLayers</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~hasNoSections">hasNoSections</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~imperfectingLevels">imperfectingLevels</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~indexOfNextDot">indexOfNextDot</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~indexOfNextSameOrLongerOrDot">indexOfNextSameOrLongerOrDot</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~indexOfPrevLongerOrDot">indexOfPrevLongerOrDot</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~isAlterable">isAlterable</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~labelRests">labelRests</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~leveleq">leveleq</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~mensurSummary">mensurSummary</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~midBeatAlteration">midBeatAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~midBeatImperfection">midBeatImperfection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~minimStructures">minimStructures</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~noteInt">noteInt</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~noteIntFromDur">noteIntFromDur</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~noteOrRest">noteOrRest</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~notePerfectAsWhole">notePerfectAsWhole</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~nsResolver">nsResolver</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~proportionMultiplier">proportionMultiplier</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~propProportionMultiplier">propProportionMultiplier</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~readDur">readDur</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~regularlyPerfect">regularlyPerfect</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~secondBeatAlteration">secondBeatAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~secondBeatImperfection">secondBeatImperfection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~simpleMinims">simpleMinims</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~simplestAlterations">simplestAlterations</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~solidBlock">solidBlock</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~thirdBeatAlteration">thirdBeatAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~thirdBeatImperfection">thirdBeatImperfection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~windowDuration">windowDuration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~writeAlteration">writeAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~writeDur">writeDur</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~writeImperfection">writeImperfection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~writeSimpleImperfection">writeSimpleImperfection</a></li></ul></li><li><a href="module-music-classes.html">music-classes</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-music-classes.html#~compoundNotep">compoundNotep</a></li></ul></li><li><a href="module-music-parser.html">music-parser</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-music-parser.html#~colourp">colourp</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~consumeParenthesis">consumeParenthesis</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~enrichText">enrichText</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~extendTacet">extendTacet</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~getMusicTextSup">getMusicTextSup</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~getParameters">getParameters</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~getString">getString</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~getSubText">getSubText</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~getTag">getTag</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~linesp">linesp</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextBarline">nextBarline</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextChantNote">nextChantNote</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextChoice">nextChoice</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextChoiceLikeThing">nextChoiceLikeThing</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextChoiceLikeThing2">nextChoiceLikeThing2</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextColRef">nextColRef</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextComment">nextComment</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextCustos">nextCustos</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextDot">nextDot</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextEvent">nextEvent</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextFermata">nextFermata</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextInfo">nextInfo</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextLigature">nextLigature</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextLigChoice">nextLigChoice</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextLongRest">nextLongRest</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextMusic">nextMusic</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextNeume">nextNeume</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextNote">nextNote</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextOblique">nextOblique</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextObliqueNeume">nextObliqueNeume</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextObliqueNoteChoice">nextObliqueNoteChoice</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextPart">nextPart</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextPartnameReading">nextPartnameReading</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextRepeat">nextRepeat</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextRest">nextRest</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextSignumCongruentiae">nextSignumCongruentiae</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextSolmSign">nextSolmSign</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextTacet">nextTacet</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextTaglike">nextTaglike</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextText">nextText</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~nextTextChoice">nextTextChoice</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~parseClef">parseClef</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~parseClefReading">parseClefReading</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~parseClefVar">parseClefVar</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~parseMens">parseMens</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~parseMensReading">parseMensReading</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~parseMensReading">parseMensReading</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~parseProp">parseProp</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~parseSolm">parseSolm</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~parseSolmReading">parseSolmReading</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~parseSolmVar">parseSolmVar</a></li><li data-type='method' style='display: none;'><a href="module-music-parser.html#~parseStaff">parseStaff</a></li></ul></li></ul><h3>Classes</h3><ul><li><a href="module-music-classes-Barline.html">Barline</a></li><li><a href="module-music-classes-BlueClose.html">BlueClose</a></li><li><a href="module-music-classes-BlueOpen.html">BlueOpen</a></li><li><a href="module-music-classes-ChantNote.html">ChantNote</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-music-classes-ChantNote.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-ChantNote.html#edit">edit</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-ChantNote.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-ChantNote.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-ChantNote.html#width">width</a></li></ul></li><li><a href="module-music-classes-Classes.html">Classes</a></li><li><a href="module-music-classes-Clef.html">Clef</a></li><li><a href="module-music-classes-ColumnStart.html">ColumnStart</a></li><li><a href="module-music-classes-Comment.html">Comment</a></li><li><a href="module-music-classes-Custos.html">Custos</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-music-classes-Custos.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Custos.html#MEINode">MEINode</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Custos.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Custos.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Custos.html#width">width</a></li></ul></li><li><a href="module-music-classes-Dot.html">Dot</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-music-classes-Dot.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Dot.html#negativeSpace">negativeSpace</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Dot.html#reallyAugments">reallyAugments</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Dot.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Dot.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Dot.html#width">width</a></li></ul></li><li><a href="module-music-classes-etc.html">etc</a></li><li><a href="module-music-classes-ExampleBreak.html">ExampleBreak</a></li><li><a href="module-music-classes-Fermata.html">Fermata</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-music-classes-Fermata.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Fermata.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Fermata.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Fermata.html#width">width</a></li></ul></li><li><a href="module-music-classes-FullClose.html">FullClose</a></li><li><a href="module-music-classes-FullOpen.html">FullOpen</a></li><li><a href="module-music-classes-GenericClose.html">GenericClose</a></li><li><a href="module-music-classes-GenericOpen.html">GenericOpen</a></li><li><a href="module-music-classes-HalfFullClose.html">HalfFullClose</a></li><li><a href="module-music-classes-HalfFullOpen.html">HalfFullOpen</a></li><li><a href="module-music-classes-LargeClose.html">LargeClose</a></li><li><a href="module-music-classes-LargeOpen.html">LargeOpen</a></li><li><a href="module-music-classes-LedgerLineChange.html">LedgerLineChange</a></li><li><a href="module-music-classes-Ligature.html">Ligature</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#addChoice">addChoice</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#addElement">addElement</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#addEvent">addEvent</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#addNote">addNote</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#addOblique">addOblique</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#drawVar">drawVar</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#enrichEvent">enrichEvent</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#firstEvent">firstEvent</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#firstNoteIndexp">firstNoteIndexp</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#lastNoteIndexp">lastNoteIndexp</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#leftOverhang">leftOverhang</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#negativeSpace">negativeSpace</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#nextNote">nextNote</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#nextPos">nextPos</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#nthNote">nthNote</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#oblique">oblique</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#prevNote">prevNote</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#prevPos">prevPos</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#varEndStaffPos">varEndStaffPos</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Ligature.html#width">width</a></li></ul></li><li><a href="module-music-classes-LigatureComment.html">LigatureComment</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-music-classes-LigatureComment.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-LigatureComment.html#drawVar">drawVar</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-LigatureComment.html#footnote">footnote</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-LigatureComment.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-LigatureComment.html#toText">toText</a></li></ul></li><li><a href="module-music-classes-LigatureNote.html">LigatureNote</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-music-classes-LigatureNote.html#backwardEvent">backwardEvent</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-LigatureNote.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-LigatureNote.html#drawVar">drawVar</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-LigatureNote.html#forwardEvent">forwardEvent</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-LigatureNote.html#lstem">lstem</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-LigatureNote.html#nextEvent">nextEvent</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-LigatureNote.html#prevEvent">prevEvent</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-LigatureNote.html#rstem">rstem</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-LigatureNote.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-LigatureNote.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-LigatureNote.html#varEndStaffPos">varEndStaffPos</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-LigatureNote.html#varStartStaffPos">varStartStaffPos</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-LigatureNote.html#width">width</a></li></ul></li><li><a href="module-music-classes-LigChoice.html">LigChoice</a></li><li><a href="module-music-classes-LongRest.html">LongRest</a></li><li><a href="module-music-classes-MaxRest.html">MaxRest</a></li><li><a href="module-music-classes-MChoice.html">MChoice</a></li><li><a href="module-music-classes-MensuralSignature.html">MensuralSignature</a></li><li><a href="module-music-classes-MESuper.html">MESuper</a></li><li><a href="module-music-classes-MNilReading.html">MNilReading</a></li><li><a href="module-music-classes-MReading.html">MReading</a></li><li><a href="module-music-classes-MusicOptionalSpace.html">MusicOptionalSpace</a></li><li><a href="module-music-classes-MusicPunctuation.html">MusicPunctuation</a></li><li><a href="module-music-classes-MusicWordJoin.html">MusicWordJoin</a></li><li><a href="module-music-classes-MusicWordSplit.html">MusicWordSplit</a></li><li><a href="module-music-classes-NegativeSpace.html">NegativeSpace</a></li><li><a href="module-music-classes-Neume.html">Neume</a></li><li><a href="module-music-classes-NeumeItem.html">NeumeItem</a></li><li><a href="module-music-classes-Notation.html">Notation</a></li><li><a href="module-music-classes-Note.html">Note</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-music-classes-Note.html#commentPos">commentPos</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Note.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Note.html#edit">edit</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Note.html#negativeSpace">negativeSpace</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Note.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Note.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Note.html#width">width</a></li></ul></li><li><a href="module-music-classes-Oblique.html">Oblique</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-music-classes-Oblique.html#backwardEvent">backwardEvent</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Oblique.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Oblique.html#drawComments">drawComments</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Oblique.html#drawTexts">drawTexts</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Oblique.html#drawVar">drawVar</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Oblique.html#enrichEvent">enrichEvent</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Oblique.html#extendMembers">extendMembers</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Oblique.html#flattenedMembers">flattenedMembers</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Oblique.html#forwardEvent">forwardEvent</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Oblique.html#lstem">lstem</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Oblique.html#member">member</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Oblique.html#nextEvent">nextEvent</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Oblique.html#prevEvent">prevEvent</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Oblique.html#rstem">rstem</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Oblique.html#width">width</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-Oblique.html#width">width</a></li></ul></li><li><a href="module-music-classes-ObliqueNeume.html">ObliqueNeume</a></li><li><a href="module-music-classes-ObliqueNote.html">ObliqueNote</a></li><li><a href="module-music-classes-ObliqueNoteChoice.html">ObliqueNoteChoice</a></li><li><a href="module-music-classes-Parameters.html">Parameters</a></li><li><a href="module-music-classes-Part.html">Part</a></li><li><a href="module-music-classes-PositiveSpace.html">PositiveSpace</a></li><li><a href="module-music-classes-ProportionSign.html">ProportionSign</a></li><li><a href="module-music-classes-RedClose.html">RedClose</a></li><li><a href="module-music-classes-RedlineClose.html">RedlineClose</a></li><li><a href="module-music-classes-RedlineOpen.html">RedlineOpen</a></li><li><a href="module-music-classes-RedOpen.html">RedOpen</a></li><li><a href="module-music-classes-Repeat.html">Repeat</a></li><li><a href="module-music-classes-Rest.html">Rest</a></li><li><a href="module-music-classes-SignumCongruentiae.html">SignumCongruentiae</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-music-classes-SignumCongruentiae.html#backwardEvent">backwardEvent</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-SignumCongruentiae.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-SignumCongruentiae.html#forwardEvent">forwardEvent</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-SignumCongruentiae.html#nextEvent">nextEvent</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-SignumCongruentiae.html#prevEvent">prevEvent</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-SignumCongruentiae.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-SignumCongruentiae.html#varEndStaffPos">varEndStaffPos</a></li><li data-type='method' style='display: none;'><a href="module-music-classes-SignumCongruentiae.html#varStartStaffPos">varStartStaffPos</a></li></ul></li><li><a href="module-music-classes-SolmizationSign.html">SolmizationSign</a></li><li><a href="module-music-classes-SolmizationSignature.html">SolmizationSignature</a></li><li><a href="module-music-classes-StackedProportionSigns.html">StackedProportionSigns</a></li><li><a href="module-music-classes-Staff.html">Staff</a></li><li><a href="module-music-classes-StrikethroughClose.html">StrikethroughClose</a></li><li><a href="module-music-classes-StrikethroughOpen.html">StrikethroughOpen</a></li><li><a href="module-music-classes-Tacet.html">Tacet</a></li><li><a href="module-music-classes-TextUnderlay.html">TextUnderlay</a></li><li><a href="module-music-classes-upsideDownClose.html">upsideDownClose</a></li><li><a href="module-music-classes-upsideDownOpen.html">upsideDownOpen</a></li><li><a href="module-music-classes-ValueChoice.html">ValueChoice</a></li><li><a href="module-music-classes-ValueReading.html">ValueReading</a></li><li><a href="module-music-classes-VoidClose.html">VoidClose</a></li><li><a href="module-music-classes-VoidOpen.html">VoidOpen</a></li><li><a href="module-music-parser-MusicExample.html">MusicExample</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-music-parser-MusicExample.html#appendStaffDefs">appendStaffDefs</a></li><li data-type='method' style='display: none;'><a href="module-music-parser-MusicExample.html#commentsDiv">commentsDiv</a></li><li data-type='method' style='display: none;'><a href="module-music-parser-MusicExample.html#commentsTip">commentsTip</a></li><li data-type='method' style='display: none;'><a href="module-music-parser-MusicExample.html#easyRhythms">easyRhythms</a></li><li data-type='method' style='display: none;'><a href="module-music-parser-MusicExample.html#gatherStaffs">gatherStaffs</a></li><li data-type='method' style='display: none;'><a href="module-music-parser-MusicExample.html#height">height</a></li><li data-type='method' style='display: none;'><a href="module-music-parser-MusicExample.html#markResolved">markResolved</a></li><li data-type='method' style='display: none;'><a href="module-music-parser-MusicExample.html#mensurStrich">mensurStrich</a></li><li data-type='method' style='display: none;'><a href="module-music-parser-MusicExample.html#parse">parse</a></li><li data-type='method' style='display: none;'><a href="module-music-parser-MusicExample.html#regenerateMEILinks">regenerateMEILinks</a></li><li data-type='method' style='display: none;'><a href="module-music-parser-MusicExample.html#reset">reset</a></li><li data-type='method' style='display: none;'><a href="module-music-parser-MusicExample.html#setSysWidths">setSysWidths</a></li><li data-type='method' style='display: none;'><a href="module-music-parser-MusicExample.html#staffDefForPart">staffDefForPart</a></li><li data-type='method' style='display: none;'><a href="module-music-parser-MusicExample.html#startingStaffForPart">startingStaffForPart</a></li><li data-type='method' style='display: none;'><a href="module-music-parser-MusicExample.html#stupidVerovioStretch">stupidVerovioStretch</a></li><li data-type='method' style='display: none;'><a href="module-music-parser-MusicExample.html#targetWidth">targetWidth</a></li><li data-type='method' style='display: none;'><a href="module-music-parser-MusicExample.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="module-music-parser-MusicExample.html#toTEI">toTEI</a></li><li data-type='method' style='display: none;'><a href="module-music-parser-MusicExample.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="module-music-parser-MusicExample.html#width">width</a></li></ul></li></ul>undefined
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">music-parser</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+                <div class="description usertext"><p>Contains the parser for the music examples and pieces</p></div>
+            
+
+            
+                
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="module-music-parser-MusicExample.html">MusicExample</a></dt>
+            <dd></dd>
+        </dl>
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="~colourp"><span class="type-signature">(inner) </span>colourp<span class="signature">(string)</span><span class="type-signature"> &rarr; {string|boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2468">line 2468</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>this checks for colors?</li>
+        </ul>
+    </dd>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>string</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+|
+
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~consumeParenthesis"><span class="type-signature">(inner) </span>consumeParenthesis<span class="signature">()</span><span class="type-signature"> &rarr; {?}</span></h4>
+
+    
+    <p class="summary usertext"><p>Checks for closing parenthesis</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1992">line 1992</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>paren</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">?</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~enrichText"><span class="type-signature">(inner) </span>enrichText<span class="signature">(tag, obj)</span><span class="type-signature"></span></h4>
+
+    
+    <p class="summary usertext"><p>Add info to textlike element based on the element tag</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1672">line 1672</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tag</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>element tag</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>obj</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>textline element</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~extendTacet"><span class="type-signature">(inner) </span>extendTacet<span class="signature">(content, tacet)</span><span class="type-signature"> &rarr; {Tacet}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1717">line 1717</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>content</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>tacet</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Tacet</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>tacet object</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>tacet object</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Tacet</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~getMusicTextSup"><span class="type-signature">(inner) </span>getMusicTextSup<span class="signature">()</span><span class="type-signature"> &rarr; {MESuper}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1920">line 1920</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>element</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">MESuper</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~getParameters"><span class="type-signature">(inner) </span>getParameters<span class="signature">()</span><span class="type-signature"> &rarr; {Parameters}</span></h4>
+
+    
+    <p class="summary usertext"><p>gets the parameters like notation type, mensural signature, solmization, clef and staff</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2967">line 2967</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>parameters</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Parameters</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~getString"><span class="type-signature">(inner) </span>getString<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+    <p class="summary usertext"><p>Parse contents of <text></text> or equivalently-syntaxed thing (e.g. a variant).
+This is a version of what was previously getSubText, a faster, but much less flexible function</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1827">line 1827</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>content</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~getSubText"><span class="type-signature">(inner) </span>getSubText<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+    <p class="summary usertext"><p>parse contents of a <text></text> block or equivalently-syntaxed thing (e.g. a variant)</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1761">line 1761</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>components</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~getTag"><span class="type-signature">(inner) </span>getTag<span class="signature">(tag)</span><span class="type-signature"> &rarr; {*}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1954">line 1954</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tag</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>object according to tag name</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">*</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~linesp"><span class="type-signature">(inner) </span>linesp<span class="signature">(string)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2456">line 2456</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>Obviously, it checks if some string or its particle is a number</li>
+        </ul>
+    </dd>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>string</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextBarline"><span class="type-signature">(inner) </span>nextBarline<span class="signature">()</span><span class="type-signature"> &rarr; {Barline}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1121">line 1121</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>barline</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Barline</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextChantNote"><span class="type-signature">(inner) </span>nextChantNote<span class="signature">()</span><span class="type-signature"> &rarr; {ChantNote}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1266">line 1266</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>chant note</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">ChantNote</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextChoice"><span class="type-signature">(inner) </span>nextChoice<span class="signature">()</span><span class="type-signature"> &rarr; {MChoice}</span></h4>
+
+    
+    <p class="summary usertext"><p>handles choices</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2682">line 2682</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>choice</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">MChoice</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextChoiceLikeThing"><span class="type-signature">(inner) </span>nextChoiceLikeThing<span class="signature">(choice, textp)</span><span class="type-signature"> &rarr; {?}</span></h4>
+
+    
+    <p class="summary usertext"><p>handles ChoiceLikes</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2753">line 2753</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>readChoice in parser.js</li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>choice</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>textp</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>choice</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">?</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextChoiceLikeThing2"><span class="type-signature">(inner) </span>nextChoiceLikeThing2<span class="signature">(choice, textp)</span><span class="type-signature"> &rarr; {?}</span></h4>
+
+    
+    <p class="summary usertext"><p>based on @see readChoice in parser.js</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2818">line 2818</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>choice</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>textp</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>choice</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">?</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextColRef"><span class="type-signature">(inner) </span>nextColRef<span class="signature">()</span><span class="type-signature"> &rarr; {ColumnStart|PositiveSpace|boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1055">line 1055</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>column, a new PositiveSpace object or false</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">ColumnStart</span>
+|
+
+<span class="param-type">PositiveSpace</span>
+|
+
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextComment"><span class="type-signature">(inner) </span>nextComment<span class="signature">()</span><span class="type-signature"> &rarr; {Annotation}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1079">line 1079</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>ann</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Annotation</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextCustos"><span class="type-signature">(inner) </span>nextCustos<span class="signature">()</span><span class="type-signature"> &rarr; {Custos}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1276">line 1276</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>custos with pitch</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Custos</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextDot"><span class="type-signature">(inner) </span>nextDot<span class="signature">()</span><span class="type-signature"> &rarr; {Dot}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1285">line 1285</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>dot with staff position</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Dot</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextEvent"><span class="type-signature">(inner) </span>nextEvent<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line968">line 968</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>takes a char and looks what kind of event do we have</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>object according to char</p>
+</div>
+
+
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextFermata"><span class="type-signature">(inner) </span>nextFermata<span class="signature">()</span><span class="type-signature"> &rarr; {Fermata}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1308">line 1308</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>fermata with staff position</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Fermata</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextInfo"><span class="type-signature">(inner) </span>nextInfo<span class="signature">()</span><span class="type-signature"> &rarr; {*}</span></h4>
+
+    
+    <p class="summary usertext"><p>handles next info -&gt; things in {}</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2598">line 2598</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">*</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextLigature"><span class="type-signature">(inner) </span>nextLigature<span class="signature">()</span><span class="type-signature"> &rarr; {Ligature}</span></h4>
+
+    
+    <p class="summary usertext"><p>Parses <lig>-Tag into Ligature objects</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1529">line 1529</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>ligature with notes</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Ligature</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextLigChoice"><span class="type-signature">(inner) </span>nextLigChoice<span class="signature">(parent)</span><span class="type-signature"> &rarr; {LigChoice}</span></h4>
+
+    
+    <p class="summary usertext"><p>handles choices in ligatures?</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2698">line 2698</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>ligature choice</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">LigChoice</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextLongRest"><span class="type-signature">(inner) </span>nextLongRest<span class="signature">()</span><span class="type-signature"> &rarr; {LongRest|MaxRest|boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1191">line 1191</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Longa rest, maxima rest or false</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">LongRest</span>
+|
+
+<span class="param-type">MaxRest</span>
+|
+
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextMusic"><span class="type-signature">(inner) </span>nextMusic<span class="signature">(parent)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2902">line 2902</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>results</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextNeume"><span class="type-signature">(inner) </span>nextNeume<span class="signature">()</span><span class="type-signature"> &rarr; {Neume}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1431">line 1431</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>neume</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Neume</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextNote"><span class="type-signature">(inner) </span>nextNote<span class="signature">()</span><span class="type-signature"> &rarr; {Note}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1248">line 1248</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>note</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Note</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextOblique"><span class="type-signature">(inner) </span>nextOblique<span class="signature">(ligature)</span><span class="type-signature"> &rarr; {Oblique}</span></h4>
+
+    
+    <p class="summary usertext"><p>Parses <obl> tag</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1604">line 1604</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ligature</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Ligature</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>oblique object with content</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Oblique</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextObliqueNeume"><span class="type-signature">(inner) </span>nextObliqueNeume<span class="signature">()</span><span class="type-signature"> &rarr; {ObliqueNeume}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1486">line 1486</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>oblique neume</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">ObliqueNeume</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextObliqueNoteChoice"><span class="type-signature">(inner) </span>nextObliqueNoteChoice<span class="signature">(parent)</span><span class="type-signature"> &rarr; {ObliqueNoteChoice}</span></h4>
+
+    
+    <p class="summary usertext"><p>handles choices in oblique notes</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2713">line 2713</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>choice</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">ObliqueNoteChoice</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextPart"><span class="type-signature">(inner) </span>nextPart<span class="signature">(partType, closes, extra)</span><span class="type-signature"> &rarr; {Part}</span></h4>
+
+    
+    <p class="summary usertext"><p>This covers Part, pars and other boundaries in the flow. N.B. The
+<Part> object represents the tag, not the element (i.e. there is
+an open at the beginning and a close at the end, and nothing is
+'contained')</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2477">line 2477</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>partType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>closes</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>extra</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>part</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Part</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextPartnameReading"><span class="type-signature">(inner) </span>nextPartnameReading<span class="signature">(fields, partType, closes, choice)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2559">line 2559</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fields</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>partType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>closes</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>choice</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>array with reading</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextRepeat"><span class="type-signature">(inner) </span>nextRepeat<span class="signature">()</span><span class="type-signature"> &rarr; {Repeat|boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1213">line 1213</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>repeat or false</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Repeat</span>
+|
+
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextRest"><span class="type-signature">(inner) </span>nextRest<span class="signature">()</span><span class="type-signature"> &rarr; {LongRest|Rest|boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1168">line 1168</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Rest or false</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">LongRest</span>
+|
+
+<span class="param-type">Rest</span>
+|
+
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextSignumCongruentiae"><span class="type-signature">(inner) </span>nextSignumCongruentiae<span class="signature">()</span><span class="type-signature"> &rarr; {SignumCongruentiae}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1297">line 1297</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>signum congruentiae with staff position</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">SignumCongruentiae</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextSolmSign"><span class="type-signature">(inner) </span>nextSolmSign<span class="signature">()</span><span class="type-signature"> &rarr; {SolmizationSign}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1144">line 1144</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>solimization sign</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">SolmizationSign</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextTacet"><span class="type-signature">(inner) </span>nextTacet<span class="signature">(endPos)</span><span class="type-signature"> &rarr; {Tacet}</span></h4>
+
+    
+    <p class="summary usertext"><p>nice and simple. Tacet is a type of text, but is treated differently because it takes up horizontal space.</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1694">line 1694</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>endPos</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>tacet object</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Tacet</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextTaglike"><span class="type-signature">(inner) </span>nextTaglike<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+    <p class="summary usertext"><p>handles taglike elements of music examples</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1318">line 1318</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextText"><span class="type-signature">(inner) </span>nextText<span class="signature">()</span><span class="type-signature"> &rarr; {TextUnderlay}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1738">line 1738</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>text</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">TextUnderlay</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nextTextChoice"><span class="type-signature">(inner) </span>nextTextChoice<span class="signature">()</span><span class="type-signature"> &rarr; {MChoice}</span></h4>
+
+    
+    <p class="summary usertext"><p>handles text choices</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2690">line 2690</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>choice</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">MChoice</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~parseClef"><span class="type-signature">(inner) </span>parseClef<span class="signature">(spec, sub)</span><span class="type-signature"> &rarr; {Clef}</span></h4>
+
+    
+    <p class="summary usertext"><p>parses a clef</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2333">line 2333</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>spec</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sub</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>clef</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Clef</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~parseClefReading"><span class="type-signature">(inner) </span>parseClefReading<span class="signature">(fields)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+    <p class="summary usertext"><p>parses a clef reading</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2251">line 2251</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fields</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>reading</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~parseClefVar"><span class="type-signature">(inner) </span>parseClefVar<span class="signature">(fields)</span><span class="type-signature"> &rarr; {MChoice}</span></h4>
+
+    
+    <p class="summary usertext"><p>parses clef variants</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2314">line 2314</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fields</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>variant</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">MChoice</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~parseMens"><span class="type-signature">(inner) </span>parseMens<span class="signature">(spec)</span><span class="type-signature"> &rarr; {MensuralSignature}</span></h4>
+
+    
+    <p class="summary usertext"><p>parses mensural signature</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2022">line 2022</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>spec</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>mensural signature</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">MensuralSignature</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~parseMensReading"><span class="type-signature">(inner) </span>parseMensReading<span class="signature">(fields)</span><span class="type-signature"></span></h4>
+
+    
+    <p class="summary usertext"><p>parses readings of mensuration signs?</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2060">line 2060</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fields</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~parseMensReading"><span class="type-signature">(inner) </span>parseMensReading<span class="signature">(fields)</span><span class="type-signature"> &rarr; {MChoice}</span></h4>
+
+    
+    <p class="summary usertext"><p>handles variants in mensuration</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2090">line 2090</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fields</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>variant object</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">MChoice</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~parseProp"><span class="type-signature">(inner) </span>parseProp<span class="signature">(propSpec, posSpec)</span><span class="type-signature"> &rarr; {ProportionSign|StackedProportionSigns}</span></h4>
+
+    
+    <p class="summary usertext"><p>parses proportion signs</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2110">line 2110</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>propSpec</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>posSpec</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>proportion sign</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">ProportionSign</span>
+|
+
+<span class="param-type">StackedProportionSigns</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~parseSolm"><span class="type-signature">(inner) </span>parseSolm<span class="signature">(signs)</span><span class="type-signature"> &rarr; {SolmizationSignature}</span></h4>
+
+    
+    <p class="summary usertext"><p>parses solmization signature</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2139">line 2139</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>signs</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>solmization signature with solmization signs</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">SolmizationSignature</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~parseSolmReading"><span class="type-signature">(inner) </span>parseSolmReading<span class="signature">(fields)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+    <p class="summary usertext"><p>parses reading of solmization signature</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2173">line 2173</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fields</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~parseSolmVar"><span class="type-signature">(inner) </span>parseSolmVar<span class="signature">(fields)</span><span class="type-signature"> &rarr; {MChoice}</span></h4>
+
+    
+    <p class="summary usertext"><p>parses solmization variant</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2232">line 2232</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fields</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>variant</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">MChoice</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~parseStaff"><span class="type-signature">(inner) </span>parseStaff<span class="signature">(spec)</span><span class="type-signature"> &rarr; {Staff}</span></h4>
+
+    
+    <p class="summary usertext"><p>parses a staff</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2396">line 2396</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>spec</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">?</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>staff</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Staff</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Fri Jun 12 2020 13:11:18 GMT+0200 (GMT+02:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

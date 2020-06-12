@@ -1,4 +1,4 @@
-/** @file Musical classes
+/** @fileoverview Musical classes
 * Classes have some methods in common:
 *   * .width for width estimation (before drawing)
 *   * .negativeSpace In some cases inserted negative spaces
@@ -17,6 +17,7 @@
 *       unnecessarily) returned.
 *   * .draw Draws the object to the SVG object referred to by the
 *       global variable <SVG>. The drawn object is returned.
+* @module music-classes
 */
 
 /// util functions

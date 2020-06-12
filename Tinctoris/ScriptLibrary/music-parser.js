@@ -2,6 +2,7 @@
  * Music parser
  * 
  * @fileoverview Contains the parser for the music examples and pieces
+ * @module music-parser
  */
 
  /**

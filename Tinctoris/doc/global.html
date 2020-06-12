@@ -104,7 +104,7 @@
 
 
 <div class="description">
-    More complex stages, for where knowledge is partial and patchy
+    <p>More complex stages, for where knowledge is partial and patchy</p>
 </div>
 
 
@@ -178,7 +178,7 @@
 
 
 <div class="description">
-    Colored notation is assumed to be simple duple and labelled accordingly
+    <p>Colored notation is assumed to be simple duple and labelled accordingly</p>
 </div>
 
 
@@ -230,7 +230,8 @@
 
             
 
-            <td class="description last">Array of all the coherent areas ofmensurations in a section</td>
+            <td class="description last"><p>Array of all the coherent areas of
+mensurations in a section</p></td>
         </tr>
 
     
@@ -315,7 +316,7 @@
 
 
 <div class="description">
-    Simple processing of dots of augmentation (other dots ignored
+    <p>Simple processing of dots of augmentation (other dots ignored</p>
 </div>
 
 
@@ -367,7 +368,8 @@
 
             
 
-            <td class="description last">Array of all the coherent areas ofmensurations in a section</td>
+            <td class="description last"><p>Array of all the coherent areas of
+mensurations in a section</p></td>
         </tr>
 
     
@@ -444,6 +446,143 @@
     
 
     
+    <h4 class="name" id="addAllStartTimes"><span class="type-signature"></span>addAllStartTimes<span class="signature">(sectionBlocks)</span><span class="type-signature"></span></h4>
+    
+
+    
+    <p class="summary"><p>If event[n] has both a duration assigned to it and a start time,
+adds a start time for event[n+1]</p></p>
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sectionBlocks</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of all the coherent areas of
+mensurations in a section</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="mensural-rhythm.js.html">mensural-rhythm.js</a>, <a href="mensural-rhythm.js.html#line1303">line 1303</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="addBreveBoundariesForBlock"><span class="type-signature"></span>addBreveBoundariesForBlock<span class="signature">(block)</span><span class="type-signature"></span></h4>
     
 
@@ -452,7 +591,9 @@
 
 
 <div class="description">
-    Indicates where an event falls in larger-scale mensural structures,also singling out which breve beat an event falls on and whether itcrosses one (adds @beatPos, @onTheBreveBeat and @crossedABreveBeat)
+    <p>Indicates where an event falls in larger-scale mensural structures,
+also singling out which breve beat an event falls on and whether it
+crosses one (adds @beatPos, @onTheBreveBeat and @crossedABreveBeat)</p>
 </div>
 
 
@@ -589,7 +730,8 @@
 
 
 <div class="description">
-    Add start times for all events in block for which that's possible(i.e. where the start and duration of the previous note is known).
+    <p>Add start times for all events in block for which that's possible
+(i.e. where the start and duration of the previous note is known).</p>
 </div>
 
 
@@ -641,7 +783,8 @@
 
             
 
-            <td class="description last">Object with attributes for events andmensuration sign</td>
+            <td class="description last"><p>Object with attributes for events and
+mensuration sign</p></td>
         </tr>
 
     
@@ -726,7 +869,8 @@
 
 
 <div class="description">
-    Resolves durations for any note that is not regularly perfect andthat is not a direct part of a ternary note (so isn't alterable).
+    <p>Resolves durations for any note that is not regularly perfect and
+that is not a direct part of a ternary note (so isn't alterable).</p>
 </div>
 
 
@@ -778,7 +922,8 @@
 
             
 
-            <td class="description last">Array of all the coherent areas ofmensurations in a section</td>
+            <td class="description last"><p>Array of all the coherent areas of
+mensurations in a section</p></td>
         </tr>
 
     
@@ -863,7 +1008,9 @@
 
 
 <div class="description">
-    Lists all levels that can be affected by alteration. Uses0=semifusa, 1=fusa, 2=minima, etc (n.b. Nothing below a minim canbe altered anyway).
+    <p>Lists all levels that can be affected by alteration. Uses
+0=semifusa, 1=fusa, 2=minima, etc (n.b. Nothing below a minim can
+be altered anyway).</p>
 </div>
 
 
@@ -1001,7 +1148,9 @@
 
 
 <div class="description">
-    If a note is followed immediately by a note or rest at the samelevel (see <a href="global.html#leveleq">leveleq</a>), the former cannot be imperfected. Suchnotes can have duration labelled immediately.
+    <p>If a note is followed immediately by a note or rest at the same
+level (see <a href="global.html#leveleq"><code>leveleq</code></a>), the former cannot be imperfected. Such
+notes can have duration labelled immediately.</p>
 </div>
 
 
@@ -1053,7 +1202,8 @@
 
             
 
-            <td class="description last">Array of all the coherent areas ofmensurations in a section</td>
+            <td class="description last"><p>Array of all the coherent areas of
+mensurations in a section</p></td>
         </tr>
 
     
@@ -1138,7 +1288,10 @@
 
 
 <div class="description">
-    Return true if event is a dot of augmentation. Assumes that this isindicated using @mei:form=aug. In the longer term, this might bethe place to put more sophisticated reasoning in (or it might bebetter as a pre-processing step).
+    <p>Return true if event is a dot of augmentation. Assumes that this is
+indicated using @mei:form=aug. In the longer term, this might be
+the place to put more sophisticated reasoning in (or it might be
+better as a pre-processing step).</p>
 </div>
 
 
@@ -1190,7 +1343,7 @@
 
             
 
-            <td class="description last">Probably an mei:dot</td>
+            <td class="description last"><p>Probably an mei:dot</p></td>
         </tr>
 
     
@@ -1293,7 +1446,12 @@
 
 
 <div class="description">
-    Runs resolution steps that aren't dependant on any rhythms or beatpositions already having been solved. These are: rests (which can'tbe altered or imperfected anyway); coloration; dots ofaugmentation; notes below the first perfect/alterable level;trivial alterations (based on pattern, not beat position); antesimile.
+    <p>Runs resolution steps that aren't dependant on any rhythms or beat
+positions already having been solved. These are: rests (which can't
+be altered or imperfected anyway); coloration; dots of
+augmentation; notes below the first perfect/alterable level;
+trivial alterations (based on pattern, not beat position); ante
+simile.</p>
 </div>
 
 
@@ -1345,7 +1503,8 @@
 
             
 
-            <td class="description last">Array of all the coherent areas ofmensurations in a section</td>
+            <td class="description last"><p>Array of all the coherent areas of
+mensurations in a section</p></td>
         </tr>
 
     
@@ -1430,7 +1589,8 @@
 
 
 <div class="description">
-    Return the beat number of an element within its parent metricalunit (e.g. second semibreve in its breve).
+    <p>Return the beat number of an element within its parent metrical
+unit (e.g. second semibreve in its breve).</p>
 </div>
 
 
@@ -1482,7 +1642,7 @@
 
             
 
-            <td class="description last">mei:note or mei:rest</td>
+            <td class="description last"><p>mei:note or mei:rest</p></td>
         </tr>
 
     
@@ -1505,7 +1665,7 @@
 
             
 
-            <td class="description last">mei:mensur</td>
+            <td class="description last"><p>mei:mensur</p></td>
         </tr>
 
     
@@ -1528,7 +1688,9 @@
 
             
 
-            <td class="description last">Find the beat number for a differentmensural level (1 for the next longer level, -1 for the nextshorter, etc.)</td>
+            <td class="description last"><p>Find the beat number for a different
+mensural level (1 for the next longer level, -1 for the next
+shorter, etc.)</p></td>
         </tr>
 
     
@@ -1631,7 +1793,8 @@
 
 
 <div class="description">
-    Return the number of unit beats since the beginning of the largerunit (e.g. semibreve 2 of its breve)
+    <p>Return the number of unit beats since the beginning of the larger
+unit (e.g. semibreve 2 of its breve)</p>
 </div>
 
 
@@ -1683,7 +1846,7 @@
 
             
 
-            <td class="description last">Duration of unit (in minims)</td>
+            <td class="description last"><p>Duration of unit (in minims)</p></td>
         </tr>
 
     
@@ -1729,7 +1892,8 @@
 
             
 
-            <td class="description last">Number of minims since start of pieceor section</td>
+            <td class="description last"><p>Number of minims since start of piece
+or section</p></td>
         </tr>
 
     
@@ -1799,7 +1963,7 @@
 
         
 <div class="param-desc">
-    Object with attributes for beat and remainder
+    <p>Object with attributes for beat and remainder</p>
 </div>
 
 
@@ -1836,7 +2000,8 @@
 
 
 <div class="description">
-    Return an array of an event's position with respect to all mensurallevels.
+    <p>Return an array of an event's position with respect to all mensural
+levels.</p>
 </div>
 
 
@@ -1888,7 +2053,8 @@
 
             
 
-            <td class="description last">Minim steps since the start of thecounting period</td>
+            <td class="description last"><p>Minim steps since the start of the
+counting period</p></td>
         </tr>
 
     
@@ -1973,7 +2139,8 @@
 
 
 <div class="description">
-    Give proportion multiplier for a block given the current andprevious proportion state.
+    <p>Give proportion multiplier for a block given the current and
+previous proportion state.</p>
 </div>
 
 
@@ -2111,7 +2278,9 @@
 
 
 <div class="description">
-    Calculate the number of breves between two times, specified asthe number of mensural units into the current section (so [subminims,minims, semibreves, breves, longs, maximas])
+    <p>Calculate the number of breves between two times, specified as
+the number of mensural units into the current section (so [subminims,
+minims, semibreves, breves, longs, maximas])</p>
 </div>
 
 
@@ -2163,7 +2332,7 @@
 
             
 
-            <td class="description last">Timepoint</td>
+            <td class="description last"><p>Timepoint</p></td>
         </tr>
 
     
@@ -2186,7 +2355,7 @@
 
             
 
-            <td class="description last">Timepoint</td>
+            <td class="description last"><p>Timepoint</p></td>
         </tr>
 
     
@@ -2209,7 +2378,7 @@
 
             
 
-            <td class="description last">mei:mens element</td>
+            <td class="description last"><p>mei:mens element</p></td>
         </tr>
 
     
@@ -2279,7 +2448,7 @@
 
         
 <div class="param-desc">
-    Number of breve beats separating the notes
+    <p>Number of breve beats separating the notes</p>
 </div>
 
 
@@ -2316,7 +2485,8 @@
 
 
 <div class="description">
-    True if the level in the first argument can imperfect the level inthe second, given the prevailing mensuration.
+    <p>True if the level in the first argument can imperfect the level in
+the second, given the prevailing mensuration.</p>
 </div>
 
 
@@ -2368,7 +2538,7 @@
 
             
 
-            <td class="description last">Level (semifusa=0, fusa=1,...maxima=7) of shorter note</td>
+            <td class="description last"><p>Level (semifusa=0, fusa=1,...maxima=7) of shorter note</p></td>
         </tr>
 
     
@@ -2391,7 +2561,7 @@
 
             
 
-            <td class="description last">Level (semifusa=0, fusa=1,...maxima=7) of longer note</td>
+            <td class="description last"><p>Level (semifusa=0, fusa=1,...maxima=7) of longer note</p></td>
         </tr>
 
     
@@ -2414,7 +2584,7 @@
 
             
 
-            <td class="description last">Summary of mensuration (as returned by <a href="global.html#mensurSummary">mensurSummary</a></td>
+            <td class="description last"><p>Summary of mensuration (as returned by <a href="global.html#mensurSummary"><code>mensurSummary</code></a></p></td>
         </tr>
 
     
@@ -2517,7 +2687,12 @@
 
 
 <div class="description">
-    Check an event for evidence of alteration. Alters event if it fallsafter a longer note followed by its own duration. Where there isuncertainty about the intervening duration, rule out alteration ifthe minimum interpretation of that duration is too long. We assumethat the calling function has established that the ensuing durations are suitable.
+    <p>Check an event for evidence of alteration. Alters event if it falls
+after a longer note followed by its own duration. Where there is
+uncertainty about the intervening duration, rule out alteration if
+the minimum interpretation of that duration is too long. We assume
+that the calling function has established that the ensuing durations
+are suitable.</p>
 </div>
 
 
@@ -2569,7 +2744,7 @@
 
             
 
-            <td class="description last">mei:note (rests can't be altered)</td>
+            <td class="description last"><p>mei:note (rests can't be altered)</p></td>
         </tr>
 
     
@@ -2592,7 +2767,7 @@
 
             
 
-            <td class="description last">The note's position in events</td>
+            <td class="description last"><p>The note's position in events</p></td>
         </tr>
 
     
@@ -2615,7 +2790,7 @@
 
             
 
-            <td class="description last">Sequence of events in this section for this voice</td>
+            <td class="description last"><p>Sequence of events in this section for this voice</p></td>
         </tr>
 
     
@@ -2638,7 +2813,7 @@
 
             
 
-            <td class="description last">mei:mensur</td>
+            <td class="description last"><p>mei:mensur</p></td>
         </tr>
 
     
@@ -2708,7 +2883,7 @@
 
         
 <div class="param-desc">
-    This function returns the altered event (why?)
+    <p>This function returns the altered event (why?)</p>
 </div>
 
 
@@ -2834,7 +3009,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2463">line 2463</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2467">line 2467</a>
     </li></ul></dd>
     
 
@@ -2902,7 +3077,7 @@
     
 
     
-    <p class="summary">Checks if object is not TextUnderlay and not Comment</p>
+    <p class="summary"><p>Checks if object is not TextUnderlay and not Comment</p></p>
     
 
 
@@ -3055,7 +3230,7 @@
     
 
     
-    <p class="summary">Checks for closing parenthesis</p>
+    <p class="summary"><p>Checks for closing parenthesis</p></p>
     
 
 
@@ -3101,7 +3276,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1987">line 1987</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1991">line 1991</a>
     </li></ul></dd>
     
 
@@ -3130,7 +3305,7 @@
 
         
 <div class="param-desc">
-    paren
+    <p>paren</p>
 </div>
 
 
@@ -3167,7 +3342,10 @@
 
 
 <div class="description">
-    Return true if event is a dot of division. Assumes that this isindicated using @mei:form!=aug. In the longer term, this might bethe place to put more sophisticated reasoning in (or it might bebetter as a pre-processing step).
+    <p>Return true if event is a dot of division. Assumes that this is
+indicated using @mei:form!=aug. In the longer term, this might be
+the place to put more sophisticated reasoning in (or it might be
+better as a pre-processing step).</p>
 </div>
 
 
@@ -3219,7 +3397,7 @@
 
             
 
-            <td class="description last">Probably an mei:dot</td>
+            <td class="description last"><p>Probably an mei:dot</p></td>
         </tr>
 
     
@@ -3322,7 +3500,10 @@
 
 
 <div class="description">
-    Often, rests are grouped vertically to indicate coherent mensuralunits – in effect, the vertical displacement acting as a dot ofdivision. check whether two (implicitly adjacent) rests behave likethat.
+    <p>Often, rests are grouped vertically to indicate coherent mensural
+units – in effect, the vertical displacement acting as a dot of
+division. check whether two (implicitly adjacent) rests behave like
+that.</p>
 </div>
 
 
@@ -3374,7 +3555,8 @@
 
             
 
-            <td class="description last">Highest mensural level that we'reinterested in (expressed as 0=semifusa, 1=fusa, etc.)</td>
+            <td class="description last"><p>Highest mensural level that we're
+interested in (expressed as 0=semifusa, 1=fusa, etc.)</p></td>
         </tr>
 
     
@@ -3397,7 +3579,7 @@
 
             
 
-            <td class="description last">mei:rest</td>
+            <td class="description last"><p>mei:rest</p></td>
         </tr>
 
     
@@ -3420,7 +3602,7 @@
 
             
 
-            <td class="description last">mei:rest</td>
+            <td class="description last"><p>mei:rest</p></td>
         </tr>
 
     
@@ -3443,7 +3625,7 @@
 
             
 
-            <td class="description last">"left" | "right"</td>
+            <td class="description last"><p>&quot;left&quot; | &quot;right&quot;</p></td>
         </tr>
 
     
@@ -3594,7 +3776,7 @@
 
             
 
-            <td class="description last">An mei:note or mei:rest</td>
+            <td class="description last"><p>An mei:note or mei:rest</p></td>
         </tr>
 
     
@@ -3696,7 +3878,7 @@
     
 
     
-    <p class="summary">Add info to textlike element based on the element tag</p>
+    <p class="summary"><p>Add info to textlike element based on the element tag</p></p>
     
 
 
@@ -3745,7 +3927,7 @@
 
             
 
-            <td class="description last">element tag</td>
+            <td class="description last"><p>element tag</p></td>
         </tr>
 
     
@@ -3763,7 +3945,7 @@
 
             
 
-            <td class="description last">textline element</td>
+            <td class="description last"><p>textline element</p></td>
         </tr>
 
     
@@ -3804,7 +3986,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1667">line 1667</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1671">line 1671</a>
     </li></ul></dd>
     
 
@@ -3919,7 +4101,7 @@
 
             
 
-            <td class="description last">tacet object</td>
+            <td class="description last"><p>tacet object</p></td>
         </tr>
 
     
@@ -3960,7 +4142,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1712">line 1712</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1716">line 1716</a>
     </li></ul></dd>
     
 
@@ -3989,7 +4171,7 @@
 
         
 <div class="param-desc">
-    tacet object
+    <p>tacet object</p>
 </div>
 
 
@@ -4026,7 +4208,8 @@
 
 
 <div class="description">
-    Given an event on the first beat, if we can tell if it's altered,label the duration.
+    <p>Given an event on the first beat, if we can tell if it's altered,
+label the duration.</p>
 </div>
 
 
@@ -4078,7 +4261,7 @@
 
             
 
-            <td class="description last">mei:note (rest would have been resolved already)</td>
+            <td class="description last"><p>mei:note (rest would have been resolved already)</p></td>
         </tr>
 
     
@@ -4101,7 +4284,7 @@
 
             
 
-            <td class="description last">The note's position in events</td>
+            <td class="description last"><p>The note's position in events</p></td>
         </tr>
 
     
@@ -4124,7 +4307,7 @@
 
             
 
-            <td class="description last">Sequence of events in this section for this voice</td>
+            <td class="description last"><p>Sequence of events in this section for this voice</p></td>
         </tr>
 
     
@@ -4147,7 +4330,7 @@
 
             
 
-            <td class="description last">mei:mensur</td>
+            <td class="description last"><p>mei:mensur</p></td>
         </tr>
 
     
@@ -4217,7 +4400,7 @@
 
         
 <div class="param-desc">
-    This function returns the modified event (why?)
+    <p>This function returns the modified event (why?)</p>
 </div>
 
 
@@ -4254,7 +4437,10 @@
 
 
 <div class="description">
-    Given an event on the first beat, if we can tell if it's perfect,label the duration. Checks simpler rules (I.3 and I.4 from therulelist). If the note remains unresolved, calls firstBeatAlterationCheck with a context window of events thatmight affect the decision.
+    <p>Given an event on the first beat, if we can tell if it's perfect,
+label the duration. Checks simpler rules (I.3 and I.4 from the
+rulelist). If the note remains unresolved, calls <code>firstBeatAlterationCheck</code> with a context window of events that
+might affect the decision.</p>
 </div>
 
 
@@ -4306,7 +4492,7 @@
 
             
 
-            <td class="description last">mei:note (rest would have been resolved already)</td>
+            <td class="description last"><p>mei:note (rest would have been resolved already)</p></td>
         </tr>
 
     
@@ -4329,7 +4515,7 @@
 
             
 
-            <td class="description last">The note's position in events</td>
+            <td class="description last"><p>The note's position in events</p></td>
         </tr>
 
     
@@ -4352,7 +4538,7 @@
 
             
 
-            <td class="description last">Sequence of events in this section for this voice</td>
+            <td class="description last"><p>Sequence of events in this section for this voice</p></td>
         </tr>
 
     
@@ -4375,7 +4561,7 @@
 
             
 
-            <td class="description last">mei:mensur</td>
+            <td class="description last"><p>mei:mensur</p></td>
         </tr>
 
     
@@ -4445,7 +4631,7 @@
 
         
 <div class="param-desc">
-    This function returns the modified event (why?)
+    <p>This function returns the modified event (why?)</p>
 </div>
 
 
@@ -4482,7 +4668,8 @@
 
 
 <div class="description">
-    Having sifted the trivial cases out, attempts to resolve cases thatrely on context, particularly the shorter notes that follow this one.
+    <p>Having sifted the trivial cases out, attempts to resolve cases that
+rely on context, particularly the shorter notes that follow this one.</p>
 </div>
 
 
@@ -4534,7 +4721,7 @@
 
             
 
-            <td class="description last">mei:note (rest would have been resolved already)</td>
+            <td class="description last"><p>mei:note (rest would have been resolved already)</p></td>
         </tr>
 
     
@@ -4557,7 +4744,9 @@
 
             
 
-            <td class="description last">List of following events (until the nextdivision dot or equivalent, or the next event of similar or greaterlength).</td>
+            <td class="description last"><p>List of following events (until the next
+division dot or equivalent, or the next event of similar or greater
+length).</p></td>
         </tr>
 
     
@@ -4580,7 +4769,7 @@
 
             
 
-            <td class="description last">mei:mensur</td>
+            <td class="description last"><p>mei:mensur</p></td>
         </tr>
 
     
@@ -4650,7 +4839,7 @@
 
         
 <div class="param-desc">
-    This function returns the modified event (why?)
+    <p>This function returns the modified event (why?)</p>
 </div>
 
 
@@ -4687,7 +4876,8 @@
 
 
 <div class="description">
-    Return an integer (semifusa=0, fusa=1,...maxima=7) of the first(shortest) level that is divisible into 3 parts.
+    <p>Return an integer (semifusa=0, fusa=1,...maxima=7) of the first
+(shortest) level that is divisible into 3 parts.</p>
 </div>
 
 
@@ -4739,7 +4929,7 @@
 
             
 
-            <td class="description last">mei:mensur</td>
+            <td class="description last"><p>mei:mensur</p></td>
         </tr>
 
     
@@ -4809,7 +4999,7 @@
 
         
 <div class="param-desc">
-    Mensural level
+    <p>Mensural level</p>
 </div>
 
 
@@ -4846,7 +5036,8 @@
 
 
 <div class="description">
-    Find highest common factor (for tidy @num/@numbase use). May beless useful, depending how these attributes actually work.
+    <p>Find highest common factor (for tidy @num/@numbase use). May be
+less useful, depending how these attributes actually work.</p>
 </div>
 
 
@@ -5024,7 +5215,9 @@
 
 
 <div class="description">
-    Return all the sections that themselves contain no sections (wehave a hierarchical tree structure for parts, so this only choosesthe lowest level structural unit.
+    <p>Return all the sections that themselves contain no sections (we
+have a hierarchical tree structure for parts, so this only chooses
+the lowest level structural unit.</p>
 </div>
 
 
@@ -5146,7 +5339,7 @@
 
         
 <div class="param-desc">
-    Array of mei:section elements
+    <p>Array of mei:section elements</p>
 </div>
 
 
@@ -5183,7 +5376,8 @@
 
 
 <div class="description">
-    Creates an array of mensurally coherent blocks, each an object withmensuration and events attributes.
+    <p>Creates an array of mensurally coherent blocks, each an object with
+mensuration and events attributes.</p>
 </div>
 
 
@@ -5235,7 +5429,7 @@
 
             
 
-            <td class="description last">The section to process</td>
+            <td class="description last"><p>The section to process</p></td>
         </tr>
 
     
@@ -5258,7 +5452,7 @@
 
             
 
-            <td class="description last">The parent MEI doc</td>
+            <td class="description last"><p>The parent MEI doc</p></td>
         </tr>
 
     
@@ -5281,7 +5475,9 @@
 
             
 
-            <td class="description last">The last mensuration of the previous block(this is the default for the first section of hte new block in somecases, if none is specified).</td>
+            <td class="description last"><p>The last mensuration of the previous block
+(this is the default for the first section of hte new block in some
+cases, if none is specified).</p></td>
         </tr>
 
     
@@ -5366,7 +5562,7 @@
 
 
 <div class="description">
-    Return all layers for a section
+    <p>Return all layers for a section</p>
 </div>
 
 
@@ -5488,7 +5684,7 @@
 
         
 <div class="param-desc">
-    Array of mei:layer elements
+    <p>Array of mei:layer elements</p>
 </div>
 
 
@@ -5565,7 +5761,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1915">line 1915</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1919">line 1919</a>
     </li></ul></dd>
     
 
@@ -5594,7 +5790,7 @@
 
         
 <div class="param-desc">
-    element
+    <p>element</p>
 </div>
 
 
@@ -5627,7 +5823,7 @@
     
 
     
-    <p class="summary">gets the parameters like notation type, mensural signature, solmization, clef and staff</p>
+    <p class="summary"><p>gets the parameters like notation type, mensural signature, solmization, clef and staff</p></p>
     
 
 
@@ -5673,7 +5869,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2962">line 2962</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2966">line 2966</a>
     </li></ul></dd>
     
 
@@ -5702,7 +5898,7 @@
 
         
 <div class="param-desc">
-    parameters
+    <p>parameters</p>
 </div>
 
 
@@ -5735,7 +5931,8 @@
     
 
     
-    <p class="summary">Parse contents of <text></text> or equivalently-syntaxed thing (e.g. a variant). This is a version of what was previously getSubText, a faster, but much less flexible function</p>
+    <p class="summary"><p>Parse contents of <text></text> or equivalently-syntaxed thing (e.g. a variant).
+This is a version of what was previously getSubText, a faster, but much less flexible function</p></p>
     
 
 
@@ -5781,7 +5978,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1822">line 1822</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1826">line 1826</a>
     </li></ul></dd>
     
 
@@ -5810,7 +6007,7 @@
 
         
 <div class="param-desc">
-    content
+    <p>content</p>
 </div>
 
 
@@ -5843,7 +6040,7 @@
     
 
     
-    <p class="summary">parse contents of a <text></text> block or equivalently-syntaxed thing (e.g. a variant)</p>
+    <p class="summary"><p>parse contents of a <text></text> block or equivalently-syntaxed thing (e.g. a variant)</p></p>
     
 
 
@@ -5889,7 +6086,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1756">line 1756</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1760">line 1760</a>
     </li></ul></dd>
     
 
@@ -5918,7 +6115,7 @@
 
         
 <div class="param-desc">
-    components
+    <p>components</p>
 </div>
 
 
@@ -6044,7 +6241,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1949">line 1949</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1953">line 1953</a>
     </li></ul></dd>
     
 
@@ -6073,7 +6270,7 @@
 
         
 <div class="param-desc">
-    object according to tag name
+    <p>object according to tag name</p>
 </div>
 
 
@@ -6110,7 +6307,8 @@
 
 
 <div class="description">
-    Return true if x (an XML DOM object, normally MEI) contains *no*mei:sections. this needs to be set as a DOM document object.
+    <p>Return true if x (an XML DOM object, normally MEI) contains <em>no</em>
+mei:sections. this needs to be set as a DOM document object.</p>
 </div>
 
 
@@ -6162,7 +6360,7 @@
 
             
 
-            <td class="description last">the part of the tree.</td>
+            <td class="description last"><p>the part of the tree.</p></td>
         </tr>
 
     
@@ -6265,7 +6463,7 @@
 
 
 <div class="description">
-    Returns the minim counts for all levels that can imperfect elemnt
+    <p>Returns the minim counts for all levels that can imperfect elemnt</p>
 </div>
 
 
@@ -6443,7 +6641,7 @@
 
 
 <div class="description">
-    Forward window support – find the next dot of division
+    <p>Forward window support – find the next dot of division</p>
 </div>
 
 
@@ -6495,7 +6693,7 @@
 
             
 
-            <td class="description last">Index of the current event (start point for the seach</td>
+            <td class="description last"><p>Index of the current event (start point for the seach</p></td>
         </tr>
 
     
@@ -6518,7 +6716,7 @@
 
             
 
-            <td class="description last">Array of events</td>
+            <td class="description last"><p>Array of events</p></td>
         </tr>
 
     
@@ -6588,7 +6786,7 @@
 
         
 <div class="param-desc">
-    Position if found (false if not)
+    <p>Position if found (false if not)</p>
 </div>
 
 
@@ -6625,7 +6823,8 @@
 
 
 <div class="description">
-    Forward window support – find the next note that's at least aslong, or find a dot of division
+    <p>Forward window support – find the next note that's at least as
+long, or find a dot of division</p>
 </div>
 
 
@@ -6677,7 +6876,7 @@
 
             
 
-            <td class="description last">Level of the note</td>
+            <td class="description last"><p>Level of the note</p></td>
         </tr>
 
     
@@ -6700,7 +6899,7 @@
 
             
 
-            <td class="description last">Index of the current event (start point for the search)</td>
+            <td class="description last"><p>Index of the current event (start point for the search)</p></td>
         </tr>
 
     
@@ -6723,7 +6922,7 @@
 
             
 
-            <td class="description last">Array of events</td>
+            <td class="description last"><p>Array of events</p></td>
         </tr>
 
     
@@ -6793,7 +6992,7 @@
 
         
 <div class="param-desc">
-    Position if found (false if not)
+    <p>Position if found (false if not)</p>
 </div>
 
 
@@ -6833,7 +7032,8 @@
 
 
 <div class="description">
-    Backward window support – find the previous note that's at least aslong, or find a dot of division
+    <p>Backward window support – find the previous note that's at least as
+long, or find a dot of division</p>
 </div>
 
 
@@ -6885,7 +7085,7 @@
 
             
 
-            <td class="description last">Level of the note</td>
+            <td class="description last"><p>Level of the note</p></td>
         </tr>
 
     
@@ -6908,7 +7108,7 @@
 
             
 
-            <td class="description last">Index of the current event (end point for the search)</td>
+            <td class="description last"><p>Index of the current event (end point for the search)</p></td>
         </tr>
 
     
@@ -6931,7 +7131,7 @@
 
             
 
-            <td class="description last">Array of events</td>
+            <td class="description last"><p>Array of events</p></td>
         </tr>
 
     
@@ -7001,7 +7201,7 @@
 
         
 <div class="param-desc">
-    Position if found (false if not)
+    <p>Position if found (false if not)</p>
 </div>
 
 
@@ -7038,7 +7238,7 @@
 
 
 <div class="description">
-    True if the supplied element is a note contained in a ternary unit
+    <p>True if the supplied element is a note contained in a ternary unit</p>
 </div>
 
 
@@ -7216,7 +7416,8 @@
 
 
 <div class="description">
-    Since rests can't be altered or imperfected, all rests can beresolved immediately
+    <p>Since rests can't be altered or imperfected, all rests can be
+resolved immediately</p>
 </div>
 
 
@@ -7268,7 +7469,8 @@
 
             
 
-            <td class="description last">Array of all the coherent areas ofmensurations in a section</td>
+            <td class="description last"><p>Array of all the coherent areas of
+mensurations in a section</p></td>
         </tr>
 
     
@@ -7353,7 +7555,8 @@
 
 
 <div class="description">
-    True if e1 and e2 are notes or rests at the same mensural level(e.g. minima or semibrevis)
+    <p>True if e1 and e2 are notes or rests at the same mensural level
+(e.g. minima or semibrevis)</p>
 </div>
 
 
@@ -7405,7 +7608,7 @@
 
             
 
-            <td class="description last">mei:note or mei:rest</td>
+            <td class="description last"><p>mei:note or mei:rest</p></td>
         </tr>
 
     
@@ -7428,7 +7631,7 @@
 
             
 
-            <td class="description last">mei:note or mei:rest</td>
+            <td class="description last"><p>mei:note or mei:rest</p></td>
         </tr>
 
     
@@ -7620,7 +7823,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2451">line 2451</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2455">line 2455</a>
     </li></ul></dd>
     
 
@@ -7689,7 +7892,9 @@
 
 
 <div class="description">
-    Reads the attributes of a mei:mensur element and returns afour-element array of 2s or 3s for the perfection of each levelfrom prolation to major modus
+    <p>Reads the attributes of a mei:mensur element and returns a
+four-element array of 2s or 3s for the perfection of each level
+from prolation to major modus</p>
 </div>
 
 
@@ -7741,7 +7946,7 @@
 
             
 
-            <td class="description last">mei:mensur element</td>
+            <td class="description last"><p>mei:mensur element</p></td>
         </tr>
 
     
@@ -7811,7 +8016,7 @@
 
         
 <div class="param-desc">
-    Four-element array
+    <p>Four-element array</p>
 </div>
 
 
@@ -7848,7 +8053,8 @@
 
 
 <div class="description">
-    Currently a placeholder for deciding the alteration status of anote that isn't on beats 1, 2 or 3
+    <p>Currently a placeholder for deciding the alteration status of a
+note that isn't on beats 1, 2 or 3</p>
 </div>
 
 
@@ -7900,7 +8106,7 @@
 
             
 
-            <td class="description last">mei:note (rest would have been resolved already)</td>
+            <td class="description last"><p>mei:note (rest would have been resolved already)</p></td>
         </tr>
 
     
@@ -7923,7 +8129,7 @@
 
             
 
-            <td class="description last">The note's position in events</td>
+            <td class="description last"><p>The note's position in events</p></td>
         </tr>
 
     
@@ -7946,7 +8152,7 @@
 
             
 
-            <td class="description last">Sequence of events in this section for this voice</td>
+            <td class="description last"><p>Sequence of events in this section for this voice</p></td>
         </tr>
 
     
@@ -7969,7 +8175,7 @@
 
             
 
-            <td class="description last">mei:mensur</td>
+            <td class="description last"><p>mei:mensur</p></td>
         </tr>
 
     
@@ -8039,7 +8245,7 @@
 <ul>
         <li>
 <div class="param-desc">
-    This function returns the altered event (why?)
+    <p>This function returns the altered event (why?)</p>
 </div>
 
 
@@ -8059,7 +8265,7 @@
     
         <li>
 <div class="param-desc">
-    Returns the event (unmodified at the moment)
+    <p>Returns the event (unmodified at the moment)</p>
 </div>
 
 
@@ -8096,7 +8302,8 @@
 
 
 <div class="description">
-    Currently a placeholder for deciding the imperfection status of anote that isn't on beats 1, 2 or 3
+    <p>Currently a placeholder for deciding the imperfection status of a
+note that isn't on beats 1, 2 or 3</p>
 </div>
 
 
@@ -8148,7 +8355,7 @@
 
             
 
-            <td class="description last">mei:note (rest would have been resolved already)</td>
+            <td class="description last"><p>mei:note (rest would have been resolved already)</p></td>
         </tr>
 
     
@@ -8171,7 +8378,7 @@
 
             
 
-            <td class="description last">The note's position in events</td>
+            <td class="description last"><p>The note's position in events</p></td>
         </tr>
 
     
@@ -8194,7 +8401,7 @@
 
             
 
-            <td class="description last">Sequence of events in this section for this voice</td>
+            <td class="description last"><p>Sequence of events in this section for this voice</p></td>
         </tr>
 
     
@@ -8217,7 +8424,7 @@
 
             
 
-            <td class="description last">mei:mensur</td>
+            <td class="description last"><p>mei:mensur</p></td>
         </tr>
 
     
@@ -8287,7 +8494,7 @@
 <ul>
         <li>
 <div class="param-desc">
-    This function returns the altered event (why?)
+    <p>This function returns the altered event (why?)</p>
 </div>
 
 
@@ -8307,7 +8514,7 @@
     
         <li>
 <div class="param-desc">
-    Returns the event (unmodified at the moment)
+    <p>Returns the event (unmodified at the moment)</p>
 </div>
 
 
@@ -8344,7 +8551,8 @@
 
 
 <div class="description">
-    Given the output of <a href="global.html#mensurSummary">mensurSummary</a>, return an array of minimcounts for each level.
+    <p>Given the output of <a href="global.html#mensurSummary"><code>mensurSummary</code></a>, return an array of minim
+counts for each level.</p>
 </div>
 
 
@@ -8412,7 +8620,8 @@
                 </td>
             
 
-            <td class="description last">Mensural structure (2 forduple/imperfect and 3 for triple/perfect for each level)</td>
+            <td class="description last"><p>Mensural structure (2 for
+duple/imperfect and 3 for triple/perfect for each level)</p></td>
         </tr>
 
     
@@ -8451,7 +8660,7 @@
                 </td>
             
 
-            <td class="description last">Stopping point</td>
+            <td class="description last"><p>Stopping point</p></td>
         </tr>
 
     
@@ -8594,7 +8803,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1116">line 1116</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1120">line 1120</a>
     </li></ul></dd>
     
 
@@ -8623,7 +8832,7 @@
 
         
 <div class="param-desc">
-    barline
+    <p>barline</p>
 </div>
 
 
@@ -8700,7 +8909,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1261">line 1261</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1265">line 1265</a>
     </li></ul></dd>
     
 
@@ -8729,7 +8938,7 @@
 
         
 <div class="param-desc">
-    chant note
+    <p>chant note</p>
 </div>
 
 
@@ -8762,7 +8971,7 @@
     
 
     
-    <p class="summary">handles choices</p>
+    <p class="summary"><p>handles choices</p></p>
     
 
 
@@ -8808,7 +9017,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2677">line 2677</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2681">line 2681</a>
     </li></ul></dd>
     
 
@@ -8837,7 +9046,7 @@
 
         
 <div class="param-desc">
-    choice
+    <p>choice</p>
 </div>
 
 
@@ -8870,7 +9079,7 @@
     
 
     
-    <p class="summary">handles ChoiceLikes</p>
+    <p class="summary"><p>handles ChoiceLikes</p></p>
     
 
 
@@ -8988,7 +9197,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2748">line 2748</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2752">line 2752</a>
     </li></ul></dd>
     
 
@@ -9024,7 +9233,7 @@
 
         
 <div class="param-desc">
-    choice
+    <p>choice</p>
 </div>
 
 
@@ -9057,7 +9266,7 @@
     
 
     
-    <p class="summary">based on @see readChoice in parser.js</p>
+    <p class="summary"><p>based on @see readChoice in parser.js</p></p>
     
 
 
@@ -9175,7 +9384,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2813">line 2813</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2817">line 2817</a>
     </li></ul></dd>
     
 
@@ -9204,7 +9413,7 @@
 
         
 <div class="param-desc">
-    choice
+    <p>choice</p>
 </div>
 
 
@@ -9281,7 +9490,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1050">line 1050</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1054">line 1054</a>
     </li></ul></dd>
     
 
@@ -9310,7 +9519,7 @@
 
         
 <div class="param-desc">
-    column, a new PositiveSpace object or false
+    <p>column, a new PositiveSpace object or false</p>
 </div>
 
 
@@ -9393,7 +9602,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1074">line 1074</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1078">line 1078</a>
     </li></ul></dd>
     
 
@@ -9422,7 +9631,7 @@
 
         
 <div class="param-desc">
-    ann
+    <p>ann</p>
 </div>
 
 
@@ -9499,7 +9708,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1271">line 1271</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1275">line 1275</a>
     </li></ul></dd>
     
 
@@ -9528,7 +9737,7 @@
 
         
 <div class="param-desc">
-    custos with pitch
+    <p>custos with pitch</p>
 </div>
 
 
@@ -9605,7 +9814,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1280">line 1280</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1284">line 1284</a>
     </li></ul></dd>
     
 
@@ -9634,7 +9843,7 @@
 
         
 <div class="param-desc">
-    dot with staff position
+    <p>dot with staff position</p>
 </div>
 
 
@@ -9671,7 +9880,7 @@
 
 
 <div class="description">
-    takes a char and looks what kind of event do we have
+    <p>takes a char and looks what kind of event do we have</p>
 </div>
 
 
@@ -9715,7 +9924,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line963">line 963</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line967">line 967</a>
     </li></ul></dd>
     
 
@@ -9744,7 +9953,7 @@
 
         
 <div class="param-desc">
-    object according to char
+    <p>object according to char</p>
 </div>
 
 
@@ -9809,7 +10018,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1303">line 1303</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1307">line 1307</a>
     </li></ul></dd>
     
 
@@ -9838,7 +10047,7 @@
 
         
 <div class="param-desc">
-    fermata with staff position
+    <p>fermata with staff position</p>
 </div>
 
 
@@ -9871,7 +10080,7 @@
     
 
     
-    <p class="summary">handles next info -> things in {}</p>
+    <p class="summary"><p>handles next info -&gt; things in {}</p></p>
     
 
 
@@ -9917,7 +10126,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2593">line 2593</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2597">line 2597</a>
     </li></ul></dd>
     
 
@@ -9975,7 +10184,7 @@
     
 
     
-    <p class="summary">Parses <lig>-Tag into Ligature objects</p>
+    <p class="summary"><p>Parses <lig>-Tag into Ligature objects</p></p>
     
 
 
@@ -10021,7 +10230,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1524">line 1524</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1528">line 1528</a>
     </li></ul></dd>
     
 
@@ -10050,7 +10259,7 @@
 
         
 <div class="param-desc">
-    ligature with notes
+    <p>ligature with notes</p>
 </div>
 
 
@@ -10083,7 +10292,7 @@
     
 
     
-    <p class="summary">handles choices in ligatures?</p>
+    <p class="summary"><p>handles choices in ligatures?</p></p>
     
 
 
@@ -10178,7 +10387,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2693">line 2693</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2697">line 2697</a>
     </li></ul></dd>
     
 
@@ -10207,7 +10416,7 @@
 
         
 <div class="param-desc">
-    ligature choice
+    <p>ligature choice</p>
 </div>
 
 
@@ -10284,7 +10493,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1186">line 1186</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1190">line 1190</a>
     </li></ul></dd>
     
 
@@ -10313,7 +10522,7 @@
 
         
 <div class="param-desc">
-    Longa rest, maxima rest or false
+    <p>Longa rest, maxima rest or false</p>
 </div>
 
 
@@ -10445,7 +10654,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2897">line 2897</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2901">line 2901</a>
     </li></ul></dd>
     
 
@@ -10474,7 +10683,7 @@
 
         
 <div class="param-desc">
-    results
+    <p>results</p>
 </div>
 
 
@@ -10551,7 +10760,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1426">line 1426</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1430">line 1430</a>
     </li></ul></dd>
     
 
@@ -10580,7 +10789,7 @@
 
         
 <div class="param-desc">
-    neume
+    <p>neume</p>
 </div>
 
 
@@ -10657,7 +10866,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1243">line 1243</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1247">line 1247</a>
     </li></ul></dd>
     
 
@@ -10686,7 +10895,7 @@
 
         
 <div class="param-desc">
-    note
+    <p>note</p>
 </div>
 
 
@@ -10719,7 +10928,7 @@
     
 
     
-    <p class="summary">Parses <obl> tag</p>
+    <p class="summary"><p>Parses <obl> tag</p></p>
     
 
 
@@ -10814,7 +11023,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1599">line 1599</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1603">line 1603</a>
     </li></ul></dd>
     
 
@@ -10843,7 +11052,7 @@
 
         
 <div class="param-desc">
-    oblique object with content
+    <p>oblique object with content</p>
 </div>
 
 
@@ -10920,7 +11129,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1481">line 1481</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1485">line 1485</a>
     </li></ul></dd>
     
 
@@ -10949,7 +11158,7 @@
 
         
 <div class="param-desc">
-    oblique neume
+    <p>oblique neume</p>
 </div>
 
 
@@ -10982,7 +11191,7 @@
     
 
     
-    <p class="summary">handles choices in oblique notes</p>
+    <p class="summary"><p>handles choices in oblique notes</p></p>
     
 
 
@@ -11077,7 +11286,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2708">line 2708</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2712">line 2712</a>
     </li></ul></dd>
     
 
@@ -11106,7 +11315,7 @@
 
         
 <div class="param-desc">
-    choice
+    <p>choice</p>
 </div>
 
 
@@ -11139,7 +11348,10 @@
     
 
     
-    <p class="summary">This covers Part, pars and other boundaries in the flow. N.B. The<Part> object represents the tag, not the element (i.e. there isan open at the beginning and a close at the end, and nothing is'contained')</p>
+    <p class="summary"><p>This covers Part, pars and other boundaries in the flow. N.B. The
+<Part> object represents the tag, not the element (i.e. there is
+an open at the beginning and a close at the end, and nothing is
+'contained')</p></p>
     
 
 
@@ -11280,7 +11492,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2472">line 2472</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2476">line 2476</a>
     </li></ul></dd>
     
 
@@ -11309,7 +11521,7 @@
 
         
 <div class="param-desc">
-    part
+    <p>part</p>
 </div>
 
 
@@ -11504,7 +11716,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2554">line 2554</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2558">line 2558</a>
     </li></ul></dd>
     
 
@@ -11533,7 +11745,7 @@
 
         
 <div class="param-desc">
-    array with reading
+    <p>array with reading</p>
 </div>
 
 
@@ -11610,7 +11822,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1208">line 1208</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1212">line 1212</a>
     </li></ul></dd>
     
 
@@ -11639,7 +11851,7 @@
 
         
 <div class="param-desc">
-    repeat or false
+    <p>repeat or false</p>
 </div>
 
 
@@ -11719,7 +11931,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1163">line 1163</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1167">line 1167</a>
     </li></ul></dd>
     
 
@@ -11748,7 +11960,7 @@
 
         
 <div class="param-desc">
-    Rest or false
+    <p>Rest or false</p>
 </div>
 
 
@@ -11831,7 +12043,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1292">line 1292</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1296">line 1296</a>
     </li></ul></dd>
     
 
@@ -11860,7 +12072,7 @@
 
         
 <div class="param-desc">
-    signum congruentiae with staff position
+    <p>signum congruentiae with staff position</p>
 </div>
 
 
@@ -11937,7 +12149,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1139">line 1139</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1143">line 1143</a>
     </li></ul></dd>
     
 
@@ -11966,7 +12178,7 @@
 
         
 <div class="param-desc">
-    solimization sign
+    <p>solimization sign</p>
 </div>
 
 
@@ -11999,7 +12211,7 @@
     
 
     
-    <p class="summary">nice and simple. Tacet is a type of text, but is treated differently because it takes up horizontal space.</p>
+    <p class="summary"><p>nice and simple. Tacet is a type of text, but is treated differently because it takes up horizontal space.</p></p>
     
 
 
@@ -12094,7 +12306,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1689">line 1689</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1693">line 1693</a>
     </li></ul></dd>
     
 
@@ -12123,7 +12335,7 @@
 
         
 <div class="param-desc">
-    tacet object
+    <p>tacet object</p>
 </div>
 
 
@@ -12156,7 +12368,7 @@
     
 
     
-    <p class="summary">handles taglike elements of music examples</p>
+    <p class="summary"><p>handles taglike elements of music examples</p></p>
     
 
 
@@ -12202,7 +12414,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1313">line 1313</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1317">line 1317</a>
     </li></ul></dd>
     
 
@@ -12286,7 +12498,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1733">line 1733</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line1737">line 1737</a>
     </li></ul></dd>
     
 
@@ -12315,7 +12527,7 @@
 
         
 <div class="param-desc">
-    text
+    <p>text</p>
 </div>
 
 
@@ -12348,7 +12560,7 @@
     
 
     
-    <p class="summary">handles text choices</p>
+    <p class="summary"><p>handles text choices</p></p>
     
 
 
@@ -12394,7 +12606,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2685">line 2685</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2689">line 2689</a>
     </li></ul></dd>
     
 
@@ -12423,7 +12635,7 @@
 
         
 <div class="param-desc">
-    choice
+    <p>choice</p>
 </div>
 
 
@@ -12460,7 +12672,7 @@
 
 
 <div class="description">
-    Return the duration level of a note or rest as an integer (semifusa=0, semibrevis=4, maxima=7)
+    <p>Return the duration level of a note or rest as an integer (semifusa=0, semibrevis=4, maxima=7)</p>
 </div>
 
 
@@ -12512,7 +12724,7 @@
 
             
 
-            <td class="description last">mei:note or mei:rest (or other object with mei:@dur</td>
+            <td class="description last"><p>mei:note or mei:rest (or other object with mei:@dur</p></td>
         </tr>
 
     
@@ -12615,7 +12827,7 @@
 
 
 <div class="description">
-    Convert mei:@dur to an integer (semifusa=0, semibrevis=4, maxima=7)
+    <p>Convert mei:@dur to an integer (semifusa=0, semibrevis=4, maxima=7)</p>
 </div>
 
 
@@ -12667,7 +12879,7 @@
 
             
 
-            <td class="description last">@dur string</td>
+            <td class="description last"><p>@dur string</p></td>
         </tr>
 
     
@@ -12770,7 +12982,7 @@
 
 
 <div class="description">
-    Return true if event is a note or rest
+    <p>Return true if event is a note or rest</p>
 </div>
 
 
@@ -12822,7 +13034,7 @@
 
             
 
-            <td class="description last">Event from MEI</td>
+            <td class="description last"><p>Event from MEI</p></td>
         </tr>
 
     
@@ -12925,7 +13137,10 @@
 
 
 <div class="description">
-    Is note perfect as a whole, i.e. is it divisible into 3 directparts (for example, a breve is regularly perfect in perfect tempus,minor prolation and in imperfect tempus, major prolation, but onlyin the former case is it perfect as a whole)
+    <p>Is note perfect as a whole, i.e. is it divisible into 3 direct
+parts (for example, a breve is regularly perfect in perfect tempus,
+minor prolation and in imperfect tempus, major prolation, but only
+in the former case is it perfect as a whole)</p>
 </div>
 
 
@@ -13081,7 +13296,8 @@
 
 
 <div class="description">
-    Name space manager function. Takes a prefix and returns the URL forthat name space. In this case, though, pretty much hard-wired.
+    <p>Name space manager function. Takes a prefix and returns the URL for
+that name space. In this case, though, pretty much hard-wired.</p>
 </div>
 
 
@@ -13133,7 +13349,7 @@
 
             
 
-            <td class="description last">The namespace prefix to retrieve as a URL</td>
+            <td class="description last"><p>The namespace prefix to retrieve as a URL</p></td>
         </tr>
 
     
@@ -13214,7 +13430,7 @@
     
 
     
-    <p class="summary">parses a clef</p>
+    <p class="summary"><p>parses a clef</p></p>
     
 
 
@@ -13332,7 +13548,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2328">line 2328</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2332">line 2332</a>
     </li></ul></dd>
     
 
@@ -13361,7 +13577,7 @@
 
         
 <div class="param-desc">
-    clef
+    <p>clef</p>
 </div>
 
 
@@ -13394,7 +13610,7 @@
     
 
     
-    <p class="summary">parses a clef reading</p>
+    <p class="summary"><p>parses a clef reading</p></p>
     
 
 
@@ -13489,7 +13705,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2246">line 2246</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2250">line 2250</a>
     </li></ul></dd>
     
 
@@ -13518,7 +13734,7 @@
 
         
 <div class="param-desc">
-    reading
+    <p>reading</p>
 </div>
 
 
@@ -13551,7 +13767,7 @@
     
 
     
-    <p class="summary">parses clef variants</p>
+    <p class="summary"><p>parses clef variants</p></p>
     
 
 
@@ -13646,7 +13862,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2309">line 2309</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2313">line 2313</a>
     </li></ul></dd>
     
 
@@ -13675,7 +13891,7 @@
 
         
 <div class="param-desc">
-    variant
+    <p>variant</p>
 </div>
 
 
@@ -13708,7 +13924,7 @@
     
 
     
-    <p class="summary">parses mensural signature</p>
+    <p class="summary"><p>parses mensural signature</p></p>
     
 
 
@@ -13798,7 +14014,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2017">line 2017</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2021">line 2021</a>
     </li></ul></dd>
     
 
@@ -13827,7 +14043,7 @@
 
         
 <div class="param-desc">
-    mensural signature
+    <p>mensural signature</p>
 </div>
 
 
@@ -13860,7 +14076,7 @@
     
 
     
-    <p class="summary">parses readings of mensuration signs?</p>
+    <p class="summary"><p>parses readings of mensuration signs?</p></p>
     
 
 
@@ -13955,7 +14171,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2055">line 2055</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2059">line 2059</a>
     </li></ul></dd>
     
 
@@ -13995,7 +14211,7 @@
     
 
     
-    <p class="summary">handles variants in mensuration</p>
+    <p class="summary"><p>handles variants in mensuration</p></p>
     
 
 
@@ -14090,7 +14306,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2085">line 2085</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2089">line 2089</a>
     </li></ul></dd>
     
 
@@ -14119,7 +14335,7 @@
 
         
 <div class="param-desc">
-    variant object
+    <p>variant object</p>
 </div>
 
 
@@ -14152,7 +14368,7 @@
     
 
     
-    <p class="summary">parses proportion signs</p>
+    <p class="summary"><p>parses proportion signs</p></p>
     
 
 
@@ -14270,7 +14486,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2105">line 2105</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2109">line 2109</a>
     </li></ul></dd>
     
 
@@ -14299,7 +14515,7 @@
 
         
 <div class="param-desc">
-    proportion sign
+    <p>proportion sign</p>
 </div>
 
 
@@ -14335,7 +14551,7 @@
     
 
     
-    <p class="summary">parses solmization signature</p>
+    <p class="summary"><p>parses solmization signature</p></p>
     
 
 
@@ -14430,7 +14646,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2134">line 2134</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2138">line 2138</a>
     </li></ul></dd>
     
 
@@ -14459,7 +14675,7 @@
 
         
 <div class="param-desc">
-    solmization signature with solmization signs
+    <p>solmization signature with solmization signs</p>
 </div>
 
 
@@ -14492,7 +14708,7 @@
     
 
     
-    <p class="summary">parses reading of solmization signature</p>
+    <p class="summary"><p>parses reading of solmization signature</p></p>
     
 
 
@@ -14587,7 +14803,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2168">line 2168</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2172">line 2172</a>
     </li></ul></dd>
     
 
@@ -14645,7 +14861,7 @@
     
 
     
-    <p class="summary">parses solmization variant</p>
+    <p class="summary"><p>parses solmization variant</p></p>
     
 
 
@@ -14740,7 +14956,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2227">line 2227</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2231">line 2231</a>
     </li></ul></dd>
     
 
@@ -14769,7 +14985,7 @@
 
         
 <div class="param-desc">
-    variant
+    <p>variant</p>
 </div>
 
 
@@ -14802,7 +15018,7 @@
     
 
     
-    <p class="summary">parses a staff</p>
+    <p class="summary"><p>parses a staff</p></p>
     
 
 
@@ -14897,7 +15113,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2391">line 2391</a>
+        <a href="music-parser.js.html">music-parser.js</a>, <a href="music-parser.js.html#line2395">line 2395</a>
     </li></ul></dd>
     
 
@@ -14926,7 +15142,7 @@
 
         
 <div class="param-desc">
-    staff
+    <p>staff</p>
 </div>
 
 
@@ -14963,7 +15179,9 @@
 
 
 <div class="description">
-    Given an element, find its applicable 'block' (mensurally-coherentsection) and, if there is a proportion that should apply, returnsthe factor. Uses the idDictionary global.
+    <p>Given an element, find its applicable 'block' (mensurally-coherent
+section) and, if there is a proportion that should apply, returns
+the factor. Uses the idDictionary global.</p>
 </div>
 
 
@@ -15015,7 +15233,7 @@
 
             
 
-            <td class="description last">mei:note or mei:rest</td>
+            <td class="description last"><p>mei:note or mei:rest</p></td>
         </tr>
 
     
@@ -15118,7 +15336,7 @@
 
 
 <div class="description">
-    Given a proportion-specifying element, give its implied multiplier
+    <p>Given a proportion-specifying element, give its implied multiplier</p>
 </div>
 
 
@@ -15206,7 +15424,8 @@
 
 
 <div class="description">
-    Given an event with dur.ges of the form [0-9]*b, return the integerpart
+    <p>Given an event with dur.ges of the form [0-9]*b, return the integer
+part</p>
 </div>
 
 
@@ -15258,7 +15477,7 @@
 
             
 
-            <td class="description last">or mei:rest</td>
+            <td class="description last"><p>or mei:rest</p></td>
         </tr>
 
     
@@ -15361,7 +15580,8 @@
 
 
 <div class="description">
-    A note or rest is regularly perfect if it or any parts of it areare ternary according to the mensuration sign.
+    <p>A note or rest is regularly perfect if it or any parts of it are
+are ternary according to the mensuration sign.</p>
 </div>
 
 
@@ -15516,7 +15736,8 @@
 
 
 <div class="description">
-    Given an event on the second beat, if we can tell if it's altered,label the duration. Currently, absolutely assumes alteration is appropriate.
+    <p>Given an event on the second beat, if we can tell if it's altered,
+label the duration. Currently, absolutely assumes alteration is appropriate.</p>
 </div>
 
 
@@ -15568,7 +15789,7 @@
 
             
 
-            <td class="description last">mei:note (rest would have been resolved already)</td>
+            <td class="description last"><p>mei:note (rest would have been resolved already)</p></td>
         </tr>
 
     
@@ -15591,7 +15812,7 @@
 
             
 
-            <td class="description last">The note's position in events</td>
+            <td class="description last"><p>The note's position in events</p></td>
         </tr>
 
     
@@ -15614,7 +15835,7 @@
 
             
 
-            <td class="description last">Sequence of events in this section for this voice</td>
+            <td class="description last"><p>Sequence of events in this section for this voice</p></td>
         </tr>
 
     
@@ -15637,7 +15858,7 @@
 
             
 
-            <td class="description last">mei:mensur</td>
+            <td class="description last"><p>mei:mensur</p></td>
         </tr>
 
     
@@ -15707,7 +15928,7 @@
 
         
 <div class="param-desc">
-    This function returns the modified event (why?)
+    <p>This function returns the modified event (why?)</p>
 </div>
 
 
@@ -15744,7 +15965,8 @@
 
 
 <div class="description">
-    Given an event on the second beat, if we can tell if it's perfect,label the duration. Checks rule I.8 from the rulelist
+    <p>Given an event on the second beat, if we can tell if it's perfect,
+label the duration. Checks rule I.8 from the rulelist</p>
 </div>
 
 
@@ -15796,7 +16018,7 @@
 
             
 
-            <td class="description last">mei:note (rest would have been resolved already)</td>
+            <td class="description last"><p>mei:note (rest would have been resolved already)</p></td>
         </tr>
 
     
@@ -15819,7 +16041,7 @@
 
             
 
-            <td class="description last">The note's position in events</td>
+            <td class="description last"><p>The note's position in events</p></td>
         </tr>
 
     
@@ -15842,7 +16064,7 @@
 
             
 
-            <td class="description last">Sequence of events in this section for this voice</td>
+            <td class="description last"><p>Sequence of events in this section for this voice</p></td>
         </tr>
 
     
@@ -15865,7 +16087,7 @@
 
             
 
-            <td class="description last">mei:mensur</td>
+            <td class="description last"><p>mei:mensur</p></td>
         </tr>
 
     
@@ -15935,7 +16157,7 @@
 
         
 <div class="param-desc">
-    This function returns the modified event (why?)
+    <p>This function returns the modified event (why?)</p>
 </div>
 
 
@@ -15972,7 +16194,8 @@
 
 
 <div class="description">
-    Return the number of minims that a given note would be expected tohave, given the prevailing mensuration.
+    <p>Return the number of minims that a given note would be expected to
+have, given the prevailing mensuration.</p>
 </div>
 
 
@@ -16024,7 +16247,7 @@
 
             
 
-            <td class="description last">mei:note</td>
+            <td class="description last"><p>mei:note</p></td>
         </tr>
 
     
@@ -16047,7 +16270,7 @@
 
             
 
-            <td class="description last">mei:mensur</td>
+            <td class="description last"><p>mei:mensur</p></td>
         </tr>
 
     
@@ -16070,7 +16293,8 @@
 
             
 
-            <td class="description last">Displaces the note level (so, if el isa minim, 1 for levelAdjust will treat it as a semibreve)</td>
+            <td class="description last"><p>Displaces the note level (so, if el is
+a minim, 1 for levelAdjust will treat it as a semibreve)</p></td>
         </tr>
 
     
@@ -16093,7 +16317,7 @@
 
             
 
-            <td class="description last">count</td>
+            <td class="description last"><p>count</p></td>
         </tr>
 
     
@@ -16178,7 +16402,8 @@
 
 
 <div class="description">
-    Resolves any alterations that can be treated as simple local notepatterns
+    <p>Resolves any alterations that can be treated as simple local note
+patterns</p>
 </div>
 
 
@@ -16230,7 +16455,8 @@
 
             
 
-            <td class="description last">Array of all the coherent areas ofmensurations in a section</td>
+            <td class="description last"><p>Array of all the coherent areas of
+mensurations in a section</p></td>
         </tr>
 
     
@@ -16315,7 +16541,12 @@
 
 
 <div class="description">
-    Returns true if a duration (in minims) is 3, 6 or 9 times thelength of any of a list of candidate values, otherwise returnsfalse. This is for durations of windows of notes, to see whetherthey represent a coherent block of whole mensural units (which islikely to imply that they fall on the beat and that they don'timperfect their neighbours).
+    <p>Returns true if a duration (in minims) is 3, 6 or 9 times the
+length of any of a list of candidate values, otherwise returns
+false. This is for durations of windows of notes, to see whether
+they represent a coherent block of whole mensural units (which is
+likely to imply that they fall on the beat and that they don't
+imperfect their neighbours).</p>
 </div>
 
 
@@ -16481,7 +16712,8 @@
 
 
 <div class="description">
-    Given an event on the third beat, if we can tell if it's altered,label the duration.
+    <p>Given an event on the third beat, if we can tell if it's altered,
+label the duration.</p>
 </div>
 
 
@@ -16533,7 +16765,7 @@
 
             
 
-            <td class="description last">mei:note (rest would have been resolved already)</td>
+            <td class="description last"><p>mei:note (rest would have been resolved already)</p></td>
         </tr>
 
     
@@ -16556,7 +16788,7 @@
 
             
 
-            <td class="description last">The note's position in events</td>
+            <td class="description last"><p>The note's position in events</p></td>
         </tr>
 
     
@@ -16579,7 +16811,7 @@
 
             
 
-            <td class="description last">Sequence of events in this section for this voice</td>
+            <td class="description last"><p>Sequence of events in this section for this voice</p></td>
         </tr>
 
     
@@ -16602,7 +16834,7 @@
 
             
 
-            <td class="description last">mei:mensur</td>
+            <td class="description last"><p>mei:mensur</p></td>
         </tr>
 
     
@@ -16672,7 +16904,7 @@
 
         
 <div class="param-desc">
-    This function returns the modified event (why?)
+    <p>This function returns the modified event (why?)</p>
 </div>
 
 
@@ -16709,7 +16941,8 @@
 
 
 <div class="description">
-    Given an event on the third beat, if we can tell if it's perfect,label the duration. Checks rule I.9 from the rulelist
+    <p>Given an event on the third beat, if we can tell if it's perfect,
+label the duration. Checks rule I.9 from the rulelist</p>
 </div>
 
 
@@ -16761,7 +16994,7 @@
 
             
 
-            <td class="description last">mei:note (rest would have been resolved already)</td>
+            <td class="description last"><p>mei:note (rest would have been resolved already)</p></td>
         </tr>
 
     
@@ -16784,7 +17017,7 @@
 
             
 
-            <td class="description last">The note's position in events</td>
+            <td class="description last"><p>The note's position in events</p></td>
         </tr>
 
     
@@ -16807,7 +17040,7 @@
 
             
 
-            <td class="description last">Sequence of events in this section for this voice</td>
+            <td class="description last"><p>Sequence of events in this section for this voice</p></td>
         </tr>
 
     
@@ -16830,7 +17063,7 @@
 
             
 
-            <td class="description last">mei:mensur</td>
+            <td class="description last"><p>mei:mensur</p></td>
         </tr>
 
     
@@ -16900,7 +17133,7 @@
 
         
 <div class="param-desc">
-    This function returns the modified event (why?)
+    <p>This function returns the modified event (why?)</p>
 </div>
 
 
@@ -16937,7 +17170,10 @@
 
 
 <div class="description">
-    Get exact, estimated and minimum durations for a window, naivelycalculated. The returned object has attibutes for definite,bareMinimum (including possible extremes of imperfection),approximateMinimum (less extreme) and approximation ('most likely')
+    <p>Get exact, estimated and minimum durations for a window, naively
+calculated. The returned object has attibutes for definite,
+bareMinimum (including possible extremes of imperfection),
+approximateMinimum (less extreme) and approximation ('most likely')</p>
 </div>
 
 
@@ -17025,7 +17261,8 @@
 
 
 <div class="description">
-    Write duration information for a note that we've decided should bealtered
+    <p>Write duration information for a note that we've decided should be
+altered</p>
 </div>
 
 
@@ -17077,7 +17314,7 @@
 
             
 
-            <td class="description last">mei:note</td>
+            <td class="description last"><p>mei:note</p></td>
         </tr>
 
     
@@ -17100,7 +17337,7 @@
 
             
 
-            <td class="description last">mei:mensur</td>
+            <td class="description last"><p>mei:mensur</p></td>
         </tr>
 
     
@@ -17123,7 +17360,8 @@
 
             
 
-            <td class="description last">Reference for rule used to decide this(written to element as @rule)</td>
+            <td class="description last"><p>Reference for rule used to decide this
+(written to element as @rule)</p></td>
         </tr>
 
     
@@ -17208,7 +17446,8 @@
 
 
 <div class="description">
-    Given a count of beats, writes dur.ges to an element (appends 'b'and, if there's a dot of augmentation, multiplies by 1.5)
+    <p>Given a count of beats, writes dur.ges to an element (appends 'b'
+and, if there's a dot of augmentation, multiplies by 1.5)</p>
 </div>
 
 
@@ -17260,7 +17499,7 @@
 
             
 
-            <td class="description last">Core duration in minims</td>
+            <td class="description last"><p>Core duration in minims</p></td>
         </tr>
 
     
@@ -17283,7 +17522,7 @@
 
             
 
-            <td class="description last">mei:note</td>
+            <td class="description last"><p>mei:note</p></td>
         </tr>
 
     
@@ -17306,7 +17545,7 @@
 
             
 
-            <td class="description last">Is there a dot of augmentation?</td>
+            <td class="description last"><p>Is there a dot of augmentation?</p></td>
         </tr>
 
     
@@ -17391,7 +17630,8 @@
 
 
 <div class="description">
-    Write duration information for a note that we've decided should beimperfected
+    <p>Write duration information for a note that we've decided should be
+imperfected</p>
 </div>
 
 
@@ -17443,7 +17683,7 @@
 
             
 
-            <td class="description last">mei:note</td>
+            <td class="description last"><p>mei:note</p></td>
         </tr>
 
     
@@ -17466,7 +17706,7 @@
 
             
 
-            <td class="description last">Time (in minims) to subtract</td>
+            <td class="description last"><p>Time (in minims) to subtract</p></td>
         </tr>
 
     
@@ -17489,7 +17729,7 @@
 
             
 
-            <td class="description last">mei:mensur</td>
+            <td class="description last"><p>mei:mensur</p></td>
         </tr>
 
     
@@ -17512,7 +17752,8 @@
 
             
 
-            <td class="description last">Reference for rule used to decide this(written to element as @rule)</td>
+            <td class="description last"><p>Reference for rule used to decide this
+(written to element as @rule)</p></td>
         </tr>
 
     
@@ -17597,7 +17838,9 @@
 
 
 <div class="description">
-    Write duration information for a note that we've decided should bethe simplest form of imperfection (subtract a third). For otherimperfection, use <a href="global.html#writeImperfection">writeImperfection</a>
+    <p>Write duration information for a note that we've decided should be
+the simplest form of imperfection (subtract a third). For other
+imperfection, use <a href="global.html#writeImperfection"><code>writeImperfection</code></a></p>
 </div>
 
 
@@ -17649,7 +17892,7 @@
 
             
 
-            <td class="description last">mei:note</td>
+            <td class="description last"><p>mei:note</p></td>
         </tr>
 
     
@@ -17672,7 +17915,7 @@
 
             
 
-            <td class="description last">Time (in minims) to subtract</td>
+            <td class="description last"><p>Time (in minims) to subtract</p></td>
         </tr>
 
     
@@ -17695,7 +17938,7 @@
 
             
 
-            <td class="description last">mei:mensur</td>
+            <td class="description last"><p>mei:mensur</p></td>
         </tr>
 
     
@@ -17718,7 +17961,8 @@
 
             
 
-            <td class="description last">Reference for rule used to decide this(written to element as @rule)</td>
+            <td class="description last"><p>Reference for rule used to decide this
+(written to element as @rule)</p></td>
         </tr>
 
     
@@ -17805,13 +18049,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Barline.html">Barline</a></li><li><a href="BlueClose.html">BlueClose</a></li><li><a href="BlueOpen.html">BlueOpen</a></li><li><a href="ChantNote.html">ChantNote</a></li><li><a href="Classes.html">Classes</a></li><li><a href="Clef.html">Clef</a></li><li><a href="ColumnStart.html">ColumnStart</a></li><li><a href="Comment.html">Comment</a></li><li><a href="Custos.html">Custos</a></li><li><a href="Dot.html">Dot</a></li><li><a href="etc.html">etc</a></li><li><a href="ExampleBreak.html">ExampleBreak</a></li><li><a href="Fermata.html">Fermata</a></li><li><a href="FullClose.html">FullClose</a></li><li><a href="FullOpen.html">FullOpen</a></li><li><a href="GenericClose.html">GenericClose</a></li><li><a href="GenericOpen.html">GenericOpen</a></li><li><a href="HalfFullClose.html">HalfFullClose</a></li><li><a href="HalfFullOpen.html">HalfFullOpen</a></li><li><a href="LargeClose.html">LargeClose</a></li><li><a href="LargeOpen.html">LargeOpen</a></li><li><a href="LedgerLineChange.html">LedgerLineChange</a></li><li><a href="Ligature.html">Ligature</a></li><li><a href="LigatureComment.html">LigatureComment</a></li><li><a href="LigatureNote.html">LigatureNote</a></li><li><a href="LigChoice.html">LigChoice</a></li><li><a href="LongRest.html">LongRest</a></li><li><a href="MaxRest.html">MaxRest</a></li><li><a href="MChoice.html">MChoice</a></li><li><a href="MensuralSignature.html">MensuralSignature</a></li><li><a href="MESuper.html">MESuper</a></li><li><a href="MNilReading.html">MNilReading</a></li><li><a href="MReading.html">MReading</a></li><li><a href="MusicExample.html">MusicExample</a></li><li><a href="MusicOptionalSpace.html">MusicOptionalSpace</a></li><li><a href="MusicPunctuation.html">MusicPunctuation</a></li><li><a href="MusicWordJoin.html">MusicWordJoin</a></li><li><a href="MusicWordSplit.html">MusicWordSplit</a></li><li><a href="NegativeSpace.html">NegativeSpace</a></li><li><a href="Neume.html">Neume</a></li><li><a href="NeumeItem.html">NeumeItem</a></li><li><a href="Notation.html">Notation</a></li><li><a href="Note.html">Note</a></li><li><a href="Oblique.html">Oblique</a></li><li><a href="ObliqueNeume.html">ObliqueNeume</a></li><li><a href="ObliqueNote.html">ObliqueNote</a></li><li><a href="ObliqueNoteChoice.html">ObliqueNoteChoice</a></li><li><a href="Parameters.html">Parameters</a></li><li><a href="Part.html">Part</a></li><li><a href="PositiveSpace.html">PositiveSpace</a></li><li><a href="ProportionSign.html">ProportionSign</a></li><li><a href="RedClose.html">RedClose</a></li><li><a href="RedlineClose.html">RedlineClose</a></li><li><a href="RedlineOpen.html">RedlineOpen</a></li><li><a href="RedOpen.html">RedOpen</a></li><li><a href="Repeat.html">Repeat</a></li><li><a href="Rest.html">Rest</a></li><li><a href="SignumCongruentiae.html">SignumCongruentiae</a></li><li><a href="SolmizationSign.html">SolmizationSign</a></li><li><a href="SolmizationSignature.html">SolmizationSignature</a></li><li><a href="StackedProportionSigns.html">StackedProportionSigns</a></li><li><a href="Staff.html">Staff</a></li><li><a href="StrikethroughClose.html">StrikethroughClose</a></li><li><a href="StrikethroughOpen.html">StrikethroughOpen</a></li><li><a href="Tacet.html">Tacet</a></li><li><a href="TextUnderlay.html">TextUnderlay</a></li><li><a href="upsideDownClose.html">upsideDownClose</a></li><li><a href="upsideDownOpen.html">upsideDownOpen</a></li><li><a href="ValueChoice.html">ValueChoice</a></li><li><a href="ValueReading.html">ValueReading</a></li><li><a href="VoidClose.html">VoidClose</a></li><li><a href="VoidOpen.html">VoidOpen</a></li></ul><h3>Global</h3><ul><li><a href="global.html#actOnColoration">actOnColoration</a></li><li><a href="global.html#actOnDots">actOnDots</a></li><li><a href="global.html#addBreveBoundariesForBlock">addBreveBoundariesForBlock</a></li><li><a href="global.html#addStartTimesForBlock">addStartTimesForBlock</a></li><li><a href="global.html#allUnalterableImperfectLevels">allUnalterableImperfectLevels</a></li><li><a href="global.html#alterableLevels">alterableLevels</a></li><li><a href="global.html#anteSim">anteSim</a></li><li><a href="global.html#augDot">augDot</a></li><li><a href="global.html#beatIndependentDurations">beatIndependentDurations</a></li><li><a href="global.html#beatOfDur">beatOfDur</a></li><li><a href="global.html#beatOfUnit">beatOfUnit</a></li><li><a href="global.html#beatUnitStructure">beatUnitStructure</a></li><li><a href="global.html#blockProportionMultiplier">blockProportionMultiplier</a></li><li><a href="global.html#breveDifference">breveDifference</a></li><li><a href="global.html#canImperfect">canImperfect</a></li><li><a href="global.html#checkForGeneralAlteration">checkForGeneralAlteration</a></li><li><a href="global.html#colourp">colourp</a></li><li><a href="global.html#compoundNotep">compoundNotep</a></li><li><a href="global.html#consumeParenthesis">consumeParenthesis</a></li><li><a href="global.html#divisionDot">divisionDot</a></li><li><a href="global.html#divisionLikeRests">divisionLikeRests</a></li><li><a href="global.html#dupleMinimCountFromElement">dupleMinimCountFromElement</a></li><li><a href="global.html#enrichText">enrichText</a></li><li><a href="global.html#extendTacet">extendTacet</a></li><li><a href="global.html#firstBeatAlteration">firstBeatAlteration</a></li><li><a href="global.html#firstBeatImperfection">firstBeatImperfection</a></li><li><a href="global.html#firstBeatImperfectionCheck">firstBeatImperfectionCheck</a></li><li><a href="global.html#firstPerfectLevel">firstPerfectLevel</a></li><li><a href="global.html#gcd">gcd</a></li><li><a href="global.html#getAtomicSections">getAtomicSections</a></li><li><a href="global.html#getEventsByMensurationForSection">getEventsByMensurationForSection</a></li><li><a href="global.html#getLayers">getLayers</a></li><li><a href="global.html#getMusicTextSup">getMusicTextSup</a></li><li><a href="global.html#getParameters">getParameters</a></li><li><a href="global.html#getString">getString</a></li><li><a href="global.html#getSubText">getSubText</a></li><li><a href="global.html#getTag">getTag</a></li><li><a href="global.html#hasNoSections">hasNoSections</a></li><li><a href="global.html#imperfectingLevels">imperfectingLevels</a></li><li><a href="global.html#indexOfNextDot">indexOfNextDot</a></li><li><a href="global.html#indexOfNextSameOrLongerOrDot">indexOfNextSameOrLongerOrDot</a></li><li><a href="global.html#indexOfPrevLongerOrDot">indexOfPrevLongerOrDot</a></li><li><a href="global.html#isAlterable">isAlterable</a></li><li><a href="global.html#labelRests">labelRests</a></li><li><a href="global.html#leveleq">leveleq</a></li><li><a href="global.html#linesp">linesp</a></li><li><a href="global.html#mensurSummary">mensurSummary</a></li><li><a href="global.html#midBeatAlteration">midBeatAlteration</a></li><li><a href="global.html#midBeatImperfection">midBeatImperfection</a></li><li><a href="global.html#minimStructures">minimStructures</a></li><li><a href="global.html#nextBarline">nextBarline</a></li><li><a href="global.html#nextChantNote">nextChantNote</a></li><li><a href="global.html#nextChoice">nextChoice</a></li><li><a href="global.html#nextChoiceLikeThing">nextChoiceLikeThing</a></li><li><a href="global.html#nextChoiceLikeThing2">nextChoiceLikeThing2</a></li><li><a href="global.html#nextColRef">nextColRef</a></li><li><a href="global.html#nextComment">nextComment</a></li><li><a href="global.html#nextCustos">nextCustos</a></li><li><a href="global.html#nextDot">nextDot</a></li><li><a href="global.html#nextEvent">nextEvent</a></li><li><a href="global.html#nextFermata">nextFermata</a></li><li><a href="global.html#nextInfo">nextInfo</a></li><li><a href="global.html#nextLigature">nextLigature</a></li><li><a href="global.html#nextLigChoice">nextLigChoice</a></li><li><a href="global.html#nextLongRest">nextLongRest</a></li><li><a href="global.html#nextMusic">nextMusic</a></li><li><a href="global.html#nextNeume">nextNeume</a></li><li><a href="global.html#nextNote">nextNote</a></li><li><a href="global.html#nextOblique">nextOblique</a></li><li><a href="global.html#nextObliqueNeume">nextObliqueNeume</a></li><li><a href="global.html#nextObliqueNoteChoice">nextObliqueNoteChoice</a></li><li><a href="global.html#nextPart">nextPart</a></li><li><a href="global.html#nextPartnameReading">nextPartnameReading</a></li><li><a href="global.html#nextRepeat">nextRepeat</a></li><li><a href="global.html#nextRest">nextRest</a></li><li><a href="global.html#nextSignumCongruentiae">nextSignumCongruentiae</a></li><li><a href="global.html#nextSolmSign">nextSolmSign</a></li><li><a href="global.html#nextTacet">nextTacet</a></li><li><a href="global.html#nextTaglike">nextTaglike</a></li><li><a href="global.html#nextText">nextText</a></li><li><a href="global.html#nextTextChoice">nextTextChoice</a></li><li><a href="global.html#noteInt">noteInt</a></li><li><a href="global.html#noteIntFromDur">noteIntFromDur</a></li><li><a href="global.html#noteOrRest">noteOrRest</a></li><li><a href="global.html#notePerfectAsWhole">notePerfectAsWhole</a></li><li><a href="global.html#nsResolver">nsResolver</a></li><li><a href="global.html#parseClef">parseClef</a></li><li><a href="global.html#parseClefReading">parseClefReading</a></li><li><a href="global.html#parseClefVar">parseClefVar</a></li><li><a href="global.html#parseMens">parseMens</a></li><li><a href="global.html#parseMensReading">parseMensReading</a></li><li><a href="global.html#parseProp">parseProp</a></li><li><a href="global.html#parseSolm">parseSolm</a></li><li><a href="global.html#parseSolmReading">parseSolmReading</a></li><li><a href="global.html#parseSolmVar">parseSolmVar</a></li><li><a href="global.html#parseStaff">parseStaff</a></li><li><a href="global.html#propNum">propNum</a></li><li><a href="global.html#proportionMultiplier">proportionMultiplier</a></li><li><a href="global.html#propProportionMultiplier">propProportionMultiplier</a></li><li><a href="global.html#readDur">readDur</a></li><li><a href="global.html#regularlyPerfect">regularlyPerfect</a></li><li><a href="global.html#secondBeatAlteration">secondBeatAlteration</a></li><li><a href="global.html#secondBeatImperfection">secondBeatImperfection</a></li><li><a href="global.html#simpleMinims">simpleMinims</a></li><li><a href="global.html#simplestAlterations">simplestAlterations</a></li><li><a href="global.html#solidBlock">solidBlock</a></li><li><a href="global.html#thirdBeatAlteration">thirdBeatAlteration</a></li><li><a href="global.html#thirdBeatImperfection">thirdBeatImperfection</a></li><li><a href="global.html#windowDuration">windowDuration</a></li><li><a href="global.html#writeAlteration">writeAlteration</a></li><li><a href="global.html#writeDur">writeDur</a></li><li><a href="global.html#writeImperfection">writeImperfection</a></li><li><a href="global.html#writeSimpleImperfection">writeSimpleImperfection</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Barline.html">Barline</a></li><li><a href="BlueClose.html">BlueClose</a></li><li><a href="BlueOpen.html">BlueOpen</a></li><li><a href="ChantNote.html">ChantNote</a></li><li><a href="Classes.html">Classes</a></li><li><a href="Clef.html">Clef</a></li><li><a href="ColumnStart.html">ColumnStart</a></li><li><a href="Comment.html">Comment</a></li><li><a href="Custos.html">Custos</a></li><li><a href="Dot.html">Dot</a></li><li><a href="etc.html">etc</a></li><li><a href="ExampleBreak.html">ExampleBreak</a></li><li><a href="Fermata.html">Fermata</a></li><li><a href="FullClose.html">FullClose</a></li><li><a href="FullOpen.html">FullOpen</a></li><li><a href="GenericClose.html">GenericClose</a></li><li><a href="GenericOpen.html">GenericOpen</a></li><li><a href="HalfFullClose.html">HalfFullClose</a></li><li><a href="HalfFullOpen.html">HalfFullOpen</a></li><li><a href="LargeClose.html">LargeClose</a></li><li><a href="LargeOpen.html">LargeOpen</a></li><li><a href="LedgerLineChange.html">LedgerLineChange</a></li><li><a href="Ligature.html">Ligature</a></li><li><a href="LigatureComment.html">LigatureComment</a></li><li><a href="LigatureNote.html">LigatureNote</a></li><li><a href="LigChoice.html">LigChoice</a></li><li><a href="LongRest.html">LongRest</a></li><li><a href="MaxRest.html">MaxRest</a></li><li><a href="MChoice.html">MChoice</a></li><li><a href="MensuralSignature.html">MensuralSignature</a></li><li><a href="MESuper.html">MESuper</a></li><li><a href="MNilReading.html">MNilReading</a></li><li><a href="MReading.html">MReading</a></li><li><a href="MusicExample.html">MusicExample</a></li><li><a href="MusicOptionalSpace.html">MusicOptionalSpace</a></li><li><a href="MusicPunctuation.html">MusicPunctuation</a></li><li><a href="MusicWordJoin.html">MusicWordJoin</a></li><li><a href="MusicWordSplit.html">MusicWordSplit</a></li><li><a href="NegativeSpace.html">NegativeSpace</a></li><li><a href="Neume.html">Neume</a></li><li><a href="NeumeItem.html">NeumeItem</a></li><li><a href="Notation.html">Notation</a></li><li><a href="Note.html">Note</a></li><li><a href="Oblique.html">Oblique</a></li><li><a href="ObliqueNeume.html">ObliqueNeume</a></li><li><a href="ObliqueNote.html">ObliqueNote</a></li><li><a href="ObliqueNoteChoice.html">ObliqueNoteChoice</a></li><li><a href="Parameters.html">Parameters</a></li><li><a href="Part.html">Part</a></li><li><a href="PositiveSpace.html">PositiveSpace</a></li><li><a href="ProportionSign.html">ProportionSign</a></li><li><a href="RedClose.html">RedClose</a></li><li><a href="RedlineClose.html">RedlineClose</a></li><li><a href="RedlineOpen.html">RedlineOpen</a></li><li><a href="RedOpen.html">RedOpen</a></li><li><a href="Repeat.html">Repeat</a></li><li><a href="Rest.html">Rest</a></li><li><a href="SignumCongruentiae.html">SignumCongruentiae</a></li><li><a href="SolmizationSign.html">SolmizationSign</a></li><li><a href="SolmizationSignature.html">SolmizationSignature</a></li><li><a href="StackedProportionSigns.html">StackedProportionSigns</a></li><li><a href="Staff.html">Staff</a></li><li><a href="StrikethroughClose.html">StrikethroughClose</a></li><li><a href="StrikethroughOpen.html">StrikethroughOpen</a></li><li><a href="Tacet.html">Tacet</a></li><li><a href="TextUnderlay.html">TextUnderlay</a></li><li><a href="upsideDownClose.html">upsideDownClose</a></li><li><a href="upsideDownOpen.html">upsideDownOpen</a></li><li><a href="ValueChoice.html">ValueChoice</a></li><li><a href="ValueReading.html">ValueReading</a></li><li><a href="VoidClose.html">VoidClose</a></li><li><a href="VoidOpen.html">VoidOpen</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-MusicEntry.html">MusicEntry</a></li></ul><h3>Global</h3><ul><li><a href="global.html#actOnColoration">actOnColoration</a></li><li><a href="global.html#actOnDots">actOnDots</a></li><li><a href="global.html#addAllStartTimes">addAllStartTimes</a></li><li><a href="global.html#addBreveBoundariesForBlock">addBreveBoundariesForBlock</a></li><li><a href="global.html#addStartTimesForBlock">addStartTimesForBlock</a></li><li><a href="global.html#allUnalterableImperfectLevels">allUnalterableImperfectLevels</a></li><li><a href="global.html#alterableLevels">alterableLevels</a></li><li><a href="global.html#anteSim">anteSim</a></li><li><a href="global.html#augDot">augDot</a></li><li><a href="global.html#beatIndependentDurations">beatIndependentDurations</a></li><li><a href="global.html#beatOfDur">beatOfDur</a></li><li><a href="global.html#beatOfUnit">beatOfUnit</a></li><li><a href="global.html#beatUnitStructure">beatUnitStructure</a></li><li><a href="global.html#blockProportionMultiplier">blockProportionMultiplier</a></li><li><a href="global.html#breveDifference">breveDifference</a></li><li><a href="global.html#canImperfect">canImperfect</a></li><li><a href="global.html#checkForGeneralAlteration">checkForGeneralAlteration</a></li><li><a href="global.html#colourp">colourp</a></li><li><a href="global.html#compoundNotep">compoundNotep</a></li><li><a href="global.html#consumeParenthesis">consumeParenthesis</a></li><li><a href="global.html#divisionDot">divisionDot</a></li><li><a href="global.html#divisionLikeRests">divisionLikeRests</a></li><li><a href="global.html#dupleMinimCountFromElement">dupleMinimCountFromElement</a></li><li><a href="global.html#enrichText">enrichText</a></li><li><a href="global.html#extendTacet">extendTacet</a></li><li><a href="global.html#firstBeatAlteration">firstBeatAlteration</a></li><li><a href="global.html#firstBeatImperfection">firstBeatImperfection</a></li><li><a href="global.html#firstBeatImperfectionCheck">firstBeatImperfectionCheck</a></li><li><a href="global.html#firstPerfectLevel">firstPerfectLevel</a></li><li><a href="global.html#gcd">gcd</a></li><li><a href="global.html#getAtomicSections">getAtomicSections</a></li><li><a href="global.html#getEventsByMensurationForSection">getEventsByMensurationForSection</a></li><li><a href="global.html#getLayers">getLayers</a></li><li><a href="global.html#getMusicTextSup">getMusicTextSup</a></li><li><a href="global.html#getParameters">getParameters</a></li><li><a href="global.html#getString">getString</a></li><li><a href="global.html#getSubText">getSubText</a></li><li><a href="global.html#getTag">getTag</a></li><li><a href="global.html#hasNoSections">hasNoSections</a></li><li><a href="global.html#imperfectingLevels">imperfectingLevels</a></li><li><a href="global.html#indexOfNextDot">indexOfNextDot</a></li><li><a href="global.html#indexOfNextSameOrLongerOrDot">indexOfNextSameOrLongerOrDot</a></li><li><a href="global.html#indexOfPrevLongerOrDot">indexOfPrevLongerOrDot</a></li><li><a href="global.html#isAlterable">isAlterable</a></li><li><a href="global.html#labelRests">labelRests</a></li><li><a href="global.html#leveleq">leveleq</a></li><li><a href="global.html#linesp">linesp</a></li><li><a href="global.html#mensurSummary">mensurSummary</a></li><li><a href="global.html#midBeatAlteration">midBeatAlteration</a></li><li><a href="global.html#midBeatImperfection">midBeatImperfection</a></li><li><a href="global.html#minimStructures">minimStructures</a></li><li><a href="global.html#nextBarline">nextBarline</a></li><li><a href="global.html#nextChantNote">nextChantNote</a></li><li><a href="global.html#nextChoice">nextChoice</a></li><li><a href="global.html#nextChoiceLikeThing">nextChoiceLikeThing</a></li><li><a href="global.html#nextChoiceLikeThing2">nextChoiceLikeThing2</a></li><li><a href="global.html#nextColRef">nextColRef</a></li><li><a href="global.html#nextComment">nextComment</a></li><li><a href="global.html#nextCustos">nextCustos</a></li><li><a href="global.html#nextDot">nextDot</a></li><li><a href="global.html#nextEvent">nextEvent</a></li><li><a href="global.html#nextFermata">nextFermata</a></li><li><a href="global.html#nextInfo">nextInfo</a></li><li><a href="global.html#nextLigature">nextLigature</a></li><li><a href="global.html#nextLigChoice">nextLigChoice</a></li><li><a href="global.html#nextLongRest">nextLongRest</a></li><li><a href="global.html#nextMusic">nextMusic</a></li><li><a href="global.html#nextNeume">nextNeume</a></li><li><a href="global.html#nextNote">nextNote</a></li><li><a href="global.html#nextOblique">nextOblique</a></li><li><a href="global.html#nextObliqueNeume">nextObliqueNeume</a></li><li><a href="global.html#nextObliqueNoteChoice">nextObliqueNoteChoice</a></li><li><a href="global.html#nextPart">nextPart</a></li><li><a href="global.html#nextPartnameReading">nextPartnameReading</a></li><li><a href="global.html#nextRepeat">nextRepeat</a></li><li><a href="global.html#nextRest">nextRest</a></li><li><a href="global.html#nextSignumCongruentiae">nextSignumCongruentiae</a></li><li><a href="global.html#nextSolmSign">nextSolmSign</a></li><li><a href="global.html#nextTacet">nextTacet</a></li><li><a href="global.html#nextTaglike">nextTaglike</a></li><li><a href="global.html#nextText">nextText</a></li><li><a href="global.html#nextTextChoice">nextTextChoice</a></li><li><a href="global.html#noteInt">noteInt</a></li><li><a href="global.html#noteIntFromDur">noteIntFromDur</a></li><li><a href="global.html#noteOrRest">noteOrRest</a></li><li><a href="global.html#notePerfectAsWhole">notePerfectAsWhole</a></li><li><a href="global.html#nsResolver">nsResolver</a></li><li><a href="global.html#parseClef">parseClef</a></li><li><a href="global.html#parseClefReading">parseClefReading</a></li><li><a href="global.html#parseClefVar">parseClefVar</a></li><li><a href="global.html#parseMens">parseMens</a></li><li><a href="global.html#parseMensReading">parseMensReading</a></li><li><a href="global.html#parseProp">parseProp</a></li><li><a href="global.html#parseSolm">parseSolm</a></li><li><a href="global.html#parseSolmReading">parseSolmReading</a></li><li><a href="global.html#parseSolmVar">parseSolmVar</a></li><li><a href="global.html#parseStaff">parseStaff</a></li><li><a href="global.html#propNum">propNum</a></li><li><a href="global.html#proportionMultiplier">proportionMultiplier</a></li><li><a href="global.html#propProportionMultiplier">propProportionMultiplier</a></li><li><a href="global.html#readDur">readDur</a></li><li><a href="global.html#regularlyPerfect">regularlyPerfect</a></li><li><a href="global.html#secondBeatAlteration">secondBeatAlteration</a></li><li><a href="global.html#secondBeatImperfection">secondBeatImperfection</a></li><li><a href="global.html#simpleMinims">simpleMinims</a></li><li><a href="global.html#simplestAlterations">simplestAlterations</a></li><li><a href="global.html#solidBlock">solidBlock</a></li><li><a href="global.html#thirdBeatAlteration">thirdBeatAlteration</a></li><li><a href="global.html#thirdBeatImperfection">thirdBeatImperfection</a></li><li><a href="global.html#windowDuration">windowDuration</a></li><li><a href="global.html#writeAlteration">writeAlteration</a></li><li><a href="global.html#writeDur">writeDur</a></li><li><a href="global.html#writeImperfection">writeImperfection</a></li><li><a href="global.html#writeSimpleImperfection">writeSimpleImperfection</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Wed Jun 10 2020 16:04:39 GMT+0200 (GMT+02:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Fri Jun 12 2020 11:11:38 GMT+0200 (GMT+02:00)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -459,8 +459,12 @@ function MusicExample(){
 		}
 		return docObj;
   };
-  /** easyRhythms 
-   * @returns MEIDoc */
+  /** @summary easyRhythms starts trivial beat analysis 
+   * @see getAtomicSections
+   * @see getEventsByMensurationForSection
+   * @see beatIndependentDurations
+   * @see addAllStartTimes
+   * @returns {MEIDoc} MEI document with resolved rhythm */
 	this.easyRhythms = function(){
 		var MEIDoc = this.toMEI();
 		var layerMens = [];

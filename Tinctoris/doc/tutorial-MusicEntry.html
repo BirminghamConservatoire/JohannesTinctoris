@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: MusicOptionalSpace</title>
+    <title>JSDoc: Tutorial: MusicEntry</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,136 +17,128 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: MusicOptionalSpace</h1>
+    <h1 class="page-title">Tutorial: MusicEntry</h1>
 
-    
-
-
-
-
-<section>
+    <section>
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>MusicOptionalSpace<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-    
+
+    <h2>MusicEntry</h2>
 </header>
 
 <article>
-    <div class="container-overview">
-    
-        
-
-    
-
-    
-    <h4 class="name" id="MusicOptionalSpace"><span class="type-signature"></span>new MusicOptionalSpace<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="classes.js.html">classes.js</a>, <a href="classes.js.html#line4470">line 4470</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
+    <h1>Tinctoris Music Entry</h1>
+<h2>Document header</h2>
+<pre class="prettyprint source"><code>[Standard title of composition]
+[Composer]
+Editor:
+Checked by:
+Date established:
+Base transcription: [source used to begin with, ‘best’ if there is one]
+Sources:
+[Siglum [tab] MS identifier], fols. [(modern numeration) if so] [tab] [composer ascription; ‘—’ if anon. in source]
+</code></pre>
+<p>Sources: repeat sigla as necessary; sources in chronological order as in List of works to be edited.</p>
+<p>Document header is non-mandatory for rendering in the editor.</p>
+<h2>Enclosing tags</h2>
+<p>Enclosing tags work like XML elements:<br>
+<code>&lt;tag: qualifier, qualifier&gt; ... &lt;/tag&gt;</code></p>
+<h3>Structural tags</h3>
+<ul>
+<li><code>&lt;piece: {mensural: [void|full]}, {staf: 5, [black|red]}&gt;... &lt;/piece&gt;</code></li>
+<li><code>&lt;section: [Kyrie|Gloria|etc.|Aleph|Beth|etc.]&gt;...&lt;/section&gt;</code></li>
+<li><code>&lt;pars&gt;...&lt;/pars&gt;</code></li>
+<li><code>&lt;part: [Supremum|Contratenor|Tenor|Bassus (in [] if necessary)]&gt;... &lt;/part&gt;</code><br>
+[new part on a new paragraph for convenience]</li>
+</ul>
+<h3>Text tags</h3>
+<ul>
+<li><code>&lt;label: [rot90c|rot90a if rotated], [vertical position of start if rotated, of baseline if not rotated and not = 0]&gt;...&lt;/label&gt;</code><br>
+[colon should be omitted if no qualifiers]</li>
+<li><code>&lt;text: [vertical position of baseline if not = 0]&gt;...&lt;/text&gt;</code><br>
+[colon should be omitted if no qualifier]</li>
+</ul>
+<h3>Feature tags</h3>
+<ul>
+<li><code>&lt;red&gt;...&lt;/red&gt;</code><br>
+[or other colour as called for]</li>
+<li><code>&lt;full&gt;...&lt;/full&gt;</code><br>
+[or void if called for (e.g. semiminims in major prolation)]</li>
+<li><code>&lt;lig&gt;...&lt;/lig&gt;</code>  [for ligatures]</li>
+<li><code>&lt;obl&gt;...&lt;/obl&gt;</code> [obliquity in a ligature]</li>
+<li><code>&lt;ll: [-1 = one leger line below the staff; 2 = two above, etc.][, colour if other than that of staff]&gt;...&lt;/ll&gt;</code> [ledger line]</li>
+<li><code>**...**</code> [pop-up comments]</li>
+</ul>
+<p>If it makes for easier reading, the enclosing tags can be spaced around their contents:<br>
+<code>&lt;tag&gt; ... &lt;/tag&gt;.</code></p>
+<h2>Non-enclosing tags</h2>
+<h3>Pitch</h3>
+<p>extended Guidonian:</p>
+<ul>
+<li>AA–GG (GG = Gamma ut),</li>
+<li>G–A,</li>
+<li>g–a (c = middle C),</li>
+<li>gg–aa, etc.</li>
+</ul>
+<h4>Pitched items</h4>
+<p><strong>M</strong> = maxima<br>
+<strong>L</strong> = longa<br>
+<strong>B</strong> = breve<br>
+<strong>S</strong> = semibreve<br>
+<strong>m</strong> = minim [upward stem; for downward stems (deprecated) prefix -m, -s, etc.]<br>
+<strong>s</strong> = semiminim<br>
+<strong>f</strong> = fusa</p>
+<p><strong>b</strong> = flat [NB: all accidentals should be located as in sources, not as in modern usage]<br>
+<strong>h</strong> = natural<br>
+<strong>x</strong> = sharp<br>
+<strong>c</strong> = custos</p>
+<p>All pitched items should be identified by note value followed immediately by pitch (e.g. Bg).</p>
+<h3>Vertical position of unpitched items</h3>
+<p>0 = 2nd leger line below staff<br>
+2 = 1st leger line below staff<br>
+4 = 1st staff line, etc.<br>
+odd numbers = spaces</p>
+<h4>Dots</h4>
+<p>An unambiguous dot of augmentation or perfection should follow immediately after the note affected: e.g. <strong><code>Bg.</code></strong><br>
+If it is not in the conventional space (i.e. the same space as a note on a space, or the space just above a note on a line), its numerical vertical position should be indicated.<br>
+Dots of division or ambiguous dots should be spaced away from notes on either side and their vertical position indicated: e.g. <strong><code>Ba Sg .7 Sf Bg</code></strong></p>
+<h4>Other unpitched items</h4>
+<h5>Rests</h5>
+<p>Rest<br>
+<strong>P[note value, breve or less][numerical vertical position of space]</strong><br>
+(e.g. <code>PS7</code>)</p>
+<p>(Group) of longa rest(s)<br>
+<strong>PL[numerical vertical position of lowest space]-[position of highest space][x[2|3] if called for]</strong>
+(e.g. <code>PL5-7</code>, <code>PL7-11x2</code>)</p>
+<h5>Fermata</h5>
+<ul>
+<li><strong><code>*</code></strong> = fermata above note<br>
+[+ numerical vertical position if not the next space]</li>
+<li><strong><code>-*</code></strong> = fermata below note [ditto]</li>
+</ul>
+<h5>Signum congruentiae</h5>
+<ul>
+<li><strong><code>?</code></strong> = signum congruentiae above note [ditto]</li>
+<li><strong><code>-?</code></strong> = signum congruentiae below note [ditto]</li>
+</ul>
+<h5>Barlines</h5>
+<ul>
+<li><strong>|</strong> = barline</li>
+<li><strong>||</strong> = double barline, etc.</li>
+</ul>
+<p>By default, barlines extend across the entire staff; if they are shorter or longer, the numerical vertical position of the bottom and top must be specified, e.g.: <strong><code>||2-14</code></strong></p>
+<p><strong>[number of barlines in repeat sign]:[numerical vertical position of lowest space]-[position of highest space]</strong><br>
+e.g. <code>2:5-7</code></p>
+<h3>Miscellaneous</h3>
+<ul>
+<li>^ = (in music) superimposed on preceding item; useful for podatus-style ligatures (e.g. <code>&lt;lig&gt;Ba ^Lc&lt;/lig&gt;</code>) or ‘double stops’ (e.g. <code>Ba ^{full}Bc</code>), etc.</li>
+<li>^ = (in text) superscript (<code>^...^</code> if necessary);</li>
+<li>in variants, <code>[source siglum]^*</code> = original reading, <code>[siglum]^c</code> = corrected reading</li>
+</ul>
 </article>
 
 </section>
-
-
-
 
 </div>
 
@@ -157,7 +149,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Fri Jun 12 2020 11:11:38 GMT+0200 (GMT+02:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Fri Jun 12 2020 11:11:39 GMT+0200 (GMT+02:00)
 </footer>
 
 <script> prettyPrint(); </script>

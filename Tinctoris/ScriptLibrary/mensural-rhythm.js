@@ -1294,8 +1294,8 @@ function midBeatAlteration(event, index, events, mens){
 
 
 ///////////////////////////
-/*
- * If event[n] has both a duration assigned to it and a start time,
+/**
+ * @summary If event[n] has both a duration assigned to it and a start time,
  * adds a start time for event[n+1]
  * @param {Array} sectionBlocks Array of all the coherent areas of
  * mensurations in a section

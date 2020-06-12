@@ -46,11 +46,27 @@ Rule that has been applied in the specific case:
 > I.2.b.antesim  
 > I.4a  
 
+## dur.ges
+
+_unclear!_
+
+Seems to contain duration in minims, like `@dur.ges='3b'`.   
+
+**What does `@dur.intermediate`?**
+
 ## mensurBlockStartsAt
 
 Gives starting position of note/rest in minim values.  
-Starting with `@mensurBlockStartAt='0'`  
+Starting with `@mensurBlockStarstAt='0'`  
 Mensuration / proportion signs reset to 0.
+
+## startsAt
+
+_unclear!_
+
+Gives starting position of note/rest in minim values.  
+Starting with `@startsAt='0'`  
+**Is not resetted by mensuration or proportion signs.**
 
 # Dots
 

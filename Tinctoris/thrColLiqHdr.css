@@ -658,6 +658,7 @@ HILLBLU libro, each released under CC-SA3 by its respective authors */
 .fn {
   vertical-align: super;
   font-size: 90%;
+	line-height: 1;
 }
 .note .fn {
   padding-right: 4px;
@@ -914,4 +915,7 @@ h1.longTitle {
 		overflow: invisible;
 		width: calc(50% - 225px);
 	}
+}
+div.article td {
+	vertical-align: top;
 }

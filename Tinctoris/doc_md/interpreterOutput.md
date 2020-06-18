@@ -21,38 +21,65 @@ Before processing, the note only contains:
 * coloration
 
 **Available attributes after interpretation:**
-* beatPos
-* crossedABreveBeat
 * dots
 * dur.ges
 * dur.intermediate
 * dur.quality
-* mensurBlockStartsAt
+* mensurBlockStartsAt (see {@link addStartTimesForBlock})
 * num / numbase
-* onTheBreveBeat
 * quality
 * rule
 * startsAt
 * stretched
 
+Added by {@link addBreveBoundariesForBlock} or {@link addAllStartTimes}:
+* beatPos 
+* onTheBreveBeat 
+* crossedABreveBeat
 
 ## rule
 
 Rule that has been applied in the specific case: 
-> simpleDot   
-> I.4b   
-> coloration   
-> I.3-726  
-> I.2.b.antesim  
-> I.4a  
 
-## dur.ges
+Simple rules
+* simpleDot  -- actOnDots
+* coloration   
+* rest
+
+Imperfection
+
+* I.2.b.antesim  
+* I.2.a.PerfDot -- actOnDots
+* I.3-726  
+* I.4a  
+* I.4b   
+* I.5
+* I.5-add
+* I.5-literalunits
+* I.6
+* I.6-literalunits
+* I.8 (see {@link secondBeatImperfection})
+* I.9 (see {@link thirdBeatImperfection})
+
+Alteration
+* A.1
+* A.2b
+* A.xxx
+* A.xxz
+
+## dur.ges & dur.intermediate
+
+See {@link writeDur}
 
 _unclear!_
-
 Seems to contain duration in minims, like `@dur.ges='3b'`.   
 
 **What does `@dur.intermediate`?**
+Is written by {@link writeDur}... read by {@link readDur}.
+
+## dur.quality
+
+Written by writeSimpleImperfection, writeImperfection, writeAlteration
 
 ## mensurBlockStartsAt
 

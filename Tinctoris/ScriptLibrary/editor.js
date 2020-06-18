@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Contains code for GUIEditor and Workinput
+ * @namespace editor
+ */
+
+ /** @function adjustWidth
+  * @memberof editor
+  */
 function adjustWidth(){
   // arbitrary extra width on rendered ensures a nice background.
   document.getElementById("rendered").style.width = (Number(wrapWidth)+100)+"px";
@@ -11,6 +19,9 @@ function adjustWidth(){
   }
 }
 
+/** @function toggleWrapping
+ * @memberof editor
+ */
 function togglewrapping(box){
   var ws = $("#wrapspan");
   if(box.checked){
@@ -22,6 +33,10 @@ function togglewrapping(box){
     ws.hide();
   }
 }
+
+/** @function setSpacing
+ * @memberof editor
+ */
 function setSpacing(value){
   var content = document.getElementById("content");
   $(content).toggleClass("oneandahalfspacing", value==1.5);
@@ -30,6 +45,10 @@ function setSpacing(value){
 
 $(document).ready(function(){
 //  $("#code").keyup(function(){
+  /** @function refreshFromCode
+   * @summary Parses the text from the editor pane and draws the content into the view pane
+   * @memberof editor
+   */
   function refreshFromCode(){
     grabdomobjects();
     var code = document.getElementById("code").value;
@@ -65,7 +84,9 @@ $(document).ready(function(){
   }
   $("#wrapspan").hide();
   
+  /** @memberof editor */
   $("#reparse").click(refreshFromCode);
+  /** @see easyRhythms */
 	$("#trivial").click(() => curDoc.example.easyRhythms());
   $("#code").keypress(function(e){
 //  $("#code").keydown(function(e){

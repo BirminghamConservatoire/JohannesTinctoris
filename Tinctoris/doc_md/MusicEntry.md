@@ -49,6 +49,25 @@ If it makes for easier reading, the enclosing tags can be spaced around their co
 
 ## Non-enclosing tags
 
+* `{staf: [number of lines]}` [can be repeated internally if forced new staff required]
+* `{clef: [Gamma|F|C|G|D][numerical vertical position]}` (e.g. {clef: F10})
+* `{solm: [0|b[pitch]]}`   
+(e.g. {solm: 0}, {solm: bb}) [must always be specified as 0 if there are no flats in the signature]
+[Clef and solmization signature (including 0) must be restated if new staff declared.]
+* `{mens: [O[= o]|o[= O]|C[= c]|c[= C]|Ø[= ø]|Ç[= ç]] [Q[= v]] [q[= V]] [œ[= ◊]] [Œ[= √]][numerical vertical position]}`
+* `{prop: [numerator]/[denominator], [numerical vertical position of lower space]-[position of higher space]}`  
+ [proportions (e.g. {prop: 3/2, 7-9})]
+
+### Variants 
+
+ `{var="[accepted reading]" [source sigla for reading] : "[1st rejected reading]" [source sigla] [: "[next rejected reading]" [source sigla]]}`     
+[NB: straight double quotation marks only; curly or single will not work!] 
+* [(om.) = omitted in the sources given] 
+* {var=(ins.) "[rejected insertion]" [source sigla]}
+[Variants within {staf}, {clef}, {solm}, {mens}, or {prop} are expressed as above, omitting the {var= prefix (e.g. {clef: "C8" X Y : "C10" Z}). Variants can occur within <label> and <text>.]
+{[full|void|red|etc.]} [applies to next item only]
+
+
 ### Pitch
 
 extended Guidonian: 

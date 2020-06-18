@@ -71,6 +71,7 @@ function hasNoSections(x){
  * the lowest level structural unit.
  * @param {DOMObject} MEIDoc 
  * @return {Array} Array of mei:section elements
+ * @see easyRhythms
  */ 
 function getAtomicSections(MEIDoc){
 	let doc = MEIDoc.doc;
@@ -309,7 +310,7 @@ function writeAlteration(el, mens, rule){
 }
 
 /**
- * Given an event with dur.ges of the form [0-9]*b, return the integer
+ * Given an event with dur.intermediate of the form [0-9]*b, return the integer
  * part
  * @param {DOMElement} mei:note or mei:rest
  * @return {Integer}
@@ -501,7 +502,7 @@ function mensurSummary(mensur){
  * @param {DOMElement} mens mei:mensur
  * @param {Integer} levelAdjust Displaces the note level (so, if el is
  * a minim, 1 for levelAdjust will treat it as a semibreve)
- * @param {integer} Minim count
+ * @return {integer} Minim count
  */
 function simpleMinims(el, mensur, levelAdjust){
 	var level = noteInt(el) - 3;
@@ -981,8 +982,9 @@ function simplestAlterations(sectionBlocks){
 
 /**
  * If a note is followed immediately by a note or rest at the same
- * level (see {@link leveleq}), the former cannot be imperfected. Such
+ * level, the former cannot be imperfected. Such
  * notes can have duration labelled immediately.
+ * @see leveleq
  * @param {Array} sectionBlocks Array of all the coherent areas of
  * mensurations in a section
  */

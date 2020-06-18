@@ -14,7 +14,7 @@
     },
     "templates": {
         "cleverLinks": false,
-        "monospaceLinks": true
+        "monospaceLinks": false
     },
     "opts": {
         "template": "./node_modules/docdash/",
@@ -25,7 +25,7 @@
         "readme": "readme.md"
     },
     "docdash": {
-        "sectionOrder": ["Tutorials","Modules","Classes","Globals"],
+        "sectionOrder": ["Tutorials","Modules", "Namespaces","Classes","Globals"],
         "collapse": true,
         "search": true,
         "scopeInOutputPath": false,

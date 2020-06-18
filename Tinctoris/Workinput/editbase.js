@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Contains dedicated to the Workinput
+ * @interface Workinput/editbase
+ */
+
 editorMode = true;
 standaloneEditor = true;
 wrapWidth = 600;

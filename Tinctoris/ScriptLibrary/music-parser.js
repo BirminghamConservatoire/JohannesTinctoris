@@ -2,7 +2,7 @@
  * Music parser
  * 
  * @fileoverview Contains the parser for the music examples and pieces
- * @module music-parser
+ * @namespace music-parser
  */
 
  /**
@@ -960,10 +960,12 @@ function MusicExample(){
   this.parse();
   currentExample = false;
 }
+// end of MusicExample
 
 /**
  * takes a char and looks what kind of event do we have
  * @returns object according to char
+ * @memberof music-parser
  */
 function nextEvent() {
   var obj;
@@ -1055,6 +1057,7 @@ function nextEvent() {
 /**
  * @function nextColRef
  * @returns {(ColumnStart|PositiveSpace|boolean)} column, a new PositiveSpace object or false
+ * @memberof music-parser
  */
 function nextColRef(){
   var col = new ColumnStart();
@@ -1079,6 +1082,7 @@ function nextColRef(){
 /**
  * @function nextComment 
  * @returns {Annotation} ann
+ * @memberof music-parser
  */
 function nextComment(){
   // Use text version
@@ -1121,6 +1125,7 @@ function nextComment(){
 /**
  * @function nextBarline
  * @returns {Barline} barline
+ * @memberof music-parser
  */
 function nextBarline(){
   var bar = new Barline();
@@ -1144,6 +1149,7 @@ function nextBarline(){
 /**
  * @function nextSolmSign
  * @returns {SolmizationSign} solimization sign
+ * @memberof music-parser
  */
 function nextSolmSign(){
   var solm = new SolmizationSign();
@@ -1168,6 +1174,7 @@ function nextSolmSign(){
 /**
  * @function nextRest
  * @returns {(LongRest|Rest|boolean)} Rest or false
+ * @memberof music-parser
  */
 function nextRest(){
   string = string.substring(1);
@@ -1190,6 +1197,7 @@ function nextRest(){
 
 /** @function nextLongRest
  * @returns {(LongRest|MaxRest|boolean)} Longa rest, maxima rest or false
+ * @memberof music-parser
  */
 function nextLongRest(){
   var start = getStaffPos();
@@ -1213,6 +1221,7 @@ function nextLongRest(){
 /**
  * @function nextRepeat
  * @returns {Repeat|boolean} repeat or false
+ * @memberof music-parser
  */
 function nextRepeat(){
   var obj = new Repeat();
@@ -1247,6 +1256,7 @@ function nextRepeat(){
 
 /** @function nextNote
  * @returns {Note} note
+ * @memberof music-parser
  */
 function nextNote(){
   var sup = consumeIf(/\^/);
@@ -1265,6 +1275,7 @@ function nextNote(){
 
 /** @function nextChantNote
  * @returns {ChantNote} chant note
+ * @memberof music-parser
  */
 function nextChantNote(){
   var obj = new ChantNote;
@@ -1275,6 +1286,7 @@ function nextChantNote(){
 
 /** @function nextCustos
  * @returns {Custos} custos with pitch
+ * @memberof music-parser
  */
 function nextCustos(){
   var obj = new Custos();
@@ -1283,7 +1295,8 @@ function nextCustos(){
 }
 
 /** @function nextDot
- * @returns {Dot} dot with staff position */
+ * @returns {Dot} dot with staff position
+ * @memberof music-parser */
 function nextDot(){
   var obj = new Dot();
   string = string.substring(1);
@@ -1296,6 +1309,7 @@ function nextDot(){
 
 /** @function nextSignumCongruentiae
  * @returns {SignumCongruentiae} signum congruentiae with staff position
+ * @memberof music-parser
  */
 function nextSignumCongruentiae(){
   var obj = new SignumCongruentiae;
@@ -1307,6 +1321,7 @@ function nextSignumCongruentiae(){
 
 /** @function nextFermata
  * @returns {Fermata} fermata with staff position
+ * @memberof music-parser
  */
 function nextFermata(){
   var obj = new Fermata();
@@ -1317,6 +1332,7 @@ function nextFermata(){
 
 /** @function nextTaglike
  * @summary handles taglike elements of music examples
+ * @memberof music-parser
  */
 function nextTaglike(){
   var tagend = string.indexOf(">");
@@ -1430,6 +1446,7 @@ function nextTaglike(){
 
 /** @function nextNeume
  * @returns {Neume} neume
+ * @memberof music-parser
  */
 function nextNeume(){
   var end = string.indexOf("</neume>");
@@ -1485,6 +1502,7 @@ function nextNeume(){
 
 /** @function nextObliqueNeume
  * @returns {ObliqueNeume} oblique neume
+ * @memberof music-parser
  */
 function nextObliqueNeume(){
   var end = string.indexOf("</obl>");
@@ -1529,6 +1547,7 @@ function nextObliqueNeume(){
 /** @function nextLigature
  * @summary Parses <lig>-Tag into Ligature objects
  * @returns {Ligature} ligature with notes
+ * @memberof music-parser
  */
 function nextLigature(){
   var end = string.indexOf("</lig>");
@@ -1605,6 +1624,7 @@ function nextLigature(){
  * @summary Parses <obl> tag
  * @param {Ligature} ligature
  * @returns {Oblique} oblique object with content
+ * @memberof music-parser
  */
 function nextOblique(ligature){
   var end = string.indexOf("</obl>");
@@ -1673,6 +1693,7 @@ function nextOblique(ligature){
  * @summary Add info to textlike element based on the element tag
  * @param tag element tag
  * @param obj textline element
+ * @memberof music-parser
  */
 function enrichText(tag, obj){
 	// Add info to textlike element based on the element tag
@@ -1696,6 +1717,7 @@ function enrichText(tag, obj){
  * @summary nice and simple. Tacet is a type of text, but is treated differently because it takes up horizontal space.
  * @param {*} endPos 
  * @returns {Tacet} tacet object
+ * @memberof music-parser
  */
 function nextTacet(endPos){
 	// nice and simple. Tacet is a type of text, but is treated
@@ -1719,6 +1741,7 @@ function nextTacet(endPos){
  * @param {string} content 
  * @param {Tacet} tacet tacet object
  * @returns {Tacet} tacet object
+ * @memberof music-parser
  */
 function extendTacet(content, tacet){
 	var os = string;
@@ -1738,6 +1761,7 @@ function extendTacet(content, tacet){
 /**
  * @function nextText
  * @returns {TextUnderlay} text
+ * @memberof music-parser
  */
 function nextText (){
   var t = string.indexOf("</text>");
@@ -1761,6 +1785,7 @@ function nextText (){
 /** @function getSubText
  * @summary parse contents of a <text></text> block or equivalently-syntaxed thing (e.g. a variant)
  * @returns {Array} components
+ * @memberof music-parser
  */
 function getSubText (){
   // parse contents of a <text></text> block or equivalently-syntaxed
@@ -1829,6 +1854,7 @@ function getSubText (){
  * @summary Parse contents of <text></text> or equivalently-syntaxed thing (e.g. a variant). 
  * This is a version of what was previously getSubText, a faster, but much less flexible function
  * @returns {Array} content
+ * @memberof music-parser
  */
 function getString (){
   // Parse contents of <text></text> or equivalently-syntaxed thing
@@ -1920,6 +1946,7 @@ function getString (){
 /**
  * @function getMusicTextSup
  * @returns {MESuper} element
+ * @memberof music-parser
  */
 function getMusicTextSup(){
   var el = new MESuper()
@@ -1954,6 +1981,7 @@ function getMusicTextSup(){
 /** @function getTag
  * @param {string} tag
  * @returns {*} object according to tag name
+ * @memberof music-parser
  */
 function getTag (tag){
   switch(tag){
@@ -1992,6 +2020,7 @@ function getTag (tag){
 /** @function consumeParenthesis
  * @summary Checks for closing parenthesis
  * @returns {?} paren
+ * @memberof music-parser
  */
 function consumeParenthesis(){
   var openchar = string.charAt(0);
@@ -2023,6 +2052,7 @@ function consumeParenthesis(){
  * @summary parses mensural signature
  * @param {} spec
  * @returns {MensuralSignature} mensural signature
+ * @memberof music-parser
  */
 function parseMens(spec){
   var obj = new MensuralSignature();
@@ -2060,6 +2090,7 @@ function parseMens(spec){
 /** @function parseMensReading
  * @summary parses readings of mensuration signs?
  * @param {*} fields 
+ * @memberof music-parser
  */
 function parseMensReading(fields){
   var mens, wits;
@@ -2091,6 +2122,7 @@ function parseMensReading(fields){
  * @summary handles variants in mensuration
  * @param {?} fields 
  * @returns {MChoice} variant object
+ * @memberof music-parser
  */
 function parseMensVar(fields){
   var obj = new MChoice();
@@ -2112,6 +2144,7 @@ function parseMensVar(fields){
  * @param {?} propSpec 
  * @param {?} posSpec 
  * @returns {ProportionSign|StackedProportionSigns} proportion sign
+ * @memberof music-parser
  */
 function parseProp(propSpec, posSpec){
   var propStrings = propSpec.split('/');
@@ -2140,6 +2173,7 @@ function parseProp(propSpec, posSpec){
  * @summary parses solmization signature
  * @param {?} signs 
  * @returns {SolmizationSignature} solmization signature with solmization signs
+ * @memberof music-parser
  */
 function parseSolm(signs){
   var solm, pitch, nextChar;
@@ -2174,6 +2208,7 @@ function parseSolm(signs){
  * @summary parses reading of solmization signature
  * @param {?} fields 
  * @returns {Array} 
+ * @memberof music-parser
  */
 function parseSolmReading(fields){
   var solm=false, closed, signs=[], start, finish, last, from, descr="", field;
@@ -2233,6 +2268,7 @@ function parseSolmReading(fields){
  * @summary parses solmization variant
  * @param {?} fields 
  * @returns {MChoice} variant
+ * @memberof music-parser
  */
 function parseSolmVar(fields){
   var next = false;
@@ -2252,6 +2288,7 @@ function parseSolmVar(fields){
  * @summary parses a clef reading
  * @param {?} fields 
  * @returns {Array} reading
+ * @memberof music-parser
  */
 function parseClefReading(fields){
   var clef = false, descr="", from=false, finish;
@@ -2315,6 +2352,7 @@ function parseClefReading(fields){
  * @summary parses clef variants
  * @param {?} fields 
  * @returns {MChoice} variant
+ * @memberof music-parser
  */
 function parseClefVar(fields){
   var obj = new MChoice();
@@ -2335,6 +2373,7 @@ function parseClefVar(fields){
  * @param {?} spec 
  * @param {?} sub 
  * @returns {Clef} clef
+ * @memberof music-parser
  */
 function parseClef(spec, sub){
   if(!spec || spec === "0") return false;
@@ -2397,6 +2436,7 @@ function parseClef(spec, sub){
  * @summary parses a staff
  * @param {?} spec 
  * @returns {Staff} staff
+ * @memberof music-parser
  */
 function parseStaff(spec){
   var staff = new Staff;
@@ -2457,6 +2497,7 @@ function parseStaff(spec){
  * @todo Obviously, it checks if some string or its particle is a number
  * @param {string} string 
  * @returns {boolean}
+ * @memberof music-parser
  */
 function linesp(string){
   return (!isNaN(parseInt(string)) && parseInt(string))
@@ -2469,6 +2510,7 @@ function linesp(string){
  * @todo this checks for colors?
  * @param {string} string 
  * @returns {string|boolean} 
+ * @memberof music-parser
  */
 function colourp(string){
   return string.match(/(black|red|blind|0)/) ? string.match(/(black|red|blind|0)/)[0] : false;
@@ -2483,6 +2525,7 @@ function colourp(string){
  * @param {?} closes 
  * @param {?} extra 
  * @returns {Part} part
+ * @memberof music-parser
  */
 function nextPart(partType, closes, extra){
 	// This covers Part, pars and other boundaries in the flow. N.B. The
@@ -2563,6 +2606,7 @@ function nextPart(partType, closes, extra){
  * @param {?} closes 
  * @param {?} choice 
  * @returns {Array} array with reading
+ * @memberof music-parser
  */
 function nextPartnameReading(fields, partType, closes, choice){
 	var part = new Part();
@@ -2598,6 +2642,7 @@ function nextPartnameReading(fields, partType, closes, choice){
 /** @function nextInfo
  * @summary handles next info -> things in {}
  * @returns {*}
+ * @memberof music-parser
  */
 function nextInfo(){
   var info = consumeParenthesis();
@@ -2682,6 +2727,7 @@ function nextInfo(){
 /** @function nextChoice
  * @summary handles choices
  * @returns {MChoice} choice
+ * @memberof music-parser
  */
 function nextChoice(){
   return nextChoiceLikeThing(new MChoice(), false);
@@ -2690,6 +2736,7 @@ function nextChoice(){
 /** @function nextTextChoice
  * @summary handles text choices
  * @returns {MChoice} choice
+ * @memberof music-parser
  */
 function nextTextChoice(){
   return nextChoiceLikeThing(new MChoice(), true);
@@ -2699,6 +2746,7 @@ function nextTextChoice(){
  * @summary handles choices in ligatures?
  * @param {?} parent 
  * @returns {LigChoice} ligature choice
+ * @memberof music-parser
  */
 function nextLigChoice(parent){
   var choice = new LigChoice();
@@ -2714,6 +2762,7 @@ function nextLigChoice(parent){
  * @summary handles choices in oblique notes
  * @param {?} parent 
  * @returns {ObliqueNoteChoice} choice
+ * @memberof music-parser
  */
 function nextObliqueNoteChoice(parent){
   var choice = new ObliqueNoteChoice();
@@ -2756,6 +2805,7 @@ function nextObliqueNoteChoice(parent){
  * @param {?} choice 
  * @param {?} textp 
  * @returns {?} choice
+ * @memberof music-parser
  */
 function nextChoiceLikeThing(choice, textp){
   // cf readChoice in parser.js
@@ -2820,6 +2870,7 @@ function nextChoiceLikeThing(choice, textp){
  * @param {?} choice 
  * @param {?} textp 
  * @returns {?} choice
+ * @memberof music-parser
  */
 function nextChoiceLikeThing2(choice, textp){
   // Based on readChoice in parser.js
@@ -2903,6 +2954,7 @@ function nextChoiceLikeThing2(choice, textp){
  * 
  * @param {?} parent 
  * @returns {Array} results
+ * @memberof music-parser
  */
 function nextMusic(parent){
   var results = [];
@@ -2967,6 +3019,7 @@ function nextMusic(parent){
 /** @function getParameters
  * @summary gets the parameters like notation type, mensural signature, solmization, clef and staff
  * @returns {Parameters} parameters
+ * @memberof music-parser
  */
 function getParameters(){
   var param = new Parameters();

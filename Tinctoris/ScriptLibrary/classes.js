@@ -17,7 +17,7 @@
 *       unnecessarily) returned.
 *   * .draw Draws the object to the SVG object referred to by the
 *       global variable <SVG>. The drawn object is returned.
-* @module music-classes
+* @namespace classes
 */
 
 /// util functions

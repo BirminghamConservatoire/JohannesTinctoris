@@ -6,77 +6,91 @@
  */
 
  /**
-  * Create Music example object.
   * @class
+  * @classdesc Create Music example object.
+  * @memberof music-parser
   */
 function MusicExample(){
-  /** @member {MusicExample} */
+  /** @property {string} objType
+   * @summary string with object type
+   */
   this.objType = "MusicExample";
-  /** @member {MusicExample} */
+  /** @property {string} code
+   * @summary String with code in JT text format
+   */
   this.code = string;
-  /** @member {MusicExample} */
+  /** @property {DOMElement} SVG
+   * @summary rendered SVG
+   */
   this.SVG = false;
-  /** @member {MusicExample} */
+  /** @property counter */
   this.counter = false;
-  /** @member {MusicExample} */
+  /** @property context */
   this.context = false;
-  /** @member {MusicExample} */
+  /** @property {Array} events
+   * @summary Contains all the musical events
+   */
   this.events = [];
-  /** @member {MusicExample} */
+  /** @property {Array} comments
+   * @summary Array with all comments
+   */
   this.comments = [];
-  /** @member {MusicExample} */
+  /** @property {Array} textObjects */
   this.textObjects = [];
-  /** @member {MusicExample} */
+  /** @property {number} drawCount */
   this.drawCount = 0;
-  /** @member {MusicExample} */
+  /** @property starts */
   this.starts = pointer;
-  /** @member {MusicExample} */
+  /** @property swidth */
   this.swidth = false;
-  /** @member {MusicExample} */
+  /** @property classes */
   this.classes = false;
-  /** @member {MusicExample} */
+  /** @property marginSpace */
   this.marginSpace = false;
-  /** @member {MusicExample} */
+  /** @property {Array}  marginalia*/
   this.marginalia = [];
-  /** @member {MusicExample} */
+  /** @property {Array} catchwords */
   this.catchwords = [];
-  /** @member {MusicExample} */
+  /** @property curCatchword */
   this.curCatchword = curCatchword;
-  /** @member {MusicExample} */
+  /** @property parameters */
   this.parameters = false;
-  /** @member {MusicExample} */
+  /** @property bbox */
   this.bbox = false;
-  /** @member {MusicExample} */
+  /** @property {Array} colbreaks */
   this.colbreaks = [];
-  /** @member {MusicExample} */
+  /** @property book */
   this.book = book;
-  /** @member {MusicExample} */
+  /** @property chapter */
   this.chapter = chapter;
-  /** @member {MusicExample} */
+  /** @property section */
   this.section = section;
-  /** @member {MusicExample} */
+  /** @property exampleno */
   this.exampleno = exampleno;
-  /** @member {MusicExample} */
+  /** @property {Array} exampleBreaks */
   this.exampleBreaks = [];
-  /** @member {MusicExample} */
+  /** @property {Array} staves */
   this.staves = [];
-  /** @member {MusicExample} */
+  /** @property {Array} parts */
   this.parts = [];
-  /** @member {MusicExample} */
+  /** @property {Array} done */
   this.done = [];
-  /** @member {MusicExample} */
+  /** @property {Object} UUIDs */
   this.UUIDs = {};
-  /** @member {MusicExample} */
+  /** @property MEI */
   this.MEI = false;
-  /** @member {MusicExample} */
+  /** @property {DOMElement} MEILink
+   * @summary Link element to MEI doc
+   */
   this.MEILink = false;
-  /** @member {MusicExample} */
+  /** @property MEIcoded */
   this.MEIcoded = false;
-  /** @member {MusicExample} */
+  /** @property {DOMElement} VerovioLink
+   * @summary Link element to Verovio
+   */
   this.VerovioLink = false;
-  /** @member {MusicExample} */
   exampleno++;
-  /** @member {MusicExample} */
+  /** @property atClass */
   this.atClass = "at-"+this.book+"-"+this.chapter+"-"+this.section+"-"+this.exampleno;
   /**
    * Parses a MusicExample

@@ -34,45 +34,45 @@ function zeroWidth(){ return 0;};
 function Note(){
   // Note is the basic class for sounding items. It's also used for
   // ligature components (why?)
-  /** @member {Note} */
+  /** @property {Note} */
   this.objType = "Note";
-  /** @member {Note} */
+  /** @property {Note} */
   this.text = false;
-  /** @member {Note} */
+  /** @property {Note} */
   this.staffPos = false;
-  /** @member {Note} */
+  /** @property {Note} */
   this.pitch = false;
-  /** @member {Note} */
+  /** @property {Note} */
   this.rhythm = false;
-  /** @member {Note} */
+  /** @property {Note} */
   this.sup = false;
-  /** @member {Note} */
+  /** @property {Note} */
   this.flipped = false;
-  /** @member {Note} */
+  /** @property {Note} */
   this.startX = false;
-  /** @member {Note} */
+  /** @property {Note} */
   this.startY = false;
-  /** @member {Note} */
+  /** @property {Note} */
   this.domObj = false;
-  /** @member {Note} */
+  /** @property {Note} */
   this.click = false;
-  /** @member {Note} */
+  /** @property {Note} */
   this.voidnotes = false;
-  /** @member {Note} */
+  /** @property {Note} */
   this.subType = false;
-  /** @member {Note} */
+  /** @property {Note} */
   this.example = false;
-  /** @member {Note} */
+  /** @property {Note} */
   this.dot = false;
-  /** @member {Note} */
+  /** @property {Note} */
   this.MEIObj = false;
-  /** @member {Note} */
+  /** @property {Note} */
   this.glyph = false;
-  /** @member {Note} */
+  /** @property {Note} */
   this.UUID = "ID"+uuid()
-  /** @member {Note} */
+  /** @property {Note} */
   this.forceTail = false; // This is only for ligatures, but the parser will put it here
-  /** @member {Note} */
+  /** @property {Note} */
   // Copy current classes
   this.classList = [];
   if(currentExample.classes && currentExample.classes.classes.length){
@@ -235,25 +235,25 @@ function Note(){
 
 /** @class */
 function ChantNote(){
-  /** @member {ChantNote} */
+  /** @property {ChantNote} */
   this.objType = "ChantNote";
-  /** @member {ChantNote} */
+  /** @property {ChantNote} */
   this.text = false;
-  /** @member {ChantNote} */
+  /** @property {ChantNote} */
   this.staffPos = false;
-  /** @member {ChantNote} */
+  /** @property {ChantNote} */
   this.pitch = false;
-  /** @member {ChantNote} */
+  /** @property {ChantNote} */
   this.rhythm = false; // Misnamed
-  /** @member {ChantNote} */
+  /** @property {ChantNote} */
   this.startX = false;
-  /** @member {ChantNote} */
+  /** @property {ChantNote} */
   this.domObj = false;
-  /** @member {ChantNote} */
+  /** @property {ChantNote} */
   this.example = currentExample;
-  /** @member {ChantNote} */
+  /** @property {ChantNote} */
   this.MEIObj = false;
-  /** @member {ChantNote} */
+  /** @property {ChantNote} */
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
   /** width */
@@ -330,25 +330,25 @@ function ChantNote(){
 
 /** @class */
 function Dot(){
-  /** @member {Dot} */
+  /** @property {Dot} */
   this.objType = "Dot";
 // If pitched
 //  this.pitch = false;
-  /** @member {Dot} */
+  /** @property {Dot} */
   this.augments = false;
-  /** @member {Dot} */
+  /** @property {Dot} */
   this.staffPos = false;
-  /** @member {Dot} */
+  /** @property {Dot} */
   this.startX = false;
-  /** @member {Dot} */
+  /** @property {Dot} */
   this.text = false;
-  /** @member {Dot} */
+  /** @property {Dot} */
   this.domObj = false;
-  /** @member {Dot} */
+  /** @property {Dot} */
   this.MEIObj = false;
-  /** @member {Dot} */
+  /** @property {Dot} */
   this.example = currentExample;
-  /** @member {Dot} */
+  /** @property {Dot} */
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
   /** width */
@@ -429,29 +429,29 @@ function Dot(){
 
 /** @class */
 function SignumCongruentiae(){
-  /** @member {SignumCongruentiae} */
+  /** @property {SignumCongruentiae} */
   this.objType = "SignumCongruentiae";
-  /** @member {SignumCongruentiae} */
+  /** @property {SignumCongruentiae} */
   this.effects = false;
-  /** @member {SignumCongruentiae} */
+  /** @property {SignumCongruentiae} */
   this.staffPos = false;
-  /** @member {SignumCongruentiae} */
+  /** @property {SignumCongruentiae} */
   this.startX = false;
-  /** @member {SignumCongruentiae} */
+  /** @property {SignumCongruentiae} */
   this.text = false;
-  /** @member {SignumCongruentiae} */
+  /** @property {SignumCongruentiae} */
   this.domObj = false;
-  /** @member {SignumCongruentiae} */
+  /** @property {SignumCongruentiae} */
   this.flipped = false;
-  /** @member {SignumCongruentiae} */
+  /** @property {SignumCongruentiae} */
   this.example = currentExample;
-  /** @member {SignumCongruentiae} */
+  /** @property {SignumCongruentiae} */
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
-  /** @member {SignumCongruentiae} */
+  /** @property {SignumCongruentiae} */
   this.MEIObj = false;
-  /** @member {SignumCongruentiae} */
+  /** @property {SignumCongruentiae} */
   this.prevEventObj = false;
-  /** @member {SignumCongruentiae} */
+  /** @property {SignumCongruentiae} */
   this.nextEventObj = false;
   /** method */
   this.forwardEvent = function(variant){return this;};
@@ -487,7 +487,7 @@ function SignumCongruentiae(){
       return false;
     }
   };
-  /** @member {SignumCongruentiae} */
+  /** @property {SignumCongruentiae} */
   this.width = zeroWidth;
   /** Writes signum congruentiae to text */
   this.toText = function(){
@@ -565,23 +565,23 @@ function SignumCongruentiae(){
 
 /** @class */
 function Fermata(){
-  /** @member {Fermata} */
+  /** @property {Fermata} */
   this.objType = "Fermata";
-  /** @member {Fermata} */
+  /** @property {Fermata} */
   this.lengthens = false;
-  /** @member {Fermata} */
+  /** @property {Fermata} */
   this.staffPos = false;
-  /** @member {Fermata} */
+  /** @property {Fermata} */
   this.startX = false;
-  /** @member {Fermata} */
+  /** @property {Fermata} */
   this.text = false;
-  /** @member {Fermata} */
+  /** @property {Fermata} */
   this.domObj = false;
-  /** @member {Fermata} */
+  /** @property {Fermata} */
   this.flipped = false;
-  /** @member {Fermata} */
+  /** @property {Fermata} */
   this.example = currentExample;
-  /** @member {Fermata} */
+  /** @property {Fermata} */
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
   /** width */
   this.width = function(){
@@ -642,26 +642,26 @@ function Fermata(){
 /** @class */
 function Custos(){
   // Self explanatory. Generally behaves like a note.
-  /** @member {Custos} */
+  /** @property {Custos} */
   this.objType = "Custos";
-  /** @member {Custos} */
+  /** @property {Custos} */
   this.text = false;
-  /** @member {Custos} */
+  /** @property {Custos} */
   this.staffPos = false;
-  /** @member {Custos} */
+  /** @property {Custos} */
   this.staffPosGuessed = false;
-  /** @member {Custos} */
+  /** @property {Custos} */
   this.pitch = false;
-  /** @member {Custos} */
+  /** @property {Custos} */
   this.startX = false;
-  /** @member {Custos} */
+  /** @property {Custos} */
   this.domObj = false;
-  /** @member {Custos} */
+  /** @property {Custos} */
   this.sup = false;
-  /** @member {Custos} */
+  /** @property {Custos} */
   this.example = currentExample;
   // Copy current classes
-  /** @member {Custos} */
+  /** @property {Custos} */
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
   /** width */
   this.width = function(){
@@ -743,47 +743,47 @@ function compoundNotep(obj){
 
 /** @class */
 function LigatureNote(note){
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   this.objType = "LigatureNote";
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   this.text = note.text;
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   this.staffPos = note.staffPos;
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   this.pitch = note.pitch;
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   this.rhythm = note.rhythm;
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   this.sup = note.sup;
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   this.forceTail = note.forceTail;
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   this.startX = false;
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   this.startY = false;
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   this.domObj = false;
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   this.dot = false;
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   this.MEIObj = false;
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   this.signum=false;
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   this.voidnotes = note.voidnotes;
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   this.subType = note.subType;
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   this.example = note.example;
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   this.ligature = false;
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   this.index = false;
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   this.prevEventObj = false;
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   this.nextEventObj = false;
-  /** @member {LigatureNote} */
+  /** @property {LigatureNote} */
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
   /** forwardEvent */
@@ -998,32 +998,32 @@ function LigatureNote(note){
 
 /** @class */
 function LigatureComment(comment){
-  /** @member {LigatureComment} */
+  /** @property {LigatureComment} */
   this.objType = "LigatureComment";
-  /** @member {LigatureComment} */
+  /** @property {LigatureComment} */
   this.content = comment.content;
-  /** @member {LigatureComment} */
+  /** @property {LigatureComment} */
   this.width = zeroWidth;
-  /** @member {LigatureComment} */
+  /** @property {LigatureComment} */
   this.startX = false;
-  /** @member {LigatureComment} */
+  /** @property {LigatureComment} */
   this.commentStyle = commentStyle;
-  /** @member {LigatureComment} */
+  /** @property {LigatureComment} */
   this.endX = false;
-  /** @member {LigatureComment} */
+  /** @property {LigatureComment} */
   this.startY = false;
-  /** @member {LigatureComment} */
+  /** @property {LigatureComment} */
   this.endY = false;
-  /** @member {LigatureComment} */
+  /** @property {LigatureComment} */
   this.ligature = false;
-  /** @member {LigatureComment} */
+  /** @property {LigatureComment} */
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
   /** to text */
   this.toText = function(){
     return "**"+this.content+"**";
   };
-  /** @member {LigatureComment} */
+  /** @property {LigatureComment} */
   this.updateStyles = keepStyles;
   /** draw variant
    * @param variant
@@ -1078,21 +1078,21 @@ function LigatureComment(comment){
  */
 function Ligature(){
   // Container object for Note and Oblique objects in ligature.
-  /** @member {Ligature} */
+  /** @property {Ligature} */
   this.objType = "Ligature";
-  /** @member {Ligature} */
+  /** @property {Ligature} */
   this.str = false;
-  /** @member {Ligature} */
+  /** @property {Ligature} */
   this.members = [];
-  /** @member {Ligature} */
+  /** @property {Ligature} */
   this.startX = false;
-  /** @member {Ligature} */
+  /** @property {Ligature} */
   this.fake = false;
-  /** @member {Ligature} */
+  /** @property {Ligature} */
   this.firstEventObj = false;
-  /** @member {Ligature} */
+  /** @property {Ligature} */
   this.lastEventObj = false;
-  /** @member {Ligature} */
+  /** @property {Ligature} */
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
   /** enrich event
@@ -1380,25 +1380,25 @@ function Ligature(){
 function Oblique(){
   // Oblique symbols in ligatures have only two members to worry
   // about. See below for the equivalent structure in neumes.
-  /** @member {Oblique} */
+  /** @property {Oblique} */
   this.objType = "Oblique";
-  /** @member {Oblique} */
+  /** @property {Oblique} */
   this.members = [];
-  /** @member {Oblique} */
+  /** @property {Oblique} */
   this.texts = [false, false];
-  /** @member {Oblique} */
+  /** @property {Oblique} */
   this.comments = [false, false]; //why two?
-  /** @member {Oblique} */
+  /** @property {Oblique} */
   this.before = false;
-  /** @member {Oblique} */
+  /** @property {Oblique} */
   this.startX = false;//curx;
-  /** @member {Oblique} */
+  /** @property {Oblique} */
   this.ligature = false;
-  /** @member {Oblique} */
+  /** @property {Oblique} */
   this.prevEventObj = false;
-  /** @member {Oblique} */
+  /** @property {Oblique} */
   this.nextEventObj = false;
-  /** @member {Oblique} */
+  /** @property {Oblique} */
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
   /** forward Event
@@ -1754,49 +1754,49 @@ function Oblique(){
  */
 function ObliqueNote(note, index, oblique){
   // Takes a normal note and generates more specialised object
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.objType = "ObliqueNote";
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.text = note.text;
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.staffPos = note.staffPos;
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.before = false;
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.pitch = note.pitch;
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.rhythm = note.rhythm;
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.startX = false;
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.startY = false;
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.domObj = false;
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.voidnotes = note.voidnotes;
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.subType = note.subType;
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.dot = false;
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.example = note.example;
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.forceTail = note.forceTail;
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.oblique = oblique;
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.ligature = false;
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.index = false;
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.otherBits = [];
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.prevEventObj = false;
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.nextEventObj = false;
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   this.MEIObj = false;
-  /** @member {ObliqueNote} */
+  /** @property {ObliqueNote} */
   // Copy current classes
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
   this.forwardEvent = function(variant){return this;};

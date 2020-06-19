@@ -7,67 +7,69 @@ editorMode = true;
 standaloneEditor = true;
 wrapWidth = 600;
 
-/** @class */
+/** @class
+ * @memberof Workinput/editbase
+ */
 function MusicHolder(text, outdiv){
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.text = text;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.prevWidth = false;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.forceredraw = true;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.footnotes = [];
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.example = false;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.out = outdiv ? outdiv : document.getElementById('content');
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.drawTo = this.out;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.drawTo.classList.add("drawTo");
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.entered = false;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.shortTitle = false;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.checked = false;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.approved = false;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.translator = false;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.contents = [];
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.copy = false;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.source = false;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.established = false;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.basefile = false;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.basefiles = false;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.source = false;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.title = false;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.attribution = false;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.sources = [];
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.running = false;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.scriptSpec = false;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.script = false;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.editor = false;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.columns = false;
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.hands = [];
-  /** @member {MusicHolder} */
+  /** @property {MusicHolder} */
   this.UUIDs = {};
   /** infoButton
    * @summary infoButtons (qv) presents several buttons for different bits of info.

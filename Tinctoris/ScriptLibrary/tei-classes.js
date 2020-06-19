@@ -1,6 +1,14 @@
+/**
+ * @namespace tei-classes
+ * @summary Contains TEIDoc and MEIDoc
+ */
+
 var hierarchy = {"book": 1, "conclusion": 2, "prologue": 2, 
                  "index": 2, "chapter": 2, "section": 3};
 
+/** @class
+ * @memberof tei-classes
+ */
 function TEIDoc(){
 //  var doc = document.implementation.createDocument(null, "xml");
   var doc = document.implementation.createDocument("http://www.tei-c.org/ns/1.0", "", null);
@@ -208,6 +216,10 @@ function makeTEITable(doc, parent){
   return el;
 };
 
+/** @class
+ * @memberof tei-classes
+ * @summary Contains Header and serialization functions. Body will be appendend.
+ */
 function MEIDoc(title){
 	this.doc = document.implementation.createDocument("http://www.music-encoding.org/ns/mei", "", null);
 	this.tree = this.doc.createElementNS("http://www.music-encoding.org/ns/mei","MEI");

@@ -919,3 +919,19 @@ h1.longTitle {
 div.article td {
 	vertical-align: top;
 }
+.epoch {
+	font-variant: small-caps;
+}
+.fraktur {
+	font-family: UnifrakturCook;
+	font-size: 110%;
+}
+.contentbox p.blockQuote {
+	padding-left: 5em;
+	padding-right: 5em;
+}
+p > sup:first-child {
+	float: left;
+	margin-left: -2.5em;
+	font-size: 70%;
+}

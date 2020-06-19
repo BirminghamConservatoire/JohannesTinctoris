@@ -34,6 +34,22 @@ _Utility functions III: Functions for reading and writing durations for events_
 * writeAlteration
 * readDur
 
+## Input analysis layer
+
+There are functions, that analyze the input...
+
+_Utility functions IV: Simple rhythm functions_
+* noteIntFromDur
+* dupleMinimCountFrom Element
+* noteInt
+* regularlyPerfect
+* minimStructures
+* breveDifference
+* beatOfUnit
+* augDot
+* noteOrRest
+* divisionDot
+
 _Utility functions V: Functions that know something about mensuration_
 * mensurSummary
 * simpleMinims
@@ -45,18 +61,6 @@ _Utility functions V: Functions that know something about mensuration_
 * notePerfectAsWhole
 * imperfectingLevels
 * firstPerfectLevel
-
-## Input analysis layer
-
-There are functions, that analyze the input...
-
-Basis analysis of single elements:
-* noteOrRest
-* augDot
-* divisionDot
-
-Compare two events:
-* leveleq
 
 _Functions to support windowing or for finding the extent to look ahead or back_
 * indexOfNextSameOrLongerOrDot

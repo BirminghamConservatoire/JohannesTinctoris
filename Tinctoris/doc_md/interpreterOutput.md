@@ -34,8 +34,8 @@ Before processing, the note only contains:
 
 Added by {@link addBreveBoundariesForBlock} or {@link addAllStartTimes}:
 * beatPos 
-* onTheBreveBeat 
-* crossedABreveBeat
+* onTheBreveBeat (used for drawing of Mensurstriche)
+* crossedABreveBeat (used for drawing of Mensurstriche)
 
 ## rule
 

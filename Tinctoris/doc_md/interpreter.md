@@ -16,9 +16,9 @@ Things that do stuff with MEI
 * hasNoSections
 
 Read from MEI:
-* getAtomicSections
+* getAtomicSections (external)
 * getLayers
-* getEventsbyMensurationForSection
+* getEventsbyMensurationForSection (external)
 
 Proportion multiplier stuff:
 * proportionMultiplier
@@ -72,7 +72,9 @@ _Functions to support windowing or for finding the extent to look ahead or back_
 
 Functions that run the analysis funtions
 
-Run easy analysis: **beatIndependentDurations**
+Run easy analysis: **beatIndependentDurations** (external)
+
+Run complex analysis: **afterTheEasyBits**
 
 ### Simple reslutions steps
 
@@ -102,3 +104,40 @@ _Functions for adding duration where no start position is known_
 * secondBeatAlteration
 * thirdBeatAlteration
 * midBeatAlteration
+
+### Other analytical functions
+
+* addAllStartTimes... external
+* addStartTimesForBlock (writes `@mensurBlockStartsAt`)
+* addBreveBoundariesForBlock
+
+## Features for machine learning
+
+MEI Walk
+* makeFeatureSequencesForML
+
+What are those small functions at the end?
+* getStaffDefMens
+* getMatchingStaffDef
+* getStaffNo
+* addFeatureDatum
+* attributeEq
+* attributeTestFun
+* attributeValueFun
+* simAnteSim
+* eventLevel
+* displacedSuccessiveEventsFun
+* displacedEventFun
+* displacedBooleanEventFun
+* displacedEventFunGenerator
+* displacedBooleanEventFunGenerator
+* comparisonBooleanFunGenerator
+* comparisonFunGenerator
+* last
+* durationBefore
+* durationAfter
+* canImperfectCurrent
+* levelDifference
+* levelTestFun
+* Feature
+* makeARFFHeader

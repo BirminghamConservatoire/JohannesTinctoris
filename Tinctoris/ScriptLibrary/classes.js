@@ -628,6 +628,8 @@ function LigatureNote(note){
   this.dot = false;
 	this.MEIObj = false;
   this.signum=false;
+  /** @property {Fermata} fermata fermata related to note */
+  this.fermata = false;
   this.voidnotes = note.voidnotes;
   this.subType = note.subType;
   this.example = note.example;

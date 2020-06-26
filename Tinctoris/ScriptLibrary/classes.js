@@ -738,6 +738,9 @@ function LigatureNote(note){
     if(this.signum){
       this.signum.draw();
     }
+    if(this.fermata){
+      this.fermata.draw();
+    }
     curx = this.startX;
 //    console.log(this, this.prevEvent(variant), variant);
     obj = drawBox(this, this.prevEvent(variant) && 
@@ -810,6 +813,9 @@ function LigatureNote(note){
     }
     if(this.signum){
       this.signum.draw();
+    }
+    if(this.fermata){
+      this.fermata.draw();
     }
     curx = this.startX;
     obj = drawBox(this, this.prevEvent() && this.prevEvent().varEndStaffPos(), 

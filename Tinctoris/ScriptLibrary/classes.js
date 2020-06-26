@@ -570,7 +570,7 @@ function SignumCongruentiae(){
 /** @class 
  * @memberof classes */
 function Fermata(){
-  /** @property {?} */
+  /** @property {string} */
   this.objType = "Fermata";
   /** @property {?} */
   this.lengthens = false;
@@ -754,11 +754,11 @@ function LigatureNote(note){
   this.objType = "LigatureNote";
   /** @property {?} */
   this.text = note.text;
-  /** @property {?} */
+  /** @property {number} staffPos staff position matching clef */
   this.staffPos = note.staffPos;
-  /** @property {?} */
+  /** @property {string} pitch pitch name as encoded */
   this.pitch = note.pitch;
-  /** @property {?} */
+  /** @property {Array} */
   this.rhythm = note.rhythm;
   /** @property {?} */
   this.sup = note.sup;
@@ -770,25 +770,25 @@ function LigatureNote(note){
   this.startY = false;
   /** @property {?} */
   this.domObj = false;
-  /** @property {?} */
+  /** @property {Dot} dot dot related to note */
   this.dot = false;
   /** @property {?} */
   this.MEIObj = false;
-  /** @property {?} */
+  /** @property {SignumCongruentiae} signum signum related to note */
   this.signum=false;
   /** @property {?} */
   this.voidnotes = note.voidnotes;
   /** @property {?} */
   this.subType = note.subType;
-  /** @property {?} */
+  /** @property {MusicExample} example ancestor music example */
   this.example = note.example;
-  /** @property {?} */
+  /** @property {Ligature} ligature parent ligature */
   this.ligature = false;
   /** @property {?} */
   this.index = false;
-  /** @property {?} */
+  /** @property {*} prevEventObj preceeding event object */
   this.prevEventObj = false;
-  /** @property {?} */
+  /** @property {*} nextEventObj following event object */
   this.nextEventObj = false;
   /** @property {?} */
   // Copy current classes
@@ -1091,7 +1091,7 @@ function Ligature(){
   this.objType = "Ligature";
   /** @property {?} */
   this.str = false;
-  /** @property {?} */
+  /** @property {Array} */
   this.members = [];
   /** @property {?} */
   this.startX = false;
@@ -1759,9 +1759,9 @@ function Oblique(){
 /** @class
  * @classdesc Takes a normal note and generates more specialised object
  * @memberof classes
- * @param note
- * @param index
- * @param oblique
+ * @param {Note} note
+ * @param {number} index
+ * @param {Oblique} oblique
  */
 function ObliqueNote(note, index, oblique){
   // Takes a normal note and generates more specialised object

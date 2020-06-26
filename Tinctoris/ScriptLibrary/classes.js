@@ -1469,6 +1469,8 @@ function ObliqueNote(note, index, oblique){
   this.voidnotes = note.voidnotes;
   this.subType = note.subType;
   this.dot = false;
+  this.signum = false;
+  this.fermata = false;
   this.example = note.example;
   this.forceTail = note.forceTail;
   this.oblique = oblique;

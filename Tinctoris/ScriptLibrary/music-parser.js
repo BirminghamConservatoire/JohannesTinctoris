@@ -1613,6 +1613,12 @@ function nextLigature(){
         next.signum.effects = next;
         next.signum.flipped = flipped;
       }
+      if((string.charAt(0)==="-" && string.charAt(1)==="*") || string.charAt(0)==="*"){
+        var flipped = consumeIf("-");
+        next.fermata = nextFermata();
+        next.fermata.lengthens = next;
+        next.fermata.flipped = flipped;
+      }
     }
     if(string.charAt(0)=="."){
       next.dot = nextDot();

@@ -776,6 +776,8 @@ function LigatureNote(note){
   this.MEIObj = false;
   /** @property {SignumCongruentiae} signum signum related to note */
   this.signum=false;
+  /** @property {Fermata} fermata fermata related to note */
+  this.fermata = false;
   /** @property {?} */
   this.voidnotes = note.voidnotes;
   /** @property {?} */

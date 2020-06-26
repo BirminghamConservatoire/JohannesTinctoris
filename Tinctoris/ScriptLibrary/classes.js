@@ -509,9 +509,17 @@ function Fermata(){
     var oldx = 0;
     var pos;
     if(this.flipped){
-      pos = staffPosition(this) || (dotPos-1) || (Math.floor(currentLinecount/4)*2-3);
+      pos = staffPosition(this) || (dotPos-2) || (Math.floor(currentLinecount/4)*2-3);
+      // adjust pos for notes with downward stem in cases without manual positioning
+      if (this.lengthens.rhythm[0].match(/[m|s|f]/) && !staffPosition(this) && this.lengthens.flipped){
+        pos = pos - 3;
+      }
     } else {
-      pos = staffPosition(this) || (2+dotPos) || (Math.floor(currentLinecount/4)*2+3);
+      pos = staffPosition(this) || (dotPos+2) || (Math.floor(currentLinecount/4)*2+3);
+      // adjust pos for notes with upward stem in cases without manual positioning
+      if (this.lengthens.rhythm[0].match(/[m|s|f]/) && !staffPosition(this) && !this.lengthens.flipped){
+        pos = pos + 4;
+      }
     }
     if(!$(SVG).parents("#content").length && $(this.lengthens.domObj).parents("#content").length){
 //      console.log(SVG!=$(this.lengthens.domObj).parents("SVG")[0]);

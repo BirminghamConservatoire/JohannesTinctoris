@@ -1,7 +1,7 @@
 texts.V = {};
 texts.V.thumbFile=sideLookUp;
 texts.V.zoomFile=obfuscateSide;
-texts.V.basePath="../../Images/Tiles/V/";
+texts.V.basePath=absBaseURI+"Images/Tiles/V/";
 texts.V.tiles={x: 4, y:4};
 texts.V.tile={rows:4, cols:4, width:335, height:425};
 texts.V.maxHeight=1700;

@@ -1,3 +1,5 @@
+const absBaseURI = 'https://www.linkedmusic.org/EarlyMusicTheory/Tinctoris/';
+
 function drawFunction(i, j, ImageSet){
   return function(){
     // ImageSet.getTile(i, j).className="Loaded";
@@ -951,7 +953,7 @@ function imageLookUp (location){
   return this[location];
 }
 function sideLookUp (breaker){
-  return "../../Images/Thumbs/"+breaker.doc.shortSource+"/"+this["f"+breaker.side()]+".png";
+  return absBaseURI+"Images/Thumbs/"+breaker.doc.shortSource+"/"+this["f"+breaker.side()]+".png";
 }
 function probeImage(filename, doc){
   $.ajax({ 
@@ -970,14 +972,14 @@ function probeImage(filename, doc){
 }
 function obfuscateSide(breaker){
   if(texts[breaker.doc.shortSource].tiles){
-    return {path: "../../Images/Full-images/"+breaker.doc.shortSource+"/",
+    return {path: absBaseURI+"Images/Full-images/"+breaker.doc.shortSource+"/",
             fname: this["f"+breaker.side()],
             extension: ".png"};
   }
-  if(probeImage("../../Images/Full-images/"+breaker.doc.shortSource+"/"+this["f"+breaker.side()]+".png", breaker.doc)){
-    return "../../Images/Full-images/"+breaker.doc.shortSource+"/"+this["f"+breaker.side()]+".png";
+  if(probeImage(absBaseURI+"Images/Full-images/"+breaker.doc.shortSource+"/"+this["f"+breaker.side()]+".png", breaker.doc)){
+    return absBaseURI+"Images/Full-images/"+breaker.doc.shortSource+"/"+this["f"+breaker.side()]+".png";
   } else {    
-    return "../../Images/Mock-images/"+breaker.doc.shortSource+"/"+this["f"+breaker.side()]+".jpg";
+    return absBaseURI+"Images/Mock-images/"+breaker.doc.shortSource+"/"+this["f"+breaker.side()]+".jpg";
   }
 }
 function thumbFilenameForBreaker(){

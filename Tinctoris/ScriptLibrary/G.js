@@ -1,7 +1,7 @@
 texts.G = {};
 texts.G.thumbFile=sideLookUp;
 texts.G.zoomFile=obfuscateSide;
-texts.G.basePath="../../Images/Tiles/G/";
+texts.G.basePath=absBaseURI+"Images/Tiles/G/";
 texts.G.tiles={x: 4, y:4};
 texts.G.tile={rows:4, cols:4, width:360, height:527};
 texts.G.maxHeight=2110;

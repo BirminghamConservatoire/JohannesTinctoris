@@ -1,7 +1,7 @@
 texts.Br1 = {}
 texts.Br1.thumbFile=sideLookUp;
 texts.Br1.zoomFile=obfuscateSide;
-texts.Br1.basePath="../../Images/Tiles/Br1/";
+texts.Br1.basePath=absBaseURI+"Images/Tiles/Br1/";
 texts.Br1.tiles={x: 4, y:4};
 texts.Br1.tile={rows:4, cols:4, width:345, height:450};
 texts.Br1.maxHeight=1800;

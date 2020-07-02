@@ -523,26 +523,34 @@ function SignumCongruentiae(){
           var opos = currentReading.content.indexOf(this);
           if(opos===0){
 						curx = currentExample.events[eventi-1].startX;
-          } else if(opos>-1){
+          } 
+          else if(opos>-1){
             curx = currentReading.content[opos-1].startX;
           }
         }
-      } else if(this.effects.objType==="Ligature Choice"){
+      } 
+      else if(this.effects.objType==="Ligature Choice"){
         if(currentReading && !$(SVG).parents("#content").length){
           var opos = currentReading.content.indexOf(this);
           if(opos===0){
             curx = currentExample.events[eventi-1].startX;
-          } else if(opos>-1){
+          } 
+          else if(opos>-1){
             curx = currentReading.content[opos-1].startX;
           }
-        } else {
+        } 
+        else {
 					if(this.effects.subType==="SignumCongruentiae"){
 						var memi = this.effects.ligature.members.indexOf(this.effects);
 						var reallyEffects = this.effects.ligature.members[memi-1];
 						curx = reallyEffects.startX;
 					}
 				}
-      } else {
+      }
+      else if(this.effects.objType==="ObliqueNote" && this.effects.index === 0 && this.flipped){
+        curx = this.effects.startX - rastralSize/2;
+      }
+      else {
 				curx = this.effects.startX;
       }
     }
@@ -615,9 +623,17 @@ function Fermata(){
     var oldx = 0;
     var pos;
     if(this.flipped){
-      pos = staffPosition(this) || (dotPos-1) || (Math.floor(currentLinecount/4)*2-3);
+      pos = staffPosition(this) || (dotPos-2) || (Math.floor(currentLinecount/4)*2-3);
+      // adjust pos for notes with downward stem in cases without manual positioning
+      if (this.lengthens.rhythm[0].match(/[m|s|f]/) && !staffPosition(this) && this.lengthens.flipped){
+        pos = pos - 3;
+      }
     } else {
-      pos = staffPosition(this) || (2+dotPos) || (Math.floor(currentLinecount/4)*2+3);
+      pos = staffPosition(this) || (dotPos+2) || (Math.floor(currentLinecount/4)*2+3);
+      // adjust pos for notes with upward stem in cases without manual positioning
+      if (this.lengthens.rhythm[0].match(/[m|s|f]/) && !staffPosition(this) && !this.lengthens.flipped){
+        pos = pos + 4;
+      }
     }
     if(!$(SVG).parents("#content").length && $(this.lengthens.domObj).parents("#content").length){
 //      console.log(SVG!=$(this.lengthens.domObj).parents("SVG")[0]);
@@ -626,6 +642,9 @@ function Fermata(){
     if(this.lengthens) {
       oldx = curx;
       curx = this.lengthens.startX;
+      if(this.lengthens.objType==="ObliqueNote" && this.lengthens.index === 0 && this.flipped){
+        curx -= rastralSize/2;
+      }
     }
     this.startX = curx;
     if(this.classList.length){
@@ -916,6 +935,9 @@ function LigatureNote(note){
     if(this.signum){
       this.signum.draw();
     }
+    if(this.fermata){
+      this.fermata.draw();
+    }
     curx = this.startX;
 //    console.log(this, this.prevEvent(variant), variant);
     obj = drawBox(this, this.prevEvent(variant) && 
@@ -989,6 +1011,9 @@ function LigatureNote(note){
     }
     if(this.signum){
       this.signum.draw();
+    }
+    if(this.fermata){
+      this.fermata.draw();
     }
     curx = this.startX;
     obj = drawBox(this, this.prevEvent() && this.prevEvent().varEndStaffPos(), 
@@ -1629,7 +1654,9 @@ function Oblique(){
     this.drawTexts(variant);
     this.drawComments(variant);
     var m0 = this.member(0, variant);
+    m0.startX = this.startX;
     var m1 = this.member(1, variant);
+    m1.startX = this.startX + oWidth(m0.staffPos, m1.staffPos)/1.8;
     // Draw oblique bit
     if(!(m0&&m1)) return false;
 		if(m0.choice){
@@ -1733,6 +1760,7 @@ function Oblique(){
     //setDotPos(this.member(0, variant).staffPos);
     setDotPos(staffPosFromPitchString(this.member(0, variant).pitch));
     curx += oWidth(m0.staffPos, m1.staffPos);
+    // handling dots in obliques
     if(this.member(0, variant).dot){
       var oldx = curx;
       curx-= oWidth(m0.staffPos, m1.staffPos)/1.8;
@@ -1746,6 +1774,31 @@ function Oblique(){
       this.member(1, variant).dot.draw();
       if(this.nextEvent()) curx = oldx;
     }
+
+    // handling signum congruentiae
+    if(this.member(0, variant).signum){
+      var oldx = curx;
+      this.member(0, variant).signum.draw();
+      curx = oldx;
+    }
+    if(this.member(1, variant).signum){
+      var oldx = curx;
+      this.member(1, variant).signum.draw();
+      if(this.nextEvent()) curx = oldx;
+    }
+
+    // handling fermatas
+    if(this.member(0, variant).fermata){
+      var oldx = curx;
+      this.member(0, variant).fermata.draw();
+      curx = oldx;
+    }
+    if(this.member(1, variant).fermata){
+      var oldx = curx;
+      this.member(1, variant).fermata.draw();
+      if(this.nextEvent()) curx = oldx;
+    }
+
     return false;
   };
   /** draw to SVG
@@ -1789,8 +1842,12 @@ function ObliqueNote(note, index, oblique){
   this.voidnotes = note.voidnotes;
   /** @property {?} */
   this.subType = note.subType;
-  /** @property {?} */
+  /** @property {Dot} */
   this.dot = false;
+  /** @property {SignumCongruentiae} */
+  this.signum = false;
+  /** @property {Fermata} */
+  this.fermata = false;
   /** @property {?} */
   this.example = note.example;
   /** @property {?} */
@@ -1912,6 +1969,7 @@ function ObliqueNote(note, index, oblique){
     // It's easier if I know the other note in the oblique (in
     // previous times, this was unneccessary, since drawing was per
     // oblique, not per note.
+
     var extraClasses = "";
     if(this.classList.length){
       extraClasses = classString(this.classList);
@@ -1921,7 +1979,8 @@ function ObliqueNote(note, index, oblique){
 			var ocx = curx;
 			this.otherBits[i].draw();
 			curx = ocx;
-		}
+    }
+
     if(this.index === 0){
       return drawObliqueStart(staffPosition(this), other ? staffPosition(other)
                                                   : staffPosition(this.nextEvent(false)), 

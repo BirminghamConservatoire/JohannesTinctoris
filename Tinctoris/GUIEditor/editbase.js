@@ -1,3 +1,5 @@
+/** @interface GUIEditor/editbase */
+
 editorMode = true;
 
 function pitchOrHeightShift(object, d){

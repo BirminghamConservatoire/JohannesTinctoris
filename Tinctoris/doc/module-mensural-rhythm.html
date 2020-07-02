@@ -1,0 +1,10943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>mensural-rhythm - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h3>Tutorials</h3><ul><li><a href="tutorial-interpreter.html">Interpreter architecture</a></li><li><a href="tutorial-interpreterOutput.html">MEI output of trivial beat analysis</a></li><li><a href="tutorial-MusicEntry.html">Tinctoris Music Entry</a></li></ul><h3>Modules</h3><ul><li><a href="module-mensural-rhythm.html">mensural-rhythm</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~actOnColoration">actOnColoration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~actOnDots">actOnDots</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~addAllStartTimes">addAllStartTimes</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~addBreveBoundariesForBlock">addBreveBoundariesForBlock</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~addStartTimesForBlock">addStartTimesForBlock</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~allUnalterableImperfectLevels">allUnalterableImperfectLevels</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~alterableLevels">alterableLevels</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~anteSim">anteSim</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~augDot">augDot</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~beatIndependentDurations">beatIndependentDurations</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~beatOfDur">beatOfDur</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~beatOfUnit">beatOfUnit</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~beatUnitStructure">beatUnitStructure</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~blockProportionMultiplier">blockProportionMultiplier</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~breveDifference">breveDifference</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~canImperfect">canImperfect</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~checkForGeneralAlteration">checkForGeneralAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~divisionDot">divisionDot</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~divisionLikeRests">divisionLikeRests</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~dupleMinimCountFromElement">dupleMinimCountFromElement</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~firstBeatAlteration">firstBeatAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~firstBeatImperfection">firstBeatImperfection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~firstBeatImperfectionCheck">firstBeatImperfectionCheck</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~firstPerfectLevel">firstPerfectLevel</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~gcd">gcd</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~getAtomicSections">getAtomicSections</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~getEventsByMensurationForSection">getEventsByMensurationForSection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~getLayers">getLayers</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~hasNoSections">hasNoSections</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~imperfectingLevels">imperfectingLevels</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~indexOfNextDot">indexOfNextDot</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~indexOfNextSameOrLongerOrDot">indexOfNextSameOrLongerOrDot</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~indexOfPrevLongerOrDot">indexOfPrevLongerOrDot</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~isAlterable">isAlterable</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~labelRests">labelRests</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~leveleq">leveleq</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~mensurSummary">mensurSummary</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~midBeatAlteration">midBeatAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~midBeatImperfection">midBeatImperfection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~minimStructures">minimStructures</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~noteInt">noteInt</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~noteIntFromDur">noteIntFromDur</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~noteOrRest">noteOrRest</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~notePerfectAsWhole">notePerfectAsWhole</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~nsResolver">nsResolver</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~proportionMultiplier">proportionMultiplier</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~propProportionMultiplier">propProportionMultiplier</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~readDur">readDur</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~regularlyPerfect">regularlyPerfect</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~secondBeatAlteration">secondBeatAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~secondBeatImperfection">secondBeatImperfection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~simpleMinims">simpleMinims</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~simplestAlterations">simplestAlterations</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~solidBlock">solidBlock</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~thirdBeatAlteration">thirdBeatAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~thirdBeatImperfection">thirdBeatImperfection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~windowDuration">windowDuration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~writeAlteration">writeAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~writeDur">writeDur</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~writeImperfection">writeImperfection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~writeSimpleImperfection">writeSimpleImperfection</a></li></ul></li></ul><h3>Namespaces</h3><ul><li><a href="classes.html">classes</a></li><li><a href="editor.html">editor</a><ul class='methods'><li data-type='method' style='display: none;'><a href="editor.html#.adjustWidth">adjustWidth</a></li><li data-type='method' style='display: none;'><a href="editor.html#.refreshFromCode">refreshFromCode</a></li><li data-type='method' style='display: none;'><a href="editor.html#.setSpacing">setSpacing</a></li><li data-type='method' style='display: none;'><a href="editor.html#.toggleWrapping">toggleWrapping</a></li></ul></li><li><a href="music-parser.html">music-parser</a><ul class='methods'><li data-type='method' style='display: none;'><a href="music-parser.html#.colourp">colourp</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.consumeParenthesis">consumeParenthesis</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.enrichText">enrichText</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.extendTacet">extendTacet</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.getMusicTextSup">getMusicTextSup</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.getParameters">getParameters</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.getString">getString</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.getSubText">getSubText</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.getTag">getTag</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.linesp">linesp</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextBarline">nextBarline</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextChantNote">nextChantNote</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextChoice">nextChoice</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextChoiceLikeThing">nextChoiceLikeThing</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextChoiceLikeThing2">nextChoiceLikeThing2</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextColRef">nextColRef</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextComment">nextComment</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextCustos">nextCustos</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextDot">nextDot</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextEvent">nextEvent</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextFermata">nextFermata</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextInfo">nextInfo</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextLigature">nextLigature</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextLigChoice">nextLigChoice</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextLongRest">nextLongRest</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextMusic">nextMusic</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextNeume">nextNeume</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextNote">nextNote</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextOblique">nextOblique</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextObliqueNeume">nextObliqueNeume</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextObliqueNoteChoice">nextObliqueNoteChoice</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextPart">nextPart</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextPartnameReading">nextPartnameReading</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextRepeat">nextRepeat</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextRest">nextRest</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextSignumCongruentiae">nextSignumCongruentiae</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextSolmSign">nextSolmSign</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextTacet">nextTacet</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextTaglike">nextTaglike</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextText">nextText</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextTextChoice">nextTextChoice</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseClef">parseClef</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseClefReading">parseClefReading</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseClefVar">parseClefVar</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseMens">parseMens</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseMensReading">parseMensReading</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseMensReading">parseMensReading</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseProp">parseProp</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseSolm">parseSolm</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseSolmReading">parseSolmReading</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseSolmVar">parseSolmVar</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseStaff">parseStaff</a></li></ul></li><li><a href="tei-classes.html">tei-classes</a></li><li><a href="Workinput_editbase.html">Workinput/editbase</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Workinput_editbase.html#.editObject">editObject</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.html#.grabdomobjects">grabdomobjects</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.html#.hoverOutShiftChecked">hoverOutShiftChecked</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.html#.pitchOrHeightShift">pitchOrHeightShift</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.html#.shiftHoverToShift">shiftHoverToShift</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.html#.UpDown">UpDown</a></li></ul></li></ul><h3>Classes</h3><ul><li><a href="classes.Barline.html">Barline</a></li><li><a href="classes.BlueClose.html">BlueClose</a></li><li><a href="classes.BlueOpen.html">BlueOpen</a></li><li><a href="classes.ChantNote.html">ChantNote</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.ChantNote.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.ChantNote.html#edit">edit</a></li><li data-type='method' style='display: none;'><a href="classes.ChantNote.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.ChantNote.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.ChantNote.html#width">width</a></li></ul></li><li><a href="classes.Classes.html">Classes</a></li><li><a href="classes.Clef.html">Clef</a></li><li><a href="classes.ColumnStart.html">ColumnStart</a></li><li><a href="classes.Comment.html">Comment</a></li><li><a href="classes.Custos.html">Custos</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.Custos.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.Custos.html#MEINode">MEINode</a></li><li data-type='method' style='display: none;'><a href="classes.Custos.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.Custos.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.Custos.html#width">width</a></li></ul></li><li><a href="classes.Dot.html">Dot</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.Dot.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.Dot.html#negativeSpace">negativeSpace</a></li><li data-type='method' style='display: none;'><a href="classes.Dot.html#reallyAugments">reallyAugments</a></li><li data-type='method' style='display: none;'><a href="classes.Dot.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.Dot.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.Dot.html#width">width</a></li></ul></li><li><a href="classes.etc.html">etc</a></li><li><a href="classes.ExampleBreak.html">ExampleBreak</a></li><li><a href="classes.Fermata.html">Fermata</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.Fermata.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.Fermata.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.Fermata.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.Fermata.html#width">width</a></li></ul></li><li><a href="classes.FullClose.html">FullClose</a></li><li><a href="classes.FullOpen.html">FullOpen</a></li><li><a href="classes.GenericClose.html">GenericClose</a></li><li><a href="classes.GenericOpen.html">GenericOpen</a></li><li><a href="classes.HalfFullClose.html">HalfFullClose</a></li><li><a href="classes.HalfFullOpen.html">HalfFullOpen</a></li><li><a href="classes.LargeClose.html">LargeClose</a></li><li><a href="classes.LargeOpen.html">LargeOpen</a></li><li><a href="classes.LedgerLineChange.html">LedgerLineChange</a></li><li><a href="classes.Ligature.html">Ligature</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.Ligature.html#addChoice">addChoice</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#addElement">addElement</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#addEvent">addEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#addNote">addNote</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#addOblique">addOblique</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#drawVar">drawVar</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#enrichEvent">enrichEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#firstEvent">firstEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#firstNoteIndexp">firstNoteIndexp</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#lastNoteIndexp">lastNoteIndexp</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#leftOverhang">leftOverhang</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#negativeSpace">negativeSpace</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#nextNote">nextNote</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#nextPos">nextPos</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#nthNote">nthNote</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#oblique">oblique</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#prevNote">prevNote</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#prevPos">prevPos</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#varEndStaffPos">varEndStaffPos</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#width">width</a></li></ul></li><li><a href="classes.LigatureComment.html">LigatureComment</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.LigatureComment.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureComment.html#drawVar">drawVar</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureComment.html#footnote">footnote</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureComment.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureComment.html#toText">toText</a></li></ul></li><li><a href="classes.LigatureNote.html">LigatureNote</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#backwardEvent">backwardEvent</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#drawVar">drawVar</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#forwardEvent">forwardEvent</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#lstem">lstem</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#nextEvent">nextEvent</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#prevEvent">prevEvent</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#rstem">rstem</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#varEndStaffPos">varEndStaffPos</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#varStartStaffPos">varStartStaffPos</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#width">width</a></li></ul></li><li><a href="classes.LigChoice.html">LigChoice</a></li><li><a href="classes.LongRest.html">LongRest</a></li><li><a href="classes.MaxRest.html">MaxRest</a></li><li><a href="classes.MChoice.html">MChoice</a></li><li><a href="classes.MensuralSignature.html">MensuralSignature</a></li><li><a href="classes.MESuper.html">MESuper</a></li><li><a href="classes.MNilReading.html">MNilReading</a></li><li><a href="classes.MReading.html">MReading</a></li><li><a href="classes.MusicOptionalSpace.html">MusicOptionalSpace</a></li><li><a href="classes.MusicPunctuation.html">MusicPunctuation</a></li><li><a href="classes.MusicWordJoin.html">MusicWordJoin</a></li><li><a href="classes.MusicWordSplit.html">MusicWordSplit</a></li><li><a href="classes.NegativeSpace.html">NegativeSpace</a></li><li><a href="classes.Neume.html">Neume</a></li><li><a href="classes.NeumeItem.html">NeumeItem</a></li><li><a href="classes.Notation.html">Notation</a></li><li><a href="classes.Note.html">Note</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.Note.html#commentPos">commentPos</a></li><li data-type='method' style='display: none;'><a href="classes.Note.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.Note.html#edit">edit</a></li><li data-type='method' style='display: none;'><a href="classes.Note.html#negativeSpace">negativeSpace</a></li><li data-type='method' style='display: none;'><a href="classes.Note.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.Note.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.Note.html#width">width</a></li></ul></li><li><a href="classes.Oblique.html">Oblique</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.Oblique.html#backwardEvent">backwardEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#drawComments">drawComments</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#drawTexts">drawTexts</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#drawVar">drawVar</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#enrichEvent">enrichEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#extendMembers">extendMembers</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#flattenedMembers">flattenedMembers</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#forwardEvent">forwardEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#lstem">lstem</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#member">member</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#nextEvent">nextEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#prevEvent">prevEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#rstem">rstem</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#width">width</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#width">width</a></li></ul></li><li><a href="classes.ObliqueNeume.html">ObliqueNeume</a></li><li><a href="classes.ObliqueNote.html">ObliqueNote</a></li><li><a href="classes.ObliqueNoteChoice.html">ObliqueNoteChoice</a></li><li><a href="classes.Parameters.html">Parameters</a></li><li><a href="classes.Part.html">Part</a></li><li><a href="classes.PositiveSpace.html">PositiveSpace</a></li><li><a href="classes.ProportionSign.html">ProportionSign</a></li><li><a href="classes.RedClose.html">RedClose</a></li><li><a href="classes.RedlineClose.html">RedlineClose</a></li><li><a href="classes.RedlineOpen.html">RedlineOpen</a></li><li><a href="classes.RedOpen.html">RedOpen</a></li><li><a href="classes.Repeat.html">Repeat</a></li><li><a href="classes.Rest.html">Rest</a></li><li><a href="classes.SignumCongruentiae.html">SignumCongruentiae</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#backwardEvent">backwardEvent</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#forwardEvent">forwardEvent</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#nextEvent">nextEvent</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#prevEvent">prevEvent</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#varEndStaffPos">varEndStaffPos</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#varStartStaffPos">varStartStaffPos</a></li></ul></li><li><a href="classes.SolmizationSign.html">SolmizationSign</a></li><li><a href="classes.SolmizationSignature.html">SolmizationSignature</a></li><li><a href="classes.StackedProportionSigns.html">StackedProportionSigns</a></li><li><a href="classes.Staff.html">Staff</a></li><li><a href="classes.StrikethroughClose.html">StrikethroughClose</a></li><li><a href="classes.StrikethroughOpen.html">StrikethroughOpen</a></li><li><a href="classes.Tacet.html">Tacet</a></li><li><a href="classes.TextUnderlay.html">TextUnderlay</a></li><li><a href="classes.upsideDownClose.html">upsideDownClose</a></li><li><a href="classes.upsideDownOpen.html">upsideDownOpen</a></li><li><a href="classes.ValueChoice.html">ValueChoice</a></li><li><a href="classes.ValueReading.html">ValueReading</a></li><li><a href="classes.VoidClose.html">VoidClose</a></li><li><a href="classes.VoidOpen.html">VoidOpen</a></li><li><a href="music-parser.MusicExample.html">MusicExample</a><ul class='methods'><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#appendStaffDefs">appendStaffDefs</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#commentsDiv">commentsDiv</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#commentsTip">commentsTip</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#easyRhythms">easyRhythms</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#gatherStaffs">gatherStaffs</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#height">height</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#markResolved">markResolved</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#mensurStrich">mensurStrich</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#parse">parse</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#regenerateMEILinks">regenerateMEILinks</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#reset">reset</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#setSysWidths">setSysWidths</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#staffDefForPart">staffDefForPart</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#startingStaffForPart">startingStaffForPart</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#stupidVerovioStretch">stupidVerovioStretch</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#targetWidth">targetWidth</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#toTEI">toTEI</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#width">width</a></li></ul></li><li><a href="tei-classes.MEIDoc.html">MEIDoc</a></li><li><a href="tei-classes.TEIDoc.html">TEIDoc</a></li><li><a href="Workinput_editbase.MusicHolder.html">MusicHolder</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#appendStaffDefs">appendStaffDefs</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#headerText">headerText</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#infoButton">infoButton</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#infoButtons">infoButtons</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#parse">parse</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#parseHeaders">parseHeaders</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#staffDefForPart">staffDefForPart</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#writeHeaders">writeHeaders</a></li></ul></li></ul>undefined<h3>Global</h3><ul><li><a href="global.html#compoundNotep">compoundNotep</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">mensural-rhythm</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+                <div class="description usertext"><p>This code takes mensural MEI and attempts to turn
+implicit duration into explicit duration, encoded
+as @dur.ges, @num, @numbase and @dur.quality. Input is assumed to
+have positions correct, dots classified and implicit mensuration
+resolved (although the system will attempt to guess major and
+minor modus from rests).</p></div>
+            
+
+            
+                
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="~propNum"><span class="type-signature">(inner) </span>propNum<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line1426">line 1426</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>More complex stages, for where knowledge is partial and patchy</p>
+</div>
+
+
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="~actOnColoration"><span class="type-signature">(inner) </span>actOnColoration<span class="signature">(sectionBlocks)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line846">line 846</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Colored notation is assumed to be simple duple and labelled accordingly</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sectionBlocks</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of all the coherent areas of
+mensurations in a section</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~actOnDots"><span class="type-signature">(inner) </span>actOnDots<span class="signature">(sectionBlocks)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line866">line 866</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Simple processing of dots of augmentation (other dots ignored</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sectionBlocks</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of all the coherent areas of
+mensurations in a section</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~addAllStartTimes"><span class="type-signature">(inner) </span>addAllStartTimes<span class="signature">(sectionBlocks)</span><span class="type-signature"></span></h4>
+
+    
+    <p class="summary usertext"><p>If event[n] has both a duration assigned to it and a start time,
+adds a start time for event[n+1]</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line1306">line 1306</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sectionBlocks</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of all the coherent areas of
+mensurations in a section</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~addBreveBoundariesForBlock"><span class="type-signature">(inner) </span>addBreveBoundariesForBlock<span class="signature">(block)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line1368">line 1368</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Indicates where an event falls in larger-scale mensural structures,
+also singling out which breve beat an event falls on and whether it
+crosses one (adds @beatPos, @onTheBreveBeat and @crossedABreveBeat)</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>block</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~addStartTimesForBlock"><span class="type-signature">(inner) </span>addStartTimesForBlock<span class="signature">(block)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line1345">line 1345</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Add start times for all events in block for which that's possible
+(i.e. where the start and duration of the previous note is known).</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>block</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Object with attributes for events and
+mensuration sign</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~allUnalterableImperfectLevels"><span class="type-signature">(inner) </span>allUnalterableImperfectLevels<span class="signature">(sectionBlocks)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line892">line 892</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Resolves durations for any note that is not regularly perfect and
+that is not a direct part of a ternary note (so isn't alterable).</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sectionBlocks</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of all the coherent areas of
+mensurations in a section</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~alterableLevels"><span class="type-signature">(inner) </span>alterableLevels<span class="signature">(mens)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line594">line 594</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Lists all levels that can be affected by alteration. Uses
+0=semifusa, 1=fusa, 2=minima, etc (n.b. Nothing below a minim can
+be altered anyway).</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mens</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~anteSim"><span class="type-signature">(inner) </span>anteSim<span class="signature">(sectionBlocks)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line991">line 991</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>leveleq</li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>If a note is followed immediately by a note or rest at the same
+level, the former cannot be imperfected. Such
+notes can have duration labelled immediately.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sectionBlocks</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of all the coherent areas of
+mensurations in a section</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~augDot"><span class="type-signature">(inner) </span>augDot<span class="signature">(event)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line458">line 458</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Return true if event is a dot of augmentation. Assumes that this is
+indicated using @mei:form=aug. In the longer term, this might be
+the place to put more sophisticated reasoning in (or it might be
+better as a pre-processing step).</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Probably an mei:dot</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~beatIndependentDurations"><span class="type-signature">(inner) </span>beatIndependentDurations<span class="signature">(sectionBlocks)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line1411">line 1411</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Runs resolution steps that aren't dependant on any rhythms or beat
+positions already having been solved. These are: rests (which can't
+be altered or imperfected anyway); coloration; dots of
+augmentation; notes below the first perfect/alterable level;
+trivial alterations (based on pattern, not beat position); ante
+simile.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sectionBlocks</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of all the coherent areas of
+mensurations in a section</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~beatOfDur"><span class="type-signature">(inner) </span>beatOfDur<span class="signature">(el, mensur, levelAdjust)</span><span class="type-signature"> &rarr; {Integer}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line534">line 534</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Return the beat number of an element within its parent metrical
+unit (e.g. second semibreve in its breve).</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>el</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:note or mei:rest</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mensur</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:mensur</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>levelAdjust</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Find the beat number for a different
+mensural level (1 for the next longer level, -1 for the next
+shorter, etc.)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Integer</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~beatOfUnit"><span class="type-signature">(inner) </span>beatOfUnit<span class="signature">(minimsInUnit, minimsInParentUnit, startMinims)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line443">line 443</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Return the number of unit beats since the beginning of the larger
+unit (e.g. semibreve 2 of its breve)</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>minimsInUnit</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Duration of unit (in minims)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>minimsInParentUnit</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>startMinims</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Number of minims since start of piece
+or section</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Object with attributes for beat and remainder</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~beatUnitStructure"><span class="type-signature">(inner) </span>beatUnitStructure<span class="signature">(startMinims)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line557">line 557</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Return an array of an event's position with respect to all mensural
+levels.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>startMinims</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Minim steps since the start of the
+counting period</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~blockProportionMultiplier"><span class="type-signature">(inner) </span>blockProportionMultiplier<span class="signature">(block)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line193">line 193</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Give proportion multiplier for a block given the current and
+previous proportion state.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>block</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~breveDifference"><span class="type-signature">(inner) </span>breveDifference<span class="signature">(struct2, struct2, mens)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line419">line 419</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Calculate the number of breves between two times, specified as
+the number of mensural units into the current section (so [subminims,
+minims, semibreves, breves, longs, maximas])</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>struct2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Timepoint</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>struct2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Timepoint</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mens</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:mens element</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Number of breve beats separating the notes</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~canImperfect"><span class="type-signature">(inner) </span>canImperfect<span class="signature">(shortLevel, longLevel, menssum)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line613">line 613</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>True if the level in the first argument can imperfect the level in
+the second, given the prevailing mensuration.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>shortLevel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Level (semifusa=0, fusa=1,...maxima=7) of shorter note</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>longLevel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Level (semifusa=0, fusa=1,...maxima=7) of longer note</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>menssum</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Summary of mensuration (as returned by mensurSummary</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~checkForGeneralAlteration"><span class="type-signature">(inner) </span>checkForGeneralAlteration<span class="signature">(event, index, events, mens)</span><span class="type-signature"> &rarr; {DOMObject}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line1022">line 1022</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Check an event for evidence of alteration. Alters event if it falls
+after a longer note followed by its own duration. Where there is
+uncertainty about the intervening duration, rule out alteration if
+the minimum interpretation of that duration is too long. We assume
+that the calling function has established that the ensuing durations
+are suitable.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:note (rests can't be altered)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The note's position in events</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>events</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Sequence of events in this section for this voice</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mens</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:mensur</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>This function returns the altered event (why?)</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">DOMObject</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~divisionDot"><span class="type-signature">(inner) </span>divisionDot<span class="signature">(event)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line478">line 478</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Return true if event is a dot of division. Assumes that this is
+indicated using @mei:form!=aug. In the longer term, this might be
+the place to put more sophisticated reasoning in (or it might be
+better as a pre-processing step).</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Probably an mei:dot</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~divisionLikeRests"><span class="type-signature">(inner) </span>divisionLikeRests<span class="signature">(maxLevel, rest1, rest2, direction)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line782">line 782</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Often, rests are grouped vertically to indicate coherent mensural
+units – in effect, the vertical displacement acting as a dot of
+division. check whether two (implicitly adjacent) rests behave like
+that.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>maxLevel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Highest mensural level that we're
+interested in (expressed as 0=semifusa, 1=fusa, etc.)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>rest1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:rest</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>rest2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:rest</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>direction</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>&quot;left&quot; | &quot;right&quot;</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~dupleMinimCountFromElement"><span class="type-signature">(inner) </span>dupleMinimCountFromElement<span class="signature">(el)</span><span class="type-signature"> &rarr; {Integer|Boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line346">line 346</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>el</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>An mei:note or mei:rest</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Integer</span>
+|
+
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~firstBeatAlteration"><span class="type-signature">(inner) </span>firstBeatAlteration<span class="signature">(event, index, events, mens)</span><span class="type-signature"> &rarr; {DOMObject}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line1247">line 1247</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Given an event on the first beat, if we can tell if it's altered,
+label the duration.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:note (rest would have been resolved already)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The note's position in events</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>events</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Sequence of events in this section for this voice</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mens</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:mensur</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>This function returns the modified event (why?)</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">DOMObject</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~firstBeatImperfection"><span class="type-signature">(inner) </span>firstBeatImperfection<span class="signature">(event, index, events, mens)</span><span class="type-signature"> &rarr; {DOMObject}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line1147">line 1147</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Given an event on the first beat, if we can tell if it's perfect,
+label the duration. Checks simpler rules (I.3 and I.4 from the
+rulelist). If the note remains unresolved, calls firstBeatAlterationCheck with a context window of events that
+might affect the decision.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:note (rest would have been resolved already)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The note's position in events</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>events</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Sequence of events in this section for this voice</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mens</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:mensur</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>This function returns the modified event (why?)</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">DOMObject</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~firstBeatImperfectionCheck"><span class="type-signature">(inner) </span>firstBeatImperfectionCheck<span class="signature">(event, window, mens)</span><span class="type-signature"> &rarr; {DOMObject}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line1065">line 1065</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Having sifted the trivial cases out, attempts to resolve cases that
+rely on context, particularly the shorter notes that follow this one.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:note (rest would have been resolved already)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>window</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>List of following events (until the next
+division dot or equivalent, or the next event of similar or greater
+length).</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mens</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:mensur</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>This function returns the modified event (why?)</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">DOMObject</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~firstPerfectLevel"><span class="type-signature">(inner) </span>firstPerfectLevel<span class="signature">(mensuration)</span><span class="type-signature"> &rarr; {Integer}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line674">line 674</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Return an integer (semifusa=0, fusa=1,...maxima=7) of the first
+(shortest) level that is divisible into 3 parts.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mensuration</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:mensur</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Mensural level</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Integer</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~gcd"><span class="type-signature">(inner) </span>gcd<span class="signature">(a, a)</span><span class="type-signature"> &rarr; {Integer}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line27">line 27</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Find highest common factor (for tidy @num/@numbase use). May be
+less useful, depending how these attributes actually work.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>a</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>a</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Integer</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~getAtomicSections"><span class="type-signature">(inner) </span>getAtomicSections<span class="signature">(MEIDoc)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line76">line 76</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>easyRhythms</li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Return all the sections that themselves contain no sections (we
+have a hierarchical tree structure for parts, so this only chooses
+the lowest level structural unit.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>MEIDoc</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Array of mei:section elements</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~getEventsByMensurationForSection"><span class="type-signature">(inner) </span>getEventsByMensurationForSection<span class="signature">(section, doc, prevMens)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line101">line 101</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Creates an array of mensurally coherent blocks, each an object with
+mensuration and events attributes.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>section</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The section to process</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>doc</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The parent MEI doc</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>prevMens</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The last mensuration of the previous block
+(this is the default for the first section of hte new block in some
+cases, if none is specified).</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~getLayers"><span class="type-signature">(inner) </span>getLayers<span class="signature">(section)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line86">line 86</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Return all layers for a section</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>section</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Array of mei:layer elements</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~hasNoSections"><span class="type-signature">(inner) </span>hasNoSections<span class="signature">(x)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line60">line 60</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Return true if x (an XML DOM object, normally MEI) contains <em>no</em>
+mei:sections. this needs to be set as a DOM document object.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the part of the tree.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~imperfectingLevels"><span class="type-signature">(inner) </span>imperfectingLevels<span class="signature">(element, mensur)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line648">line 648</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Returns the minim counts for all levels that can imperfect elemnt</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>element</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mensur</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~indexOfNextDot"><span class="type-signature">(inner) </span>indexOfNextDot<span class="signature">(index, seq)</span><span class="type-signature"> &rarr; {Integer}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line711">line 711</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Forward window support – find the next dot of division</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Index of the current event (start point for the seach</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>seq</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of events</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Position if found (false if not)</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Integer</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~indexOfNextSameOrLongerOrDot"><span class="type-signature">(inner) </span>indexOfNextSameOrLongerOrDot<span class="signature">(level, index, seq)</span><span class="type-signature"> &rarr; {integer|boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line695">line 695</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Forward window support – find the next note that's at least as
+long, or find a dot of division</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>level</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Level of the note</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Index of the current event (start point for the search)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>seq</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of events</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Position if found (false if not)</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">integer</span>
+|
+
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~indexOfPrevLongerOrDot"><span class="type-signature">(inner) </span>indexOfPrevLongerOrDot<span class="signature">(level, index, seq)</span><span class="type-signature"> &rarr; {Integer}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line728">line 728</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Backward window support – find the previous note that's at least as
+long, or find a dot of division</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>level</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Level of the note</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Index of the current event (end point for the search)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>seq</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of events</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Position if found (false if not)</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Integer</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~isAlterable"><span class="type-signature">(inner) </span>isAlterable<span class="signature">(el, mensur)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line579">line 579</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>True if the supplied element is a note contained in a ternary unit</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>el</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mensur</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~labelRests"><span class="type-signature">(inner) </span>labelRests<span class="signature">(sectionBlocks)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line826">line 826</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Since rests can't be altered or imperfected, all rests can be
+resolved immediately</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sectionBlocks</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of all the coherent areas of
+mensurations in a section</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~leveleq"><span class="type-signature">(inner) </span>leveleq<span class="signature">(e1, e2)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line248">line 248</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>True if e1 and e2 are notes or rests at the same mensural level
+(e.g. minima or semibrevis)</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>e1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:note or mei:rest</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>e2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:note or mei:rest</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~mensurSummary"><span class="type-signature">(inner) </span>mensurSummary<span class="signature">(mensur)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line494">line 494</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Reads the attributes of a mei:mensur element and returns a
+four-element array of 2s or 3s for the perfection of each level
+from prolation to major modus</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mensur</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:mensur element</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Four-element array</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~midBeatAlteration"><span class="type-signature">(inner) </span>midBeatAlteration<span class="signature">(event, index, events, mens)</span><span class="type-signature"> &rarr; {DOMObject|DOMObject}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line1293">line 1293</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Currently a placeholder for deciding the alteration status of a
+note that isn't on beats 1, 2 or 3</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:note (rest would have been resolved already)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The note's position in events</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>events</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Sequence of events in this section for this voice</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mens</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:mensur</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+<ul>
+        <li>
+<div class="param-desc">
+    <p>This function returns the altered event (why?)</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">DOMObject</span>
+
+
+    </dd>
+</dl>
+</li>
+    
+        <li>
+<div class="param-desc">
+    <p>Returns the event (unmodified at the moment)</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">DOMObject</span>
+
+
+    </dd>
+</dl>
+</li>
+    </ul>
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~midBeatImperfection"><span class="type-signature">(inner) </span>midBeatImperfection<span class="signature">(event, index, events, mens)</span><span class="type-signature"> &rarr; {DOMObject|DOMObject}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line1231">line 1231</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Currently a placeholder for deciding the imperfection status of a
+note that isn't on beats 1, 2 or 3</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:note (rest would have been resolved already)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The note's position in events</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>events</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Sequence of events in this section for this voice</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mens</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:mensur</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+<ul>
+        <li>
+<div class="param-desc">
+    <p>This function returns the altered event (why?)</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">DOMObject</span>
+
+
+    </dd>
+</dl>
+</li>
+    
+        <li>
+<div class="param-desc">
+    <p>Returns the event (unmodified at the moment)</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">DOMObject</span>
+
+
+    </dd>
+</dl>
+</li>
+    </ul>
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~minimStructures"><span class="type-signature">(inner) </span>minimStructures<span class="signature">(mensurSummary, maxLevel<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line400">line 400</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Given the output of mensurSummary, return an array of minim
+counts for each level.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mensurSummary</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Mensural structure (2 for
+duple/imperfect and 3 for triple/perfect for each level)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>maxLevel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>4</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>Stopping point</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~noteInt"><span class="type-signature">(inner) </span>noteInt<span class="signature">(el)</span><span class="type-signature"> &rarr; {Integer}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line357">line 357</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Return the duration level of a note or rest as an integer (semifusa=0, semibrevis=4, maxima=7)</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>el</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:note or mei:rest (or other object with mei:@dur</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Integer</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~noteIntFromDur"><span class="type-signature">(inner) </span>noteIntFromDur<span class="signature">(dur)</span><span class="type-signature"> &rarr; {Integer}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line334">line 334</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Convert mei:@dur to an integer (semifusa=0, semibrevis=4, maxima=7)</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dur</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>@dur string</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Integer</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~noteOrRest"><span class="type-signature">(inner) </span>noteOrRest<span class="signature">(event)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line466">line 466</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Return true if event is a note or rest</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Event from MEI</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~notePerfectAsWhole"><span class="type-signature">(inner) </span>notePerfectAsWhole<span class="signature">(note, mens)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line634">line 634</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Is note perfect as a whole, i.e. is it divisible into 3 direct
+parts (for example, a breve is regularly perfect in perfect tempus,
+minor prolation and in imperfect tempus, major prolation, but only
+in the former case is it perfect as a whole)</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>note</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mens</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~nsResolver"><span class="type-signature">(inner) </span>nsResolver<span class="signature">(prefix)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line47">line 47</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Name space manager function. Takes a prefix and returns the URL for
+that name space. In this case, though, pretty much hard-wired.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>prefix</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The namespace prefix to retrieve as a URL</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~proportionMultiplier"><span class="type-signature">(inner) </span>proportionMultiplier<span class="signature">(el)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line167">line 167</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Given an element, find its applicable 'block' (mensurally-coherent
+section) and, if there is a proportion that should apply, returns
+the factor. Uses the idDictionary global.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>el</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:note or mei:rest</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~propProportionMultiplier"><span class="type-signature">(inner) </span>propProportionMultiplier<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line182">line 182</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Given a proportion-specifying element, give its implied multiplier</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~readDur"><span class="type-signature">(inner) </span>readDur<span class="signature">(mei:note)</span><span class="type-signature"> &rarr; {Integer}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line318">line 318</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Given an event with dur.intermediate of the form [0-9]*b, return the integer
+part</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mei:note</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>or mei:rest</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Integer</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~regularlyPerfect"><span class="type-signature">(inner) </span>regularlyPerfect<span class="signature">(element)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line367">line 367</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>A note or rest is regularly perfect if it or any parts of it are
+are ternary according to the mensuration sign.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>element</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~secondBeatAlteration"><span class="type-signature">(inner) </span>secondBeatAlteration<span class="signature">(event, index, events, mens)</span><span class="type-signature"> &rarr; {DOMObject}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line1260">line 1260</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Given an event on the second beat, if we can tell if it's altered,
+label the duration. Currently, absolutely assumes alteration is appropriate.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:note (rest would have been resolved already)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The note's position in events</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>events</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Sequence of events in this section for this voice</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mens</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:mensur</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>This function returns the modified event (why?)</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">DOMObject</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~secondBeatImperfection"><span class="type-signature">(inner) </span>secondBeatImperfection<span class="signature">(event, index, events, mens)</span><span class="type-signature"> &rarr; {DOMObject}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line1188">line 1188</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Given an event on the second beat, if we can tell if it's perfect,
+label the duration. Checks rule I.8 from the rulelist</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:note (rest would have been resolved already)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The note's position in events</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>events</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Sequence of events in this section for this voice</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mens</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:mensur</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>This function returns the modified event (why?)</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">DOMObject</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~simpleMinims"><span class="type-signature">(inner) </span>simpleMinims<span class="signature">(el, mens, levelAdjust)</span><span class="type-signature"> &rarr; {integer}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line507">line 507</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Return the number of minims that a given note would be expected to
+have, given the prevailing mensuration.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>el</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:note</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mens</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:mensur</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>levelAdjust</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Displaces the note level (so, if el is
+a minim, 1 for levelAdjust will treat it as a semibreve)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Minim count</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">integer</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~simplestAlterations"><span class="type-signature">(inner) </span>simplestAlterations<span class="signature">(sectionBlocks)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line918">line 918</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Resolves any alterations that can be treated as simple local note
+patterns</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sectionBlocks</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of all the coherent areas of
+mensurations in a section</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~solidBlock"><span class="type-signature">(inner) </span>solidBlock<span class="signature">(minimCount, possibleDivisors)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line801">line 801</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Returns true if a duration (in minims) is 3, 6 or 9 times the
+length of any of a list of candidate values, otherwise returns
+false. This is for durations of windows of notes, to see whether
+they represent a coherent block of whole mensural units (which is
+likely to imply that they fall on the beat and that they don't
+imperfect their neighbours).</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>minimCount</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>possibleDivisors</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~thirdBeatAlteration"><span class="type-signature">(inner) </span>thirdBeatAlteration<span class="signature">(event, index, events, mens)</span><span class="type-signature"> &rarr; {DOMObject}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line1278">line 1278</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Given an event on the third beat, if we can tell if it's altered,
+label the duration.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:note (rest would have been resolved already)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The note's position in events</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>events</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Sequence of events in this section for this voice</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mens</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:mensur</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>This function returns the modified event (why?)</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">DOMObject</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~thirdBeatImperfection"><span class="type-signature">(inner) </span>thirdBeatImperfection<span class="signature">(event, index, events, mens)</span><span class="type-signature"> &rarr; {DOMObject}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line1204">line 1204</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Given an event on the third beat, if we can tell if it's perfect,
+label the duration. Checks rule I.9 from the rulelist</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:note (rest would have been resolved already)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The note's position in events</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>events</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Sequence of events in this section for this voice</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mens</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:mensur</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>This function returns the modified event (why?)</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">DOMObject</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~windowDuration"><span class="type-signature">(inner) </span>windowDuration<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line745">line 745</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Get exact, estimated and minimum durations for a window, naively
+calculated. The returned object has attibutes for definite,
+bareMinimum (including possible extremes of imperfection),
+approximateMinimum (less extreme) and approximation ('most likely')</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~writeAlteration"><span class="type-signature">(inner) </span>writeAlteration<span class="signature">(el, mens, rule)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line302">line 302</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Write duration information for a note that we've decided should be
+altered</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>el</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:note</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mens</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:mensur</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>rule</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reference for rule used to decide this
+(written to element as @rule)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~writeDur"><span class="type-signature">(inner) </span>writeDur<span class="signature">(num, el, dot)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line213">line 213</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Given a count of beats, writes dur.ges to an element (appends 'b'
+and, if there's a dot of augmentation, multiplies by 1.5)</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>num</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Core duration in minims</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>el</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:note</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dot</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Is there a dot of augmentation?</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~writeImperfection"><span class="type-signature">(inner) </span>writeImperfection<span class="signature">(el, reduceBy, mens, rule)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line282">line 282</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Write duration information for a note that we've decided should be
+imperfected</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>el</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:note</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>reduceBy</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Time (in minims) to subtract</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mens</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:mensur</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>rule</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reference for rule used to decide this
+(written to element as @rule)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~writeSimpleImperfection"><span class="type-signature">(inner) </span>writeSimpleImperfection<span class="signature">(el, reduceBy, mens, rule)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ScriptLibrary_mensural-rhythm.js.html">ScriptLibrary/mensural-rhythm.js</a>, <a href="ScriptLibrary_mensural-rhythm.js.html#line263">line 263</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Write duration information for a note that we've decided should be
+the simplest form of imperfection (subtract a third). For other
+imperfection, use writeImperfection</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>el</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:note</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>reduceBy</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Time (in minims) to subtract</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mens</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>mei:mensur</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>rule</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reference for rule used to decide this
+(written to element as @rule)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Fri Jun 26 2020 10:43:18 GMT+0200 (GMT+02:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

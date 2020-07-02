@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>ScriptLibrary/tei-classes.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h3>Tutorials</h3><ul><li><a href="tutorial-interpreter.html">Interpreter architecture</a></li><li><a href="tutorial-interpreterOutput.html">MEI output of trivial beat analysis</a></li><li><a href="tutorial-MusicEntry.html">Tinctoris Music Entry</a></li></ul><h3>Modules</h3><ul><li><a href="module-mensural-rhythm.html">mensural-rhythm</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~actOnColoration">actOnColoration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~actOnDots">actOnDots</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~addAllStartTimes">addAllStartTimes</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~addBreveBoundariesForBlock">addBreveBoundariesForBlock</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~addStartTimesForBlock">addStartTimesForBlock</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~allUnalterableImperfectLevels">allUnalterableImperfectLevels</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~alterableLevels">alterableLevels</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~anteSim">anteSim</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~augDot">augDot</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~beatIndependentDurations">beatIndependentDurations</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~beatOfDur">beatOfDur</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~beatOfUnit">beatOfUnit</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~beatUnitStructure">beatUnitStructure</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~blockProportionMultiplier">blockProportionMultiplier</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~breveDifference">breveDifference</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~canImperfect">canImperfect</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~checkForGeneralAlteration">checkForGeneralAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~divisionDot">divisionDot</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~divisionLikeRests">divisionLikeRests</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~dupleMinimCountFromElement">dupleMinimCountFromElement</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~firstBeatAlteration">firstBeatAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~firstBeatImperfection">firstBeatImperfection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~firstBeatImperfectionCheck">firstBeatImperfectionCheck</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~firstPerfectLevel">firstPerfectLevel</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~gcd">gcd</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~getAtomicSections">getAtomicSections</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~getEventsByMensurationForSection">getEventsByMensurationForSection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~getLayers">getLayers</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~hasNoSections">hasNoSections</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~imperfectingLevels">imperfectingLevels</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~indexOfNextDot">indexOfNextDot</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~indexOfNextSameOrLongerOrDot">indexOfNextSameOrLongerOrDot</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~indexOfPrevLongerOrDot">indexOfPrevLongerOrDot</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~isAlterable">isAlterable</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~labelRests">labelRests</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~leveleq">leveleq</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~mensurSummary">mensurSummary</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~midBeatAlteration">midBeatAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~midBeatImperfection">midBeatImperfection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~minimStructures">minimStructures</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~noteInt">noteInt</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~noteIntFromDur">noteIntFromDur</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~noteOrRest">noteOrRest</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~notePerfectAsWhole">notePerfectAsWhole</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~nsResolver">nsResolver</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~proportionMultiplier">proportionMultiplier</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~propProportionMultiplier">propProportionMultiplier</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~readDur">readDur</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~regularlyPerfect">regularlyPerfect</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~secondBeatAlteration">secondBeatAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~secondBeatImperfection">secondBeatImperfection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~simpleMinims">simpleMinims</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~simplestAlterations">simplestAlterations</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~solidBlock">solidBlock</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~thirdBeatAlteration">thirdBeatAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~thirdBeatImperfection">thirdBeatImperfection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~windowDuration">windowDuration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~writeAlteration">writeAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~writeDur">writeDur</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~writeImperfection">writeImperfection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~writeSimpleImperfection">writeSimpleImperfection</a></li></ul></li></ul><h3>Namespaces</h3><ul><li><a href="classes.html">classes</a></li><li><a href="editor.html">editor</a><ul class='methods'><li data-type='method' style='display: none;'><a href="editor.html#.adjustWidth">adjustWidth</a></li><li data-type='method' style='display: none;'><a href="editor.html#.refreshFromCode">refreshFromCode</a></li><li data-type='method' style='display: none;'><a href="editor.html#.setSpacing">setSpacing</a></li><li data-type='method' style='display: none;'><a href="editor.html#.toggleWrapping">toggleWrapping</a></li></ul></li><li><a href="music-parser.html">music-parser</a><ul class='methods'><li data-type='method' style='display: none;'><a href="music-parser.html#.colourp">colourp</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.consumeParenthesis">consumeParenthesis</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.enrichText">enrichText</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.extendTacet">extendTacet</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.getMusicTextSup">getMusicTextSup</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.getParameters">getParameters</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.getString">getString</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.getSubText">getSubText</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.getTag">getTag</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.linesp">linesp</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextBarline">nextBarline</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextChantNote">nextChantNote</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextChoice">nextChoice</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextChoiceLikeThing">nextChoiceLikeThing</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextChoiceLikeThing2">nextChoiceLikeThing2</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextColRef">nextColRef</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextComment">nextComment</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextCustos">nextCustos</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextDot">nextDot</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextEvent">nextEvent</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextFermata">nextFermata</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextInfo">nextInfo</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextLigature">nextLigature</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextLigChoice">nextLigChoice</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextLongRest">nextLongRest</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextMusic">nextMusic</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextNeume">nextNeume</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextNote">nextNote</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextOblique">nextOblique</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextObliqueNeume">nextObliqueNeume</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextObliqueNoteChoice">nextObliqueNoteChoice</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextPart">nextPart</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextPartnameReading">nextPartnameReading</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextRepeat">nextRepeat</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextRest">nextRest</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextSignumCongruentiae">nextSignumCongruentiae</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextSolmSign">nextSolmSign</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextTacet">nextTacet</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextTaglike">nextTaglike</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextText">nextText</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextTextChoice">nextTextChoice</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseClef">parseClef</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseClefReading">parseClefReading</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseClefVar">parseClefVar</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseMens">parseMens</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseMensReading">parseMensReading</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseMensReading">parseMensReading</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseProp">parseProp</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseSolm">parseSolm</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseSolmReading">parseSolmReading</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseSolmVar">parseSolmVar</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseStaff">parseStaff</a></li></ul></li><li><a href="tei-classes.html">tei-classes</a></li><li><a href="Workinput_editbase.html">Workinput/editbase</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Workinput_editbase.html#.editObject">editObject</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.html#.grabdomobjects">grabdomobjects</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.html#.hoverOutShiftChecked">hoverOutShiftChecked</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.html#.pitchOrHeightShift">pitchOrHeightShift</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.html#.shiftHoverToShift">shiftHoverToShift</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.html#.UpDown">UpDown</a></li></ul></li></ul><h3>Classes</h3><ul><li><a href="classes.Barline.html">Barline</a></li><li><a href="classes.BlueClose.html">BlueClose</a></li><li><a href="classes.BlueOpen.html">BlueOpen</a></li><li><a href="classes.ChantNote.html">ChantNote</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.ChantNote.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.ChantNote.html#edit">edit</a></li><li data-type='method' style='display: none;'><a href="classes.ChantNote.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.ChantNote.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.ChantNote.html#width">width</a></li></ul></li><li><a href="classes.Classes.html">Classes</a></li><li><a href="classes.Clef.html">Clef</a></li><li><a href="classes.ColumnStart.html">ColumnStart</a></li><li><a href="classes.Comment.html">Comment</a></li><li><a href="classes.Custos.html">Custos</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.Custos.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.Custos.html#MEINode">MEINode</a></li><li data-type='method' style='display: none;'><a href="classes.Custos.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.Custos.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.Custos.html#width">width</a></li></ul></li><li><a href="classes.Dot.html">Dot</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.Dot.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.Dot.html#negativeSpace">negativeSpace</a></li><li data-type='method' style='display: none;'><a href="classes.Dot.html#reallyAugments">reallyAugments</a></li><li data-type='method' style='display: none;'><a href="classes.Dot.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.Dot.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.Dot.html#width">width</a></li></ul></li><li><a href="classes.etc.html">etc</a></li><li><a href="classes.ExampleBreak.html">ExampleBreak</a></li><li><a href="classes.Fermata.html">Fermata</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.Fermata.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.Fermata.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.Fermata.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.Fermata.html#width">width</a></li></ul></li><li><a href="classes.FullClose.html">FullClose</a></li><li><a href="classes.FullOpen.html">FullOpen</a></li><li><a href="classes.GenericClose.html">GenericClose</a></li><li><a href="classes.GenericOpen.html">GenericOpen</a></li><li><a href="classes.HalfFullClose.html">HalfFullClose</a></li><li><a href="classes.HalfFullOpen.html">HalfFullOpen</a></li><li><a href="classes.LargeClose.html">LargeClose</a></li><li><a href="classes.LargeOpen.html">LargeOpen</a></li><li><a href="classes.LedgerLineChange.html">LedgerLineChange</a></li><li><a href="classes.Ligature.html">Ligature</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.Ligature.html#addChoice">addChoice</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#addElement">addElement</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#addEvent">addEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#addNote">addNote</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#addOblique">addOblique</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#drawVar">drawVar</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#enrichEvent">enrichEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#firstEvent">firstEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#firstNoteIndexp">firstNoteIndexp</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#lastNoteIndexp">lastNoteIndexp</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#leftOverhang">leftOverhang</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#negativeSpace">negativeSpace</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#nextNote">nextNote</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#nextPos">nextPos</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#nthNote">nthNote</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#oblique">oblique</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#prevNote">prevNote</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#prevPos">prevPos</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#varEndStaffPos">varEndStaffPos</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#width">width</a></li></ul></li><li><a href="classes.LigatureComment.html">LigatureComment</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.LigatureComment.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureComment.html#drawVar">drawVar</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureComment.html#footnote">footnote</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureComment.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureComment.html#toText">toText</a></li></ul></li><li><a href="classes.LigatureNote.html">LigatureNote</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#backwardEvent">backwardEvent</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#drawVar">drawVar</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#forwardEvent">forwardEvent</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#lstem">lstem</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#nextEvent">nextEvent</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#prevEvent">prevEvent</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#rstem">rstem</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#varEndStaffPos">varEndStaffPos</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#varStartStaffPos">varStartStaffPos</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#width">width</a></li></ul></li><li><a href="classes.LigChoice.html">LigChoice</a></li><li><a href="classes.LongRest.html">LongRest</a></li><li><a href="classes.MaxRest.html">MaxRest</a></li><li><a href="classes.MChoice.html">MChoice</a></li><li><a href="classes.MensuralSignature.html">MensuralSignature</a></li><li><a href="classes.MESuper.html">MESuper</a></li><li><a href="classes.MNilReading.html">MNilReading</a></li><li><a href="classes.MReading.html">MReading</a></li><li><a href="classes.MusicOptionalSpace.html">MusicOptionalSpace</a></li><li><a href="classes.MusicPunctuation.html">MusicPunctuation</a></li><li><a href="classes.MusicWordJoin.html">MusicWordJoin</a></li><li><a href="classes.MusicWordSplit.html">MusicWordSplit</a></li><li><a href="classes.NegativeSpace.html">NegativeSpace</a></li><li><a href="classes.Neume.html">Neume</a></li><li><a href="classes.NeumeItem.html">NeumeItem</a></li><li><a href="classes.Notation.html">Notation</a></li><li><a href="classes.Note.html">Note</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.Note.html#commentPos">commentPos</a></li><li data-type='method' style='display: none;'><a href="classes.Note.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.Note.html#edit">edit</a></li><li data-type='method' style='display: none;'><a href="classes.Note.html#negativeSpace">negativeSpace</a></li><li data-type='method' style='display: none;'><a href="classes.Note.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.Note.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.Note.html#width">width</a></li></ul></li><li><a href="classes.Oblique.html">Oblique</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.Oblique.html#backwardEvent">backwardEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#drawComments">drawComments</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#drawTexts">drawTexts</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#drawVar">drawVar</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#enrichEvent">enrichEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#extendMembers">extendMembers</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#flattenedMembers">flattenedMembers</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#forwardEvent">forwardEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#lstem">lstem</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#member">member</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#nextEvent">nextEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#prevEvent">prevEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#rstem">rstem</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#width">width</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#width">width</a></li></ul></li><li><a href="classes.ObliqueNeume.html">ObliqueNeume</a></li><li><a href="classes.ObliqueNote.html">ObliqueNote</a></li><li><a href="classes.ObliqueNoteChoice.html">ObliqueNoteChoice</a></li><li><a href="classes.Parameters.html">Parameters</a></li><li><a href="classes.Part.html">Part</a></li><li><a href="classes.PositiveSpace.html">PositiveSpace</a></li><li><a href="classes.ProportionSign.html">ProportionSign</a></li><li><a href="classes.RedClose.html">RedClose</a></li><li><a href="classes.RedlineClose.html">RedlineClose</a></li><li><a href="classes.RedlineOpen.html">RedlineOpen</a></li><li><a href="classes.RedOpen.html">RedOpen</a></li><li><a href="classes.Repeat.html">Repeat</a></li><li><a href="classes.Rest.html">Rest</a></li><li><a href="classes.SignumCongruentiae.html">SignumCongruentiae</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#backwardEvent">backwardEvent</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#forwardEvent">forwardEvent</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#nextEvent">nextEvent</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#prevEvent">prevEvent</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#varEndStaffPos">varEndStaffPos</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#varStartStaffPos">varStartStaffPos</a></li></ul></li><li><a href="classes.SolmizationSign.html">SolmizationSign</a></li><li><a href="classes.SolmizationSignature.html">SolmizationSignature</a></li><li><a href="classes.StackedProportionSigns.html">StackedProportionSigns</a></li><li><a href="classes.Staff.html">Staff</a></li><li><a href="classes.StrikethroughClose.html">StrikethroughClose</a></li><li><a href="classes.StrikethroughOpen.html">StrikethroughOpen</a></li><li><a href="classes.Tacet.html">Tacet</a></li><li><a href="classes.TextUnderlay.html">TextUnderlay</a></li><li><a href="classes.upsideDownClose.html">upsideDownClose</a></li><li><a href="classes.upsideDownOpen.html">upsideDownOpen</a></li><li><a href="classes.ValueChoice.html">ValueChoice</a></li><li><a href="classes.ValueReading.html">ValueReading</a></li><li><a href="classes.VoidClose.html">VoidClose</a></li><li><a href="classes.VoidOpen.html">VoidOpen</a></li><li><a href="music-parser.MusicExample.html">MusicExample</a><ul class='methods'><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#appendStaffDefs">appendStaffDefs</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#commentsDiv">commentsDiv</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#commentsTip">commentsTip</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#easyRhythms">easyRhythms</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#gatherStaffs">gatherStaffs</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#height">height</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#markResolved">markResolved</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#mensurStrich">mensurStrich</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#parse">parse</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#regenerateMEILinks">regenerateMEILinks</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#reset">reset</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#setSysWidths">setSysWidths</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#staffDefForPart">staffDefForPart</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#startingStaffForPart">startingStaffForPart</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#stupidVerovioStretch">stupidVerovioStretch</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#targetWidth">targetWidth</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#toTEI">toTEI</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#width">width</a></li></ul></li><li><a href="tei-classes.MEIDoc.html">MEIDoc</a></li><li><a href="tei-classes.TEIDoc.html">TEIDoc</a></li><li><a href="Workinput_editbase.MusicHolder.html">MusicHolder</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#appendStaffDefs">appendStaffDefs</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#headerText">headerText</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#infoButton">infoButton</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#infoButtons">infoButtons</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#parse">parse</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#parseHeaders">parseHeaders</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#staffDefForPart">staffDefForPart</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#writeHeaders">writeHeaders</a></li></ul></li></ul>undefined<h3>Global</h3><ul><li><a href="global.html#compoundNotep">compoundNotep</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">ScriptLibrary/tei-classes.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @namespace tei-classes
+ * @summary Contains TEIDoc and MEIDoc
+ */
+
+var hierarchy = {"book": 1, "conclusion": 2, "prologue": 2, 
+                 "index": 2, "chapter": 2, "section": 3};
+
+/** @class
+ * @memberof tei-classes
+ */
+function TEIDoc(){
+//  var doc = document.implementation.createDocument(null, "xml");
+  var doc = document.implementation.createDocument("http://www.tei-c.org/ns/1.0", "", null);
+//  this.tree = document.createElement("TEI");
+  this.tree = doc.createElementNS("http://www.tei-c.org/ns/1.0", "TEI");
+  // "http://www.w3.org/1999/xhtml", "TEI");
+  this.tree.setAttribute("version", "5.0");
+  this.tree.setAttribute("xmlns:mei", "http://www.music-encoding.org/ns/mei");
+  this.tree.setAttribute("xmlns", "http://www.tei-c.org/ns/1.0");
+//  this.head = doc.createElement("teiHeader");
+  this.head = doc.createElementNS("http://www.tei-c.org/ns/1.0", "teiHeader");
+  this.text = doc.createElementNS("http://www.tei-c.org/ns/1.0", "text");
+  this.body = doc.createElementNS("http://www.tei-c.org/ns/1.0", "body");
+  this.treatise = doc.createElementNS("http://www.tei-c.org/ns/1.0", "div");
+  this.treatise.setAttribute("type", "treatise");
+  var piElem = doc.createProcessingInstruction("xml", "version='1.0' encoding='UTF-8'");
+  doc.appendChild(this.tree);
+  doc.insertBefore(piElem, this.tree);
+  this.prevParent = false;
+  this.currentParent = this.treatise;
+  this.doc = doc;
+  this.latestID = 0; // FIXME: suboptimal way of assigning IDs
+  this.tree.appendChild(this.head);
+  this.tree.appendChild(this.text);
+  this.text.appendChild(this.body);
+  this.body.appendChild(this.treatise);
+  this.IDGen = function(tag){
+    // FIXME: suboptimal way of assigning IDs
+    return "id."+this.latestID++;
+  };
+  this.element = function(tag){
+    if(tag.indexOf(":")>-1){
+      var el = this.doc.createElement(tag);
+    } else {
+      var el = this.doc.createElementNS("http://www.tei-c.org/ns/1.0", tag);
+    }
+    el.setAttribute("xml:id", this.IDGen(tag));
+    return el;
+  };
+  this.hasParaParent = function(element){
+    if(element.nodeName==="p" || element.nodeName==="P"){
+      return true;
+    } else if (!element.parentNode) {
+      return false;
+    } else {
+      return this.hasParaParent(element.parentNode);
+    }
+  };
+  this.serialize = function(){
+    var serializer = new XMLSerializer();
+    return serializer.serializeToString(this.doc);
+  };
+  this.blobify = function(){
+    var content = [this.serialize()];
+    return new Blob([this.serialize()], {type: "application/xml"});
+  };
+  this.text = function(text){
+    return this.doc.createTextNode(text);
+  };
+  this.headers = function(treatise){
+    var el, el2, el3;
+    var fileDesc = this.element("fileDesc");
+    var titleSt = this.element("titleStmt");
+    el = this.element("title");
+    this.head.appendChild(fileDesc);
+    fileDesc.appendChild(titleSt);
+    titleSt.appendChild(el);
+    el.appendChild(document.createTextNode(treatise.title));
+    // FIXME: hard-wired
+    el = this.element("author");
+    el.appendChild(document.createTextNode("Johannes Tinctoris"));
+    el.setAttribute("ref", "http://viaf.org/viaf/100214007/");
+    titleSt.appendChild(el);
+    if(treatise.editor){
+      el = this.element("editor");
+      el.appendChild(document.createTextNode(treatise.editor));
+      // FIXME: this needs to be a proper cross-ref
+      // el.setAttribute("xml:id", "ed");//For now -- bug in Safari
+//      el.setAttributeNS("http://www.w3.org/XML/1998/namespace", "id", "ed");
+      titleSt.appendChild(el);
+    } else if (treatise.entered){
+      el = this.element("respStmt");
+      el2 = this.element("resp");
+      el2.appendChild(document.createTextNode("transcriber"));
+      el.appendChild(el2);
+      el2 = this.element("name");
+      el2.appendChild(document.createTextNode(treatise.entered));
+      el.appendChild(el2);
+      titleSt.appendChild(el);
+    }
+    var pubSt = this.element("publicationStmt");
+    fileDesc.appendChild(pubSt);
+    el = this.element("publisher");
+    el.appendChild(document.createTextNode("Early Music Theory, Birmingham Conservatoire, Birmingham City University"));
+    pubSt.appendChild(el);
+    el = this.element("availability");
+    el2 = this.element("p");
+    pubSt.appendChild(el);
+    el.appendChild(el2);
+    el2.appendChild(document.createTextNode("This document is made available under CC BY-NC-ND"));
+    var sourceDesc = this.element("sourceDesc");
+    fileDesc.appendChild(sourceDesc);
+    // var seriesStatement = this.element("seriesStmt");
+    // var sTitle = this.element("p");
+    // sTitle.appendChild(document.createTextNode("Johannes Tinctoris: Complete Theoretical Works"));
+    // seriesStatement.appendChild(sTitle);
+    // fileDesc.appendChild(seriesStatement);
+    if(treatise.sources.length){
+      el = this.element("listWit");
+      // el.setAttributeNS("http://www.w3.org/XML/1998/namespace", "id", "MSS");
+      el.setAttribute("xml:id", "MSS"); // FIXME: This is here because Safari sucks
+      sourceDesc.appendChild(el);
+      for(var i=0; i&lt;treatise.sources.length; i++){
+        el2 = this.element("witness");
+        // el2.setAttribute("xml:id", treatise.sources[i].id);
+        // el2.setAttributeNS("http://www.w3.org/XML/1998/namespace", "id", 
+        //                    treatise.sources[i].id);
+        el2.setAttribute("xml:id", treatise.sources[i].id); // FIXME: This is here because Safari sucks
+        el2.appendChild(document.createTextNode(treatise.sources[i].details));
+        el.appendChild(el2);
+      }
+    } else if (treatise.docType==="Translation") {
+      var ptr  = this.element("ptr");
+      var bibl = this.element("bibl");
+      ptr.setAttributeNS(null, 'target', 'http://earlymusictheory.org/texts/'+treatise.group+'/');
+      bibl.appendChild(ptr);
+      sourceDesc.appendChild(bibl);
+    }
+    if(treatise.script){
+      var msDesc = this.element('msDesc');
+      var physDesc = this.element('physDesc');
+      var handDesc = this.element('handDesc');
+      var handNote = this.element('handNote');
+      var found = false;
+      var msIdent = this.element('msIdentifier');
+      var msidno = this.element('idno');
+      msDesc.appendChild(msIdent);
+      msIdent.appendChild(msidno);
+      msidno.appendChild(this.text(treatise.source));
+      physDesc.appendChild(handDesc);
+      msDesc.appendChild(physDesc);
+      sourceDesc.appendChild(msDesc);
+      handDesc.appendChild(handNote);
+      handNote.appendChild(this.text(treatise.script));
+      handNote.setAttribute("scope", "sole");
+      for (var id in treatise.hands) {
+        if (treatise.hands.hasOwnProperty(id)) {
+          if(!found){
+            handNote.setAttribute("scope", "major");
+            found = true;
+          }
+          handNote = this.element('handNote');
+          handNote.setAttribute("xml:id", id); //fixme: stupid Safari
+          handNote.setAttribute("scope", "minor");
+          handNote.appendChild(this.text(treatise.hands[id]));
+          handDesc.appendChild(handNote);
+        }
+      }
+    };
+    return this.head;
+  };
+  this.addSubdivision = function(obj){
+    var par = this.currentParent;
+    var newdiv = this.element("div");
+    var level = hierarchy[obj.objType.toLowerCase()];
+    newdiv.setAttribute("type", obj.objType.toLowerCase());
+    newdiv.setAttribute("n", obj.n);
+    while(par &amp;&amp; par.tagName!=="BODY" &amp;&amp; par.tagName!=="body" 
+          &amp;&amp; hierarchy[par.getAttribute("type")]>level){
+      par = this.currentParent.parentNode;
+    }
+    if(!par){
+      this.body.appendChild(newdiv);
+    } else if(par.tagName==="BODY" || par.tagName==="body"){
+      par.appendChild(newdiv);
+    } else if(hierarchy[par.getAttribute("type")]&lt;level) {
+      // no div at this level yet in the current larger-scale unit
+      par.appendChild(newdiv);
+    } else {
+      if(!par.parentNode) {
+        console.log("no parent", par, newdiv);
+      } else {
+        par.parentNode.appendChild(newdiv);
+      }
+    }
+    this.currentParent = newdiv;
+    return newdiv;
+  };
+}
+function addSubdivision(TEI){
+  TEI.addSubdivision(this);
+}
+
+function makeTEITable(doc, parent){
+  var el = doc.element("table");
+  if(!parent) parent = doc.currentParent;
+  parent.appendChild(el);
+  el.setAttribute("rows", this.rowCount());
+  el.setAttribute("cols", this.columnCount());
+  for(var i=0; i&lt;this.rows.length; i++){
+    if(this.rows[i].toTEI){
+      this.rows[i].toTEI(doc, el);
+    }
+  }
+  return el;
+};
+
+/** @class
+ * @memberof tei-classes
+ * @summary Contains Header and serialization functions. Body will be appendend.
+ */
+function MEIDoc(title){
+	this.doc = document.implementation.createDocument("http://www.music-encoding.org/ns/mei", "", null);
+	this.tree = this.doc.createElementNS("http://www.music-encoding.org/ns/mei","MEI");
+	this.doc.appendChild(this.tree);
+	this.tree.setAttribute("meiversion", "3.0.0");
+	this.head = this.doc.createElementNS("http://www.music-encoding.org/ns/mei", "meiHead");
+	var titleel = this.doc.createElementNS("http://www.music-encoding.org/ns/mei", "title");
+	if(title){
+		console.log(title);
+		var t = this.doc.createTextNode(title ? title : "");
+		titleel.appendChild(t);
+	}
+	var titlestmt = this.doc.createElementNS("http://www.music-encoding.org/ns/mei", "titleStmt");
+	var filedesc = this.doc.createElementNS("http://www.music-encoding.org/ns/mei", "fieldesc");
+	titlestmt.appendChild(titleel);
+	this.head.appendChild(filedesc);
+	filedesc.appendChild(titlestmt);
+	this.tree.appendChild(this.head);
+	var pubstmt =  this.doc.createElementNS("http://www.music-encoding.org/ns/mei", "pubStmt");
+	filedesc.appendChild(pubstmt);
+	this.serialize = function(){
+    var serializer = new XMLSerializer();
+    return serializer.serializeToString(this.doc);
+  };
+  this.blobify = function(){
+    var content = [this.serialize()];
+    return new Blob([this.serialize()], {type: "application/xml"});
+  };
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Fri Jun 26 2020 10:43:17 GMT+0200 (GMT+02:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

@@ -1,38 +1,79 @@
+/**
+ * @fileoverview Contains dedicated to the Workinput
+ * @namespace Workinput/editbase
+ */
+
 editorMode = true;
 standaloneEditor = true;
 wrapWidth = 600;
 
+/** @class
+ * @memberof Workinput/editbase
+ */
 function MusicHolder(text, outdiv){
-	this.text = text;
-	this.prevWidth = false;
-	this.forceredraw = true;
-	this.footnotes = [];
-	this.example = false;
-	this.out = outdiv ? outdiv : document.getElementById('content');
-	this.drawTo = this.out;
-	this.drawTo.classList.add("drawTo");
-	this.entered = false;
-	this.shortTitle = false;
-	this.checked = false;
+  /** @property {MusicHolder} */
+  this.text = text;
+  /** @property {MusicHolder} */
+  this.prevWidth = false;
+  /** @property {MusicHolder} */
+  this.forceredraw = true;
+  /** @property {MusicHolder} */
+  this.footnotes = [];
+  /** @property {MusicHolder} */
+  this.example = false;
+  /** @property {MusicHolder} */
+  this.out = outdiv ? outdiv : document.getElementById('content');
+  /** @property {MusicHolder} */
+  this.drawTo = this.out;
+  /** @property {MusicHolder} */
+  this.drawTo.classList.add("drawTo");
+  /** @property {MusicHolder} */
+  this.entered = false;
+  /** @property {MusicHolder} */
+  this.shortTitle = false;
+  /** @property {MusicHolder} */
+  this.checked = false;
+  /** @property {MusicHolder} */
   this.approved = false;
+  /** @property {MusicHolder} */
   this.translator = false;
-	this.contents = [];
+  /** @property {MusicHolder} */
+  this.contents = [];
+  /** @property {MusicHolder} */
   this.copy = false;
+  /** @property {MusicHolder} */
   this.source = false;
+  /** @property {MusicHolder} */
   this.established = false;
+  /** @property {MusicHolder} */
   this.basefile = false;
+  /** @property {MusicHolder} */
   this.basefiles = false;
-	this.source = false;
-	this.title = false;
-	this.attribution = false;
+  /** @property {MusicHolder} */
+  this.source = false;
+  /** @property {MusicHolder} */
+  this.title = false;
+  /** @property {MusicHolder} */
+  this.attribution = false;
+  /** @property {MusicHolder} */
   this.sources = [];
+  /** @property {MusicHolder} */
   this.running = false;
+  /** @property {MusicHolder} */
   this.scriptSpec = false;
+  /** @property {MusicHolder} */
   this.script = false;
+  /** @property {MusicHolder} */
   this.editor = false;
+  /** @property {MusicHolder} */
   this.columns = false;
+  /** @property {MusicHolder} */
   this.hands = [];
-	this.UUIDs = {};
+  /** @property {MusicHolder} */
+  this.UUIDs = {};
+  /** infoButton
+   * @summary infoButtons (qv) presents several buttons for different bits of info.
+   */
 	this.infoButton = function(){
     // this.infoButtons (qv) presents several buttons for different bits of
     // info. Let's try a less complex approach -- just one button
@@ -41,6 +82,7 @@ function MusicHolder(text, outdiv){
                      "source", "sources", "translator", "copytext","script", "columns", "running"], 
                ib, infoDisplay == "show", "infoDisplay");
   };
+  /** infoButton */
   this.infoButtons = function(){
     var ib = this.drawTo.appendChild(DOMDiv('infoButtons'), false, false);
     if(this.editor || this.entered || this.checked || this.approved){
@@ -74,6 +116,7 @@ function MusicHolder(text, outdiv){
       }
     }
   };
+  /** writeHeaders to content */
   this.writeHeaders = function(){
     if(this.title && showtitle){
       this.drawTo.appendChild(DOMTextEl("h2", "title", false, this.title));
@@ -136,6 +179,7 @@ function MusicHolder(text, outdiv){
       if(sourceDisplay == "hide" || !sourceDisplay) $(".info.sources").hide();
     }
   };
+  /** parseHeaders from codeDiv(?) */
   this.parseHeaders = function(){
 		// Check if there's either just one line or no textual content
 		// before a <piece pseudo-element
@@ -231,6 +275,7 @@ function MusicHolder(text, outdiv){
       nextfield = consumeIf(/[^:\r\n]*:/);
     }
   };
+  /** parse from codediv */
 	this.parse = function(){
 		// FIXME: Check what these do:
 		resetAnnotations();
@@ -251,7 +296,8 @@ function MusicHolder(text, outdiv){
 			return false;
 		}
 		this.contents = [this.example];
-	};
+  };
+  /** Gets converted MEI and provides MEI links */
 	this.toMEI = function(){
 		var docObj = this.example.toMEI();
 		var old = document.getElementById('MEILink');
@@ -268,7 +314,8 @@ function MusicHolder(text, outdiv){
 		document.body.appendChild(anchor);
 		document.body.appendChild(anchor2);
 		return docObj.serialize();
-	};
+  };
+  /** appendStaffDefs */
 	this.appendStaffDefs = function(doc, el){
     var group = doc.createElementNS("http://www.music-encoding.org/ns/mei", "staffGrp");
     el.appendChild(group);
@@ -291,6 +338,7 @@ function MusicHolder(text, outdiv){
 			group.appendChild(sd);
 		}
   };
+  /** staffDeff for Parts */
   this.staffDefForPart = function(part, n, doc){
     var sd = doc.createElementNS("http://www.music-encoding.org/ns/mei", "staffDef");
     var relevantStaff = part.applicableStaff();
@@ -298,6 +346,7 @@ function MusicHolder(text, outdiv){
     sd.setAttributeNS(null, "lines", relevantStaff.trueLines());
     return sd;
   };
+  /** draw */
 	this.draw = function(){
 		state = "Starting to draw";
 		curDoc = this;
@@ -320,7 +369,8 @@ function MusicHolder(text, outdiv){
 		state = "drawing";
 		this.example.draw(newSVG, true);
 		console.log(this.toMEI());
-	};
+  };
+  /** header text */
   this.headerText = function(){
     var text = (this.title ? this.title : "")+"\n";
     if(this.shortTitle) text += "Short-title: "+this.shortTitle+"\n";
@@ -360,6 +410,9 @@ function MusicHolder(text, outdiv){
 	this.parse();
 }
 
+/** @function 
+ * @memberof Workinput/editbase
+ * @summary return function for changing pitch of [object] by [d] steps */
 function pitchOrHeightShift(object, d){
   // return function for changing pitch of [object] by [d] steps
   var t = object;
@@ -379,11 +432,18 @@ function pitchOrHeightShift(object, d){
   };
 }
 
+/** @function 
+ * @memberof Workinput/editbase
+ * @summary edit object */
 function editObject (object){
   return function(e){
     object.edit(e);
   };
 }
+
+/** @function 
+ * @memberof Workinput/editbase
+ * @summary shiftHoverToShift */
 function shiftHoverToShift (object, d){
   if(typeof(d)=="undefined" || !d) d=1;
   var t = object;
@@ -393,6 +453,9 @@ function shiftHoverToShift (object, d){
     }
   };
 }
+/** @function 
+ * @memberof Workinput/editbase
+ * @summary hoverOutShiftChecked */
 function hoverOutShiftChecked (){
   return function(e){
     if(e.shiftKey){
@@ -408,6 +471,9 @@ function hoverOutShiftChecked (){
   };
 }
 
+/** @function 
+ * @memberof Workinput/editbase
+ * @summary Provide height shifting buttons for [object] near mouse pointer */
 function UpDown(object, d, event){
   // Provide height shifting buttons for [object] near mouse pointer
   $(".updown").remove();
@@ -438,6 +504,10 @@ function UpDown(object, d, event){
 }
 
 var domobj = [];
+
+/** @function 
+ * @memberof Workinput/editbase
+ * @summary grabs DOM objects, currently content div */
 function grabdomobjects(){
   domobj['Content'] = document.getElementById("content");
 }

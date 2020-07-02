@@ -1,4 +1,50 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>ScriptLibrary/mensural-rhythm.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h3>Tutorials</h3><ul><li><a href="tutorial-interpreter.html">Interpreter architecture</a></li><li><a href="tutorial-interpreterOutput.html">MEI output of trivial beat analysis</a></li><li><a href="tutorial-MusicEntry.html">Tinctoris Music Entry</a></li></ul><h3>Modules</h3><ul><li><a href="module-mensural-rhythm.html">mensural-rhythm</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~actOnColoration">actOnColoration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~actOnDots">actOnDots</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~addAllStartTimes">addAllStartTimes</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~addBreveBoundariesForBlock">addBreveBoundariesForBlock</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~addStartTimesForBlock">addStartTimesForBlock</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~allUnalterableImperfectLevels">allUnalterableImperfectLevels</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~alterableLevels">alterableLevels</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~anteSim">anteSim</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~augDot">augDot</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~beatIndependentDurations">beatIndependentDurations</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~beatOfDur">beatOfDur</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~beatOfUnit">beatOfUnit</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~beatUnitStructure">beatUnitStructure</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~blockProportionMultiplier">blockProportionMultiplier</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~breveDifference">breveDifference</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~canImperfect">canImperfect</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~checkForGeneralAlteration">checkForGeneralAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~divisionDot">divisionDot</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~divisionLikeRests">divisionLikeRests</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~dupleMinimCountFromElement">dupleMinimCountFromElement</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~firstBeatAlteration">firstBeatAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~firstBeatImperfection">firstBeatImperfection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~firstBeatImperfectionCheck">firstBeatImperfectionCheck</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~firstPerfectLevel">firstPerfectLevel</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~gcd">gcd</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~getAtomicSections">getAtomicSections</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~getEventsByMensurationForSection">getEventsByMensurationForSection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~getLayers">getLayers</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~hasNoSections">hasNoSections</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~imperfectingLevels">imperfectingLevels</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~indexOfNextDot">indexOfNextDot</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~indexOfNextSameOrLongerOrDot">indexOfNextSameOrLongerOrDot</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~indexOfPrevLongerOrDot">indexOfPrevLongerOrDot</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~isAlterable">isAlterable</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~labelRests">labelRests</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~leveleq">leveleq</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~mensurSummary">mensurSummary</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~midBeatAlteration">midBeatAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~midBeatImperfection">midBeatImperfection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~minimStructures">minimStructures</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~noteInt">noteInt</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~noteIntFromDur">noteIntFromDur</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~noteOrRest">noteOrRest</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~notePerfectAsWhole">notePerfectAsWhole</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~nsResolver">nsResolver</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~proportionMultiplier">proportionMultiplier</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~propProportionMultiplier">propProportionMultiplier</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~readDur">readDur</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~regularlyPerfect">regularlyPerfect</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~secondBeatAlteration">secondBeatAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~secondBeatImperfection">secondBeatImperfection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~simpleMinims">simpleMinims</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~simplestAlterations">simplestAlterations</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~solidBlock">solidBlock</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~thirdBeatAlteration">thirdBeatAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~thirdBeatImperfection">thirdBeatImperfection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~windowDuration">windowDuration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~writeAlteration">writeAlteration</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~writeDur">writeDur</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~writeImperfection">writeImperfection</a></li><li data-type='method' style='display: none;'><a href="module-mensural-rhythm.html#~writeSimpleImperfection">writeSimpleImperfection</a></li></ul></li></ul><h3>Namespaces</h3><ul><li><a href="classes.html">classes</a></li><li><a href="editor.html">editor</a><ul class='methods'><li data-type='method' style='display: none;'><a href="editor.html#.adjustWidth">adjustWidth</a></li><li data-type='method' style='display: none;'><a href="editor.html#.refreshFromCode">refreshFromCode</a></li><li data-type='method' style='display: none;'><a href="editor.html#.setSpacing">setSpacing</a></li><li data-type='method' style='display: none;'><a href="editor.html#.toggleWrapping">toggleWrapping</a></li></ul></li><li><a href="music-parser.html">music-parser</a><ul class='methods'><li data-type='method' style='display: none;'><a href="music-parser.html#.colourp">colourp</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.consumeParenthesis">consumeParenthesis</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.enrichText">enrichText</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.extendTacet">extendTacet</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.getMusicTextSup">getMusicTextSup</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.getParameters">getParameters</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.getString">getString</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.getSubText">getSubText</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.getTag">getTag</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.linesp">linesp</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextBarline">nextBarline</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextChantNote">nextChantNote</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextChoice">nextChoice</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextChoiceLikeThing">nextChoiceLikeThing</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextChoiceLikeThing2">nextChoiceLikeThing2</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextColRef">nextColRef</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextComment">nextComment</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextCustos">nextCustos</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextDot">nextDot</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextEvent">nextEvent</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextFermata">nextFermata</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextInfo">nextInfo</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextLigature">nextLigature</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextLigChoice">nextLigChoice</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextLongRest">nextLongRest</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextMusic">nextMusic</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextNeume">nextNeume</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextNote">nextNote</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextOblique">nextOblique</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextObliqueNeume">nextObliqueNeume</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextObliqueNoteChoice">nextObliqueNoteChoice</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextPart">nextPart</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextPartnameReading">nextPartnameReading</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextRepeat">nextRepeat</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextRest">nextRest</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextSignumCongruentiae">nextSignumCongruentiae</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextSolmSign">nextSolmSign</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextTacet">nextTacet</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextTaglike">nextTaglike</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextText">nextText</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.nextTextChoice">nextTextChoice</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseClef">parseClef</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseClefReading">parseClefReading</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseClefVar">parseClefVar</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseMens">parseMens</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseMensReading">parseMensReading</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseMensReading">parseMensReading</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseProp">parseProp</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseSolm">parseSolm</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseSolmReading">parseSolmReading</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseSolmVar">parseSolmVar</a></li><li data-type='method' style='display: none;'><a href="music-parser.html#.parseStaff">parseStaff</a></li></ul></li><li><a href="tei-classes.html">tei-classes</a></li><li><a href="Workinput_editbase.html">Workinput/editbase</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Workinput_editbase.html#.editObject">editObject</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.html#.grabdomobjects">grabdomobjects</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.html#.hoverOutShiftChecked">hoverOutShiftChecked</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.html#.pitchOrHeightShift">pitchOrHeightShift</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.html#.shiftHoverToShift">shiftHoverToShift</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.html#.UpDown">UpDown</a></li></ul></li></ul><h3>Classes</h3><ul><li><a href="classes.Barline.html">Barline</a></li><li><a href="classes.BlueClose.html">BlueClose</a></li><li><a href="classes.BlueOpen.html">BlueOpen</a></li><li><a href="classes.ChantNote.html">ChantNote</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.ChantNote.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.ChantNote.html#edit">edit</a></li><li data-type='method' style='display: none;'><a href="classes.ChantNote.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.ChantNote.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.ChantNote.html#width">width</a></li></ul></li><li><a href="classes.Classes.html">Classes</a></li><li><a href="classes.Clef.html">Clef</a></li><li><a href="classes.ColumnStart.html">ColumnStart</a></li><li><a href="classes.Comment.html">Comment</a></li><li><a href="classes.Custos.html">Custos</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.Custos.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.Custos.html#MEINode">MEINode</a></li><li data-type='method' style='display: none;'><a href="classes.Custos.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.Custos.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.Custos.html#width">width</a></li></ul></li><li><a href="classes.Dot.html">Dot</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.Dot.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.Dot.html#negativeSpace">negativeSpace</a></li><li data-type='method' style='display: none;'><a href="classes.Dot.html#reallyAugments">reallyAugments</a></li><li data-type='method' style='display: none;'><a href="classes.Dot.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.Dot.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.Dot.html#width">width</a></li></ul></li><li><a href="classes.etc.html">etc</a></li><li><a href="classes.ExampleBreak.html">ExampleBreak</a></li><li><a href="classes.Fermata.html">Fermata</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.Fermata.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.Fermata.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.Fermata.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.Fermata.html#width">width</a></li></ul></li><li><a href="classes.FullClose.html">FullClose</a></li><li><a href="classes.FullOpen.html">FullOpen</a></li><li><a href="classes.GenericClose.html">GenericClose</a></li><li><a href="classes.GenericOpen.html">GenericOpen</a></li><li><a href="classes.HalfFullClose.html">HalfFullClose</a></li><li><a href="classes.HalfFullOpen.html">HalfFullOpen</a></li><li><a href="classes.LargeClose.html">LargeClose</a></li><li><a href="classes.LargeOpen.html">LargeOpen</a></li><li><a href="classes.LedgerLineChange.html">LedgerLineChange</a></li><li><a href="classes.Ligature.html">Ligature</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.Ligature.html#addChoice">addChoice</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#addElement">addElement</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#addEvent">addEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#addNote">addNote</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#addOblique">addOblique</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#drawVar">drawVar</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#enrichEvent">enrichEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#firstEvent">firstEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#firstNoteIndexp">firstNoteIndexp</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#lastNoteIndexp">lastNoteIndexp</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#leftOverhang">leftOverhang</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#negativeSpace">negativeSpace</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#nextNote">nextNote</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#nextPos">nextPos</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#nthNote">nthNote</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#oblique">oblique</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#prevNote">prevNote</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#prevPos">prevPos</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#varEndStaffPos">varEndStaffPos</a></li><li data-type='method' style='display: none;'><a href="classes.Ligature.html#width">width</a></li></ul></li><li><a href="classes.LigatureComment.html">LigatureComment</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.LigatureComment.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureComment.html#drawVar">drawVar</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureComment.html#footnote">footnote</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureComment.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureComment.html#toText">toText</a></li></ul></li><li><a href="classes.LigatureNote.html">LigatureNote</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#backwardEvent">backwardEvent</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#drawVar">drawVar</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#forwardEvent">forwardEvent</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#lstem">lstem</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#nextEvent">nextEvent</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#prevEvent">prevEvent</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#rstem">rstem</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#varEndStaffPos">varEndStaffPos</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#varStartStaffPos">varStartStaffPos</a></li><li data-type='method' style='display: none;'><a href="classes.LigatureNote.html#width">width</a></li></ul></li><li><a href="classes.LigChoice.html">LigChoice</a></li><li><a href="classes.LongRest.html">LongRest</a></li><li><a href="classes.MaxRest.html">MaxRest</a></li><li><a href="classes.MChoice.html">MChoice</a></li><li><a href="classes.MensuralSignature.html">MensuralSignature</a></li><li><a href="classes.MESuper.html">MESuper</a></li><li><a href="classes.MNilReading.html">MNilReading</a></li><li><a href="classes.MReading.html">MReading</a></li><li><a href="classes.MusicOptionalSpace.html">MusicOptionalSpace</a></li><li><a href="classes.MusicPunctuation.html">MusicPunctuation</a></li><li><a href="classes.MusicWordJoin.html">MusicWordJoin</a></li><li><a href="classes.MusicWordSplit.html">MusicWordSplit</a></li><li><a href="classes.NegativeSpace.html">NegativeSpace</a></li><li><a href="classes.Neume.html">Neume</a></li><li><a href="classes.NeumeItem.html">NeumeItem</a></li><li><a href="classes.Notation.html">Notation</a></li><li><a href="classes.Note.html">Note</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.Note.html#commentPos">commentPos</a></li><li data-type='method' style='display: none;'><a href="classes.Note.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.Note.html#edit">edit</a></li><li data-type='method' style='display: none;'><a href="classes.Note.html#negativeSpace">negativeSpace</a></li><li data-type='method' style='display: none;'><a href="classes.Note.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="classes.Note.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.Note.html#width">width</a></li></ul></li><li><a href="classes.Oblique.html">Oblique</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.Oblique.html#backwardEvent">backwardEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#drawComments">drawComments</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#drawTexts">drawTexts</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#drawVar">drawVar</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#enrichEvent">enrichEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#extendMembers">extendMembers</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#flattenedMembers">flattenedMembers</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#forwardEvent">forwardEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#lstem">lstem</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#member">member</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#nextEvent">nextEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#prevEvent">prevEvent</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#rstem">rstem</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#width">width</a></li><li data-type='method' style='display: none;'><a href="classes.Oblique.html#width">width</a></li></ul></li><li><a href="classes.ObliqueNeume.html">ObliqueNeume</a></li><li><a href="classes.ObliqueNote.html">ObliqueNote</a></li><li><a href="classes.ObliqueNoteChoice.html">ObliqueNoteChoice</a></li><li><a href="classes.Parameters.html">Parameters</a></li><li><a href="classes.Part.html">Part</a></li><li><a href="classes.PositiveSpace.html">PositiveSpace</a></li><li><a href="classes.ProportionSign.html">ProportionSign</a></li><li><a href="classes.RedClose.html">RedClose</a></li><li><a href="classes.RedlineClose.html">RedlineClose</a></li><li><a href="classes.RedlineOpen.html">RedlineOpen</a></li><li><a href="classes.RedOpen.html">RedOpen</a></li><li><a href="classes.Repeat.html">Repeat</a></li><li><a href="classes.Rest.html">Rest</a></li><li><a href="classes.SignumCongruentiae.html">SignumCongruentiae</a><ul class='methods'><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#backwardEvent">backwardEvent</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#forwardEvent">forwardEvent</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#nextEvent">nextEvent</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#prevEvent">prevEvent</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#varEndStaffPos">varEndStaffPos</a></li><li data-type='method' style='display: none;'><a href="classes.SignumCongruentiae.html#varStartStaffPos">varStartStaffPos</a></li></ul></li><li><a href="classes.SolmizationSign.html">SolmizationSign</a></li><li><a href="classes.SolmizationSignature.html">SolmizationSignature</a></li><li><a href="classes.StackedProportionSigns.html">StackedProportionSigns</a></li><li><a href="classes.Staff.html">Staff</a></li><li><a href="classes.StrikethroughClose.html">StrikethroughClose</a></li><li><a href="classes.StrikethroughOpen.html">StrikethroughOpen</a></li><li><a href="classes.Tacet.html">Tacet</a></li><li><a href="classes.TextUnderlay.html">TextUnderlay</a></li><li><a href="classes.upsideDownClose.html">upsideDownClose</a></li><li><a href="classes.upsideDownOpen.html">upsideDownOpen</a></li><li><a href="classes.ValueChoice.html">ValueChoice</a></li><li><a href="classes.ValueReading.html">ValueReading</a></li><li><a href="classes.VoidClose.html">VoidClose</a></li><li><a href="classes.VoidOpen.html">VoidOpen</a></li><li><a href="music-parser.MusicExample.html">MusicExample</a><ul class='methods'><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#appendStaffDefs">appendStaffDefs</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#commentsDiv">commentsDiv</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#commentsTip">commentsTip</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#easyRhythms">easyRhythms</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#gatherStaffs">gatherStaffs</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#height">height</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#markResolved">markResolved</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#mensurStrich">mensurStrich</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#parse">parse</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#regenerateMEILinks">regenerateMEILinks</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#reset">reset</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#setSysWidths">setSysWidths</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#staffDefForPart">staffDefForPart</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#startingStaffForPart">startingStaffForPart</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#stupidVerovioStretch">stupidVerovioStretch</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#targetWidth">targetWidth</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#toTEI">toTEI</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#toText">toText</a></li><li data-type='method' style='display: none;'><a href="music-parser.MusicExample.html#width">width</a></li></ul></li><li><a href="tei-classes.MEIDoc.html">MEIDoc</a></li><li><a href="tei-classes.TEIDoc.html">TEIDoc</a></li><li><a href="Workinput_editbase.MusicHolder.html">MusicHolder</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#appendStaffDefs">appendStaffDefs</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#draw">draw</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#headerText">headerText</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#infoButton">infoButton</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#infoButtons">infoButtons</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#parse">parse</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#parseHeaders">parseHeaders</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#staffDefForPart">staffDefForPart</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#toMEI">toMEI</a></li><li data-type='method' style='display: none;'><a href="Workinput_editbase.MusicHolder.html#writeHeaders">writeHeaders</a></li></ul></li></ul>undefined<h3>Global</h3><ul><li><a href="global.html#compoundNotep">compoundNotep</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">ScriptLibrary/mensural-rhythm.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  *  Analyse Mensural rhythms purely using MEI
  * 
  * 
@@ -59,9 +105,9 @@ function nsResolver(prefix){
  */
 function hasNoSections(x){
 	if(this.evaluate){
-		return x.childElementCount!==0 && this.evaluate('count(mei:section)', x, nsResolver).numberValue===0;
+		return x.childElementCount!==0 &amp;&amp; this.evaluate('count(mei:section)', x, nsResolver).numberValue===0;
 	} else {
-		return x.childElementCount!==0 && !x.getElementsByTagName('section').length;
+		return x.childElementCount!==0 &amp;&amp; !x.getElementsByTagName('section').length;
 	}
 }
 
@@ -138,7 +184,7 @@ function getEventsByMensurationForSection(section, doc, prevMens){
 					if(next.getAttributeNS(null, 'dur')==='maxima'){
 						if(next.getAttributeNS(null, 'maximaIsPerfect')==='true') block.mens.setAttributeNS(null, 'modusmaior', 3);
 						if(next.getAttributeNS(null, 'longaIsPerfect')==='true') block.mens.setAttributeNS(null, 'modusminor', 3);
-					} else if (next.getAttributeNS(null, 'dur')==='longa' && next.getAttributeNS(null, 'quality')=="p"){
+					} else if (next.getAttributeNS(null, 'dur')==='longa' &amp;&amp; next.getAttributeNS(null, 'quality')=="p"){
 						block.mens.setAttributeNS(null, 'modusminor', 3);
 					}
 				}
@@ -151,7 +197,7 @@ function getEventsByMensurationForSection(section, doc, prevMens){
 			next = ni.nextNode();
 		} else {
 			pointer++;
-			next = pointer < bucket.length ? bucket[pointer]: false;
+			next = pointer &lt; bucket.length ? bucket[pointer]: false;
 		}
 	}
 	return blocks	
@@ -345,7 +391,7 @@ function noteIntFromDur(dur){
  */
 function dupleMinimCountFromElement(el){
 	var level = noteInt(el);
-	if(level<3) return false;
+	if(level&lt;3) return false;
 	return Math.pow(2, level-3);
 }
 
@@ -400,7 +446,7 @@ function regularlyPerfect(element, mensur){
 function minimStructures(mensurSummary, maxLevel){
 	var counts = [];
 	var minims = 1;
-	for(var i=0; i < (maxLevel ? maxLevel : 4); i++){
+	for(var i=0; i &lt; (maxLevel ? maxLevel : 4); i++){
 		minims = minims*(mensurSummary[i] ? mensurSummary[i] : 2);
 		counts.push(minims);
 	}
@@ -421,7 +467,7 @@ function breveDifference(struct2, struct1, mens){
 	var breves = 0;
 	var minims = 0;
 	var MiB = minims[3];
-	for(var i=3; i<struct2.length; i++){
+	for(var i=3; i&lt;struct2.length; i++){
 		if(struct1[i]>struct2[i]){
 			minims += minims[i]*(struct1[i] - struct2[i]) - minims[i+1];
 		} else if (struct2[i]>struct1[i]){
@@ -456,7 +502,7 @@ function beatOfUnit(minimsInUnit, minimsInParentUnit, startMinims){
  * @returns {Boolean} 
  */
 function augDot(event){
-	return event.tagName==='dot' && event.getAttributeNS(null, 'form')==='aug';
+	return event.tagName==='dot' &amp;&amp; event.getAttributeNS(null, 'form')==='aug';
 }
 /**
  * Return true if event is a note or rest
@@ -476,7 +522,7 @@ function noteOrRest(event){
  * @returns {Boolean} 
  */
 function divisionDot(event){
-	return event.tagName==='dot' && event.getAttributeNS(null, 'form')!=='aug';
+	return event.tagName==='dot' &amp;&amp; event.getAttributeNS(null, 'form')!=='aug';
 }
 
 /////////////////////////////
@@ -507,10 +553,10 @@ function mensurSummary(mensur){
 function simpleMinims(el, mensur, levelAdjust){
 	var level = noteInt(el) - 3;
 	if(levelAdjust) level+= levelAdjust;
-	if(level<1) return Math.pow(2, level);
+	if(level&lt;1) return Math.pow(2, level);
 	var minims = 1;
 	var exponents = mensurSummary(mensur);
-	for(var i=0; i<level; i++){
+	for(var i=0; i&lt;level; i++){
 		if(exponents[i]) {
 			minims = minims * exponents[i];
 		} else {
@@ -559,7 +605,7 @@ function beatUnitStructure(startMinims, mens){
   var levels = minimStructures(mensurSummary(mens));
 	var units = [0, 0, 0, 0, 0, 0];
 	var leveln = levels.length
-	for(var i=0; i<leveln; i++){
+	for(var i=0; i&lt;leveln; i++){
 		var minims = levels[leveln-1-i];
 		var beats = Math.floor(rem / minims);
 		rem = rem % minims;
@@ -579,7 +625,7 @@ function beatUnitStructure(startMinims, mens){
 function isAlterable(el, mensur){
 	var m = mensurSummary(mensur);
 	var durPos = noteInt(el) - 3;
-	if(durPos<0 || durPos>3 || (m[durPos]===2 || m[durPos]===false) || el.tagName==="rest"){
+	if(durPos&lt;0 || durPos>3 || (m[durPos]===2 || m[durPos]===false) || el.tagName==="rest"){
 		return false;
 	} else return true;
 }
@@ -594,7 +640,7 @@ function isAlterable(el, mensur){
 function alterableLevels(mens){
 	var ms = mensurSummary(mens);
 	var als = [];
-	for(var i=0; i<4; i++){
+	for(var i=0; i&lt;4; i++){
 		if(ms[i]===3){
 			als.push(i+3);
 		}
@@ -616,7 +662,7 @@ function canImperfect(shortLevel, longLevel, menssum){
 	
 	// FIXME assumes statement in imperfectingLevels comment is correct
 	// (and I'm not sure it is)
-	for(var i=shortLevel-3; i<longLevel-3; i++){
+	for(var i=shortLevel-3; i&lt;longLevel-3; i++){
 		if(menssum[i]===3) return true;
 	}
 	return false;
@@ -693,8 +739,8 @@ function firstPerfectLevel(mensuration){
  * @return {(integer|boolean)} Position if found (false if not)
  */
 function indexOfNextSameOrLongerOrDot(level, index, seq){
-	for(var i=index+1; i<seq.length; i++){
-		if((seq[i].tagName==='dot' && seq[i].getAttributeNS(null, 'form')!=='aug')
+	for(var i=index+1; i&lt;seq.length; i++){
+		if((seq[i].tagName==='dot' &amp;&amp; seq[i].getAttributeNS(null, 'form')!=='aug')
 			 || (noteInt(seq[i])>=level)){
 			return i;
 		}
@@ -709,8 +755,8 @@ function indexOfNextSameOrLongerOrDot(level, index, seq){
  * @return {Integer} Position if found (false if not)
  */
 function indexOfNextDot(index, seq){
-	for(var i=index+1; i<seq.length; i++){
-		if(seq[i].tagName==='dot' && seq[i].getAttributeNS(null, 'form')!=='aug'){
+	for(var i=index+1; i&lt;seq.length; i++){
+		if(seq[i].tagName==='dot' &amp;&amp; seq[i].getAttributeNS(null, 'form')!=='aug'){
 			return i;
 		}
 	}
@@ -727,7 +773,7 @@ function indexOfNextDot(index, seq){
  */
 function indexOfPrevLongerOrDot(level, index, seq){
 	for(var i=index-1; i>=0; i--){
-		if((seq[i].tagName==='dot' && seq[i].getAttributeNS(null, 'form')!=='aug')
+		if((seq[i].tagName==='dot' &amp;&amp; seq[i].getAttributeNS(null, 'form')!=='aug')
 			 || noteInt(seq[i])>level){
 			return i;
 		}
@@ -745,7 +791,7 @@ function indexOfPrevLongerOrDot(level, index, seq){
 function windowDuration(events, mens){
 	var duration = {definite: 0, bareMinimum: 0, approximateMinimum: 0, approximation: 0};
 	var definite = true;
-	for(var i=0; i<events.length; i++){
+	for(var i=0; i&lt;events.length; i++){
 		var event = events[i];
 		if(event.tagName==="note"||event.tagName==="rest"){
 			if(event.getAttributeNS(null, 'dur.intermediate')) {
@@ -780,11 +826,11 @@ function windowDuration(events, mens){
  * @returns {Boolean} 
  */
 function divisionLikeRests(maxLevel, rest1, rest2, direction){
-	return ((!direction && noteInt(rest1)<maxLevel && noteInt(rest2)<maxLevel)
-					|| (direction==="left" && noteInt(rest1)<maxLevel)
-					|| (direction==="right" && noteInt(rest2)<maxLevel))
-		&& rest1.tagName==='rest' && rest2.tagName==='rest'
-		&& rest1.getAttributeNS(null, 'loc') !== rest2.getAttributeNS(null, 'loc');
+	return ((!direction &amp;&amp; noteInt(rest1)&lt;maxLevel &amp;&amp; noteInt(rest2)&lt;maxLevel)
+					|| (direction==="left" &amp;&amp; noteInt(rest1)&lt;maxLevel)
+					|| (direction==="right" &amp;&amp; noteInt(rest2)&lt;maxLevel))
+		&amp;&amp; rest1.tagName==='rest' &amp;&amp; rest2.tagName==='rest'
+		&amp;&amp; rest1.getAttributeNS(null, 'loc') !== rest2.getAttributeNS(null, 'loc');
 }
 
 /**
@@ -824,14 +870,14 @@ function solidBlock(minimCount, possibleDivisors){
  * mensurations in a section
  */
 function labelRests(sectionBlocks){
-	for(var b=0; b<sectionBlocks.length; b++){
+	for(var b=0; b&lt;sectionBlocks.length; b++){
 		var mens = sectionBlocks[b].mens;
-		for(var e=0; e<sectionBlocks[b].events.length; e++){
+		for(var e=0; e&lt;sectionBlocks[b].events.length; e++){
 			var event = sectionBlocks[b].events[e];
 			if(event.tagName==='rest'){
-				var augmentedDot = e+1<sectionBlocks[b].events.length
-						&& sectionBlocks[b].events[e+1].tagName==="dot"
-						&& sectionBlocks[b].events[e+1].getAttributeNS(null, 'form')==='aug';
+				var augmentedDot = e+1&lt;sectionBlocks[b].events.length
+						&amp;&amp; sectionBlocks[b].events[e+1].tagName==="dot"
+						&amp;&amp; sectionBlocks[b].events[e+1].getAttributeNS(null, 'form')==='aug';
 				writeDur(simpleMinims(event, mens, 0), event, augmentedDot);
 				event.setAttributeNS(null, 'rule', 'rest');
 			}
@@ -844,14 +890,14 @@ function labelRests(sectionBlocks){
  * mensurations in a section
  */
 function actOnColoration(sectionBlocks){
-	for(var b=0; b<sectionBlocks.length; b++){
+	for(var b=0; b&lt;sectionBlocks.length; b++){
 		var mens = sectionBlocks[b].mens;
-		for(var e=0; e<sectionBlocks[b].events.length; e++){
+		for(var e=0; e&lt;sectionBlocks[b].events.length; e++){
 			var event = sectionBlocks[b].events[e];
-			if(event.tagName==='note' && event.getAttributeNS(null, 'coloration')){
-				var augmentedDot = e+1<sectionBlocks[b].events.length
-						&& sectionBlocks[b].events[e+1].tagName==="dot"
-						&& sectionBlocks[b].events[e+1].getAttributeNS(null, 'form')==='aug';
+			if(event.tagName==='note' &amp;&amp; event.getAttributeNS(null, 'coloration')){
+				var augmentedDot = e+1&lt;sectionBlocks[b].events.length
+						&amp;&amp; sectionBlocks[b].events[e+1].tagName==="dot"
+						&amp;&amp; sectionBlocks[b].events[e+1].getAttributeNS(null, 'form')==='aug';
 				writeDur(simpleMinims(event, mens) * 2/3, event, augmentedDot);
 				event.setAttributeNS(null, 'rule', 'coloration');
 			}
@@ -864,13 +910,13 @@ function actOnColoration(sectionBlocks){
  * mensurations in a section
  */
 function actOnDots(sectionBlocks){
-	for(var b=0; b<sectionBlocks.length; b++){
+	for(var b=0; b&lt;sectionBlocks.length; b++){
 		var mens = sectionBlocks[b].mens;
-		for(var e=0; e<sectionBlocks[b].events.length; e++){
+		for(var e=0; e&lt;sectionBlocks[b].events.length; e++){
 			var event = sectionBlocks[b].events[e];
-			if(augDot(event) && e){
+			if(augDot(event) &amp;&amp; e){
 				prev = sectionBlocks[b].events[e-1];
-				if(e && !prev.getAttributeNS(null, 'dur.ges'))
+				if(e &amp;&amp; !prev.getAttributeNS(null, 'dur.ges'))
 					if(notePerfectAsWhole(prev, mens)){
 						writeDur(simpleMinims(prev, mens), prev);
 						prev.setAttributeNS(null, 'quality', 'p');
@@ -891,16 +937,16 @@ function actOnDots(sectionBlocks){
  */
 function allUnalterableImperfectLevels(sectionBlocks){
 	// Anything imperfect and with an imperfect next longer note is trivial
-	for(var b=0; b<sectionBlocks.length; b++){
+	for(var b=0; b&lt;sectionBlocks.length; b++){
 		var mens = sectionBlocks[b].mens;
 		var menssum = mensurSummary(mens);
 		var alterableLevels = [2, 2, 2].concat(menssum).concat([2]);
 		var firstPerf = firstPerfectLevel(mens);
-		for(var e=0; e<sectionBlocks[b].events.length; e++){
+		for(var e=0; e&lt;sectionBlocks[b].events.length; e++){
 			var event = sectionBlocks[b].events[e];
-			if(event.tagName==='note' && !(event.getAttributeNS(null, 'dur.ges'))){
+			if(event.tagName==='note' &amp;&amp; !(event.getAttributeNS(null, 'dur.ges'))){
 				var level = noteInt(event);
-				if(level < firstPerf && alterableLevels[level]===2){
+				if(level &lt; firstPerf &amp;&amp; alterableLevels[level]===2){
 					// Assume that actOnDots has already been run on all dotted notes
 					writeDur(simpleMinims(event, mens), event);
 				}
@@ -922,30 +968,30 @@ function simplestAlterations(sectionBlocks){
 	//   An alterable note that is preceded by a larger note followed by
 	//   the equivalent of its own regular value and followed by a note
 	//   or rest of the perfect unit next larger is altered.
-	for(var b=0; b<sectionBlocks.length; b++){
+	for(var b=0; b&lt;sectionBlocks.length; b++){
 		var events = sectionBlocks[b].events;
 		var mens = sectionBlocks[b].mens;
 		var menssum = mensurSummary(mens);
 		var alterableLevels = [2, 2, 2].concat(menssum).concat([2]);
 		var perfectLevels = [2, 2, 2, 2].concat(menssum);
-		for(var e=0; e<events.length; e++){
+		for(var e=0; e&lt;events.length; e++){
 			var event = events[e];
-			if(event.tagName==='note' && !(event.getAttributeNS(null, 'dur.ges'))){
+			if(event.tagName==='note' &amp;&amp; !(event.getAttributeNS(null, 'dur.ges'))){
 				var level = noteInt(event);
 				if(alterableLevels[level]===3){
 					// The level is alterable.
 					// The next note must be the next level up
-					if(e<events.length-1 && noteInt(events[e+1])==level+1){
+					if(e&lt;events.length-1 &amp;&amp; noteInt(events[e+1])==level+1){
 						// These are the only things that can be altered all.
 						///For A.2 to be true, we need to count backwards by one
 						// unit (assuming we have all the necessary dur.ges values;
 						var target = simpleMinims(event, mens);
-						if((e==0 || noteInt(events[e-1])>level) && perfectLevels[level]===2){
+						if((e==0 || noteInt(events[e-1])>level) &amp;&amp; perfectLevels[level]===2){
 							// highly unlikely to be an alteration (would require
 							// syncopation), not possible to be imperfected
-							var augmentedDot = e+1<sectionBlocks[b].events.length
-									&& sectionBlocks[b].events[e+1].tagName==="dot"
-									&& sectionBlocks[b].events[e+1].getAttributeNS(null, 'form')==='aug';
+							var augmentedDot = e+1&lt;sectionBlocks[b].events.length
+									&amp;&amp; sectionBlocks[b].events[e+1].tagName==="dot"
+									&amp;&amp; sectionBlocks[b].events[e+1].getAttributeNS(null, 'form')==='aug';
 							writeDur(simpleMinims(event, mens), event, augmentedDot);
 						}
 						for(i=e-1; i>=0; i--){
@@ -955,23 +1001,23 @@ function simplestAlterations(sectionBlocks){
 							target = readDur(events[i]);
 							if(target===0){
 								if(i===0 || noteInt(events[i-1])>level
-									 || (events[i-1].tagName=='dot' && events[i-1].getAttributeNS('form')!=='aug')){
+									 || (events[i-1].tagName=='dot' &amp;&amp; events[i-1].getAttributeNS('form')!=='aug')){
 									// Yay, it's an alteration
 									writeDur(2 * simpleMinims(event, mens), event);
 									event.setAttributeNS(null, 'quality', 'a');
 									event.setAttributeNS(null, 'rule', 'A.2b');
 								}
 								break;
-							} else if(target<0){
+							} else if(target&lt;0){
 								// A.2 doesn't apply
 								break;
 							} 
 						}
 					} else if(perfectLevels[level]===2){
 						// Now we can resolve this rhythm
-						var augmentedDot = e+1<sectionBlocks[b].events.length
-								&& sectionBlocks[b].events[e+1].tagName==="dot"
-								&& sectionBlocks[b].events[e+1].getAttributeNS(null, 'form')==='aug';
+						var augmentedDot = e+1&lt;sectionBlocks[b].events.length
+								&amp;&amp; sectionBlocks[b].events[e+1].tagName==="dot"
+								&amp;&amp; sectionBlocks[b].events[e+1].getAttributeNS(null, 'form')==='aug';
 						writeDur(simpleMinims(event, mens), event, augmentedDot);
 					}
 				}
@@ -989,16 +1035,16 @@ function simplestAlterations(sectionBlocks){
  * mensurations in a section
  */
 function anteSim(sectionBlocks){
-	for(var b=0; b<sectionBlocks.length; b++){
+	for(var b=0; b&lt;sectionBlocks.length; b++){
 		var mens = sectionBlocks[b].mens;
-		for(var e=0; e<sectionBlocks[b].events.length; e++){
+		for(var e=0; e&lt;sectionBlocks[b].events.length; e++){
 			var event = sectionBlocks[b].events[e];
-			if(event.tagName==="note" && !event.getAttributeNS(null, 'dur.ges')
-				 && regularlyPerfect(event, mens)
-				 && (e+1)<sectionBlocks[b].events.length
-				 // && (sectionBlocks[b].events[e+1].tagName==='note')// Surely note or rest?
-				 && (sectionBlocks[b].events[e+1].tagName==='note' || sectionBlocks[b].events[e+1].tagName==='rest')
-				 && leveleq(sectionBlocks[b].events[e+1], event)){
+			if(event.tagName==="note" &amp;&amp; !event.getAttributeNS(null, 'dur.ges')
+				 &amp;&amp; regularlyPerfect(event, mens)
+				 &amp;&amp; (e+1)&lt;sectionBlocks[b].events.length
+				 // &amp;&amp; (sectionBlocks[b].events[e+1].tagName==='note')// Surely note or rest?
+				 &amp;&amp; (sectionBlocks[b].events[e+1].tagName==='note' || sectionBlocks[b].events[e+1].tagName==='rest')
+				 &amp;&amp; leveleq(sectionBlocks[b].events[e+1], event)){
 				writeDur(simpleMinims(event, mens), event);
 				event.setAttributeNS(null, 'rule', 'I.2.b.antesim');
 			}
@@ -1106,8 +1152,8 @@ function firstBeatImperfectionCheck(event, window, mens){
 		event.setAttributeNS(null, 'defaultminims', simpleMinims(event, mens));
 		writeDur(simpleMinims(event, mens), event);
 		return true;
-	} else if(duration.approximation/simpleMinims(event, mens, -1) === 2 && mensurSummary(mens)[level-4]===3
-						&& noteInt(window[window.length-1])===level-1 && isAlterable(window[window.length-1], mens)){
+	} else if(duration.approximation/simpleMinims(event, mens, -1) === 2 &amp;&amp; mensurSummary(mens)[level-4]===3
+						&amp;&amp; noteInt(window[window.length-1])===level-1 &amp;&amp; isAlterable(window[window.length-1], mens)){
 		// This is a window with the equivalent of two units, one of which is alterable
 		// The last note of the window will be altered
 		event.setAttributeNS(null, 'rule', 'I.6-literalunits');
@@ -1155,18 +1201,18 @@ function firstBeatImperfection(event, index, events, mens){
 		event.setAttributeNS(null, 'quality', 'p');
 		event.setAttributeNS(null, 'rule', 'I.3-726');
 		return event;
-	} else if (index<events.length-2
-						 && (divisionDot(events[index+2])
-								 || (noteOrRest(events[index+2]) && noteInt(events[index+2])>=level))
-						 && noteOrRest(events[index+1]) && canImperfect(noteInt(events[index+1]), level, menssum)){
+	} else if (index&lt;events.length-2
+						 &amp;&amp; (divisionDot(events[index+2])
+								 || (noteOrRest(events[index+2]) &amp;&amp; noteInt(events[index+2])>=level))
+						 &amp;&amp; noteOrRest(events[index+1]) &amp;&amp; canImperfect(noteInt(events[index+1]), level, menssum)){
 		// I.4 a) - a simplified case where there's an obvious
 		// single note
 		writeSimpleImperfection(event, mens, 'I.4a');
 		return event;
-	} else if (((index<events.length-3 && (divisionDot(events[index+3]) || divisionLikeRests(firstPerfectLevel(mens)+1, events[index+2], events[index+3], "left")))
+	} else if (((index&lt;events.length-3 &amp;&amp; (divisionDot(events[index+3]) || divisionLikeRests(firstPerfectLevel(mens)+1, events[index+2], events[index+3], "left")))
 							|| index==events.length-3)
-						 && noteInt(events[index+1]) == noteInt(events[index+2])
-						 && canImperfect(noteInt(events[index+1]), level, menssum)) {
+						 &amp;&amp; noteInt(events[index+1]) == noteInt(events[index+2])
+						 &amp;&amp; canImperfect(noteInt(events[index+1]), level, menssum)) {
 		// very special case (generalise this later)
 		writeImperfection(event, 2*simpleMinims(events[index+1], mens), mens, 'I.4a');
 		return true;
@@ -1206,7 +1252,7 @@ function thirdBeatImperfection(event, index, events, mens){
 	var imperfectionPossibilities = imperfectingLevels(event, mens);
 	var nextDotPos = indexOfNextDot(index, events);
 	// Simplest imperfection
-	if(nextDotPos && nextDotPos - index < 6 && imperfectionPossibilities.indexOf(windowDuration(events.slice(index+1, nextDotPos), mens).approximation)>-1){
+	if(nextDotPos &amp;&amp; nextDotPos - index &lt; 6 &amp;&amp; imperfectionPossibilities.indexOf(windowDuration(events.slice(index+1, nextDotPos), mens).approximation)>-1){
 		// There's a simple explanation, that is imperfection from behind
 		writeImperfection(event, windowDuration(events.slice(index+1, nextDotPos), mens).approximation,
 											mens, 'I.9b');
@@ -1307,21 +1353,21 @@ function addAllStartTimes(sectionBlocks){
 	var nextStart = 0;
 	var prevDur = false;
 	var prevBeatStructure = false;
-	for(var b=0; b<sectionBlocks.length; b++){
+	for(var b=0; b&lt;sectionBlocks.length; b++){
 		var blockFrom = 0;
 		var blockStart = (nextStart || nextStart===0) ? nextStart : false;
 		var mens = sectionBlocks[b].mens;
-		for(var e=0; e<sectionBlocks[b].events.length; e++){
+		for(var e=0; e&lt;sectionBlocks[b].events.length; e++){
 			var event = sectionBlocks[b].events[e];
 			if(event.tagName==='rest' || event.tagName==='note'){
 				if(nextStart || nextStart===0) event.setAttributeNS(null, 'startsAt', nextStart);
 				var beatStructure = beatUnitStructure(blockFrom, mens);
 				event.setAttributeNS(null, 'beatPos', beatStructure.join(', '));
-				if(beatStructure[0]===0 && beatStructure[1]===0 && beatStructure[2]===0){
+				if(beatStructure[0]===0 &amp;&amp; beatStructure[1]===0 &amp;&amp; beatStructure[2]===0){
 					event.setAttributeNS(null, 'onTheBreveBeat', beatStructure[3]);
 				} else if(!(beatStructure[5]===prevBeatStructure[5]
-										&& beatStructure[4]===prevBeatStructure[4]
-										&& beatStructure[3]===prevBeatStructure[3])){
+										&amp;&amp; beatStructure[4]===prevBeatStructure[4]
+										&amp;&amp; beatStructure[3]===prevBeatStructure[3])){
 					event.setAttributeNS(null, 'crossedABreveBeat', breveDifference(beatStructure, prevBeatStructure, mens));
 				}
 				prevBeatStructure = beatStructure;
@@ -1346,7 +1392,7 @@ function addStartTimesForBlock(block){
 	var blockFrom = 0;
 	var mens = block.mens;
 	var events = block.events;
-	for(var e=0; e<events.length; e++){
+	for(var e=0; e&lt;events.length; e++){
 		var event = events[e];
 		if(event.tagName==='rest' || event.tagName==='note'){
 			event.setAttributeNS(null, 'mensurBlockStartsAt', blockFrom);
@@ -1370,18 +1416,18 @@ function addBreveBoundariesForBlock(block){
 	var mens = block.mens;
 	var events = block.events;
 	var prevBeatStructure = false;
-	for(var e=0; e<events.length; e++){
+	for(var e=0; e&lt;events.length; e++){
 		var event = events[e];
 		if(noteOrRest(event)){
 			var tpos = event.getAttributeNS(null, 'mensurBlockStartsAt');
 			if(tpos){
 				var beatStructure = beatUnitStructure(tpos, mens);
 				event.setAttributeNS(null, 'beatPos', beatStructure.join(', '));
-				if(beatStructure[0]===0 && beatStructure[1]===0 && beatStructure[2]===0){
+				if(beatStructure[0]===0 &amp;&amp; beatStructure[1]===0 &amp;&amp; beatStructure[2]===0){
 					event.setAttributeNS(null, 'onTheBreveBeat', beatStructure[3]);
 				} else if(!(beatStructure[5]===prevBeatStructure[5]
-										&& beatStructure[4]===prevBeatStructure[4]
-										&& beatStructure[3]===prevBeatStructure[3])){
+										&amp;&amp; beatStructure[4]===prevBeatStructure[4]
+										&amp;&amp; beatStructure[3]===prevBeatStructure[3])){
 					event.setAttributeNS(null, 'crossedABreveBeat', breveDifference(beatStructure, prevBeatStructure, mens));
 				}
 				prevBeatStructure = beatStructure;
@@ -1429,15 +1475,15 @@ function afterTheEasyBits(sectionBlocks){
 	// Now we know many durations and starting points, but not all,
 	// iterate through, looking for more context-dependent resolutions.
 	var unresolved = 0;
-	for(var b=0; b<sectionBlocks.length; b++){
+	for(var b=0; b&lt;sectionBlocks.length; b++){
 		var events = sectionBlocks[b].events;
 		var mens = sectionBlocks[b].mens;
 		var menssum = mensurSummary(mens);
 		var alterableLevels = [2, 2, 2].concat(menssum).concat([2]);
 		var firstPerfect = firstPerfectLevel(mens);
-		for(var e=0; e<events.length; e++){
+		for(var e=0; e&lt;events.length; e++){
 			var event = events[e];
-			if(event.tagName==='note' && !event.getAttributeNS(null, 'dur.ges')){
+			if(event.tagName==='note' &amp;&amp; !event.getAttributeNS(null, 'dur.ges')){
 				// duration needs to be resolved
 				if(event.getAttributeNS(null, 'mensurBlockStartsAt')){
 					// Most cases that are resolvable need beat numbers
@@ -1445,7 +1491,7 @@ function afterTheEasyBits(sectionBlocks){
 					var blockFrom = Number(event.getAttributeNS(null, 'mensurBlockStartsAt'));
 					var beatStructure = beatUnitStructure(blockFrom, mens);
 					var beatOfUnit = beatStructure[level-3];
-					if(e && divisionDot(events[e-1])){
+					if(e &amp;&amp; divisionDot(events[e-1])){
 						// Division dot
 						beatOfUnit = 0;
 					}
@@ -1465,7 +1511,7 @@ function afterTheEasyBits(sectionBlocks){
 								midBeatImperfection(event, e, events, mens);
 						}
 					}
-					if(!event.getAttributeNS(null, 'dur.ges') && isAlterable(event, mens)) {
+					if(!event.getAttributeNS(null, 'dur.ges') &amp;&amp; isAlterable(event, mens)) {
 						// Alterable? If not, why is this still here?
 						switch (beatStructure[level-2]) {
 							case 0:
@@ -1488,7 +1534,7 @@ function afterTheEasyBits(sectionBlocks){
 					}
 				} else {
 					// We may be able to do *something*
-					if(events[e-1].tagname==='note' && noteInt(events[e-1])>level){
+					if(events[e-1].tagname==='note' &amp;&amp; noteInt(events[e-1])>level){
 						// An note after a longer note is likely to
 						// start on the first beat of its unit. We can put
 						// exception logic in here, but for now
@@ -1528,31 +1574,31 @@ function makeFeatureSequencesForML(MEIDoc, noHeaders=false, featureset=SIMPLEFEA
 	var layerMens = [];
 	var standardHeader = noHeaders ? [] : makeARFFHeader(featureset);
 	var defaultMens = getStaffDefMens(MEIDoc);
-	for (var seci=0; seci<sections.length; seci++){
+	for (var seci=0; seci&lt;sections.length; seci++){
 		var layers = getLayers(sections[seci]);
 		if(!layerMens.length) layerMens = layers.map(l=>getMatchingStaffDef(l, defaultMens));
 //		var sectionFeatures = [];
 //		features.push(sectionFeatures);
-		for(var layi=0; layi<layers.length; layi++){
+		for(var layi=0; layi&lt;layers.length; layi++){
 			var layer = layers[layi];
 			// var layerFeatures = [];
 			// sectionFeatures.push(layerFeatures);
 			var blocks = getEventsByMensurationForSection(layer, MEIDoc.doc, layerMens.length > layi? layerMens[layi] : false);
 			layerMens[layi] = blocks[blocks.length-1].mens;
-			for(var blocki=0; blocki<blocks.length; blocki++){
+			for(var blocki=0; blocki&lt;blocks.length; blocki++){
 				var block = blocks[blocki];
 				// var blockFeatures = [];
 				// var blockFeatureObj = {arr: blockFeatures, str: standardHeader};
 				// layerFeatures.push(blockFeatureObj);
 				// I'm taking a block (musical unit with a single mensuration as a separate thing
-				for(var eventi=0; eventi<block.events.length; eventi++){
+				for(var eventi=0; eventi&lt;block.events.length; eventi++){
 					var event = block.events[eventi];
 					if(event.tagName==="note"){
 //						var eventFeatures = [event.getAttribute("xml:id")];
 						var eventFeatures = [];
 						features.push(eventFeatures);
-						for(var featurei=0; featurei<featureset.length; featurei++){
-//							console.log(eventFeatures.length, block, "<-------");
+						for(var featurei=0; featurei&lt;featureset.length; featurei++){
+//							console.log(eventFeatures.length, block, "&lt;-------");
 							featureset[featurei].calculate(event, eventi, block, eventFeatures);
 						}
 						standardHeader.push(eventFeatures.join(","));
@@ -1589,7 +1635,7 @@ function addFeatureDatum(event, index, block, features){
 	features.push(this.test(event, index, block, features));
 }
 function attributeEq(obj, key, value){
-	return obj.getAttributeNS(null, key) && obj.getAttributeNS(null, key)==value;
+	return obj.getAttributeNS(null, key) &amp;&amp; obj.getAttributeNS(null, key)==value;
 }
 function attributeTestFun(key, value){
 	return function(obj){return attributeEq(obj, key, value) ? '1' : '0'};
@@ -1604,8 +1650,8 @@ function attributeValueFun(key){
 }
 function simAnteSim(e1, e2){
 	return ((e1.tagName==="note" || e1.tagName=="rest")
-					&& (e1.tagName==="note" || e1.tagName=="rest")
-					&& e1.getAttributeNS(null, 'dur')===e2.getAttributeNS(null, 'dur')) ? "1" : "0"
+					&amp;&amp; (e1.tagName==="note" || e1.tagName=="rest")
+					&amp;&amp; e1.getAttributeNS(null, 'dur')===e2.getAttributeNS(null, 'dur')) ? "1" : "0"
 }
 function eventLevel(){
 	if(this.tagName==='note' || this.tagName==='rest') return noteInt(this);
@@ -1613,37 +1659,37 @@ function eventLevel(){
 }
 function displacedSuccessiveEventsFun(fun, displacement, def){
 	return function(e, i, b){
-		return (i+displacement>0 && i+displacement+1<b.events.length
+		return (i+displacement>0 &amp;&amp; i+displacement+1&lt;b.events.length
 						? fun.apply(null, [b.events[i+displacement], b.events[i+1+displacement]])
 						: (def ? def : '-'));
 	}
 }
 function displacedEventFun(fun, displacement){
 	return function(e, i, b) {
-		return (i+displacement>0 && i+displacement<b.events.length) ? fun.apply(b.events[i+displacement], [b.events[i+displacement],e,i,b]) : '-'};
+		return (i+displacement>0 &amp;&amp; i+displacement&lt;b.events.length) ? fun.apply(b.events[i+displacement], [b.events[i+displacement],e,i,b]) : '-'};
 }
 function displacedBooleanEventFun(fun, displacement){
 	return function(e, i, b) {
-		return (i+displacement>0 && i+displacement<b.events.length) ? (fun.apply(b.events[i+displacement], [b.events[i+displacement],e,i,b]) ? '1' : '0') : '0'};
+		return (i+displacement>0 &amp;&amp; i+displacement&lt;b.events.length) ? (fun.apply(b.events[i+displacement], [b.events[i+displacement],e,i,b]) ? '1' : '0') : '0'};
 }
 function displacedEventFunGenerator(fun){
 	return function(displacement){
 		return function(e, i, b) {
-			return (i+displacement>0 && i+displacement<b.events.length) ? fun.apply(b.events[i+displacement], [b.events[i+displacement],e,i,b]) : '-';
+			return (i+displacement>0 &amp;&amp; i+displacement&lt;b.events.length) ? fun.apply(b.events[i+displacement], [b.events[i+displacement],e,i,b]) : '-';
 		}
 	}
 }
 function displacedBooleanEventFunGenerator(fun){
 	return function(displacement) {
 		return function(e, i, b) {
-			return (i+displacement>0 && i+displacement<b.events.length) ? (fun.apply(b.events[i+displacement], [b.events[i+displacement],e,i,b]) ? '1' : '0') : '0';
+			return (i+displacement>0 &amp;&amp; i+displacement&lt;b.events.length) ? (fun.apply(b.events[i+displacement], [b.events[i+displacement],e,i,b]) ? '1' : '0') : '0';
 		}
 	}
 }
 function comparisonBooleanFunGenerator(fun){
 	return function(displacement){
 		return function(e, i, b){
-			return (i+displacement>0 && i+displacement<b.events.length)
+			return (i+displacement>0 &amp;&amp; i+displacement&lt;b.events.length)
 				? (fun.apply(null, [b.events[i+displacement], e, i, b]) ? '1' : '0')
 				: '0';
 		}
@@ -1652,7 +1698,7 @@ function comparisonBooleanFunGenerator(fun){
 function comparisonFunGenerator(fun){
 	return function(displacement){
 		return function(e, i, b){
-			return (i+displacement>0 && i+displacement<b.events.length)
+			return (i+displacement>0 &amp;&amp; i+displacement&lt;b.events.length)
 				? fun.apply(null, [b.events[i+displacement], e, i, b])
 				: '-';
 		}
@@ -1671,7 +1717,7 @@ function durationBefore(event, index, block){
 	var dur = durations.definite ? durations.definite
 			: (durations.approximation ? durations.approximation
 				 : durations.minimum ? durations.minimum : false);
-	if(!dur && dur!==0) return '-';
+	if(!dur &amp;&amp; dur!==0) return '-';
 	var baseDur = last(imperfectingLevels(event, block.mens));
 	var units  = dur / baseDur;
 	if([0, 1, 2, 3, 6, 9].indexOf(units)>-1) return units;
@@ -1688,7 +1734,7 @@ function durationAfter(event, index, block){
 	var dur = durations.definite ? durations.definite
 			: (durations.approximation ? durations.approximation
 				 : durations.minimum ? durations.minimum : false);
-	if(!dur && dur!==0) return '-';
+	if(!dur &amp;&amp; dur!==0) return '-';
 	var baseDur = last(imperfectingLevels(event, block.mens));
 	var units  = dur / baseDur;
 	if([0, 1, 2, 3, 6, 9].indexOf(units)>-1) return units;
@@ -1699,17 +1745,17 @@ function durationAfter(event, index, block){
 function canImperfectCurrent(shorter, longer, i, block){
 	var shortLevel = noteInt(shorter);
 	var longLevel = noteInt(longer);
-	if(shortLevel < longLevel){
+	if(shortLevel &lt; longLevel){
 		return canImperfect(noteInt(shorter), noteInt(longer), mensurSummary(block.mens));
 	} else return false;
 }
 function levelDifference(a, b){
-	return (noteOrRest(a) && noteOrRest(b)) ?  noteInt(b) - noteInt(a) : '-';
+	return (noteOrRest(a) &amp;&amp; noteOrRest(b)) ?  noteInt(b) - noteInt(a) : '-';
 }
 function levelTestFun(levelAdjust){
 	return function(event, index, block){
 		var eventLevel = noteInt(event)+levelAdjust;
-		if(eventLevel < 4) return '0';
+		if(eventLevel &lt; 4) return '0';
 		return mensurSummary(block.mens)[eventLevel-4]=='3' ? '1' : '0';
 	}
 }
@@ -1733,7 +1779,7 @@ function Feature(name, type, mainfun, testfun){
 
 const ID = new Feature("ID", "string", addFeatureDatum, attributeValueFun("xml:id"));
 const QUALITY = new Feature("Quality", "{-,a,p,i}", addFeatureDatum, attributeValueFun("quality"));
-const SIMPLER_QUALITY = new Feature("Quality", "{-,a,i}", addFeatureDatum, (e)=>(e.getAttributeNS(null, 'quality') && e.getAttributeNS(null, 'quality')!=='p') ? e.getAttributeNS(null, 'quality') : '-');
+const SIMPLER_QUALITY = new Feature("Quality", "{-,a,i}", addFeatureDatum, (e)=>(e.getAttributeNS(null, 'quality') &amp;&amp; e.getAttributeNS(null, 'quality')!=='p') ? e.getAttributeNS(null, 'quality') : '-');
 const COLORATION = new Feature("Colored", "boolean", addFeatureDatum,
 															 attributeTestFun("coloration", "true"));
 const REG_PERFECT = new Feature("RegularlyPerfect", "boolean", addFeatureDatum,
@@ -1752,7 +1798,7 @@ const DURATION_BEFORE = new Feature("DurationBefore", "{-,0,1,2,3,6,9,long,odd}"
 
 function makeFeatures(name, mainfun, range="{1,0}", windowSize=7, include0=false, ffun=addFeatureDatum){
 	var fset = [];
-	for(var i=-windowSize; i<=windowSize; i++){
+	for(var i=-windowSize; i&lt;=windowSize; i++){
 		if(include0 || i){
 			fset.push(new Feature(name+"_"+i, range, ffun, mainfun(i)));
 		}
@@ -1768,7 +1814,7 @@ var CAN_IMPERFECT = makeFeatures("CanImperfect", comparisonBooleanFunGenerator(c
 var NOTE_LEVEL_DIFF = makeFeatures("RelativeNoteLevel", comparisonFunGenerator(levelDifference), "{-,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7}");
 /*
 var windowSize = 7;
-for(var i=-windowSize; i<=windowSize; i++){
+for(var i=-windowSize; i&lt;=windowSize; i++){
 	if(i){
 		NOTE_LEVELS.push(new Feature("NoteLevel_"+i, "{-,0,1,2,3,4,5,6,7}", addFeatureDatum, displacedEventFun(eventLevel, i)));
 		DIV_DOTS.push(new Feature("DivDots_"+i, "{0,1}", addFeatureDatum, displacedBooleanEventFun(divisionDot, i)));
@@ -1778,7 +1824,7 @@ for(var i=-windowSize; i<=windowSize; i++){
 }*/
 var SIMPLEFEATURESET = [ID, ALTERABLE, COLORATION, REG_PERFECT, TRIPLE_LEVEL, TRIPLE_LEVELS_DOWN_3, TRIPLE_LEVELS_DOWN_2, TRIPLE_LEVELS_DOWN_1, TRIPLE_LEVELS_UP_1, TRIPLE_LEVELS_UP_2, TRIPLE_LEVELS_UP_3, ...NOTE_LEVELS, ...DIV_DOTS, ...AUG_DOTS,...ANTE_SIM, ...CAN_IMPERFECT, ...NOTE_LEVEL_DIFF, DURATION_BEFORE, DURATION_AFTER, SIMPLER_QUALITY];
 /*
-for(i=0; i<NOTE_LEVELS.length; i++){
+for(i=0; i&lt;NOTE_LEVELS.length; i++){
 	SIMPLEFEATURESET.push(NOTE_LEVELS[i]);
 }
 SIMPLEFEATURESET.push(QUALITY);
@@ -1790,3 +1836,32 @@ function makeARFFHeader(featureset){
 	out.push("@DATA");
 	return out;
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Fri Jun 26 2020 10:43:17 GMT+0200 (GMT+02:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

@@ -93,7 +93,9 @@ function MusicExample(){
   /** @property atClass */
   this.atClass = "at-"+this.book+"-"+this.chapter+"-"+this.section+"-"+this.exampleno;
   /**
-   * Parses a MusicExample
+   * Parses a MusicExample from string on top level. 
+   * Parsing of lower levels is done by nextMusic()
+   * @see nextMusic
    */
   this.parse = function(){
     this.staves = [];
@@ -2977,8 +2979,8 @@ function nextChoiceLikeThing2(choice, textp){
 }
 
 /** @function nextMusic
- * 
- * @param {?} parent 
+ * Iterates through the string and parses musical events or enriches other events
+ * @param {*} parent like reading, ligature, choice
  * @returns {Array} results
  * @memberof music-parser
  */
@@ -3044,7 +3046,7 @@ function nextMusic(parent){
 
 /** @function getParameters
  * @summary gets the parameters like notation type, mensural signature, solmization, clef and staff
- * @returns {Parameters} parameters
+ * @returns {Parameters} parameters to MusicExample
  * @memberof music-parser
  */
 function getParameters(){

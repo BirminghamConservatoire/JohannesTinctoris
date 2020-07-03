@@ -8,7 +8,7 @@ standaloneEditor = true;
 wrapWidth = 600;
 
 /** @class
- * @memberof Workinput/editbase
+ * @memberof editor/music/editbase
  */
 function MusicHolder(text, outdiv){
   /** @property {MusicHolder} */
@@ -411,7 +411,7 @@ function MusicHolder(text, outdiv){
 }
 
 /** @function 
- * @memberof Workinput/editbase
+ * @memberof editor/music/editbase
  * @summary return function for changing pitch of [object] by [d] steps */
 function pitchOrHeightShift(object, d){
   // return function for changing pitch of [object] by [d] steps
@@ -433,7 +433,7 @@ function pitchOrHeightShift(object, d){
 }
 
 /** @function 
- * @memberof Workinput/editbase
+ * @memberof editor/music/editbase
  * @summary edit object */
 function editObject (object){
   return function(e){
@@ -442,7 +442,7 @@ function editObject (object){
 }
 
 /** @function 
- * @memberof Workinput/editbase
+ * @memberof editor/music/editbase
  * @summary shiftHoverToShift */
 function shiftHoverToShift (object, d){
   if(typeof(d)=="undefined" || !d) d=1;
@@ -454,7 +454,7 @@ function shiftHoverToShift (object, d){
   };
 }
 /** @function 
- * @memberof Workinput/editbase
+ * @memberof editor/music/editbase
  * @summary hoverOutShiftChecked */
 function hoverOutShiftChecked (){
   return function(e){
@@ -472,7 +472,7 @@ function hoverOutShiftChecked (){
 }
 
 /** @function 
- * @memberof Workinput/editbase
+ * @memberof editor/music/editbase
  * @summary Provide height shifting buttons for [object] near mouse pointer */
 function UpDown(object, d, event){
   // Provide height shifting buttons for [object] near mouse pointer
@@ -506,7 +506,7 @@ function UpDown(object, d, event){
 var domobj = [];
 
 /** @function 
- * @memberof Workinput/editbase
+ * @memberof editor/music/editbase
  * @summary grabs DOM objects, currently content div */
 function grabdomobjects(){
   domobj['Content'] = document.getElementById("content");

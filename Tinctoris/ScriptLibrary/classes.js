@@ -6461,6 +6461,10 @@ function MNilReading(witnesses){
   this.width = function(){return 0;};
   this.draw = function(){};
 }
+
+/** @class
+ * @memberof classes
+ */
 function MOmission(witnesses, description, description2, staves, choice){
   this.objType = "MusicalOmission";
   this.witnesses = witnesses;
@@ -6577,7 +6581,8 @@ function MOmission(witnesses, description, description2, staves, choice){
 }
 
 /** @class  
- * @memberof classes*/
+ * @memberof classes
+ * @summary Choice structures for object attributes rather than for object collections */
 function ValueChoice(){
   // Choice structures for object attributes rather than for object
   // collections
@@ -6618,6 +6623,7 @@ function ValueReading(witnesses, value, description){
   };
 }
 
+/** @memberof classes */
 function witnessReading(witness, choice, MSSToAll, allToMSS, edToAll, allToEd){
   var ws;
   for(var i=0;i<choice.content.length; i++){
@@ -6704,6 +6710,7 @@ function Classes(){
   };
 }
 
+/** @memberof classes */
 function classString (classes){
   return classes.reduce(
     function(str, el){
@@ -6712,11 +6719,14 @@ function classString (classes){
     "");
 }
 
+/** @memberof classes */
 function drawClasses (classes){
   for(var c=0; c<classes.length; c++){
     if(classes[c].draw) classes[c].draw();
   }
 }
+
+/** @memberof classes */
 function removeRedlineBefore (classlist){
   // This hack is necessary for reasons I don't understand, to remove
   // a state variable whose reason for persisting is unclear.
@@ -6727,6 +6737,8 @@ function removeRedlineBefore (classlist){
   }
   return true;
 }
+
+/** @memberof classes */
 function isResolved(ligel){
 	switch(ligel.objType){
 		case 'LigatureNote':

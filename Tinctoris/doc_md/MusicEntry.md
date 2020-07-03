@@ -54,7 +54,17 @@ If it makes for easier reading, the enclosing tags can be spaced around their co
 * `{solm: [0|b[pitch]]}`   
 (e.g. {solm: 0}, {solm: bb}) [must always be specified as 0 if there are no flats in the signature]
 [Clef and solmization signature (including 0) must be restated if new staff declared.]
-* `{mens: [O[= o]|o[= O]|C[= c]|c[= C]|Ø[= ø]|Ç[= ç]] [Q[= v]] [q[= V]] [œ[= ◊]] [Œ[= √]][numerical vertical position]}`
+* `{mens: [sign][numerical vertical position]}`
+   * O = <img src="https://smufl-browser.edirom.de/E911.png" height="12" width="12" >
+   * o = <img src="https://smufl-browser.edirom.de/E912.png" height="12" width="12" >
+   * C = <img src="https://smufl-browser.edirom.de/E915.png" height="12" width="12" >
+   * c = <img src="https://smufl-browser.edirom.de/E918.png" height="12" width="12" >
+   * Ø = <img src="https://smufl-browser.edirom.de/E910.png" height="12" width="12" >
+   * Ç = <img src="https://smufl-browser.edirom.de/E914.png" height="12" width="12" > 
+   * Q = <img src="https://smufl-browser.edirom.de/E916.png" height="12" width="12" > 
+   * q = <img src="https://smufl-browser.edirom.de/E919.png" height="12" width="12" > 
+   * œ = <img src="https://smufl-browser.edirom.de/E917.png" height="12" width="12" style="transform: rotate(180deg)" > 
+   * Œ = <img src="https://smufl-browser.edirom.de/E91A.png" height="12" width="12" >
 * `{prop: [numerator]/[denominator], [numerical vertical position of lower space]-[position of higher space]}`  
  [proportions (e.g. {prop: 3/2, 7-9})]
 

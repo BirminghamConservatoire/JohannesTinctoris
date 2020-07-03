@@ -1,6 +1,6 @@
 /**
- * @fileoverview Contains dedicated to the Workinput
- * @namespace Workinput/editbase
+ * @fileoverview Contains functions dedicated to the Workinput
+ * @namespace editor/music/editbase
  */
 
 editorMode = true;

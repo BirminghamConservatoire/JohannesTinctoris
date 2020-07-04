@@ -919,6 +919,9 @@ h1.longTitle {
 div.article td {
 	vertical-align: top;
 }
+div.contentbox.article p  {
+	padding-left: 25px;
+}
 .epoch {
 	font-variant: small-caps;
 }
@@ -935,40 +938,45 @@ p > sup:first-child {
 	margin-left: -2.5em;
 	font-size: 70%;
 }
+span.para-no {
+	float: left;
+	margin-left: -2.5em;
+	font-size: 90%;
+}
 .contentbox.article table {
 	table-layout: fixed;
 	width: 100%;
 }
 @media screen and (min-width: 700px) {
-.verse p {
+.verse p, div.contentbox.article p.verse{
 	text-indent: -0.4em;
 	padding-left: 1.4em;
 	margin-bottom: 0.1em;
 	min-height: 4.3em;
 }
 @media screen and (min-width: 1200px) {
-.verse p {
+.verse p, div.contentbox.article p.verse {
 	text-indent: -1em;
 	padding-left: 2em;
 	margin-bottom: 0.1em;
 	min-height: 3em;
 }
 @media screen and (min-width: 1270px) {
-.verse p {
+.verse p, div.contentbox.article p.verse {
 	text-indent: -2em;
 	padding-left: 3em;
 	margin-bottom: 0.1em;
 	min-height: 3em;
 }
 @media screen and (min-width: 1350px) {
-.verse p {
+.verse p, div.contentbox.article p.verse {
 	text-indent: -5em;
 	padding-left: 6em;
 	margin-bottom: 0.1em;
 	min-height: 3em;
 }
 }@media screen and (min-width: 1550px) {
-.verse p {
+.verse p, div.contentbox.article p.verse {
 	text-indent: -9em;
 	padding-left: 10em;
 	margin-bottom: 0.2em;

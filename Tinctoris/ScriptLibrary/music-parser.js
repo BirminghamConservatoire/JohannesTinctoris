@@ -221,7 +221,12 @@ function MusicExample(){
 						if(last(this.events).objType==="Dot" && last(this.events).augments){
 							// If a dot follows a note, put the text under the note
 							last(this.events).augments.text=next;
-						} else {
+            }
+            else if (last(this.events).objType==="Fermata" && last(this.events).lengthens){
+							// If a fermata follows a note, put the text under the note
+              last(this.events).lengthens.text=next;
+            } 
+            else {
 							this.events[this.events.length-1].text=next;
 						}
           } else if (this.events.length>1){
@@ -980,7 +985,7 @@ function MusicExample(){
 
 /**
  * takes a char and looks what kind of event do we have
- * @returns object according to char
+ * @returns {*} object according to char
  * @memberof music-parser
  */
 function nextEvent() {

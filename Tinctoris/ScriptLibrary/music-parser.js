@@ -1680,11 +1680,13 @@ function nextOblique(ligature){
     if((tag=consumeIf(/<(text|label):?.*?>/))){
       oblique.texts[oblique.members.length-1] = nextText();
       enrichText(tag, oblique.texts[oblique.members.length-1]);
-    } else if(string.substring(0,2) == "**"){
+    } 
+    else if(string.substring(0,2) == "**"){
       var obj = nextComment();
       obj.ligature = oblique.ligature;
       oblique.comments[oblique.members.length-1] = obj;
-    } else if(string.substring(0,1) == "{"){
+    } 
+    else if(string.substring(0,1) == "{"){
       // FIXME: do stuff
       next = nextObliqueNoteChoice(oblique);
 			if(next.subType==="no notes"){
@@ -1696,10 +1698,12 @@ function nextOblique(ligature){
 			} else {
 				oblique.extendMembers(next);
 			}
-    } else {
+    } 
+    else {
       next = nextNote();
       if(next){
         next = new ObliqueNote(next, oblique.members.length, oblique);
+        consumeSpace();
         if(string.charAt(0)=="."){
           next.dot = nextDot();
         }

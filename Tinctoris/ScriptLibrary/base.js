@@ -1,7 +1,10 @@
-// First file to load. Contains:
-//  1. Dictionaries for finding glyphs
-//  2. Global variables
-//  3. Utility functions
+/** @fileoverview base.js
+ * First file to load. Contains:
+ * 1. Dictionaries for finding glyphs
+ * 2. Global variables
+ * 3. Utility functions 
+ * @namespace base
+ * */ 
 
 /////////////////////
 // `Dictionaries' -- These are where symbol codes are converted to

@@ -1617,6 +1617,7 @@ function nextLigature(){
       // check actively if next object is really a note an not just assume it by exclusion  
       next = nextNote();
       next = new LigatureNote(next);
+      consumeSpace();
       if(string.charAt(0)=="."){
         next.dot = nextDot();
       }

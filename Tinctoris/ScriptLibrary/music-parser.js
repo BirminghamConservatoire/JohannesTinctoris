@@ -1597,18 +1597,24 @@ function nextLigature(){
       //FIXME ignores meaning
       next = nextText();
       enrichText(tag, next);
-    } else if(consumeIf("<obl>")){
+    } 
+    else if(consumeIf("<obl>")){
       next = nextOblique(ligature);
-    } else if(string.substring(0,2) == "**"){
+    } 
+    else if(string.substring(0,2) == "**"){
       next = nextComment();
 //      next = new LigatureComment(next);
       currentExample.comments.push(next);
-    } else if(string.charAt(0)=="<") {
+    } 
+    else if(string.charAt(0)=="<") {
       complaint.push("Unexpected item in the tagging area: "+string);
       return false;
-    } else if(string.substring(0,5)=="{var="){
+    } 
+    else if(string.substring(0,5)=="{var="){
       next = nextLigChoice(ligature);
-    } else {
+    }       
+    else if(string.charAt(0) in rhythms){
+      // check actively if next object is really a note an not just assume it by exclusion  
       next = nextNote();
       next = new LigatureNote(next);
       if(string.charAt(0)=="."){

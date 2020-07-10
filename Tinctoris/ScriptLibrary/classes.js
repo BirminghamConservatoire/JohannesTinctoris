@@ -4850,7 +4850,12 @@ function LedgerLineChange(){
     var e2 = currentExample.events[eventi-1];
 		var e2box = e2.domObj.getBBox();
     var end2 = ((e2 && e2.domObj) ? e2box.width + e2box.x : this.maxX);
-    var end = Math.max((this.endX || curx), end2, this.maxX);
+    // in the case on a ligature with text underlay, end2 exceeds curx
+    // Question: is it wise to always use the maximum? 
+    // Maybe trying without end2 isn't too bad... hopefully
+    var end = Math.max((this.endX || curx), this.maxX); //add end2 again if stupid
+
+
 //    if(this.maxX && end<this.maxX) end=this.maxX;
     // if(this.domObj){
     //   for(var i=0; i<this.domObj.length; i++){
@@ -4858,7 +4863,7 @@ function LedgerLineChange(){
     //   }
     // }
 		/// Testing
-		for(var j=0; j<this.coordinates.length; j+=2){
+		/*for(var j=0; j<this.coordinates.length; j+=2){
 			var l = this.coordinates[j][0];
 			var r = (this.coordinates.length===j+1) ? end2 : this.coordinates[j+1];
 			var y = this.coordinates[j][1];
@@ -4869,8 +4874,15 @@ function LedgerLineChange(){
 				bag.push(drawLedgerLine(l, y-yoffset(pos), r + 1, " "+colour));
 				pos+=2;
 			}
-		}
-		/// End testing
+		}*/
+    /// End testing
+    
+    // I don't know what has been tested here, but here is the line drawn now:
+    var colour = this.colour || currentStaffColour;
+    var pos = this.count<0 ? 4-2*Math.abs(this.count) : 2*(currentLinecount + 2);   
+    // setting the end a little bit back to get a small margin
+    this.domObj = drawLedgerLine(this.startX, this.startY - yoffset(pos), end - rastralSize/4, " "+colour);
+
 		if(this.previous && this.previous.count!=0) this.previous.finishLines();
   };
   this.makeLines = function(){

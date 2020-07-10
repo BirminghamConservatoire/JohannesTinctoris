@@ -4098,7 +4098,11 @@ function TextUnderlay(){
 		// experimental:
 		if(eventi && (currentExample.events[eventi-1].objType==="TextUnderlay")){
 			curx = currentExample.events[eventi-1].prevCurX;
-		}
+    }
+    
+    //try setting curx back to start after it has been set back
+    curx = this.prevCurX;
+
     return textBlock;
   };
   // Text Underlay

@@ -1923,8 +1923,18 @@ function getString (){
     }
     switch(string.charAt(0)){
       case "<":
-        next = getTag(consumeIf(/<[^<]*>/));
-        content.push(next);
+        if(string.indexOf("<l/>")===0){
+          // we have a line break, start a new array object
+          string = string.substring(4);
+          if(/[^\{|\*|\^]/.test(string.charAt(0))){
+            content.push(string.charAt(0));
+            consume(1);
+          }
+        }
+        else{
+          next = getTag(consumeIf(/<[^<]*>/));
+          content.push(next);
+        }
         break;
       case "{":
         var closePos = Math.min(string.indexOf("}"), string.length);

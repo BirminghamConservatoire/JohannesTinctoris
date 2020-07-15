@@ -3998,38 +3998,6 @@ function TextUnderlay(){
                 false, false, false);
     var oldSVG = SVG;
     SVG = textBlock;
-/*    var styles = new Array();
-    var dy = false;
-    for(var i=0; i<this.components.length; i++){
-      if(typeof(this.components[i]) == "string"){
-        if(this.components[i].length>0// && /\S+/.test(this.components[i])
-          ){
-          var txt = svgSpan(SVG, 
-                            (styles.length ? textClasses(styles) :"text"), false,
-                            ((this.components.length > i+1 
-                              && this.components[i+1].objType==="MusicalChoice"
-                              && this.components[i+1].content[0].description
-                              && this.components[i+1].content[0].description.indexOf("ins.")>-1)
-                             ? this.components[i].replace(/\s+$/g, '')
-                             : this.components[i]));
-          if(dy){
-            txt.setAttributeNS(null, "dy", dy+"px");
-            dy=false;
-          }
-          // FIXME: Unneccessary now?
-          // var dx = txt.getBBox().width;
-          // curx += dx;
-        }
-      } else if(this.components[i]) {
-        if(this.components[i].objType == "MusicalChoice") {
-          this.components[i].textBlock = textBlock;
-          this.components[i].styles = styles;
-        }
-        this.components[i].draw(styles);
-        if(this.components[i].dy) dy = this.components[i].dy()*-1;
-        styles = this.components[i].updateStyles(styles);
-      }
-			} */
 		drawRichText(textBlock, this.components);
     switch(hpos){
       case "l":

@@ -11,16 +11,24 @@
 // characters from RW's fonts, y offsets and width guidance.
 // 
 // For notes, mostly
+/** @global */
 showagain=false;
+/** @global */
 var prop=0.7;
+/** @global */
 var noteEn = 1.8 * prop;
+/** @global */
 var ya = 50.5;
 //var ya = 63;
+/** @global */
 var yb = 6;
+/** @global */
 var rhythms = {M: "maxima", L: "longa", B: "brevis",
                S: "semibrevis", m: "minima", s: "semiminima",
                f: "fusa"};
+               /** @global */
 var neumeForms = {p: "punctus", v: "virga"};
+/** @global */
 var baseDictionary = 
   {void: {M: ["a", ya, 2.8*prop],//50.5, 2.8],
           L: ["s", ya, noteEn], 
@@ -65,6 +73,7 @@ var baseDictionary =
    square: {c: ["~", yb, 2.5]},
    hufnagel: {c: ["~", yb, 2.5]}};
 // For completely void/black note shapes //FIXME: what?
+/** @global */
 var voidBaseDictionary = 
   {void: {M: ["a", ya, 2.8],
           L: ["s", ya, noteEn], 
@@ -100,6 +109,7 @@ var voidBaseDictionary =
    square: {c: ["~", yb, 2.5]},
    hufnagel: {c: ["~", yb, 2.5]}}};
 // For inverted notes (some of these stay the same)
+/** @global */
 var flippedDictionary = 
   {void: {M: ["A", yb, 2.8], 
           L: ["S", yb, noteEn], 
@@ -130,6 +140,7 @@ var flippedDictionary =
           m: ["g", yb, noteEn],
           s: ["h", yb, noteEn],
           f: ["k", yb, noteEn]}};
+/** @global */
 var voidFlippedDictionary = 
   {void: {M: ["A", yb, 2.8], 
           L: ["S", yb, noteEn], 
@@ -161,18 +172,23 @@ var voidFlippedDictionary =
           s: ["h", yb, noteEn],
           f: ["k", yb, noteEn]}};
 
+/** @global */
 var restDictionary = 
   {B: ["∂", yb, 1.3],
    S: ["ƒ", yb, 1.3],
    m: ["©", yb, 1.3],
    s: ["˙", yb, 1.3],
    f: ["˚", yb, 1.5]};
+
+/** @global */ 
 var clefDictionary = 
   {
     C: [":", 28.5, 1.3],
     F: ["L", 43.5, 3],
     G: ["Ý", 28.5, 2.5]
   };
+
+/** @global */
 var mensDictionary = 
    {
      O: ["o", 10, 2, false],
@@ -193,13 +209,18 @@ var mensDictionary =
 //     c: ["C", 35, 2.75, "?"],
 //     ø: ["X", 35, 2.75, "/"]
 //   };
+
+/** @global */
 var solmDictionary = 
   {
     b: ["b",4, 2.5*prop],
     h: ["µ",4, 2.5*prop],
     x: ["M",4, 2.5*prop]
   };
+
+/** @global */
 var dotData = [">", 36, 1*prop];
+/** @global */
 var fermataData = ["Z", 36, prop];
 // No longer needed -- I'm drawing these.
 // var obliqueDictionary = 
@@ -213,36 +234,60 @@ var fermataData = ["Z", 36, prop];
 // Global variables
 //
 // Constants
+/** @global */
 var foo=false;
+/** @global */
 var texts = {};
+/** @global */
 var allTexts = {};
 //var editable = true;
+/** @global */
 var editable = false;
+/** @global */
 var standaloneEditor = false;
+/** @global */
 var MEILinks = (document.location.href.indexOf('beta') >-1 ||
-								document.location.href.indexOf('localhost') > -1) ? true : false;
+                document.location.href.indexOf('localhost') > -1) ? true : false;
+/** @global */
 var nocache = false;
+/** @global */
 var titleBar = false;
+/** @global */
 var showtitle = true;
+/** @global */
 var margins = false;
+/** @global */
 var safari = /Safari/.test(navigator.userAgent);
+/** @global */
 var webkit = /WebKit/.test(navigator.userAgent);
+/** @global */
 var vertical;
+/** @global */
 var leading = 20;
+/** @global */
 var debug=false;
 // var topMargin = 40;
 //var topMargin = 25;
+/** @global */
 var topMargin = 0;
 //var lmargin = 10;
+/** @global */
 var lmargin = 3;
 //var rastralSize = 15;
 //var rastralSize = 12;
+/** @global */
 var rastralSize = 10;
+/** @global */
 var exWidth = 690;
+/** @global */
 var localWidth = exWidth;
+/** @global */
 var colours = {red: "#F00", black: "#000", blind: "#AAA"};
+/** @global */
 var defaultColour = "black";
+/** @global */
 var clefOffsets = {Gamma: 0, F: 6, C: 10, G: 14, E: 19};
+/** @global */
 var notes = ["AA", "BB", "CC", "DD", "EE", "FF", "GG", 
   "A", "B", "C", "D", "E", "F", "G",
   "a", "b", "c", "d", "e", "f", "g",
@@ -250,141 +295,267 @@ var notes = ["AA", "BB", "CC", "DD", "EE", "FF", "GG",
   "aaa", "bbb", "ccc", "ddd", "eee", "fff", "ggg"];
 
 // UI-set variables
+/** @global */
 var editorMode=false;
+/** @global */
 var singlePaneMode = true;
+/** @global */
 var showvariants = true;
+/** @global */
 var showfacsimile = false;
+/** @global */
 var showcommentary = true;
+/** @global */
 var showtranslationnotes = true;
+/** @global */
 var showtranscriptionnotes = true;
+/** @global */
 var flattenOnExport = true;
+/** @global */
 var punctuationStyle="modern";
+/** @global */
 var editorDisplay = "show";
+/** @global */
 var dateDisplay = "show";
+/** @global */
 var copyTextDisplay = "show";
+/** @global */
 var sourceDisplay = "show";
+/** @global */
 var extraInfoDisplay = "show";
+/** @global */
 var infoDisplay = "hide";
+/** @global */
 var infoButtons = false;
+/** @global */
 var exampleSource = false;
+/** @global */
 var docMap = false;
 
 // Current variable values (for context)
 //var tooltip = false;
+/** @global */
 var state = "initialising";
+/** @global */
 var timeouts = [];
+/** @global */
 var scrollLock = false;
+/** @global */
 var paneWidths = false;
+/** @global */
 var maxWidth = 650;
+/** @global */
 var minWidth = 350;
+/** @global */
 var sources = [];
+/** @global */
 var commentary = false;
+/** @global */
 var nodeNo = 0;
+/** @global */
 var nodes = [];
+/** @global */
 var textnodes = [];
+/** @global */
 var sysWidths = false;
+/** @global */
 var sysNo = 0;
+/** @global */
 var pointer = 0;
+/** @global */
 var strikeStarts = false;
+/** @global */
 var voidnotes = false;
+/** @global */
 var doc = false;
+/** @global */
 var complaint = [];
+/** @global */
 var chapter = 0;
+/** @global */
 var book = 0;
+/** @global */
 var prevBook = 0;
+/** @global */
 var section = 0;
+/** @global */
 var paragraph = 0;
+/** @global */
 var sentence = 0;
+/** @global */
 var exampleno = 0;
+/** @global 
+ * @summary Contains the currently parsed string */
 var string;
+/** @global */
 var hackedString;
+/** @global */
 var SVG = false;
+/** @global */
 var canvas = false;
+/** @global */
 var context = false;
+/** @global */
 var currentExample = false;
+/** @global */
 var currentReading = false;
+/** @global */
 var curDoc = false;
+/** @global */
 var curCatchword = false;
+/** @global */
 var currentTextParent = false;
+/** @global */
 var inHeading = false;
+/** @global */
 var inTip = false;
+/** @global */
 var inVerse = false;
+/** @global */
 var inIndex = false;
+/** @global */
 var inCommentary = false;
+/** @global */
 var noCount = false;
+/** @global */
 var hang = false;
+/** @global */
 var lastIsSentenceBreak = false;
+/** @global */
 var lastIsHeading = false;
+/** @global */
 var lastIsVerse = false;
+/** @global */
 var oneOff=false;
+/** @global */
 var leaveSpace=false;
+/** @global */
 var handsmet = [];
+/** @global */
 var examplei = false;
+/** @global */
 var eventi = false;
+/** @global */
 var texti = false;
+/** @global
+ * @summary Current position on x axis for rendering
+ */
 var curx = 0;
+/** @global
+ * @summary Current position on y axis for rendering
+ */
 var cury = 20;
+/** @global */
 var noBreaks = false;
+/** @global */
 var systemLines = false;
+/** @global */
 var staffGroup = false;
+/** @global */
 var currentLinecount = 5;
+/** @global */
 var currentStaffColour = "";
+/** @global */
 var currentSystem = false;
+/** @global */
 var currentSystems = [];
+/** @global */
 var currentInfo = false;
+/** @global */
 var currentChoice = false;
+/** @global */
 var suppressBreak = true;
 //var wrapWidth = 460;
+/** @global */
 var wrapWidth = false;
+/** @global */
 var currentClef = false;
+/** @global */
 var currentRedline = false;
+/** @global */
 var currentSolm = false;
+/** @global */
 var uncapitalise = false;
+/** @global */
 var capitalise = false;
+/** @global */
 var allowCapitalisation = false;
+/** @global */
 var initialStaffStar = false;
+/** @global */
 var drawingWidth;
+/** @global */
 var currentType = "mensural";
+/** @global */
 var currentSubType = "void";
+/** @global */
 var dotPos = false;
+/** @global */
 var dotNudge = true;
+/** @global */
 var redline = false;
+/** @global */
 var examples = [];
+/** @global */
 var commentaryTables = [];
+/** @global */
 var k1 = Math.cos(Math.PI/3) ;//0.866;
+/** @global */
 var k2 = Math.sin(Math.PI/3);//0.5;
+/** @global */
 var textScale = 0.8;
 // var textScale = 0.6;
+/** @global */
 var commentStyle = "#00F";
+/** @global */
 var comments = false;
+/** @global */
 var hands = [];
+/** @global */
 var range = false;
+/** @global */
 var desperatecounter = 0;
+/** @global */
 var underlays = [];
+/** @global */
 var currenttextparent = false;
+/** @global */
 var currentTable = false;
+/** @global */
 var curtextitem = false;
+/** @global */
 var pari = false;
+/** @global */
 var systemContainsPageOrColumnBreak = false;
+/** @global */
 var lowPoint = false;
-//offset for editorial square bracket character
+/** @global 
+ *  @summary offset for editorial square bracket character 
+*/
 var braceOff = 7.5;
+
+/** @memberof base */
 function musicStyle(){
   return "font-size : "+(3*rastralSize*prop)+"pt";
 }
+/** @memberof base */
 function mensStyle(){
   return "font-size : "+(1.6*rastralSize*prop)+"pt";
 }
+/** @memberof base */
 function restStyle(){
   return "font-size: "+(3 * rastralSize) +"pt";
 }
+/** @memberof base */
 function braceStyle(){
   return "font-size: "+(2*rastralSize*prop)+"pt";
 }
+/** @memberof base */
 function etcStyle(){
   return "font-size: "+(0.7*rastralSize) +"pt";
 }
 
+/** @memberof base */
 function textClasses(cstyles){
   // This is effectively "text"+styles.join(" "), but I don't want to
   // anticipate future use
@@ -395,24 +566,30 @@ function textClasses(cstyles){
   return textstyle;
 }
 
+/** @memberof base */
 function textFont(){
 //  var font = "normal " + Math.floor(rastralSize * 0.8) + "pt serif";
   var font = Math.floor(rastralSize * textScale) + "pt georgia";
   return font;
 }
+/** @memberof base */
 function musicFont(){
   return Math.round(3 * rastralSize * prop) +"pt ArsNovaBlackRegular";
 }
+/** @memberof base */
 function restFont(){
   return Math.round(3 * rastralSize) +"pt ArsNovaBlackRegular";
 }
+/** @memberof base */
 function sansFont(){
   return "bold "+Math.floor(rastralSize * textScale) + "pt sans-serif";
 }
+/** @memberof base */
 function starFont(){
   return "bold "+Math.floor(rastralSize * textScale * 2) + "pt sans-serif";
 }
 
+/** @memberof base */
 function metrics(){
   return {
     halfHeight: rastralSize * 2/3 * prop,
@@ -431,9 +608,11 @@ function metrics(){
   };
 }
 
+/** @memberof base */
 function zerofunction (){
   return 0;
 }
+/** @memberof base */
 function identity (arg){
   return arg;
 }
@@ -444,17 +623,20 @@ function identity (arg){
 
 // a. pitch/vertical positioning
 
+/** @memberof base */
 function fontCharData (rhythm){
   // basic form for getting glyph
   return baseDictionary[currentSubType][rhythm];
 }
 
+/** @memberof base */
 function HexChar(staffpos){
   // convert hex staffPos to integer
   return (Number("0x"+staffpos));
 }
 
 // FIXME: Obsolete
+/** @memberof base */
 function pitchgt(note1, note2){
   // compare relative height based on staffPos
   if(note1.objType == "Oblique"){
@@ -465,6 +647,7 @@ function pitchgt(note1, note2){
   }
   return HexChar(note1.staffPos) > HexChar(note2.staffPos);
 }
+/** @memberof base */
 function staffPosition(obj){
   if(obj.pitch){
     return staffPosFromPitchString(obj.pitch);
@@ -474,6 +657,7 @@ function staffPosition(obj){
     return false;
   }
 }
+/** @memberof base */
 function yPos(y, staffPos){
   if(staffPos || staffPos===0){
     return y-((rastralSize*(staffPos-2))/2);
@@ -482,6 +666,7 @@ function yPos(y, staffPos){
     return y;
   }
 }
+/** @memberof base */
 function yoffset(staffpos){
   // Convert staffPos to coordinate offset
   // FIXME: get rid of this IF/ELSE
@@ -492,10 +677,12 @@ function yoffset(staffpos){
   }
 }
 
+/** @memberof base */
 function texty(offset, staffPos){
   return cury+(offset*rastralSize/15) - yoffset(staffPos);
 }
 
+/** @memberof base */
 function staffPosFromPitchString(pitchString){
   if(currentClef){
     return notes.indexOf(pitchString)-6 + currentClef.pitchOffset();
@@ -504,10 +691,12 @@ function staffPosFromPitchString(pitchString){
   }
 }
 
+/** @memberof base */
 function isStaffPos(posChar){
   posChar.match(/[0123456789ABCDEF]/);
 }
 
+/** @memberof base */
 function getvPos(o){
   // Finds pitch or staff pos for events that can have either
   if(currentClef){
@@ -526,6 +715,7 @@ function getvPos(o){
   }
 }
 
+/** @memberof base */
 function getAndSetPitch(object){
   var pitch = getvPos(object);
   if(pitch) {
@@ -535,12 +725,14 @@ function getAndSetPitch(object){
   return object;
 }
 
+/** @memberof base */
 function getStaffPos(){
   if("ABCDEF".indexOf(string.charAt(0))>-1) return getStaffPos2();
   var pos = consumeIf(/[0-9]+/);
   return pos ? Number(pos) : false;
 }
 
+/** @memberof base */
 function getStaffPos2(){
   var pos = "0123456789ABCDEFGHIJ".indexOf(string.charAt(0));
   if(pos != -1){
@@ -551,6 +743,7 @@ function getStaffPos2(){
   }
 }
 
+/** @memberof base */
 function staffPosFromString(tempstring){
   var val = /^[0-9]+/.exec(tempstring);
   if(val){
@@ -562,6 +755,7 @@ function staffPosFromString(tempstring){
   }
 }
 
+/** @memberof base */
 function getRhythm(){
   var rhythm = string.charAt(0).match(/[MLBSmsfpv]/);
   if(rhythm){
@@ -572,10 +766,11 @@ function getRhythm(){
   }
 }
 
+/** @memberof base
+ * @summary Some tags are too fundamental to parse explicitly in the main
+ * parser. These should be dealt with in the consume function. I think.
+ */
 function consumeStyleTags(){
-  // Some tags are too fundamental to parse explicitly in the main
-  // parser. These should be dealt with in the consume function. I
-  // think.
   var oneoff=false;
   var end = false;
   var found = false;
@@ -668,10 +863,12 @@ function consumeStyleTags(){
   return;
 }
 
+/** @memberof base */
 function clearOneOffTags(){
   if(currentExample) currentExample.classes.removeOneOffClasses();
 }
 
+/** @memberof base */
 function consume(n){
   if(string.length < n){
     pointer += string.length;
@@ -682,6 +879,7 @@ function consume(n){
   }
 }
 
+/** @memberof base */
 function consumeIf(search){
   var result = typeof(search)=='string' ? string.indexOf(search) : string.search(search);
   if(result == 0){
@@ -694,6 +892,7 @@ function consumeIf(search){
   }
 }
 
+/** @memberof base */
 function consumeSpace(spacesOnly){
   // Remove space from string global variable. Return true if space is
   // removed
@@ -710,6 +909,7 @@ function consumeSpace(spacesOnly){
   return p===pointer ? false : true;
 }
 
+/** @memberof base */
 function consumeSpace2(spacesOnly){
   var regex = (spacesOnly ? /[^ ]/ : /\S/);
   var nextNonSpace = string.search(regex);
@@ -723,6 +923,7 @@ function consumeSpace2(spacesOnly){
   }
 }
 
+/** @memberof base */
 function unRead(value){
   // We've pulled too much off of the string and it and the pointer
   // need to be reset
@@ -730,6 +931,7 @@ function unRead(value){
   pointer -= value.length;
 }
 
+/** @memberof base */
 function setDotPos(staffPos, down, nudge){
   dotNudge = nudge ? true : false;
   if(down){
@@ -743,6 +945,11 @@ function setDotPos(staffPos, down, nudge){
 
 // b. i) lines
 
+/** @namespace base/drawing
+ * @summary Generic drawing
+ */
+
+/** @memberof base/drawing */
 function drawSystem(linecount, y, x1, x2, colour, lcanvas){
   y+=0.5;
   if(colour==="0") colour = "No";
@@ -753,6 +960,7 @@ function drawSystem(linecount, y, x1, x2, colour, lcanvas){
   return group;
 }
 
+/** @memberof base/drawing */
 function drawSystemLines(sysgroup, linecount, y, x1, x2, colour){
    // y+=0.5;
   if(colour==="0") colour = "No";
@@ -763,13 +971,17 @@ function drawSystemLines(sysgroup, linecount, y, x1, x2, colour){
   return sysgroup;
 }
 
+/** @memberof base/drawing */
 function drawVerticalLine(x, y1, y2, classes){
   return svgLine(SVG, x, y1, x, y2, classes, false);
 }
 
+/** @memberof base/drawing */
 function drawRedBarline(x, top, bottom){
   svgLine(SVG, x, top, x,  bottom, "barline red", false);
 }
+
+/** @memberof base/drawing */
 function drawScallopedBarline(x, top, bottom, colour){
   var count = Math.floor(1.6 * (top - bottom) / rastralSize);
   var step = (top - bottom) / count;
@@ -783,16 +995,19 @@ function drawScallopedBarline(x, top, bottom, colour){
   return svgPath(SVG, path, "scallopedBarline"+(colour? " "+colour: ""), false);
 }
 
+/** @memberof base/drawing */
 function drawPartialBarline(x, y, start, end, extras){
   svgLine(SVG, x, y-yoffset(start), x, y-yoffset(end), 
     "barline"+(extras ? extras : ""), false);
 }
 
+/** @memberof base/drawing */
 function drawBarline(x, y, extras){
   svgLine(SVG, x+0.5, y-rastralSize, x+0.5, y-(rastralSize * currentLinecount), 
     "barline"+(extras ? extras : ""), false);
 }
 
+/** @memberof base/drawing */
 function drawMensurStrich(event){
 	var x = event.startX;
 	var y = event.startY;
@@ -801,12 +1016,14 @@ function drawMensurStrich(event){
 					"barline breve mensurstrich", false);
 }
 
+/** @memberof base/drawing */
 function drawSmallBarline(start, end, thickness, extras){
   var starty = cury - yoffset(start);
   var endy = cury - yoffset(end);
   svgLine(SVG, curx+0.5, starty, curx+0.5, endy, "barline"+(extras ? extras : ""), false);
 }
 
+/** @memberof base/drawing */
 function drawLedgerLine(x, y, x2, extraClasses) {
   // FIXME: line end is wrong
   if(!extraClasses) extraClasses = "";
@@ -817,6 +1034,7 @@ function drawLedgerLine(x, y, x2, extraClasses) {
   }
 }
 
+/** @memberof base/drawing */
 function squareBracket(x, y, open, extraClasses){
   return svgText(SVG, x, y+(rastralSize/15/prop), "editorial bracket"+extraClasses, 
                  false, braceStyle(), open ? "[" : "]");
@@ -824,6 +1042,7 @@ function squareBracket(x, y, open, extraClasses){
 
 // b. ii) Ligature components (boxes)
 
+/** @memberof base/drawing */
 function drawBox(note, staffPos, width, lStem, rStem, sup, full, extras){
   var m = metrics();
   var group = svgGroup(SVG, "ligatureBox"+(editable ? " clickable" : "")
@@ -880,6 +1099,7 @@ function drawBox(note, staffPos, width, lStem, rStem, sup, full, extras){
   return group;
 }
 
+/** @memberof base/drawing */
 function drawOblique2 (sp1, sp2, staffPos, width, lstem, rstem){
   var m = metrics();
   // I'm confused here. I named vThickness as the size of vertical
@@ -923,6 +1143,7 @@ function drawOblique2 (sp1, sp2, staffPos, width, lstem, rstem){
   return path;
 }
 
+/** @memberof base/drawing */
 function drawObliqueStart(sp1, sp2, full, extras){
   var m = metrics();
   // I'm confused here. I named vThickness as the size of vertical
@@ -971,6 +1192,7 @@ function drawObliqueStart(sp1, sp2, full, extras){
   return path;
 }
 
+/** @memberof base/drawing */
 function drawObliqueEnd(sp2, sp1, full, extras){
   var m = metrics();
   // I'm confused here. I named vThickness as the size of vertical
@@ -1020,6 +1242,7 @@ function drawObliqueEnd(sp2, sp1, full, extras){
   return path;  
 }
 
+/** @memberof base/drawing */
 function drawObliqueNeume(sp1, sp2, staffPos, width, lstem, rstem) {
   var m = metrics();
   curx -= m.vThickness/2;
@@ -1031,12 +1254,14 @@ function drawObliqueNeume(sp1, sp2, staffPos, width, lstem, rstem) {
   svgPolygon(SVG, [x1, y1-DV, x1, y1+DV, x2, y2+DV, x2, y2-DV],'obliqueOuter', false);
 }
 
+/** @memberof base/drawing */
 function oWidth(p1, p2){
   var k=0.8;
   var a=0.8;
   return prop * rastralSize * (k + a * Math.abs(p2-p1));
 }
 
+/** @memberof base/drawing */
 function drawOblique (sp1, sp2, staffPos, width, lStem, rStem, extras){
   width = oWidth(sp1, sp2);
   var m = metrics();
@@ -1067,6 +1292,7 @@ function drawOblique (sp1, sp2, staffPos, width, lStem, rStem, extras){
   curx += width- m.vThickness;
 }
 
+/** @memberof base/drawing */
 function drawRhombus(x, y, colour, ltail, rtail, extras){
   var m = metrics();
   var a = m.chantPenA;
@@ -1091,6 +1317,7 @@ function drawRhombus(x, y, colour, ltail, rtail, extras){
 
 // b. ii) Chant components
 
+/** @memberof base/drawing */
 function drawNeumeJoin(x, y, p1, p2, colour, sup, extras){
   var m = metrics();
   var a = m.chantPenA;
@@ -1100,6 +1327,7 @@ function drawNeumeJoin(x, y, p1, p2, colour, sup, extras){
                  "neumeJoin " + (colour ? colour : "")+(extras ? extras : ""));
 }
 
+/** @memberof base/drawing */
 function neumeStep(p1, p2){
   if(typeof(p1)=="object"){
     return 0;
@@ -1109,6 +1337,7 @@ function neumeStep(p1, p2){
   }
 }
 
+/** @memberof base/drawing */
 function drawChantBox(x, y, ltail, rtail, colour, sup, nudge){
   var m = metrics();
   var ct = m.chantThickness;
@@ -1128,6 +1357,11 @@ function drawChantBox(x, y, ltail, rtail, colour, sup, nudge){
 
 // c. Parsing aids
 
+/** @namespace base/parsing 
+ * @summary Parsing aids
+*/
+
+/** @memberof base/parsing */
 function bracedParam(str){
   var loc = str.indexOf("{");
   var locend = str.indexOf("}");
@@ -1153,6 +1387,11 @@ function bracedParam(str){
 
 // d. System break management
 
+/**@namespace base/sysbreak
+ * @summary System break management
+ */
+
+ /** @memberof base/sysbreak */
 function sysBreak(addSpace, moreSpace){
   var width = sysWidths[sysNo];
   curx = lmargin;
@@ -1172,6 +1411,7 @@ function sysBreak(addSpace, moreSpace){
 	leaveSpace = false;
 }
 
+ /** @memberof base/sysbreak */
 function sysBreak2(lastp){
   currentExample.w2.push([curx, cury-(currentLinecount*rastralSize), 
     currentLinecount, currentStaffColour]);
@@ -1184,6 +1424,9 @@ function sysBreak2(lastp){
 }
 
 // e. custos assistance
+ /** @memberof base/sysbreak
+  * @summary Custos assistance
+  */
 function nextPitch(){
   var events = currentExample.events;
   var event;
@@ -1217,6 +1460,9 @@ function nextPitch(){
   } 
 }
 
+ /** @memberof base/sysbreak
+  * @summary Custos assistance
+  */
 function pitchAndPos(event){
   if(event.pitch && !event.staffPos){
     event.staffPos = staffPosFromPitchString(event.pitch);

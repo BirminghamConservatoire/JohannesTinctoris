@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>TEIDoc - Documentation</title>
+    <title>ScriptLibrary/dom.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -34,139 +34,359 @@
 
 <div id="main">
     
-    <h1 class="page-title">TEIDoc</h1>
+    <h1 class="page-title">ScriptLibrary/dom.js</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2>
-            <span class="ancestors"><a href="tei-classes.html">tei-classes</a>.</span>
-        
-        TEIDoc
-        </h2>
-        
-    
-</header>
-
-<article>
-    
-        <div class="container-overview">
-        
-            
-
-    
-
-    <h4 class="name" id="TEIDoc"><span class="type-signature"></span>new TEIDoc<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ScriptLibrary_tei-classes.js.html">ScriptLibrary/tei-classes.js</a>, <a href="ScriptLibrary_tei-classes.js.html#line12">line 12</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        </div>
-    
-
-    
-
-    
-
-    
-    
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** @fileoverview dom.js
+ * Contains functions for DOM interaction
+ */
+
+function DOMEl(tag, cname, id){
+  var el = document.createElement(tag);
+  if(cname) el.className = cname;
+  if(id) el.id = id;
+  return el;
+}
+function DOMTextEl(tag, cname, id, content){
+  var el = DOMEl(tag, cname, id);
+  if (content) {
+    if(typeof(content)=="string"){
+      el.appendChild(document.createTextNode(content));
+    } else {
+      el.appendChild(content);
+    }
+  }
+  return el;  
+}
+function DOMSpace(){
+  return document.createTextNode(" ");
+}
+function DOMTable(cname, id){
+  return DOMEl('table', cname, id);  
+}
+function DOMRow(cname, id){
+  return DOMEl('tr', cname, id);
+}
+function DOMCell(cname, id, content){
+  return DOMTextEl('td', cname, id, content);
+}
+function DOMCopyTable(table){
+  var copy = DOMTable();
+  if(table.className){
+    copy.className = table.className;
+  }
+  var rows = $(table).find("tr");
+  for(var i=0; i&lt;rows.length; i++){
+    var rowCopy = DOMRow();
+    copy.appendChild(rowCopy);
+    var cells = $(rows[i]).find("td");
+    for(var j=0; j&lt;cells.length; j++){
+      var cellCopy = DOMCell();
+      rowCopy.appendChild(cellCopy);
+      var cn = cells[j].childNodes;
+      for(var mm=0; mm&lt;cn.length; mm++){
+        cellCopy.appendChild(cn[mm].cloneNode(true));
+      }
+    }
+  }
+  return copy;
+}
+function DOMDiv(cname, id, content){
+  return DOMTextEl('div', cname, id, content);  
+}
+function DOMSpan(cname, id, content){
+  return DOMTextEl('span', cname, id, content);  
+}
+function DOMTextInput(cname, id, value){
+  var el = DOMEl("input", cname, id);
+  el.value = value;
+  el.type = "text";
+  return el;
+}
+function DOMTextArea(cname, id){
+  var el = DOMEl("textarea", cname, id);
+  return el;
+}
+function DOMButton(cname, id, label, callback) {
+  var el = DOMEl('button', cname, id);
+  el.value = label;
+  el.name = label;
+  el.innerHTML = label;
+  el.onclick = callback;
+//  $(el).click = callback;
+  return el;
+}
+function DOMRadio(cname, name, id, value, caption, checked){
+  var el = DOMEl('input', cname, id);
+  el.name = name;
+  el.type = "radio";
+  el.value = value;
+  el.innerHTML = caption;
+  el.checked = checked;
+  return el;
+}
+function DOMSelect(name, cname, id, multiple, options){
+  var el = DOMEl('select', cname, id);
+  el.name = name;
+  el.multiple = multiple;
+  for(var i=0; i&lt;options.length; i++){
+    el.appendChild(options[i]);
+  }
+  return el;
+}
+function DOMOption(value, label, text, selected){
+  var el = DOMTextEl('option', false, false, text);
+  if(value) el.value = value;
+  if(label) el.label = label;
+  if(selected) el.selected = true;
+  return el;
+}
+function DOMAnchor(cname, id, content, href){
+  var el = DOMTextEl('a', cname, id, content);
+  if(href) el.href = href;
+  return el;
+}
+function DOMImage(cname, id, src){
+  var img = document.createElement('img');
+  if(src) img.src = src;
+  if(cname) img.className = cname;
+  if(id) img.id = id;
+  return img;
+}
+function DOMListItem(cname, id, content){
+  return DOMTextEl("li", cname, id, content);
+}
+function DOMList(type, cname, id, array){
+  var list = document.createElement(type);
+  var el;
+  if(cname) list.className = cname;
+  if(id) list.id = id;
+  if(array){
+    for(var i=0; i&lt;array.length; i++){
+      el = array[i];
+      if(Array.isArray(el)){
+        el = DOMList(type, false, false, el);
+      } else if(el.tagName!="li"){
+        el = DOMListItem(false, false, el);
+      }
+      list.appendChild(el);
+    }
+  }
+  return list;
+}
+function DOMAddToList(list, el){
+  if(Array.isArray(el)){
+    el = DOMList("ul", false, false, el);
+  } else if(el.tagName!="li"){
+    el = DOMListItem(false, false, el);
+  }
+  list.appendChild(el);
+  return list;
+}
+
+///////////////////
+
+var tooltip = false;
+function Tooltip(info){
+  if(!tooltip){
+    tooltip = DOMDiv('tooltip', 'tooltip', info);
+    document.body.appendChild(tooltip);
+  } else {//if(tooltip.innerHTML!=info){
+    $(tooltip).empty();
+    $(tooltip).removeClass("clicked");
+    if(typeof(info) == "string"){
+      tooltip.appendChild(document.createTextNode(info));
+    } else if (info){
+      tooltip.appendChild(info);
+    }
+  }
+  return tooltip;
+}
+function removeTooltip(hovered){
+  if(tooltip &amp;&amp; (!hovered || !$(tooltip).hasClass("clicked"))){
+    $("#tooltip").remove();
+    $(".highlight").removeClass("highlight");
+    tooltip = false;
+  }
+}
+//////////////////////////////////////////
+//
+// SVG
+//
+
+/** @namespace SVGfunctions
+ * @summary Contains functions to create svg elements
+ */
+
+ /** @memberof SVGfunctions */
+var SVGNS = "http://www.w3.org/2000/svg";
+
+/** @memberof SVGfunctions */
+function svg (w,h){
+  var svg=document.createElementNS(SVGNS,"svg");
+  if(w) svg.setAttribute('width', w);
+  if(h) svg.setAttribute('height', h);
+  return svg;
+}
+
+/** @memberof SVGfunctions */
+function clearSVG(svgEl){
+//  $(svgEl).children().detach().remove();
+  $(svgEl).empty();
+  // while(svgEl.firstChild){
+  //   svgEl.removeChild(svgEl.firstChild);
+  // }
+}
+
+/** @memberof SVGfunctions */
+function svgCSS(element, css){
+  var link = document.createElementNS(SVGNS, "link");
+  link.setAttributeNS(null, "href", css);
+  link.setAttributeNS(null, "type", "text/css");
+  link.setAttributeNS(null, "rel", "stylesheet");
+  element.appendChild(link);
+  return element;
+}
+
+/** @memberof SVGfunctions
+ * @summary Creates an SVG text element
+ * @param svgEl parent svg element
+ * @param x x-axis position
+ * @param y y-axis position
+ * @param cname class name
+ * @param id element id
+ * @param {string} style style attribute value
+ * @param {string} content text content
+ * @returns svg text element
+ */
+function svgText(svgEl, x, y, cname, id, style, content){
+  var el = document.createElementNS(SVGNS, "text");
+  if(content) var textNode = document.createTextNode(content);
+  if(cname) el.setAttributeNS(null, "class", cname);
+  if(id) el.id = id;
+  if(x) el.setAttributeNS(null, "x", x);
+  if(y) el.setAttributeNS(null, "y", y);
+  if(style) el.setAttributeNS(null, "style", style);
+  if(content) el.appendChild(textNode);
+  if(svgEl) svgEl.appendChild(el);
+  return el;
+}
+
+/** @memberof SVGfunctions */
+function svgSpan(svgEl, cname, id, content){
+  var el = document.createElementNS(SVGNS, "tspan");
+  if(content) var textNode = document.createTextNode(content);
+  if(cname) el.setAttributeNS(null, "class", cname);
+  if(id) el.id = id;
+  if(content) el.appendChild(textNode);
+  if(svgEl)  svgEl.appendChild(el);
+  return el;
+}
+
+/** @memberof SVGfunctions 
+ * @summary Creates an svg group element, appends it to a parents and returns it
+ * @param svgEl parent SVG element
+ * @param {string} cname class name
+ * @param {string} id element id
+ * @returns svg group element
+*/
+function svgGroup(svgEl, cname, id){
+  var el = document.createElementNS(SVGNS, "g");
+  if(cname) el.setAttributeNS(null, "class", cname);
+  if(id) el.id = id;
+  if(svgEl) svgEl.appendChild(el);
+  return el;
+}
+
+/** @memberof SVGfunctions */
+function svgLine(svgEl, x1, y1, x2, y2, cname, id){
+  var el = document.createElementNS(SVGNS, "line");
+  if(cname) el.setAttributeNS(null, "class", cname);
+  if(id) el.setAttributeNS(null, "id", id);
+  el.setAttributeNS(null, "x1", x1);
+  el.setAttributeNS(null, "y1", y1);
+  el.setAttributeNS(null, "x2", x2);
+  el.setAttributeNS(null, "y2", y2);
+  if(svgEl) svgEl.appendChild(el);
+  return el;
+}
+
+/** @memberof SVGfunctions */
+function svgCircle(svgEl, x, y, r, cname, id){
+  var el = document.createElementNS(SVGNS, "circle");
+  if(cname) el.setAttributeNS(null, "class", cname);
+  if(id) el.setAttributeNS(null, "id", id);
+  el.setAttributeNS(null, "cx", x);
+  el.setAttributeNS(null, "cy", y);
+  el.setAttributeNS(null, "r", r);
+  if(svgEl) svgEl.appendChild(el);
+  return el;
+}
+
+/** @memberof SVGfunctions */
+function svgRect(svgEl, x, y, w, h, cname, id, rx, ry){
+  var el = document.createElementNS(SVGNS, "rect");
+  if(cname) el.setAttributeNS(null, "class", cname);
+  if(id) el.setAttributeNS(null, "id", id);
+  el.setAttributeNS(null, "x", x);
+  el.setAttributeNS(null, "y", y);
+  el.setAttributeNS(null, "width", w);
+  el.setAttributeNS(null, "height", h);
+  // rx and ry are for rounded corners
+  if(rx) el.setAttributeNS(null, "rx", rx);
+  if(ry) el.setAttributeNS(null, "ry", ry);
+  if(svgEl) svgEl.appendChild(el);
+  return el;
+}
+
+/** @memberof SVGfunctions */
+function svgPolygon(svgEl, points, cname, id){
+  var el = document.createElementNS(SVGNS, "polygon");
+  if(cname) el.setAttributeNS(null, "class", cname);
+  if(id) el.setAttributeNS(null, "id", id);
+  // FIXME: ugly, but is neater code, and spec-compatible
+  el.setAttributeNS(null, "points", points.join(" "));
+  if(svgEl) svgEl.appendChild(el);
+  return el;
+}
+
+/** @memberof SVGfunctions */
+function svgPath(svgEl, commands, cname, id){
+  var el = document.createElementNS(SVGNS, "path");
+  if(cname) el.setAttributeNS(null, "class", cname);
+  if(id) el.setAttributeNS(null, "id", id);
+  el.setAttributeNS(null, "d", commands.join(" "));
+  if(svgEl) svgEl.appendChild(el);
+  return el;
+}
+
+/** @memberof SVGfunctions */
+function svgArc(x1, y1, x2, y2, radius) {
+  return "M "+x1+" "+y1+" A "+radius+" "+radius+", 0, 1, 0, "+x2+" "+y2;
+}
+
+/** @memberof SVGfunctions */
+function svgPolyPath(points, close) {
+  points = points.reverse();
+  var firstPoints = points.pop()+" "+points.pop()+" ";
+  var commands = ["M "+firstPoints];
+  var start = typeof(close) != undefined &amp;&amp; close ? "L "+firstPoints : false;
+  while(points.length){
+    commands.push("L "+points.pop()+" "+points.pop()+" ");
+  }
+  if(start) commands.push(start);
+  return commands;
+}
+</code></pre>
+        </article>
+    </section>
 
 
 
@@ -178,7 +398,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Thu Jul 16 2020 13:32:19 GMT+0200 (GMT+02:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Thu Jul 16 2020 13:32:18 GMT+0200 (GMT+02:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

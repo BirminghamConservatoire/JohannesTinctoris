@@ -3962,7 +3962,8 @@ function TextUnderlay(){
       // beneath *previous* glyph
       if(eventi == 0){
         curx = rastralSize;
-      } else if (currentExample.events[eventi-1].objType != "TextUnderlay"){
+      } 
+      else if (currentExample.events[eventi-1].objType != "TextUnderlay"){
         if(!currentExample.events[eventi-1].startX){
           // FIXME: This seems to happen for texts with musical choice in them
           currentExample.events[eventi-1].startX = curx; // for now
@@ -3972,7 +3973,8 @@ function TextUnderlay(){
       if(curx < lmargin){
         curx = lmargin;
       }
-    } else {
+    } 
+    else {
       if(!this.orientation){
         curx = Math.max(curx, underlayRight(this.position));
       }
@@ -3992,53 +3994,62 @@ function TextUnderlay(){
 			}
 			if(vpos<-6) leaveSpace = true;
     }
+    // lowPoint is a global
     lowPoint = Math.max(lowPoint, cury+(2*rastralSize)-ynudge);
+
+    // store basic x & y axis positions -- they'll be used to create a new textblock
+    var blockX = curx;
+    var blockY = cury+rastralSize-ynudge;
+
+    // creates adds a new textblock if the current svg isn't already a text element
     var textBlock = SVG.nodeName.toUpperCase()==="TEXT" ? SVG 
-      : svgText(SVG, curx, cury+rastralSize-ynudge, "textblock"+(this.orientation ? " r"+this.orientation : ""), 
+      : svgText(SVG, blockX, blockY, "textblock"+(this.orientation ? " r"+this.orientation : ""), 
                 false, false, false);
     var oldSVG = SVG;
     SVG = textBlock;
-		// after the textblock has been created, try to find its position, then fill it afterwards (below)
+    // after the textblock has been created, try to find its position, then fill it afterwards (below)
+    
+    // now, the x and y coordinates has to be determined again because of crazy orientation stuff
+    // we're trying to determine if blockX and blockY updates and then set it once and for all...
     switch(hpos){
       case "l":
-        SVG.setAttributeNS(null, "x", lmargin);
+        blockX = lmargin;
         break;
       case "r":
-        SVG.setAttributeNS(null, "x", currentExample.width()-SVG.getBoundingClientRect().width-rastralSize);
+        blockX = currentExample.width()-SVG.getBoundingClientRect().width-rastralSize;
         break;
       case "c":
-        SVG.setAttributeNS(null, "x", (currentExample.width()-SVG.getBoundingClientRect().width)/2);
+        blockX = (currentExample.width()-SVG.getBoundingClientRect().width)/2;
     }
     if(this.orientation){
       if(this.orientation==="90c"){
         if(this.marginal==="l") {
           this.startX = lmargin-rastralSize;
-          SVG.setAttributeNS(null, "x", this.startX);
+          blockX = this.startX;
         }
         if(this.marginal==="r") {
           this.startX = curx+rastralSize*2; // currentExample.width();
-          SVG.setAttributeNS(null, "x", this.startX);
+          blockX = this.startX;
         }
-        // SVG.setAttributeNS(null, "transform", "rotate(90, "
-        //                    +this.startX+", "+(cury+rastralSize)+") translate(-"
-        //                    +(this.staffPos * rastralSize / 2)+")");
-      } else if(this.orientation==="90a"){
+      } 
+      else if(this.orientation==="90a"){
         var actualx = curx;
         if(this.marginal==="l") {
           this.startX = lmargin-(3*rastralSize/2);
           actualx = this.startX;
-          SVG.setAttributeNS(null, "x", this.startX);
+          blockX = this.startX;
         }
         if(this.marginal==="r") {
           this.startX = curx+rastralSize*2; // currentExample.width();
           actualx = this.startX;
-          SVG.setAttributeNS(null, "x", this.startX);
+          blockX = this.startX;
         }
         var actualy = cury+rastralSize-ynudge;
         // SVG.setAttributeNS(null, "transform", "rotate(-90, "
         //                    +actualx+", "+actualy+") translate("
         //                    +(this.staffPos * rastralSize / 2)+", "+rastralSize+")");
-      } else if(this.orientation==="180") {
+      } 
+      else if(this.orientation==="180") {
 				var width = SVG.getBBox().width;
 				var height = SVG.getBBox().height;
         this.startX = curx + width;
@@ -4050,8 +4061,8 @@ function TextUnderlay(){
           this.startX = curx+rastralSize*2; // currentExample.width();
         }
         var actualx = this.startX;
-        SVG.setAttributeNS(null, "x", this.startX);
-				SVG.setAttributeNS(null, "y", cury-ynudge+(rastralSize*-0.25));
+        blockX = this.startX;
+				blockY = cury-ynudge+(rastralSize*-0.25);
 				//        var actualy = cury+rastralSize-ynudge;
 				var actualy = cury-ynudge;
 				var width = SVG.getBBox().width;
@@ -4059,6 +4070,12 @@ function TextUnderlay(){
                            +actualx+", "+actualy+")" );
 			}
     }
+
+    
+    //set x and y once and for all
+    SVG.setAttributeNS(null, "x", blockX);
+    SVG.setAttributeNS(null, "y", blockY);
+
     SVG = oldSVG;
     if(!this.orientation && !this.marginal) curx = this.startX;
 //    if(this.orientation) curx+=rastralSize*2;

@@ -233,7 +233,13 @@ function svgText(svgEl, x, y, cname, id, style, content){
   return el;
 }
 
-/** @memberof SVGfunctions */
+/** @memberof SVGfunctions
+ * @summary Creates tspan element
+ * @param svgEl parent svg element
+ * @param cname class name
+ * @param id element id
+ * @param content text content
+ */
 function svgSpan(svgEl, cname, id, content){
   var el = document.createElementNS(SVGNS, "tspan");
   if(content) var textNode = document.createTextNode(content);

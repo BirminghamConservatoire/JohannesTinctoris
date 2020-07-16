@@ -1926,9 +1926,12 @@ function getString (){
         if(string.indexOf("<l/>")===0){
           // we have a line break, start a new array object
           string = string.substring(4);
-          if(/[^\{|\*|\^]/.test(string.charAt(0))){
+          if(/[^\{|\*|\^\<]/.test(string.charAt(0))){
             content.push(string.charAt(0));
             consume(1);
+          }
+          else{
+            break;
           }
         }
         else{

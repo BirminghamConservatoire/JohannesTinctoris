@@ -3998,7 +3998,7 @@ function TextUnderlay(){
                 false, false, false);
     var oldSVG = SVG;
     SVG = textBlock;
-		drawRichText(textBlock, this.components);
+		// after the textblock has been created, try to find its position, then fill it afterwards (below)
     switch(hpos){
       case "l":
         SVG.setAttributeNS(null, "x", lmargin);
@@ -4067,6 +4067,9 @@ function TextUnderlay(){
 		if(eventi && (currentExample.events[eventi-1].objType==="TextUnderlay")){
 			curx = currentExample.events[eventi-1].prevCurX;
     }
+
+    //try adding the text after figuring out where the block is positioned
+    drawRichText(textBlock, this.components);
     
     //try setting curx back to start after it has been set back
     curx = this.prevCurX;

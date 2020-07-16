@@ -4342,6 +4342,29 @@ function RedlineClose(){
   };
 }
 
+/**@class
+ * @memberof classes
+ * @summary Class that marks line breaks in TextUnderlay
+ */
+function Linebreak(){
+  this.objType = "Linebreak";
+  this.startX = false;
+  this.oneOff = true;
+  this.tag = "l/";
+  this.toText = function(){
+    return "<"+this.tag+">";
+  }
+  this.width = zeroWidth;
+  this.updateStyles = function(styles){
+    //styles.push("newLine");
+    return styles;
+  };
+  this.draw = function(){
+    currentExample.classes.addClass(this);
+    this.startX = curx;
+  };
+}
+
 /** @class  
  * @memberof classes*/
 function GenericOpen(){

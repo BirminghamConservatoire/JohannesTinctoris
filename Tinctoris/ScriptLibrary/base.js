@@ -2139,7 +2139,10 @@ function drawRichText(textBlock, components){
 			if(current.objType==="MusicalChoice"){
 				current.textBlock = textBlock;
 				current.styles = styles;
-			}
+      }
+      else if(current.objType==="Linebreak"){
+        //in the case of a linebreak, it is necessary to update the position of x & y
+      }
 			current.draw(styles);
 			if(current.dy) dy=current.dy()*-1;
 			styles = current.updateStyles(styles);

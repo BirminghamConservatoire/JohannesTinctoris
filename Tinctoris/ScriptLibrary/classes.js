@@ -4001,12 +4001,49 @@ function TextUnderlay(){
     var blockX = curx;
     var blockY = cury+rastralSize-ynudge;
 
-    // creates adds a new textblock if the current svg isn't already a text element
-    var textBlock = SVG.nodeName.toUpperCase()==="TEXT" ? SVG 
+    // lets see, if we have linebreaks in that object
+    var lbIndices = findLinebreaksinText(this.components);
+    
+    // creates adds a new textblock... g in case of linebreaks
+    var textBlock = false;
+    var orientClass = this.orientation ? " r"+this.orientation : "";
+    if(lbIndices.length > 0)
+    {
+      textBlock = svgGroup(SVG, "textgroup"+orientClass, false);
+      
+      let i = 0;
+      let start = 0;
+      let end = lbIndices[i];
+      do
+      {
+        let partofComponents = this.components.slice(start,end);
+        
+        let text = svgText(textBlock, blockX, blockY, "textblock"+orientClass, 
+        false, false, false);
+        drawRichText(text, partofComponents);
+        
+        start = lbIndices[i]+1;
+        i++;
+        end = i < lbIndices.length ? lbIndices[i]+1 : this.components.length;
+      }
+      while(i <= lbIndices.length);
+    }
+    else
+    {
+      textBlock = svgText(SVG, blockX, blockY, "textblock"+orientClass, 
+      false, false, false);
+      drawRichText(textBlock, this.components);
+    }
+
+    // Let's hope that there is no text within text... in case of emergency, try to make sense of this:
+    /*var textBlock = SVG.nodeName.toUpperCase()==="TEXT" ? SVG 
       : svgText(SVG, blockX, blockY, "textblock"+(this.orientation ? " r"+this.orientation : ""), 
-                false, false, false);
-    var oldSVG = SVG;
-    SVG = textBlock;
+                false, false, false);*/
+
+    //var oldSVG = SVG;
+    //SVG = textBlock;
+
+
     // after the textblock has been created, try to find its position, then fill it afterwards (below)
     
     // now, the x and y coordinates has to be determined again because of crazy orientation stuff
@@ -4016,11 +4053,15 @@ function TextUnderlay(){
         blockX = lmargin;
         break;
       case "r":
-        blockX = currentExample.width()-SVG.getBoundingClientRect().width-rastralSize;
+        blockX = currentExample.width()-textBlock.getBoundingClientRect().width-rastralSize;
         break;
       case "c":
-        blockX = (currentExample.width()-SVG.getBoundingClientRect().width)/2;
+        blockX = (currentExample.width()-textBlock.getBoundingClientRect().width)/2;
     }
+
+    var width = textBlock.getBBox().width;
+		var height = textBlock.getBBox().height;
+
     if(this.orientation){
       if(this.orientation==="90c"){
         if(this.marginal==="l") {
@@ -4050,9 +4091,7 @@ function TextUnderlay(){
         //                    +(this.staffPos * rastralSize / 2)+", "+rastralSize+")");
       } 
       else if(this.orientation==="180") {
-				var width = SVG.getBBox().width;
-				var height = SVG.getBBox().height;
-        this.startX = curx + width;
+				this.startX = curx + width;
 				if(typeof(last(this.components))=="string" && /[,.¶:;()–\-\—!?‘’]/.test(last(last(this.components)))) this.startX -= 0.55*rastralSize;
         if(this.marginal==="l") {
           this.startX = lmargin;
@@ -4065,18 +4104,41 @@ function TextUnderlay(){
 				blockY = cury-ynudge+(rastralSize*-0.25);
 				//        var actualy = cury+rastralSize-ynudge;
 				var actualy = cury-ynudge;
-				var width = SVG.getBBox().width;
-        SVG.setAttributeNS(null, "transform", "rotate(180, "
+        textBlock.setAttributeNS(null, "transform", "rotate(180, "
                            +actualx+", "+actualy+")" );
 			}
     }
+    //set x and y once and for all and for multiple blocks if necessary
+    if(lbIndices.length > 0) 
+    {
+      texts = textBlock.childNodes;
+      for(let i=0; i < texts.length; i++)
+      {
+        texts[i].setAttributeNS(null, "x", blockX);
+        texts[i].setAttributeNS(null, "y", blockY);
 
+        switch(this.orientation){
+          case "90c":
+            blockX -= width;
+            break;
+          case "90a":
+            blockX += width;
+            break;
+          default:
+            blockY += height;
+        }
+      }
+    }
+    else
+    {
+      textBlock.setAttributeNS(null, "x", blockX);
+      textBlock.setAttributeNS(null, "y", blockY);
+    }
     
-    //set x and y once and for all
-    SVG.setAttributeNS(null, "x", blockX);
-    SVG.setAttributeNS(null, "y", blockY);
+    //try adding the text after figuring out where the block is positioned
+    //drawRichText(textBlock, this.components);
 
-    SVG = oldSVG;
+    //SVG = oldSVG;
     if(!this.orientation && !this.marginal) curx = this.startX;
 //    if(this.orientation) curx+=rastralSize*2;
     if($(SVG).parent("#content")) underlays.push(textBlock);
@@ -4084,9 +4146,6 @@ function TextUnderlay(){
 		if(eventi && (currentExample.events[eventi-1].objType==="TextUnderlay")){
 			curx = currentExample.events[eventi-1].prevCurX;
     }
-
-    //try adding the text after figuring out where the block is positioned
-    drawRichText(textBlock, this.components);
     
     //try setting curx back to start after it has been set back
     curx = this.prevCurX;
@@ -4094,6 +4153,25 @@ function TextUnderlay(){
     return textBlock;
   };
   // Text Underlay
+}
+
+/** @memberof classes
+ * @summary Looks for Linebreak objects in the components of a TextUnderlay
+ * Is used in TextUnderlay.draw()
+ * @param {Array} components Array with components of TextUnderlay
+ * @returns {Array} index of Linebreak objects
+ */
+function findLinebreaksinText(components){
+  var indices = [];
+
+  for(let i = 0; i < components.length; i++){
+    if(components[i].objType==="Linebreak")
+    {
+      indices.push(i);
+    }
+  }
+
+  return indices;
 }
 
 function textwidth(thing){

@@ -2113,6 +2113,7 @@ function ligatureDrawingKit(ligarray){
  * been positioned already
  * @param textBlock svg text element
  * @param components components of TextUnderlay
+ * @returns textblock element
  */
 function drawRichText(textBlock, components){
 	var dy = false;
@@ -2143,9 +2144,6 @@ function drawRichText(textBlock, components){
 			if(current.objType==="MusicalChoice"){
 				current.textBlock = textBlock;
 				current.styles = styles;
-      }
-      else if(current.objType==="Linebreak"){
-        //in the case of a linebreak, it is necessary to update the position of x & y
       }
 			current.draw(styles);
 			if(current.dy) dy=current.dy()*-1;

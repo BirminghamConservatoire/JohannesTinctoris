@@ -2107,10 +2107,14 @@ function ligatureDrawingKit(ligarray){
   }
 }
 
+/** @memberof base
+ * @summary Given the bits of a formatted text object, draw it to textBlock.
+ * textBlock is assumed to be a <text> element in an SVG and to have
+ * been positioned already
+ * @param textBlock svg text element
+ * @param components components of TextUnderlay
+ */
 function drawRichText(textBlock, components){
-	// Given the bits of a formatted text object, draw it to textBlock.
-	// textBlock is assumed to be a <text> element in an SVG and to have
-	// been positioned already
 	var dy = false;
 	var styles = new Array();
 	var oldSVG = SVG;

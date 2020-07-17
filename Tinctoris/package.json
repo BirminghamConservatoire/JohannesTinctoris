@@ -1,0 +1,34 @@
+{
+  "name": "tinctoris-website",
+  "version": "1.0.0",
+  "description": "This is the website of the edition of Johannes Tinctoris Complete Theoretical Works",
+  "main": "index.html",
+  "directories": {
+    "doc": "doc"
+  },
+  "devDependencies": {
+    "docdash": "^1.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BirminghamConservatoire/JohannesTinctoris.git"
+  },
+  "keywords": [
+    "tinctoris",
+    "edition"
+  ],
+  "author": "David Lewis",
+  "contributors": [
+    {
+      "name": "Anna Plaksin"
+    }
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BirminghamConservatoire/JohannesTinctoris/issues"
+  },
+  "homepage": "https://github.com/BirminghamConservatoire/JohannesTinctoris#readme"
+}

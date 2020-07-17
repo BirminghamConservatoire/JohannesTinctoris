@@ -2049,6 +2049,8 @@ function getTag (tag){
       return new LargeOpen();
     case "</large>": 
       return new LargeClose();
+    case "<l/>":
+        return new Linebreak();
     default:
       if(tag.charAt(1)==="/"){
         var obj = new GenericClose();

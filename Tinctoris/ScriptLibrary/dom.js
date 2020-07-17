@@ -1,3 +1,7 @@
+/** @fileoverview dom.js
+ * Contains functions for DOM interaction
+ */
+
 function DOMEl(tag, cname, id){
   var el = document.createElement(tag);
   if(cname) el.className = cname;
@@ -171,8 +175,14 @@ function removeTooltip(hovered){
 // SVG
 //
 
+/** @namespace SVGfunctions
+ * @summary Contains functions to create svg elements
+ */
+
+ /** @memberof SVGfunctions */
 var SVGNS = "http://www.w3.org/2000/svg";
 
+/** @memberof SVGfunctions */
 function svg (w,h){
   var svg=document.createElementNS(SVGNS,"svg");
   if(w) svg.setAttribute('width', w);
@@ -180,6 +190,7 @@ function svg (w,h){
   return svg;
 }
 
+/** @memberof SVGfunctions */
 function clearSVG(svgEl){
 //  $(svgEl).children().detach().remove();
   $(svgEl).empty();
@@ -187,6 +198,8 @@ function clearSVG(svgEl){
   //   svgEl.removeChild(svgEl.firstChild);
   // }
 }
+
+/** @memberof SVGfunctions */
 function svgCSS(element, css){
   var link = document.createElementNS(SVGNS, "link");
   link.setAttributeNS(null, "href", css);
@@ -195,6 +208,18 @@ function svgCSS(element, css){
   element.appendChild(link);
   return element;
 }
+
+/** @memberof SVGfunctions
+ * @summary Creates an SVG text element
+ * @param svgEl parent svg element
+ * @param x x-axis position
+ * @param y y-axis position
+ * @param cname class name
+ * @param id element id
+ * @param {string} style style attribute value
+ * @param {string} content text content
+ * @returns svg text element
+ */
 function svgText(svgEl, x, y, cname, id, style, content){
   var el = document.createElementNS(SVGNS, "text");
   if(content) var textNode = document.createTextNode(content);
@@ -207,6 +232,14 @@ function svgText(svgEl, x, y, cname, id, style, content){
   if(svgEl) svgEl.appendChild(el);
   return el;
 }
+
+/** @memberof SVGfunctions
+ * @summary Creates tspan element
+ * @param svgEl parent svg element
+ * @param cname class name
+ * @param id element id
+ * @param content text content
+ */
 function svgSpan(svgEl, cname, id, content){
   var el = document.createElementNS(SVGNS, "tspan");
   if(content) var textNode = document.createTextNode(content);
@@ -216,6 +249,14 @@ function svgSpan(svgEl, cname, id, content){
   if(svgEl)  svgEl.appendChild(el);
   return el;
 }
+
+/** @memberof SVGfunctions 
+ * @summary Creates an svg group element, appends it to a parents and returns it
+ * @param svgEl parent SVG element
+ * @param {string} cname class name
+ * @param {string} id element id
+ * @returns svg group element
+*/
 function svgGroup(svgEl, cname, id){
   var el = document.createElementNS(SVGNS, "g");
   if(cname) el.setAttributeNS(null, "class", cname);
@@ -223,6 +264,8 @@ function svgGroup(svgEl, cname, id){
   if(svgEl) svgEl.appendChild(el);
   return el;
 }
+
+/** @memberof SVGfunctions */
 function svgLine(svgEl, x1, y1, x2, y2, cname, id){
   var el = document.createElementNS(SVGNS, "line");
   if(cname) el.setAttributeNS(null, "class", cname);
@@ -234,6 +277,8 @@ function svgLine(svgEl, x1, y1, x2, y2, cname, id){
   if(svgEl) svgEl.appendChild(el);
   return el;
 }
+
+/** @memberof SVGfunctions */
 function svgCircle(svgEl, x, y, r, cname, id){
   var el = document.createElementNS(SVGNS, "circle");
   if(cname) el.setAttributeNS(null, "class", cname);
@@ -244,6 +289,8 @@ function svgCircle(svgEl, x, y, r, cname, id){
   if(svgEl) svgEl.appendChild(el);
   return el;
 }
+
+/** @memberof SVGfunctions */
 function svgRect(svgEl, x, y, w, h, cname, id, rx, ry){
   var el = document.createElementNS(SVGNS, "rect");
   if(cname) el.setAttributeNS(null, "class", cname);
@@ -258,6 +305,8 @@ function svgRect(svgEl, x, y, w, h, cname, id, rx, ry){
   if(svgEl) svgEl.appendChild(el);
   return el;
 }
+
+/** @memberof SVGfunctions */
 function svgPolygon(svgEl, points, cname, id){
   var el = document.createElementNS(SVGNS, "polygon");
   if(cname) el.setAttributeNS(null, "class", cname);
@@ -267,6 +316,8 @@ function svgPolygon(svgEl, points, cname, id){
   if(svgEl) svgEl.appendChild(el);
   return el;
 }
+
+/** @memberof SVGfunctions */
 function svgPath(svgEl, commands, cname, id){
   var el = document.createElementNS(SVGNS, "path");
   if(cname) el.setAttributeNS(null, "class", cname);
@@ -275,9 +326,13 @@ function svgPath(svgEl, commands, cname, id){
   if(svgEl) svgEl.appendChild(el);
   return el;
 }
+
+/** @memberof SVGfunctions */
 function svgArc(x1, y1, x2, y2, radius) {
   return "M "+x1+" "+y1+" A "+radius+" "+radius+", 0, 1, 0, "+x2+" "+y2;
 }
+
+/** @memberof SVGfunctions */
 function svgPolyPath(points, close) {
   points = points.reverse();
   var firstPoints = points.pop()+" "+points.pop()+" ";

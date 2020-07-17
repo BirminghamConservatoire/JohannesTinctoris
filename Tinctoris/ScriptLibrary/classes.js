@@ -3962,7 +3962,8 @@ function TextUnderlay(){
       // beneath *previous* glyph
       if(eventi == 0){
         curx = rastralSize;
-      } else if (currentExample.events[eventi-1].objType != "TextUnderlay"){
+      } 
+      else if (currentExample.events[eventi-1].objType != "TextUnderlay"){
         if(!currentExample.events[eventi-1].startX){
           // FIXME: This seems to happen for texts with musical choice in them
           currentExample.events[eventi-1].startX = curx; // for now
@@ -3972,7 +3973,8 @@ function TextUnderlay(){
       if(curx < lmargin){
         curx = lmargin;
       }
-    } else {
+    } 
+    else {
       if(!this.orientation){
         curx = Math.max(curx, underlayRight(this.position));
       }
@@ -3992,88 +3994,104 @@ function TextUnderlay(){
 			}
 			if(vpos<-6) leaveSpace = true;
     }
+    // lowPoint is a global
     lowPoint = Math.max(lowPoint, cury+(2*rastralSize)-ynudge);
-    var textBlock = SVG.nodeName.toUpperCase()==="TEXT" ? SVG 
-      : svgText(SVG, curx, cury+rastralSize-ynudge, "textblock"+(this.orientation ? " r"+this.orientation : ""), 
-                false, false, false);
-    var oldSVG = SVG;
-    SVG = textBlock;
-/*    var styles = new Array();
-    var dy = false;
-    for(var i=0; i<this.components.length; i++){
-      if(typeof(this.components[i]) == "string"){
-        if(this.components[i].length>0// && /\S+/.test(this.components[i])
-          ){
-          var txt = svgSpan(SVG, 
-                            (styles.length ? textClasses(styles) :"text"), false,
-                            ((this.components.length > i+1 
-                              && this.components[i+1].objType==="MusicalChoice"
-                              && this.components[i+1].content[0].description
-                              && this.components[i+1].content[0].description.indexOf("ins.")>-1)
-                             ? this.components[i].replace(/\s+$/g, '')
-                             : this.components[i]));
-          if(dy){
-            txt.setAttributeNS(null, "dy", dy+"px");
-            dy=false;
-          }
-          // FIXME: Unneccessary now?
-          // var dx = txt.getBBox().width;
-          // curx += dx;
-        }
-      } else if(this.components[i]) {
-        if(this.components[i].objType == "MusicalChoice") {
-          this.components[i].textBlock = textBlock;
-          this.components[i].styles = styles;
-        }
-        this.components[i].draw(styles);
-        if(this.components[i].dy) dy = this.components[i].dy()*-1;
-        styles = this.components[i].updateStyles(styles);
+
+    // store basic x & y axis positions -- they'll be used to create a new textblock
+    var blockX = curx;
+    var blockY = cury+rastralSize-ynudge;
+
+    // lets see, if we have linebreaks in that object
+    var lbIndices = findLinebreaksinText(this.components);
+    
+    // creates adds a new textblock... g in case of linebreaks
+    var textBlock = false;
+    var orientClass = this.orientation ? " r"+this.orientation : "";
+    if(lbIndices.length > 0)
+    {
+      textBlock = svgGroup(SVG, "textgroup"+orientClass, false);
+      
+      let i = 0;
+      let start = 0;
+      let end = lbIndices[i];
+      do
+      {
+        let partofComponents = this.components.slice(start,end);
+        
+        let text = svgText(textBlock, blockX, blockY, "textblock"+orientClass, 
+        false, false, false);
+        drawRichText(text, partofComponents);
+        
+        start = lbIndices[i]+1;
+        i++;
+        end = i < lbIndices.length ? lbIndices[i]+1 : this.components.length;
       }
-			} */
-		drawRichText(textBlock, this.components);
+      while(i <= lbIndices.length);
+    }
+    else
+    {
+      textBlock = svgText(SVG, blockX, blockY, "textblock"+orientClass, 
+      false, false, false);
+      drawRichText(textBlock, this.components);
+    }
+
+    // Let's hope that there is no text within text... in case of emergency, try to make sense of this:
+    /*var textBlock = SVG.nodeName.toUpperCase()==="TEXT" ? SVG 
+      : svgText(SVG, blockX, blockY, "textblock"+(this.orientation ? " r"+this.orientation : ""), 
+                false, false, false);*/
+
+    //var oldSVG = SVG;
+    //SVG = textBlock;
+
+
+    // after the textblock has been created, try to find its position, then fill it afterwards (below)
+    
+    // now, the x and y coordinates has to be determined again because of crazy orientation stuff
+    // we're trying to determine if blockX and blockY updates and then set it once and for all...
     switch(hpos){
       case "l":
-        SVG.setAttributeNS(null, "x", lmargin);
+        blockX = lmargin;
         break;
       case "r":
-        SVG.setAttributeNS(null, "x", currentExample.width()-SVG.getBoundingClientRect().width-rastralSize);
+        blockX = currentExample.width()-textBlock.getBoundingClientRect().width-rastralSize;
         break;
       case "c":
-        SVG.setAttributeNS(null, "x", (currentExample.width()-SVG.getBoundingClientRect().width)/2);
+        blockX = (currentExample.width()-textBlock.getBoundingClientRect().width)/2;
     }
+
+    var width = textBlock.getBBox().width;
+		var height = textBlock.getBBox().height;
+
     if(this.orientation){
       if(this.orientation==="90c"){
         if(this.marginal==="l") {
           this.startX = lmargin-rastralSize;
-          SVG.setAttributeNS(null, "x", this.startX);
+          blockX = this.startX;
         }
         if(this.marginal==="r") {
           this.startX = curx+rastralSize*2; // currentExample.width();
-          SVG.setAttributeNS(null, "x", this.startX);
+          blockX = this.startX;
         }
-        // SVG.setAttributeNS(null, "transform", "rotate(90, "
-        //                    +this.startX+", "+(cury+rastralSize)+") translate(-"
-        //                    +(this.staffPos * rastralSize / 2)+")");
-      } else if(this.orientation==="90a"){
+      } 
+      else if(this.orientation==="90a"){
         var actualx = curx;
         if(this.marginal==="l") {
           this.startX = lmargin-(3*rastralSize/2);
           actualx = this.startX;
-          SVG.setAttributeNS(null, "x", this.startX);
+          blockX = this.startX;
         }
         if(this.marginal==="r") {
           this.startX = curx+rastralSize*2; // currentExample.width();
           actualx = this.startX;
-          SVG.setAttributeNS(null, "x", this.startX);
+          blockX = this.startX;
         }
         var actualy = cury+rastralSize-ynudge;
         // SVG.setAttributeNS(null, "transform", "rotate(-90, "
         //                    +actualx+", "+actualy+") translate("
         //                    +(this.staffPos * rastralSize / 2)+", "+rastralSize+")");
-      } else if(this.orientation==="180") {
-				var width = SVG.getBBox().width;
-				var height = SVG.getBBox().height;
-        this.startX = curx + width;
+      } 
+      else if(this.orientation==="180") {
+				this.startX = curx + width;
 				if(typeof(last(this.components))=="string" && /[,.¶:;()–\-\—!?‘’]/.test(last(last(this.components)))) this.startX -= 0.55*rastralSize;
         if(this.marginal==="l") {
           this.startX = lmargin;
@@ -4082,16 +4100,45 @@ function TextUnderlay(){
           this.startX = curx+rastralSize*2; // currentExample.width();
         }
         var actualx = this.startX;
-        SVG.setAttributeNS(null, "x", this.startX);
-				SVG.setAttributeNS(null, "y", cury-ynudge+(rastralSize*-0.25));
+        blockX = this.startX;
+				blockY = cury-ynudge+(rastralSize*-0.25);
 				//        var actualy = cury+rastralSize-ynudge;
 				var actualy = cury-ynudge;
-				var width = SVG.getBBox().width;
-        SVG.setAttributeNS(null, "transform", "rotate(180, "
+        textBlock.setAttributeNS(null, "transform", "rotate(180, "
                            +actualx+", "+actualy+")" );
 			}
     }
-    SVG = oldSVG;
+    //set x and y once and for all and for multiple blocks if necessary
+    if(lbIndices.length > 0) 
+    {
+      texts = textBlock.childNodes;
+      for(let i=0; i < texts.length; i++)
+      {
+        texts[i].setAttributeNS(null, "x", blockX);
+        texts[i].setAttributeNS(null, "y", blockY);
+
+        switch(this.orientation){
+          case "90c":
+            blockX -= width;
+            break;
+          case "90a":
+            blockX += width;
+            break;
+          default:
+            blockY += height;
+        }
+      }
+    }
+    else
+    {
+      textBlock.setAttributeNS(null, "x", blockX);
+      textBlock.setAttributeNS(null, "y", blockY);
+    }
+    
+    //try adding the text after figuring out where the block is positioned
+    //drawRichText(textBlock, this.components);
+
+    //SVG = oldSVG;
     if(!this.orientation && !this.marginal) curx = this.startX;
 //    if(this.orientation) curx+=rastralSize*2;
     if($(SVG).parent("#content")) underlays.push(textBlock);
@@ -4106,6 +4153,25 @@ function TextUnderlay(){
     return textBlock;
   };
   // Text Underlay
+}
+
+/** @memberof classes
+ * @summary Looks for Linebreak objects in the components of a TextUnderlay
+ * Is used in TextUnderlay.draw()
+ * @param {Array} components Array with components of TextUnderlay
+ * @returns {Array} index of Linebreak objects
+ */
+function findLinebreaksinText(components){
+  var indices = [];
+
+  for(let i = 0; i < components.length; i++){
+    if(components[i].objType==="Linebreak")
+    {
+      indices.push(i);
+    }
+  }
+
+  return indices;
 }
 
 function textwidth(thing){
@@ -4367,6 +4433,29 @@ function RedlineClose(){
   this.draw = function(){
     currentExample.classes.addClass(this);
     currentRedline = false;
+    this.startX = curx;
+  };
+}
+
+/**@class
+ * @memberof classes
+ * @summary Class that marks line breaks in TextUnderlay
+ */
+function Linebreak(){
+  this.objType = "Linebreak";
+  this.startX = false;
+  this.oneOff = true;
+  this.tag = "l/";
+  this.toText = function(){
+    return "<"+this.tag+">";
+  }
+  this.width = zeroWidth;
+  this.updateStyles = function(styles){
+    //styles.push("newLine");
+    return styles;
+  };
+  this.draw = function(){
+    currentExample.classes.addClass(this);
     this.startX = curx;
   };
 }

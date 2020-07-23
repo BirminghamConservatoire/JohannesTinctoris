@@ -5431,12 +5431,12 @@ function MChoice(){
   if(currentExample.classes && currentExample.classes.classes.length){
     this.classList = currentExample.classes.classes.slice(0);
   }
+  /** A single reading may be split into several in cases where we
+   * want the clef/sig/staff information to be displayed
+   * separately. The exact rules for deciding this have changed at
+   * least twice so far, so the code for this function should be
+   * considered volatile. */
   this.addReading = function(witnesses, string, description, description2, staffing){
-    // A single reading may be split into several in cases where we
-    // want the clef/sig/staff information to be displayed
-    // separately. The exact rules for deciding this have changed at
-    // least twice so far, so the code for this function should be
-    // considered volatile.
     var agreement = stavesAgree(staffing);
     var isntdefault = this.content.length || description ==="ins." || 
         description==="ins. & del.";
@@ -5484,9 +5484,11 @@ function MChoice(){
     currentClef = oldClef;
   };
   // MChoice
+  /** addTextReading */
   this.addTextReading = function(witnesses, string, description, description2){
     this.content.push(new MReading(witnesses, string?getSubText():[], description, description2));
   };
+  /** addOmission */
   this.addOmission = function(witnesses, description, description2, staffing){
     var agreement = stavesAgree(staffing);
     var oldClef = currentClef;
@@ -5501,12 +5503,15 @@ function MChoice(){
     }
     currentClef=oldClef;
   };
+  /** addNilReading */
   this.addNilReading = function(witnesses){
     this.content.push(new MNilReading(witnesses));
   };
+  /** determines width */
   this.width = function(){
     return this.content.length && this.content[0] ? this.content[0].width() : 0;
   };
+  /** infop */
   this.infop = function(){
     // Find out if this contains useful prefatory info
     if(this.content[0].applies(false)){
@@ -5514,6 +5519,7 @@ function MChoice(){
     }
     return false;
   };
+  /** applicableReading */
   this.applicableReading = function(variant){
     for(var i=0; i<this.content.length; i++){
       if(typeof(this.content[i].applies)=="undefined") debugger;
@@ -5521,6 +5527,7 @@ function MChoice(){
     }
     return false;
   };
+  /** addParams */
   this.addParams = function(params){
     for(var i=0; i<this.content.length; i++){
       if(infop(this.content[i].content[0])){
@@ -5528,6 +5535,7 @@ function MChoice(){
       }
     }
   };
+  /** ignorable */
   this.ignorable = function(){
     // Find out if this contains useful prefatory info
     if(this.content[0].applies(false)){
@@ -5535,9 +5543,11 @@ function MChoice(){
     }
     return true;
   };
+  /** varEndStaffPos */
   this.varEndStaffPos = function(variant){
     return false;
   };
+  /** clefp */
   this.clefp = function(variant){
     if(variant){
       for(var i=0; i<this.content.length; i++){
@@ -5552,6 +5562,7 @@ function MChoice(){
     }
     return false;
   };
+  /** solmp */
   this.solmp = function(variant){
     if(variant){
       for(var i=0; i< (variant? this.content.length : 1); i++){
@@ -5566,6 +5577,7 @@ function MChoice(){
     }
     return false;
   };
+  /** overPrevious??? */
 	this.overPrevious = function(){
 		var op = false;
 		for(var i=0; i<this.content.length; i++){
@@ -5580,7 +5592,8 @@ function MChoice(){
 			}
 		}
 		return op;
-	};
+  };
+  /** toText */
   this.toText = function(){
     // FIXME:!!
     var string = "{var=";
@@ -5591,10 +5604,10 @@ function MChoice(){
     return string + "}";    
   };
   // MChoice
+  /** Draw the popup box for variants
+   * First we need to prep some variable and check what the current
+   * accepted clef/solm/mens are. */
   this.tip = function(tipSVG){
-		// Draw the popup box for variants
-		// First we need to prep some variable and check what the current
-		// accepted clef/solm/mens are.
     var oldSystem = systemLines;
     var oldClef = currentClef;
     var prevSVG = SVG;
@@ -5687,11 +5700,13 @@ function MChoice(){
     return tipSVG;
   };
   // MChoice
+  /** nonDefault */
   this.nonDefault = function(){
     return this.content.length &&
       (this.content[0].description == "ins." 
        || this.content[0].description == "ins. & del.");
   };
+  /** hasPart */
 	this.hasPart = function(){
 		// Does this have new voice information for MEI export?
 		if(this.nonDefault()) return false;
@@ -5703,7 +5718,8 @@ function MChoice(){
 			}
 		}
 		return false;
-	};
+  };
+  /** toMEI */
 	this.toMEI = function(doc, parent){
 		if(!parent) parent = doc.currentParent;
 		if(flattenOnExport){
@@ -5731,7 +5747,8 @@ function MChoice(){
 			parent.appendChild(choiceel);
 			return choiceel;
 		}
-	}
+  }
+  /** draws the variant */
   this.draw = function(prepsolm){
     //FIXME
 		this.startX = curx;
@@ -5781,6 +5798,7 @@ function MChoice(){
       : this.SVG.getBoundingClientRect().width;
     SVG = this.SVG;
   };
+  /** updateStyles */
   this.updateStyles = function(styles) { return styles;};
   // MChoice
 }

@@ -164,6 +164,9 @@ body.edition, .edition .container{
 .content ul, .content ol { 
 	padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
 }
+.content ul ul {
+	padding-bottom: 0;
+}
 
 /* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
 ul.nav {
@@ -262,8 +265,9 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
   }
 }
 #EMT{
-	width: 15%;
-  min-width: 193px;
+	/* width: 15%; */
+  /* min-width: 193px; */
+	width: max(20%, 225px);
 }
 .bloglink {
   float:right;
@@ -293,6 +297,11 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 	min-height: 36px;
 	margin: 0 auto 10px auto;
 	width: 842px;
+}
+.frontpagemenu.fourblock{
+	min-height: 36px;
+	margin: 0 auto 10px auto;
+	width: 562px;
 }
 .frontpagemenu > ul > li {
 	height: 36px;
@@ -649,6 +658,7 @@ HILLBLU libro, each released under CC-SA3 by its respective authors */
 .fn {
   vertical-align: super;
   font-size: 90%;
+	line-height: 1;
 }
 .note .fn {
   padding-right: 4px;
@@ -867,4 +877,109 @@ img.logo {
   padding: 12px;
   background-color: #FFF;
   margin-left: 24px;
+}
+.microsite {
+	padding: 0 1em;
+	border-left: 4px #cc2414 solid;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+.pubDate {
+	text-align: center;
+	font-size: 95%;
+}
+h2.editors {
+	font-weight: bold;
+	text-align: center;
+	font-size: 98%;
+}
+p.abstract {
+	/* text-align: justify; */
+	padding: 0 6.5em 1em 4em;
+	font-size: 97%;
+}
+h1.longTitle {
+	font-size: 180%;
+	padding-top: 1em;
+}
+@media screen and (max-width: 1370px) {
+  h1.longTitle{
+	  font-size: 140%;
+  }
+}
+@media screen and (max-width: 1100px) {
+  h1.longTitle{
+	  font-size: 120%;
+  }
+	#Team {
+		overflow: invisible;
+		width: calc(50% - 225px);
+	}
+}
+div.article td {
+	vertical-align: top;
+}
+div.contentbox.article p  {
+	padding-left: 25px;
+}
+.epoch {
+	font-variant: small-caps;
+}
+.fraktur {
+	font-family: UnifrakturCook;
+	font-size: 110%;
+}
+.contentbox p.blockQuote {
+	padding-left: 5em;
+	padding-right: 5em;
+}
+p > sup:first-child {
+	float: left;
+	margin-left: -2.5em;
+	font-size: 70%;
+}
+span.para-no {
+	float: left;
+	margin-left: -2.5em;
+	font-size: 90%;
+}
+.contentbox.article table {
+	table-layout: fixed;
+	width: 100%;
+}
+@media screen and (min-width: 700px) {
+.verse p, div.contentbox.article p.verse{
+	text-indent: -0.4em;
+	padding-left: 1.4em;
+	margin-bottom: 0.1em;
+	min-height: 4.3em;
+}
+@media screen and (min-width: 1200px) {
+.verse p, div.contentbox.article p.verse {
+	text-indent: -1em;
+	padding-left: 2em;
+	margin-bottom: 0.1em;
+	min-height: 3em;
+}
+@media screen and (min-width: 1270px) {
+.verse p, div.contentbox.article p.verse {
+	text-indent: -2em;
+	padding-left: 3em;
+	margin-bottom: 0.1em;
+	min-height: 3em;
+}
+@media screen and (min-width: 1350px) {
+.verse p, div.contentbox.article p.verse {
+	text-indent: -5em;
+	padding-left: 6em;
+	margin-bottom: 0.1em;
+	min-height: 3em;
+}
+}@media screen and (min-width: 1550px) {
+.verse p, div.contentbox.article p.verse {
+	text-indent: -9em;
+	padding-left: 10em;
+	margin-bottom: 0.2em;
+	min-height: 3.1em;
+}
 }

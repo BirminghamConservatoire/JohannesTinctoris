@@ -39,6 +39,12 @@ function getNoteEntries(){
   });
 }
 
+function getParagraphs(){
+	var paragraphs = $(".contentbox p sup:first-child");
+	console.log(paragraphs.size(), paragraphs);
+	paragraphs.map(function(i, x) { var foo=DOMAnchor('paragraph', "para-"+x.innerHTML.match(/\d+/)[0], false);  x.appendChild(foo) });
+}
+
 function getNotes(){
   // Fetch all references to notes, store them in allNotes and add
   // footnote numbers for reference
@@ -62,6 +68,29 @@ function maybeHideNote(e){
 //  }
 }
 
+function getNote(anchor){
+	// Get the relevant footnote. If it's a multi-paragraph footnote,
+	// grab all the paragraphs, and put them in a div
+	var note = $(anchor).parents("p")[0];
+	var nextParaIsNextNote = $(note.nextElementSibling).has("a[id]").size()>0;
+	console.log('test', nextParaIsNextNote, note.nextElementSibling);
+	if(nextParaIsNextNote){
+		return note.cloneNode(true);
+	} else {
+		var bigNote = DOMDiv("longnote", false);
+		bigNote.appendChild(note.cloneNode(true));
+		console.log("o", note.parentNode,
+								$(note.nextElementSibling).has("a[id]").size()==0);
+		while(note.nextElementSibling && $(note.nextElementSibling).has("a[id]").size()==0){
+			note = note.nextElementSibling;
+			console.log(bigNote, note);
+			// FIXME: hack
+			bigNote.appendChild(note);
+		}
+		return bigNote;
+	}
+}
+
 function showNote(e){
   e.preventDefault();
   var index = 1+$(this).data("index");
@@ -71,7 +100,8 @@ function showNote(e){
   // var anchor = DOMAnchor("{"+$(this).data("ref")+"}", false, false, false);
   // anchor.name = "{"+$(this).data("ref")+"}";
   if(note && note.length) {
-    note = $(note[0]).parents("p")[0].cloneNode(true);
+		//    note = $(note[0]).parents("p")[0].cloneNode(true);
+		note = getNote(note[0]);
     $(note).addClass("note");
     if(!id) console.log("note id error");
     note.id=id;
@@ -189,6 +219,7 @@ function imageToggles(){
 
 $(function(){
   getNotes();
+	getParagraphs();
   getFigures();
   inlineNotes();
   updateXRefs();

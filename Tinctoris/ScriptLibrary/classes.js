@@ -6248,6 +6248,12 @@ function ObliqueNoteChoice(){
 }
 
 /** @class  
+ * @param witnesses
+ * @param content content of the reading
+ * @param description description of the reading
+ * @param description2 another description?
+ * @param {Array} staves stave, clef and solm information
+ * @param {MChoice} choice parent choice of the reading
  * @memberof classes*/
 function MReading(witnesses, content, description, description2, staves, choice){
   this.objType = "MusicalReading";
@@ -6262,9 +6268,10 @@ function MReading(witnesses, content, description, description2, staves, choice)
 	//  this.ligReading = false;// not used
   this.eventi = false;
   this.drawPrep = false;
-  // we need to pull out staff, clef and solm information
+  // here, every object that is inside the reading gets a reference to the parent choice obj
   for(var i=content.length-1; i>=0; i--){
-		content[i].choice = choice;
+    content[i].choice = choice;
+    // we need to pull out staff, clef and solm information
     if(content[i].objType == "Staff" ||
        content[i].objType == "Clef" ||
        content[i].objType == "SolmizationSignature"){

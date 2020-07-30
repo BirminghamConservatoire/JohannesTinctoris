@@ -120,31 +120,44 @@ function MusicExample(){
     currentInfo = this.parameters;
     this.w2 = [];
     consumeSpace();
-    while(string.length >0){
+    while(string.length >0)
+    {
       length = string.length;
       next = nextEvent();
-      if(next){
-        if(prev) {
+      if(next)
+      {
+        if(prev) 
+        {
           prev.next = next;
           next.previous = prev;
         }
-				if(next.objType==="Part") {
+        if(next.objType==="Part") 
+        {
 					currentProp = 1;
 					next.wordNo = this.events.length;
-					if(next.closes){
+          if(next.closes)
+          {
 						let lastEl = openParts.pop();
-						if(lastEl){
+            if(lastEl)
+            {
 							next.startEl = lastEl;
 							next.startEl.endEl = next;
-						} else {
+            } 
+            else 
+            {
 							console.log("missed", this.events.slice(this.events.length -10));
 						}
-					} else {
-						if(openParts.length){
+          } 
+          else 
+          {
+            if(openParts.length)
+            {
 							let lowestOpen = openParts[openParts.length-1];
 							lowestOpen.contains.push(next);
 							next.parent = lowestOpen;
-						} else {
+            } 
+            else 
+            {
 							console.log(next.type);
 						}
 						openParts.push(next);
@@ -153,90 +166,124 @@ function MusicExample(){
 				if(next.changesProportion && next.changesProportion()) currentProp = next.proportionChangesTo;
 				if(next.objType==="Part" && next.type==="part") this.parts.push(next);
 				if(next.objType==="MusicalChoice" && next.hasPart()) this.parts.push(next.hasPart());
-        if(currentInfo){
-          if(infop(next)){
+        if(currentInfo)
+        {
+          if(infop(next))
+          {
             currentInfo.extras.push(next);
             next.params = currentInfo;
             if(next.objType=="MusicalChoice") next.addParams(currentInfo);
-          } else if(!ignorable(next)){
+          } 
+          else if(!ignorable(next))
+          {
             currentInfo = false;
           }
-        } else if(next.objType==="Staff"){
-					if(prev.objType="Part" || prev.subType=="part"){
+        } 
+        else if(next.objType==="Staff")
+        {
+          if(prev.objType="Part" || prev.subType=="part")
+          {
 						prev.staff = next;
 						next.part = prev;
 					}
           currentInfo = next;
-          for (var i=this.events.length-1; i>0; i--){
-            if(this.events[i].objType==="TextUnderlay"){
+          for (var i=this.events.length-1; i>0; i--)
+          {
+            if(this.events[i].objType==="TextUnderlay")
+            {
               this.events[i].marginal="r";
               break;
-            } else if(this.events[i].objType!="NegativeSpace"){
+            } 
+            else if(this.events[i].objType!="NegativeSpace")
+            {
               break;
             }
           }
         }
         if(next.objType==="SolmizationSignature" 
-           && this.events.length && this.events[this.events.length-1].objType==="Clef"){
-          this.events[this.events.length-1].solm = next;
-        }
-        if(next.objType=="Dot"){
+           && this.events.length && this.events[this.events.length-1].objType==="Clef")
+            {
+              this.events[this.events.length-1].solm = next;
+            }
+        if(next.objType=="Dot")
+        {
           next.augments = augmented;
-        } else if(next.objType=="Fermata"){
+        } 
+        else if(next.objType=="Fermata")
+        {
           next.lengthens = augmented;
-        } else if(next.objType==="SignumCongruentiae"){
-//          console.log(currentChoice, this.events[this.events.length-1]);
-          if(currentChoice){
+        } 
+        else if(next.objType==="SignumCongruentiae")
+        {
+          // console.log(currentChoice, this.events[this.events.length-1]);
+          if(currentChoice)
+          {
             console.log("it happened");
             next.effects = currentChoice;
-          } else {
+          } 
+          else 
+          {
             next.effects = this.events[this.events.length-1];
           }
-        } else if (next.objType==="Comment" && this.events.length && 
-                   this.events[this.events.length-1].objType==="Ligature"){
-          var c = new LigatureComment(next);
-          currentExample.comments.push(c);
-          this.events[this.events.length-1].members.push(c);
-          // I think this is necessary because otherwise we get two
-          // comments -- a ligature comment and a normal comment
-          next = c;
-          prev = next;
-          continue;
-          //
-        } else if(next.objType=="MusicalChoice" && augmented 
-                  && next.content.length && !next.content[0].nonDefault()
-                  && next.content[0].content.length && next.content[0].content[0].objType==="Fermata"){
-          next.content[0].content[0].lengthens = augmented;
-        }
+        } 
+        else if (next.objType==="Comment" && this.events.length && 
+                   this.events[this.events.length-1].objType==="Ligature")
+          {
+            var c = new LigatureComment(next);
+            currentExample.comments.push(c);
+            this.events[this.events.length-1].members.push(c);
+            // I think this is necessary because otherwise we get two
+            // comments -- a ligature comment and a normal comment
+            next = c;
+            prev = next;
+            continue;
+          } 
+        else if(next.objType=="MusicalChoice" && augmented 
+                  && next.content.length //&& !next.content[0].nonDefault()
+                  && next.content[0].content.length && next.content[0].content[0].objType==="Fermata")
+          {
+            next.content[0].content[0].lengthens = augmented;
+          }
         if(next.objType==="TextUnderlay" && this.events.length
            && typeof(this.events[this.events.length-1].text) !=="undefined"
-           && !this.events[this.events.length-1].text) {
-          if(this.events[this.events.length-1].objType !== "SignumCongruentiae"){
-            // FIXME: This is a painful hack. sig cong is treated by
-            // the system as an event in its own right, that happens
-            // to take its position from the note before. That would
-            // be fine, even if we add text, but not if the text
-            // should alter the position of the note that the sig cong
-            // attaches to. In that case, we'd draw it before adjusting the position.
-						if(last(this.events).objType==="Dot" && last(this.events).augments){
-							// If a dot follows a note, put the text under the note
-							last(this.events).augments.text=next;
-            }
-            else if (last(this.events).objType==="Fermata" && last(this.events).lengthens){
-							// If a fermata follows a note, put the text under the note
-              last(this.events).lengthens.text=next;
-            } 
-            else {
+           && !this.events[this.events.length-1].text) 
+          {
+            if(this.events[this.events.length-1].objType !== "SignumCongruentiae")
+            {
+              // FIXME: This is a painful hack. sig cong is treated by
+              // the system as an event in its own right, that happens
+              // to take its position from the note before. That would
+              // be fine, even if we add text, but not if the text
+              // should alter the position of the note that the sig cong
+              // attaches to. In that case, we'd draw it before adjusting the position.
+              if(last(this.events).objType==="Dot" && last(this.events).augments)
+                {
+							    // If a dot follows a note, put the text under the note
+							    last(this.events).augments.text=next;
+                }
+              else if (last(this.events).objType==="Fermata" && last(this.events).lengthens)
+              {
+							  // If a fermata follows a note, put the text under the note
+                last(this.events).lengthens.text=next;
+              } 
+            else 
+            {
 							this.events[this.events.length-1].text=next;
 						}
-          } else if (this.events.length>1){
+          } 
+          else if (this.events.length>1)
+          {
             this.events[this.events.length-2].text=next;
           }
-        } else {
+        } 
+        else 
+        {
           this.events.push(next);
         }
         prev = next;
-      } else if(length == string.length){
+      } 
+      else if(length == string.length)
+      {
         // We're stuck in a loop. Try to escape
         string = string.substring(1);
       }
@@ -3012,48 +3059,73 @@ function nextMusic(parent){
     string = hackedString;
   }
   consumeSpace();
-  while(string.length >0){
+  while(string.length >0)
+  {
     length = string.length;
     next = nextEvent();
-    if(next){
-      if(prev){
+    if(next)
+    {
+      if(prev)
+      {
         prev.next = next;
         next.previous = prev;
       }
       if(next.objType==="SolmizationSignature"
-         && results.length && results[results.length-1].objType==="Clef"){
+         && results.length && results[results.length-1].objType==="Clef")
+      {
         results[results.length-1].solm = next;
       }
-      if(parent){
+      if(parent)
+      {
         next = parent.enrichEvent(next, results);
       }
-      if(next) {
-        if(next.objType=="Dot"){
+      if(next) 
+      {
+        if(next.objType=="Dot")
+        {
           next.augments = augmented;
-        } else if(next.objType=="Fermata"){
+        } 
+        else if(next.objType=="Fermata")
+        {
           next.lengthens = augmented;
-        } else if(next.objType==="SignumCongruentiae"){
-//          console.log(currentChoice, this.events[this.events.length-1]);
-          if(currentChoice){
+        } 
+        else if(next.objType==="SignumCongruentiae")
+        {
+          // console.log(currentChoice, this.events[this.events.length-1]);
+          if(currentChoice)
+          {
             next.effects = currentChoice;
-          } else {
+          } else 
+          {
             next.effects = this.events[this.events.length-1];
           }
-        } else if (next.objType==="Comment" && this.events.length && 
-                   this.events[this.events.length-1].objType==="Ligature"){
+        } 
+        else if (next.objType==="Comment" && this.events.length && 
+                   this.events[this.events.length-1].objType==="Ligature")
+        {
           var c = new LigatureComment(next);
           currentExample.comments.push(c);
           this.events[this.events.length-1].members.push(c);
           // I think this is necessary because otherwise we get two
           // comments -- a ligature comment and a normal comment
           next = c;
-          prev = next;
+          // prev = next; --- Why was this only in here?! I put 
+          // this line down below where next is pushed
           continue;
           //
         } 
+        else if(next.objType=="MusicalChoice" && augmented 
+                  && next.content.length //&& !next.content[0].nonDefault()
+                  && next.content[0].content.length && next.content[0].content[0].objType==="Fermata")
+          {
+            next.content[0].content[0].lengthens = augmented;
+          }
         results.push(next);
+        prev = next;
       }
-    } else if(length == string.length){
+    } 
+    else if(length == string.length)
+    {
       // We're stuck in a loop. Try to escape
       string = string.substring(1);
     }

@@ -5755,6 +5755,7 @@ function MChoice(){
     this.startY = cury;
     this.SVG = SVG;
     var click;
+    var backtrack;
     if(this.content.length){
       if(this.nonDefault()){
         if(showvariants){
@@ -5762,7 +5763,7 @@ function MChoice(){
             click = svgSpan(this.textBlock, "musical ins variants", false, "‸");
           } else {
 						if(this.overPrevious()){
-							var backtrack = curx -currentExample.events[eventi-1].startX;
+              backtrack = curx -this.previous.startX;
 						} else {
 							backtrack = rastralSize/3;
 						}

@@ -2,7 +2,7 @@
     "plugins": ["plugins/markdown"],
     "recurseDepth": 10,
     "source": {
-        "include": ["./editor/music","./ScriptLibrary"],
+        "include": ["./Tinctois/editor/music","./Tinctoris/ScriptLibrary"],
         "exclude": [],
         "includePattern": "(.+\\.js?$)",
         "excludePattern": "(jquery)"
@@ -19,10 +19,10 @@
     "opts": {
         "template": "./node_modules/docdash/",
         "encoding": "utf8",
-        "destination": "./doc/",
+        "destination": "./Tinctoris/doc/",
         "recurse": true,
-        "tutorials": "./doc_md",
-        "readme": "readme.md"
+        "tutorials": "./Tinctoris/doc_md",
+        "readme": "./Tinctoris/readme.md"
     },
     "docdash": {
         "sectionOrder": ["Tutorials","Modules", "Namespaces","Classes","Globals"],

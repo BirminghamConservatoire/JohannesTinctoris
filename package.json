@@ -1,10 +1,10 @@
 {
-  "name": "tinctoris-website",
-  "version": "1.0.0",
+  "name": "emt-website",
+  "version": "0.0.1",
   "description": "This is the website of the edition of Johannes Tinctoris Complete Theoretical Works",
   "main": "index.html",
   "directories": {
-    "doc": "doc"
+    "doc": "./Tinctoris/doc"
   },
   "devDependencies": {
     "docdash": "^1.2.0"
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BirminghamConservatoire/JohannesTinctoris.git"
+    "url": "git+https://github.com/EarlyMusicTheory/JohannesTinctoris.git"
   },
   "keywords": [
     "tinctoris",
@@ -28,7 +28,7 @@
   ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/BirminghamConservatoire/JohannesTinctoris/issues"
+    "url": "https://github.com/EarlyMusicTheory/JohannesTinctoris/issues"
   },
-  "homepage": "https://github.com/BirminghamConservatoire/JohannesTinctoris#readme"
+  "homepage": "https://github.com/EarlyMusicTheory/JohannesTinctoris#readme"
 }

@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+  <title>Johannes Tinctoris: Complete Practical Works</title>
+  <link rel="icon" type="image/png" href="../Images/jt.png">
+  <link href="../SpryAssets/SpryMenuBarHorizontal.css" rel="stylesheet" type="text/css" />
+  <link href="../SpryAssets/SpryAccordion.css" rel="stylesheet" type="text/css" />
+  <link href="../thrColLiqHdr.css" rel="stylesheet" type="text/css" /><!--[if lte IE 7]>
+  <style>
+  .content { margin-right: -1px; } /* this 1px negative margin can be placed on any of the columns in this layout with the same corrective effect. */
+  ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it needs to correct extra whiltespace between the links */
+  </style>
+  <![endif]-->
+  <script src="../ScriptLibrary/privatemenu.js" type="text/javascript"></script>
+  <script src="../SpryAssets/SpryMenuBar.js" type="text/javascript"></script>
+  <script src="../SpryAssets/SpryAccordion.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    function showNote(){ 
+      alert("We strive to ensure that these pages\
+ conform to web standards, but these standards are continually evolving, and\
+ are not always quickly and consistently adopted by browser\
+ developers.\n\
+ We test our pages on the latest versions of Webkit and\
+ Gecko-based browsers (e.g. Mozilla Firefox, Apple Safari and\
+ Google Chrome) on Mac OS 10.7+. Other browsers and platforms\
+ may display some aspects of the site differently than intended.\n\
+ We are keen to hear about any technical issues that do arise.");
+    }
+    function addTechWarn(){
+      var agent = window.navigator.userAgent;
+      if(agent.indexOf("Mac OS X")>=0){
+        // Mac
+        if(agent.indexOf("Gecko/")>=0 || agent.indexOf("AppleWebKit/")>=0){
+          // Browser ok.
+          return;
+        }
+      }
+      var w = document.getElementById("warn");
+      w.innerHTML = "<span>Browser Note</span>";
+      w.onclick = showNote;
+  console.log("warned");
+    }
+  </script>
+</head>
+
+<body onload="addTechWarn()">
+
+<div class="container">
+  <div class="header">
+  	<div class="imagebox" id="EMT"><a href="../../#"><img src="../Images/EMT logo full.png" id="EMTLogo" alt="Early Music Theory Logo" name="EMTLogo"  /></a> </div>
+    <div class="imagebox" id="projectlogo"><h1><a href="../#">Johannes Tinctoris</a></h1></div>
+    <div class="imagebox right QuickLinks" id="Team">
+      <!-- <a href="#"><img src="Images/masthead_team.png" id="JTTeam" alt="Team: Ronald Woodley, Jeffrey Dean & David Lewis" /></a> -->
+      <!-- FIXME: not accessible -->
+      <a href="../Project/ProjectTeam/#">
+      <table class="team">
+        <tr>
+          <td id="projectTeam"></td>
+          <td id="RonaldWoodley"></td>
+        </tr>
+        <tr>
+          <td />
+          <td id="JeffreyDean"></td>
+        </tr>
+      </table>
+      </a>
+          <a href="http://earlymusictheory.org/blog" id="QLBlog"></a>
+          <div class="ql-divider"></div>
+          <a href="http://earlymusictheory.org/Tinctoris" id="QLHome"></a>      
+    </div>
+  </div>
+	<div class="nav">
+  	<div class="row">
+			<div class="tabl">
+   	 		<div class="frontpagemenu fourblock">
+  				<ul id="MenuBar1" class="MenuBarHorizontal MenuBarActive">
+            <li><a class="MenuBarItem" href="../">Home</a></li>
+            <li><a href="#" class="MenuBarItem">Test 1</a></li>
+            <li><a href="#" class="MenuBarItem">Test 2</a></li>
+            <li><a href="#" class="MenuBarItem">Test 3</a></li>
+					</ul>
+				</div>
+  		</div>
+	    <div class="tabr"></div>
+    </div>
+  </div>
+  <div class="sidebar1">
+    <!-- left sidebar-->
+  </div>
+  <div class="content">
+  	<div class="contentbox">
+			<main>
+				<div id="rendered" class="notation pane">
+          <div class="cursorLocator"></div>
+          <div id="content"></div>
+        </div>
+			</main>
+  	</div>
+    <!-- end .content -->
+  </div>
+  <div class="sidebar2">
+    <div class="imagebox">
+      <img src="../Images/v_jtlarge.jpg" alt="Image of Tinctoris" />
+    </div>
+    <div class="contentbox">
+      Johannes Tinctoris, depicted seated at his desk<br />
+      <br />
+      <em>Universitat de València, Biblioteca Històrica<br />
+      MS 835, fol. 2 (detail)</em><br />
+  </div>
+
+    <!-- end .sidebar2 --></div>
+  <div class="footer">
+   
+    <!-- end .footer --></div>
+  <!-- end .container --></div>
+  <script type="text/javascript">
+		var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"../SpryAssets/SpryMenuBarDownHover.gif", imgRight:"../SpryAssets/SpryMenuBarRightHover.gif"});
+		var Accordion1 = new Spry.Widget.Accordion("Accordion1");
+  </script>
+</body>
+</html>

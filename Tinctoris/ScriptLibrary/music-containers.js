@@ -346,7 +346,7 @@ function MusicHolder(text, outdiv){
       this.draw = function(){
           state = "Starting to draw";
           curDoc = this;
-          editable=true;
+          //editable=true;
           this.footnotes = [];
           if(!this.forceredraw && this.out.childNodes.length){
               return;

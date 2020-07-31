@@ -7,5 +7,7 @@ Base transcription: CS35
 Sources:
 CS35	V-CVbav Cappella Sistina 35, fols. lxiiij^s^-lxxxij^d^ (85^v^-104^r^)	Tinctoris	tttt
 <piece: {mensural: void}, {staf: 5, black}>
+<part: 1>
 {clef: C6} {solm: bb ^bbb} {mens: O7} Bd <text>Kyrie</text> Sg mg.
+</part>
 </piece>

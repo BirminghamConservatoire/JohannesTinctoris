@@ -52,8 +52,8 @@ function grabFromFile(fileUri, musicContainer)
     client.send();
 }
 
-$(document).ready(function() {
-
+function loadData() {
+    musicMap.clear();
     var ids = [];
     var items = document.getElementsByClassName("load");
     for(let i = 0; i < items.length; i++)
@@ -65,22 +65,53 @@ $(document).ready(function() {
         var container = new MusicDocContainer(ids[i]);
         grabFromFile(ids[i], container);
         musicMap.set(ids[i], container);
-        
     }
-    console.log("loaded data");
+}
 
-    $(".load").click(function() {
-        let id = this.getAttribute("id");
-        musicMap.get(id).draw();
-    });
+function loadSubMenu(menu){
+    $("#content").empty();
+        $(".sidebar1").html(menu).on("click", "a", function() {
+                let id = this.getAttribute("id");
+                if(this.className == "text")
+                {
+                    $("#content").text(musicMap.get(id).text);
+                }
+                else if (this.className == "load")
+                {
+                    musicMap.get(id).draw();
+                }
+                else
+                {
+                    $("#content").text("Oooops!");
+                }
+            }
+        );
+        loadData();
+}
 
-    $(".text").click(function() {
-        let id = this.getAttribute("id");
-        $("#content").text(musicMap.get(id).text);
-    });
-
-    $("#clean").click(function() {
+$(document).ready(function() {
+    $(".MenuBarItem").click(function() {
         $("#content").empty();
+    });
+
+    $("#home").click(function() {
+        $(".sidebar1").empty();
+    })
+
+    $("#tinctoris").click(function() {
+        var newMenu = "<ul>\n\
+        <li><a class='text' id='music/minimal.txt'>Load Text</a></li>\n\
+        <li><a class='load' id='music/minimal.txt'>Show Music</a></li>\n\
+        </ul>"
+        loadSubMenu(newMenu);
+    });
+
+    $("#dufay").click(function() {
+        var newMenu = "<ul>\n\
+        <li><a class='text' id='music/second.txt'>Second Text</a></li>\n\
+        <li><a class='load' id='music/second.txt'>Second Music</a></li>\n\
+        </ul>"
+        loadSubMenu(newMenu);
     });
 });
 

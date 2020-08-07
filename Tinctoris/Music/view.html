@@ -45,74 +45,41 @@
   
 </head>
 
-<body>
-
+<body class="edition">
 <div class="container">
-  <div class="header">
-  	<div class="imagebox" id="EMT"><a href="../../#"><img src="../Images/EMT logo full.png" id="EMTLogo" alt="Early Music Theory Logo" name="EMTLogo"  /></a> </div>
-    <div class="imagebox" id="projectlogo"><h1><a href="../#">Johannes Tinctoris</a></h1></div>
-    <div class="imagebox right QuickLinks" id="Team">
-      <a href="../Project/ProjectTeam/#">
-      <table class="team">
-        <tr>
-          <td id="projectTeam"></td>
-          <td id="RonaldWoodley"></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td id="JeffreyDean"></td>
-        </tr>
-      </table>
-      </a>
-          <a href="http://earlymusictheory.org/blog" id="QLBlog"></a>
-          <div class="ql-divider"></div>
-          <a href="http://earlymusictheory.org/Tinctoris" id="QLHome"></a>      
-    </div>
+  <div class="header shortHeader">
+  	<div class="imagebox" id="EMT"><a href="../../#"><img src="../Images/EMT logo abbr.png" id="EMTLogo" alt="Early Music Theory Logo" name="EMTLogo"  /></a> </div>
+    <div class="imagebox" id="projectlogo" style="text-align: center;"><a href="../#"><img src="../Images/JT_small.png" id="JTLogo" alt="Tinctoris EditonLogo"></a></div>
   </div>
 	<div class="nav">
   	<div class="row">
 			<div class="tabl">
    	 		<div class="frontpagemenu fourblock">
   				<ul id="MenuBar1" class="MenuBarHorizontal MenuBarActive">
-            <li><a class="MenuBarItem"><span id="clean">Clean</span></a></li>
-            <li><a class="MenuBarItem"><span id="load" load="music/minimal.txt">Test 1</span></a></li>
-            <li><a href="#" class="MenuBarItem">Test 2</a></li>
-            <li><a href="#" class="MenuBarItem">Test 3</a></li>
+            <li><a class="MenuBarItem" id="clean">Home</a></li>
+            <li><a class="MenuBarItem">Tinctoris</a></li>
+            <li><a class="MenuBarItem">Dufay</a></li>
+            <li><a class="MenuBarItem">Busnois</a></li>
 					</ul>
 				</div>
   		</div>
 	    <div class="tabr"></div>
     </div>
   </div>
-  <div class="sidebar1">
-    <!-- left sidebar-->
-  </div>
-  <div class="content">
-  	<div class="contentbox">
+  <div class="mainBody">
+    <div class="sidebar1">
+      <ul>
+        <li><a class="text" id="music/minimal.txt">Load Text</a></li>
+        <li><a class="load" id="music/minimal.txt">Show Music</a></li>
+        <li><a class="text" id="music/second.txt">Second Text</a></li>
+        <li><a class="load" id="music/second.txt">Second Music</a></li>
+      </ul>
+    </div>
 			<main id="rendered" class="notation pane">
-				<!--<div class="cursorLocator"></div>-->
         <div id="content"></div>
         <div id="footnotes"></div>
 			</main>
-  	</div>
-    <!-- end .content -->
-  </div>
-  <!-- right sidebar-->
-  <div class="sidebar2">
-    <div class="imagebox">
-      <img src="../Images/v_jtlarge.jpg" alt="Image of Tinctoris" />
-    </div>
-    <div class="contentbox">
-      Johannes Tinctoris, depicted seated at his desk<br />
-      <br />
-      <em>Universitat de València, Biblioteca Històrica<br />
-      MS 835, fol. 2 (detail)</em><br />
-  </div>
-
-    <!-- end .sidebar2 --></div>
-  <div class="footer">
-   
-    <!-- end .footer --></div>
+  <!-- end .mainBody --></div>
   <!-- end .container --></div>
   <script type="text/javascript">
 		var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"../SpryAssets/SpryMenuBarDownHover.gif", imgRight:"../SpryAssets/SpryMenuBarRightHover.gif"});

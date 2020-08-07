@@ -3,66 +3,84 @@
  * @namespace getMusic
  */
 
-var musicCode;
+ /** @global stores current music */
+var musicMap = new Map();
+/** suppress editor functions */
 editable = false;
 
-$(document).ready(function() {
+/** @class */
+class MusicDocContainer {
+    constructor(id) {
+        this.id = id;
+        this._text;
+        this._music;
+        //this.musicDoc = new MusicHolder(this.text, document.getElementById("content"));
+    }
+    set text(text) {
+        this._text = text;
+    }
+    get text() {
+        return this._text;
+    }
+    set musicDoc(text) {
+        this._music = new MusicHolder(text, document.getElementById("content"));
+    }
+    get musicDoc() {
+        return this._music;
+    }
+    draw() {
+        this.musicDoc.draw();
+    }
+}
+
+
+/** @memberof getMusic */
+function grabFromFile(fileUri, musicContainer)
+{
+    var client = new XMLHttpRequest();
     
-    function grabMusic(text) 
-    {
-        if(text)
+    client.onload = function() {
+        if (this.status >= 200 && this.status < 300)
         {
-            musicCode = text;
-            console.log(text);
-            return text;
+            console.log(client.responseText);
+            musicContainer.text = client.responseText;
+            musicContainer.musicDoc = client.responseText;
         }
-    }
-
-    function grabFromFile(fileUri)
-    {
-        var client = new XMLHttpRequest();
-        client.onreadystatechange = function() {
-            grabMusic(client.responseText);
-        };
         
-        client.open('GET', fileUri);
-        client.send();
-    }
+    };
+    client.open('GET', fileUri);
+    client.send();
+}
 
-    function makeMusicDoc()
+$(document).ready(function() {
+
+    var ids = [];
+    var items = document.getElementsByClassName("load");
+    for(let i = 0; i < items.length; i++)
     {
-        doc.draw();
+        ids.push(items[i].getAttribute("id"));
     }
-
+    for(let i = 0; i < ids.length; i++)
+    {
+        var container = new MusicDocContainer(ids[i]);
+        grabFromFile(ids[i], container);
+        musicMap.set(ids[i], container);
+        
+    }
+    console.log("loaded data");
 
     $(".load").click(function() {
-        if(musicCode)
-        {
-            doc = new MusicHolder(musicCode, document.getElementById("content"));
-            makeMusicDoc();
-        }
-        else
-        {
-            grabFromFile(this.getAttribute("id"));
-            musicCode = "";
-        }
+        let id = this.getAttribute("id");
+        musicMap.get(id).draw();
     });
 
     $(".text").click(function() {
-        if(musicCode)
-        {
-            $("#content").text(musicCode);
-            musicCode = "";
-        }
-        else
-        {
-            grabFromFile(this.getAttribute("id"));
-        }
+        let id = this.getAttribute("id");
+        $("#content").text(musicMap.get(id).text);
     });
 
     $("#clean").click(function() {
         $("#content").empty();
     });
 });
-
 

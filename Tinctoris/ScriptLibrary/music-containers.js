@@ -185,12 +185,15 @@ function MusicHolder(text, outdiv){
         return;
       }
           // FIXME: will this be a problem for titles with Colons?
+          consumeSpace();
           var title = consumeIf(/[^\r\n:]*[\r\n]/)
       if(title) {
               this.title = trimString(title);
+              consumeSpace();
               var attribution = consumeIf(/[^\r\n:]*[\r\n]/)
               if(attribution) this.attribution = trimString(attribution);
           }
+      consumeSpace();
       var nextfield=consumeIf(/[^:]*:/);
       while(nextfield){
         switch (nextfield){

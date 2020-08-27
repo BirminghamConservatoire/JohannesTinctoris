@@ -117,6 +117,10 @@ function MusicHolder(text, outdiv){
       if(this.title && showtitle){
         this.drawTo.appendChild(DOMTextEl("h2", "title", false, this.title));
       }
+      if(this.attribution && showtitle)
+      {
+        this.drawTo.appendChild(DOMTextEl("hi", "attribution", false, this.attribution));
+      }
       if(infoButtons){
         // this.infoButtons();
         this.infoButton();

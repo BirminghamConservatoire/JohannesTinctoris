@@ -8,34 +8,9 @@ var musicMap = new Map();
 /** suppress editor functions */
 editable = false;
 
-/** @class */
-class MusicDocContainer {
-    constructor(id) {
-        this.id = id;
-        this._text;
-        this._music;
-        //this.musicDoc = new MusicHolder(this.text, document.getElementById("content"));
-    }
-    set text(text) {
-        this._text = text;
-    }
-    get text() {
-        return this._text;
-    }
-    set musicDoc(text) {
-        this._music = new MusicHolder(text, document.getElementById("content"));
-    }
-    get musicDoc() {
-        return this._music;
-    }
-    draw() {
-        this.musicDoc.draw();
-    }
-}
-
 
 /** @memberof getMusic */
-function grabFromFile(fileUri, musicContainer)
+function grabFromFile(fileUri)
 {
     var client = new XMLHttpRequest();
     
@@ -43,8 +18,8 @@ function grabFromFile(fileUri, musicContainer)
         if (this.status >= 200 && this.status < 300)
         {
             console.log(client.responseText);
-            musicContainer.text = client.responseText;
-            musicContainer.musicDoc = client.responseText;
+            var musicContainer = new MusicHolder(client.responseText, document.getElementById("content"));
+            musicMap.set(fileUri, musicContainer);
         }
         
     };
@@ -62,9 +37,7 @@ function loadData() {
     }
     for(let i = 0; i < ids.length; i++)
     {
-        var container = new MusicDocContainer(ids[i]);
-        grabFromFile(ids[i], container);
-        musicMap.set(ids[i], container);
+        grabFromFile(ids[i]);
     }
 }
 

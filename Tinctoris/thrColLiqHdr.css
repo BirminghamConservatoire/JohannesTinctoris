@@ -82,6 +82,7 @@ body.edition, .edition .container{
 	float: left;
 	width: 20%;
   min-width: 188px;
+  height: 100vh;
 	background: #DDD;
 	padding: 40px 10px;
   break-before: avoid;

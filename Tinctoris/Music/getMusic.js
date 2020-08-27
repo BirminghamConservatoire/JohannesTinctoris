@@ -86,5 +86,13 @@ $(document).ready(function() {
         </ul>"
         loadSubMenu(newMenu);
     });
+
+    $("#busnois").click(function() {
+        var newMenu = "<ul>\n\
+        <li><a class='text' id='music/variantIssues.txt'>Third Text</a></li>\n\
+        <li><a class='load' id='music/variantIssues.txt'>Third Music</a></li>\n\
+        </ul>"
+        loadSubMenu(newMenu);
+    });
 });
 

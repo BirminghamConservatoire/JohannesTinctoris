@@ -314,8 +314,9 @@ function MusicHolder(text, outdiv){
           this.example.VerovioLink = anchor2;
           anchor.setAttribute('download', 'editor.mei');
           anchor2.setAttribute('target', 'viewer');
-          document.body.appendChild(anchor);
-          document.body.appendChild(anchor2);
+          //document.body.appendChild(anchor);
+          this.drawTo.appendChild(anchor);
+          //document.body.appendChild(anchor2); ...this doesn't work anyway right now
           return docObj.serialize();
     };
     /** appendStaffDefs */

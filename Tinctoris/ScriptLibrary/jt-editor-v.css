@@ -1426,13 +1426,15 @@ div.thumbdiv{
 .invisible {
 		fill-opacity: 0.1;
 }
-a.mei {
+a.MEI {
 		text-decoration: none;
 		font-weight: bold;
 		font-size: 50%;
-		color: #999;
+    color: #999;
+    float: right;
 }
-a.mei:hover {
+a.MEI:hover {
 		text-decoration: underline;
-		color: #888;
+    color: #888;
+    float: right;
 }

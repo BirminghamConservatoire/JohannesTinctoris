@@ -17,6 +17,20 @@
             "request": "launch",
             "name": "Music editor localhost",
             "url": "http://localhost/tinctoris/Tinctoris/editor/music"
+        },
+
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Treatise editor localhost",
+            "url": "http://localhost/tinctoris/Tinctoris/editor/treatise"
+        },
+
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Treatise De Notis",
+            "url": "http://localhost/tinctoris/Tinctoris/texts/denotisetpausis/#"
         }
     ]
 }

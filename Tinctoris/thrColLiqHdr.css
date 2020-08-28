@@ -87,6 +87,12 @@ body.edition, .edition .container{
   break-before: avoid;
   page-break-before: avoid;
 }
+/* side menu for music editon view */
+.sidebar1 > ul > li:hover {
+  cursor: pointer;
+  color: #cc2414;
+
+}
 .twitter-timeline {
   padding: 10% 0;
 }

@@ -243,7 +243,8 @@ var allTexts = {};
 //var editable = true;
 /** @global */
 var editable = false;
-/** @global */
+/** @global 
+ * @summary Set on/off if window is an editor window*/
 var standaloneEditor = false;
 /** @global */
 var MEILinks = (document.location.href.indexOf('beta') >-1 ||
@@ -252,7 +253,9 @@ var MEILinks = (document.location.href.indexOf('beta') >-1 ||
 var nocache = false;
 /** @global */
 var titleBar = false;
-/** @global */
+/** @global 
+ * @summary Switch on/off to render title and attribution
+*/
 var showtitle = true;
 /** @global */
 var margins = false;
@@ -313,19 +316,33 @@ var showtranscriptionnotes = true;
 var flattenOnExport = true;
 /** @global */
 var punctuationStyle="modern";
-/** @global */
+/** @global
+ * @summary toggles if editor info is displayed
+ */
 var editorDisplay = "show";
-/** @global */
+/** @global
+ * @summary toggles if date info is displayed
+ */
 var dateDisplay = "show";
-/** @global */
+/** @global 
+ * @summary toggles if copy text info is displayed
+*/
 var copyTextDisplay = "show";
-/** @global */
+/** @global 
+ * @summary toggles if source info is displayed
+*/
 var sourceDisplay = "show";
-/** @global */
+/** @global
+ * @summary toggles if extra info is displayed
+ */
 var extraInfoDisplay = "show";
-/** @global */
+/** @global 
+ * @summary toggles info display
+*/
 var infoDisplay = "hide";
-/** @global */
+/** @global
+ * @summary toggles whether an info button is rendered or not
+ */
 var infoButtons = false;
 /** @global */
 var exampleSource = false;
@@ -389,7 +406,9 @@ var exampleno = 0;
 var string;
 /** @global */
 var hackedString;
-/** @global */
+/** @global 
+ * @summary contains the currently rendered SVG
+*/
 var SVG = false;
 /** @global */
 var canvas = false;

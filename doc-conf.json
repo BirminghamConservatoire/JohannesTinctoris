@@ -2,7 +2,7 @@
     "plugins": ["plugins/markdown"],
     "recurseDepth": 10,
     "source": {
-        "include": ["./Tinctois/editor/music","./Tinctoris/ScriptLibrary"],
+        "include": ["./Tinctois/editor/music","./Tinctoris/ScriptLibrary", "./Tinctoris/Music"],
         "exclude": [],
         "includePattern": "(.+\\.js?$)",
         "excludePattern": "(jquery)"

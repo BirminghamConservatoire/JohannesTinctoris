@@ -3,10 +3,20 @@
  * @namespace getMusic
  */
 
- /** @global stores current music */
+ /** @global 
+  * @type {Map} 
+  * @summary stores current music as [Filename -- MusicHolder]
+  * */
 var musicMap = new Map();
 /** suppress editor functions */
 editable = false;
+/** use info buttons and have every info hidden */
+infoButtons = true;
+editorDisplay = "hide";
+dateDisplay = "hide";
+copyTextDisplay = "hide";
+sourceDisplay = "hide";
+extraInfoDisplay = "hide";
 
 
 /** @memberof getMusic */

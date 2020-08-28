@@ -463,7 +463,7 @@ function MusicExample(){
     this.catchwords = [];
     /** @property curCatchword */
     this.curCatchword = curCatchword;
-    /** @property parameters */
+    /** @property {Parameters} parameters */
     this.parameters = false;
     /** @property bbox */
     this.bbox = false;

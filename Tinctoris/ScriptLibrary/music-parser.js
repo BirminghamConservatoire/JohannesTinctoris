@@ -2119,17 +2119,28 @@ function getParameters(){
   if(string.indexOf(">") != -1){
     // FIXME: DOOM!
 		if(!standaloneEditor){
-			param.spec = consumeIf(/\s*{[^}]*}\s*/);
-			if(!param.spec){ // old format without braces
-				param.spec = consumeIf(/[^,]*/);      
+      // Spec comments are e.g. <example: {full measure}
+      // Since there aren't any within <piece>, I'll try to avoid them by excluding colons
+      param.spec = consumeIf(/\s*{[^}:]*}\s*/);
+      // Let's just hope there aren't any old formats to catch
+			/*if(!param.spec){ // old format without braces
+				param.spec = consumeIf(/[^,]*);      
 			} else {
 				param.spec = param.spec.slice(1, -1);
-			}
-			param.specComment = new Comment();
-			param.specComment.content = param.spec;
-			//    param.specComment.commentStyle = "#A6F";
-			currentExample.comments.push(param.specComment);
-			consumeIf(/\s*,\s*/);
+      }*/
+      if(param.spec)
+      { 
+        param.spec = param.spec.slice(1, -1);
+        param.specComment = new Comment();
+        param.specComment.content = param.spec;
+        //    param.specComment.commentStyle = "#A6F";
+        currentExample.comments.push(param.specComment);
+        consumeIf(/\s*,\s*/); 
+      }
+      else
+      {
+        param.specComment = false;
+      }
 		} else {
 			param.specComment = false;
 		}

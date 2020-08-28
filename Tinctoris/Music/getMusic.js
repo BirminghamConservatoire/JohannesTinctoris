@@ -19,7 +19,10 @@ sourceDisplay = "hide";
 extraInfoDisplay = "hide";
 
 
-/** @memberof getMusic */
+/** @memberof getMusic
+ * @summary Grabs a text file from the provided fileUri and adds it to the musicMap
+ * @param {string} fileUri URI of the text file, that should be opened
+ */
 function grabFromFile(fileUri)
 {
     var client = new XMLHttpRequest();
@@ -37,6 +40,9 @@ function grabFromFile(fileUri)
     client.send();
 }
 
+/** @memberof getMusic
+ * @summary Re-loads the musicMap according to the current menu structure
+ */
 function loadData() {
     musicMap.clear();
     var ids = [];
@@ -51,6 +57,10 @@ function loadData() {
     }
 }
 
+/** @memberof getMusic
+ * @summary Builds the sub menu
+ * @param {string} menu HTML code for side menu
+ */
 function loadSubMenu(menu){
     $("#content").empty();
         $(".sidebar1").html(menu).on("click", "a", function() {

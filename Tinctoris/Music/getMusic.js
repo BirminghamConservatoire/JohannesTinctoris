@@ -58,61 +58,54 @@ function loadData() {
 }
 
 /** @memberof getMusic
- * @summary Builds the sub menu
- * @param {string} menu HTML code for side menu
+ * @summary Builds the sub menu from the structure in menu.js and loads music content according to menu
+ * @param {Object} menu stucture of submenu as object
  */
 function loadSubMenu(menu){
+    // First clear the content
     $("#content").empty();
-        $(".sidebar1").html(menu).on("click", "a", function() {
-                let id = this.getAttribute("id");
-                if(this.className == "text")
-                {
-                    $("#content").text(musicMap.get(id).text);
-                }
-                else if (this.className == "load")
-                {
-                    musicMap.get(id).draw();
-                }
-                else
-                {
-                    $("#content").text("Oooops!");
-                }
+
+    // Build menu structure
+    var htmlMenu = "<ul>";
+    for (item in menu)
+    {
+        htmlMenu = htmlMenu + "<li class='" + menu[item].class + "' id='" + menu[item].id + "'>" + menu[item].name + "</li>";
+    }
+    htmlMenu = htmlMenu + "</ul>";
+    
+    // Render sidebar menu
+    $(".sidebar1").html(htmlMenu).on("click", "li", function() 
+        {
+            let id = this.getAttribute("id");
+            if(this.className == "text")
+            {
+                $("#content").text(musicMap.get(id).text);
             }
-        );
-        loadData();
+            else if (this.className == "load")
+            {
+                musicMap.get(id).draw();
+            }
+            else
+            {
+                $("#content").text("Oooops!");
+            }
+        }
+    );
+    loadData();
 }
 
 $(document).ready(function() {
     $(".MenuBarItem").click(function() {
         $("#content").empty();
-    });
-
-    $("#home").click(function() {
-        $(".sidebar1").empty();
-    })
-
-    $("#tinctoris").click(function() {
-        var newMenu = "<ul>\n\
-        <li><a class='text' id='music/minimal.txt'>Load Text</a></li>\n\
-        <li><a class='load' id='music/minimal.txt'>Show Music</a></li>\n\
-        </ul>"
-        loadSubMenu(newMenu);
-    });
-
-    $("#dufay").click(function() {
-        var newMenu = "<ul>\n\
-        <li><a class='text' id='music/second.txt'>Second Text</a></li>\n\
-        <li><a class='load' id='music/second.txt'>Second Music</a></li>\n\
-        </ul>"
-        loadSubMenu(newMenu);
-    });
-
-    $("#busnois").click(function() {
-        var newMenu = "<ul>\n\
-        <li><a class='text' id='music/variantIssues.txt'>Third Text</a></li>\n\
-        <li><a class='load' id='music/variantIssues.txt'>Third Music</a></li>\n\
-        </ul>"
-        loadSubMenu(newMenu);
+        if($(this).is("#home"))
+        {
+            $(".sidebar1").empty();
+        }
+        else
+        {
+            let id = $(this).attr("id");
+            loadSubMenu(musicMenu[id]);
+        }
     });
 });
 

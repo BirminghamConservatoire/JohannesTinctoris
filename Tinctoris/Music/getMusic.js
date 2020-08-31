@@ -62,19 +62,21 @@ function loadData() {
  * @param {Object} menu stucture of submenu as object
  */
 function loadSubMenu(menu){
-    // First clear the content
+    // First clear content and submenu
     $("#content").empty();
+    $(".sidebar1").empty();
 
     // Build menu structure
-    var htmlMenu = "<ul>";
+    var htmlMenu = $("<ul></ul>");
     for (item in menu)
     {
-        htmlMenu = htmlMenu + "<li class='" + menu[item].class + "' id='" + menu[item].id + "'>" + menu[item].name + "</li>";
+        var itemEl = $("<li></li>").attr({"class": menu[item].class, "id": menu[item].id});
+        itemEl.text(menu[item].name);
+        htmlMenu.append(itemEl);
     }
-    htmlMenu = htmlMenu + "</ul>";
     
     // Render sidebar menu
-    $(".sidebar1").html(htmlMenu).on("click", "li", function() 
+    $(".sidebar1").append(htmlMenu).on("click", "li", function() 
         {
             let id = this.getAttribute("id");
             if(this.className == "text")

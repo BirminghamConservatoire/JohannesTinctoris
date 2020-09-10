@@ -96,7 +96,23 @@ function loadSubMenu(menu){
     loadData();
 }
 
+function getParam()
+{
+    var url = window.location.href
+    var param = url.match(/\?\w*/);
+    param = param[0].substring(1,param[0].length);
+
+    return param;
+}
+
 $(document).ready(function() {
+    // Load submenu from uri parameter
+    var param = getParam();
+    if(param.length>0)
+    {
+        loadSubMenu(musicMenu[param]);
+    }
+
     $(".MenuBarItem").click(function() {
         $("#content").empty();
         if($(this).is("#home"))

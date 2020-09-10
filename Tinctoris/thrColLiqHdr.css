@@ -313,6 +313,11 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 	margin: 0 auto 10px auto;
 	width: 562px;
 }
+.frontpagemenu.fiveblock{
+	min-height: 36px;
+	margin: 0 auto 10px auto;
+	width: 702px;
+}
 .frontpagemenu > ul > li {
 	height: 36px;
 }

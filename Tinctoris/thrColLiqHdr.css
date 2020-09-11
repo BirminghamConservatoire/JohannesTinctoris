@@ -109,7 +109,9 @@ ul.musicMenu > li:hover {
   break-before: avoid;
   page-break-before: avoid;
 }
-
+.notation-pane{
+  width:75% !important;
+}
 
 .twitter-timeline {
   padding: 10% 0;

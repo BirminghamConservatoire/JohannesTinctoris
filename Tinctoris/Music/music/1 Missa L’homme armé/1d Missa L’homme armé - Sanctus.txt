@@ -1,0 +1,71 @@
+﻿Missa ‘L’homme armé’
+Johannes Tinctoris
+Editor: Jeffrey J. Dean
+Checked by: Christian Goursaud
+Date established: 13 April 2020
+Base transcription: CS35
+Sources:
+CS35	V-CVbav Cappella Sistina 35, fols. lxiiij^s^-lxxxij^d^ (85^v^-104^r^)	Tinctoris	tttt
+<piece: {mensural: void}, {staf: 5, black}>
+<section: Sanctus>
+<part: Supremum>
+<pars>
+{clef: C6} {solm: bb ^bbb} {mens: O11} Sg. <text>Sanctus,</text> me. sf mg maa. sbb scc saa sbb mg sf sf se Sg Pm7 md. <text>san -</text> se mf. se sd sc mb. sG Sd me mf. sg maa. sg sf se mf me. sd Sd mc <text>ctus,</text> Bd PB7 {mens: Ç11} <lig><obl>Sg <text>san -</text> Sf</obl></lig> <lig><obl>Sg Sd</obl></lig> {mens: O5} Pm5 mb mc sa sd. fc fb ma <text>ctus,</text> BG PS3 mg maa. sg mf Se Sd Pm7 md <text>Do -</text> mf. sg saa sbb mcc. sbb Saa mg Saa Pm9 mf mg. faa fbb Scc mbb. saa mg maa. sg sf se md <text>minus</text> mg. sf sf fe ff Bg Pm11 mg <text>De -</text> maa. sbb mcc sbb. <ll: 1>fcc sdd mbb</ll> saa <text>us</text> Scc PS11 Pm11 maa <text>Sa -</text> mbb. saa mbb mcc. sbb saa sg mf. sg. maa mbb. saa sg ff fe mf mg md Ps5 sb sd se sf. fg saa sbb mcc maa. sg mg. <text>baoth.</text> ff fg sf se Mg ||
+</pars>
+<pars>
+{clef: C6} {solm: bb ^bbb} {mens: c11} Bg <text>Pleni</text> Sg. sf se Bd Se md mf. se sd sc Sb. sc sd me md. sc {var="Sc" (ed.) : "Sc." CS35} mb <lig>Sc <obl>Sb BG</obl> Ba</lig> PS3 SG. mc. sd me mf Sd mg. sf se sd Sg <lig>Saa Sbb</lig> mg maa. sg sf se md me md Sg mf mbb. faa fbb saa sg Sg <text>sunt</text> mf Bg PL9-11x2 PL7-9x2 PL5-7x2 PL7-9x2 PL9-11 PS9 Sg <text>celi et ter -</text> Sbb Sbb maa md. se mf Sg maa mbb. saa sg sf Se Pm7 Sd mf. sg maa mbb mcc. sbb Saa mg <text>ra</text> Baa PS7 Sd. se sf Sg maa Sg me mf md. sc mb Sa Pm5 ma. {var="sb" CS35^c : "mc" CS35^*}**This correction was made by the original scribe, who realized his mistake before he had filled in the wrong note.** mc Sd Pm5 mG. sa mb mc. sb sa sG mb. sa <ll: -1>SG mF BG</ll> {mens: O7}{prop: 3/2, 5-7} PS7 PS7 Sd. <text>gloria</text> me <full>Sd Bg</full> PS9 Sg. <text>tu -</text> maa <full>Sg Bcc</full> Saa. mbb xbb <lig><obl>Scc Sbb.</obl></lig> saa sbb Bcc Saa .13 Sbb Bg <lig><obl>Saa Sf.</obl></lig> se sf <lig><obl>Sg Sd</obl></lig> PS7 Se. mf <lig>Sg Saa.</lig> mbb Scc <lig><obl>Sbb Saa.</obl></lig> mg Sg. sf sg mf <text>a.</text> me Mg ||
+</pars>
+<pars>
+{clef: C6} {solm: bb ^bbb} {mens: c11} PL7-11x2 <lig><obl>Sg <text>Osanna</text> Se.</obl></lig> mf mg maa Sg Sg. sf se Sd Pm7 md. se mf mg me Sd mc. sb SG PS3 Pm7 md me Sc mb Sd ma. sb mc md. sc mb Sa Sd mb SG mc. sa sb sc <lig><obl>Sd Sc.</obl></lig> sb sc Sd mb mG mg maa. sg mf me mg. sf se sd Sf. se sd Bc PB7 <full>Sd. me Sf Sg. mf me md <lig><obl>Se Sc.</obl></lig> mb</full> Sd Pm7 md. sc ma mb md. sc mb Sa Pm5 mG Sg Se Se. sf sg Saa mbb Sg sf se <lig>Bd Bg.</lig> Saa. mbb Scc Saa. sg saa Sbb. saa sg mf. sg Saa. sg saa mf. se Bg PB9 Se. md mc sb sa Sb Sc Pm7 mc md mb Sa <lig>SG Sb.</lig> sa sG <lig>Sa Sd.</lig> se sf Sg <lig><obl>Se Sc</obl> Bd</lig> Se mf md. sc Sd mb. sc sd se mf sg saa Sbb maa mf. <text>in</text> se md me. sf mg maa. sbb mcc. sbb saa sg Sbb mg <text>{var="excel -" (ed.) : (om.) CS35}</text> mf. sg saa sbb mcc maa. sg me Sf <text>{var="sis" (ed.) : (om.) CS35}.</text> Mg ||
+</pars>
+<pars>
+{clef: C6} {solm: bb ^bbb} {mens: c9} Bd <text>Benedictus</text> Se Se md me md Sg sf se sf se sd sc mb be Se sd sc <lig><obl>Sd SG</obl></lig> PS3 Sc <text>sem -</text> mb <lig>SG Sc</lig> ma mb mc <lig>Sd Se</lig> mf <lig>Sd Sg</lig> me mf mg maa. fg faa mbb maa. sg Sg <text>per sit</text> mf Bg {var="PB11 PL9-11 PB9" (ed.) : "PL9-11x2" CS35} PS9 Sg. <text>fi -</text> sf se mf mg Baa <lig>Sbb Scc.</lig> mbb maa sg sf me Saa <text>lius</text> mg Baa PS7 <lig>Sd. <text>Altis -</text> Sg.</lig> Se. maa. sg sf se md mf. se Sd <text>simi,</text> mc Ld PS5 Sc <text>qui de celis</text> mb md. sc ma. sb mc. sb mG ma <ll: -1>SG mF BG</ll> PS3 <lig>SG <text>huc</text> Sc</lig> PS5 <lig>Sc <text>ve -</text> Sg.</lig> mf me sd sc <lig>Sd Se</lig> Sf mg <lig>Sc Sd</lig> me mc mf. se sd sc md Sc mb <text>nit</text> Bc {mens: O5}{prop: 3/2, 3-5} <full>BG <text>in nomine</text> Bb Ba</full> <lig>SG Sb.</lig> mc <lig>Sd Se</lig> Sf <lig>Sg Sbb.</lig> maa Sg Bcc <text>Do -</text> <lig><obl>Sbb Saa.</obl></lig> mg mf me <lig>Sd Sg.</lig> me mf mg Saa <lig><obl>Sbb. Saa.</obl></lig> Sg. mf mf <text>mini.</text> se sf Mg ||
+</pars>
+</part>
+{staf: 5} <part: Tenor>
+<pars>
+{clef: C10} {solm: bb} {mens: Ç7} <text>Cherubin ac seraphin </text> PS7 SG mG Sc mc .13 mb ma SG PS7 md <text>ceterique </text> md md SG PS11 md <text>spiritus angelici</text> md md md Sc mb Sa BG Pm7 Pm7 SG <text>Deo in altissimis</text> mG SF mF SG mG mD Pm5 Pm5 {var="PB5 PL5-7 PB5" (ed.) : "PL5-7x2" CS35} Pm5 SD <text>in -</text> mF. <text>cessabili</text> sG sa sb mc ma mc md Sb Ba Pm9 Pm9 SF <text>voce proclamant:</text> mG. fa fb Sc md. sc sb sa mG Sa BG Pm7 <text>Sanctus, sanctus, sanctus,</text> Pm7 PS7 SG mG Sc mc .13 mb ma SG PS7 Sd <text>Do -</text> md <text>minus</text> SG PS11 md <text>Deus Sabaoth.</text> Sd md Sc mb Sa MG ||
+</pars>
+<pars>
+<tacet>{var="Tenor Pleni tacet." (ed.) : (om.) CS35}</tacet> ||
+</pars>
+<pars>
+{clef: C10} {solm: bb} {mens: c11} Bd <text>Osanna</text> mG sa sb mc Sb ma mG sF sE sD sE sF sG ma. sb mc md Pm5 SD. SD <lig><obl>SE SC.</obl></lig> mD mE mF SG. ma Sb. sa sG ma mb Sa mG Sc mb mc be Se sd sc md me Sd mc. sb SG ma mD. sE sF sG ma mb ma md. sc mb Sa SG Pm7 mG. sF sG sa Sb Ba mF mD md. sc mb <lig>Sa Sd</lig> mc mc. sb Sd mc Sa mb ma sG sF sG sF sE sD SE SD PS3 SE. sF sG Ba SF mG mF SD Pm7 <lig><obl>SG. SD</obl></lig> <full>SG. ma Sb Sc. mb ma mG <lig><obl>Sa SF.</obl></lig> mE</full> <lig>SG Sb.</lig> mc Sd PS7 SG. <lig><obl>Sc Sa</obl></lig> mG SF PS7 Sa Sd Sd. {var="me" (ed.) : "se" CS35} mf. se <lig>Sc Sd</lig> Pm9 mb. sc md me sd sc Sd mc Sb ma mG sF sE SF mG Sa mG mF mG SD PS7 BG SF. sG sa Sb Pm7 <lig>SG Sc</lig> sb sa Sb. ma mG sF sE SD Pm7 mG. sa sb sc md. sc Sa Pm7 mG <text>in</text> Sa mF. sG sa sb Sc ma. sG sF sE SF mG Pm7 md. <text>excel -</text> se mf. se Sc. me Sd. mb. sG sb <text>sis.</text> sc {var="{full}Ma ^Md" (ed.) : "{full}La ^Ld" CS35} ||
+</pars>
+<pars>
+{clef: C10} {solm: bb} {mens: c7} PL7-9 BG <text>Benedictus</text> Sa Sa mG Sc sb sa sb sa sG sF sE sD SG mF mF mE SG PS7 mE <text>sem -</text> mF mG ma mF <lig>SG Sa</lig> mb <lig>SG Sc</lig> ma mb mc Sd mc md mb <text>per</text> Sa PS7 <lig>SG. <text>sit</text> Sa</lig> mb mc. sd me mf. se sd sc mb me. sd Sc mb Bc PS11 Sd. <text>fi -</text> sc sb Sa SG Pm9 Sa mb Sc. ma <text>lius</text> Sb Sa PS7 <lig>SD. <text>Altis -</text> SG.</lig> SE. ma. sG sF sE mD mF{var=".7 sE mD mF mG SE" CS35^c : "mG SE" CS35^*} <text>simi,</text>  SD PS3 mD. <text>qui</text> sE {var="mF" CS35^c : "sF" CS35^*} SG sF sE SF SG <text>de celis</text> md. sc ma. fG fF mG mE. sD SD mC SD <lig>SD <text>huc</text> SG</lig> PS7 <lig>SC <text>ve -</text> SG.</lig> mF mE mD <lig><obl>SE SC</obl></lig> <lig>SG. Sa.</lig> <lig>SG Sa</lig> mb mc. sb sa sG md mb. sa SG mF BG {mens: O7}{prop: 3/2, 5-7} <lig>SE SG.</lig> mF <lig>SG Sa</lig> mF. <text>nit</text> sE BG PB7 <full>BG <text>in no -</text> Bb Ba</full> <text>mine</text> SG PS7 Sd. <text>Domi -</text> mc mb ma <lig>SG Sc</lig> ma mb Sc Bd Sc .11 Sb Ba MG <text>ni.</text> ||
+</pars>
+<pars>
+[-][-] <label: 4>Osanna</label> [-] bd {full}Ba [-][-][-]
+</pars>
+</part>
+{staf: 5} <part: Contratenor Altus>
+<pars>
+{clef: C8} {solm: bb} {mens: O9} Sd <text>Sanctus,</text> md se mg ff fe md Ps9 sc. <text>San -</text> fb fa fG sF. fE mG Pm7 ma mb. sc md. se mf. se sd sc mb. sG md Pm11 mg. ff fe md. se mf. sg maa. fg ff sg saa mg mg. ff fe mf Sg mG mb. fa fG ma mG mc. md fc fb sa sc. fb fa fG mb. sG sb sc md. fc fb ma <text>ctus,</text> BG PS5 {mens: Ç11} <lig><obl>Sg <text>Sanctus,</text> Sf</obl></lig> <lig><obl>Sg Sd</obl></lig> {var="{mens: O9}" (ed.) : (transp.) CS35} me mf. se Sd mc {var=(ins.) "{mens: O9}" CS35} md. fc fb Sa PB7 Bd <text>Do -</text> SG {var="Pm7" CS35^c : (om.) CS35^*} ma mb. fc fd me mc Pm7 ma mb mc Sd mb <text>minus</text> sc. fb mG. fF fE mF mG Ps5 mF <text>De -</text> sG ma sG sg. ff se md sc. fd se sf mg mg. ff fe mf mg. ff fe md mc. sd sc. fb ma ma. fb fc sb. fc md. fc fb mc <text>us</text> md Ps7 sb. <text>Sa -</text> fc sd sb fa fG ma SF ma <text>baoth.</text> md. fc fb ma mb. sG Md ||
+</pars>
+<pars>
+{clef: C8 } {solm: bb} {mens: c5} <lig>SG <text>Pleni</text> Sc.</lig> md me sd se Sf. se sd Sc Pm9 md. sc sb sa mG Sd sc sb mc mf. sg me Sd mc. sb SG Pm9 <lig>Sd Sg</lig> mf mf se sf Lg PS5 SG. mc. sd me mf Sd mg me mc md. sc sb sa SG mb Sa mG md. sb mc Sa SG PS5 <text> sunt</text> <lig>SG Sc</lig> Pm5 mG <text>ce -</text> mc. sd se sc Sg mf me sd sc md me. sd Sc mb Sc PS7 Sa. sb sc Sd mb <lig>SG Sc</lig> <lig>Sa Sd</lig> me Sf md me. sd Sd mc Sd PS9 Sd. sc sb Sa. mc. sb SG mb ma md. sc me. sd sc sb Sa BG <text>{var="li" (ed.) : (om.) CS35}</text> PS9 Sd <text>{var="et" (ed.) : (om.) CS35} ter -</text> Sf Sf Se md mG. sa mb Sc md. se mf Sd mc md ma mc md Sb <text>ra</text> La PL5-7x2 PL7-9x2 {mens: O7}{prop: 3/2, 5-7} PL5-7 PS5 PS5 SG. <text>gloria</text> ma <full>SG Bc</full> PS7 Sc. <text>tu -</text> md <lig>Sc Sf</lig> Se Bd <lig>Sc Se</lig> Sf <full>Bg <lig><obl>Se Sc</obl> Bd</lig></full> Sb. sa sb <lig><obl>Sc SG.</obl></lig> ma <lig>Sb Sc.</lig> mb ma mG <full>Bd <lig>Sc <text>a.</text> <obl>Sb Ba</obl></lig></full> {var="-MG" (ed.) : "-LG" CS35} ||
+</pars>
+<pars>
+{clef: C8} {solm: bb} {mens: Ç11} <text>Pueri Hebreorum,</text> <label: 14>Crescit in duplum.</label> Sg mg Sf mf Sg me md Pm9 Pm9 Sg <text>sternentes vestimenta </text> mg Sf mf Sg me .13 md Pm11 mg <text>ramos{ }{var="que" (Melin) : (om.) CS35} palma -</text> Saa mg .15 mf Se Bd <text>rum,</text> Pm9 Pm9 SG <text>Jhesu filio David </text> mG Sc mc .11 mb ma SG PS9 md <text>clamabant:</text> md SG. md <text>Osanna in excelsis.</text> md md md Sc mb Sa -MG ||
+</pars>
+<pars>
+<tacet>Contratenor {var="Altus" (ed.) : (om.) CS35}<l/>Benedictus tacet.</tacet>
+</pars>
+</part>
+{staf: 5} <part: Contratenor Bassus>
+<pars>
+{clef: F10} {solm: bB} {mens: O5} <lig>SGG. <text>Sanctus,</text> SC</lig> mB {var="SA. mGG" CS35^c : "SA SGG" CS35^*} SD Pm5 mGG. <text>Sanctus,</text> sA mB. sC mD mB. sA BGG mC SD. SD PS11 PS11 Pm13 ma <text>San -</text> Sb. mG. sF mD mE mC. sB mD. fC fB mA SGG PS7 SD mE mC. sGG mB. sA SGG mG mC SD. mE SC mG. sF mG mE mD. sE sF sG Sa <text>ctus, {var="Do -" (ed.) : (om.) CS35}</text> mD mF. sG sa <ll: 1>sb Sc mF</ll> Sa mD SG BD mE. fF fG Sa Pm11 mG <text>{var="minus" (ed.) : (om.) CS35}</text>  {var="mC" CS35^c : "mD" CS35^*} mF mD. fE fF mG mE SD mGG mC. sB mGG mA sGG sG <text>Deus</text> sF ma mG sF mG Pm11 mG <text>{var="Saba" (ed.) : "sabba" CS35} -</text> mC. sD sE sF mG SD Pm5 SGG mA. sB mC mD. sE mF sG. fa mb. fa fG ma SG mG. fF fE sD. fE sF sG ma mF mG SD <text>oth.</text> -MGG ||
+</pars>
+<pars>
+{clef: F10} {solm: bB} {mens: c5} <text>Pleni</text> PL5-7x2 PL7-9x2 PL9-11x2 PL7-9x2 PL5-7 PB5 PS3 <text>sunt</text> <lig>SGG SC</lig> PS7 mGG <text>ce -</text> mC. sD sE sF mG. sF mE mD SG mF mG. sF mE SD <lig><obl>SC SA.</obl></lig> sB sC SD mB SGG. <lig>SC SF</lig> <lig>SD SG</lig> mF SD mC mD mF SE BD PS7 SD. sC sB SA. mC. sB mGG mD. sE mF mG. sF ma mF. sE <text>li</text> LG mD. <text>et</text> sE <lig><obl>SF SC</obl></lig> PS7 <lig>SG <text>ter -</text> Sa</lig> SD Pm9 mD. sE mF mD Sa mF SG SD PS7 SD. sE sF SG. mE mF mE SC <lig><obl>SD SGG</obl></lig> Pm5 mA. sB mC mD Pm9 mGG. sA mB SC mB sA sGG mC. sB mD. sC mB SA <text>ra</text> LGG {mens: O5}{prop: 3/2, 3-5} PS3 SGG. <text>gloria</text> mA SGG BC PS7 SC. <text>tu -</text> mD <lig>SC SF.</lig> mE SC BG SC BA <lig>SGG SC.</lig> sD sE <lig>SF <obl>SD BGG</obl></lig> mA. sB BC SB .9 SA BA <lig>SGG SD</lig> <lig>SF <obl>SG <text>a.</text> BD</obl></lig> -MGG ||
+</pars>
+<pars>
+{clef: F10} {solm: bB} {mens: c11} BG <text>Osanna</text> SE mC SG mF mE sD sC mD. sE sF sG Sa mb <ll: 1>ma md. sc mb</ll> Sa BG PS7 SC. mD mE mF SG. sF sE mF SG mF mE mC SG SC. sB sA mB SC mB <lig>SC <obl>SE BD</obl></lig> PS7 BD SD bE <lig><obl>SE SC</obl></lig> mC sB sA SGG BA SB mGG SG mF SD BE <lig>SD SF.</lig> mG mF sE sD mE SC mB BD <lig><obl>BC BA</obl></lig> SB mGG mD. sE mF mG mb. sa SG mF <lig><obl>SG SGG</obl></lig> LA SGG PS3 <lig>BGG. BC</lig> SF. mG Sa. sG sa mF. sE <lig><obl>BG BD</obl></lig> PS7 SD SE. mD mC sB sA SB mC SG mF mE sD sC SD mC SF mE mD SG mF BG PS7 SD. sE sF <lig>SG <obl>SE BC</obl></lig> SGG. sA sB SC <lig><obl>SB SGG</obl></lig> Pm5 mGG. sA sB sC mD sE sF SG mF mD. sC mB SA Pm7 mC. <text>in</text> sB sA sGG SA Pm5 SGG <text>excel -</text> mD. sE sF sG ma mF. sE mC SD <text>sis.</text> -MGG ||
+</pars>
+<pars>
+{clef: F10} {solm: bB} {mens: c7} PL5-7x2 PB5 BGG <text>Benedictus</text> SA SA <lig>SGG SC.</lig> mD mB mA mB mGG <lig>SC SD</lig> Pm9 mE <text>sem -</text> SC mD mB mA mD. sE mF mD mG <text>per</text> SD Pm5 mGG. <text>sit</text> sA mB <lig>SC SD</lig> mE. sF mG mD. sE mF SG mC mE SD SC Pm9 SE <text>fi -</text> mF SD. mE mF. sE <lig><obl>SG SF.</obl></lig> mG mF sE sD mC <text>lius</text> mD SGG Pm9 mD. sC mA SB Pm5 <lig>SGG. <text>Altissimi,</text> SC.</lig> <lig>SA. SD</lig> mB. sC mD mGG SA Pm13 ma <text>qui</text> mb sa sG mF. <text>de</text> sG ma Sb sa sG Sa Pm11 mG <text>ce -</text> mD. sE mF. sE SC. mB SA <text>lis</text> LGG PS3 <lig>SGG <text>huc</text> SC</lig> PS7 <lig>SC <text>ve -</text> SG.</lig> mF mE sD sC SD <lig>SE SF</lig> mG mC mF. sE sD sC mG. sF mE SD <text>nit</text> BC {mens: O7}{prop: 3/2, 5-7} PL5-7 <full>BGG <text>in nomine</text> BB BA</full> <lig>SGG SG.</lig> mF <lig>SG Sa</lig> mF. sE <lig><obl>SG <text>Do -</text> SD.</obl></lig> mE <lig>SF SG</lig> <lig><obl>SE SC</obl></lig> mD mB SA SGG Pm9 mD <text>mini.</text> SF SG BD {var="-MGG" (ed.) : "-LGG" CS35} ||
+</pars>
+</part>
+</section>
+</piece>

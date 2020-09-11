@@ -1,0 +1,56 @@
+﻿Missa ‘L’homme armé’
+Johannes Tinctoris
+Editor: Jeffrey J. Dean
+Checked by: Christian Goursaud
+Date established: 13 April 2020
+Base transcription: CS35
+Sources:
+CS35	V-CVbav Cappella Sistina 35, fols. lxiiij^s^-lxxxij^d^ (85^v^-104^r^)	Tinctoris	tttt
+<piece: {mensural: void}, {staf: 5, black}>
+<section: Agnus Dei>
+<part: Supremum>
+<pars>
+{clef: C6} {solm: bb ^bbb} {mens: O11} Bg. <text>Agnus</text> Scc. mbb Saa mg. sf me Sd mg mf maa. sg Sg mf Sg Pm11 Sg <text>Dei,</text> maa xbb Bbb. mcc Saa sg sf me Saa mg Saa Pm11 maa <text>qui</text> mbb mg. sf md. se sf sg maa mf <text>tol -</text> {var="{prop: 3/1, 9-11}" (ed.) : "{prop: 3, 10}" CS35} Sg. mf me md <lig><obl>Se Sc.</obl></lig> mb {mens: O7} <text>lis</text> Sd Pm9 mf. <text>peccata</text> sg Saa mbb mcc. maa <text>mundi,</text> fg ff me md mg mf. saa. fg saa sf se Bg md <text>miserere</text> me. sd sc fb fa mG mb Sa mG Ps7 mc sd se sf mg md. fc fb mc Sd PS7 ma <text>no -</text> mb ma md. se sf sg maa mbb. saa Saa mg sf. fg saa mbb saa mg. ff <text>bis.</text> fe mf Mg ||
+</pars>
+<pars>
+{clef: C6} {solm: bb ^bbb} {mens: c11} Bg <text>Agnus</text> Se. sd sc me Sd sc sd Se. mf md sc sb Sc <lig><obl>Sd SG</obl></lig>PS9 Sg <text>Dei,</text> maa Scc mbb mg maa. sg sf se md mf. se sd sc mb mbb. faa fg maa. sg Sg mf Sg PS9 Sc <text>qui</text> Sg PS3 SG <text>tollis</text> Sd mb md. se Sf mb mf mg mf mbb mcc Sbb maa Sbb PS11 Sbb <text>peccata</text> maa. sg Sg mf mg Sd <text>{var=(ins.) "mundi" CS35}</text> mc. sd mb Sa SG PS3 {var="PB5 PL5-7 PL7-9x2 PL9-11" (ed.) : "PL5-7x2 PL7-9x2 PB9" CS35} Bg. <text>miserere</text> Se. mc Sc Pm11 Sg mf mg mbb maa <lig>Sg Scc</lig> mbb Scc maa Sbb mg Saa Sg Pm7 <lig>Sc Sg</lig> mf me sd sc mb md. sc sb sa mG. sa mG Sc mb Sc PS5 mc. <text>no -</text> sd me mf mg maa mg mcc. sbb saa sg mbb maa. sg Sg mf <text>bis.</text> Mg ||
+</pars>
+<pars>
+{clef: C6} {solm: bb ^bbb} {mens: O11}{prop: 3/2, 9-11} Bg <text>Agnus</text> Sf Sg. mf me md Sf me me. sd sc sb Sd. sc sb Sc Bd PS7 Sd. <text>Dei,</text> me mf mg maa mg Scc. sbb saa <lig><obl>Sbb. Saa.</obl></lig> Sg. mf mf se sf Bg. PS9 mg. <text>qui</text> saa Sbb <lig><obl>Scc Sbb.</obl></lig> saa sbb Bcc PS11 Sg. <text>tol -</text> me mg. saa Bbb Sg. maa mg sf se Sf <lig><obl>Sg Sd.</obl></lig> mc Sa Bb Sa. mb <lig>Sc sd</lig> Se. sf sg <lig><obl>Saa Sd</obl></lig> me Sg mf me md mc. <text>lis</text> sb Bd PB7 Ld <text>peccata</text> Sg. mf <lig>Sd Se.</lig> mf <lig>Sg Saa</lig> <lig>Sd Sg</lig> mf. <text>mun -</text> sg Saa. mbb Scc <lig><obl>Sbb Sg.</obl></lig> mf <lig><obl>Se Sd.</obl></lig> mc <lig><obl>Sb Sa</obl></lig> BG <text>di,</text> PS3 Bd <text>dona nobis</text> {full}BG Sd. me mf mg <full>Baa Sf. <text>pa -</text> mg</full> Saa mbb saa sbb <lig><obl>Scc Saa.</obl></lig> sg sf <lig><obl>Se Sd</obl></lig> mg sf sg Saa mf maa. sg sf se Sf <text>cem.</text> {var="Mg" (ed.) : "Lg" CS35} ||
+</pars>
+</part>
+{staf: 5} <part: Tenor>
+<pars>
+{clef: C10} {solm: bb} {mens: O7} <lig>SG. <text>Agnus</text> Sc</lig> mb ma. fG fF sE sD mG ma sF. fE mG Sc mb SG Sd mc mb Sa mG. mc <text>Dei,</text> sd se sf me mc Bd. mc. ma sb Sc ma PS7 <full>SF <text>qui</text> mG ma mF. sE</full> mG mb. sa mb. sc md. sc ma Pm7 SG <text>tollis</text> mE mF mD mF. sG Sa Pm7 mG <text>peccata mundi,</text> sE. fF sG ma sb mc <full>Ld Sb. mc</full> SG Pm7 mG <text>miserere</text> SD be md me. sd sc fb fa mG mb Sa mG md. <text>no -</text> fc fb mc md. se mf sd mf se sd fc fb ma mG. sF ma Sb ma md. sc mb Sa <text>bis.</text> MG || [-][-][-]
+</pars>
+<pars>
+{mens: c11} Bc <text>Agnus</text> Sc. sb sa mc Sb sa sb Sc. md mb sa sG Sa mG. sa <lig>Sb Sc</lig> PS9 Sc. <text>Dei,</text> md Se mf md. sc sb sa md mb. sa <lig><obl>SG SF</obl></lig> mG SD be PS11 Sd <text>{var="qui" (ed.) : (om.) CS35}</text> Be Se <text>{var="tollis" (ed.) : (om.) CS35}</text> md. sc mb md. se mf Sd mb mb. sa mG Sb Pm9 mb <text>{var="peccata" (ed.) : (om.) CS35}</text> SF mG md. sc sb sa mG Sd mc. sb mG Sa SG PS7 PB7 Sb. <text>{var="mundi," (ed.) : (om.) CS35}</text> ma. sG SG mF <lig><obl>SG SD</obl></lig> Pm7 mG ma mb <lig><obl>Sc SF</obl></lig> mG ma mb mG. sF mE mD sE sF mG. sF sE sD SE mC SG mF mE SD LC. PL5-7x2 PL7-9x2 PL5-7 PS3 <text>{var=(ins.) "miserere" CS35}</text> mC. <text>no -</text> sD mE mF mG ma mG mc. sb sa sG mF. sE mG ma mD mE SD <text>bis.</text> {var="{full}MG ^Md" (ed.) : "{full}LG ^Ld" CS35} ||
+</pars>
+<pars>
+{clef: C10} {solm: bb} {mens: O9}{prop: 3/2, 7-9} Sb. <text>Agnus</text> sa sG Sa Sb Bc <lig><obl>Sd SG</obl></lig> Sa <lig>SD SE</lig> BD. PS3 SD. <text>De -</text> mE mF mG ma mG Sc Bd Sc .11 Sb Ba SG. <text>i,</text> ma Sb Bc SG <text>qui</text> .9 Sc Bd Lc <lig><obl>Sb <text>tol -</text> SG.</obl></lig> ma Sb. sa sG Sa SG Pm9 Sb ma mc ma Bd. mc. sb Sa Pm7 mF SG mc. sb md ma Sb mc mb SG. sF sG Sa <text>lis</text> SF Pm7 SG <text>peccata</text> ma Sb. sa sG Sa <full>SG Lb SG.</full> ma <lig><obl>Sb SG</obl></lig> Sc. mb Sa <lig><obl>Sb SG</obl></lig> ma mD. <text>mundi,</text> sE SF mG ma mF <lig><obl>SG. SE</obl></lig> mD SC PS3 PS3 <lig><obl>SG <text>dona nobis</text> SD</obl> <full>Bd</lig> BG <lig>Bb Bd <obl>Bb Ba</obl></lig></full> <lig>SD. SF</lig> mE SD PS3 <lig>SF <text>pa -</text> Sa.</lig> mb <lig>Sc Sd.</lig> me Sf. me md. sc Sd Sb <text>cem.</text> Pm7 mG mb. sc Md ||
+</pars>
+</part>
+{staf: 5} <part: Contratenor Altus>
+</pars>
+{clef: C8} {solm: bb} {mens: Ç5} <label: 14>Crescit in duplum.</label> PL5-7 <text> Agnus Dei, qui tollis</text> PS5 SG Sc mb ma SG md .11 md SG Pm9 md <text>peccata mundi,</text> md md Sc mb ma SG PS11 Sg <text>miserere nobis.</text> mf mg me Sd Bd Md || [-] <label>{var=(ins.) "verte Tibault" CS35}</label>
+</pars>
+<pars>
+{clef: C8} {solm: bb} {mens: c11} PB11 Lg <text>Agnus</text> Sg. sf se mg Sf se sf Sg PS11 <lig><obl>Sg <text>Dei,</text> Sc</obl></lig> Sa. mb Sc md mf. se sd sc mb md. sc sb sa mG Sc mb Sa BG PS7 Sc <text>qui</text> Sg PS11 SG <text>tol -</text> Sd mb md. se mf mb. sc Sd me md Sc <lig><obl>Sb <text>lis</text> SG</obl></lig> PL5-7 Sb. <text>peccata</text> ma. sG SG mF mG Sd <text>{var="mundi," (ed.) : (om.) CS35}</text> mc. sd mb Sa SG Pm9 Sd me mf <lig><obl>Sg Sc</obl></lig> md me <lig><obl>Sf Sb</obl></lig> mc Sd. se sf mg. sf se sd Se md. sc Sc mb Bc PS11 Sg. <text>miserere</text> Se mc Sc Pm9 md me mg mf me <lig>Sc Sd</lig> mc mf. se <lig>Sd Sg</lig> mf Sg mf me. sd mc Sb mc sb sc md mG. sa sb sc md se sf mg me Sd Pm9 mc <text>nobis.</text> me. sf mg maa mg mc md me mc. sb sa sG md. sb mc md mG Sa -MG || [-] <label>{var=(ins.) "A l'avante Tibault" CS35}</label>
+</pars>
+<pars>
+{clef: C8} {solm: bb} {mens: Ç11}{prop: 3/8, 9-11} PL9-11 PS11 Sg <text>Agnus</text> mf .13 mg <text>Dei,</text> me Sd Pm13 Pm13 mg <text>qui tollis</text> Saa mg .14 mf me Sd Pm5 Pm5 <full><lig>SG <text>peccata mundi,</text> Sc</lig></full> mb ma SG Pm9 Pm9 md SG Sd <text>dona nobis pacem.</text> md {var=".11" (ed.) : (om.?) CS35}**The stem of the preceding minim is almost imperceptible, as is the custos following this dot, and the dot itself cannot be seen; but the horizontal space it would have occupied is left between the minim and the custos, so the dot was almost certainly present in CS35 (it is necessary). Ultraviolet illumination may make the vanished ink easier to discern.** md Sc mb Sa -MG ||
+</pars>
+</part>
+{staf: 5} <part: Contratenor Bassus>
+<pars>
+{clef: F10} {solm: bB} {mens: O5} SGG <text>Agnus</text> mC. sD sE sF mG mF. fE fD mC mGG SD mE SC mG. sF mE mD. sE mF mG SD mGG mC. <text>Dei,</text> sB sC sD mC mA BGG. mA mFF mF. sG ma mF SG BD SGG Pm11 mG. <text>{var="qui tollis"  (ed.) : (om.) CS35}</text> sF mD. sE sF sD BE mD mB. <text>{var="peccata" (ed.) : (om.) CS35}</text> sC sD sE mF mD. fE fF mG mC. mF <text>{var="mundi," (ed.) : (om.) CS35}</text> fE fD mC SG BD SGG Pm5 SGG <text>miserere</text> mC. sB sC sD sE. fF mG. sF sF sE mG mC Ps5 sGG sC sD sE. fF mG Pm13 ma <text>no -</text> mb mG Sa mD mG mF. mD sC sD sE mF mG. sD mF SG mD. mGG sA sB sC SD <text>bis.</text> {var="-MGG" (ed.) : "LGG" CS35} ||
+</pars>
+<pars>
+<tacet>{var="Contratenor" (ed.) : (om.) CS35} Bassus<l/>{var="Agnus 2^9" (ed.) : (om.) CS35} tacet.</tacet> ||
+</pars>
+<pars>
+{clef: F10} {solm: bB} {mens: O11}{prop: 3/2, 9-11} SG. <text>Agnus</text> sF sE SD SG BE SD mE mC. sB sA sGG SB BA PS11 Ba <text>{var="Dei," (ed.) : (om.) CS35}</text> <lig><obl>Sb Sa.</obl></lig> mG mF mE mF mG Sa SG. mD SF SG BD SE. mF SG BC PS7 PB7 BC. <text>{var="qui" (ed.) : (om.) CS35}</text> {var="SE" (ed.) : "SC" CS35} Pm7 mC <text>{var="tol -" (ed.) : (om.) CS35}</text> mE. sF <lig>SG Sb.</lig> ma BG SD PS11 SG. ma SF BG {full}SD <lig>BF <full>BE <obl>BD</full> BC</obl></lig> {full}SA SB <text>{var="lis" (ed.) : (om.) CS35}</text> BGG SG. sF sE SF <full>LG PS9 SE.</full> <text>{var="peccata" (ed.) : (om.) CS35}</text> mF <lig><obl>SG SC.</obl></lig> mD <lig>SE SF</lig> BG SD mF. sE SD PS7 <lig>SGG. <text>{var="mundi," (ed.) : (om.) CS35}</text> SC</lig> mD mE mC SG. ma SG. mF mF sE sF SG PS11 bb <ll: 1>SG <text>{var="dona" (ed.) : (om.) CS35}</text> <full><lig>Bb Bd</lig></full> BG</ll> <full>SD. <text>nobis</text> mE</full> SF mB SD mE <lig>SF SG</lig> <lig><obl>Sa <text>pa -</text> SF.</obl></lig> sE sD SC BG SF mD. sC BD <text>cem.</text> -MGG ||
+</pars>
+</part>
+</section>
+</piece>

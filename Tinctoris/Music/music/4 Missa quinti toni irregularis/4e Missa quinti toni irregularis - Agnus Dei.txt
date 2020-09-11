@@ -1,0 +1,39 @@
+Missa quinti toni irregularis
+Johannes Tinctoris
+Editor: Christian Goursaud
+Checked by:
+Date established: 11 June 2020
+Base transcription: Ve759
+Sources: 
+Ve759	I-VEcap DCCLIX, fols. 25v–31r	Tintoris
+<piece: {mensural: void}, {staf: 5, black}>
+
+<section: Agnus Dei>
+<part: {var="Supremum" (ed.) : (om.) Ve759}>
+<pars>
+{clef: C4} {solm: 0} {mens: O5} Sc <text>Agnus</text> me. sf mg maa mg Pm9 me mc. sb mc Pm7 mcc. sdd <ll:1>mee mff. see</ll> mdd mee. scc  <text>Dei,</text> Scc mbb Bcc. Pm9 mc. <text> qui tollis</text> sd me. sf md mg. saa mbb. scc maa mdd. scc sbb faa fg maa mbb. saa mg. sf sg saa md Sg mf Lg <lig><obl>Se <text>peccata</text> Sc</obl></lig> Sd mc mg. sf maa. sg sf fe ff mg <lig>Sc Scc</lig> mbb mcc mdd mbb <text>mundi,</text> mcc Saa Sg Pm9 me. sd mc Bb. mc <text>miserere</text> <text: -4>dona nobis</text> me. sf sg saa mg mbb. scc sdd see sdd fcc fbb maa mg mcc mbb {var="mee. sdd" (ed.) : "<full>See mdd</full>" Ve759}<text>nobis.</text><text: -4>pacem.</text> Scc mbb Lcc ||
+</pars>
+<pars>
+{mens: c11} <label: 14>Duo</label> Scc. <text>Agnus Dei</text> sbb saa mbb mcc. sbb maa Bg. Saa Sbb Pm9 mg. sf se sd Sc md. se <lig><obl>Sf. Sd</obl></lig> me Sf <lig>Sg Saa</lig> mbb Scc <ll:1>mdd mff mee.</ll> sdd Scc mbb Scc Pm11  Saa. <text>qui</text> sg sf me md Sg. maa <text>tollis peccata</text> mbb maa Sdd. mbb Sdd <full>mcc mbb maa Sbb mcc mbb maa mg mf mg maa mg mf me Sd me</full> mf mg maa mbb mcc sbb saa mg <text>mundi</text> Saa Sg mf Lg PS7 Se. <text>miserere</text> mf Sg. maa sg sf se sd me mf Sg mc md me Sc mb Sc Pm7 <lig>Sg<text>nobis.</text> Saa</lig> Sbb mcc mdd. scc sbb saa mee. sdd Scc mbb Lcc ||  
+</pars>
+</part>
+ 
+{staf: 5} <part: Tenor>
+<pars>
+{clef: C4} {solm: 0} {mens: O5} PS5 PS5 Sc <text>Agnus</text> me. sf mg maa Sg me mf mc mg maa. sg maa mbb mcc Sg mf mg me. sf mg. sf <text>Dei,</text> mg mf me Sc PS3 Pm5 mc <text>{var="qui tollis" (ed.) : (om.) Ve759}</text> md me mf md mg. ff fe mf mg md. fc fd Se Pm7 md. fc fb mc md me. sd se sf mg me. sd se sf md me Sd Sc PS3 PS3 <lig><obl>Se <text>{var="peccata" (ed.) : (om.) Ve759}</text> Sc</obl></lig> Sd mc {var="mg. sf maa. sg sf" Ve759^c : "me. md mf. me md" Ve759^*} fe ff Sg Pm9 mf. <text>{var="mundi," (ed.) : (om.) Ve759}</text> se md me mc. sd se sf mg me Bd. Pm5 mc <text>{var="miserere" (ed.) : (om.) Ve759}</text> <text: -4>{var="dona nobis" (ed.) : (om.) Ve759}</text> me. sf sg saa sg. ff Bd Se. sf mg Sd Sg <text>{var="nobis." (ed.) : (om.) Ve759}</text> <text: -4>{var="pacem." (ed.) : (om.) Ve759}</text> mf Lg ||
+</pars>
+<pars>
+<tacet>Agnus secun -<l/>dus tacet</tacet> || 
+</pars>
+</part> 
+
+{staf: 5} <part: {var="Contratenor" (ed.) : "Contra." Ve759}>
+<pars>
+{clef: C8} {solm: 0} {mens: O9} PB9 PS9 Sc <text>Agnus</text> me. sf mg maa mg me {var="md. se mf mg mc" Ve759^c : "mc mb. sc md me" Ve759^*} me Sd Sc mc. sd me.sf md mg. sf mg. <text>Dei</text> saa mf Se PS9 md <text>qui tollis</text>mb SG md mG. sa mb Sc mb mG Sa mG mc. sb sc sd me mc. sb sc sd mG Sc mb mc me. sd Sc mb Sc PS7 PS7 <lig><obl>Se <text>{var="peccata" (ed.) : (om.) Ve759}</text> Sc</obl></lig> Sd mc mg. ff fg maa. sg sf fe fd mg me. sf mg Sc BG. <text>{var="mundi" (ed.) : (om.) Ve759}</text> ma. sb Sc Pm7 mG. <text>{var="miserere" (ed.) : (om.) Ve759}</text> <text: -4>{var="dona nobis" (ed.) : (om.) Ve759}</text> sa sb sc sd se mf mg mc me. sf mg <text>{var="nobis." (ed.) : (om.) Ve759}</text> <text: -4>{var="pacem." (ed.) : (om.) Ve759}</text> me Sd Lc || 
+</pars>
+<pars>
+{mens: c7} <label: 14>Duo</label> PL7-9 Sc. <text>Agnus</text> sb sa mb mc. sb ma BG. <text>Dei</text> Sa Sb Pm9 md. sc sb sa SG Sa mb Sc Sd me Sf md mg. sf me Sd Pm9 Sc <text>qui tollis</text> ma mF. sE SF mG. sa mb Sc ma Sd Pm9 <lig><obl>Sb <text>peccata</text> SG</obl></lig> mb <lig><obl>Sa <full>SG</obl></lig> ma mG mF <ll:-1>mE mD mE</ll> mF .7 mG ma Sb mc</full> md me mf mg mc md <text>mun -</text> me mc md mb <text>di,</text> Sa BG PS5 Se. <text>miserere</text> mf Sg. maa sg sf se sd me mf Sg mc md me Sc mb mc me Sd Pm9 Sc <text>nobis.</text>mb <lig>Sc Sd</lig> Se mf mg. sf mg  mc me Sd Lc ||  
+</pars>
+</part>
+</section>
+</piece>

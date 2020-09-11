@@ -1,0 +1,56 @@
+﻿Missa ‘L’homme armé’
+Johannes Tinctoris
+Editor: Jeffrey J. Dean
+Checked by: Christian Goursaud
+Date established: 13 April 2020
+Base transcription: CS35
+Sources:
+CS35	V-CVbav Cappella Sistina 35, fols. lxiiij^s^-lxxxij^d^ (85^v^-104^r^)	Tinctoris	tttt
+<piece: {mensural: void}, {staf: 5, black}>
+<section: Kyrie>
+<part: {var="Supremum" (ed.) : "suppremū" CS35^E^i}>
+<pars>
+{clef: C6} {solm: bb ^bbb} {mens: O7} Bd <text>Kyrie</text> Sg mg. sf me me <text>cuncto -</text> md mg maa. sbb mcc mcc. sbb saa fg faa mbb. faa fg mf. saa. fg ff fe mf Sg. <text>rum plasmator</text> mbb. saa sg sf me. fd fe mf Sd mc Bd Pm9 me <text>sum -</text> mf. se mg md. se mf me. sd {var="Sg" CS35^c : (om.) CS35^*} <lig>Sg <text>mus</text> Saa.</lig> mg Pm11 maa <text>eley -</text> mbb. faa fbb mcc. maa fg ff me md mg sf saa. fbb scc. fbb faa fg sf. fe <text>son;</text> Sg md <text>Ky -</text> mg. sf se fd fc mb. sc md Sc mb <text>rie</text> mc md. fc fb ma Pm5 ma <text>celi -</text> mb sG mb sc md. fc fb <text>genum</text> ma SG PS3 PS3 mg <text>verus do -</text> me md. sg. ff sd me sf. fe sc sd me <text>mina -</text> md. fc fb mc Sd <text>tor {var="eleyson" (ed.) : (om.) CS35};</text> mb. mG sc. fb sG sa fG fa <ll: -1> sF. fE mG Pm3 </ll> Sg <text>Kyrie</text> mg mcc. saa sbb mg sf sf se mg. sf md. <text>terra -</text> sc sb sa md. fc fb mc <text>rum</text> md Ps11 mg <text>sublimus</text> maa sf sg. ff se sd mg <text>rector</text> maa mbb. faa fg mbb <text>eley -</text> scc. fbb saa sg mg. ff fg sf <text>son.</text> se Mg || [-][-][-]
+</pars>
+<pars>
+{mens: c7} PL5-7x2 PL7-9x2 <text>sapiens</text> Sd Sd SG Pm7 md. <text>pa -</text> se mf. se <text>tre</text> md me Sc <text>natus</text> mb mc me Sd mc ma mG mg. <text>eley -</text> saa mbb. saa mbb scc sbb saa sg mf. <text>son;</text> se Bg PL9-11x2 PL7-9 Bg <text>fructus</text> Sg mf. sg maa Sg <text>quoque ven -</text> mf mg. sf se sd mf. se md. sc sc sb <text>tris</text> Sd PS7 PL7-9x2 PL9-11 PS9 Sg <text>{var="Christe" (ed.) : "Criste" CS35} salus mundi</text> mg saa sbb Scc scc sbb saa sg Sbb Baa Sg Pm7 md. <text>no -</text> sc me. sd sc sb ma <text>ster</text> mb Sa Pm5 mG. <text>mediator</text> sa sb sc md. se sf sg maa. sg Scc <text>eleyson.</text> mbb. saa mg. sf sf se Mg ||
+</pars>
+<pars>
+{clef: C6} {solm: bb ^bbb} {mens: o11} PL9-11 PS9 Bg <text>Kyrie procedens</text> Sg Bcc Sbb. saa sg Sbb Baa. Sg Bd <text>ex {var="his" (ed.) : "hiis" CS35}</text> SG PS3 <full>BG <text>ambobus eley -</text> Bg</full> <lig>Saa Sbb</lig> Sg Saa maa. sg Se md Sg mf mf se <text>son;</text> sf Bg. PS9 Bg. <text>Kyrie</text> Scc. sbb scc <lig>Saa. Sbb</lig> maa Bcc PB11 PS5 Bc <text>vera docens</text> Sd Bd. mc. sd me sd se Sf. <text>sacrum spiramen eleyson;</text> md Se Bf Se Sd. sc sb Sc Bd PS7 Bd <text>Kyrie sanctus</text> Sd Sg mg. sf Sd Be Sd me <text>amor</text> Saa sg sf me mf Sg. sf sg mf me Sg PS9 Sg <text>mi -</text> mf <text>serum</text> maa. sg mf Se Sd Pm7 mc. <text>patronus</text> sb sa sG Sb mG md. se mf mg. sf se sd me mc. sb Sd Saa <text>eley -</text> Sg Sf Se. sd sc md Sg mf mf se sf <text>son.</text> Mg ||
+</pars>
+</part>
+{staf: 5} <part: {var="Tenor" CS35^E^i^O}>
+<pars>
+{clef: C10} {solm: bb} {mens: O7} SG <text>Kyrie</text> mD mG. sF sE sD SE. mC SD mE <text>cunctorum</text> mF mE. sa. fG fF fE mF SG PS7 PS7 PS11 Sd <text>plasmator</text> Sd mG ma. sG mF SE SD. md. <text>sum -</text> fc fb mc md mD mG mb. sa mF mG mE. fD fC mD mE mC mF. sG ma mb. fa <text>mus</text> fG ma SG PS7 PS7 Pm7 mG <text>eley -</text> sD sF. fG sa. fb sc. fb fa fG mb <text>son;</text> mG Ps9 sb. <text>Ky -</text> fa sG sE sF mG. sa mb sa. fG mG. <text>rie</text> fF fE mF SG PS7 PS7 mD <text>celigenum</text> mG. sa mb. fa fG mF mb sG mb sc md. fc fb ma mG mc mb Ps9 sb. <text>verus</text> fa md sc md <text>dominator</text> <lig><obl>Sc Sa</obl></lig> ma SF mD md <text>eleyson;</text> be me mc. fb fa mb Sc mb <text>Kyrie</text> mG mE mF. sE mG Pm9 ma <text>terra -</text> Sb. mG. sF mD SE <text>rum</text> mD sd. <text>sublimis</text> fc sb fa fG sa md sc sc <text>re -</text> sb <text>ctor</text> Sd Pm11 <lig><obl>Sb <text>eleyson.</text> Sa</obl></lig> md. fc fb ma mb. sc Md ||
+</pars>
+<pars>
+{clef: C10} {solm: bb} {mens: c7} BG <text>{var="Christe" (ed.) : "Criste" CS35}</text> SG. sa sb mc md. sc sb sa mG Sc <text>coe -</text> mb Sc mb ma. sG sF sE sD sE sF sG ma <text>terno</text> SG mF LG PB7 PL5-7x2 PL7-9x2 PL5-7x2 PB7 mG. <text>fructus</text> sa mb mc. sd me Sd mc <text>quoque</text> mb Sa mG mc. <text>ventris</text> sb sa sG ma mF SE mD mF. <text>e -</text> sG ma mb sa sG ma Sd mc mc <text>leyson;</text> sb sc Bd PL9-11 PL7-9 PL9-11 Sd <text>salus mundi noster</text> Sd SG ma mb. sa mc. sb sa sG mF mG. sF sF sE mG. sa sb sc md Pm5 mD. <text>mediator eley -</text> sE sF sG ma. sG mc md. sc mb <text>son.</text> Sa MG ||
+</pars>
+<pars>
+{clef: C10} {solm: bb} {mens: o7} PB7 <text>Kyrie procedens</text> BG SG Bc Sc .9 <lig><obl>Sb Sa</obl></lig> BG PB7 PB11 PS11 <text>ex {var="his" (ed.) : "hiis" CS35} ambobus eleyson;</text> Sd BG. PS11 Sd Sd Sd Bc Sb Ba LG PS7 PS7 .7 Sc <text>Kyrie vera</text> Sc. sb sc Sd Sd Bc <lig>Sa. <text>do -</text> Sb</lig> ma Sc. sb sa SG Ba <text>cens sacrum spiramen eleyson;</text> BG Bb Sb {var=(ins.) ".11" CS35^*} Sa ma. sb Sc Ba. SF BD <lig>SD SG</lig> PB7 BG <text>Kyrie sanctus amor</text> SG Bc Sc .9 Sb Sa BG PB7 PB11 PS11 Sd <text>miserum patronus e -</text> Sd BG. PS11 Sd Sd Sd Bc Sb <text>leyson.</text> Ba MG ||
+</pars>
+</part>
+{staf: 5} <part: {var="Contratenor" CS35^B} {var="Altus" (ed.)}>
+<pars>
+{clef: C8} {solm: bb} {mens: Ç5} <label: 14>Crescit in duplum</label> PS5 SG <text>Kyrie cunctorum</text> mG Sc mc .11 mb ma SG PS5 PS9 Pm9 <text>plasmator</text> md md SG. Pm9 md <text>summus eleyson;</text> md md Sc mb Sa BG Pm5 Pm5 {prop: 2/1, 11-13} <text>Kyrie celigenum</text> Sg mg Sf mf Sg mg Sd Sg <text>verus domina -</text> mg Sf mf Sg Sd <text>tor eley -</text> mg Saa mg .14 mf Se <text>son;</text> Bd Pm9 Pm9 PS5 SG <text>Kyrie terrarum</text> mG Sc mc .11 mb ma SG PS5 PS9 Pm9 <text>sublimis</text> md md SG. Pm9 md <text>rector eleyson.</text> md md Sc mb Sa {var="-MG" (ed.) : "-LG" CS35} ||
+</pars>
+<pars>
+{clef: C8} {solm: bb} {mens: c11} PL9-11x2 PL7-9x2 PS9 Sd <text>sapi -</text> Sd SG <text>ens</text> Pm9 md. <text>patre natus eley -</text> se mf mg. sf me md. sc Sc mb Sc Sb <lig>BG <text>son;</text> Ba</lig> SG PS5 Bg <text>{var="Christe" (ed.) : "Criste" CS35} caro</text> Sg mf. sg maa Sg mf mg. sf se sd mf. <text>verbum</text> se md. sc sc sb Bd PL9-11x2 PL7-9x2 PB9 Sd <text>{var="Christe" (ed.) : "Criste" CS35}</text> md se sf mg maa md. <text>sa -</text> se mf mg. sf sf <text>lus</text> se Sg mG <text>mun -</text> sa sb Sc. sd se mf. se md Sg sf se sf sg saa sf Sg <text>di</text> PS11 PL9-11 md <text>medi -</text> md Sg <text>ator</text> Sf Pm11 mf. <text>eley -</text> sg maa mf mg. sf md. sc ma Sb. mc <text>son.</text> Md || [-] <label: 8>{var=(ins.) "verte" CS35}</label>
+</pars>
+<pars>
+{clef: C8} {solm: bb} {mens: o9} Bd <text>Kyrie proce -</text> Sd Bg Sg .11 Sf Be Sd me Sf se sf Sg. sf se md. se sf sg maa. sg sf se Sf <text>dens ex {var="his" (ed.) : "hiis" CS35}</text> Bg Sd .11 Sd SG PS5 Sd <text>ambobus eleyson;</text> Sd Sd <lig><obl>Sc Sb</obl></lig> <full>Ba BG</full> PS5 PS5 PL7-9 Bg <text>Kyrie vera docens sacrum spiramen eley -</text> Sg Bf Sf Bg Sg Bd Bg Sg Bf Bg Bd Sg Baa Sg .11 Sf Be <text>son;</text> Sd Sd <text>Kyrie san -</text> Sd Sg Sg mg. sf md mb. sc md mb. sa Bc <text>ctus</text> Sd Pm9 mc <text>a -</text> ma. sb Sc <text>mor</text> Bd. mb. sc Sd. sc sb ma mF. <ll: -1>sE mD mE</ll> mF SG. mE <text>mise -</text> mF sE sF mG Sb sa <text>rum</text> sG Sa PB5 Sa <text>patronus</text> SF mG. <ll: -1>sF SD PS1 SG <text>eley -</text></ll> mG Sd sc sb ma. sG mb. sc <text>son.</text> Md ||
+</pars>
+</part>
+{staf: 5} <part: {var="Contratenor Bassus" CS35^K^1 : "Bassus" CS35^E^i^t^A^D^2}>
+<pars>
+{clef: F10} {solm: bB} {mens: O5} BGG <text>Kyrie cunctorum plasmator</text> SGG BC SB BA. SGG SD SD SGG Pm5 mGG. <text>sum -</text> sA mB mC mA <lig><obl>SD SA</obl></lig> Pm13 ma. <text>mus</text> sG mF SE mD ma <text>e -</text> mb mG. sF mD mE mC. <text>ley -</text> sB mGG mC mE mD. sE mF mG. fF fE mF Pm11 mG sC. fD sE mF <text>son;</text> {var="fE fD" CS35^c : "sE sD" CS35^*} mC SG PS11 PS11 mGG <text>Kyri -</text>mC mB sGG mC sD sE sF SG mF mE SD <text>e</text> mC sGG <text>celi -</text> mB sC mD. <text>genum</text> fC fB mA BGG Pm9 mD <text>verus</text> mGG. sG. fF sE SD. <text>do -</text> mE mC mG. mG sF mE mD <text>minator</text> mA mC mD SA Pm7 SB <text>eleyson;</text> mGG mC mE SD SC mGG <text>Kyrie</text> mC. sB sA sGG mA mGG SD Pm5 SGG <text>terrarum</text> mGG. sA mB SA ma <text>sublimis</text> mG. sF mD SE Pm9 mD <text>rector eleyson.</text> SG. ma mF mG SD {var="-MGG" (ed.) : "-LGG" CS35} ||
+</pars>
+<pars>
+{clef: F10} {solm: bB} {mens: c5} BGG <text>{var="Christe" (ed.) : "Criste" CS35}</text> mGG sA sB mC. sD mE mF mG. sF sE sD mC SD mC mA mGG <text>coe -</text> mD. sE mF. sE mD. sC mB SA <text>terno</text> {var="-LGG" CS35^c : "BGG" CS35^*} PB5 PL5-7 PL7-9 PL5-7 PS3 <lig>SGG. <text>{var="Christe" (ed.) : "Criste" CS35}</text> SC</lig> mB mC mE mD. sE mF <text>caro</text> mG ma. sG mE mG. <text>ver -</text> sF mD mF mG SE <text>bum</text> BD PL9-11x2 PS11 SG <text>eleyson;</text> Ba <lig>SG <obl>SF BE</obl></lig> SD SD <text>{var="Christe" (ed.) : "Criste" CS35} salus mundi</text> mD sE sF SG. mF mG mb. sa mG Sa SG PS11 PL9-11x2 PL7-9 PS5 mGG. <text>mediator</text> sA mB. sC mD. sE mF. sG ma SG. <text>eleyson.</text> SD -MGG ||
+</pars>
+<pars>
+{clef: F10} {solm: bB} {mens: o11} BG. <text>Kyrie</text> SC. mD SE SF BC SG PS11 PS11 BGG <text>procedens ex {var="his" (ed.) : "hiis" CS35} ambobus</text> SD SD BGG bb SG <ll: 1>Sb. mc mb.</ll> sa Bb Sb .14 Sa BG SD <text>eley -</text> mF. sE SC <lig>SGG SD</lig> <lig>BGG <text>son;</text> LC</lig> PB7 SC <text>Kyrie</text> SC. sB sC SD SD <text>vera docens sacrum spiramen eleyson;</text> BC SE BD  SGG SC BB SGG {var=".3" (ed.) : (om.) CS35} <lig>SFF SF</lig> SC <lig><obl>SD SA</obl></lig> BB SGG BGG PS3 BGG <text>Kyrie san -</text> SGG BC SB .5 SA <text>ctus amor</text> BA SGG SD <text>miserum</text> SD BGG PS3 .3 SD <text>patronus</text> SD SC SB BA mGG SG mF SD <lig><obl>BE <text>eley -</text> BD</obl></lig> mGG. sA <lig>SB SC.</lig>mB SGG BD <text>son.</text> {var="-MGG" CS35^c : "||" CS35^*} ||
+</pars>
+</part>
+</section>
+</piece>

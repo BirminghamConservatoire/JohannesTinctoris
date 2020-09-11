@@ -67,13 +67,7 @@ function loadSubMenu(menu){
     $(".sidebar1").empty();
 
     // Build menu structure
-    var htmlMenu = $("<ul></ul>");
-    for (item in menu)
-    {
-        var itemEl = $("<li></li>").attr({"class": menu[item].class, "id": menu[item].id});
-        itemEl.text(menu[item].name);
-        htmlMenu.append(itemEl);
-    }
+    var htmlMenu = buildMenu(menu, htmlMenu);
     
     // Render sidebar menu
     $(".sidebar1").append(htmlMenu).on("click", "li", function() 
@@ -87,6 +81,10 @@ function loadSubMenu(menu){
             {
                 musicMap.get(id).draw();
             }
+            else if (this.className == "none")
+            {
+                $("#content").empty();
+            }
             else
             {
                 $("#content").text("Oooops!");
@@ -96,6 +94,31 @@ function loadSubMenu(menu){
     loadData();
 }
 
+function buildMenu(menu, htmlMenu)
+{
+    htmlMenu = $("<ul></ul>");
+    htmlMenu.attr("class", "musicMenu");
+    for (item in menu)
+    {
+        var itemEl = $("<li></li>").attr({"class": menu[item].class, "id": menu[item].id});
+        itemEl.text(menu[item].name);
+        htmlMenu.append(itemEl);
+
+        // deal with nested menus for parts
+        if (menu[item].parts)
+        {
+            var submenu = buildMenu(menu[item].parts, submenu);
+            htmlMenu.append(submenu);
+        }
+    }
+    return htmlMenu;
+}
+
+/**
+ * @memberof getMusic
+ * @summary Reads the part of the url after an "?"
+ * @returns Parameter after "?"
+ */
 function getParam()
 {
     var url = window.location.href

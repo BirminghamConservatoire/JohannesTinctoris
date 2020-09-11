@@ -88,11 +88,12 @@ body.edition, .edition .container{
   page-break-before: avoid;
 }
 /* side menu for music editon view */
-.sidebar1 > ul {
+ul.musicMenu {
+  margin-left: 5%;
+  margin-bottom: 0.5em;
   list-style-type: none;
 }
-
-.sidebar1 > ul > li:hover {
+ul.musicMenu > li:hover {
   cursor: pointer;
   color: #cc2414;
 

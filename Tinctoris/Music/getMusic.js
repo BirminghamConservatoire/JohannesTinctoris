@@ -8,6 +8,7 @@
   * @summary stores current music as [Filename -- MusicHolder]
   * */
 var musicMap = new Map();
+var currentID = "";
 /** suppress editor functions */
 editable = false;
 /** use info buttons and have every info hidden */
@@ -79,7 +80,9 @@ function loadSubMenu(menu){
             }
             else if (this.className == "load")
             {
+                wrapWidth = $(".content").width();
                 musicMap.get(id).draw();
+                currentID = id;
             }
             else if (this.className == "none")
             {
@@ -148,5 +151,10 @@ $(document).ready(function() {
             loadSubMenu(musicMenu[id]);
         }
     });
+
+    $(window).resize(function() {
+        wrapWidth = $(".content").width();
+        musicMap.get(currentID).draw();
+    })
 });
 

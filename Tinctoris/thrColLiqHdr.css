@@ -88,9 +88,13 @@ body.edition, .edition .container{
   page-break-before: avoid;
 }
 /* side menu for music editon view */
+/*.sidemenu{
+  background-image: url(Images/Ivory%20Laid%20Paper.png);
+}*/
 ul.musicMenu {
   margin-left: 5%;
-  margin-bottom: 0.5em;
+  padding: 0.5em;
+  margin-bottom: 0em 0.5em 0em 0.5em;
   list-style-type: none;
 }
 ul.musicMenu > li:hover {
@@ -98,6 +102,15 @@ ul.musicMenu > li:hover {
   color: #cc2414;
 
 }
+/* music edition content pane*/
+#rendered{
+  background-image: url(Images/Ivory%20Laid%20Paper.png);
+  padding: 40px 10px;
+  break-before: avoid;
+  page-break-before: avoid;
+}
+
+
 .twitter-timeline {
   padding: 10% 0;
 }

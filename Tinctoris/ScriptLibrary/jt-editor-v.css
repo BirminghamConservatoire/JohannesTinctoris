@@ -229,7 +229,7 @@ span.sup {
   position: relative;
   background-color: beige;
   border: none;
-  width: 715px;
+  /*width: 715px;*/
   height: 95%;
   resize: both;
 }

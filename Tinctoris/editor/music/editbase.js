@@ -5,7 +5,8 @@
 
 editorMode = true;
 standaloneEditor = true;
-wrapWidth = 600;
+wrapWidth = 690;
+//exWidth = 660;
 
 /** @function 
  * @memberof editor/music/editbase

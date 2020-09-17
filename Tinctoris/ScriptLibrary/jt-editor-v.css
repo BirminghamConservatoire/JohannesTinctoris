@@ -566,14 +566,14 @@ p.colend.columnPara {
 }
 
 .choice, .variantGroup {
-  color: #060;
-  fill: #060;
+  color: #008900;
+  fill: #008900;
 }
 .variantGroup line, .variantGroup line.rest{
-  stroke: #060;
+  stroke: #008900;
 }
 .variantGroup path, .variantGroup path.red  {
-  fill: #060;
+  fill: #008900;
 }
 #TheTreatiseEditor .choice, .variantGroup {
   color: #0B0;
@@ -590,7 +590,7 @@ p.colend.columnPara {
 }
 #TheTreatiseEditor .variantGroup .ligatureBox .ligatureVertical, #TheTreatiseEditor .variantGroup .ligatureBox .ligatureStem, 
    .variantGroup .ligatureBox .ligatureHorizontal, .variantGroup .barline{
-  stroke: #060;
+  stroke: #008900;
 }
 
 #TheTreatiseEditor .variantGroup .variantGroup, #TheTreatiseEditor .variantGroup .variantGroup path,
@@ -727,7 +727,7 @@ div.musicexample.standalone {
 }
 
 .variantGroup .menssign {
-  fill: #060;
+  fill: #008900;
 }
 
 .repeatGroup .repeatdot {
@@ -762,7 +762,7 @@ neumeJoin{
 
 .variantGroup .ligatureBox .ligatureVertical, .variantGroup .ligatureBox .ligatureStem, 
    .variantGroup .ligatureBox .ligatureHorizontal, .variantGroup .barline{
-  stroke: #060;
+  stroke: #008900;
 }
 
 .variantGroup .variantGroup, .variantGroup .variantGroup path,
@@ -909,7 +909,7 @@ tspan.correctionem {
 }
 
 .choice {
-  color: #060;
+  color: #008900;
   /* font-weight: bolder; */
 }
 
@@ -928,9 +928,9 @@ span.choice span.choice {
   line-height: 0;
 }
 .variants.musical {
-  color: #060;
-  fill: #060;
-  stroke: #060;
+  color: #008900;
+  fill: #008900;
+  stroke: #008900;
   display: inline;
 }
 

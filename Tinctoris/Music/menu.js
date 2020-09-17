@@ -6,7 +6,8 @@ var musicMenu = {
         0 : 
         {
             "name" : "Missa L'homme armé",
-            "class" : "none",
+            "class" : "load",
+            "id" : "music/1 Missa L’homme armé/1a Missa L’homme armé - Kyrie.txt",
             "parts": 
             {
                 0 :
@@ -43,7 +44,8 @@ var musicMenu = {
         },
         1 : 
         {   "name" : "Missa primi toni",
-            "class" : "none",
+            "class" : "load",
+            "id" : "music/2 Missa primi toni/2a Missa primi toni - Gloria.txt",
             "parts" : 
             {
                 0 : 
@@ -69,7 +71,8 @@ var musicMenu = {
         2 :
         {
             "name" : "Missa secundi toni irregularis",
-            "class" : "none",
+            "class" : "load",
+            "id" : "music/3 Missa secundi toni irregularis/3a Missa secundi toni irregularis - Kyrie.txt",
             "parts": 
             {
                 0 :
@@ -107,7 +110,8 @@ var musicMenu = {
         3 :
         {
             "name" : "Missa quinti toni irregularis",
-            "class" : "none",
+            "class" : "load",
+            "id" : "music/4 Missa quinti toni irregularis/4a Missa quinti toni irregularis - Kyrie.txt",
             "parts": 
             {
                 0 :

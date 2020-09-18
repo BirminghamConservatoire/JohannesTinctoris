@@ -6,6 +6,15 @@
     "configurations": 
     [
         {
+            "type": "firefox",
+            "request": "launch",
+            "name": "Fire: Music Edition",
+            "webRoot": "${workspaceFolder}/Tinctoris/Music",
+            "pathMappings": [],
+            "reAttach": true,
+            "url": "http://localhost/tinctoris/Tinctoris/Music/view.html"
+        },
+        {
             "name": "Music Edition",
             "request": "launch",
             "type": "chrome",

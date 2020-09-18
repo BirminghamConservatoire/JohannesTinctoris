@@ -126,7 +126,7 @@ function getParam()
 {
     var url = window.location.href
     var param = url.match(/\?\w*/);
-    param = param[0].substring(1,param[0].length);
+    param = param ? param[0].substring(1,param[0].length) : "";
 
     return param;
 }

@@ -3870,10 +3870,14 @@ function TextUnderlay(){
 	this.prevCurX = false;
   this.marginal = currentInfo ? "l" : false;
   this.classList = currentExample.classes ? currentExample.classes.classes.slice(0) : [];
-  this.width = zeroWidth;
+  this.width = function(){
+    let textLength = this.justGiveMeText().length;
+    let estCharWidth = 6;
+    return textLength * estCharWidth;
+  }
   this.updateStyles = selfFun;
-	this.MEIObj = false;
-	this.changesProportion = function(){
+  this.MEIObj = false;
+  this.changesProportion = function(){
 		if(this.type==="label" && typeof(this.components[0])=="string"
 				&& this.components[0].toLowerCase()=="crescit in duplum"){
 			this.proportionChangesTo = this.prevProportion / 2;
@@ -3952,7 +3956,7 @@ function TextUnderlay(){
   };
   this.draw = function(){
     this.startX = curx;
-		this.prevCurX = curx;
+    this.prevCurX = curx;
     if(this.classList.length){
       extraClasses = classString(this.classList);
       drawClasses(this.classList, this);
@@ -3986,13 +3990,13 @@ function TextUnderlay(){
     var vpos = /-?[0-9]*/.exec(this.position);
     if(vpos) vpos = Number(vpos[0]);
     if(vpos){
-			//      ynudge = vpos*rastralSize/4;
-			if(this.orientation){
-				ynudge = vpos*rastralSize/2;
-			} else {
-				ynudge = vpos*rastralSize/2 +1;
-			}
-			if(vpos<-6) leaveSpace = true;
+      //      ynudge = vpos*rastralSize/4;
+      if(this.orientation){
+        ynudge = vpos*rastralSize/2;
+      } else {
+        ynudge = vpos*rastralSize/2 +1;
+      }
+      if(vpos<-6) leaveSpace = true;
     }
     // lowPoint is a global
     lowPoint = Math.max(lowPoint, cury+(2*rastralSize)-ynudge);
@@ -4060,7 +4064,7 @@ function TextUnderlay(){
     }
 
     var width = textBlock.getBBox().width;
-		var height = textBlock.getBBox().height;
+    var height = textBlock.getBBox().height;
 
     if(this.orientation){
       if(this.orientation==="90c"){
@@ -4091,8 +4095,8 @@ function TextUnderlay(){
         //                    +(this.staffPos * rastralSize / 2)+", "+rastralSize+")");
       } 
       else if(this.orientation==="180") {
-				this.startX = curx + width;
-				if(typeof(last(this.components))=="string" && /[,.¶:;()–\-\—!?‘’]/.test(last(last(this.components)))) this.startX -= 0.55*rastralSize;
+        this.startX = curx + width;
+        if(typeof(last(this.components))=="string" && /[,.¶:;()–\-\—!?‘’]/.test(last(last(this.components)))) this.startX -= 0.55*rastralSize;
         if(this.marginal==="l") {
           this.startX = lmargin;
         }
@@ -4101,12 +4105,12 @@ function TextUnderlay(){
         }
         var actualx = this.startX;
         blockX = this.startX;
-				blockY = cury-ynudge+(rastralSize*-0.25);
-				//        var actualy = cury+rastralSize-ynudge;
-				var actualy = cury-ynudge;
+        blockY = cury-ynudge+(rastralSize*-0.25);
+        //        var actualy = cury+rastralSize-ynudge;
+        var actualy = cury-ynudge;
         textBlock.setAttributeNS(null, "transform", "rotate(180, "
-                           +actualx+", "+actualy+")" );
-			}
+                          +actualx+", "+actualy+")" );
+      }
     }
     //set x and y once and for all and for multiple blocks if necessary
     if(lbIndices.length > 0) 
@@ -4140,11 +4144,11 @@ function TextUnderlay(){
 
     //SVG = oldSVG;
     if(!this.orientation && !this.marginal) curx = this.startX;
-//    if(this.orientation) curx+=rastralSize*2;
+  //    if(this.orientation) curx+=rastralSize*2;
     if($(SVG).parent("#content")) underlays.push(textBlock);
-		// experimental:
-		if(eventi && (currentExample.events[eventi-1].objType==="TextUnderlay")){
-			curx = currentExample.events[eventi-1].prevCurX;
+    // experimental:
+    if(eventi && (currentExample.events[eventi-1].objType==="TextUnderlay")){
+      curx = currentExample.events[eventi-1].prevCurX;
     }
     
     //try setting curx back to start after it has been set back

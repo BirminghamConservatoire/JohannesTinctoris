@@ -1276,42 +1276,65 @@ function MusicExample(){
         remain--;
         if(eventi>nextBreak) nextBreak = this.indexOfStaffBreak(1+nextBreak);
         if(wrapWidth && 
-           // when do we add a break? 
-           // 0. Not if the next item is a fermata or a dot of augmentation!
-           !this.events[eventi].lengthens 
-           && !(this.events[eventi].objType==="MusicalChoice" 
-                && !this.events[eventi].nonDefault() 
-                && this.events[eventi].content[0].content[0].lengthens)
-           && !this.events[eventi].augments
-                   && !(eventi && (this.events[eventi-1].objType=="SolmizationSignature"
-                                                   || this.events[eventi-1].objType=="MensuralSignature"
-                                                   || this.events[eventi-1].objType=="ProportionSign"))
-                   && this.events[eventi].objType!=="Barline"
-                   && !(eventi<this.events.length-2 && this.events[eventi+1].objType=="Barline")
-  //				 && !(eventi<this.events.length-3 && this.events[eventi+2].objType=="Barline")
-                   && 
-           // 1. If x is close to the edge 
-           (curx>=this.targetWidth()-rastralSize 
-            ||
-            // 2. If we're there's a break point coming, but we'd need a
-            // break before then, break a little early
-            (nextBreak && nextBreak - eventi < 5 
-             && (curx>=this.targetWidth()-((nextBreak-eventi)*1.5*rastralSize)))
-            ||
-            // 3. If we're near the end, break a little early if a break
-            // will be needed.
-            (remain<3  
-             && 
-             curx>=this.targetWidth()-((this.events.length-eventi)*1.6*rastralSize)) 
-            ||
-            // 4. If breaking at the next opportunity would separate a note
-            // from its dot.
-            (remain>1 && this.events[eventi+1].augments 
-             && curx+this.events[eventi].width()>=this.targetWidth()-rastralSize)
-                    ||
-                    // 5. If the thing is a tacet (which is super wide) and pushes us over
-                      (this.events[eventi].objType==="Tacet"
-                       && curx + this.events[eventi].width() > this.targetWidth()))){
+          // when do we add a break? 
+          // 0. Not if the next item is a fermata or a dot of augmentation!
+          // If the current item isn't a fermata
+          !this.events[eventi].lengthens 
+          // and a current choice's default reading is a fermata on the preceding note
+          && !(
+            this.events[eventi].objType==="MusicalChoice" && !this.events[eventi].nonDefault() && this.events[eventi].content[0].content[0].lengthens
+          )
+          // and the current item isn't a dot of augmentation
+          && !this.events[eventi].augments
+          // and the last event isn't a SolmizationSignature, MensuralSignature, 
+          // ProportionSign or Barline
+          && !(eventi && 
+            (this.events[eventi-1].objType=="SolmizationSignature"
+                      || this.events[eventi-1].objType=="MensuralSignature"
+                      || this.events[eventi-1].objType=="ProportionSign"
+                      || this.events[eventi-1].objType=="Barline"
+            )
+          )
+          // and the current event is not a Barline
+          && this.events[eventi].objType!=="Barline"
+          // and this event isn't one of the last two events of this example 
+          && !(eventi<this.events.length-2 
+          // and the next event isn't a Barline 
+          && this.events[eventi+1].objType=="Barline")
+            && 
+              // and...  1. If x is close to the edge 
+              (curx>=this.targetWidth()-rastralSize 
+                ||
+                // 2. or If we're there's a break point coming, but we'd need a
+                // break before then, break a little early
+                (nextBreak && nextBreak - eventi < 5 
+                  && (curx>=this.targetWidth()-((nextBreak-eventi)*1.6*rastralSize))
+                )
+                ||
+                // 3. or If we're near the end, break a little early if a break
+                // will be needed.
+                (remain<3  
+                  && curx>=this.targetWidth()-((this.events.length-eventi)*1.6*rastralSize)
+                ) 
+                ||
+                // 4. or If breaking at the next opportunity would separate a note
+                // from its dot.
+                (remain>1 && this.events[eventi+1].augments 
+                  && curx+this.events[eventi].width()>=this.targetWidth()-rastralSize
+                )
+                ||
+                // 5. or If the thing is a tacet (which is super wide) and pushes us over
+                (this.events[eventi].objType==="Tacet"
+                  && curx + this.events[eventi].width() > this.targetWidth()
+                )
+                ||
+                // 6. and a text underlay would reach beyond width
+                (this.events[eventi].text 
+                  && curx + this.events[eventi].text.width() > this.targetWidth()
+                )
+              )
+          )
+        {
            // wrapWidth-32){
           // The custos has to know the next (=current) note, so rewind
           // the pointer, briefly

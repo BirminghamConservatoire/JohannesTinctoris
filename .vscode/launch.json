@@ -10,7 +10,12 @@
             "request": "launch",
             "name": "Fire: Music Edition",
             "webRoot": "${workspaceFolder}/Tinctoris/Music",
-            "pathMappings": [],
+            "pathMappings": [
+                {
+                    "url": "http://localhost/tinctoris",
+                    "path": "${workspaceFolder}"
+                }
+            ],
             "reAttach": true,
             "url": "http://localhost/tinctoris/Tinctoris/Music/view.html"
         },
@@ -20,21 +25,18 @@
             "type": "chrome",
             "url": "http://localhost/tinctoris/Tinctoris/Music/view.html"
         },
-        
         {
             "type": "chrome",
             "request": "launch",
             "name": "Music editor localhost",
             "url": "http://localhost/tinctoris/Tinctoris/editor/music"
         },
-
         {
             "type": "chrome",
             "request": "launch",
             "name": "Treatise editor localhost",
             "url": "http://localhost/tinctoris/Tinctoris/editor/treatise"
         },
-
         {
             "type": "chrome",
             "request": "launch",

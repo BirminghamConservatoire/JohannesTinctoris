@@ -1297,6 +1297,9 @@ function MusicExample(){
           )
           // and the current event is not a Barline
           && this.events[eventi].objType!=="Barline"
+          // and the current event is not a TextUnderlay
+          && this.events[eventi].objType!=="TextUnderlay"
+          // TODO: something isn't right with independent text underlay
           // and this event isn't one of the last two events of this example 
           && !(eventi<this.events.length-2 
           // and the next event isn't a Barline 
@@ -1332,6 +1335,11 @@ function MusicExample(){
                 (this.events[eventi].text 
                   && curx + this.events[eventi].text.width() > this.targetWidth()
                 )
+                ||
+                (this.events[eventi].objType==="TextUnderlay" 
+                  && curx + this.events[eventi].width() > this.targetWidth()
+                )
+                // todo: remember texted notes in ligatures
               )
           )
         {
@@ -1352,10 +1360,15 @@ function MusicExample(){
           eventi+=1;
           sysBreak2();
           sysBreak(false, leaveSpace);
-          currentClef.draw();
-          //console.log(currentClef.appliesTo);
-          var realSolm = this.currentSolm(false);
-          if(realSolm) realSolm.draw();
+          // draw Clef & Solm only if the current object is no clef
+          if(this.events[eventi]==!"Clef")
+          {
+            currentClef.draw();
+            //console.log(currentClef.appliesTo);
+            var realSolm = this.currentSolm(false);
+            if(realSolm) realSolm.draw();
+          }
+          
           this.SVG.height.baseVal.value = this.SVG.height.baseVal.value 
             + (rastralSize*5)+5+(currentLinecount*rastralSize);
         }

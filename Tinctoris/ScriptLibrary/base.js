@@ -2227,6 +2227,9 @@ function cssPath(filename){
   return cssloc +"/"+ filename;
 }
 
+/** @class
+ * @memberof base
+ */
 function docMapping(){
   this.docs = [];
   this.treatises = {};
@@ -3717,4 +3720,73 @@ function addUUIDs(event, mei, document){
 	mei.setAttribute("xml:id", ID);
 	if(!document.UUIDs) document.UUIDs = {};
 	document.UUIDs[ID] = {event: event, mei: mei};
+}
+
+
+/** @namespace base/queryHelper 
+ * @summary Helper functions to make querying the data structure easier
+*/
+
+/** @memberof base/queryHelper 
+ * @summary Finds and returns TextUnderlay in default descendants
+ * @param {*} event Event of a MusicExample
+ * @returns Default TextUnderlay object
+*/
+function getDefaultText(event) {
+  // Because everything can be inside everything else, we need to deal with variants in ligatures
+  // and with ligatures is variants
+  switch (event.objType) {
+    case "TextUnderlay":
+      return event;
+    case "Ligature":
+    case "Oblique":
+      // in ligatures, check all members and return the first one you get
+      // (usually it should be the first one)
+      for (i = 0; i < event.members.length; i++) {
+        if (event.members[i].text) {
+          return event.members[i].text; break;
+        }
+      }
+      return false;
+    case "Musical Choice":
+    case "Ligature Choice":
+    case "ObliqueNote Choice":
+      // we only look for text in the default reading, so only the first reading matters
+      let readingContent = getDefaultReading(event);
+      var textObjs = [];
+      for (i = 0; i < readingContent.length; i++) {
+        textObjs.push(getDefaultText(readingContent[i]));
+      }
+      return textObjs;
+    default:
+      // default can be Note, LigatureNote, ObliqueNote etc. (too many different note types)
+      // If there is no text, return false
+      return event.text ? event.text : false;
+  }
+}
+
+/** @memberof base/queryHelper
+ * @summary Gets the content of the default reading of too many kinds of choices
+ * @param {*} event some kind of Choice object
+ * @returns {Array} Content of first reading
+ */
+function getDefaultReading(event) {
+  // We have to think about MChoice, LigChoice and ObliqueNoteChoice
+  // Luckily, all have .nonDefault()
+  switch (event.objType) {
+    case "Musical Choice":
+    case "Ligature Choice":
+    case "ObliqueNote Choice":
+      if (event.nonDefault()) {
+        // no default reading, return null
+        return null;
+      }
+      else {
+        return event.content[0].content;
+      }
+      break;
+    default:
+      // not a choice object
+      return null;
+  }
 }

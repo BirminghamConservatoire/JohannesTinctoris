@@ -1332,14 +1332,8 @@ function MusicExample(){
                 )
                 ||
                 // 6. and a text underlay would reach beyond width
-                (this.events[eventi].text 
-                  && curx + this.events[eventi].text.width() > this.targetWidth()
-                )
-                ||
-                (this.events[eventi].objType==="TextUnderlay" 
-                  && curx + this.events[eventi].width() > this.targetWidth()
-                )
-                // todo: remember texted notes in ligatures
+                ((text = getDefaultText(this.events[eventi]))
+                  && curx + text.width() > this.targetWidth())
               )
           )
         {

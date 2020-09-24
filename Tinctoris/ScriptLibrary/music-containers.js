@@ -361,7 +361,15 @@ function MusicHolder(text, outdiv){
           }
           state = "emptying drawTo (.draw())";
           $(this.drawTo).empty();
-          this.drawTo.style.width = wrapWidth+"px";
+          // width of content div depends on editor or viewer
+          if(standaloneEditor)
+          {
+            this.drawTo.style.width = (wrapWidth+20)+"px";
+          }
+          else
+          {
+            this.drawTo.style.width = wrapWidth+"px";
+          }
           this.writeHeaders();
           state = "creating new svg – requires width and height";
           var newSVG = svg(this.example.width(), this.example.height());

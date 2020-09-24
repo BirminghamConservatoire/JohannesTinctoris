@@ -43,7 +43,7 @@ var musicMenu = {
             }
         },
         1 : 
-        {   "name" : "Missa primi toni",
+        {   "name" : "Missa [primi toni]",
             "class" : "load",
             "id" : "music/2 Missa primi toni/2a Missa primi toni - Gloria.txt",
             "parts" : 
@@ -70,7 +70,7 @@ var musicMenu = {
         },
         2 :
         {
-            "name" : "Missa secundi toni irregularis",
+            "name" : "Missa [secundi toni irregularis]",
             "class" : "load",
             "id" : "music/3 Missa secundi toni irregularis/3a Missa secundi toni irregularis - Kyrie.txt",
             "parts": 
@@ -109,7 +109,7 @@ var musicMenu = {
         },
         3 :
         {
-            "name" : "Missa quinti toni irregularis",
+            "name" : "Missa [quinti toni irregularis]",
             "class" : "load",
             "id" : "music/4 Missa quinti toni irregularis/4a Missa quinti toni irregularis - Kyrie.txt",
             "parts": 

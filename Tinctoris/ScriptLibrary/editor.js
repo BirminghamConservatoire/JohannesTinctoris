@@ -8,7 +8,7 @@
   */
 function adjustWidth(){
   // arbitrary extra width on rendered ensures a nice background.
-  document.getElementById("rendered").style.width = (Number(wrapWidth)+100)+"px";
+  document.getElementById("rendered").style.width = (Number(wrapWidth)+20)+"px"; //used to be 100
   try {
     doc = new TreatiseDoc(document.getElementById("code").value, document.getElementById("content"));
     doc.draw();
@@ -55,6 +55,7 @@ $(document).ready(function(){
     if(!doc || code.value!==doc.text){
       try {
         var content = document.getElementById("content");
+        adjustWidth();
         var tp = content.scrollTop;
 				if(standaloneEditor){
 					try {

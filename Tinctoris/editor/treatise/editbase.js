@@ -1,6 +1,8 @@
 /** @interface GUIEditor/editbase */
 
 editorMode = true;
+//standaloneEditor = true;
+wrapWidth = 690;
 
 function pitchOrHeightShift(object, d){
   // return function for changing pitch of [object] by [d] steps

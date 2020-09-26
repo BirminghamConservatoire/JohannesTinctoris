@@ -91,12 +91,31 @@ function getNote(anchor){
 	}
 }
 
+function showFootnoteNote(e){
+	e.preventDefault();
+	var id = e.target.href;
+	var indexSearch = /.*#note-(?<index>[0-9]*)/
+	var match = indexSearch.exec(id);
+	var index = match.groups.index;
+	var origFn = $("#footnote-ref-"+index)[0];
+	$([document.documentElement, document.body])
+		.animate({
+			scrollTop: $(origFn).offset().top
+		}, 500);
+	showNote2(index, "note-"+index, "footnote-"+index, origFn);
+}
 function showNote(e){
   e.preventDefault();
   var index = 1+$(this).data("index");
   var id = "note-"+index;
+	var ref = $(this).data("ref");
+	console.log(this);
+	showNote2(index, id, ref, this);
+}
+function showNote2(index, id, ref, thisObj){
   if(document.getElementById(id)) return $(document.getElementById(id)).remove();
-  var note = $("#"+$(this).data("ref"), notesPage);
+  var note = $("#"+ref, notesPage);
+	console.log(notesPage, ref);
   // var anchor = DOMAnchor("{"+$(this).data("ref")+"}", false, false, false);
   // anchor.name = "{"+$(this).data("ref")+"}";
   if(note && note.length) {
@@ -107,10 +126,12 @@ function showNote(e){
     note.id=id;
     note.insertBefore(DOMSpan("fn", false, index+""), note.firstChild);
     // note.insertBefore(anchor, note.firstChild);
-    this.parentNode.insertBefore(note, this.nextSibling);
+    thisObj.parentNode.insertBefore(note, thisObj.nextSibling);
   } else {
-    alert($(this).data("ref"));
+    alert($(thisObj).data("ref"));
   }
+	var noteNotes = $(note).find('[href*="#note"]');
+	noteNotes.click(showFootnoteNote);
   var cites = $(note).find('[href*="Bibliography"]');
   var base = false;
   for(var i=0; i<cites.length; i++){
@@ -123,7 +144,7 @@ function showNote(e){
   // $(note).find('[href*="Bibliography"]').hoverIntent(citationHoverIn, nullHoverOut);
   // $(note).find('[href*="Bibliography"]').click(pinCitation);
   updateXRefs();
-  e.preventDefault();
+//  e.preventDefault();
   return false;
 }
 function showInlineNote(e){

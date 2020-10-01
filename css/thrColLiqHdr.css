@@ -461,10 +461,10 @@ ul.MenuBarHorizontal .MenuBarSubmenuVisible{
 }
 ul.MenuBarHorizontal a.MenuBarItemSubmenu
 {
-	background-image: url(SpryAssets/SpryMenuBarDown.gif);
-	background-image: url(SpryAssets/SpryMenuBarDown.gif), -moz-linear-gradient(to top, #CCC, #CCC, #E2E2E2, #E2E2E2, #E2E2E2);
-	background-image: url(SpryAssets/SpryMenuBarDown.gif), -webkit-linear-gradient(bottom, #CCC 40%, #E2E2E2 60%);
-	background-image: url(SpryAssets/SpryMenuBarDown.gif), -o-linear-gradient(to top, #CCC, #CCC, #E2E2E2, #E2E2E2, #E2E2E2);
+	background-image: url(../SpryAssets/SpryMenuBarDown.gif);
+	background-image: url(../SpryAssets/SpryMenuBarDown.gif), -moz-linear-gradient(to top, #CCC, #CCC, #E2E2E2, #E2E2E2, #E2E2E2);
+	background-image: url(../SpryAssets/SpryMenuBarDown.gif), -webkit-linear-gradient(bottom, #CCC 40%, #E2E2E2 60%);
+	background-image: url(../SpryAssets/SpryMenuBarDown.gif), -o-linear-gradient(to top, #CCC, #CCC, #E2E2E2, #E2E2E2, #E2E2E2);
 	background-repeat: no-repeat;
 	background-position: 95% 50%;
 }
@@ -527,7 +527,7 @@ ul.MenuBarHorizontal a.MenuBarItem
   background-image: url(../Images/DL-red.png);
 }
 #QLBlog{
-  background-image: url("Images/JT Project blog blue %282015 06%29.png");
+  background-image: url("../Images/JT Project blog blue %282015 06%29.png");
   margin: 24px 0 0 0;
   height: 19px;
   width: 80px;
@@ -542,7 +542,7 @@ div.ql-divider{
   height: 25px;
 }
 #QLHome{
-  background-image: url("Images/JT Project home blue %282015 06%29.png");
+  background-image: url("../Images/JT Project home blue %282015 06%29.png");
   margin: 24px 0 0 0;
   height: 19px;
   width: 80px;
@@ -550,10 +550,10 @@ div.ql-divider{
   display: block;
 }
 #QLBlog:hover{
-  background-image: url("Images/JT Project blog red %282015 06%29.png");
+  background-image: url("../Images/JT Project blog red %282015 06%29.png");
 }
 #QLHome:hover{
-  background-image: url("Images/JT Project home red %282015 06%29.png");
+  background-image: url("../Images/JT Project home red %282015 06%29.png");
 }
 #QuickLinks{
   width: 80px;

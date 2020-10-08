@@ -5,13 +5,13 @@
 <head>
 	<meta charset="UTF-8">
   <title>Johannes Tinctoris</title>
-  <link rel="icon" type="image/png" href="{{page.style_url}}/Images/jt.png">
-  <link href="{{page.style_url}}/SpryAssets/SpryMenuBarHorizontal.css" rel="stylesheet" type="text/css" />
-  <link href="{{page.style_url}}/SpryAssets/SpryAccordion.css" rel="stylesheet" type="text/css" />
-  <link href="{{page.style_url}}/css/thrColLiqHdr.css" rel="stylesheet" type="text/css" />
-  <script src="{{page.style_url}}/ScriptLibrary/privatemenu.js" type="text/javascript"></script>
-  <script src="{{page.style_url}}/SpryAssets/SpryMenuBar.js" type="text/javascript"></script>
-  <script src="{{page.style_url}}/SpryAssets/SpryAccordion.js" type="text/javascript"></script>
+  <link rel="icon" type="image/png" href="{{page.rel_url}}/Images/jt.png">
+  <link href="{{page.rel_url}}/SpryAssets/SpryMenuBarHorizontal.css" rel="stylesheet" type="text/css" />
+  <link href="{{page.rel_url}}/SpryAssets/SpryAccordion.css" rel="stylesheet" type="text/css" />
+  <link href="{{page.rel_url}}/css/thrColLiqHdr.css" rel="stylesheet" type="text/css" />
+  <script src="{{page.rel_url}}/ScriptLibrary/privatemenu.js" type="text/javascript"></script>
+  <script src="{{page.rel_url}}/SpryAssets/SpryMenuBar.js" type="text/javascript"></script>
+  <script src="{{page.rel_url}}/SpryAssets/SpryAccordion.js" type="text/javascript"></script>
   <script type="text/javascript">
     function showNote(){ 
       alert("We strive to ensure that these pages\
@@ -46,7 +46,7 @@
         {{ content }}
     </div><!-- end .container -->
     <script type="text/javascript">
-		var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"../SpryAssets/SpryMenuBarDownHover.gif", imgRight:"../SpryAssets/SpryMenuBarRightHover.gif"});
+		var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"{{page.rel_url}}/SpryAssets/SpryMenuBarDownHover.gif", imgRight:"{{page.rel_url}}/SpryAssets/SpryMenuBarRightHover.gif"});
 		var Accordion1 = new Spry.Widget.Accordion("Accordion1");
   </script>
 </body>

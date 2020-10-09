@@ -10,7 +10,7 @@ var prevParent, zoomParent;
 //
 // Bibliographical citation
 
-var BibliographyPath = $('script[src*=citation]').attr('src').replace("citation.js", "../Tinctoris/Bibliography/index.html");
+var BibliographyPath = $('script[src*=citation]').attr('src').replace("citation.js", "index.html");
 //var BibliographyEntries = [];
 var FullBibliography = false;
 var currentCitation = false;

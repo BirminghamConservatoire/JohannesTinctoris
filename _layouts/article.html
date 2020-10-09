@@ -31,7 +31,9 @@
             {% else %}
             {% include tinctoris_header.html %}
             {% endif %}
-            {% include article_menu.html %}
+            {% if page.menu %}
+                {% include {{ page.menu }} %}
+            {% endif %}
             <div class="sidebar1">
                 <!-- emtpy sidebar -->
             </div>

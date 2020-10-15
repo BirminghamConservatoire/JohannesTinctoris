@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+  <title>Johannes Tinctoris: Complete Practical Works</title>
+  <link rel="icon" type="image/png" href="{{page.rel_url}}/Images/jt.png">
+  <!-- website styles-->
+  <link href="{{page.rel_url}}/SpryAssets/SpryMenuBarHorizontal.css" rel="stylesheet" type="text/css" />
+  <link href="{{page.rel_url}}/SpryAssets/SpryAccordion.css" rel="stylesheet" type="text/css" />
+  <link href="{{page.rel_url}}/css/thrColLiqHdr.css" rel="stylesheet" type="text/css" />
+  <!-- jQuery-->
+  <script src="{{page.rel_url}}/ScriptLibrary/jquery-1.8.2.min.js" ></script>
+  <script src="{{page.rel_url}}/ScriptLibrary/jquery.scrollTo-1.4.2.js"></script>
+  <script src="{{page.rel_url}}/ScriptLibrary/jquery-ui-1.9.0.custom.min.js"></script>
+
+  <!-- music editor styles -->
+  <link type="text/css" rel="stylesheet" href="{{page.rel_url}}/ScriptLibrary/jt-editor-v.css" />
+  <!--<link type="text/css" rel="stylesheet" href="../ScriptLibrary/GUI-print.css" media="print"/>-->
+  <link type="text/css" rel="stylesheet" href="{{page.rel_url}}/ScriptLibrary/buttons.css" />
+
+  <!-- menu scripts -->
+  <script src="{{page.rel_url}}/ScriptLibrary/privatemenu.js" type="text/javascript"></script>
+  <script src="{{page.rel_url}}/SpryAssets/SpryMenuBar.js" type="text/javascript"></script>
+  <script src="{{page.rel_url}}/SpryAssets/SpryAccordion.js" type="text/javascript"></script>
+
+  <!-- get the library -->
+  <script src="{{page.rel_url}}/ScriptLibrary/base.js"></script>
+  <script src="{{page.rel_url}}/ScriptLibrary/debugger.js"></script>
+	  <script src="{{page.rel_url}}/ScriptLibrary/dom.js"></script>
+    <script src="{{page.rel_url}}/ScriptLibrary/tei-classes.js"></script>
+	  <script src="{{page.rel_url}}/ScriptLibrary/glyphs.js"></script>
+	  <script src="{{page.rel_url}}/ScriptLibrary/arsnovavoid.js"></script>
+	  <script src="{{page.rel_url}}/ScriptLibrary/music-containers.js"></script>
+	  <script src="{{page.rel_url}}/ScriptLibrary/buttons.js"></script>
+    <script src="{{page.rel_url}}/ScriptLibrary/facs-preview.js"></script>
+    <script src="{{page.rel_url}}/ScriptLibrary/Br1.js"></script>
+	  <script src="{{page.rel_url}}/ScriptLibrary/text-classes.js"></script>
+	  <script src="{{page.rel_url}}/ScriptLibrary/classes.js"></script>
+	  <script src="{{page.rel_url}}/ScriptLibrary/music-parser.js"></script>
+	  <script src="{{page.rel_url}}/ScriptLibrary/parser.js"></script>
+    <script src="{{page.rel_url}}/ScriptLibrary/editor.js"></script>
+    
+      <!-- funcionality scripts -->
+  <script src="getMusic.js" type="text/javascript"></script>
+  <script src="menu.js" type="text/javascript"></script>
+  
+</head>
+
+<body>
+<div class="container">
+    {% include cpw_header.html %}
+	{% include cpw_menu.html %}
+    {{ content }}
+  <!-- end .container --></div>
+  <script type="text/javascript">
+		var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"{{page.rel_url}}/SpryAssets/SpryMenuBarDownHover.gif", imgRight:"{{page.rel_url}}/SpryAssets/SpryMenuBarRightHover.gif"});
+		var Accordion1 = new Spry.Widget.Accordion("Accordion1");
+  </script>
+</body>
+</html>

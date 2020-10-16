@@ -1,79 +1,8 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-	<meta charset="UTF-8">
-  <title>Johannes Tinctoris: Complete Practical Works</title>
-  <link rel="icon" type="image/png" href="../Images/jt.png">
-  <!-- website styles-->
-  <link href="../SpryAssets/SpryMenuBarHorizontal.css" rel="stylesheet" type="text/css" />
-  <link href="../SpryAssets/SpryAccordion.css" rel="stylesheet" type="text/css" />
-  <link href="../thrColLiqHdr.css" rel="stylesheet" type="text/css" />
-  <!-- jQuery-->
-  <script src="../ScriptLibrary/jquery-1.8.2.min.js" ></script>
-  <script src="../ScriptLibrary/jquery.scrollTo-1.4.2.js"></script>
-  <script src="../ScriptLibrary/jquery-ui-1.9.0.custom.min.js"></script>
-
-  <!-- music editor styles -->
-  <link type="text/css" rel="stylesheet" href="../ScriptLibrary/jt-editor-v.css" />
-  <!--<link type="text/css" rel="stylesheet" href="../ScriptLibrary/GUI-print.css" media="print"/>-->
-  <link type="text/css" rel="stylesheet" href="../ScriptLibrary/buttons.css" />
-
-  <!-- menu scripts -->
-  <script src="../ScriptLibrary/privatemenu.js" type="text/javascript"></script>
-  <script src="../SpryAssets/SpryMenuBar.js" type="text/javascript"></script>
-  <script src="../SpryAssets/SpryAccordion.js" type="text/javascript"></script>
-
-  <!-- get the library -->
-  <script src="../ScriptLibrary/base.js"></script>
-  <script src="../ScriptLibrary/debugger.js"></script>
-	  <script src="../ScriptLibrary/dom.js"></script>
-    <script src="../ScriptLibrary/tei-classes.js"></script>
-	  <script src="../ScriptLibrary/glyphs.js"></script>
-	  <script src="../ScriptLibrary/arsnovavoid.js"></script>
-	  <script src="../ScriptLibrary/music-containers.js"></script>
-	  <script src="../ScriptLibrary/buttons.js"></script>
-    <script src="../ScriptLibrary/facs-preview.js"></script>
-    <script src="../ScriptLibrary/Br1.js"></script>
-	  <script src="../ScriptLibrary/text-classes.js"></script>
-	  <script src="../ScriptLibrary/classes.js"></script>
-	  <script src="../ScriptLibrary/music-parser.js"></script>
-	  <script src="../ScriptLibrary/parser.js"></script>
-    <script src="../ScriptLibrary/editor.js"></script>
-    
-      <!-- funcionality scripts -->
-  <script src="getMusic.js" type="text/javascript"></script>
-  <script src="menu.js" type="text/javascript"></script>
-  
-</head>
-
-<body>
-<div class="container">
-  <div class="header">
-  	<div class="imagebox" id="EMT"><a href="../../#"><img src="../Images/EMT logo full.png" id="EMTLogo" alt="Early Music Theory Logo" name="EMTLogo"  /></a> </div>
-    <div class="imagebox" id="projectlogo" style="text-align: center;"><a href="../#"><img src="../Images/JT CPW Title main.png" id="JTLogo" alt="Tinctoris EditonLogo"></a></div>
-  </div>
-	<div class="nav">
-  	<div class="row">
-			<div class="tabl">
-   	 		<div class="frontpagemenu fiveblock">
-  				<ul id="MenuBar1" class="MenuBarHorizontal MenuBarActive">
-            <li><a class="MenuBarItem" href="index.html" id="home">Home</a></li>
-            <li><a class="MenuBarItemSubmenu" href="view.html" id="tinctoris">Tinctoris</a>
-              <ul>
-                <li><a href="view.html?tMasses" id="tMasses">Masses</a></li>
-                <li><a href="#" class="placeholder" id="tMotets">Motets &c.</a></li>
-                <li><a href="#" class="placeholder" id="tSongs">Songs</a></li>
-              </ul>
-            </li>
-            <li><a class="MenuBarItem" href="view.html?dufay" id="dufay">Du Faÿ</a></li>
-            <li><a class="MenuBarItem" href="view.html?busnois" id="busnois">Busnoys</a></li>
-            <li><a class="MenuBarItem" id="about">About</a></li>
-					</ul>
-				</div>
-  		</div>
-	    <div class="tabr"></div>
-    </div>
-  </div>
+---
+layout: cpw_works
+title: Johannes Tinctoris - Complete Practical Works
+rel_url: ../..
+---
   <div class="mainBody">
     <div class="sidebar1 sidemenu">
       <!-- side menu space-->
@@ -83,10 +12,3 @@
         <div id="footnotes"></div>
 			</main>
   <!-- end .mainBody --></div>
-  <!-- end .container --></div>
-  <script type="text/javascript">
-		var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"../SpryAssets/SpryMenuBarDownHover.gif", imgRight:"../SpryAssets/SpryMenuBarRightHover.gif"});
-		var Accordion1 = new Spry.Widget.Accordion("Accordion1");
-  </script>
-</body>
-</html>

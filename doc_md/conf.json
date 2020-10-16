@@ -1,0 +1,14 @@
+{
+    "siteLayouts": {
+        "title": "Website layouts and parts"
+    },
+    "MusicEntry": {
+        "title": "Tinctoris Music Entry"
+    },
+    "interpreterOutput": {
+        "title": "MEI output of trivial beat analysis"
+    },
+    "interpreter": {
+        "title": "Interpreter architecture"
+    }
+}

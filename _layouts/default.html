@@ -1,0 +1,53 @@
+---
+---
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+  <title>{{page.title}}</title>
+  <link rel="icon" type="image/png" href="{{page.rel_url}}/Images/jt.png">
+  <link href="{{page.rel_url}}/SpryAssets/SpryMenuBarHorizontal.css" rel="stylesheet" type="text/css" />
+  <link href="{{page.rel_url}}/SpryAssets/SpryAccordion.css" rel="stylesheet" type="text/css" />
+  <link href="{{page.rel_url}}/css/thrColLiqHdr.css" rel="stylesheet" type="text/css" />
+  <script src="{{page.rel_url}}/ScriptLibrary/privatemenu.js" type="text/javascript"></script>
+  <script src="{{page.rel_url}}/SpryAssets/SpryMenuBar.js" type="text/javascript"></script>
+  <script src="{{page.rel_url}}/SpryAssets/SpryAccordion.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    function showNote(){ 
+      alert("We strive to ensure that these pages\
+ conform to web standards, but these standards are continually evolving, and\
+ are not always quickly and consistently adopted by browser\
+ developers.\n\
+ We test our pages on the latest versions of Webkit and\
+ Gecko-based browsers (e.g. Mozilla Firefox, Apple Safari and\
+ Google Chrome) on Mac OS 10.7+. Other browsers and platforms\
+ may display some aspects of the site differently than intended.\n\
+ We are keen to hear about any technical issues that do arise.");
+    }
+    function addTechWarn(){
+      var agent = window.navigator.userAgent;
+      if(agent.indexOf("Mac OS X")>=0){
+        // Mac
+        if(agent.indexOf("Gecko/")>=0 || agent.indexOf("AppleWebKit/")>=0){
+          // Browser ok.
+          return;
+        }
+      }
+      var w = document.getElementById("warn");
+      w.innerHTML = "<span>Browser Note</span>";
+      w.onclick = showNote;
+  console.log("warned");
+    }
+  </script>
+</head>
+
+<body onload="addTechWarn()">
+    <div class="container">
+        {{ content }}
+    </div><!-- end .container -->
+    <script type="text/javascript">
+		var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"{{page.rel_url}}/SpryAssets/SpryMenuBarDownHover.gif", imgRight:"{{page.rel_url}}/SpryAssets/SpryMenuBarRightHover.gif"});
+		var Accordion1 = new Spry.Widget.Accordion("Accordion1");
+  </script>
+</body>
+</html>

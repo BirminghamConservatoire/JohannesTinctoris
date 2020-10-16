@@ -24,3 +24,5 @@ Setup requires various components:
 * `doc_md` contains files that are part of the code documentation
 * `_includes` contains reusable website parts to be included via [Liquid](https://jekyllrb.com/docs/liquid/)
 * ``_layouts` contains standard layouts for webpages to be built by Jekyll
+
+For more details, see code documentation.

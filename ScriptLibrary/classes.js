@@ -4009,39 +4009,12 @@ function TextUnderlay(){
     var blockX = curx;
     var blockY = cury+rastralSize-ynudge;
 
-    // lets see, if we have linebreaks in that object
-    var lbIndices = findLinebreaksinText(this.components);
-    
-    // creates adds a new textblock... g in case of linebreaks
+    // creates adds a new textblock
     var textBlock = false;
     var orientClass = this.orientation ? " r"+this.orientation : "";
-    if(lbIndices.length > 0)
-    {
-      textBlock = svgGroup(SVG, "textgroup"+orientClass, false);
-      
-      let i = 0;
-      let start = 0;
-      let end = lbIndices[i];
-      do
-      {
-        let partofComponents = this.components.slice(start,end);
-        
-        let text = svgText(textBlock, blockX, blockY, "textblock"+orientClass, 
-        false, false, false);
-        drawRichText(text, partofComponents);
-        
-        start = lbIndices[i]+1;
-        i++;
-        end = i < lbIndices.length ? lbIndices[i]+1 : this.components.length;
-      }
-      while(i <= lbIndices.length);
-    }
-    else
-    {
-      textBlock = svgText(SVG, blockX, blockY, "textblock"+orientClass, 
+    textBlock = svgText(SVG, blockX, blockY, "textblock"+orientClass, 
       false, false, false);
-      drawRichText(textBlock, this.components);
-    }
+    drawRichText(textBlock, this.components);
 
     // Let's hope that there is no text within text... in case of emergency, try to make sense of this:
     /*var textBlock = SVG.nodeName.toUpperCase()==="TEXT" ? SVG 
@@ -4117,24 +4090,26 @@ function TextUnderlay(){
       }
     }
     //set x and y once and for all and for multiple blocks if necessary
-    if(lbIndices.length > 0) 
+    if(textBlock.querySelectorAll("*")) 
     {
-      texts = textBlock.childNodes;
+      texts = textBlock.querySelectorAll("*");
       for(let i=0; i < texts.length; i++)
       {
+        if(texts[i].classList.contains("newline"))
+        {
+          switch(this.orientation){
+            case "90c":
+              blockX -= width;
+              break;
+            case "90a":
+              blockX += width;
+              break;
+            default:
+              blockY += height;
+          }
+        }
         texts[i].setAttributeNS(null, "x", blockX);
         texts[i].setAttributeNS(null, "y", blockY);
-
-        switch(this.orientation){
-          case "90c":
-            blockX -= width;
-            break;
-          case "90a":
-            blockX += width;
-            break;
-          default:
-            blockY += height;
-        }
       }
     }
     else
@@ -4161,25 +4136,6 @@ function TextUnderlay(){
     return textBlock;
   };
   // Text Underlay
-}
-
-/** @memberof classes
- * @summary Looks for Linebreak objects in the components of a TextUnderlay
- * Is used in TextUnderlay.draw()
- * @param {Array} components Array with components of TextUnderlay
- * @returns {Array} index of Linebreak objects
- */
-function findLinebreaksinText(components){
-  var indices = [];
-
-  for(let i = 0; i < components.length; i++){
-    if(components[i].objType==="Linebreak")
-    {
-      indices.push(i);
-    }
-  }
-
-  return indices;
 }
 
 function textwidth(thing){
@@ -6374,16 +6330,35 @@ function MReading(witnesses, content, description, description2, staves, choice)
   this.sketchText = function(styles){
     var obj = [];
     var span;
-    for (var i=0; i<this.content.length; i++){
-      if(typeof(this.content[i])=="string"){
+    var newline;
+    for (var i=0; i<this.content.length; i++)
+    {
+      if(typeof(this.content[i])=="string")
+      {
         // .content is almost always an array containing just a single string
+        // not in the case of line breaks
         span = svgSpan(false, styles.length ? textClasses(styles) :"text", false,
                          this.content[i]);
+        // newline is only applied once
+        if(newline)
+        {
+          styles.pop();
+          newline = false;
+        }
         obj.push(span);
         SVG.appendChild(span);
-      } else if(this.content[i]){
+      } 
+      else if(this.content[i])
+      {
         this.content[i].draw(false, styles); // FIXME: Watch this!!!
         styles = this.content[i].updateStyles(styles);
+
+        // handle linebreaks
+        if(this.content[i].objType==="Linebreak")
+        {
+          newline = true;
+          styles.push("newline");
+        }
       }
     }
     return obj;

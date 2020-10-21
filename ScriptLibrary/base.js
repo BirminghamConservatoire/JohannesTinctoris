@@ -2126,7 +2126,7 @@ function ligatureDrawingKit(ligarray){
   }
 }
 
-/** @memberof base
+/** @memberof base/drawing
  * @summary Given the bits of a formatted text object, draw it to textBlock.
  * textBlock is assumed to be a <text> element in an SVG and to have
  * been positioned already
@@ -2138,31 +2138,54 @@ function drawRichText(textBlock, components){
 	var dy = false;
 	var styles = new Array();
 	var oldSVG = SVG;
-	SVG = textBlock;
-	for(var i=0; i<components.length; i++){
+  SVG = textBlock;
+  var newline;
+  for(var i=0; i<components.length; i++)
+  {
 		var current = components[i]
-		if(typeof(current)=="string"){
-			if(current.length>0){
+    if(typeof(current)=="string")
+    {
+      if(current.length>0)
+      {
 				if(components.length>i+1
 					 && components[i+1].objType==="MusicalChoice"
 					 && components[i+1].content[0].description
-					 && components[i+1].content[0].description.indexOf("ins.")>-1){
+           && components[i+1].content[0].description.indexOf("ins.")>-1)
+        {
 					var textSpan = svgSpan(SVG, styles ? textClasses(styles) : "text", false, current.replace(/\s+%/g, ''));
-				} else {
+        } 
+        else 
+        {
 					textSpan = svgSpan(SVG, styles ? textClasses(styles) : "text", false, current);
-				}
-				if(dy) {
+        }
+        if(newline)
+        {
+          styles.pop();
+          newline = false;
+        }
+        if(dy) 
+        {
 					txt.setAttributeNS(null, 'dy', dy+'px');
 					dy = false;
 				}
-			} else {
+      } 
+      else 
+      {
 				console.log("WARNING: empty text string at ", eventi);
 			}
-		} else if(current){
+    } 
+    else if(current)
+    {
 			// FIXME: why is that in doubt? Why not else?
-			if(current.objType==="MusicalChoice"){
+      if(current.objType==="MusicalChoice")
+      {
 				current.textBlock = textBlock;
 				current.styles = styles;
+      }
+      else if(current.objType==="Linebreak")
+      {
+        newline = true;
+        styles.push("newline");
       }
 			current.draw(styles);
 			if(current.dy) dy=current.dy()*-1;

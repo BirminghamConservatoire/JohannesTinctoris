@@ -4092,12 +4092,12 @@ function TextUnderlay(){
     //set x and y once and for all and for multiple blocks if necessary
     if(textBlock.querySelectorAll("*").length > 1) 
     {
-      texts = textBlock.querySelectorAll("*");
-      texts[0].setAttributeNS(null, "x", blockX);
-      texts[0].setAttributeNS(null, "y", blockY);
-      for(let i=1; i < texts.length; i++)
+      let textParts = textBlock.querySelectorAll("*");
+      textParts[0].setAttributeNS(null, "x", blockX);
+      textParts[0].setAttributeNS(null, "y", blockY);
+      for(let i=1; i < textParts.length; i++)
       {
-        if(texts[i].classList.contains("newline"))
+        if(textParts[i].classList.contains("newline"))
         {
           switch(this.orientation){
             case "90c":
@@ -4109,8 +4109,8 @@ function TextUnderlay(){
             default:
               blockY += height;
           }
-          texts[i].setAttributeNS(null, "x", blockX);
-          texts[i].setAttributeNS(null, "y", blockY);
+          textParts[i].setAttributeNS(null, "x", blockX);
+          textParts[i].setAttributeNS(null, "y", blockY);
         }
       }
     }

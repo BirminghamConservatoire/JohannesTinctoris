@@ -4090,10 +4090,12 @@ function TextUnderlay(){
       }
     }
     //set x and y once and for all and for multiple blocks if necessary
-    if(textBlock.querySelectorAll("*")) 
+    if(textBlock.querySelectorAll("*").length > 1) 
     {
       texts = textBlock.querySelectorAll("*");
-      for(let i=0; i < texts.length; i++)
+      texts[0].setAttributeNS(null, "x", blockX);
+      texts[0].setAttributeNS(null, "y", blockY);
+      for(let i=1; i < texts.length; i++)
       {
         if(texts[i].classList.contains("newline"))
         {
@@ -4107,9 +4109,9 @@ function TextUnderlay(){
             default:
               blockY += height;
           }
+          texts[i].setAttributeNS(null, "x", blockX);
+          texts[i].setAttributeNS(null, "y", blockY);
         }
-        texts[i].setAttributeNS(null, "x", blockX);
-        texts[i].setAttributeNS(null, "y", blockY);
       }
     }
     else

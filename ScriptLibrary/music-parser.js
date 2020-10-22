@@ -635,8 +635,9 @@ function nextLigature(){
     else if(string.substring(0,5)=="{var="){
       next = nextLigChoice(ligature);
     }       
-    else if(string.charAt(0) in rhythms){
-      // check actively if next object is really a note an not just assume it by exclusion  
+    else if(string.charAt(0) in rhythms || 
+      (string.charAt(0) == "^" && string.charAt(1) in rhythms)){
+      // check actively if next object is really a note (remember sup. starting with ^)
       next = nextNote();
       next = new LigatureNote(next);
       consumeSpace();
@@ -662,6 +663,8 @@ function nextLigature(){
     if(next){
 //      ligature.members.push(next);
       ligature.addElement(next);
+      // clear next after pushing, just to be sure
+      next = false;
     }
     consumeSpace();
     if(string.length == strsize){

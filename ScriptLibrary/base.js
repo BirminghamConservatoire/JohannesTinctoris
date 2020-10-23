@@ -1670,19 +1670,53 @@ function showAnnotation(obj, clicked){
     } else {
       var candidateBox = $(obj).parents("SVG")[0].getBoundingClientRect();
       var drawTo = $(obj).parents(".drawTo")[0];
-      if(drawTo && candidateBox.bottom < (drawTo.scrollHeight - drawTo.scrollTop -100)){
-        if(candidateBox.bottom < drawTo.scrollTop - 100){
-          fndiv.style.top = candidateBox.bottom+"px";
-        } else if (candidateBox.top > (drawTo.scrollTop+100)){
-          fndiv.style.bottom = (candidateBox.top - drawTo.scrollTop - $(drawTo).offset().top)+"px";
-        } else {
-          fndiv.style.top = "50px";
+      var fnheight = fndiv.getBoundingClientRect().height;
+        
+      let objCBoxTopDistance = obj.getBoundingClientRect().top - candidateBox.top;
+      let objCBoxBottomDistance = candidateBox.bottom - obj.getBoundingClientRect().bottom;
+      let screenMeasure = drawTo.getBoundingClientRect().height / 4;
+      if(drawTo) {
+        // check if variant obect is closer to top or bottom of svg box
+        if(objCBoxTopDistance <= objCBoxBottomDistance){
+          // variant is closer to top
+          // then make sure, the top of the svg isn't outside the screen or too far away
+          if(!goesOverScreenEnd(candidateBox, drawTo, fndiv, "top") &&
+            objCBoxTopDistance <= screenMeasure){
+              fndiv.style.top = (candidateBox.top-fnheight)+"px";
+            }
+            else {
+              // if not, position fn with variant
+              if(obj.getBoundingClientRect().top-(fnheight+10) > drawTo.getBoundingClientRect().top){
+                fndiv.style.top = (obj.getBoundingClientRect().top-fnheight-10)+"px";
+              }
+              else {
+                fndiv.style.top = (obj.getBoundingClientRect().bottom+10)+"px";
+              }
+            }
+        }
+        else {
+          // closer to bottom
+          // then make sure, the bottom isn't outside the screen or too far away
+          if(!goesOverScreenEnd(candidateBox, drawTo, fndiv, "bottom") &&
+            objCBoxBottomDistance <= screenMeasure){
+              fndiv.style.top = (candidateBox.bottom)+"px";
+            }
+            else {
+              // if not, position fn with variant
+              if(obj.getBoundingClientRect().bottom+(fnheight+10) < drawTo.getBoundingClientRect().bottom){
+                fndiv.style.top = (obj.getBoundingClientRect().bottom+10)+"px";
+              }
+              else {
+                fndiv.style.top = (obj.getBoundingClientRect().top-fnheight-10)+"px";
+              }
+            }
         }
       } else {
-				var fnheight = fndiv.getBoundingClientRect().height;
 				if(candidateBox.top>fnheight) {
-					fndiv.style.top = (candidateBox.top-fndiv.getBoundingClientRect().height)+"px";
+          // when fn fits on top of svg, put it on top
+					fndiv.style.top = (candidateBox.top-fnheight)+"px";
 				} else {
+          // in any case, put it right at the object
 					fndiv.style.top = (obj.getBoundingClientRect().bottom+10)+"px";
 				}
       }
@@ -1695,6 +1729,31 @@ function showAnnotation(obj, clicked){
     popupCloseButton(fndiv);
   }
   return false;
+}
+
+/** @summary Checks if the footnote on top or below the svg fits on the screen
+ * @param candidateBox SVG Box
+ * @param drawTo Content panel
+ * @param fn Footnote that needs to fit
+ * @param {string} side Either "top" or "bottom"
+ * @returns {boolean}
+ */
+function goesOverScreenEnd (candidateBox, drawTo, fn, side){
+  var fnheight = fn.getBoundingClientRect().height;
+  var drawToBox = drawTo.getBoundingClientRect();
+  if(side == "top"){
+    let candidateTop = candidateBox.top;
+    let drawtoTop = drawToBox.top;
+    return candidateTop - fnheight <= drawtoTop;
+  }
+  else if(side == "bottom"){
+    let candidateBottom = candidateBox.bottom;
+    let drawToBottom = drawToBox.bottom;
+    return candidateBottom + fnheight >= drawToBottom;
+  }
+  else{
+    return false;
+  }
 }
 
 function mergeKeys(list1, list2){

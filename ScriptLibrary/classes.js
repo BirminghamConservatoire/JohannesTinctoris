@@ -514,11 +514,11 @@ function SignumCongruentiae(){
 //        console.log("s.c. at", pos, this.staffPos, dotPos, currentLinecount);
       }
     }
-    if(this.effects && !variant && $(SVG).parents("#content").length){
+    if(this.effects && !variant){ //&& $(SVG).parents("#content").length){
 			console.log("step1", this.effects.subType, this.effects.objType);
       oldx = curx;
       if(this.effects.objType==="MusicalChoice"){
-        if(currentReading){
+        if(currentReading && $(SVG).parents("#content").length){
 					console.log(curx);
           var opos = currentReading.content.indexOf(this);
           if(opos===0){

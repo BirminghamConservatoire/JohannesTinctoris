@@ -6183,7 +6183,7 @@ function ObliqueNoteChoice(){
     }
     for(var i=0; i<rdg.content.length; i++){
       obj = rdg.content[i].drawVar(variant);
-      obj.style.fill = "#704";
+      //obj.style.fill = "#704";
     }
 //    return this.applicableReading(variant).sketch(SVG, true);
   };

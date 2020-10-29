@@ -530,7 +530,21 @@ function SignumCongruentiae(){
         }
       } 
       else if(this.effects.objType==="Ligature Choice"){
-        if(currentReading && !$(SVG).parents("#content").length){
+        if(this.effects.subType==="SignumCongruentiae"){
+          var memi = this.effects.ligature.members.indexOf(this.effects);
+          var reallyEffects = this.effects.ligature.members[memi-1];
+          curx = reallyEffects.startX;
+        }
+        else if(currentReading){
+          var opos = currentReading.content.indexOf(this);
+          if(opos>0){
+            curx = currentReading.content[opos-1].startX;
+          }
+        }
+        else{
+          curx = currentExample.events[eventi-1].startX;
+        }
+        /*if(currentReading && !$(SVG).parents("#content").length){
           var opos = currentReading.content.indexOf(this);
           if(opos===0){
             curx = currentExample.events[eventi-1].startX;
@@ -545,7 +559,7 @@ function SignumCongruentiae(){
 						var reallyEffects = this.effects.ligature.members[memi-1];
 						curx = reallyEffects.startX;
 					}
-				}
+				}*/
       }
       else if(this.effects.objType==="ObliqueNote" && this.effects.index === 0 && this.flipped){
         curx = this.effects.startX - rastralSize/2;

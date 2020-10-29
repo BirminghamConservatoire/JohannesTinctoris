@@ -518,11 +518,13 @@ function SignumCongruentiae(){
 			console.log("step1", this.effects.subType, this.effects.objType);
       oldx = curx;
       if(this.effects.objType==="MusicalChoice"){
-        if(currentReading && $(SVG).parents("#content").length){
+        if(currentReading){
 					console.log(curx);
           var opos = currentReading.content.indexOf(this);
           if(opos===0){
-						curx = currentExample.events[eventi-1].startX;
+            if($(SVG).parents("#content").length){
+              curx = currentExample.events[eventi-1].startX;
+            }
           } 
           else if(opos>-1){
             curx = currentReading.content[opos-1].startX;

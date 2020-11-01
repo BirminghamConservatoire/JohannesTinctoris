@@ -40,8 +40,8 @@ function getNoteEntries(){
 }
 
 function getParagraphs(){
-	var paragraphs = $(".contentbox p sup:first-child");
-	console.log(paragraphs.size(), paragraphs);
+	var paragraphs = $(".contentbox p .para-no");
+//	console.log(paragraphs.length, paragraphs);
 	paragraphs.map(function(i, x) { var foo=DOMAnchor('paragraph', "para-"+x.innerHTML.match(/\d+/)[0], false);  x.appendChild(foo) });
 }
 

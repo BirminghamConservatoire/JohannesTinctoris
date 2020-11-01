@@ -1,6 +1,6 @@
 @charset "UTF-8";
 body {
-	font: 100%/1.4 Georgia, "Times New Roman", serif;
+	font: 100%/1.4 Georgia, "Times New Roman", serif!important;
 	background: #DDD;
 	margin: 0;
 	padding: 0;
@@ -41,7 +41,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 }
 
 /* ~~ this container surrounds all other divs giving them their percentage-based width ~~ */
-.container {
+.container, JTcontainer {
 	width: 100%;
 	/*max-width: 1350px;/* a max-width may be desirable to keep this layout from getting too wide on a large monitor. This keeps line length more readable. IE6 does not respect this declaration. */
 	min-width: 975px;/* a min-width may be desirable to keep this layout from getting too narrow. This keeps line length more readable in the side columns. IE6 does not respect this declaration. */
@@ -973,6 +973,23 @@ span.para-no {
 	float: left;
 	margin-left: -2.5em;
 	font-size: 90%;
+}
+span.siglum span {
+	font-weight: bold;
+	color: #414958;
+	cursor: pointer;
+}
+span.siglum span.details {
+	font-size: 90%;
+}
+span.siglum span.details::before {
+	content: " [";
+}
+span.siglum span.details::after {
+	content: "] ";
+}
+span.siglum span:hover {
+    #cc2414;
 }
 .contentbox.article table {
 	table-layout: fixed;

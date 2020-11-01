@@ -238,7 +238,9 @@ function fixLinks(n, citation){
   // and works on each. Multiple links are unlikely but, I guess,
   // possible. 0 links will be the most common situation.
   var links = $(citation).find("a[href^=#]").not(".biblButton");
-  links.hoverIntent(citationHoverIn, nullHoverOut);
+	if(links.hoverIntent){
+		links.hoverIntent(citationHoverIn, nullHoverOut);
+	}
   links.click(pinCitation);
   links.data("refposition", n+0.5);
 }
@@ -361,12 +363,18 @@ function nullHoverOut(){
 $(function(){
   getReferences();
   if(bibliographyPage){
-    $(".contentbox a").filter('[href^=#]').hoverIntent(citationHoverIn, nullHoverOut);
+		if($(".contentbox a").filter('[href^=\\#]').hoverIntent){
+			$(".contentbox a").filter('[href^=#]').hoverIntent(citationHoverIn, nullHoverOut);
+		}
     $(".contentbox a").filter('[href^=#]').click(pinCitation);
   } else {
-    $(".contentbox a").filter('[href*="Bibliography"]').hoverIntent(citationHoverIn, nullHoverOut);
+		if($(".contentbox a").filter('[href^=\\#]').hoverIntent){
+			$(".contentbox a").filter('[href*="Bibliography"]').hoverIntent(citationHoverIn, nullHoverOut);
+		}
     $(".contentbox a").filter('[href*="Bibliography"]').click(pinCitation);
-    $(".contentbox a").filter('[href*="Images"]').hoverIntent(previewHoverIn, nullHoverOut);
+		if($(".contentbox a").filter('[href^=\\#]').hoverIntent){
+			$(".contentbox a").filter('[href*="Images"]').hoverIntent(previewHoverIn, nullHoverOut);
+		}
     $(".contentbox a").filter('[href*="Images"]').click(pinPreview);
   }
   window.onresize = adjustAllDivTops;

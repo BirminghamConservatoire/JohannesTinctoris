@@ -72,7 +72,7 @@ function getNote(anchor){
 	// Get the relevant footnote. If it's a multi-paragraph footnote,
 	// grab all the paragraphs, and put them in a div
 	var note = $(anchor).parents("p")[0];
-	var nextParaIsNextNote = $(note.nextElementSibling).has("a[id]").size()>0;
+	var nextParaIsNextNote = $(note.nextElementSibling).has("a[id]").length>0;
 	console.log('test', nextParaIsNextNote, note.nextElementSibling);
 	if(nextParaIsNextNote){
 		return note.cloneNode(true);
@@ -125,10 +125,10 @@ function showNote2(index, id, ref, thisObj){
     if(!id) console.log("note id error");
     note.id=id;
     note.insertBefore(DOMSpan("fn", false, index+""), note.firstChild);
-    // note.insertBefore(anchor, note.firstChild);
     thisObj.parentNode.insertBefore(note, thisObj.nextSibling);
   } else {
-    alert($(thisObj).data("ref"));
+		console.log("aaargh", $(thisObj).data("ref"), ref, id, note);
+//    alert($(thisObj).data("ref"));
   }
 	var noteNotes = $(note).find('[href*="#note"]');
 	noteNotes.click(showFootnoteNote);

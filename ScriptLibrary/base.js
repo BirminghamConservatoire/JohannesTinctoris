@@ -3374,7 +3374,7 @@ function currentThingForVar(variant, typeString) {
     return false;
   }
   var skip = false;
-  while(skip || (prevEvent=prevMObj(variant, prevEvent))){
+  while(skip || (prevEvent==prevMObj(variant, prevEvent))){
     // previous is dodgy for choices, so sometimes, we need to do it ourselves
     if(!prevEvent){
       return false;

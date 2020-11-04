@@ -557,6 +557,8 @@ function MusicExample(){
             if(next.closes)
             {
                           let lastEl = openParts.pop();
+                          currentClef = false;
+                          currentSolm = false;
               if(lastEl)
               {
                               next.startEl = lastEl;
@@ -1283,6 +1285,12 @@ function MusicExample(){
         // console.log(this.events[eventi], curx);
         remain--;
         if(eventi>nextBreak) nextBreak = this.indexOfStaffBreak(1+nextBreak);
+        //test something
+        if(this.events[eventi].objType==="Part" && this.events[eventi].closes)
+        {
+          currentClef = false;
+          currentSolm = false;
+        }
         if(wrapWidth && 
           // when do we add a break? 
           // 0. Not if the next item is a fermata or a dot of augmentation!

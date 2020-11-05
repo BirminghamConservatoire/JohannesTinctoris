@@ -6473,7 +6473,7 @@ function MReading(witnesses, content, description, description2, staves, choice)
       }
       if(!this.clefp()){
         currentClef = this.staves[0][1];
-        currentSolm = this.staves[0][2];
+        currentSolm = this.solmp() ? null : this.staves[0][2];
 //      currentLinecount = this.staves[0][3].varLines(this.witnesses[0]);
         currentStaffColour = this.staves[0][3].varColour(this.witnesses[0]);
       // currentLinecount = this.staves[0][3].trueLines();

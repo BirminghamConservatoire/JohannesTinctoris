@@ -4923,8 +4923,8 @@ function LedgerLineChange(){
   // Ledger Line Change
   this.finishLines = function(){
     var e2 = currentExample.events[eventi-1];
-		var e2box = e2.domObj.getBBox();
-    var end2 = ((e2 && e2.domObj) ? e2box.width + e2box.x : this.maxX);
+		//var e2box = e2.domObj.getBBox();
+    //var end2 = ((e2 && e2.domObj) ? e2box.width + e2box.x : this.maxX);
     // in the case on a ligature with text underlay, end2 exceeds curx
     // Question: is it wise to always use the maximum? 
     // Maybe trying without end2 isn't too bad... hopefully
@@ -4984,7 +4984,8 @@ function LedgerLineChange(){
 			this.startX = curx;
 			if(!tip) this.coordinates.push([curx-rastralSize/4, cury]);
 		}
-    if(!this.startY) this.startY = cury;
+    // set startY only at the beginning of a line, since a ledger lines must be evenly horizontal
+    if(this.startY===false) this.startY = cury;
 		if(this.maxX && this.maxX>curx){
 			// we've changed system
 //			this.coordinates.push(this.maxX);
@@ -5738,6 +5739,12 @@ function MChoice(){
     this.SVG = SVG;
     var click;
     var backtrack;
+    var extraClasses = "";
+    // Now check for styles
+    if(this.classList.length){
+      extraClasses = classString(this.classList);
+      drawClasses(this.classList, this);
+    }
     if(this.content.length){
       if(this.nonDefault()){
         if(showvariants){

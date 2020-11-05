@@ -557,8 +557,11 @@ function MusicExample(){
             if(next.closes)
             {
                           let lastEl = openParts.pop();
-                          currentClef = false;
-                          currentSolm = false;
+                          if(next.type=="part")
+                          {
+                            currentClef = false;
+                            currentSolm = false;
+                          }
               if(lastEl)
               {
                               next.startEl = lastEl;
@@ -1285,8 +1288,8 @@ function MusicExample(){
         // console.log(this.events[eventi], curx);
         remain--;
         if(eventi>nextBreak) nextBreak = this.indexOfStaffBreak(1+nextBreak);
-        //test something
-        if(this.events[eventi].objType==="Part" && this.events[eventi].closes)
+        //reset currentClef and currentSolm at the end of a part (and ONLY A PART, NOT A PARS!!!!)
+        if(this.events[eventi].objType==="Part" && this.events[eventi].closes && this.events[eventi].type=="part")
         {
           currentClef = false;
           currentSolm = false;
@@ -1373,7 +1376,7 @@ function MusicExample(){
           // draw Clef & Solm only if the next object is no clef
           if(this.events[eventi+1].objType!=="Clef")
           {
-            currentClef.draw();
+            if(currentClef) currentClef.draw();
             //console.log(currentClef.appliesTo);
             var realSolm = this.currentSolm(false);
             if(realSolm) realSolm.draw();

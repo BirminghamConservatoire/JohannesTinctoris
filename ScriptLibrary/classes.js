@@ -6253,6 +6253,7 @@ function MReading(witnesses, content, description, description2, staves, choice)
   this.description2 = description2;
   this.staves = staves;
   this.choice = choice;
+  this.classes = new Classes();
   this.prev = (choice && choice.content.length) ? choice.content[choice.content.length-1]
     : false;
 	//  this.ligReading = false;// not used
@@ -6580,10 +6581,11 @@ function MReading(witnesses, content, description, description2, staves, choice)
     return obj;
 //     return SVG;
   };
-  this.updateStyles = function(styles){
+  // apparently duplicate
+  /*this.updateStyles = function(styles){
     //FIXME:
     return styles;
-  };
+  };*/
   // MReading
 }
 

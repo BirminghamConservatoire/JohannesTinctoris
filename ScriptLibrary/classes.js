@@ -5098,7 +5098,7 @@ function Parameters(){
     var c = this.getClef();
     var s = this.getSolmization();
     return !((!c || c.objType == "Clef") && (!s || s.objType == "SolmizationSignature")
-      && typeof(this.staff.lines) == "number" && typeof(this.staff.colour) =="string");
+      && typeof(this.staff.lines) == "number" && (typeof(this.staff.colour) =="string" || this.staff.colour==false));
   };
   this.annotations = function(){
     var c = this.getClef();
@@ -5150,7 +5150,7 @@ function Parameters(){
       }
     }
     if(showvariants && this.hasChoice()){
-      SVG.style.fill = "#060";
+      //SVG.style.fill = "#060";
       addAnnotation(SVG, this, "staff");
       SVG = this.SVG;
     }

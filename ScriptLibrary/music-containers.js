@@ -1388,20 +1388,23 @@ function MusicExample(){
         if(this.events[eventi].objType && (!this.events[eventi].params || this.events[eventi].objType==="Staff")) {
           try {
             if(currentRedline && removeRedlineBefore(this.events[eventi].classList)) currentRedline = false;
-                      if(this.events[eventi].objType==="Part" && this.events[eventi].staff) {
-  //						console.log("Part will be displayed on new system");
-                      } else if (this.events[eventi].objType==="UpsideDownOpen"){
-                          preRot = SVG;
-                          SVG = svgGroup(preRot, 'flippin', false);
-                      } else if (this.events[eventi].objType==="UpsideDownClose"){
-                          var box = SVG.getBBox();
-                          var halfwayX = box.x + (box.width / 2);
-                          var halfwayY = cury - (3*rastralSize);
-                          SVG.setAttributeNS(null, "transform", "rotate(180, "+halfwayX+", "+halfwayY+")");
-                          SVG = preRot;
-                      } else {
-                          this.events[eventi].draw();
-                      }
+            if(this.events[eventi].objType==="Part" && this.events[eventi].staff) {
+                //console.log("Part will be displayed on new system");
+              } 
+            else if (this.events[eventi].objType==="UpsideDownOpen"){
+                preRot = SVG;
+                SVG = svgGroup(preRot, 'flippin', false);
+              } 
+            else if (this.events[eventi].objType==="UpsideDownClose"){
+                var box = SVG.getBBox();
+                var halfwayX = box.x + (box.width / 2);
+                var halfwayY = cury - (3*rastralSize);
+                SVG.setAttributeNS(null, "transform", "rotate(180, "+halfwayX+", "+halfwayY+")");
+                SVG = preRot;
+              } 
+            else {
+                this.events[eventi].draw();
+              }
             // this.events[eventi].draw(curx, cury); // obsolete
           } catch (x) {
             console.log(x, this.events[eventi]);

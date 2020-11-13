@@ -1924,13 +1924,15 @@ function nextChoiceLikeThing(choice, textp){
           choice.addTextReading(witnesses, string, description);
         } else {
           choice.addReading(witnesses, string, lDescription, rDescription, staffing);
+          if(currentReading.isDefault) clef = currentClef;
+          if(!currentReading.isDefault && currentClef != clef) currentClef = clef;
         }
-        currentClef = clef;
+        currentReading = false;
         break;
     }
     string = stringTemp;
   }
-  currentClef = clef;
+  //currentClef = clef;
   string = finalString;
   currentChoice = false;
   return choice;

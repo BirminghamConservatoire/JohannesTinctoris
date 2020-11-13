@@ -5427,17 +5427,32 @@ function MChoice(){
     var oldSolm = currentSolm;
     var oldLines = currentLinecount;
     var oldColour = currentStaffColour;
+    var oldstring = string;
+    var reading;
     if(!isntdefault){
       // Simplest case. Accepted reading is always standardised
-      this.content.push(new MReading(witnesses, string?nextMusic():[], description, 
-                                     description2, false, this));
+      reading = new MReading(witnesses, [], description, 
+        description2, false, this);
+      if(staffing.length > 0 && currentClef != staffing[0][1]) currentClef = staffing[0][1];
+      reading.clef = currentClef;
+      reading.solm = currentSolm;
+      let content = string?nextMusic():[];
+      reading.content = content;
+      reading.isDefault = true;
+      this.content.push(reading);
+      string = oldstring;
     } else if (witnesses.length <=1 || agreement){
       // Easiest case: either all definitions are the same (AGREEMENT) or there's only one
       // Do staff stuff: 
       currentClef = staffing[0][1];
-      // Then add reading
-      this.content.push(new MReading(witnesses, string?nextMusic():[], description, description2, 
-                                     staffing, this));
+      reading = new MReading(witnesses, [], description, 
+        description2, staffing, this);
+      reading.clef = currentClef;
+      reading.solm = currentSolm;
+      let content = string?nextMusic():[];
+      reading.content = content;
+      this.content.push(reading);
+      string = oldstring;
     } else {
       // Question 1: Is the variant insignificant
       var ostr = string;
@@ -5464,7 +5479,8 @@ function MChoice(){
         }
       }
     }
-    currentClef = oldClef;
+    currentReading = reading;
+    if (isntdefault) currentClef = oldClef;
   };
   // MChoice
   /** addTextReading */
@@ -5760,7 +5776,7 @@ function MChoice(){
 						this.startX = curx;
             click = svgText(SVG, curx, cury-(currentLinecount*rastralSize), "musical variants text", false, false, "ˇ");//*
             curx += backtrack;
-//            curx += rastralSize / 2;
+            //curx += rastralSize / 2;
           }
         } else return;
       } else if(this.textBlock){
@@ -6469,6 +6485,8 @@ function MReading(witnesses, content, description, description2, staves, choice)
     var sc = currentStaffColour;
     var oc = currentClef;
     var os = currentSolm;
+    currentSolm = this.solm;
+    currentClef = this.clef;
     var oldSVG = SVG;
     if(this.staves && !defaultPresent(this.staves)){// && !this.clefp()){
       currentLinecount = false;

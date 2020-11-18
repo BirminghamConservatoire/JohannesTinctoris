@@ -1,3 +1,5 @@
-<div class="footer">
-   
+{% if page.date %}
+<div class="footer" style="text-align: center;">
+   <p style="color: #4E5869;">Updated last at {{page.date}}</p>
 </div><!-- end .footer -->
+{% endif %}

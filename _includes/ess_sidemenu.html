@@ -10,11 +10,23 @@
         <div class="card">
             <div class="card-header" id="headingOne">
                 <button id="btnOne" class="btn btn-link btn-block text-left font-weight-bold text-muted" type="button" data-toggle="collapse"
-                    data-target="#partOne" aria-expanded="false" aria-controls="partOne">
+                    data-target="#partOne" 
+                    {% if page.collapse=='btnOne' %}
+                    aria-expanded="true"
+                    {% else%}
+                    aria-expanded="false"
+                    {% endif %}
+                    aria-controls="partOne">
                     Part One: Reading Tinctoris
                 </button>
             </div>
-            <div id="partOne" class="collapse" aria-labelledby="headingOne" data-parent="#esSidemenu">
+            <div id="partOne" 
+            {% if page.collapse=='btnOne' %}
+            class="collapse show"
+            {% else %}
+            class="collapse"
+            {% endif %}
+            aria-labelledby="headingOne" data-parent="#esSidemenu">
                 <div class="btn-group-vertical d-flex">
                     <a href="{{page.menu_base}}/Dean/#" role="button" class="btn btn-block btn-light text-left">
                         Dean: 
@@ -34,11 +46,23 @@
         <div class="card">
             <div class="card-header" id="headingTwo">
                 <button id="btnTwo" class="btn btn-link btn-block text-left font-weight-bold text-muted" type="button" data-toggle="collapse"
-                    data-target="#partTwo" aria-expanded="false" aria-controls="partTwo">
+                    data-target="#partTwo" 
+                    {% if page.collapse=='btnTwo' %}
+                    aria-expanded="true"
+                    {% else%}
+                    aria-expanded="false"
+                    {% endif %}
+                    aria-controls="partTwo">
                     Part Two: Modal & Contrapuntal Theory
                 </button>
             </div>
-            <div id="partTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#esSidemenu">
+            <div id="partTwo" 
+            {% if page.collapse=='btnTwo' %}
+            class="collapse show"
+            {% else %}
+            class="collapse"
+            {% endif %}
+            aria-labelledby="headingTwo" data-parent="#esSidemenu">
                 <div class="btn-group-vertical">
                     <a href="#" role="button" class="btn btn-block btn-light text-left disabled">
                         Morgan: ‘Tinctoris’s Interval Successions’
@@ -52,11 +76,23 @@
         <div class="card">
             <div class="card-header" id="headingThree">
                 <button id="btnThree" class="btn btn-link btn-block text-left font-weight-bold text-muted" type="button" data-toggle="collapse"
-                    data-target="#partThree" aria-expanded="false" aria-controls="partThree">
+                    data-target="#partThree" 
+                    {% if page.collapse=='btnThree' %}
+                    aria-expanded="true"
+                    {% else%}
+                    aria-expanded="false"
+                    {% endif %}
+                    aria-controls="partThree">
                     Part Three: Theory in Practice
                 </button>
             </div>
-            <div id="partThree" class="collapse" aria-labelledby="headingThree" data-parent="#esSidemenu">
+            <div id="partThree" 
+            {% if page.collapse=='btnThree' %}
+            class="collapse show"
+            {% else %}
+            class="collapse"
+            {% endif %}
+            aria-labelledby="headingThree" data-parent="#esSidemenu">
                 <div class="btn-group-vertical d-flex">
                     <a href="#" role="button" class="btn btn-block btn-light text-left disabled">
                         Smilansky: ‘Tinctoris and the Fernandez Brothers’
@@ -70,11 +106,23 @@
         <div class="card">
             <div class="card-header" id="headingFour">
                 <button id="btnFour" class="btn btn-link btn-block text-left font-weight-bold text-muted" type="button" data-toggle="collapse"
-                    data-target="#partFour" aria-expanded="false" aria-controls="partFour">
+                    data-target="#partFour" 
+                    {% if page.collapse=='btnFour' %}
+                    aria-expanded="true"
+                    {% else%}
+                    aria-expanded="false"
+                    {% endif %}
+                    aria-controls="partFour">
                     Part Four: Source Studies and Biographical Context
                 </button>
             </div>
-            <div id="partFour" class="collapse" aria-labelledby="headingFour" data-parent="#esSidemenu">
+            <div id="partFour" 
+            {% if page.collapse=='btnFour' %}
+            class="collapse show"
+            {% else %}
+            class="collapse"
+            {% endif %}
+            aria-labelledby="headingFour" data-parent="#esSidemenu">
                 <div class="btn-group-vertical d-flex">
                     <a href="{{page.menu_base}}/Goursaud/#" role="button" class="btn btn-block btn-light text-left">
                         Goursaud: ‘The Production and History of Valencia 835’
@@ -91,11 +139,23 @@
         <div class="card">
             <div class="card-header" id="appHeading">
                 <button id="btnApp" class="btn btn-link btn-block text-left font-weight-bold text-muted" type="button" data-toggle="collapse"
-                    data-target="#appendix" aria-expanded="false" aria-controls="appendix">
+                    data-target="#appendix" 
+                    {% if page.collapse=='btnApp' %}
+                    aria-expanded="true"
+                    {% else%}
+                    aria-expanded="false"
+                    {% endif %}
+                    aria-controls="appendix">
                     Appendix
             </button>
             </div>
-            <div id="appendix" class="collapse" aria-labelledby="appHeading" data-parent="#esSidemenu">
+            <div id="appendix" 
+            {% if page.collapse=='btnApp' %}
+            class="collapse show"
+            {% else %}
+            class="collapse"
+            {% endif %}
+            aria-labelledby="appHeading" data-parent="#esSidemenu">
                 <div class="btn-group-vertical d-flex">
                     <a href="#" role="button" class="btn btn-block btn-light text-left disabled">
                         List of Sigla

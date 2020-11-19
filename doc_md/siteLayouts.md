@@ -19,12 +19,15 @@ The page related variables used in front matters are:
 * ``menu``: Only for article template. Defines the used menu.
 * ``header``: Only for article template. Defines the used header.
 * ``date``: Can be used to appear in an optional page footer as date this particluar page was updated.
+* ``section``: If "e&S" it toggle the appearance of the Essays & Studies side menu.
+* ``collapse``: Can be `btnOne`, `btnTwo`, `btnThree`, `btnFour` or `btnApp` for having the respective side menu section collapsed by default.
 
 ## Layouts
 
 ### *article_overview*
 
-Currently used for the overview page of Essays & Studies. A static site template with JT:E&S header, JT:E&S menu and empty sidebars.
+A static site template with JT:E&S header, JT:E&S menu and empty sidebars as a clean option for the E&S landing page.
+(Currently not used.)
 
 ### article
 
@@ -36,6 +39,8 @@ layout: article
 [...]
 menu: tinctoris_menubar.html
 header: tinctoris_header.html
+section: e&s
+collapse: btnOne
 ---
 ```
 
@@ -85,9 +90,10 @@ Template for static pages about Johannes Tinctoris, that don't belong to CTW, CP
 * _cpw_menu.html_ (Complete Practical Works)
 * _ctw_menu.html_ (Complete Theoretical Works)
 * _tinctoris_menubar.html_ (Tinctoris Website)
+* _ess_sidemenu.html_ (Essays & Studies side menu)
 
 ### Other parts
 
-* _footer.html_ (currently empty footer element)
+* _footer.html_ (optional date for last page update)
 * _twitter.html_ (left sidebar with twitter timeline)
 * _tinctoris_right-sidebar.html_ (right sidebar with portrait of JT)

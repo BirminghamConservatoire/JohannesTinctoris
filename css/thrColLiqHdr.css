@@ -989,7 +989,7 @@ span.siglum span.details::after {
 	content: "] ";
 }
 span.siglum span:hover {
-    #cc2414;
+    color: #cc2414;
 }
 .contentbox.article table {
 	table-layout: fixed;

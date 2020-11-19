@@ -1,0 +1,932 @@
+﻿
+    [
+        {
+            "Siglum": "A-Wn 3",
+            "Year": "1487",
+            "Content": "Strabo",
+            "Escutcheon": "Oval",
+            "Original Surmounting": "Cardinal's hat",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "A-Wn 32",
+            "Year": "1472",
+            "Content": "Servius",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Prothonotary's hat",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "A-Wn 34",
+            "Year": "1477",
+            "Content": "Caesar",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "Prothonotary's hat",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "A-Wn 49",
+            "Year": "1480",
+            "Content": "Tacitus",
+            "Escutcheon": "Horse-head ",
+            "Original Surmounting": "Cardinal's hat",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "CH-Bgünther",
+            "Year": "1480",
+            "Content": "Aquinas",
+            "Escutcheon": "Round",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "D-B lat. fol. 28",
+            "Year": "1477",
+            "Content": "Suetonius",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily Crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "Drouot Aquinas MS",
+            "Year": "1486",
+            "Content": "Aquinas",
+            "Escutcheon": "?",
+            "Original Surmounting": "?",
+            "Surviving Surmounting": "?",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "E-E s.ii.19",
+            "Year": "1477",
+            "Content": "Virgil",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Alfonso, Duke of Calabria"
+        },
+        {
+            "Siglum": "E-E t.ii.5",
+            "Year": "1484",
+            "Content": "Horace",
+            "Escutcheon": "Horse-head",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "E-VAsmr ",
+            "Year": "1472",
+            "Content": "Cicero",
+            "Escutcheon": "?",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Prothonotary's hat (?)",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "E-VAu 292",
+            "Year": "1482",
+            "Content": "Quintilian",
+            "Escutcheon": "Half-rounded/Horsehead (Mixed)",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Ferrante I of Aragon"
+        },
+        {
+            "Siglum": "E-VAu 380",
+            "Year": "1491",
+            "Content": "Aquinas",
+            "Escutcheon": "Horse-head",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Ferrante I of Aragon"
+        },
+        {
+            "Siglum": "E-VAu 384",
+            "Year": "1479",
+            "Content": "Livy",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Ducal coronet",
+            "Other decorative features": "-",
+            "Owner": "Alfonso, Duke of Calabria"
+        },
+        {
+            "Siglum": "E-VAu 388",
+            "Year": "1480",
+            "Content": "Aristotle",
+            "Escutcheon": "Oval",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "E-VAu 389",
+            "Year": "1483",
+            "Content": "Gellius",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "Cardinal's hat",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "E-VAu 390",
+            "Year": "1484",
+            "Content": "Albertus Magnus",
+            "Escutcheon": "Horse-head ",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Cardinal's hat",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "E-VAu 395",
+            "Year": "1484",
+            "Content": "Aquinas",
+            "Escutcheon": "Horse-head ",
+            "Original Surmounting": "Cardinal's hat",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "E-VAu 408",
+            "Year": "1473",
+            "Content": "Valla",
+            "Escutcheon": "Horse-head ",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Ferrante I of Aragon"
+        },
+        {
+            "Siglum": "E-VAu 51",
+            "Year": "1484",
+            "Content": "Seneca",
+            "Escutcheon": "Horse-head ",
+            "Original Surmounting": "Cardinal's hat",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "E-VAu 52",
+            "Year": "1475",
+            "Content": "Pontano",
+            "Escutcheon": "Horse-head",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Ducal coronet",
+            "Other decorative features": "-",
+            "Owner": "Alfonso, Duke of Calabria"
+        },
+        {
+            "Siglum": "E-VAu 53",
+            "Year": "1480",
+            "Content": "Aquinas",
+            "Escutcheon": "Horse-head ",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "E-VAu 54",
+            "Year": "1488",
+            "Content": "Columella",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "-",
+            "Other decorative features": "-",
+            "Owner": "Alfonso, Duke of Calabria"
+        },
+        {
+            "Siglum": "E-VAu 55",
+            "Year": "1472",
+            "Content": "Macrobius",
+            "Escutcheon": "Horse-head ",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Ducal coronet",
+            "Other decorative features": "-",
+            "Owner": "Alfonso, Duke of Calabria"
+        },
+        {
+            "Siglum": "E-VAu 691",
+            "Year": "1470",
+            "Content": "Pliny",
+            "Escutcheon": "Horse-head",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Ducal coronet",
+            "Other decorative features": "-",
+            "Owner": "Alfonso, Duke of Calabria"
+        },
+        {
+            "Siglum": "E-VAu 692",
+            "Year": "1473",
+            "Content": "Quintilian",
+            "Escutcheon": "Horse-head ",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "E-VAu 731",
+            "Year": "1488",
+            "Content": "Xenophon",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "-",
+            "Other decorative features": "-",
+            "Owner": "Alfonso, Duke of Calabria"
+        },
+        {
+            "Siglum": "E-VAu 758",
+            "Year": "1481",
+            "Content": "Aesop",
+            "Escutcheon": "Horse-head ",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Ferrante I of Aragon"
+        },
+        {
+            "Siglum": "E-VAu 759",
+            "Year": "1470",
+            "Content": "Joannes de Angelis",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Prothonotary's hat?",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "E-VAu 765",
+            "Year": "1471",
+            "Content": "Probi",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Ducal coronet",
+            "Other decorative features": "-",
+            "Owner": "Alfonso, Duke of Calabria"
+        },
+        {
+            "Siglum": "E-VAu 768",
+            "Year": "1465",
+            "Content": "Virgil",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Ducal coronet",
+            "Other decorative features": "-",
+            "Owner": "Alfonso, Duke of Calabria"
+        },
+        {
+            "Siglum": "E-VAu 774",
+            "Year": "1475",
+            "Content": "Brancati",
+            "Escutcheon": "Horse-head",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Ferrante I of Aragon"
+        },
+        {
+            "Siglum": "E-VAu 833",
+            "Year": "1475",
+            "Content": "Pontano",
+            "Escutcheon": "Horse-head",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Ducal coronet",
+            "Other decorative features": "-",
+            "Owner": "Alfonso, Duke of Calabria"
+        },
+        {
+            "Siglum": "E-VAu 836",
+            "Year": "1475",
+            "Content": "Josephus",
+            "Escutcheon": "Oval",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Ducal coronet",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "E-VAu 847",
+            "Year": "1472",
+            "Content": "Aquinas",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Prothonotary's hat",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "E-VAu 890",
+            "Year": "1467",
+            "Content": "Dominican Breviary",
+            "Escutcheon": "Horse-head",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Ferrante I of Aragon"
+        },
+        {
+            "Siglum": "E-VAu 891",
+            "Year": "1465",
+            "Content": "Virgil",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Ducal coronet",
+            "Other decorative features": "-",
+            "Owner": "Alfonso, Duke of Calabria"
+        },
+        {
+            "Siglum": "E-VAu 892",
+            "Year": "1481",
+            "Content": "Augustine",
+            "Escutcheon": "Horse-head ",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Ferrante I of Aragon"
+        },
+        {
+            "Siglum": "F-LO 7",
+            "Year": "1484",
+            "Content": "Aquinas",
+            "Escutcheon": "-",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "-",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pm inc. 3619(1)",
+            "Year": "1483",
+            "Content": "Capréolus",
+            "Escutcheon": "Horse-head",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Cardinal's hat",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 16032",
+            "Year": "1479",
+            "Content": "Josephus",
+            "Escutcheon": "Removed",
+            "Original Surmounting": "Removed",
+            "Surviving Surmounting": "Removed",
+            "Other decorative features": "-",
+            "Owner": "Alfonso, Duke of Calabria"
+        },
+        {
+            "Siglum": "F-Pn lat. 1659",
+            "Year": "1485",
+            "Content": "Ciprian",
+            "Escutcheon": "Rectangular",
+            "Original Surmounting": "Cardinal's hat",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 18524",
+            "Year": "1467",
+            "Content": "Rosarium grammaticae",
+            "Escutcheon": "-",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "-",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 2231(1)",
+            "Year": "1485",
+            "Content": "Gregory the Great",
+            "Escutcheon": "Oval",
+            "Original Surmounting": "Cardinal's hat",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 2231(2)",
+            "Year": "1485",
+            "Content": "Gregory the Great",
+            "Escutcheon": "-",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "-",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 2231(3)",
+            "Year": "1485",
+            "Content": "Gregory the Great",
+            "Escutcheon": "-",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "-",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 2347",
+            "Year": "1470",
+            "Content": "Bede",
+            "Escutcheon": "Horse-head ",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Ferrante I of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 3063",
+            "Year": "1480",
+            "Content": "Duns Scotus",
+            "Escutcheon": "Horse-head ",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "Golden bands",
+            "Owner": "Ferrante I of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 4833",
+            "Year": "1478",
+            "Content": "Mela",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 495",
+            "Year": "1489",
+            "Content": "Aquinas",
+            "Escutcheon": "Horse-head",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Ferrante I of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 6292",
+            "Year": "1473",
+            "Content": "Porphyry",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Prothonotary's hat",
+            "Other decorative features": "Fiocchi, grey",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 6295",
+            "Year": "1470",
+            "Content": "Aristotle",
+            "Escutcheon": "-",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "-",
+            "Other decorative features": "-",
+            "Owner": "Ferrante I of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 6309",
+            "Year": "1480",
+            "Content": "Aristotle",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Ducal coronet",
+            "Other decorative features": "-",
+            "Owner": "Alfonso, Duke of Calabria"
+        },
+        {
+            "Siglum": "F-Pn lat. 6324",
+            "Year": "1475",
+            "Content": "Aristotle",
+            "Escutcheon": "-",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "-",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 6637",
+            "Year": "1100",
+            "Content": "Boethius",
+            "Escutcheon": "-",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "-",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 6793",
+            "Year": "1479",
+            "Content": "Aristotle",
+            "Escutcheon": "Horse-head ",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 6922",
+            "Year": "1477",
+            "Content": "Aristotle",
+            "Escutcheon": "?",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Prothonotary's hat",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 7524",
+            "Year": "1469",
+            "Content": "Valla",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "-",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 7549",
+            "Year": "1472",
+            "Content": "Priscian, trans. George of Trebizond",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Prothonotary's hat ",
+            "Other decorative features": "Fiocchi, grey",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 7810",
+            "Year": "1490",
+            "Content": "Filelfo",
+            "Escutcheon": "Horse-head",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Ferrante I of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 8016",
+            "Year": "1483",
+            "Content": "Ovid",
+            "Escutcheon": "Pointed oval",
+            "Original Surmounting": "Cardinal's hat",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 8078",
+            "Year": "1474",
+            "Content": "Calfurnio",
+            "Escutcheon": "Horse-head",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Ferrante I of Aragon"
+        },
+        {
+            "Siglum": "F-Pn lat. 8374",
+            "Year": "1472",
+            "Content": "Malvezzi",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Prothonotary's hat",
+            "Other decorative features": "Fiocchi, grey",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn Rés.A.1424",
+            "Year": "1475",
+            "Content": "Petrus Niger, Frater",
+            "Escutcheon": "-",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "-",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn Rés.C.424 (1)",
+            "Year": "1468",
+            "Content": "Jerome",
+            "Escutcheon": "-",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "-",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn Rés.C.424 (2)",
+            "Year": "1468",
+            "Content": "Jerome",
+            "Escutcheon": "-",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "-",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn Rés.D.1842",
+            "Year": "1473",
+            "Content": "Janduno",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Prothonotary's hat",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn Rés.D.27 (1–4)",
+            "Year": "1477",
+            "Content": "Duns Scotus",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Cardinal's hat",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn Rés.E.15",
+            "Year": "1471",
+            "Content": "Cicero",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Prothonotary's hat",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn Rés.G.YC.212",
+            "Year": "1472",
+            "Content": "Aelius Donatus",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Prothonotary's hat",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn Rés.G.YC.373",
+            "Year": "1474",
+            "Content": "Ovid",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Prothonotary's hat",
+            "Other decorative features": "Fiocchi (grey?)",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn Rés.G.YC.374",
+            "Year": "1474",
+            "Content": "Ovid",
+            "Escutcheon": "-",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "-",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn Rés.H.145",
+            "Year": "1481",
+            "Content": "Massarius de Cora",
+            "Escutcheon": "-",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "-",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn Rés.H.35",
+            "Year": "1476",
+            "Content": "Eusebius",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Prothonotary's hat",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn Rés.H.63",
+            "Year": "1479",
+            "Content": "Platina",
+            "Escutcheon": "?",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Cardinal's hat",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn Rés.R.91",
+            "Year": "1479",
+            "Content": "Albertus Magnus",
+            "Escutcheon": "?",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Cardinal's hat",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn Rés.Z.120",
+            "Year": "1470",
+            "Content": "Cicero",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Prothonotary's hat",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn Rés.Z.185",
+            "Year": "1482",
+            "Content": "Valerius Maximus",
+            "Escutcheon": "?",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Cardinal's hat",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "F-Pn Smith-Lesouëf 14",
+            "Year": "1486",
+            "Content": "Aquinas",
+            "Escutcheon": "-",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "-",
+            "Other decorative features": "-",
+            "Owner": "Ferrante I of Aragon"
+        },
+        {
+            "Siglum": "F-R A 13",
+            "Year": "1485",
+            "Content": "Nogarola",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Cardinal's hat",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "GB-Cu Gg.3.22",
+            "Year": "1484",
+            "Content": "Bonaventure",
+            "Escutcheon": "Horse-head",
+            "Original Surmounting": "Cardinal's hat",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "GB-Cu Gg.3.23",
+            "Year": "1484",
+            "Content": "Bonaventure",
+            "Escutcheon": "Horse-head",
+            "Original Surmounting": "Cardinal's hat",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "GB-Gu Hunterian By.2.3",
+            "Year": "1477",
+            "Content": "Duns Scotus",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Cardinal's hat",
+            "Other decorative features": "Red/silver fiocchi",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "GB-Lbl Harl. 3485",
+            "Year": "1470",
+            "Content": "Plutarch",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "Prothonotary's hat",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "GB-Lbl Harl. 3699",
+            "Year": "1478",
+            "Content": "Josephus",
+            "Escutcheon": "Oval",
+            "Original Surmounting": "Cardinal's hat",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "GB-Lbl Harl. 4965",
+            "Year": "1482",
+            "Content": "Eusebius",
+            "Escutcheon": "Pointed oval ",
+            "Original Surmounting": "Cardinal's hat",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "GB-Mr lat. 53",
+            "Year": "1478",
+            "Content": "Prolianus",
+            "Escutcheon": "Horse-head ",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Ferrante I of Aragon"
+        },
+        {
+            "Siglum": "GB-Ob Auct. F.1.18",
+            "Year": "1483",
+            "Content": "Ovid",
+            "Escutcheon": "-",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "-",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "I-AGI 1",
+            "Year": "1475",
+            "Content": "Iustinus",
+            "Escutcheon": "Half-rounded",
+            "Original Surmounting": "Prothonotary's hat",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "I-AGI 2",
+            "Year": "1475",
+            "Content": "Florus",
+            "Escutcheon": "?",
+            "Original Surmounting": "Prothonotary's hat",
+            "Surviving Surmounting": "Lily crown (?)",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "I-Mborletti",
+            "Year": "-",
+            "Content": "Livy",
+            "Escutcheon": "Square flag",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "I-Nn VII.B.4",
+            "Year": "1484",
+            "Content": "Aquinas",
+            "Escutcheon": "Oval",
+            "Original Surmounting": "Cardinal's hat",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        },
+        {
+            "Siglum": "I-Nn XIV.D.20",
+            "Year": "1476",
+            "Content": "Tinctoris: Order of the Golden Fleece Statutes",
+            "Escutcheon": "Horse-head ",
+            "Original Surmounting": "-",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Ferrante I of Aragon"
+        },
+        {
+            "Siglum": "US-NYpl 20",
+            "Year": "1485",
+            "Content": "Valerius Maximus",
+            "Escutcheon": "Globe",
+            "Original Surmounting": "Cardinal's hat",
+            "Surviving Surmounting": "Lily crown",
+            "Other decorative features": "-",
+            "Owner": "Giovanni of Aragon"
+        }
+    ]

@@ -995,6 +995,9 @@ span.siglum span:hover {
 	table-layout: fixed;
 	width: 100%;
 }
+.content.largetable{
+  width:75% !important;
+}
 @media screen and (min-width: 700px) {
 .verse p, div.contentbox.article p.verse{
 	text-indent: -0.4em;

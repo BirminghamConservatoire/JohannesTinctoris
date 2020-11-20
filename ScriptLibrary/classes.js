@@ -530,6 +530,9 @@ function SignumCongruentiae(){
             curx = currentReading.content[opos-1].startX;
           }
         }
+        else if($(SVG).parents("#content").length){
+          curx = currentExample.events[eventi-1].startX;
+        }
       } 
       else if(this.effects.objType==="Ligature Choice"){
         if(this.effects.subType==="SignumCongruentiae"){

@@ -3925,7 +3925,7 @@ function TextUnderlay(){
       } else if(this.components[i].justGiveMeText){
         text += this.components[i].justGiveMeText();
       }
-      else if(this.components[i].objType==="MusicalChoice"){
+      else if(this.components[i].objType==="MusicalChoice" && !this.components[i].nonDefault()){
         // yes, there are variants inside text, we want the default reading
         text += this.components[i].content[0].content[0];
       }

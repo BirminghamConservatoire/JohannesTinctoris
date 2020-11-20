@@ -5999,7 +5999,8 @@ function LigChoice(){
       if(!showvariants) return false;
       // If we are showing variants, we need a marker
       click = svgText(SVG, curx, cury-(currentLinecount*rastralSize), "musical variants text", false, false, "ˇ");//ˇ
-      curx += rastralSize;
+      // Don't change curx after an insertion inside a ligature!!!
+      //curx += rastralSize;
     } else {
       click = this.content[0].draw(false, false); // ?!
       if(showvariants) {

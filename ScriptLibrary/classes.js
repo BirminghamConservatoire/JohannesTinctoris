@@ -6488,8 +6488,8 @@ function MReading(witnesses, content, description, description2, staves, choice)
     var sc = currentStaffColour;
     var oc = currentClef;
     var os = currentSolm;
-    currentSolm = this.solm;
-    currentClef = this.clef;
+    currentSolm = this.solm ? this.solm : currentSolm;
+    currentClef = this.clef ? this.clef : currentClef;
     var oldSVG = SVG;
     if(this.staves && !defaultPresent(this.staves)){// && !this.clefp()){
       currentLinecount = false;

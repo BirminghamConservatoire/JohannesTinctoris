@@ -1855,7 +1855,8 @@ function nextObliqueNoteChoice(parent){
 				justNotes = false;
 				if(choice.content[i].content[j].objType==="SignumCongruentiae"){
 					// console.log("s.c. in a variant in an oblique");
-					choice.content[i].content[j].ligature = parent.ligature;
+          choice.content[i].content[j].ligature = parent.ligature;
+          choice.content[i].content[j].effects = parent.members[parent.members.length-1];
 				} else {
 					console.log("Unexpected item in oblique ligature area:", choice, choice.content[i].content[j]);
 				}

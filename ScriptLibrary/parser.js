@@ -1,3 +1,7 @@
+/**
+ * @namespace parser
+ */
+
 var indent = false;
 var centre = false;
 var firstTime = true;
@@ -2234,9 +2238,14 @@ function findLocation(e){
   }
 }
 
+/** @memberof parser
+ * Given a treatise text child object, an ex number and the list of
+ * all music example strings, link blanks with music examples.
+ * @param obj treatise text child object
+ * @param {int} count counter of examples
+ * @param {Array} sourceArray array for all examples
+ */
 function grabExamples(obj, count, sourceArray){
-  // Given a treatise text child object, an ex number and the list of
-  // all music example strings, link blanks with music examples.
   if(!count) count=0;
   if(obj.objType==="Blank Example"){
     // This is blank number *count*. Match with example string and
@@ -2263,12 +2272,16 @@ function grabExamples(obj, count, sourceArray){
   return count;
 }
 
+/** @memberof parser
+ * Given a treatise with `placeholder' blank music examples and the
+ * text of a treatise containing the missing examples, match the
+ * relevant blank with its example.
+ * First, find all examples in the text
+ * @param {TreatiseDoc} treatise Treatise object
+ * @param {string} text edited text of treatise
+ */
 function matchExamples(treatise, text){
-  // Given a treatise with `placeholder' blank music examples and the
-  // text of a treatise containing the missing examples, match the
-  // relevant blank with its example.
-  // First, find all examples in the text
-  var fullExamples = text.match(/<example.*?<\/example>/gm);
+  var fullExamples = text.match(/<example(.|\n|\r)*?<\/example>/gm);
   var count = 0;
   for(var i=0; i<treatise.contents.length; i++){
     // Music examples can be buried in the hierarchy, so we need

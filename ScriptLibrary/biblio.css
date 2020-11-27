@@ -61,7 +61,7 @@ h5 {
   font-size:100%;
   color: #414958;
 }
-.contentbox p {
+.contentbox p:not(.blockquote) {
   padding-left: 15px;
 }
 a.noteanchor:hover {

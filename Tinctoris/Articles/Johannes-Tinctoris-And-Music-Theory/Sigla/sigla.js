@@ -15,6 +15,7 @@ function showDetails(el){
 function toggleDetails(el){
 	$(el).children(".details").toggle();
 }
+/*
 function replaceSiglum(i, siglum){
 	var siglumCode = siglum.innerHTML;
 	if(siglumCode in sigla) {
@@ -27,40 +28,23 @@ function replaceSigla(){
 	$(".siglum").each(replaceSiglum);
 	$(".siglum .details").hide();
 }
+*/
+function replaceSiglum(sigla, i, siglum){
+	console.log(sigla, i, siglum);
+	var siglumCode = siglum.innerHTML;
+	if(siglumCode in sigla) {
+		siglum.innerHTML = '<span onclick="toggleDetails(this)" class="siglumInfo"><span class="code" tabindex="0">'+sigla[siglumCode].siglum
+			+'</span><span  tabindex="0" class="details">'+sigla[siglumCode].fullName+'</span></span>';
+	}
+}
+function replaceSigla(sigla){
+	console.log(sigla)
+	var rS = replaceSiglum.bind(null, sigla);
+	$(".siglum").each(rS);
+	$(".siglum .details").hide();
+}
+
 
 $(function() {
-  replaceSigla(); 
+	$.get('/Tinctoris/Articles/Johannes-Tinctoris-And-Music-Theory/Sigla/sigla.json', replaceSigla, 'json')
 });
-/*
-function Siglum(library, msID, msShort, msFull, msURI){
-	this.library = library;
-	this.id = msCode;
-	this.shortHTML = msShort;
-	this.longHTML = msLong;
-	this.URI = msURI;
-	this.exchangeMainText = function(obj){
-		obj.replaceWith(this.linkElement());
-	}
-	this.linkElement = function(){
-		var el =  this.shortHTML.cloneNode(true);
-		$(el).data("siglum", this);
-		return el;
-	}
-}
-function Library(siglum, place, name){
-	this.siglum = siglum;
-	this.place = place;
-	this.name = name;
-}
-const libraryData = [
-	["A-Wn", "Vienna", "Österreichische Nationalbibliothek"],
-	["B-Br", "Brussels", "Bibliothèque Royale"],
-	["B-Gu", "Ghent", "Universiteitsbibliotheek"],
-	["D-Eu", "Eichstätt", "Universitätsbibliothek Eichstätt-Ingolstadt"]
-]
-const MSSData = [
-	["A-Wn", "2.H.15", "2.H.15", "http://data.onb.ac.at/dtl/5207039"]
-]
-const libraries = {}
-libraryData.forEach(x=>libraries[x[0]] = new Library(...x));
-*/

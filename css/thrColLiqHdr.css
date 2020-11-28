@@ -950,7 +950,7 @@ h1.longTitle {
 div.article td {
 	vertical-align: top;
 }
-div.contentbox.article p  {
+div.contentbox.article p:not(.blockquote)  {
 	padding-left: 25px;
 }
 .epoch {
@@ -961,8 +961,8 @@ div.contentbox.article p  {
 	font-size: 110%;
 }
 .contentbox p.blockQuote {
-	padding-left: 5em;
-	padding-right: 5em;
+	padding-left: 5em !important; 
+	padding-right: 5em !important;
 }
 p > sup:first-child {
 	float: left;

@@ -808,14 +808,23 @@ Unisonus autem quintam inferiorem (licet rarissime) sequi poterit{. } si tenor d
 {¶ } Pariformiter si placuerit compositori aut super librum concinenti ab aliquo concordi loco in alium ab illo distante quinque aut sex aut septem gradibus ascendere{.,} vel etiam usque ad ipsum septimum gradum descendere{.,} non ei prohibetur{.,} dummodo ibi concordantia apta poterit institui{.,} ut hic patet:\n\
 <example: {full measure}, {mensural: void}, {staf: 5, red}> <part: 1> {clef: "C10" V BU : "C12" Br1} <label>Tenor.</label> {solm: 0} {mens: c5} LD. BF BG Ba <lig>BF <obl>BG BE</obl></lig> BD Ld <lig>Bd Ba Bb</lig> {var=(ins.) "{staf: 5} {clef: C10} {solm: 0}" Br1} <lig>Ba <obl>Bd Bc</obl></lig> <lig>Bd Bf Be Ld</lig> Bc <lig>Bd <obl>Ba BG</obl></lig> Ba BF BE {var="LD" BU Br1 : "MD" V} || </part> {staf: "6" BU Br1 : "5" V} <part: 2> {clef: "C12" BU Br1 : "C10" V} <label>{var="Contrapunctus" V BU : "Contratenor" Br1}.</label> {solm: 0} {mens: c13} Sd. sc sb ma. sG mb ma. sG sF sE SF SD. sC sD mE mC SB BA PS9 Sa mb. sc md me. sd sc sb Sc Bd <lig>SD SG.</lig> mF {var="SD Sb." V BU : "<lig>SD Sb.</lig>" Br1} sa sG {var=(ins.) "{staf: 4} {clef: C8} {solm: 0}" BU} <lig>SF. Sa</lig> sG sF SG {var="<lig><obl>Sa SD.</obl></lig>" V BU : "<lig>Sa SD.</lig>" Br1} mE mF mG ma mF SE LD {var=(ins.) "{staf: 6} {clef: C10} {solm: 0}" Br1} Bc <lig>Bd <obl>Bf Be</obl></lig> {var="<lig><obl>Sd Sb</obl></lig> Sc. Se" V BU : "<lig>Sd Sb</lig> <lig>Sc. Se</lig>" Br1} sd sc Sb Pm11 ma. sb Sc mf. se Sd sc sb {var="mc sb sc" V BU : "Sc" Br1} Ld || </part> </example> </chapter>\n\
 <explicit>Explicit liber primus{.;}</explicit></book> <book><incipit>incipit secundus.</incipit></book>\n\
+<<<<<<< HEAD
 [Only Book I of <italic>De arte contrapuncti</italic> is available here. To keep things manageable, Books II–III are in a separate file.]\n\
 </treatise>';
+=======
+[For the sake of manageability, Books II–III of <italic>De arte contrapuncti</italic> are in a separate file from Book I.] </treatise>';
+>>>>>>> 072c643c7c9149022518063166512e96fa03da10
 texts.deartecontrapuncti.translation = {};
 texts.deartecontrapuncti.translation.english = 'De arte contrapuncti\n\
 Translator: Jeffrey J. Dean\n\
 Checked by:\n\
+<<<<<<< HEAD
 Date established: 27 November 2020\n\
 <treatise>[Only Book I of <italic>De arte contrapuncti</italic> is available here. To keep things manageable, Books II–III are in a separate file.]\n\
+=======
+Date established: 2 April 2015\n\
+<treatise>[For the sake of manageability, Books II–III of <italic>De arte contrapuncti</italic> are in a separate file from Book I.]\n\
+>>>>>>> 072c643c7c9149022518063166512e96fa03da10
 Table of the chapters contained in this book <citation>On the art of counterpoint</citation>.\n\
 <heading>The chapters of Book I.</heading>\n\
 <index>\n\
@@ -1645,8 +1654,12 @@ Besides, it must be understood that rarely in composed music, and hardly ever or
 In the same way, if a composer or an improviser upon the book should please to ascend from any position of a concord to another distant five or six or seven steps from it, or likewise to descend to that seventh step, it is not forbidden to him, provided that an appropriate concord will be able to be set up there, as is clear here:\n\
 {example}</chapter>\n\
 <explicit>Here ends the first book;</explicit></book> <book><incipit>here begins the second.</incipit></book>\n\
+<<<<<<< HEAD
 [Only Book I of <italic>De arte contrapuncti</italic> is available here. To keep things manageable, Books II–III are in a separate file.]\n\
 </treatise>';
+=======
+[For the sake of manageability, Books II–III of <italic>De arte contrapuncti</italic> are in a separate file from Book I.]</treatise>';
+>>>>>>> 072c643c7c9149022518063166512e96fa03da10
 texts.deartecontrapuncti.V = 'De arte contrapuncti\n\
 Data entry: Jeffrey J. Dean\n\
 Checked by:\n\

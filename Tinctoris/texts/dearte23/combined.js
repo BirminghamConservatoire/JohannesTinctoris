@@ -3,16 +3,16 @@ if(!texts.treatises) texts.treatises = [];
 texts.treatises.push("dearte23");
 texts.dearte23.exportYear = 2020;
 texts.dearte23.exportMonth = 11;
-texts.dearte23.exportDay = 26;
-texts.dearte23.exportHour = 11;
-texts.dearte23.exportMinutes = 40;
+texts.dearte23.exportDay = 28;
+texts.dearte23.exportHour = 10;
+texts.dearte23.exportMinutes = 48;
 texts.dearte23.sources = [['BU', 'I-Bu 2573, fols. 133r–166r'],
 ['Br1', 'B-Br II 4147 Mus., fols. 80ra–101ra'],
 ['V', 'E-VAu 835, fols. 116r–144r']];
 texts.dearte23.edited = 'De arte contrapuncti\n\
 Editor: Jeffrey J. Dean\n\
 Checked by:\n\
-Date established: 25 November 2020\n\
+Date established: 27 November 2020\n\
 Base file: De arte contrapuncti II (BU).txt\n\
 Sources:\n\
 V	E-VAu 835, fols. 116r–144r (modern numeration)\n\
@@ -30,7 +30,8 @@ CS14	V-CVbav Cappella Sistina 14, fol. 40r (modern numeration; II.xxx.ex1)\n\
 Col	E-Sc 5.1.43, fol. o9v [107v] (II.xxx.ex2)\n\
 MC	I-MC 871, p. 11 [267] (III.iii.ex2)\n\
 CanC	<citation>Canti C nº cento Cinquanta</citation> (Venice: Ottaviano Petrucci, 10.ii.1503 [n.s. 1504, RISM 1504^1^]), opening 1018s [118s] (II.xxx.ex2)\n\
-<treatise><book><incipit>incipit secundus</incipit>\n\
+<treatise>[Only Books II–III of <italic>De arte contrapuncti</italic> are available here. To keep things manageable, Book I is in a separate file.]\n\
+<book><explicit>Explicit liber primus{.;}</explicit></book> <book><incipit>incipit secundus.</incipit>\n\
 <chapter><heading>{¶ } De generali diffinitione discordantiarum earunque numero ac nominibus. Capitulum .i.**Chapter title duplicated in <boldface>BU</boldface>**</heading>\n\
 {¶ } Postquam superiori libro de concordantiis tractatum est{.,} ut nunc de discordantiis tractemus debitus ordo postulat. Hinc tametsi iuxta Philosophum{.,} “cognito uno contrariorum{ ,} cognoscatur et reliquum”{.,}**? paraphrase of Arist. De cael. trans. Moerbeke I.vi.273a10–11: “contrariorum autem si alterum determinatum est et alterum determinatum erit”; ?or II.iii.286a24: “contrariorum enim si alterum natura necesse est et alterum esse natura”. Opera (Venice: Andreas de Asula, 1483), ii/2a: sig. [b5]^v^, [e8]^v^. Alternatively, Auct. Arist. s.v. “Secundi de celo et mundo”: “Si unum contrariorum inest a natura, reliquum inest a natura.” [b7]^r^. Cf. Th. Aq. Sent. De sensu tr. 2 l. 5 n. 7: “cognito uno contrariorum simul cognoscitur aliud”; Sent. De anim. III l. 4 n. 14: “qui cognoscit unum contrariorum, cognoscit et aliud”; ibid. l. 11 n. 14: “intellectus noster qui sic cognoscit unum contrariorum per alterum”; Sent. Ethic. V, l. 1 n. 7: “unum contrariorum est ratio cognoscendi aliud”; Summa theol. I, q. 77 a. 3 ad 2: “unum contrariorum est quodammodo ratio alterius”; Compend. theol. I.lxxxiv co.: “est enim contrariorum ratio intelligibilis una, quia per unum intelligitur aliud”; Sent. De sensu tract. 1 l. 19 n. 12: “per unum contrariorum sumitur iudicium de altero”; Sent. Metaphys. X, l. 2 n. 6: “in uno contrariorum invenitur alterum”; ibid. XII, l. 12 n. 15: “unum contrariorum potest pati a reliquo”; In Phys. Il. 9 n. 4: “unum contrariorum praeexistit in altero”; ibid. V, l. 10 n. 10: “unum contrariorum secundum quid permisceatur alteri”; In De caelo II, l. 4 n. 7.: “necesse est quod si unum contrariorum est, quod et reliquum sit”.** quo videtur cognitis concordantiis{ ,} mox {var="et" V^c BU Br1 : "ex" V^*} discordantias esse cognitas{.,} specifice tamen ut perfectius cognoscantur quot et que sint intra tridiapason ostendere diffinire{ }que decrevi. {¶¶} Unde primo notandum quod <definition><lemma: discordantie, discordantiam, discordantiarum, discordantiis, discordantias>discordantia</lemma> est duarum vocum mixtura naturaliter aures offendens.</definition> Dicitur{ }que “discordantia” metaphorice a “dis” et “corde”. Quemadmodum enim ex {var="separatione" Br1 : "seperatione" V BU} duorum cordium ab uniformitate mutui consensus amaritudo inimicicie oritur{.,} ita ex duabus vocibus sibi invicem non consentientibus asperitas discordantie producitur. {¶¶} Et quamvis apud diversos auctores nostre artis discordantiam nunc “diaphoniam”{ ,} nunc “dissonantiam”{ ,} nunc “discrepantiam” nominari compererim{ ,} nusquam tamen eam appellari “malam concordantiam” accepi{:;} unde revera plurimum errant multi nostre etatis cantores imperitissimi quom discordantiam “malam concordantiam” vocent. Enimvero sicut {var="vitium" BU^c : "vicium" V BU^* Br1} “mala virtus” a nullo unquam morali philosopho {var="dictum" V^c Br1 : "dicta" V^* BU} fuit{.,} ita nec musicus unquam litteratus discordantiam “malam concordantiam” nuncupavit. {¶¶} Porro tridiapason in se septem et triginta mixturas continente{ ,} due et viginti earum (ut superius {var="demonstravimus" V Br1 : "demonstavimus" BU}) concordantie sunt{.,} cetere vero{ ,} hoc est quindecim{ ,} discordantie{.,} videlicet:**{boldface}V and <boldface>BU</boldface> present this table as a single column, with only a normal word space before the “more common” name of the interval; <boldface>Br1</boldface> presents each pair on two lines, with the more common name in red.**\n\
 <table>\n\
@@ -504,8 +505,9 @@ texts.dearte23.translation = {};
 texts.dearte23.translation.english = 'De arte contrapuncti\n\
 Translator: Jeffrey J. Dean\n\
 Checked by:\n\
-Date established: 24 November 2020\n\
-<treatise><book><incipit>here begins the second.</incipit>\n\
+Date established: 27 November 2020\n\
+<treatise>[Only Books II–III of <italic>De arte contrapuncti</italic> are available here. To keep things manageable, Book I is in a separate file.]\n\
+<book><explicit>Here ends the first book;</explicit></book> <book><incipit>here begins the second.</incipit>\n\
 <chapter><heading>On the general definition of discords, and their number and names. Chapter 1 [i].</heading>\n\
 After concords have been discussed in the previous book, now it is desirable that we should discuss discords. Hence, although according to the Philosopher, “if one of [a pair of] contraries is known, the remainder is also known”, from which it will appear that if concords are known, then discords are also known, nevertheless, so they may be more perfectly known, I have specifically decided to show how many and define which ones there are within the triple diapason.\n\
 Whence it must first be noted that <definition>a <lemma: discords>discord</lemma> is a mixture of two pitches [voces] naturally offending the ears.</definition> And it is called a “discord” metaphorically from “apart” [dis] and “heart” [cor]. For just as the bitterness of enmity arises from the separation of two hearts from the uniformity of mutual agreement, so the harshness of discords is produced from two pitches not agreeing with one another.\n\

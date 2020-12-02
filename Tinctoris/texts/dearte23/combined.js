@@ -505,14 +505,9 @@ texts.dearte23.translation = {};
 texts.dearte23.translation.english = 'De arte contrapuncti\n\
 Translator: Jeffrey J. Dean\n\
 Checked by:\n\
-<<<<<<< HEAD
 Date established: 27 November 2020\n\
 <treatise>[Only Books II–III of <italic>De arte contrapuncti</italic> are available here. To keep things manageable, Book I is in a separate file.]\n\
 <book><explicit>Here ends the first book;</explicit></book> <book><incipit>here begins the second.</incipit>\n\
-=======
-Date established: 24 November 2020\n\
-<treatise>[For the sake of manageability, Book I of <italic>De arte contrapuncti</italic> is in a separate file from Books II–III.] <book><explicit>Here ends the first book;</explicit></book><book><incipit>here begins the second.</incipit>\n\
->>>>>>> 072c643c7c9149022518063166512e96fa03da10
 <chapter><heading>On the general definition of discords, and their number and names. Chapter 1 [i].</heading>\n\
 After concords have been discussed in the previous book, now it is desirable that we should discuss discords. Hence, although according to the Philosopher, “if one of [a pair of] contraries is known, the remainder is also known”, from which it will appear that if concords are known, then discords are also known, nevertheless, so they may be more perfectly known, I have specifically decided to show how many and define which ones there are within the triple diapason.\n\
 Whence it must first be noted that <definition>a <lemma: discords>discord</lemma> is a mixture of two pitches [voces] naturally offending the ears.</definition> And it is called a “discord” metaphorically from “apart” [dis] and “heart” [cor]. For just as the bitterness of enmity arises from the separation of two hearts from the uniformity of mutual agreement, so the harshness of discords is produced from two pitches not agreeing with one another.\n\

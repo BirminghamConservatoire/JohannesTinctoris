@@ -3849,7 +3849,7 @@ function getDefaultText(event) {
 
 /** @memberof base/queryHelper
  * @summary Gets the content of the default reading of too many kinds of choices
- * @param {*} event some kind of Choice object
+ * @param {*} event some kind of (Choice) object
  * @returns {Array} Content of first reading
  */
 function getDefaultReading(event) {
@@ -3869,6 +3869,6 @@ function getDefaultReading(event) {
       break;
     default:
       // not a choice object
-      return null;
+      return event;
   }
 }

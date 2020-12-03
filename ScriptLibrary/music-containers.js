@@ -1281,6 +1281,9 @@ function MusicExample(){
       currentSystems.push(svgGroup(SVG, "Stafflines", false));
       this.parameters.draw();
       var broken=false;
+      // some helpers for better system breaks
+      var sysbreakWidth = this.targetWidth()-rastralSize;
+      var remainingEvents = this.events;
       for(eventi = 0; eventi<this.events.length; eventi++){
         if(!broken && currentSolm && currentSolm.members.length && eventi>0) {
           broken=true;
@@ -1294,72 +1297,12 @@ function MusicExample(){
           currentClef = false;
           currentSolm = false;
         }
+        // determine automatic system breaks in case of wrapWidth... are we near the end of space?
+        // Make sure to prevent a crash if nextBreak is false... (Why is this possible?!)
         if(wrapWidth && 
-          // when do we add a break? 
-          // 0. Not if the next item is a fermata or a dot of augmentation!
-          // If the current item isn't a fermata
-          !this.events[eventi].lengthens 
-          // and a current choice's default reading is a fermata on the preceding note
-          && !(
-            this.events[eventi].objType==="MusicalChoice" && !this.events[eventi].nonDefault() && this.events[eventi].content[0].content[0].lengthens
-          )
-          // and the current item isn't a dot of augmentation
-          && !this.events[eventi].augments
-          // and the last event isn't a SolmizationSignature, MensuralSignature, 
-          // ProportionSign or Barline
-          && !(eventi && 
-            (this.events[eventi-1].objType=="SolmizationSignature"
-                      || this.events[eventi-1].objType=="MensuralSignature"
-                      || this.events[eventi-1].objType=="ProportionSign"
-                      || this.events[eventi-1].objType=="Barline"
-            )
-          )
-          // and the current event is not a Barline
-          && this.events[eventi].objType!=="Barline"
-          // and the current event is not a TextUnderlay
-          && this.events[eventi].objType!=="TextUnderlay"
-          // and current event is not a part and staff
-          && this.events[eventi].objType!=="Part"
-          && this.events[eventi].objType!=="Staff"
-          // TODO: something isn't right with independent text underlay
-          // and this event isn't one of the last two events of this example 
-          && !(eventi<this.events.length-2 
-          // and the next event isn't a Barline 
-          && this.events[eventi+1].objType=="Barline")
-            && 
-              // and...  1. If x is close to the edge 
-              (curx>=this.targetWidth()-rastralSize 
-                ||
-                // 2. or If we're there's a break point coming, but we'd need a
-                // break before then, break a little early
-                (nextBreak && nextBreak - eventi < 5 
-                  && (curx>=this.targetWidth()-((nextBreak-eventi)*1.6*rastralSize))
-                )
-                ||
-                // 3. or If we're near the end, break a little early if a break
-                // will be needed.
-                (remain<3  
-                  && curx>=this.targetWidth()-((this.events.length-eventi)*1.6*rastralSize)
-                ) 
-                ||
-                // 4. or If breaking at the next opportunity would separate a note
-                // from its dot.
-                (remain>1 && this.events[eventi+1].augments 
-                  && curx+this.events[eventi].width()>=this.targetWidth()-rastralSize
-                )
-                ||
-                // 5. or If the thing is a tacet (which is super wide) and pushes us over
-                (this.events[eventi].objType==="Tacet"
-                  && curx + this.events[eventi].width() > this.targetWidth()
-                )
-                ||
-                // 6. and a text underlay would reach beyond width
-                ((text = getDefaultText(this.events[eventi]))
-                  && curx + text.width() > this.targetWidth())
-              )
-          )
+          determineSysBreak(remainingEvents, sysbreakWidth, 
+            (nextBreak!=false ? nextBreak - eventi: remain), remain))
         {
-           // wrapWidth-32){
           // The custos has to know the next (=current) note, so rewind
           // the pointer, briefly
           eventi-=1;
@@ -1418,7 +1361,8 @@ function MusicExample(){
           }
         }
         mw = Math.max(curx, mw);
-      }
+        remainingEvents = remainingEvents.slice(1);
+      } // end of for loop
       if(this.classes.classes.length) drawClasses(this.classes.classes, false);
       sysBreak2(true);
       for(var w=0; w<this.w2.length; w++){
@@ -1496,3 +1440,67 @@ function MusicExample(){
   }
   // end of MusicExample
   
+
+  function determineSysBreak(remainingEvents, sysbreakWidth, toNextBreak, remain)
+  {
+    var breakSys = false;
+    var currentEvent = remainingEvents[0];
+    var curText = getDefaultText(currentEvent);
+    var curWidth = curText ? curText.width() : currentEvent.width();
+
+    // We need to check for things that should not be broken at!
+    var dontBreak = needToPreventBreak(currentEvent);
+    // but when... before or after the break is determined?
+    
+    // Break if: (yep, the code is redundant, but it's easier to debug if cases are properly separated)
+    // X + width of current event would reach beyond recommended system width
+    if(curx + curWidth >= sysbreakWidth)
+    {
+      breakSys = true;
+    }
+    // no break seems to be necessary because of remaining space
+    // check if we would like to break earlier because of future stuff
+    else if(remain < 5)
+    {
+      // break earlier near the end because the rest won't fit?
+      let restWidth = 0;
+      for(let i = 0; i < remainingEvents.length; i++)
+      {
+        let thisItemWidth = remainingEvents[i].text ? 
+          getDefaultText(remainingEvents[i]).width() : remainingEvents[i].width();
+        restWidth = restWidth + thisItemWidth;
+      }
+
+      if(curx + restWidth > sysbreakWidth)
+      {
+        breakSys = true;
+      }
+
+    }
+    else if(toNextBreak > 0 && toNextBreak < 8)
+    {
+      // we're near a break, check whether it's a default break
+      // then check if we would like to break early
+      let breakEvent = remainingEvents[toNextBreak];
+      
+      if(breakEvent.objType!=="MusicalChoice" || !breakEvent.nonDefault())
+      {
+        let toBreakWidth = 0;
+        for(let i = 0; i <= toNextBreak; i++)
+        {
+          let thisItemWidth = remainingEvents[i].text ? 
+          getDefaultText(remainingEvents[i]).width() : remainingEvents[i].width();
+          toBreakWidth = toBreakWidth + thisItemWidth;
+
+          if(remainingEvents[i]===breakEvent) break;
+        }
+
+        if(curx + toBreakWidth > sysbreakWidth)
+        {
+          breakSys = true;
+        }
+      }
+    }
+
+    return breakSys;
+  }

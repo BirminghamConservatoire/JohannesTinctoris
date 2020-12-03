@@ -1377,7 +1377,7 @@ function MusicExample(){
           sysBreak2();
           sysBreak(false, leaveSpace);
           // draw Clef & Solm only if the next object is no clef
-          if(this.events[eventi+1].objType!=="Clef")
+          if(this.events[eventi+1] && this.events[eventi+1].objType!=="Clef")
           {
             if(currentClef) currentClef.draw();
             //console.log(currentClef.appliesTo);

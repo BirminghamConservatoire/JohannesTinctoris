@@ -1318,6 +1318,9 @@ function MusicExample(){
           && this.events[eventi].objType!=="Barline"
           // and the current event is not a TextUnderlay
           && this.events[eventi].objType!=="TextUnderlay"
+          // and current event is not a part and staff
+          && this.events[eventi].objType!=="Part"
+          && this.events[eventi].objType!=="Staff"
           // TODO: something isn't right with independent text underlay
           // and this event isn't one of the last two events of this example 
           && !(eventi<this.events.length-2 

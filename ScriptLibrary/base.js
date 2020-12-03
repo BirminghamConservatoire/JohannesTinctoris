@@ -3843,7 +3843,7 @@ function getDefaultText(event) {
     default:
       // default can be Note, LigatureNote, ObliqueNote etc. (too many different note types)
       // If there is no text, return false
-      return event.text ? event.text : false;
+      return event.text ? event.text : null;
   }
 }
 

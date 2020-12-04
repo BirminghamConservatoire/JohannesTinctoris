@@ -1464,12 +1464,12 @@ function MusicExample(){
     // Advise an earlier break because of the following events:
     if (!dontBreak)
     {
-      let threeGram = remainingEvents.slice(0,3);
-      let threeGramWidth = getGroupWidth(threeGram);
+      let fiveGram = remainingEvents.slice(0,5);
+      let fiveGramWidth = getGroupWidth(fiveGram);
       // if the next 3 events won't fit, determine if an earlier break is desired
-      if(curx + threeGramWidth > sysbreakWidth)
+      if(curx + fiveGramWidth > sysbreakWidth)
       {
-        breakSys = dontSplitGram(threeGram);
+        breakSys = dontSplitGram(fiveGram);
       }
     }
     

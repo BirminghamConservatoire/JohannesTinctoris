@@ -40,8 +40,8 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Treatise De Notis",
-            "url": "http://localhost:4000/Tinctoris/texts/denotisetpausis/#"
+            "name": "De Arte II+III",
+            "url": "http://localhost:4000/Tinctoris/texts/dearte23/#"
         }
     ]
 }

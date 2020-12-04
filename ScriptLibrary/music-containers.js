@@ -1282,7 +1282,7 @@ function MusicExample(){
       this.parameters.draw();
       var broken=false;
       // some helpers for better system breaks
-      var sysbreakWidth = this.targetWidth()-rastralSize;
+      var sysbreakWidth = this.targetWidth()-(3*rastralSize);
       var remainingEvents = this.events;
       for(eventi = 0; eventi<this.events.length; eventi++){
         if(!broken && currentSolm && currentSolm.members.length && eventi>0) {

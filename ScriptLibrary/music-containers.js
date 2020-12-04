@@ -1607,9 +1607,11 @@ function MusicExample(){
       {
         case "Clef":
         case "SolmizationSign":
-        case "MensuralSignature":
         case "StackedProportionSigns":
         case "ProportionSign":
+          splitNow = true;
+          break;
+        case "MensuralSignature":
           splitNow = true;
           break;
         default:

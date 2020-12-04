@@ -1461,6 +1461,18 @@ function MusicExample(){
     var dontBreak = needToPreventBreak(currentEvent);
     // Result is applied at the end, because it cancels the break
 
+    // Advise an earlier break because of the following events:
+    if (!dontBreak)
+    {
+      let threeGram = remainingEvents.slice(0,3);
+      let threeGramWidth = getGroupWidth(threeGram);
+      // if the next 3 events won't fit, determine if an earlier break is desired
+      if(curx + threeGramWidth > sysbreakWidth)
+      {
+        breakSys = dontSplitGram(threeGram);
+      }
+    }
+    
     // Break if: (yep, the code is redundant, but it's easier to debug if cases are properly separated)
     // X + width of current event would reach beyond recommended system width
     if(curx + curWidth >= sysbreakWidth)
@@ -1501,7 +1513,7 @@ function MusicExample(){
     if(dontBreak===true)
     {
       breakSys = false;
-        }
+    }
 
     return breakSys;
   }
@@ -1559,4 +1571,104 @@ function MusicExample(){
     }
 
     return dontBreak;
+  }
+
+  /**
+   * @memberof music-container
+   * Checks for following events that shouldn't be split and advises a split just before
+   * @param {Array} nGram 
+   * @returns {boolean} advise split now
+   */
+  function dontSplitGram(nGram)
+  {
+    var splitNow = false;
+
+    /**
+     * We have various reasons to split:
+     * --- Because of first event (in case of choices, check only first item of default reading)
+     * - First is a clef
+     * - Don't split accidental from note
+     * - Don't split after Mensuration Sign
+     * - Don't split after Proportion sign
+     * --- Because of second event 
+     *     (since the connection between 1st & 2nd is important, check only first item in choices)
+     * - Don't split a fermata from its note
+     * - Don't split a dot of augmentation from its note
+     * 
+     * But we need to get these items recursively for dealing with nested variants
+     */
+
+    var first = getFirstDefaultNonChoice(nGram[0]);
+    var second = getFirstDefaultNonChoice(nGram[1]);
+
+    if(first)
+    {
+      switch(first.objType)
+      {
+        case "Clef":
+        case "SolmizationSign":
+        case "MensuralSignature":
+        case "StackedProportionSigns":
+        case "ProportionSign":
+          splitNow = true;
+          break;
+        default:
+          splitNow = false;
+          break;
+      }
+    }
+
+    if(second)
+    {
+      switch(second.objType)
+      {
+        case "Dot":
+          // check if augments
+          if(second.augments)
+          {
+            splitNow = true;
+          }
+          break;
+        case "Fermata":
+          // check if lengthens
+          if(second.lengthens)
+          {
+            splitNow = true;
+          }
+          break;
+        case "SignumCongruentiae":
+          // check if effects
+          if(second.effects)
+          {
+            splitNow = true;
+          }
+          break;
+        default:
+          // don't do anything you stupid!
+          //splitNow = false;
+          break;
+      }
+    }
+
+    return splitNow;
+  }
+
+  /**
+   * @memberof music-container
+   * Gets the first non-choice default event inside a choice
+   * @param {*} event Musical event
+   * @returns {*} Musical event
+   */
+  function getFirstDefaultNonChoice(event)
+  {
+    do{
+      event = getDefaultReading(event);
+      if(Array.isArray(event))
+      {
+        event = event[0];
+      }
+    }
+    while(event && event.objType==="MusicalChoice");
+
+    return event;
   }

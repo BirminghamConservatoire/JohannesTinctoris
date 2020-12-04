@@ -2725,7 +2725,7 @@ function ProportionSign(){
   this.width = function(){
     if(this.sign && mensDictionary[this.signature]){
       return mensDictionary[this.sign][2] * rastralSize * prop - 2/3*rastralSize;
-    } else return 0;
+    } else return rastralSize;
   };
 	this.toMEI = function(doc, parent){
 		if(!parent) parent = doc.currentParent;

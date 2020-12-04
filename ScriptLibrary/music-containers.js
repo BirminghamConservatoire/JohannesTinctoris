@@ -1440,7 +1440,16 @@ function MusicExample(){
   }
   // end of MusicExample
   
-
+  /**
+   * @memberof music-container
+   * Checks if an automatic system break is necessary.
+   * This is done in a separate function for better traceability.
+   * @param {Array} remainingEvents 
+   * @param {int} sysbreakWidth 
+   * @param {int} toNextBreak 
+   * @param {int} remain 
+   * @returns {boolean} advise break
+   */
   function determineSysBreak(remainingEvents, sysbreakWidth, toNextBreak, remain)
   {
     var breakSys = false;
@@ -1450,8 +1459,8 @@ function MusicExample(){
 
     // We need to check for things that should not be broken at!
     var dontBreak = needToPreventBreak(currentEvent);
-    // but when... before or after the break is determined?
-    
+    // Result is applied at the end, because it cancels the break
+
     // Break if: (yep, the code is redundant, but it's easier to debug if cases are properly separated)
     // X + width of current event would reach beyond recommended system width
     if(curx + curWidth >= sysbreakWidth)
@@ -1463,21 +1472,15 @@ function MusicExample(){
     else if(remain < 5)
     {
       // break earlier near the end because the rest won't fit?
-      let restWidth = 0;
-      for(let i = 0; i < remainingEvents.length; i++)
-      {
-        let thisItemWidth = remainingEvents[i].text ? 
-          getDefaultText(remainingEvents[i]).width() : remainingEvents[i].width();
-        restWidth = restWidth + thisItemWidth;
-      }
-
+      let restWidth = getGroupWidth(remainingEvents);
+      
       if(curx + restWidth > sysbreakWidth)
       {
         breakSys = true;
       }
 
     }
-    else if(toNextBreak > 0 && toNextBreak < 8)
+    else if(toNextBreak > 0 && toNextBreak < 8 && toNextBreak != remain)
     {
       // we're near a break, check whether it's a default break
       // then check if we would like to break early
@@ -1485,15 +1488,7 @@ function MusicExample(){
       
       if(breakEvent.objType!=="MusicalChoice" || !breakEvent.nonDefault())
       {
-        let toBreakWidth = 0;
-        for(let i = 0; i <= toNextBreak; i++)
-        {
-          let thisItemWidth = remainingEvents[i].text ? 
-          getDefaultText(remainingEvents[i]).width() : remainingEvents[i].width();
-          toBreakWidth = toBreakWidth + thisItemWidth;
-
-          if(remainingEvents[i]===breakEvent) break;
-        }
+        let toBreakWidth = getGroupWidth(remainingEvents.slice(0,toNextBreak+1));
 
         if(curx + toBreakWidth > sysbreakWidth)
         {
@@ -1502,5 +1497,58 @@ function MusicExample(){
       }
     }
 
+    // prevent a break
+    if(dontBreak===true)
+    {
+      breakSys = false;
+        }
+
     return breakSys;
+  }
+
+  /**
+   * @memberof music-container
+   * Determines the estimated width of a group of events
+   * @param {Array} eventGroup Group of events
+   * @returns {int} total width of group
+   */
+  function getGroupWidth(eventGroup)
+  {
+    var grpWidth = 0;
+    for(let i = 0; i < eventGroup.length; i++)
+    {
+      let thisItemWidth = eventGroup[i].text ?
+        getDefaultText(eventGroup[i]).width() : eventGroup[i].width();
+      grpWidth = grpWidth + thisItemWidth;
+    }
+
+    return grpWidth;
+  }
+
+  /**
+   * @memberof music-container
+   * Checks whether an event should not be put in a new system.
+   * Usually, the object type contradicts a break.
+   * @param {*} event 
+   * @returns {boolean} Don't break!
+   */
+  function needToPreventBreak(event) 
+  {
+    var dontBreak = false;
+
+    switch(event.objType)
+    {
+      case "TextUnderlay":
+      case "Part":
+      case "Staff":
+      case "Barline":
+      case "Custos":
+        dontBreak = true;
+        break;
+      default:
+        dontBreak = false;
+        break;
+    }
+
+    return dontBreak;
   }

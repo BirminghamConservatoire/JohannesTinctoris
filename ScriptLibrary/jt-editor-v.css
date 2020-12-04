@@ -693,15 +693,15 @@ div.musicexample.standalone {
 }
 
 .redSVGLine{
-  stroke: #F00;
+  stroke: #F00 !important; 
 }
 
 .blackSVGLine{
-  stroke: #000;
+  stroke: #000 !important;
 }
 
 .blindSVGLine, .ledgerline.blind{
-  stroke: #AAA;
+  stroke: #AAA !important;
 }
 
 .NoSVGLine{

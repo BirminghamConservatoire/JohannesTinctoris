@@ -3843,20 +3843,20 @@ function getDefaultText(event) {
     default:
       // default can be Note, LigatureNote, ObliqueNote etc. (too many different note types)
       // If there is no text, return false
-      return event.text ? event.text : false;
+      return event.text ? event.text : null;
   }
 }
 
 /** @memberof base/queryHelper
  * @summary Gets the content of the default reading of too many kinds of choices
- * @param {*} event some kind of Choice object
+ * @param {*} event some kind of (Choice) object
  * @returns {Array} Content of first reading
  */
 function getDefaultReading(event) {
   // We have to think about MChoice, LigChoice and ObliqueNoteChoice
   // Luckily, all have .nonDefault()
   switch (event.objType) {
-    case "Musical Choice":
+    case "MusicalChoice":
     case "Ligature Choice":
     case "ObliqueNote Choice":
       if (event.nonDefault()) {
@@ -3869,6 +3869,6 @@ function getDefaultReading(event) {
       break;
     default:
       // not a choice object
-      return null;
+      return event;
   }
 }

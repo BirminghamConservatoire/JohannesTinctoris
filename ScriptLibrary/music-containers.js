@@ -1281,6 +1281,9 @@ function MusicExample(){
       currentSystems.push(svgGroup(SVG, "Stafflines", false));
       this.parameters.draw();
       var broken=false;
+      // some helpers for better system breaks
+      var sysbreakWidth = this.targetWidth()-(3*rastralSize);
+      var remainingEvents = this.events;
       for(eventi = 0; eventi<this.events.length; eventi++){
         if(!broken && currentSolm && currentSolm.members.length && eventi>0) {
           broken=true;
@@ -1294,72 +1297,12 @@ function MusicExample(){
           currentClef = false;
           currentSolm = false;
         }
+        // determine automatic system breaks in case of wrapWidth... are we near the end of space?
+        // Make sure to prevent a crash if nextBreak is false... (Why is this possible?!)
         if(wrapWidth && 
-          // when do we add a break? 
-          // 0. Not if the next item is a fermata or a dot of augmentation!
-          // If the current item isn't a fermata
-          !this.events[eventi].lengthens 
-          // and a current choice's default reading is a fermata on the preceding note
-          && !(
-            this.events[eventi].objType==="MusicalChoice" && !this.events[eventi].nonDefault() && this.events[eventi].content[0].content[0].lengthens
-          )
-          // and the current item isn't a dot of augmentation
-          && !this.events[eventi].augments
-          // and the last event isn't a SolmizationSignature, MensuralSignature, 
-          // ProportionSign or Barline
-          && !(eventi && 
-            (this.events[eventi-1].objType=="SolmizationSignature"
-                      || this.events[eventi-1].objType=="MensuralSignature"
-                      || this.events[eventi-1].objType=="ProportionSign"
-                      || this.events[eventi-1].objType=="Barline"
-            )
-          )
-          // and the current event is not a Barline
-          && this.events[eventi].objType!=="Barline"
-          // and the current event is not a TextUnderlay
-          && this.events[eventi].objType!=="TextUnderlay"
-          // and current event is not a part and staff
-          && this.events[eventi].objType!=="Part"
-          && this.events[eventi].objType!=="Staff"
-          // TODO: something isn't right with independent text underlay
-          // and this event isn't one of the last two events of this example 
-          && !(eventi<this.events.length-2 
-          // and the next event isn't a Barline 
-          && this.events[eventi+1].objType=="Barline")
-            && 
-              // and...  1. If x is close to the edge 
-              (curx>=this.targetWidth()-rastralSize 
-                ||
-                // 2. or If we're there's a break point coming, but we'd need a
-                // break before then, break a little early
-                (nextBreak && nextBreak - eventi < 5 
-                  && (curx>=this.targetWidth()-((nextBreak-eventi)*1.6*rastralSize))
-                )
-                ||
-                // 3. or If we're near the end, break a little early if a break
-                // will be needed.
-                (remain<3  
-                  && curx>=this.targetWidth()-((this.events.length-eventi)*1.6*rastralSize)
-                ) 
-                ||
-                // 4. or If breaking at the next opportunity would separate a note
-                // from its dot.
-                (remain>1 && this.events[eventi+1].augments 
-                  && curx+this.events[eventi].width()>=this.targetWidth()-rastralSize
-                )
-                ||
-                // 5. or If the thing is a tacet (which is super wide) and pushes us over
-                (this.events[eventi].objType==="Tacet"
-                  && curx + this.events[eventi].width() > this.targetWidth()
-                )
-                ||
-                // 6. and a text underlay would reach beyond width
-                ((text = getDefaultText(this.events[eventi]))
-                  && curx + text.width() > this.targetWidth())
-              )
-          )
+          determineSysBreak(remainingEvents, sysbreakWidth, 
+            (nextBreak!=false ? nextBreak - eventi: remain), remain))
         {
-           // wrapWidth-32){
           // The custos has to know the next (=current) note, so rewind
           // the pointer, briefly
           eventi-=1;
@@ -1377,7 +1320,7 @@ function MusicExample(){
           sysBreak2();
           sysBreak(false, leaveSpace);
           // draw Clef & Solm only if the next object is no clef
-          if(this.events[eventi+1].objType!=="Clef")
+          if(this.events[eventi+1] && this.events[eventi+1].objType!=="Clef")
           {
             if(currentClef) currentClef.draw();
             //console.log(currentClef.appliesTo);
@@ -1418,7 +1361,8 @@ function MusicExample(){
           }
         }
         mw = Math.max(curx, mw);
-      }
+        remainingEvents = remainingEvents.slice(1);
+      } // end of for loop
       if(this.classes.classes.length) drawClasses(this.classes.classes, false);
       sysBreak2(true);
       for(var w=0; w<this.w2.length; w++){
@@ -1496,3 +1440,237 @@ function MusicExample(){
   }
   // end of MusicExample
   
+  /**
+   * @memberof music-container
+   * Checks if an automatic system break is necessary.
+   * This is done in a separate function for better traceability.
+   * @param {Array} remainingEvents 
+   * @param {int} sysbreakWidth 
+   * @param {int} toNextBreak 
+   * @param {int} remain 
+   * @returns {boolean} advise break
+   */
+  function determineSysBreak(remainingEvents, sysbreakWidth, toNextBreak, remain)
+  {
+    var breakSys = false;
+    var currentEvent = remainingEvents[0];
+    var curText = getDefaultText(currentEvent);
+    var curWidth = curText ? curText.width() : currentEvent.width();
+
+    // We need to check for things that should not be broken at!
+    var dontBreak = needToPreventBreak(currentEvent);
+    // Result is applied at the end, because it cancels the break
+
+    // Advise an earlier break because of the following events:
+    if (!dontBreak)
+    {
+      let fiveGram = remainingEvents.slice(0,5);
+      let fiveGramWidth = getGroupWidth(fiveGram);
+      // if the next 3 events won't fit, determine if an earlier break is desired
+      if(curx + fiveGramWidth > sysbreakWidth)
+      {
+        breakSys = dontSplitGram(fiveGram);
+      }
+    }
+    
+    // Break if: (yep, the code is redundant, but it's easier to debug if cases are properly separated)
+    // X + width of current event would reach beyond recommended system width
+    if(curx + curWidth >= sysbreakWidth)
+    {
+      breakSys = true;
+    }
+    // no break seems to be necessary because of remaining space
+    // check if we would like to break earlier because of future stuff
+    else if(remain < 5)
+    {
+      // break earlier near the end because the rest won't fit?
+      let restWidth = getGroupWidth(remainingEvents);
+      
+      if(curx + restWidth > sysbreakWidth)
+      {
+        breakSys = true;
+      }
+
+    }
+    else if(toNextBreak > 0 && toNextBreak < 8 && toNextBreak != remain)
+    {
+      // we're near a break, check whether it's a default break
+      // then check if we would like to break early
+      let breakEvent = remainingEvents[toNextBreak];
+      
+      if(breakEvent.objType!=="MusicalChoice" || !breakEvent.nonDefault())
+      {
+        let toBreakWidth = getGroupWidth(remainingEvents.slice(0,toNextBreak+1));
+
+        if(curx + toBreakWidth > sysbreakWidth)
+        {
+          breakSys = true;
+        }
+      }
+    }
+
+    // prevent a break
+    if(dontBreak===true)
+    {
+      breakSys = false;
+    }
+
+    return breakSys;
+  }
+
+  /**
+   * @memberof music-container
+   * Determines the estimated width of a group of events
+   * @param {Array} eventGroup Group of events
+   * @returns {int} total width of group
+   */
+  function getGroupWidth(eventGroup)
+  {
+    var grpWidth = 0;
+    for(let i = 0; i < eventGroup.length; i++)
+    {
+      let thisItemWidth = eventGroup[i].text ?
+        getDefaultText(eventGroup[i]).width() : eventGroup[i].width();
+      grpWidth = grpWidth + thisItemWidth;
+    }
+
+    return grpWidth;
+  }
+
+  /**
+   * @memberof music-container
+   * Checks whether an event should not be put in a new system.
+   * Usually, the object type contradicts a break.
+   * @param {*} event 
+   * @returns {boolean} Don't break!
+   */
+  function needToPreventBreak(event) 
+  {
+    var dontBreak = false;
+
+    if(event)
+    {
+      switch(event.objType)
+      {
+        case "TextUnderlay":
+        case "Part":
+        case "Staff":
+        case "Barline":
+        case "Custos":
+          dontBreak = true;
+          break;
+        case "MusicalChoice":
+          //In case of a choice, look at first event in default Reading
+          let defaultRdg = getDefaultReading(event);
+          dontBreak = needToPreventBreak(Array.isArray(defaultRdg) ? defaultRdg[0] : defaultRdg);
+          break;
+        default:
+          dontBreak = false;
+          break;
+      }
+    }
+
+    return dontBreak;
+  }
+
+  /**
+   * @memberof music-container
+   * Checks for following events that shouldn't be split and advises a split just before
+   * @param {Array} nGram 
+   * @returns {boolean} advise split now
+   */
+  function dontSplitGram(nGram)
+  {
+    var splitNow = false;
+
+    /**
+     * We have various reasons to split:
+     * --- Because of first event (in case of choices, check only first item of default reading)
+     * - First is a clef
+     * - Don't split accidental from note
+     * - Don't split after Mensuration Sign
+     * - Don't split after Proportion sign
+     * --- Because of second event 
+     *     (since the connection between 1st & 2nd is important, check only first item in choices)
+     * - Don't split a fermata from its note
+     * - Don't split a dot of augmentation from its note
+     * 
+     * But we need to get these items recursively for dealing with nested variants
+     */
+
+    var first = getFirstDefaultNonChoice(nGram[0]);
+    var second = getFirstDefaultNonChoice(nGram[1]);
+
+    if(first)
+    {
+      switch(first.objType)
+      {
+        case "Clef":
+        case "SolmizationSign":
+        case "StackedProportionSigns":
+        case "ProportionSign":
+          splitNow = true;
+          break;
+        case "MensuralSignature":
+          splitNow = true;
+          break;
+        default:
+          splitNow = false;
+          break;
+      }
+    }
+
+    if(second)
+    {
+      switch(second.objType)
+      {
+        case "Dot":
+          // check if augments
+          if(second.augments)
+          {
+            splitNow = true;
+          }
+          break;
+        case "Fermata":
+          // check if lengthens
+          if(second.lengthens)
+          {
+            splitNow = true;
+          }
+          break;
+        case "SignumCongruentiae":
+          // check if effects
+          if(second.effects)
+          {
+            splitNow = true;
+          }
+          break;
+        default:
+          // don't do anything you stupid!
+          //splitNow = false;
+          break;
+      }
+    }
+
+    return splitNow;
+  }
+
+  /**
+   * @memberof music-container
+   * Gets the first non-choice default event inside a choice
+   * @param {*} event Musical event
+   * @returns {*} Musical event
+   */
+  function getFirstDefaultNonChoice(event)
+  {
+    do{
+      event = getDefaultReading(event);
+      if(Array.isArray(event))
+      {
+        event = event[0];
+      }
+    }
+    while(event && event.objType==="MusicalChoice");
+
+    return event;
+  }

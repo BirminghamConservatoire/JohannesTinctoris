@@ -810,6 +810,7 @@ function TreatiseDoc(text, outdiv){
   this.draw = function(){
     curDoc = this;
     margin = this.marg;
+		inVerse = false;
     this.showvar = this.showvars || this.source;
     this.breaks = [];
     if(!this.forceredraw && $(this.out.childNodes.length)) {

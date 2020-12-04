@@ -3856,7 +3856,7 @@ function getDefaultReading(event) {
   // We have to think about MChoice, LigChoice and ObliqueNoteChoice
   // Luckily, all have .nonDefault()
   switch (event.objType) {
-    case "Musical Choice":
+    case "MusicalChoice":
     case "Ligature Choice":
     case "ObliqueNote Choice":
       if (event.nonDefault()) {

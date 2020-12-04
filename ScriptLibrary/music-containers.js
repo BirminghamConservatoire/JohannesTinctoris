@@ -1536,18 +1536,26 @@ function MusicExample(){
   {
     var dontBreak = false;
 
-    switch(event.objType)
+    if(event)
     {
-      case "TextUnderlay":
-      case "Part":
-      case "Staff":
-      case "Barline":
-      case "Custos":
-        dontBreak = true;
-        break;
-      default:
-        dontBreak = false;
-        break;
+      switch(event.objType)
+      {
+        case "TextUnderlay":
+        case "Part":
+        case "Staff":
+        case "Barline":
+        case "Custos":
+          dontBreak = true;
+          break;
+        case "MusicalChoice":
+          //In case of a choice, look at first event in default Reading
+          let defaultRdg = getDefaultReading(event);
+          dontBreak = needToPreventBreak(Array.isArray(defaultRdg) ? defaultRdg[0] : defaultRdg);
+          break;
+        default:
+          dontBreak = false;
+          break;
+      }
     }
 
     return dontBreak;

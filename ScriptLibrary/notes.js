@@ -72,18 +72,14 @@ function getNote(anchor){
 	// Get the relevant footnote. If it's a multi-paragraph footnote,
 	// grab all the paragraphs, and put them in a div
 	var note = $(anchor).parents("p")[0];
-	var nextParaIsNextNote = $(note.nextElementSibling).has("a[id]").length>0;
-	console.log('test', nextParaIsNextNote, note.nextElementSibling);
+	var nextParaIsNextNote = $(note.nextElementSibling).has("a[id][name]").length>0;
 	if(nextParaIsNextNote){
 		return note.cloneNode(true);
 	} else {
 		var bigNote = DOMDiv("longnote", false);
 		bigNote.appendChild(note.cloneNode(true));
-		console.log("o", note.parentNode,
-								$(note.nextElementSibling).has("a[id]").size()==0);
-		while(note.nextElementSibling && $(note.nextElementSibling).has("a[id]").size()==0){
+		while(note.nextElementSibling && $(note.nextElementSibling).has("a[id][name]").size()==0){
 			note = note.nextElementSibling;
-			console.log(bigNote, note);
 			// FIXME: hack
 			bigNote.appendChild(note);
 		}

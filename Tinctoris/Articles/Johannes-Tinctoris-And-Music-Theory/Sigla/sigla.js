@@ -18,7 +18,8 @@ function replaceSiglum(sigla, i, siglum){
 	var siglumMatch = sigla.find(sigObj => sigObj.id == siglumCode);
 	if(siglumMatch) {
 		siglum.innerHTML = '<span onclick="toggleDetails(this)" class="siglumInfo"><span class="code" tabindex="0">'+siglumMatch.siglum
-			+'</span><span  tabindex="0" class="details">'+siglumMatch.fullName+'</span></span>';
+			+'</span><span  tabindex="0" class="details">'+siglumMatch.fullName+' ' + siglumMatch.url
+			+'</span></span>';
 	}
 }
 function replaceSigla(sigla){

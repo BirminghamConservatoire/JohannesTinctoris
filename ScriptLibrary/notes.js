@@ -81,7 +81,7 @@ function getNote(anchor){
 		while(note.nextElementSibling && $(note.nextElementSibling).has("a[id][name]").size()==0){
 			note = note.nextElementSibling;
 			// FIXME: hack
-			bigNote.appendChild(note);
+			bigNote.appendChild(note.cloneNode(true));
 		}
 		return bigNote;
 	}
@@ -105,13 +105,11 @@ function showNote(e){
   var index = 1+$(this).data("index");
   var id = "note-"+index;
 	var ref = $(this).data("ref");
-	console.log(this);
 	showNote2(index, id, ref, this);
 }
 function showNote2(index, id, ref, thisObj){
   if(document.getElementById(id)) return $(document.getElementById(id)).remove();
   var note = $("#"+ref, notesPage);
-	console.log(notesPage, ref);
   // var anchor = DOMAnchor("{"+$(this).data("ref")+"}", false, false, false);
   // anchor.name = "{"+$(this).data("ref")+"}";
   if(note && note.length) {

@@ -1,3 +1,5 @@
+var loadedSigla;
+
 function showCode(el){
 	var sig = el.parentNode;
 	$(sig).children(".code").show();
@@ -25,10 +27,21 @@ function replaceSiglum(sigla, i, siglum){
 function replaceSigla(sigla){
 	// Replace all sigla spans in article with
 	// expandable links
+	if(!loadedSigla) loadedSigla = sigla;
 	var rS = replaceSiglum.bind(null, sigla);
 	$(".siglum").each(rS);
 	$(".siglum .details").hide();
 }
+function docChanged(){
+	if(!loadedSigla) return;
+	replaceSigla(loadedSigla);
+}
+function startObserving(){
+	var article = document.getElementsByClassName("contentbox")[0];
+	var observer = new MutationObserver(docChanged);
+	observer.observe(article, {subtree:true, childList: true});
+}
 $(function() {
-	$.get('/Tinctoris/Articles/Johannes-Tinctoris-And-Music-Theory/Sigla/sigla.json', replaceSigla, 'json')
+	$.get('/Tinctoris/Articles/Johannes-Tinctoris-And-Music-Theory/Sigla/sigla.json', replaceSigla, 'json');
+	startObserving();
 });

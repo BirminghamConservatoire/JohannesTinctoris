@@ -41,7 +41,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "De Arte II+III",
-            "url": "http://localhost:4000/Tinctoris/texts/dearte23/#"
+            "url": "http://localhost:4000/Tinctoris/texts/dearte23/#showvars0=true&pane0=Edited"
         }
     ]
 }

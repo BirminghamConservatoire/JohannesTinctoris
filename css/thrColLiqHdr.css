@@ -1,6 +1,6 @@
 @charset "UTF-8";
 body {
-	font: 100%/1.4 Georgia, "Times New Roman", serif!important;
+	font: 100%/1.4 Georgia, Lora, "Times New Roman", serif!important;
 	background: #DDD;
 	margin: 0;
 	padding: 0;

@@ -10,7 +10,7 @@
   font-family: 'unicode-fallback';
   font-style: normal;
   src: local("Segoe UI Symbol"),
-       local("Noto Symbols"),
+       local("Noto Sans Symbols"),
        url('FreeSerif.woff') format('woff'), /* Modern Browsers */
        url('FreeSerif.ttf') format('truetype'), /* Safari, Android, iOS */
        url('FreeSerif.otf') format('opentype'); /* OpenType */

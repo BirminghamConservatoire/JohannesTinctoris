@@ -1,26 +1,23 @@
 @charset "UTF-8";
 
-@import url('https://fonts.googleapis.com/css?family=Lora');
-
-/* lora-regular - latin-ext_latin */
 @font-face {
-  font-family: 'local';
+  font-family: 'unicode-fallback';
   font-style: normal;
-  src: local('Georgia');
+  src: local('Georgia'),
+       local("Times New Roman");
 }
 @font-face {
-  font-family: 'local';
+  font-family: 'unicode-fallback';
   font-style: normal;
-  src: url('lora-v16-latin-ext_latin-regular.eot'); /* IE9 Compat Modes */
-  src: url('lora-v16-latin-ext_latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('lora-v16-latin-ext_latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
-       url('lora-v16-latin-ext_latin-regular.woff') format('woff'), /* Modern Browsers */
-       url('lora-v16-latin-ext_latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('lora-v16-latin-ext_latin-regular.svg#Lora') format('svg'); /* Legacy iOS */
+  src: local("Segoe UI Symbol"),
+       local("Noto Symbols"),
+       url('FreeSerif.woff') format('woff'), /* Modern Browsers */
+       url('FreeSerif.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('FreeSerif.otf') format('opentype'); /* OpenType */
   unicode-range: U+1D1D2;
 }
 body {
-	font: 100%/1.4 local, Lora, "Times New Roman", serif!important;
+	font: 100%/1.4 Georgia, "Times New Roman", unicode-fallback, serif!important;
 	background: #DDD;
 	margin: 0;
 	padding: 0;

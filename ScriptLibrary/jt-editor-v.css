@@ -37,7 +37,7 @@
 /*     font-weight: normal; */
 /*     font-style: normal; */
 /* } */
-* {
+div.titleBar * {
   font-family: georgia;
 }
 /* Line Heights (and related stuff) here (so easily changed) */

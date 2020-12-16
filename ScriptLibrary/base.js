@@ -2268,7 +2268,7 @@ function drawRichText(textBlock, components){
         }
         if(dy) 
         {
-					txt.setAttributeNS(null, 'dy', dy+'px');
+					textSpan.setAttributeNS(null, 'dy', dy+'px');
 					dy = false;
 				}
       } 
@@ -2705,6 +2705,10 @@ docMapping.prototype.addPopup = function(info, referrer, ptype, tDoc){
     } else if (info.objType==="Choice"){ 
       fndiv.appendChild(info.footnote());
     } else if (info.objType==="Annotation" || info.objType.indexOf("Comment")>-1){
+      fndiv.appendChild(info.footnote());
+    } else if (info.objType==="Part"){
+      fndiv.appendChild(info.footnote());
+    } else if (!info.tip){
       fndiv.appendChild(info.footnote());
     } else if (info){
       var frame = svg(100, 100);

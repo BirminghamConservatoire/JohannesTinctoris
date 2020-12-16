@@ -4147,7 +4147,7 @@ function TextUnderlay(){
   //    if(this.orientation) curx+=rastralSize*2;
     if($(SVG).parent("#content")) underlays.push(textBlock);
     // experimental:
-    if(eventi && (currentExample.events[eventi-1].objType==="TextUnderlay")){
+    if(eventi>0 && (currentExample.events[eventi-1].objType==="TextUnderlay")){
       curx = currentExample.events[eventi-1].prevCurX;
     }
     

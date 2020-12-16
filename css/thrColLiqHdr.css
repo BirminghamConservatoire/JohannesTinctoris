@@ -9,11 +9,11 @@
 @font-face {
   font-family: 'unicode-fallback';
   font-style: normal;
-  src: local("Segoe UI Symbol"),
-       local("Noto Sans Symbols"),
-       url('FreeSerif.woff') format('woff'), /* Modern Browsers */
-       url('FreeSerif.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('FreeSerif.otf') format('opentype'); /* OpenType */
+  src: url('Mensuration.woff2') format('woff2'), /* Super modern browsers */
+       url('Mensuration.woff') format('woff'), /* Modern Browsers */
+       url('Mensuration.ttf') format('truetype'),/* Safari, Android, iOS */
+       local("Segoe UI Symbol"),
+       local("Noto Sans Symbols");
   unicode-range: U+1D1D2;
 }
 body {

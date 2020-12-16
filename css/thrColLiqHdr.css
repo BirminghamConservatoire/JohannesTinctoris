@@ -14,7 +14,7 @@
        url('Mensuration.ttf') format('truetype'),/* Safari, Android, iOS */
        local("Segoe UI Symbol"),
        local("Noto Sans Symbols");
-  unicode-range: U+1D1D2;
+  unicode-range: U+1D100-FF;
 }
 body {
 	font: 100%/1.4 Georgia, "Times New Roman", unicode-fallback, serif!important;

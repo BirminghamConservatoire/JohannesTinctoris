@@ -879,7 +879,7 @@ function fixHeight(ignorewidth){
     var topheight = $(".header").height() + $(".nav").height();
     var total = $(window).height();
     var space = $(".mainBody").height();
-    $(".mainBody")[0].style.height=(total-topheight-2)+"px";
+    $(".mainBody")[0].style.height=(total-topheight-22)+"px";
 //    var space = $(window).height() - $(domobj['Content']).offset().top; 
     domobj['Content'].style.height = (space-20)+"px";
     var bars = $(domobj['Content']).find(".titleBar");

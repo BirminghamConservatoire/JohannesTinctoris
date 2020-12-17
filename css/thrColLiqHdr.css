@@ -252,7 +252,13 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 	position: relative;/* this gives IE6 hasLayout to properly clear */
 	clear: both; /* this clear property forces the .container to understand where the columns end and contain them */
 }
-
+.edition .footer {
+  clear: both;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  padding: 2px 0px 0px;
+}
 /* ~~miscellaneous float/clear classes~~ */
 .fltrt {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
 	float: right;

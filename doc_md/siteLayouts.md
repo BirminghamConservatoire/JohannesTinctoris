@@ -18,10 +18,11 @@ The page related variables used in front matters are:
 * ``menu_base``: Menu base - contains the relative url to the part of the website that is the menu bar for (for proper linking in the menu)
 * ``menu``: Only for article template. Defines the used menu.
 * ``header``: Only for article template. Defines the used header.
-* ``date``: Can be used to appear in an optional page footer as date this particluar page was updated.
 * ``section``: If "e&S" it toggle the appearance of the Essays & Studies side menu.
 * ``collapse``: Can be `btnOne`, `btnTwo`, `btnThree`, `btnFour` or `btnApp` for having the respective side menu section collapsed by default.
 * ``table``: If `true`, the inclusion of Bootstrap Table is toggled.
+* ``updated``: Can be used to appear in an optional page footer as date this particluar page was updated.
+* ``first``: Can be used to appear in an optional page footer as date this particluar page was first published.
 
 ## Layouts
 

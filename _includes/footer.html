@@ -1,5 +1,11 @@
-{% if page.date %}
 <div class="footer" style="text-align: center;">
-   <p style="color: #4E5869;">Updated last at {{page.date}}</p>
+   {% if page.first %}
+      <span style="color: #4E5869;">First published at {{page.first}}</span>
+      {% if page.updated %}
+         <span style="color: #4E5869;">/</span>
+      {% endif %}
+   {% endif %}
+   {% if page.updated %}
+      <span style="color: #4E5869;">Updated last at {{page.updated}}</span>
+   {% endif %}
 </div><!-- end .footer -->
-{% endif %}

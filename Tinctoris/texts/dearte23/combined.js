@@ -6,9 +6,9 @@ texts.dearte23.exportMonth = 11;
 texts.dearte23.exportDay = 28;
 texts.dearte23.exportHour = 10;
 texts.dearte23.exportMinutes = 48;
-texts.dearte23.sources = [['BU', 'I-Bu 2573, fols. 133r–166r'],
+texts.dearte23.sources = [/*['BU', 'I-Bu 2573, fols. 133r–166r'],
 ['Br1', 'B-Br II 4147 Mus., fols. 80ra–101ra'],
-['V', 'E-VAu 835, fols. 116r–144r']];
+['V', 'E-VAu 835, fols. 116r–144r']*/];
 texts.dearte23.edited = 'De arte contrapuncti\n\
 Editor: Jeffrey J. Dean\n\
 Checked by:\n\

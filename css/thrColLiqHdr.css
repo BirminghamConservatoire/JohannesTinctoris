@@ -48,6 +48,9 @@ h3{
 	font-size: 1rem;
 	font-weight: bold;
 }
+.article * {
+	overflow-wrap: break-word;
+}
 h4{
   font-size: 1.25rem;;
 }
@@ -729,6 +732,24 @@ HILLBLU libro, each released under CC-SA3 by its respective authors */
 }
 .note .fn {
   padding-right: 4px;
+}
+.contentbox div.longnote {
+	padding-left: 25px;
+}
+.longnote .fn {
+	float: left;
+	margin-right: 0.2em;
+}
+.longnote p {
+	padding-left: 0!important;
+	margin-left: 0;
+}
+.longnote p:nth-child(2) {
+	text-indent: 0;
+}
+.longnote p {
+	text-indent: 1em;
+	margin-bottom: 0;
 }
 p > img {
   max-width: 100%;

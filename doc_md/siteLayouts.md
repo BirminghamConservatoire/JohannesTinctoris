@@ -22,7 +22,7 @@ The page related variables used in front matters are:
 * ``collapse``: Can be `btnOne`, `btnTwo`, `btnThree`, `btnFour` or `btnApp` for having the respective side menu section collapsed by default.
 * ``table``: If `true`, the inclusion of Bootstrap Table is toggled.
 * ``updated``: Can be used to appear in an optional page footer as date this particluar page was updated.
-* ``first``: Can be used to appear in an optional page footer as date this particluar page was first published.
+* ``firstpub``: Can be used to appear in an optional page footer as date this particluar page was first published.
 
 ## Layouts
 

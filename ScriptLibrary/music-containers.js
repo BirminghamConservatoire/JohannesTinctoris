@@ -1179,6 +1179,7 @@ function MusicExample(){
       var sd = doc.createElementNS("http://www.music-encoding.org/ns/mei", "staffDef");
       var relevantStaff = part.applicableStaff();
       sd.setAttributeNS(null, "n", n);
+      sd.setAttributeNS(null, "notationtype", "mensural");
       sd.setAttributeNS(null, "lines", relevantStaff.trueLines());
           if(part.id) {
               sd.setAttributeNS(null, "label", part.defaultName());

@@ -222,9 +222,16 @@ function makeTEITable(doc, parent){
  */
 function MEIDoc(title){
 	this.doc = document.implementation.createDocument("http://www.music-encoding.org/ns/mei", "", null);
-	this.tree = this.doc.createElementNS("http://www.music-encoding.org/ns/mei","MEI");
+	this.tree = this.doc.createElementNS("http://www.music-encoding.org/ns/mei","mei");
 	this.doc.appendChild(this.tree);
 	this.tree.setAttribute("meiversion", "3.0.0");
+
+  // create PIs to atuomatically link the schema
+  piRNG = document.createProcessingInstruction('xml-model', 'href="https://music-encoding.org/schema/3.0.0/mei-all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"')
+  piSchematron = document.createProcessingInstruction('xml-model', 'href="https://music-encoding.org/schema/3.0.0/mei-all.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"')
+  this.doc.insertBefore(piRNG, this.tree);
+  this.doc.insertBefore(piSchematron, this.tree);
+
 	this.head = this.doc.createElementNS("http://www.music-encoding.org/ns/mei", "meiHead");
 	var titleel = this.doc.createElementNS("http://www.music-encoding.org/ns/mei", "title");
 	if(title){
@@ -233,7 +240,7 @@ function MEIDoc(title){
 		titleel.appendChild(t);
 	}
 	var titlestmt = this.doc.createElementNS("http://www.music-encoding.org/ns/mei", "titleStmt");
-	var filedesc = this.doc.createElementNS("http://www.music-encoding.org/ns/mei", "fieldesc");
+	var filedesc = this.doc.createElementNS("http://www.music-encoding.org/ns/mei", "fileDesc");
 	titlestmt.appendChild(titleel);
 	this.head.appendChild(filedesc);
 	filedesc.appendChild(titlestmt);

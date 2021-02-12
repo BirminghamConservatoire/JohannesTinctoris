@@ -2594,7 +2594,7 @@ function MensuralSignature(){
 			parent.appendChild(el);
 		}
 		if("cCçÇqQœŒ".indexOf(this.signature[0])>=0){
-			el.setAttributeNS(null, "symbol", "C");
+			el.setAttributeNS(null, "sign", "C");
 			el.setAttributeNS(null, "tempus", "2");
 			if("çÇŒ".indexOf(this.signature[0])>-1) {
 				el.setAttributeNS(null, "dot", "true");
@@ -2606,7 +2606,7 @@ function MensuralSignature(){
 				el.setAttributeNS(null, "orient", "reversed");
 			}
 		} else if("oOøØ".indexOf(this.signature[0])>=0){
-			el.setAttributeNS(null, "symbol", "O");
+			el.setAttributeNS(null, "sign", "O");
 			el.setAttributeNS(null, "tempus", "3");
 			if("øØ".indexOf(this.signature[0])>=0) {
 				el.setAttributeNS(null, "dot", "true");

@@ -2733,7 +2733,8 @@ function ProportionSign(){
 		parent.appendChild(el);
 		el.setAttributeNS(null, 'num', this.sign);
 		console.log("--", this.proportionChangesTo);
-		el.setAttributeNS(null, 'multiplier', this.proportionChangesTo);
+		// multiplier is not schema conform
+    //el.setAttributeNS(null, 'multiplier', this.proportionChangesTo);
 		addUUIDs(this, el, curDoc);
 		this.MEIObj = el;
 	}
@@ -2825,8 +2826,9 @@ function StackedProportionSigns(){
 		var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "proport");
 		parent.appendChild(el);
 		if(this.signs[0] && this.signs[0].objType==='ProportionSign') el.setAttributeNS(null, 'num', this.signs[0].sign);
-		if(this.signs[1] && this.signs[1].objType==='ProportionsSign') el.setAttributeNS(null, 'numbase', this.signs[1].sign);
-		el.setAttributeNS(null, 'multiplier', this.proportionChangesTo);		
+		if(this.signs[1] && this.signs[1].objType==='ProportionSign') el.setAttributeNS(null, 'numbase', this.signs[1].sign);
+		// multiplier is not schema conform
+    //el.setAttributeNS(null, 'multiplier', this.proportionChangesTo);		
 		addUUIDs(this, el, curDoc);
 		this.MEIObj = el;
 	}

@@ -132,7 +132,7 @@ function Note(){
 		}
     if((voidRule(this) && currentSubType==="full") 
        || (fullRule(this) && currentSubType==="void")){
-      el.setAttribute("coloration", "true");
+      el.setAttribute("colored", "true");
     }
     parent.appendChild(el);
 		if(this.text) this.text.toMEI(doc, el, this);
@@ -3940,8 +3940,7 @@ function TextUnderlay(){
 			var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "verse");
       var elSyl = doc.createElementNS("http://www.music-encoding.org/ns/mei", "syl");
 			addUUIDs(this, el, curDoc);
-      elSyl.setAttribute("xml:id", "ID" + uuid());
-			parent.appendChild(el);
+      parent.appendChild(el);
       el.appendChild(elSyl);
 			this.MEIObj = el;
       // put syl inside verse to be schema conform

@@ -3938,17 +3938,28 @@ function TextUnderlay(){
     if(!parent) parent = doc.currentParent;
 		if(lyricParent){
 			var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "verse");
+      var elSyl = doc.createElementNS("http://www.music-encoding.org/ns/mei", "syl");
 			addUUIDs(this, el, curDoc);
+      elSyl.setAttribute("xml:id", "ID" + uuid());
 			parent.appendChild(el);
+      el.appendChild(elSyl);
 			this.MEIObj = el;
-			el.appendChild(doc.createTextNode(this.justGiveMeText()));
+      // put syl inside verse to be schema conform
+			elSyl.appendChild(doc.createTextNode(this.justGiveMeText()));
+      // question: what to do with multiple lines??? (hope this never happens)
 			return el;
 		} else {
-			var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "dir");
+      var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "dir");
 			addUUIDs(this, el, curDoc);
-			parent.appendChild(el);
+      // append dir only if there is any text to contain
+      if (this.justGiveMeText().length > 0) 
+      {
+        parent.appendChild(el);
+      }
 			this.MEIObj = el;
-			el.appendChild(doc.createTextNode(this.justGiveMeText()));
+      // dir needs @startid, get uuid from previous element
+      if(el.parentNode) el.setAttributeNS(null, 'startid', '#' + el.previousSibling.getAttribute('xml:id'));
+      el.appendChild(doc.createTextNode(this.justGiveMeText()));
 			if(this.type==="label" && typeof(this.components[0])=="string"
 				 && this.components[0].toLowerCase()=="crescit in duplum"){
 				var el2 = doc.createElementNS("http://www.music-encoding.org/ns/mei", "proport");

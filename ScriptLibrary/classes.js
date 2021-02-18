@@ -3958,7 +3958,12 @@ function TextUnderlay(){
       }
 			this.MEIObj = el;
       // dir needs @startid, get uuid from previous element
-      if(el.parentNode) el.setAttributeNS(null, 'startid', '#' + el.previousSibling.getAttribute('xml:id'));
+      if(el.previousSibling) {
+        el.setAttributeNS(null, 'startid', '#' + el.previousSibling.getAttribute('xml:id'))
+      }
+      else if (el.parentNode && el.parentNode.localName != 'layer') {
+        el.setAttributeNS(null, 'startid', '#' + el.parentNode.getAttribute('xml:id'))
+      }
       el.appendChild(doc.createTextNode(this.justGiveMeText()));
 			if(this.type==="label" && typeof(this.components[0])=="string"
 				 && this.components[0].toLowerCase()=="crescit in duplum"){

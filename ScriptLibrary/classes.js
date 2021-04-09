@@ -2307,6 +2307,13 @@ function Rest(){
 		addUUIDs(this, el, curDoc);
     el.setAttribute("dur", rhythms[this.rhythm]);
     MEIAddPosition(this, el);
+    // make sure that the location of a rest is never a space but the line below (because of false rendering)
+    if (parseInt(el.getAttributeNS("","loc"))%2>0)
+    {
+      let loc = parseInt(el.getAttributeNS("","loc"));
+      loc = loc-1;
+      el.setAttributeNS("","loc",loc);
+    }
     parent.appendChild(el);
     if(this.dot) this.dot.toTEI(doc, parent);
     this.MEIObj = el;

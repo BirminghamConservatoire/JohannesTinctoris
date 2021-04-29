@@ -249,7 +249,11 @@ function MEIDoc(title){
 	filedesc.appendChild(pubstmt);
 	this.serialize = function(){
     var serializer = new XMLSerializer();
-    return serializer.serializeToString(this.doc);
+    //somehow, the xml declaration went missing 
+    // I don't find any proper solution to this, let's be hacky (and feel bad about it)
+    var xmlSting =serializer.serializeToString(this.doc);
+    xmlSting = '<?xml version="1.0" encoding="UTF-8"?>\n' + xmlSting;
+    return xmlSting;
   };
   this.blobify = function(){
     var content = [this.serialize()];

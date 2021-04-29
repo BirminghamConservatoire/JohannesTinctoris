@@ -132,7 +132,7 @@ function Note(){
 		}
     if((voidRule(this) && currentSubType==="full") 
        || (fullRule(this) && currentSubType==="void")){
-      el.setAttribute("coloration", "true");
+      el.setAttribute("colored", "true");
     }
     parent.appendChild(el);
 		if(this.text) this.text.toMEI(doc, el, this);
@@ -2307,6 +2307,13 @@ function Rest(){
 		addUUIDs(this, el, curDoc);
     el.setAttribute("dur", rhythms[this.rhythm]);
     MEIAddPosition(this, el);
+    // make sure that the location of a rest is never a space but the line below (because of false rendering)
+    if (parseInt(el.getAttributeNS("","loc"))%2>0)
+    {
+      let loc = parseInt(el.getAttributeNS("","loc"));
+      loc = loc-1;
+      el.setAttributeNS("","loc",loc);
+    }
     parent.appendChild(el);
     if(this.dot) this.dot.toTEI(doc, parent);
     this.MEIObj = el;
@@ -2594,7 +2601,7 @@ function MensuralSignature(){
 			parent.appendChild(el);
 		}
 		if("cCçÇqQœŒ".indexOf(this.signature[0])>=0){
-			el.setAttributeNS(null, "symbol", "C");
+			el.setAttributeNS(null, "sign", "C");
 			el.setAttributeNS(null, "tempus", "2");
 			if("çÇŒ".indexOf(this.signature[0])>-1) {
 				el.setAttributeNS(null, "dot", "true");
@@ -2606,7 +2613,7 @@ function MensuralSignature(){
 				el.setAttributeNS(null, "orient", "reversed");
 			}
 		} else if("oOøØ".indexOf(this.signature[0])>=0){
-			el.setAttributeNS(null, "symbol", "O");
+			el.setAttributeNS(null, "sign", "O");
 			el.setAttributeNS(null, "tempus", "3");
 			if("øØ".indexOf(this.signature[0])>=0) {
 				el.setAttributeNS(null, "dot", "true");
@@ -2733,7 +2740,8 @@ function ProportionSign(){
 		parent.appendChild(el);
 		el.setAttributeNS(null, 'num', this.sign);
 		console.log("--", this.proportionChangesTo);
-		el.setAttributeNS(null, 'multiplier', this.proportionChangesTo);
+		// multiplier is not schema conform
+    //el.setAttributeNS(null, 'multiplier', this.proportionChangesTo);
 		addUUIDs(this, el, curDoc);
 		this.MEIObj = el;
 	}
@@ -2825,8 +2833,9 @@ function StackedProportionSigns(){
 		var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "proport");
 		parent.appendChild(el);
 		if(this.signs[0] && this.signs[0].objType==='ProportionSign') el.setAttributeNS(null, 'num', this.signs[0].sign);
-		if(this.signs[1] && this.signs[1].objType==='ProportionsSign') el.setAttributeNS(null, 'numbase', this.signs[1].sign);
-		el.setAttributeNS(null, 'multiplier', this.proportionChangesTo);		
+		if(this.signs[1] && this.signs[1].objType==='ProportionSign') el.setAttributeNS(null, 'numbase', this.signs[1].sign);
+		// multiplier is not schema conform
+    //el.setAttributeNS(null, 'multiplier', this.proportionChangesTo);		
 		addUUIDs(this, el, curDoc);
 		this.MEIObj = el;
 	}
@@ -3936,17 +3945,32 @@ function TextUnderlay(){
     if(!parent) parent = doc.currentParent;
 		if(lyricParent){
 			var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "verse");
+      var elSyl = doc.createElementNS("http://www.music-encoding.org/ns/mei", "syl");
 			addUUIDs(this, el, curDoc);
-			parent.appendChild(el);
+      parent.appendChild(el);
+      el.appendChild(elSyl);
 			this.MEIObj = el;
-			el.appendChild(doc.createTextNode(this.justGiveMeText()));
+      // put syl inside verse to be schema conform
+			elSyl.appendChild(doc.createTextNode(this.justGiveMeText()));
+      // question: what to do with multiple lines??? (hope this never happens)
 			return el;
 		} else {
-			var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "dir");
+      var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "dir");
 			addUUIDs(this, el, curDoc);
-			parent.appendChild(el);
+      // append dir only if there is any text to contain
+      if (this.justGiveMeText().length > 0) 
+      {
+        parent.appendChild(el);
+      }
 			this.MEIObj = el;
-			el.appendChild(doc.createTextNode(this.justGiveMeText()));
+      // dir needs @startid, get uuid from previous element
+      if(el.previousSibling) {
+        el.setAttributeNS(null, 'startid', '#' + el.previousSibling.getAttribute('xml:id'))
+      }
+      else if (el.parentNode && el.parentNode.localName != 'layer') {
+        el.setAttributeNS(null, 'startid', '#' + el.parentNode.getAttribute('xml:id'))
+      }
+      el.appendChild(doc.createTextNode(this.justGiveMeText()));
 			if(this.type==="label" && typeof(this.components[0])=="string"
 				 && this.components[0].toLowerCase()=="crescit in duplum"){
 				var el2 = doc.createElementNS("http://www.music-encoding.org/ns/mei", "proport");

@@ -222,9 +222,16 @@ function makeTEITable(doc, parent){
  */
 function MEIDoc(title){
 	this.doc = document.implementation.createDocument("http://www.music-encoding.org/ns/mei", "", null);
-	this.tree = this.doc.createElementNS("http://www.music-encoding.org/ns/mei","MEI");
+	this.tree = this.doc.createElementNS("http://www.music-encoding.org/ns/mei","mei");
 	this.doc.appendChild(this.tree);
 	this.tree.setAttribute("meiversion", "3.0.0");
+
+  // create PIs to atuomatically link the schema
+  piRNG = document.createProcessingInstruction('xml-model', 'href="https://music-encoding.org/schema/3.0.0/mei-all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"')
+  piSchematron = document.createProcessingInstruction('xml-model', 'href="https://music-encoding.org/schema/3.0.0/mei-all.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"')
+  this.doc.insertBefore(piRNG, this.tree);
+  this.doc.insertBefore(piSchematron, this.tree);
+
 	this.head = this.doc.createElementNS("http://www.music-encoding.org/ns/mei", "meiHead");
 	var titleel = this.doc.createElementNS("http://www.music-encoding.org/ns/mei", "title");
 	if(title){
@@ -233,7 +240,7 @@ function MEIDoc(title){
 		titleel.appendChild(t);
 	}
 	var titlestmt = this.doc.createElementNS("http://www.music-encoding.org/ns/mei", "titleStmt");
-	var filedesc = this.doc.createElementNS("http://www.music-encoding.org/ns/mei", "fieldesc");
+	var filedesc = this.doc.createElementNS("http://www.music-encoding.org/ns/mei", "fileDesc");
 	titlestmt.appendChild(titleel);
 	this.head.appendChild(filedesc);
 	filedesc.appendChild(titlestmt);
@@ -242,7 +249,11 @@ function MEIDoc(title){
 	filedesc.appendChild(pubstmt);
 	this.serialize = function(){
     var serializer = new XMLSerializer();
-    return serializer.serializeToString(this.doc);
+    //somehow, the xml declaration went missing 
+    // I don't find any proper solution to this, let's be hacky (and feel bad about it)
+    var xmlSting =serializer.serializeToString(this.doc);
+    xmlSting = '<?xml version="1.0" encoding="UTF-8"?>\n' + xmlSting;
+    return xmlSting;
   };
   this.blobify = function(){
     var content = [this.serialize()];

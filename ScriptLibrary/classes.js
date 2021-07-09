@@ -2410,8 +2410,16 @@ function LongRest() {
   this.toMEI = function(doc, parent){
     if(!parent) parent = doc.currentParent;
     var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "rest");
-    el.setAttribute("dur", "longa");
-		el.setAttribute("quality", this.end-this.start==2 ? "i" : "p");
+    //el.setAttribute("dur", "longa");
+		//el.setAttribute("quality", this.end-this.start==2 ? "i" : "p");
+    if(this.end-this.start==2)
+    {
+      el.setAttribute("dur", "2B");
+    }
+    else
+    {
+      el.setAttribute("dur", "3B");
+    }
 		addUUIDs(this, el, curDoc);
     if(this.dot) this.dot.toTEI(doc, el);
     // FIXME: How does position work?
@@ -2486,15 +2494,32 @@ function MaxRest() {
   };
   this.toMEI = function(doc, parent){
     if(!parent) parent = doc.currentParent;
-    var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "rest");
-    el.setAttribute("dur", "maxima");
-		el.setAttribute("longIsPerfect", this.end-this.start==3 ? "true" : "false");
-		el.setAttribute("maximaIsPerfect", this.multiple==3 ? "true" : "false");
-		addUUIDs(this, el, curDoc);
-    MEIAddPosition(this, el);
-    parent.appendChild(el);
-    if(this.dot) this.dot.toMEI(doc, parent);
-    this.MEIObj = el;
+    var rests = [];
+    for(let i = 1; i<=this.multiple;i++)
+    {
+      var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "rest");
+      if(this.end-this.start==2)
+      {
+        el.setAttribute("dur", "2B");
+      }
+      else
+      {
+        el.setAttribute("dur", "3B");
+      }
+      if(i===1)
+      {
+        addUUIDs(this, el, curDoc);
+      }
+      else
+      {
+        el.setAttribute("xml:id", "ID"+uuid());
+      }
+      MEIAddPosition(this, el);
+      parent.appendChild(el);
+      if(this.dot) this.dot.toMEI(doc, parent);
+      this.MEIObj = el;
+    }
+    
     return el;
   };
   this.draw = function(){

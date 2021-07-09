@@ -846,23 +846,23 @@ function MusicExample(){
           var music = doc.createElementNS("http://www.music-encoding.org/ns/mei", "music");
           var body =  doc.createElementNS("http://www.music-encoding.org/ns/mei", "body");
           var mdiv = doc.createElementNS("http://www.music-encoding.org/ns/mei", "mdiv");
-      var mscore = doc.createElementNS("http://www.music-encoding.org/ns/mei", "score");
-      var msection = doc.createElementNS("http://www.music-encoding.org/ns/mei", "section");
+          var mscore = doc.createElementNS("http://www.music-encoding.org/ns/mei", "score");
+          var msection = doc.createElementNS("http://www.music-encoding.org/ns/mei", "section");
           var mscoredef = doc.createElementNS("http://www.music-encoding.org/ns/mei", "scoreDef");
           var staffn = 1;
           this.done = [];
           docObj.tree.appendChild(music);
           music.appendChild(body);
           body.appendChild(mdiv);
-      mdiv.appendChild(mscore);
+          mdiv.appendChild(mscore);
           mscore.appendChild(mscoredef);
           var msectionIsNew = true;
-  //		mscore.appendChild(msection);
-  //		msection.appendChild(mstaff);
-  //		mstaff.appendChild(mlayer);
-      currentExample = this;
-      if(this.parameters && this.parameters.toMEI) {this.parameters.toMEI(doc, msection);}
-      this.appendStaffDefs(doc, mscoredef);
+    //		mscore.appendChild(msection);
+    //		msection.appendChild(mstaff);
+    //		mstaff.appendChild(mlayer);
+          currentExample = this;
+          if(this.parameters && this.parameters.toMEI) {this.parameters.toMEI(doc, msection);}
+          this.appendStaffDefs(doc, mscoredef);
           var started = false;
           var extras = [];
           var inExtra = false;
@@ -872,10 +872,11 @@ function MusicExample(){
           var parti=0;
           var sic = false;
           var n=0;
-          var mstaff = false;
+          var mstaff = doc.createElementNS("http://www.music-encoding.org/ns/mei", "staff");
+          // If there is no part, there won't be any output without this [AP 07/21]
           // I don't know why this isn't happening later, but adding this unbreaks things [DL 05/20]
           var mlayer = doc.createElementNS("http://www.music-encoding.org/ns/mei", "layer");
-      // more
+          // more
           for(var i=0; i<this.events.length; i++){
               var prevLength = currentPartes.length;
               if(this.events[i].objType==="Part"
@@ -940,7 +941,11 @@ function MusicExample(){
                       msection.appendChild(msubsection);
                       if(mstaff) msubsection.appendChild(mstaff);
                   } else if(!inExtra){
-                      if(mstaff) msection.appendChild(mstaff);
+                    if(mstaff) 
+                    {
+                      msection.appendChild(mstaff);
+                      if(mlayer) mstaff.appendChild(mlayer);
+                    }
                   }
                   msectionIsNew = false;
                   mstaff = false;

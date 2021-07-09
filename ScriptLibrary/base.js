@@ -247,7 +247,7 @@ var editable = false;
  * @summary Set on/off if window is an editor window*/
 var standaloneEditor = false;
 /** @global */
-var MEILinks = (document.location.href.indexOf('beta') >-1 ||
+var MEILinks = (document.location.href.indexOf('github') >-1 ||
                 document.location.href.indexOf('localhost') > -1) ? true : false;
 /** @global */
 var nocache = false;

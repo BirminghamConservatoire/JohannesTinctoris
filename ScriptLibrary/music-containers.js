@@ -873,6 +873,7 @@ function MusicExample(){
           var sic = false;
           var n=0;
           var mstaff = doc.createElementNS("http://www.music-encoding.org/ns/mei", "staff");
+          mstaff.setAttribute('n', 1);
           // If there is no part, there won't be any output without this [AP 07/21]
           // I don't know why this isn't happening later, but adding this unbreaks things [DL 05/20]
           var mlayer = doc.createElementNS("http://www.music-encoding.org/ns/mei", "layer");

@@ -247,7 +247,7 @@ var editable = false;
  * @summary Set on/off if window is an editor window*/
 var standaloneEditor = false;
 /** @global */
-var MEILinks = (document.location.href.indexOf('beta') >-1 ||
+var MEILinks = (document.location.href.indexOf('github') >-1 ||
                 document.location.href.indexOf('localhost') > -1) ? true : false;
 /** @global */
 var nocache = false;
@@ -3850,6 +3850,18 @@ function addUUIDs(event, mei, document){
 	mei.setAttribute("xml:id", ID);
 	if(!document.UUIDs) document.UUIDs = {};
 	document.UUIDs[ID] = {event: event, mei: mei};
+}
+
+/** 
+ * Name space manager function. Takes a prefix and returns the URL for
+ * that name space. In this case, though, pretty much hard-wired.
+ * @param {String} prefix The namespace prefix to retrieve as a URL
+ */
+ function nsResolver(prefix){
+  var ns = {
+    mei: "http://www.music-encoding.org/ns/mei"
+  }
+  return ns[prefix] || null;
 }
 
 

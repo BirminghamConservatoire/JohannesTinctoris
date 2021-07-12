@@ -2410,8 +2410,16 @@ function LongRest() {
   this.toMEI = function(doc, parent){
     if(!parent) parent = doc.currentParent;
     var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "rest");
-    el.setAttribute("dur", "longa");
-		el.setAttribute("quality", this.end-this.start==2 ? "i" : "p");
+    //el.setAttribute("dur", "longa");
+		//el.setAttribute("quality", this.end-this.start==2 ? "i" : "p");
+    if(this.end-this.start==2)
+    {
+      el.setAttribute("dur", "2B");
+    }
+    else
+    {
+      el.setAttribute("dur", "3B");
+    }
 		addUUIDs(this, el, curDoc);
     if(this.dot) this.dot.toTEI(doc, el);
     // FIXME: How does position work?
@@ -2486,15 +2494,32 @@ function MaxRest() {
   };
   this.toMEI = function(doc, parent){
     if(!parent) parent = doc.currentParent;
-    var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "rest");
-    el.setAttribute("dur", "maxima");
-		el.setAttribute("longIsPerfect", this.end-this.start==3 ? "true" : "false");
-		el.setAttribute("maximaIsPerfect", this.multiple==3 ? "true" : "false");
-		addUUIDs(this, el, curDoc);
-    MEIAddPosition(this, el);
-    parent.appendChild(el);
-    if(this.dot) this.dot.toMEI(doc, parent);
-    this.MEIObj = el;
+    var rests = [];
+    for(let i = 1; i<=this.multiple;i++)
+    {
+      var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "rest");
+      if(this.end-this.start==2)
+      {
+        el.setAttribute("dur", "2B");
+      }
+      else
+      {
+        el.setAttribute("dur", "3B");
+      }
+      if(i===1)
+      {
+        addUUIDs(this, el, curDoc);
+      }
+      else
+      {
+        el.setAttribute("xml:id", "ID"+uuid());
+      }
+      MEIAddPosition(this, el);
+      parent.appendChild(el);
+      if(this.dot) this.dot.toMEI(doc, parent);
+      this.MEIObj = el;
+    }
+    
     return el;
   };
   this.draw = function(){
@@ -3960,15 +3985,23 @@ function TextUnderlay(){
       // append dir only if there is any text to contain
       if (this.justGiveMeText().length > 0) 
       {
-        parent.appendChild(el);
+        // since MEI 4, <dir> will be put into staff in mensural notation
+        // we need to make sure, to put <dir> there
+        //parent.afterChild(el);
+        let staff = doc.evaluate("./ancestor::mei:staff", parent, nsResolver, 9).singleNodeValue;
+        staff.appendChild(el);
       }
 			this.MEIObj = el;
-      // dir needs @startid, get uuid from previous element
-      if(el.previousSibling) {
-        el.setAttributeNS(null, 'startid', '#' + el.previousSibling.getAttribute('xml:id'))
+      // dir needs @startid, get uuid from parent element, last element in layer or do a fallback
+      if(parent && parent.localName!=="layer") {
+        el.setAttributeNS(null, 'startid', '#' + parent.getAttribute('xml:id'));
       }
-      else if (el.parentNode && el.parentNode.localName != 'layer') {
-        el.setAttributeNS(null, 'startid', '#' + el.parentNode.getAttribute('xml:id'))
+      else if (parent && parent.localName==='layer' && parent.childNodes.length>0) {
+        el.setAttributeNS(null, 'startid', '#' + parent.childNodes[parent.childNodes.length-1].getAttribute('xml:id'));
+      }
+      else {
+        // this is a nasty fallback to keep the MEI valid even though tstamp in mensural is nonsense
+        el.setAttributeNS(null, 'tstamp', '0');
       }
       el.appendChild(doc.createTextNode(this.justGiveMeText()));
 			if(this.type==="label" && typeof(this.components[0])=="string"

@@ -224,11 +224,11 @@ function MEIDoc(title){
 	this.doc = document.implementation.createDocument("http://www.music-encoding.org/ns/mei", "", null);
 	this.tree = this.doc.createElementNS("http://www.music-encoding.org/ns/mei","mei");
 	this.doc.appendChild(this.tree);
-	this.tree.setAttribute("meiversion", "3.0.0");
+	this.tree.setAttribute("meiversion", "5.0.0-dev");
 
   // create PIs to atuomatically link the schema
-  piRNG = document.createProcessingInstruction('xml-model', 'href="https://music-encoding.org/schema/3.0.0/mei-all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"')
-  piSchematron = document.createProcessingInstruction('xml-model', 'href="https://music-encoding.org/schema/3.0.0/mei-all.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"')
+  piRNG = document.createProcessingInstruction('xml-model', 'href="http://birminghamconservatoire.github.io/JohannesTinctoris/utils/mei-Mensural_dev.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"')
+  piSchematron = document.createProcessingInstruction('xml-model', 'href="http://birminghamconservatoire.github.io/JohannesTinctoris/utils/mei-Mensural_dev.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"')
   this.doc.insertBefore(piRNG, this.tree);
   this.doc.insertBefore(piSchematron, this.tree);
 

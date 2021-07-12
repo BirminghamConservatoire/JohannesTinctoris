@@ -3852,6 +3852,18 @@ function addUUIDs(event, mei, document){
 	document.UUIDs[ID] = {event: event, mei: mei};
 }
 
+/** 
+ * Name space manager function. Takes a prefix and returns the URL for
+ * that name space. In this case, though, pretty much hard-wired.
+ * @param {String} prefix The namespace prefix to retrieve as a URL
+ */
+ function nsResolver(prefix){
+  var ns = {
+    mei: "http://www.music-encoding.org/ns/mei"
+  }
+  return ns[prefix] || null;
+}
+
 
 /** @namespace base/queryHelper 
  * @summary Helper functions to make querying the data structure easier

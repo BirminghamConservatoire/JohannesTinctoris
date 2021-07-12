@@ -3985,15 +3985,23 @@ function TextUnderlay(){
       // append dir only if there is any text to contain
       if (this.justGiveMeText().length > 0) 
       {
-        parent.appendChild(el);
+        // since MEI 4, <dir> will be put into staff in mensural notation
+        // we need to make sure, to put <dir> there
+        //parent.afterChild(el);
+        let staff = doc.evaluate("./ancestor::mei:staff", parent, nsResolver, 9).singleNodeValue;
+        staff.appendChild(el);
       }
 			this.MEIObj = el;
-      // dir needs @startid, get uuid from previous element
-      if(el.previousSibling) {
-        el.setAttributeNS(null, 'startid', '#' + el.previousSibling.getAttribute('xml:id'))
+      // dir needs @startid, get uuid from parent element, last element in layer or do a fallback
+      if(parent && parent.localName!=="layer") {
+        el.setAttributeNS(null, 'startid', '#' + parent.getAttribute('xml:id'));
       }
-      else if (el.parentNode && el.parentNode.localName != 'layer') {
-        el.setAttributeNS(null, 'startid', '#' + el.parentNode.getAttribute('xml:id'))
+      else if (parent && parent.localName==='layer' && parent.childNodes.length>0) {
+        el.setAttributeNS(null, 'startid', '#' + parent.childNodes[parent.childNodes.length-1].getAttribute('xml:id'));
+      }
+      else {
+        // this is a nasty fallback to keep the MEI valid even though tstamp in mensural is nonsense
+        el.setAttributeNS(null, 'tstamp', '0');
       }
       el.appendChild(doc.createTextNode(this.justGiveMeText()));
 			if(this.type==="label" && typeof(this.components[0])=="string"

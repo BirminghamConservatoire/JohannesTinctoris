@@ -1547,9 +1547,13 @@ function Oblique(){
   };
 	this.toMEI = function(doc, parent){
     if(!parent) parent = doc.currentParent;
-		for(var i=0; i<this.members.length; i++){
-			if(this.members[i].toMEI){
-				this.members[i].toMEI(doc, parent);
+    // currently, ObliqueNoteChoice.toMEI() is not implemeted,
+    // just retrieve default reading instead
+    // change defaultRdg back to this.members...
+    var defaultRdg = this.flattenedMembers(false);
+		for(var i=0; i<defaultRdg.length; i++){
+			if(defaultRdg[i].toMEI){
+				defaultRdg[i].toMEI(doc, parent);
 			}
 		}
   }

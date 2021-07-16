@@ -1619,20 +1619,30 @@ function Oblique(){
 		// Not as harmful as it sounds. Support function for this.member –
 		// create a list of all member notes and the variants they apply to.
 		var m = [];
-		for(var i=0; i<this.members.length; i++){
+    for(var i=0; i<this.members.length; i++)
+    {
 			var member = this.members[i];
-			if(member.objType==="ObliqueNote") {
+			if(member.objType==="ObliqueNote") 
+      {
 				m.push(member);
-			} else if (member.objType==="ObliqueNote Choice"){
-				for(var j=0; j<member.content.length; j++){
+			} 
+      else if (member.objType==="ObliqueNote Choice")
+      {
+				for(var j=0; j<member.content.length; j++)
+        {
 					var reading = member.content[j];
-					if(reading.content && (!variant || reading.applies(variant))){
-						for(var k=0; k<reading.content.length; k++){
-							if(reading.content[k].objType==="ObliqueNote" || reading.content[k].objType==="Note"){
+
+          if(reading.content && (!variant || reading.applies(variant)))
+          {
+						for(var k=0; k<reading.content.length; k++)
+            {
+              if(reading.content[k].objType==="ObliqueNote" || reading.content[k].objType==="Note")
+              {
 								m.push(reading.content[k]);
 							}
 						}
 					}
+          if(!variant) break;
 				}
 			}
 		}
@@ -1678,85 +1688,58 @@ function Oblique(){
     m1.startX = this.startX + oWidth(m0.staffPos, m1.staffPos)/1.8;
     // Draw oblique bit
     if(!(m0&&m1)) return false;
-		if(m0.choice){
-			if(m1.choice){
-        if(variant || !showvariants){
-          m0.choice.drawVar(variant);
-          m1.choice.drawVar(variant);
-        } else {
-          var click = m0.choice.drawVar(false);
-          click.id = "gii";
-          click.style.fill = "#060";
-          var tempSVG = SVG;
-          if(!variant) addAnnotation(click, this.members[0], "Oblique MusicalChoice");
-          SVG = tempSVG;
-          click = m1.draw(m0);
-          click.id = "wii";
-          click.style.fill = "#060";
-          if(!variant) addAnnotation(click, this.members[1], "Oblique MusicalChoice");
-          SVG = tempSVG;
-        }
-			} else {
-        if(variant){
-          m0.drawVar(variant);
-					m1.drawVar(variant);
-        } else {
-          m0.draw();
-					m1.draw();
-        }
-			}
-		} else {
-      if(variant){
+    if(m0.choice)
+    {
+      if(variant || !showvariants)
+      {
+        m0.choice.drawVar(variant);
+      }
+      else
+      {
+        let click = m0.choice.drawVar(false);
+        click.style.fill = "#0B0";
+        let tempSVG = SVG;
+        addAnnotation(click, this.members[0], "Oblique MusicalChoice");
+        SVG = tempSVG;
+      }
+    }
+    else
+    {
+      if(variant)
+      {
         m0.drawVar(variant);
-        m1.drawVar(variant);          
-      } else{
+      }
+      else
+      {
         m0.draw();
+      }
+    }
+    if(m1.choice)
+    {
+      if(variant || !showvariants)
+      {
+        m1.choice.drawVar(variant);
+      }
+      else
+      {
+        let click = m1.choice.drawVar(false);
+        click.style.fill = "#0B0";
+        let tempSVG = SVG;
+        addAnnotation(click, this.members[1], "Oblique MusicalChoice");
+        SVG = tempSVG;
+      }
+    }
+    else
+    {
+      if(variant)
+      {
+        m1.drawVar(variant);
+      }
+      else
+      {
         m1.draw();
       }
-		}
-		/*
-    if(this.members[0].objType == "ObliqueNote Choice"){
-      if(this.members[0].content[0].content.length == 1){
-        if(variant){
-          this.members[0].drawVar(variant);
-        } else {
-          this.members[0].draw();
-        }
-        if(this.members.length == 2){
-          if(variant){
-            this.members[1].drawVar(variant);
-          } else {
-            this.members[1].draw();
-          }
-        }
-      } else {
-        // The Choice is the full Oblique
-        if(variant || !showvariants){
-          m0.drawVar(variant);
-          m1.drawVar(variant);
-        } else {
-          var click = m0.drawVar(false);
-          click.id = "gii";
-          click.style.fill = "#060";
-          var tempSVG = SVG;
-          if(!variant) addAnnotation(click, this.members[0], "Oblique MusicalChoice");
-          SVG = tempSVG;
-          click = m1.draw(m0);
-          click.id = "wii";
-          click.style.fill = "#060";
-          if(!variant) addAnnotation(click, this.members[0], "Oblique MusicalChoice");
-          SVG = tempSVG;
-        }
-      }
-    } else {
-      if(variant){
-        this.members[0].drawVar(variant);
-        this.members[1].drawVar(variant);          
-      } else{
-        this.members[0].draw();
-        this.members[1].draw();
-      }
-    }*/
+    }
     //then left stem
     var ls = this.lstem(variant);
     if(ls){
@@ -6285,6 +6268,7 @@ function ObliqueNoteChoice(){
       obj = rdg.content[i].drawVar(variant);
       //obj.style.fill = "#704";
     }
+    return obj;
 //    return this.applicableReading(variant).sketch(SVG, true);
   };
   // ObliqueNoteChoice

@@ -393,7 +393,15 @@ function Dot(){
     MEIAddPosition(this, el);
     // ? form?
     if(parent.tagName==="note" || this.reallyAugments()) el.setAttribute("form", "aug");
-    parent.appendChild(el);
+    // dot as a child of note or rest is not allowed in MEI mensural
+    if (parent.tagName==="note" || parent.tagName==="rest")
+    {
+      parent.after(el)
+    }
+    else
+    {
+      parent.appendChild(el);
+    }
     this.MEIObj = el;
     return el;
   };

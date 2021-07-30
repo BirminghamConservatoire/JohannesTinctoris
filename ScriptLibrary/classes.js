@@ -950,7 +950,6 @@ function LigatureNote(note){
     // FIXME: SUP?
     el.setAttribute("dur", rhythms[this.rhythm]);
 		addUUIDs(this, el, curDoc);
-    if(this.dot) this.dot.toMEI(doc, el);
     MEIAddPosition(this, el);
     if((voidRule(this) && currentSubType==="full") 
        || (fullRule(this) && currentSubType==="void")){
@@ -958,6 +957,7 @@ function LigatureNote(note){
     }
 		this.MEIObj = el;
     parent.appendChild(el);
+    if(this.dot) this.dot.toMEI(doc, el);
   };
   // Ligature Note
   /** draw variant

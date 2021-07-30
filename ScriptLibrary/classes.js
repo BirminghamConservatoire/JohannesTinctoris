@@ -634,7 +634,8 @@ function Fermata(){
   /** Writes fermata as MEI element */
   this.toMEI = function(doc, parent){
     if(!parent) parent = doc.currentParent;
-    var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "fermata");
+    // Fermata element is not allowed in MEI Mensural, only @fermata
+    /*var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "fermata");
 		addUUIDs(this, el, curDoc);
     MEIAddPosition(this, el);
     if(this.lengthens && this.lengthens.MEIObj 
@@ -642,7 +643,18 @@ function Fermata(){
       el.setAttribute("startid", this.lengthens.MEIObj.getAttribute("xml:id"));
     }
     parent.appendChild(el);
-    return el;
+    return el;*/
+    if(this.lengthens && this.lengthens.MEIObj)
+    {
+      if(this.flipped)
+      {
+        this.lengthens.MEIObj.setAttribute("fermata", "below");
+      }
+      else
+      {
+        this.lengthens.MEIObj.setAttribute("fermata", "above");
+      }
+    }
   };
   /** Draws Fermata to SVG */
   this.draw = function(){

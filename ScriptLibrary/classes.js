@@ -134,7 +134,50 @@ function Note(){
        || (fullRule(this) && currentSubType==="void")){
       el.setAttribute("colored", "true");
     }
-    parent.appendChild(el);
+    // sup outside of ligatures is used for divisio. Put notes into chord
+    if(this.sup)
+    {
+      var prevElement = parent.lastElementChild;
+      var chord;
+      // check for previous chord
+      if(prevElement.localName === "chord")
+      {
+        chord = prevElement;
+        chord.appendChild(el);
+      }
+      // or create new chord if note
+      else if(prevElement.localName === "note")
+      {
+        chord = doc.createElementNS("http://www.music-encoding.org/ns/mei", "chord");
+        chord.setAttribute("xml:id", "ID"+uuid());
+        // put previous non-sup note into chord and current note
+        chord.appendChild(prevElement);
+        chord.appendChild(el);
+        parent.appendChild(chord);
+      }
+      else
+      {
+        // unlikely fallback just in case
+        parent.appendChild(el);
+      }
+
+      // check for coloration: this is not semantic coloration if not every note is coloured
+      if(doc.evaluate("count(./*[@colored])<=count(./*)", chord, nsResolver, 3).booleanValue)
+      {
+        let coloredNotes = doc.evaluate("./*[@colored]", chord, nsResolver, 6);
+        
+        for(let i = 0; i < coloredNotes.snapshotLength; i++)
+        {
+          coloredNotes.snapshotItem(i).setAttribute("color", "black");
+          coloredNotes.snapshotItem(i).removeAttribute("colored");
+        }
+      }
+    }
+    else
+    {
+      parent.appendChild(el);
+    }
+    
 		if(this.text) this.text.toMEI(doc, el, this);
     this.MEIObj = el;
     return el;

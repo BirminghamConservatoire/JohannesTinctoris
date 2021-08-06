@@ -168,7 +168,7 @@ function Note(){
         
         for(let i = 0; i < coloredNotes.snapshotLength; i++)
         {
-          coloredNotes.snapshotItem(i).setAttribute("color", "black");
+          coloredNotes.snapshotItem(i).setAttribute("head.fill", "solid");
           coloredNotes.snapshotItem(i).removeAttribute("colored");
         }
       }

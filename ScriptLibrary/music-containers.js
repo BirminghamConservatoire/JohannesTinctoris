@@ -306,17 +306,19 @@ function MusicHolder(text, outdiv){
           var old = document.getElementById('MEILink');
           if(old) old.parentNode.removeChild(old);
           this.UUIDs = {};
-          var MEIcoded = btoa(docObj.serialize());
+          //var MEIcoded = btoa(docObj.serialize());
+          var MEIcoded = docObj.blobify();
           this.example.MEIcoded = MEIcoded;
-          var anchor = DOMAnchor('MEI', 'MEILink', 'MEI', "data:application/xml;base64,"+MEIcoded);
-          var anchor2 = DOMAnchor('MEI2', 'MEILink', 'verovio', 'viewer.html?mei='+encodeURI(MEIcoded));
+          var anchor = DOMAnchor('MEI', 'MEILink', 'MEI', URL.createObjectURL(MEIcoded));
+          var anchor2 = DOMAnchor('MEI2', 'MEILink', 'download MEI', URL.createObjectURL(MEIcoded));
           this.example.MEILink = anchor;
-          this.example.VerovioLink = anchor2;
-          anchor.setAttribute('download', 'editor.mei');
-          anchor2.setAttribute('target', 'viewer');
+          //this.example.VerovioLink = anchor2;
+          anchor2.setAttribute('download', 'editor.mei');
+          //anchor2.setAttribute('target', 'viewer');
+          anchor.setAttribute('target', '_blank');
           //document.body.appendChild(anchor);
           this.drawTo.appendChild(anchor);
-          //document.body.appendChild(anchor2); ...this doesn't work anyway right now
+          document.body.appendChild(anchor2);
           return docObj.serialize();
     };
     /** appendStaffDefs */
@@ -1003,10 +1005,9 @@ function MusicExample(){
     /** regenerateMEILinks
       */
       this.regenerateMEILinks = function(){
-          this.MEIcoded = btoa(this.MEI.serialize());
-          this.MEILink.setAttributeNS(null, 'href', "data:application/xml;base64,"
-                                                                                  +this.MEIcoded);
-          this.VerovioLink.setAttributeNS(null, 'href', 'viewer.html?mei='+encodeURI(this.MEIcoded));
+          this.MEIcoded = this.MEI.blobify();
+          this.MEILink.setAttributeNS(null, 'href', URL.createObjectURL(this.MEIcoded));
+          //this.VerovioLink.setAttributeNS(null, 'href', 'viewer.html?mei='+encodeURI(this.MEIcoded));
     };
     /** Deals with the unability of Verovio to do proportions
      */

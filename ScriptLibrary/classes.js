@@ -3032,7 +3032,15 @@ function SolmizationSign(){
   };
 	this.toMEI = function(doc, parent) {
 		if(!parent) parent = doc.currentParent;
-    var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "keyAccid");
+    var el;
+    if(parent.localName==="keySig")
+    {
+      el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "keyAccid");
+    }
+    else
+    {
+      el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "accid");
+    }
 		addUUIDs(this, el, curDoc);
 		parent.appendChild(el);
 		MEIAddPosition(this, el);

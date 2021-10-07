@@ -3766,10 +3766,18 @@ function TEIWitnesses(rdg, el){
 function MEIAddPosition(obj, MEIObj){
   // Adds pitch to MEI element, if available, and otherwise adds staff
   // position
-  if(obj.pitch){
-		var pname = obj.pitch.charAt(0).toLowerCase();
+  // elements with pname & oct: note, keyAccid, custos
+  var logPitch = ["note", "keyAccid", "custos"];
+  // elements with ploc & oloc: accid, dot, rest
+  var visPitch = ["accid", "dot", "rest"];
+  if(obj.pitch && logPitch.indexOf(MEIObj.localName)>=0){
+		let pname = obj.pitch.charAt(0).toLowerCase();
     MEIObj.setAttributeNS(null, "pname", pname);
     MEIObj.setAttributeNS(null, "oct", 1+(Math.floor((notes.indexOf(obj.pitch)+5) / 7)));
+  } else if(obj.pitch && visPitch.indexOf(MEIObj.localName)>=0){ 
+    let pname = obj.pitch.charAt(0).toLowerCase();
+    MEIObj.setAttributeNS(null, "ploc", pname);
+    MEIObj.setAttributeNS(null, "oloc", 1+(Math.floor((notes.indexOf(obj.pitch)+5) / 7)));
   } else if(obj.staffPos){
     MEIObj.setAttribute("loc", obj.staffPos-4);
   }

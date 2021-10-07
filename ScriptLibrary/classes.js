@@ -134,8 +134,9 @@ function Note(){
        || (fullRule(this) && currentSubType==="void")){
       el.setAttribute("colored", "true");
     }
-    // sup outside of ligatures is used for divisio. Put notes into chord
-    if(this.sup)
+    // sup outside of ligatures (within ligatures we have LigatureNote objects) is used for divisio. Put notes into chord
+    // sup can follow as well accidentals, make sure that previous is a note
+    if(this.sup && this.previous.objType==="Note")
     {
       var prevElement = parent.lastElementChild;
       var chord;

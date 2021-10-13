@@ -1,22 +1,43 @@
-<div class="nav">
-    <div class="row">
-          <div class="tabl">
-              <div class="frontpagemenu fiveblock">
-                <ul id="MenuBar1" class="MenuBarHorizontal MenuBarActive">
-          <li><a class="MenuBarItem" id="home">Home</a></li>
-          <li><a class="MenuBarItemSubmenu" href="view.html" id="tinctoris">Tinctoris</a>
-            <ul>
-              <li><a href="view.html?tMasses" id="tMasses">Masses</a></li>
-              <li><a href="#" class="placeholder" id="tMotets">Motets &c.</a></li>
-              <li><a href="#" class="placeholder" id="tSongs">Songs</a></li>
-            </ul>
-          </li>
-          <li><a class="MenuBarItem" href="view.html?dufay" id="dufay">Du Faÿ</a></li>
-          <li><a class="MenuBarItem" href="view.html?busnois" id="busnois">Busnoys</a></li>
-          <li><a class="MenuBarItem" id="about">About</a></li>
-                  </ul>
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg sticky-top">
+  <a class="navbar-brand" href="{{site.url}}">
+      <img src="{{site.url}}/Images/EMT logo abbr.png" width="30" height="30" class="d-inline-block align-top" alt="EMT" loading="lazy">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navToggler" aria-controls="navToggler" aria-expanded="false" aria-label="Menu">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div id="navToggler" class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+          {% for entry in site.data.menu.menu %}
+            {% if entry.url %}
+              {% capture entry_href %}{{entry.url}}{% endcapture %}
+            {% else %}
+              {% capture entry_href %}view.html?item={{entry.id}}{% endcapture %}
+            {% endif %}
+            {% if entry.items %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="{{entry_href}}" id="{{entry.id}}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{entry.label}}
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                {% for subentry in entry.items %}
+                {% if subentry.url %}
+                  {% capture subentry_href %}{{entry.url}}}{% endcapture %}
+                {% else %}
+                  {% capture subentry_href %}view.html?item={{subentry.id}}{% endcapture %}
+                  {% if subentry.file %}
+                    {% capture subentry_href %}{{subentry_href}}&file={{subentry.file}}{% endcapture %}
+                  {% endif %}
+                {% endif %}
+                <a class="dropdown-item" href="{{subentry_href}}">{{subentry.label}}</a>
+                {% endfor %}
               </div>
-        </div>
-      <div class="tabr"></div>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{entry_href}}">{{entry.label}}</a>
+            </li>
+            {% endif %}
+          {% endfor %}
+      </ul>
   </div>
-</div>
+</nav>

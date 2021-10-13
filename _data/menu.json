@@ -1,0 +1,86 @@
+{
+  "menu":
+  [
+    {
+      "id": "home",
+      "label": "Home",
+      "url": "index.html"
+    },
+    {
+      "id": "tinctoris",
+      "label": "Tinctoris",
+      "items":
+      [
+        {
+          "id": "tincMissaLhommeArmee",
+          "label": "Missa L'homme armé",
+          "file": "music/1-M_Lhomme_arme/1a-Kyrie.txt",
+          "items":
+          [
+            {
+              "id": "tincMissaLhommeArmee-Kyrie",
+              "label": "Kyrie",
+              "file": "music/1-M_Lhomme_arme/1a-Kyrie.txt"
+            },
+            {
+              "id": "tincMissaLhommeArmee-Gloria",
+              "label" : "Gloria",
+              "file" : "music/1-M_Lhomme_arme/1b-Gloria.txt"
+            },
+            {
+              "id": "tincMissaLhommeArmee-Credo",
+              "label" : "Credo",
+              "file" : "music/1-M_Lhomme_arme/1c-Credo.txt"
+            },
+            {
+              "id": "tincMissaLhommeArmee-Sanctus",
+              "label" : "Sanctus",
+              "file" : "music/1-M_Lhomme_arme/1d-Sanctus.txt"
+            },
+            {
+              "id": "tincMissaLhommeArmee-Agnus",
+              "label" : "Agnus Dei",
+              "file" : "music/1-M_Lhomme_arme/1e-Agnus.txt"
+            }
+          ]
+        },
+        {   
+          "id": "tincMissaPrimiToni",
+          "label" : "Missa [primi toni]",
+          "file" : "music/2-M_primi_toni/2a-Gloria.txt",
+          "items" : 
+          [
+            {
+              "id": "tincMissaPrimiToni-Gloria",
+              "label" : "Gloria",
+              "file" : "music/2-M_primi_toni/2a-Gloria.txt"
+            },
+            {
+              "id": "tincMissaPrimiToni-Credo",
+              "label" : "Credo",
+              "file" : "music/2-M_primi_toni/2b-Credo.txt"
+            },
+            {
+              "id": "tincMissaPrimiToni-Sanctus",
+              "label" : "Sanctus",
+              "file" : "music/2-M_primi_toni/2c-Sanctus.txt"
+            }
+          ]
+      }
+      ]
+    },
+    {
+      "id": "dufay",
+      "label": "Du Faÿ"
+    },
+    {
+      "id": "busnoys",
+      "label": "Busnoys"
+    },
+    {
+      "id": "about",
+      "label": "About",
+      "url": "index.html"
+    }
+  ]
+}

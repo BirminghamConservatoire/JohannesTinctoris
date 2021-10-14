@@ -114,59 +114,61 @@ function MusicHolder(text, outdiv){
     };
     /** writeHeaders to content */
     this.writeHeaders = function(){
+      var headerdiv = DOMDiv("musicHeader", "musicHeader","");
+      this.drawTo.appendChild(headerdiv);
       if(this.title && showtitle){
-        this.drawTo.appendChild(DOMTextEl("h2", "title", false, this.title));
+        headerdiv.appendChild(DOMTextEl("h2", "title", false, this.title));
       }
       if(this.attribution && showtitle)
       {
-        this.drawTo.appendChild(DOMTextEl("hi", "attribution", false, this.attribution));
+        headerdiv.appendChild(DOMTextEl("hi", "attribution", false, this.attribution));
       }
       if(infoButtons){
         // this.infoButtons();
         this.infoButton();
       }
       if(this.translator){
-        this.drawTo.appendChild(fieldDatumPair("Translator", this.translator));
+        headerdiv.appendChild(fieldDatumPair("Translator", this.translator));
         if(editorDisplay == "hide" || !editorDisplay) $(".info.translator").hide();
       }
       if(this.editor){
-        this.drawTo.appendChild(fieldDatumPair("Editor", this.editor));
+        headerdiv.appendChild(fieldDatumPair("Editor", this.editor));
         if(editorDisplay == "hide" || !editorDisplay) $(".info.editor").hide();
       }
       if(this.entered){
-        this.drawTo.appendChild(fieldDatumPair("Entered by", this.entered));
+        headerdiv.appendChild(fieldDatumPair("Entered by", this.entered));
         if(editorDisplay == "hide" || !editorDisplay) $(".info.enteredby").hide();
       }
       if(this.checked){
-        this.drawTo.appendChild(fieldDatumPair("Checked by", this.checked));
+        headerdiv.appendChild(fieldDatumPair("Checked by", this.checked));
         if(editorDisplay == "hide" || !editorDisplay) $(".info.checkedby").hide();
       }
       if(this.established){
-        this.drawTo.appendChild(fieldDatumPair("Date established", this.established));
+        headerdiv.appendChild(fieldDatumPair("Date established", this.established));
         if(dateDisplay == "hide" || !dateDisplay) $(".info.dateestablished").hide();
       }
       if(this.approved){
-        this.drawTo.appendChild(fieldDatumPair("Approved by", this.approved));
+        headerdiv.appendChild(fieldDatumPair("Approved by", this.approved));
         if(editorDisplay == "hide" || !editorDisplay) $(".info.approvedby").hide();
       }
       if(this.copy){
-        this.drawTo.appendChild(fieldDatumPair("Copy text", this.copy));
+        headerdiv.appendChild(fieldDatumPair("Copy text", this.copy));
         if(copyTextDisplay == "hide" || !copyTextDisplay) $(".info.copytext").hide();
       }
       if(this.source){
-        this.drawTo.appendChild(fieldDatumPair("Source", this.source));
+        headerdiv.appendChild(fieldDatumPair("Source", this.source));
         if(sourceDisplay == "hide" || !sourceDisplay) $(".info.source").hide();
       }
       if(this.script){
-        this.drawTo.appendChild(fieldDatumPair("Script", this.script));
+        headerdiv.appendChild(fieldDatumPair("Script", this.script));
         if(extraInfoDisplay == "hide" || !extraInfoDisplay) $(".info.script").hide();
       }
       if(this.columns){
-        this.drawTo.appendChild(fieldDatumPair("Columns", ""+this.columns));
+        headerdiv.appendChild(fieldDatumPair("Columns", ""+this.columns));
         if(extraInfoDisplay == "hide" || !extraInfoDisplay) $(".info.columns").hide();
       }
       if(this.running){
-        this.drawTo.appendChild(fieldDatumPair("Running", this.running));
+        headerdiv.appendChild(fieldDatumPair("Running", this.running));
         if(extraInfoDisplay == "hide" || !extraInfoDisplay) $(".info.running").hide();
       }
       if(this.sources.length){
@@ -175,7 +177,7 @@ function MusicHolder(text, outdiv){
         for (var i=0; i<this.sources.length; i++){
           div.appendChild(this.sources[i].toHTML());
         }
-        this.drawTo.appendChild(div);
+        headerdiv.appendChild(div);
         if(sourceDisplay == "hide" || !sourceDisplay) $(".info.sources").hide();
       }
     };

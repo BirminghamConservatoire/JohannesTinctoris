@@ -15,7 +15,7 @@
           "id": "tincMissaLhommeArmee",
           "label": "Missa L'homme armé",
           "file": "music/1-M_Lhomme_arme/1a-Kyrie.txt",
-          "items":
+          "parts":
           [
             {
               "id": "tincMissaLhommeArmee-Kyrie",
@@ -48,7 +48,7 @@
           "id": "tincMissaPrimiToni",
           "label" : "Missa [primi toni]",
           "file" : "music/2-M_primi_toni/2a-Gloria.txt",
-          "items" : 
+          "parts" : 
           [
             {
               "id": "tincMissaPrimiToni-Gloria",

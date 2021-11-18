@@ -27,6 +27,7 @@ function fetchMusic(fileUrl)
         .then(function(text) {
             currentFile = text;
             currentMusic = new MusicHolder(text, document.getElementById("content"));
+            setWindowWidth();
             currentMusic.draw();
         });
     }
@@ -102,6 +103,11 @@ function findMenuItem(itemID, itemList)
     return menuItem;
 }
 
+function setWindowWidth()
+{
+    wrapWidth = $(document).width()*0.97;
+}
+
 $(document).ready(function() {
     // Load submenu from uri parameter
     var fileUrl = currentParams.get("file");
@@ -117,7 +123,7 @@ $(document).ready(function() {
     fetchMusic(fileUrl);
 
     $(window).resize(function() {
-        wrapWidth = $(".content").width();
+        setWindowWidth();
         currentMusic.draw();
     })
 });

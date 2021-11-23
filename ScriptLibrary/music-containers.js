@@ -380,11 +380,11 @@ function MusicHolder(text, outdiv){
           state = "adding SVG to drawTo";
           $(this.drawTo).removeClass("nowrap");
           this.drawTo.appendChild(newSVG);
-      newSVG.className += " musicexample dc1";
+          newSVG.className += " musicexample dc1";
           this.example.SVG = newSVG;
           state = "drawing";
           this.example.draw(newSVG, true);
-          console.log(this.toMEI());
+          //console.log(this.toMEI());
     };
     /** header text */
     this.headerText = function(){

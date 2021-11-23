@@ -370,15 +370,15 @@ function MusicHolder(text, outdiv){
       {
         this.drawTo.style.width = (wrapWidth+20)+"px";
       }
-      else
+      /*else
       {
         this.drawTo.style.width = wrapWidth+"px";
-      }
+      }*/
       // writing header info
       this.writeHeaders();
 
       // start drawing music
-      var musicDiv = DOMDiv("music", "music");
+      var musicDiv = DOMDiv("music row row-cols-1", "music");
       this.drawTo.appendChild(musicDiv);
       // split every part of this.example into a single music example
       // every part will be rendered into a separate div
@@ -387,7 +387,7 @@ function MusicHolder(text, outdiv){
       $(this.drawTo).removeClass("nowrap");
       for(let partPair of partExamples)
       {
-        let partDiv = DOMDiv("musicPart", partPair[0]);
+        let partDiv = DOMDiv("musicPart col", partPair[0]);
         musicDiv.appendChild(partDiv);
 
         state = "creating new svg – requires width and height";

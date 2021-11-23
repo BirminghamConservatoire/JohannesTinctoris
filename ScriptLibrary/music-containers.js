@@ -355,36 +355,51 @@ function MusicHolder(text, outdiv){
       return sd;
     };
     /** draw */
-      this.draw = function(){
-          state = "Starting to draw";
-          curDoc = this;
-          //editable=true;
-          this.footnotes = [];
-          if(!this.forceredraw && this.out.childNodes.length){
-              return;
-          }
-          state = "emptying drawTo (.draw())";
-          $(this.drawTo).empty();
-          // width of content div depends on editor or viewer
-          if(standaloneEditor)
-          {
-            this.drawTo.style.width = (wrapWidth+20)+"px";
-          }
-          else
-          {
-            this.drawTo.style.width = wrapWidth+"px";
-          }
-          this.writeHeaders();
-          state = "creating new svg – requires width and height";
-          var newSVG = svg(this.example.width(), this.example.height());
-          state = "adding SVG to drawTo";
-          $(this.drawTo).removeClass("nowrap");
-          this.drawTo.appendChild(newSVG);
-          newSVG.className += " musicexample dc1";
-          this.example.SVG = newSVG;
-          state = "drawing";
-          this.example.draw(newSVG, true);
-          //console.log(this.toMEI());
+    this.draw = function(){
+      state = "Starting to draw";
+      curDoc = this;
+      //editable=true;
+      this.footnotes = [];
+      if(!this.forceredraw && this.out.childNodes.length){
+          return;
+      }
+      state = "emptying drawTo (.draw())";
+      $(this.drawTo).empty();
+      // width of content div depends on editor or viewer
+      if(standaloneEditor)
+      {
+        this.drawTo.style.width = (wrapWidth+20)+"px";
+      }
+      else
+      {
+        this.drawTo.style.width = wrapWidth+"px";
+      }
+      // writing header info
+      this.writeHeaders();
+
+      // start drawing music
+      var musicDiv = DOMDiv("music", "music");
+      this.drawTo.appendChild(musicDiv);
+      // split every part of this.example into a single music example
+      // every part will be rendered into a separate div
+      // if partwise MEI export is needed, make partExamples a property of MusicHolder
+      var partExamples = this.splitParts();
+      $(this.drawTo).removeClass("nowrap");
+      for(let partPair of partExamples)
+      {
+        let partDiv = DOMDiv("musicPart", partPair[0]);
+        musicDiv.appendChild(partDiv);
+
+        state = "creating new svg – requires width and height";
+        var partSVG = svg(partPair[1].width(), partPair[1].height());
+        state = "adding SVG to drawTo";
+        partDiv.appendChild(partSVG);
+        partSVG.className += " musicexample dc1";
+        partPair[1].SVG = partSVG;
+        state = "drawing";
+        partPair[1].draw(partSVG, true);
+      }
+      //console.log(this.toMEI());
     };
     /** header text */
     this.headerText = function(){
@@ -418,11 +433,50 @@ function MusicHolder(text, outdiv){
       }
       return text;
     };
-      this.toText = function(){
-          var text = "";
-          text += this.headerText();
-          return text + this.example.toText();
-      };
+    this.toText = function(){
+        var text = "";
+        text += this.headerText();
+        return text + this.example.toText();
+    };
+    /** splits MusicHolder.example into a single example per part to render it in single divs */
+    this.splitParts = function(){
+      var exampleParts = [];
+      var partCounter = 0;
+      var fullExampleCode = this.example.code;
+      var pieceEnd = fullExampleCode.indexOf(">")+1;
+      var pieceString = fullExampleCode.substring(0,pieceEnd);
+      let partNames = [];
+      // MusicExamples need to be parsed properly to work
+      // Splitting a MusicExample into its parts needs to be stupid string manipulation...
+      for(let i = 0; i < this.example.parts.length; i=i+2)
+      {
+        let part = this.example.parts[i];
+        partCounter++;
+        let partStart = fullExampleCode.indexOf("<part: ");
+        let partEnd = fullExampleCode.indexOf("</part>")+7;
+        let partString = pieceString + fullExampleCode.substring(partStart,partEnd);
+        string = partString;
+        let partExample;
+        try{
+          partExample = new MusicExample();
+        } catch(x){
+            console.log(x.stack);
+            console.log("error parsing example");
+            return false;
+        }
+
+        // partName will become the div id, try to make it unique
+        // Something like Tenor2 is not elaborate but will hopefully work for all realistic cases
+        let partName = partNames.indexOf(part.defaultName()) >= 0 ? 
+                      part.defaultName() + "2" : part.defaultName();
+        partNames.push(partName);
+        exampleParts.push([partName, partExample]);
+        fullExampleCode = pieceString + fullExampleCode.slice(partEnd+8);
+        console.log("sliced part no. " + partCounter);
+      }
+
+      return exampleParts;
+    };
       this.parse();
   }
 // end of MusicHolder

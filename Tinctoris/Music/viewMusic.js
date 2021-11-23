@@ -115,7 +115,7 @@ $(document).ready(function() {
 
     var currentMenuItem = findMenuItem(currentItemID, menu);
 
-    if(currentMenuItem["parts"])
+    if(currentMenuItem && currentMenuItem["parts"])
     {
         fillSubMenu(currentMenuItem, currentItemID);
     }

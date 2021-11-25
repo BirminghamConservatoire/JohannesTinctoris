@@ -312,7 +312,7 @@ function MusicHolder(text, outdiv){
           var MEIcoded = docObj.blobify();
           this.example.MEIcoded = MEIcoded;
           var anchor = DOMAnchor('MEI', 'MEILink', 'MEI', URL.createObjectURL(MEIcoded));
-          var anchor2 = DOMAnchor('MEI2', 'MEILink', 'download MEI', URL.createObjectURL(MEIcoded));
+          var anchor2 = DOMAnchor('MEI', 'MEIdownload', 'download MEI', URL.createObjectURL(MEIcoded));
           this.example.MEILink = anchor;
           //this.example.VerovioLink = anchor2;
           anchor2.setAttribute('download', 'editor.mei');
@@ -399,7 +399,8 @@ function MusicHolder(text, outdiv){
         state = "drawing";
         partPair[1].draw(partSVG, true);
       }
-      //console.log(this.toMEI());
+      // I don't know why, but without putting it into console.log(), no MEI will be created...
+      console.log(this.toMEI());
     };
     /** header text */
     this.headerText = function(){

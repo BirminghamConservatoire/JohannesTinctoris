@@ -520,6 +520,10 @@ p.colend.columnPara {
   padding: 0px;
 }
 
+.musicPart {
+  overflow-y:auto;
+}
+
 .pag {
   font-size: 130%;
 }

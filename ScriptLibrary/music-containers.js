@@ -355,7 +355,7 @@ function MusicHolder(text, outdiv){
       return sd;
     };
     /** draw */
-    this.draw = function(){
+    this.draw = function(rowCols, choirbook, divHeight){
       state = "Starting to draw";
       curDoc = this;
       //editable=true;
@@ -378,16 +378,21 @@ function MusicHolder(text, outdiv){
       this.writeHeaders();
 
       // start drawing music
-      var musicDiv = DOMDiv("music row row-cols-1", "music");
+      var musicDiv = DOMDiv("music row row-cols-" + rowCols, "music");
       this.drawTo.appendChild(musicDiv);
       // split every part of this.example into a single music example
       // every part will be rendered into a separate div
       // if partwise MEI export is needed, make partExamples a property of MusicHolder
       var partExamples = this.splitParts();
+      // choirbook toggles whether splitting at <pars> should happen, pagination in choir book format?
       $(this.drawTo).removeClass("nowrap");
       for(let partPair of partExamples)
       {
-        let partDiv = DOMDiv("musicPart col", partPair[0]);
+        let partDiv = DOMDiv("musicPart col mb-3", partPair[0]);
+        if(choirbook)
+        {
+          partDiv.style.height = divHeight+"px";
+        }
         musicDiv.appendChild(partDiv);
 
         state = "creating new svg – requires width and height";

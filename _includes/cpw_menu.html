@@ -39,5 +39,11 @@
             {% endif %}
           {% endfor %}
       </ul>
+      {% if page.name == "view.html" %}
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button id="layoutBook" type="button" class="btn btn-light"><i class="bi bi-book"></i></button>
+          <button id="layoutParts" type="button" class="btn btn-light"><i class="bi bi-file"></i></button>
+        </div>
+      {% endif %}
   </div>
 </nav>

@@ -27,8 +27,7 @@ function fetchMusic(fileUrl)
         .then(function(text) {
             currentFile = text;
             currentMusic = new MusicHolder(text, document.getElementById("content"));
-            setWindowWidth();
-            currentMusic.draw();
+            setWindowAndDraw();
         });
     }
 }
@@ -103,15 +102,42 @@ function findMenuItem(itemID, itemList)
     return menuItem;
 }
 
-function setWindowWidth()
+function setWindowAndDraw()
 {
-    wrapWidth = $(document).width()*0.97;
+    let drawWidth = $(document).width()*0.97;
+    let rowCols = 1;
+    let choirbook = false;
+    let divHeight;
+    if(currentParams.get("layout") == "book")
+    {
+        rowCols = 2;
+        wrapWidth = drawWidth/2;
+        choirbook = true;
+        divHeight = $(window).height()/2.7;
+    }
+    else
+    {
+        wrapWidth = drawWidth;
+    }
+
+    currentMusic.draw(rowCols, choirbook, divHeight);
+}
+
+function setLayout(layout)
+{
+    currentParams.set("layout",layout);
+    window.history.replaceState({}, '', baseUrl + '?' + currentParams);
 }
 
 $(document).ready(function() {
     // Load submenu from uri parameter
     var fileUrl = currentParams.get("file");
     var currentItemID = currentParams.get("item");
+
+    /*if(!currentLayout)
+    {
+        setLayout("parts");
+    }*/
 
     var currentMenuItem = findMenuItem(currentItemID, menu);
 
@@ -122,8 +148,17 @@ $(document).ready(function() {
 
     fetchMusic(fileUrl);
 
+    $("#layoutBook").click(function(){
+        setLayout("book");
+        setWindowAndDraw();
+    });
+
+    $("#layoutParts").click(function(){
+        setLayout("parts");
+        setWindowAndDraw();
+    });
+
     $(window).resize(function() {
-        setWindowWidth();
-        currentMusic.draw();
+        setWindowAndDraw();
     })
 });

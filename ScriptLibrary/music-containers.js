@@ -312,15 +312,15 @@ function MusicHolder(text, outdiv){
           var MEIcoded = docObj.blobify();
           this.example.MEIcoded = MEIcoded;
           var anchor = DOMAnchor('MEI', 'MEILink', 'MEI', URL.createObjectURL(MEIcoded));
-          var anchor2 = DOMAnchor('MEI', 'MEIdownload', 'download MEI', URL.createObjectURL(MEIcoded));
+          var anchor2 = DOMAnchor('MEI', 'MEIdownload', ' download', URL.createObjectURL(MEIcoded));
           this.example.MEILink = anchor;
           //this.example.VerovioLink = anchor2;
           anchor2.setAttribute('download', 'editor.mei');
           //anchor2.setAttribute('target', 'viewer');
           anchor.setAttribute('target', '_blank');
           //document.body.appendChild(anchor);
-          this.drawTo.appendChild(anchor);
-          document.body.appendChild(anchor2);
+          if(!document.getElementById("MEILink")) document.body.appendChild(anchor);
+          if(!document.getElementById("MEIdownload")) document.body.appendChild(anchor2);
           return docObj.serialize();
     };
     /** appendStaffDefs */

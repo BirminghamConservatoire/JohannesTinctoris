@@ -115,6 +115,7 @@ function MusicHolder(text, outdiv){
     /** writeHeaders to content */
     this.writeHeaders = function(){
       var headerdiv = DOMDiv("musicHeader", "musicHeader","");
+      var detailDiv = DOMDiv("infoDetails", "infoDetails","");
       this.drawTo.appendChild(headerdiv);
       if(this.title && showtitle){
         headerdiv.appendChild(DOMTextEl("h2", "title", false, this.title));
@@ -127,48 +128,61 @@ function MusicHolder(text, outdiv){
         // this.infoButtons();
         this.infoButton();
       }
+      if(cpw)
+      {
+        $(detailDiv).addClass("collapse");
+        var dummySpan = DOMSpan("d-block", "infoSpan", "");
+        var infoButton = DOMAnchor("btn btn-outline-dark btn-sm", "infoButton", "", "#infoDetails");
+        $(infoButton).attr({
+          "data-toggle": "collapse"
+        });
+        $(infoButton).append("<i class='bi bi-info-lg'></i>");
+        dummySpan.appendChild(infoButton);
+        headerdiv.appendChild(dummySpan);
+      }
+      headerdiv.appendChild(detailDiv);
       if(this.translator){
-        headerdiv.appendChild(fieldDatumPair("Translator", this.translator));
+        detailDiv.appendChild(fieldDatumPair("Translator", this.translator));
         if(editorDisplay == "hide" || !editorDisplay) $(".info.translator").hide();
       }
       if(this.editor){
-        headerdiv.appendChild(fieldDatumPair("Editor", this.editor));
+        detailDiv.appendChild(fieldDatumPair("Editor", this.editor));
         if(editorDisplay == "hide" || !editorDisplay) $(".info.editor").hide();
       }
       if(this.entered){
-        headerdiv.appendChild(fieldDatumPair("Entered by", this.entered));
+        detailDiv.appendChild(fieldDatumPair("Entered by", this.entered));
         if(editorDisplay == "hide" || !editorDisplay) $(".info.enteredby").hide();
       }
       if(this.checked){
-        headerdiv.appendChild(fieldDatumPair("Checked by", this.checked));
+        detailDiv.appendChild(fieldDatumPair("Checked by", this.checked));
         if(editorDisplay == "hide" || !editorDisplay) $(".info.checkedby").hide();
       }
       if(this.established){
-        headerdiv.appendChild(fieldDatumPair("Date established", this.established));
+        detailDiv.appendChild(fieldDatumPair("Date established", this.established));
         if(dateDisplay == "hide" || !dateDisplay) $(".info.dateestablished").hide();
       }
       if(this.approved){
-        headerdiv.appendChild(fieldDatumPair("Approved by", this.approved));
+        detailDiv.appendChild(fieldDatumPair("Approved by", this.approved));
         if(editorDisplay == "hide" || !editorDisplay) $(".info.approvedby").hide();
       }
       if(this.copy){
-        headerdiv.appendChild(fieldDatumPair("Copy text", this.copy));
+        detailDiv.appendChild(fieldDatumPair("Copy text", this.copy));
         if(copyTextDisplay == "hide" || !copyTextDisplay) $(".info.copytext").hide();
       }
       if(this.source){
-        headerdiv.appendChild(fieldDatumPair("Source", this.source));
+        detailDiv.appendChild(fieldDatumPair("Source", this.source));
         if(sourceDisplay == "hide" || !sourceDisplay) $(".info.source").hide();
       }
       if(this.script){
-        headerdiv.appendChild(fieldDatumPair("Script", this.script));
+        detailDiv.appendChild(fieldDatumPair("Script", this.script));
         if(extraInfoDisplay == "hide" || !extraInfoDisplay) $(".info.script").hide();
       }
       if(this.columns){
-        headerdiv.appendChild(fieldDatumPair("Columns", ""+this.columns));
+        detailDiv.appendChild(fieldDatumPair("Columns", ""+this.columns));
         if(extraInfoDisplay == "hide" || !extraInfoDisplay) $(".info.columns").hide();
       }
       if(this.running){
-        headerdiv.appendChild(fieldDatumPair("Running", this.running));
+        detailDiv.appendChild(fieldDatumPair("Running", this.running));
         if(extraInfoDisplay == "hide" || !extraInfoDisplay) $(".info.running").hide();
       }
       if(this.sources.length){
@@ -177,7 +191,7 @@ function MusicHolder(text, outdiv){
         for (var i=0; i<this.sources.length; i++){
           div.appendChild(this.sources[i].toHTML());
         }
-        headerdiv.appendChild(div);
+        detailDiv.appendChild(div);
         if(sourceDisplay == "hide" || !sourceDisplay) $(".info.sources").hide();
       }
     };

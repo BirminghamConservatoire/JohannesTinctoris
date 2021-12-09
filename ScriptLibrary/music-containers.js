@@ -400,16 +400,30 @@ function MusicHolder(text, outdiv){
       var partExamples = this.splitParts();
       // choirbook toggles whether splitting at <pars> should happen, pagination in choir book format?
       $(this.drawTo).removeClass("nowrap");
-      for(let partPair of partExamples)
+      for(let i=0;i<partExamples.length;i++)
       {
+        let partPair = partExamples[i];
         let partDiv = DOMDiv("musicPart col mb-3", partPair[0]);
-        if(choirbook)
-        {
-          partDiv.style.height = divHeight+"px";
-        }
-        musicDiv.appendChild(partDiv);
+        let partDivID;
 
-        state = "creating new svg – requires width and height";
+        if(partPair[0].includes("2"))
+        {
+          let lastPartDiv = document.getElementById(partExamples[i-1][0]);
+          partDivID = partPair[0] + "1&2";
+          let combinedDiv = DOMDiv("musicPart col mb-3", partDivID);
+          musicDiv.appendChild(combinedDiv);
+          combinedDiv.appendChild(lastPartDiv);
+          combinedDiv.appendChild(partDiv);
+          $(lastPartDiv).removeClass();
+          $(partDiv).removeClass();
+        }
+        else 
+        {
+          musicDiv.appendChild(partDiv);
+          partDivID = partPair[0];
+        }
+        
+        state = "creating new svg – requires width and height";
         var partSVG = svg(partPair[1].width(), partPair[1].height());
         state = "adding SVG to drawTo";
         partDiv.appendChild(partSVG);
@@ -417,6 +431,21 @@ function MusicHolder(text, outdiv){
         partPair[1].SVG = partSVG;
         state = "drawing";
         partPair[1].draw(partSVG, true);
+
+        if(choirbook)
+        {
+          //partDiv.style.height = divHeight+"px";
+          if(partDivID.includes("Tenor"))
+          {
+            let partDiv = document.getElementById(partDivID);
+            $(partDiv).addClass("order-2");
+          }
+          else if(partDivID.includes("Bassus"))
+          {
+            let partDiv = document.getElementById(partDivID);
+            $(partDiv).addClass("order-last");
+          }
+        }
       }
       // I don't know why, but without putting it into console.log(), no MEI will be created...
       console.log(this.toMEI());

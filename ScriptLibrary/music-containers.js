@@ -369,7 +369,7 @@ function MusicHolder(text, outdiv){
       return sd;
     };
     /** draw */
-    this.draw = function(rowCols, choirbook, divHeight){
+    this.draw = function(rowCols, choirbook, pagination){
       state = "Starting to draw";
       curDoc = this;
       //editable=true;
@@ -410,31 +410,56 @@ function MusicHolder(text, outdiv){
         {
           let lastPartDiv = document.getElementById(partExamples[i-1][0]);
           partDivID = partPair[0] + "1&2";
-          let combinedDiv = DOMDiv("musicPart col mb-3", partDivID);
+          let combinedDiv = DOMDiv("musicPanel col mb-3 p-0", partDivID);
           musicDiv.appendChild(combinedDiv);
           combinedDiv.appendChild(lastPartDiv);
           combinedDiv.appendChild(partDiv);
-          $(lastPartDiv).removeClass();
-          $(partDiv).removeClass();
+          $(lastPartDiv).removeClass("musicPanel");
+          //$(partDiv).removeClass("mb-3");
         }
         else 
         {
           musicDiv.appendChild(partDiv);
           partDivID = partPair[0];
+          partDiv.className += " musicPanel";
+        }
+
+        // check for pagination
+        if(pagination===true)
+        {
+          let partPartes = splitPars(partPair[1]);
+
+          for(let parsPair of partPartes)
+          {
+            let parsDiv = DOMDiv("musicPars "+parsPair[0], partDivID + parsPair[0]);
+            partDiv.appendChild(parsDiv);
+
+            state = "creating new svg – requires width and height";
+            var parsSVG = svg(parsPair[1].width(), parsPair[1].height());
+            state = "adding SVG to drawTo";
+            parsDiv.appendChild(parsSVG);
+            parsSVG.className += " musicexample dc1";
+            parsPair[1].SVG = parsSVG;
+            state = "drawing";
+            parsPair[1].draw(parsSVG, true);
+          }
+        }
+        else
+        {
+          state = "creating new svg – requires width and height";
+          var partSVG = svg(partPair[1].width(), partPair[1].height());
+          state = "adding SVG to drawTo";
+          partDiv.appendChild(partSVG);
+          partSVG.className += " musicexample dc1";
+          partPair[1].SVG = partSVG;
+          state = "drawing";
+          partPair[1].draw(partSVG, true);
         }
         
-        state = "creating new svg – requires width and height";
-        var partSVG = svg(partPair[1].width(), partPair[1].height());
-        state = "adding SVG to drawTo";
-        partDiv.appendChild(partSVG);
-        partSVG.className += " musicexample dc1";
-        partPair[1].SVG = partSVG;
-        state = "drawing";
-        partPair[1].draw(partSVG, true);
 
         if(choirbook)
         {
-          //partDiv.style.height = divHeight+"px";
+          // Adjust ordering of the parts in choirbook format
           if(partDivID.includes("Tenor"))
           {
             let partDiv = document.getElementById(partDivID);
@@ -528,6 +553,75 @@ function MusicHolder(text, outdiv){
     };
       this.parse();
   }
+
+  function splitPars(part)
+  {
+    var partParses = [];
+    var parses = part.events.filter(event => event.objType==="Part" && event.type==="pars" && event.closes===false);
+    var parscounter = 1;
+    var fullPartCode = part.code;
+
+    var firstParsStart = fullPartCode.indexOf("<pars")+1;
+    // having the partname in every pars shows it at every page
+    var partString = fullPartCode.substring(0,firstParsStart-1);
+
+    var currentClef;
+    var currentSolm;
+
+    // MusicExamples need to be parsed properly to work
+    // Splitting a MusicExample into its parses needs to be stupid string manipulation...
+    // see MusicExample.splitParts()
+    for(parscounter; parscounter <= parses.length; parscounter++)
+    {
+      let parsStart = fullPartCode.indexOf("<pars");
+      let parsEnd = fullPartCode.indexOf("</pars>")+7;
+      let parsString = fullPartCode.substring(parsStart,parsEnd);
+
+      // we need to take clef and solm from last pars if there is none
+      let lastSolmPos = parsString.lastIndexOf("{solm:");
+      if(lastSolmPos != -1)
+      {
+        currentSolm = parsString.substring(lastSolmPos, parsString.indexOf("}", lastSolmPos)+1);
+      }
+      else
+      {
+        parsString = parsString.slice(0,6) + currentSolm + parsString.slice(6);
+      }
+
+      let lastClefPos = parsString.lastIndexOf("{clef:");  
+      if(lastClefPos != -1)
+      {
+        currentClef = parsString.substring(lastClefPos, parsString.indexOf("}",lastClefPos)+1);
+      }
+      else
+      {
+        parsString = parsString.slice(0,6) + currentClef + parsString.slice(6);
+      }
+
+      // add part tag to have the part name in every pars
+      parsString = partString + parsString;
+
+      // add part closing tag here to ensure proper parsing without disturbing string slicing
+      string = parsString + "</part>";
+      let parsExample;
+      
+      try{
+        parsExample = new MusicExample();
+      } catch(x){
+          console.log(x.stack);
+          console.log("error parsing example");
+          return false;
+      }
+
+      // parsNumber will become the div id, try to make it unique
+      partParses.push([parscounter, parsExample]);
+      fullPartCode = partString + fullPartCode.slice(parsEnd);
+      console.log("sliced pars no. " + parscounter);
+    }
+
+    return partParses;
+  }
+
 // end of MusicHolder
 //-------------------------------------------------------------------------------//  
 

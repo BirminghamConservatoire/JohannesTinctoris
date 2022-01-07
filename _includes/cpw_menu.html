@@ -25,7 +25,7 @@
                 {% else %}
                   {% capture subentry_href %}view.html?item={{subentry.id}}{% endcapture %}
                   {% if subentry.file %}
-                    {% capture subentry_href %}{{subentry_href}}&file={{subentry.file}}{% endcapture %}
+                    {% capture subentry_href %}{{subentry_href}}{% endcapture %}
                   {% endif %}
                 {% endif %}
                 <a class="dropdown-item" href="{{subentry_href}}">{{subentry.label}}</a>
@@ -40,8 +40,9 @@
           {% endfor %}
       </ul>
       {% if page.name == "view.html" %}
-        <div class="btn-group" role="group" aria-label="Basic example">
+        <div class="btn-group" role="group" aria-label="layout options">
           <button id="layoutBook" type="button" class="btn btn-light"><i class="bi bi-book"></i></button>
+          <button id="layoutPageParts" type="button" class="btn btn-light"><i class="bi bi-view-stacked"></i></button>
           <button id="layoutParts" type="button" class="btn btn-light"><i class="bi bi-file"></i></button>
         </div>
       {% endif %}

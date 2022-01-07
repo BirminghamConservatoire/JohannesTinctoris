@@ -49,7 +49,7 @@ function fillSubMenu(item, activeID)
 
     for(let entry of item["parts"])
     {
-        currentParams.set("file", entry["file"]);
+        //currentParams.set("file", entry["file"]);
         currentParams.set("item", entry["id"]);
         currentUrl.search = currentParams.toString();
         let entryHref = currentUrl.toString();
@@ -216,7 +216,7 @@ function setLayout(layout)
 
 $(document).ready(function() {
     // Load submenu from uri parameter
-    var fileUrl = currentParams.get("file");
+    //var fileUrl = currentParams.get("file");
     var currentItemID = currentParams.get("item");
 
     /*if(!currentLayout)
@@ -225,13 +225,23 @@ $(document).ready(function() {
     }*/
 
     var currentMenuItem = findMenuItem(currentItemID, menu);
+    var fileUrl;
 
-    if(currentMenuItem && currentMenuItem["parts"])
+    if(currentMenuItem)
     {
-        fillSubMenu(currentMenuItem, currentItemID);
+        fileUrl = currentMenuItem["file"]
     }
 
-    fetchMusic(fileUrl);
+    /*if(currentMenuItem && currentMenuItem["parts"])
+    {
+        fillSubMenu(currentMenuItem, currentItemID);
+    }*/
+
+    if(fileUrl)
+    {
+        fillSubMenu(currentMenuItem, currentItemID);
+        fetchMusic(fileUrl);
+    }
 
     $("#layoutBook").click(function(){
         setLayout("book");

@@ -39,7 +39,7 @@ function fetchMusic(fileUrl)
  * @param {Object} item 
  * @param {string} activeID 
  */
-function fillSubMenu(item, activeID)
+function fillSubMenu(item)
 {
     /** 
      * <li class="nav-item">
@@ -47,18 +47,22 @@ function fillSubMenu(item, activeID)
      * </li>
     */
 
-    for(let entry of item["parts"])
+    let menuItem = findSubMenuParent(item.id,menu);
+
+    let linkUrl = new URL(currentUrl.toString());
+    let linkParams = new URLSearchParams(currentParams.toString());
+
+    for(let entry of menuItem["parts"])
     {
-        //currentParams.set("file", entry["file"]);
-        currentParams.set("item", entry["id"]);
-        currentUrl.search = currentParams.toString();
-        let entryHref = currentUrl.toString();
+        linkParams.set("item", entry["id"]);
+        linkUrl.search = linkParams.toString();
+        let entryHref = linkUrl.toString();
         $("#submenu").append("<li class='nav-item'><a id='"
             +entry["id"]+
             "' class='nav-link' href='"
             +entryHref+"'>"
             +entry["label"]+"</a></li>");
-        if(entry["id"]===activeID)
+        if(entry["id"]===item["id"])
         {
             $("#"+entry["id"]).addClass("active");
         }

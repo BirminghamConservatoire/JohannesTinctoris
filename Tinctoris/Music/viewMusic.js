@@ -84,7 +84,41 @@ function findMenuItem(itemID, itemList)
         }
         else if(item["items"]!=null)
         {
-            menuItem = findMenuItem(itemID, item["items"]);
+            let pieceItem = findMenuItem(itemID, item["items"], false);
+            if(pieceItem!=null)
+            {
+                menuItem = pieceItem;
+                break;
+            }
+        }
+        else if(item["parts"]!=null)
+        {
+            let partItem = findMenuItem(itemID, item["parts"], false);
+            if(partItem!=null)
+            {
+                menuItem = partItem;
+                break;
+            }
+        }
+    }
+
+    return menuItem;
+}
+
+function findSubMenuParent(itemID, itemList)
+{
+    var menuItem;
+
+    for(let item of itemList)
+    {
+        if(item["id"]===itemID)
+        {
+            menuItem = item;
+            break;
+        }
+        else if(item["items"]!=null)
+        {
+            menuItem = findSubMenuParent(itemID, item["items"]);
             if(menuItem!=null)
             {
                 break;
@@ -92,7 +126,7 @@ function findMenuItem(itemID, itemList)
         }
         else if(item["parts"]!=null)
         {
-            let partItem = findMenuItem(itemID, item["parts"]);
+            let partItem = findSubMenuParent(itemID, item["parts"]);
             if(partItem!=null)
             {
                 menuItem = item;
@@ -229,17 +263,12 @@ $(document).ready(function() {
 
     if(currentMenuItem)
     {
-        fileUrl = currentMenuItem["file"]
+        fileUrl = currentMenuItem["file"];
+        fillSubMenu(currentMenuItem);
     }
-
-    /*if(currentMenuItem && currentMenuItem["parts"])
-    {
-        fillSubMenu(currentMenuItem, currentItemID);
-    }*/
 
     if(fileUrl)
     {
-        fillSubMenu(currentMenuItem, currentItemID);
         fetchMusic(fileUrl);
     }
 

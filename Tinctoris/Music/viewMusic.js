@@ -201,29 +201,44 @@ function addPagination()
         }
     }
 
-    $("#pageNav").append("<li class='nav-item pageMenu'><a id='pageBack' class='nav-link'>&laquo;</a></li>");
+    $("#pageNav").append("<li class='nav-item pageMenu'><a id='pageBack' href='#' class='nav-link'>&laquo;</a></li>");
     for(let i = 1; i <= maxParsCount; i++)
     {
         /* <!--li class="nav-item pagnination">
             <a class="nav-link active" href="#">1</a>
         </li>-->*/
-        let pageButton = `<li class='nav-item pageMenu'><a  class='nav-link pageNum' id='page${i}'>${i}</a></li>`;
+        let pageButton = `<li class='nav-item pageMenu'><a  class='nav-link pageNum' href='#' id='page${i}'>${i}</a></li>`;
         $("#pageNav").append(pageButton);
     }
-    $("#pageNav").append("<li class='nav-item pageMenu'><a id='pageForward' class='nav-link'>&raquo;</a></li>");
+    $("#pageNav").append("<li class='nav-item pageMenu'><a id='pageForward' href='#' class='nav-link'>&raquo;</a></li>");
 
 
     parsCount = maxParsCount;
+
+    $("#pageBack").click(function(){
+        setPage(parseInt(currentParams.get("page"))-1);
+    });
+    $(".pageNum").click(function(){
+        setPage(parseInt(this.text));
+    });
+    $("#pageForward").click(function(){
+        setPage(parseInt(currentParams.get("page"))+1);
+    });
 }
 
 function setPage(pageNum)
 {
     if(pageNum >= 1 || pageNum <= parsCount)
     {
+        // set URL
         currentParams.set("page",pageNum);
         window.history.replaceState({}, '', baseUrl + '?' + currentParams);
+        // adjust content visibility
         $(".musicPars").prop("hidden", true);
         $("."+pageNum).prop("hidden", false);
+
+        // adjust menu state
+        $(".pageNum").removeClass("active");
         $("#page"+pageNum.toString()).addClass("active");
 
         if(pageNum==1)

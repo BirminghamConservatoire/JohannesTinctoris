@@ -142,7 +142,7 @@ function findSubMenuParent(itemID, itemList)
     return menuItem;
 }
 
-function setWindowAndDraw()
+function setWindowAndDraw(showvars)
 {
     let drawWidth = $(document).width()*0.97;
     let rowCols = 1;
@@ -173,6 +173,7 @@ function setWindowAndDraw()
         $("#pageNavbar").prop("hidden", true);
     }
 
+    currentMusic.showvars = showvars;
     currentMusic.draw(rowCols, choirbook, pagination);
 
     if(pagination === true)
@@ -267,6 +268,12 @@ function setLayout(layout)
     window.history.replaceState({}, '', baseUrl + '?' + currentParams);
 }
 
+function setShowVars(showvars)
+{
+    currentParams.set("showvars",showvars);
+    window.history.replaceState({}, '', baseUrl + '?' + currentParams);
+}
+
 $(document).ready(function() {
     // Load submenu from uri parameter
     //var fileUrl = currentParams.get("file");
@@ -304,6 +311,20 @@ $(document).ready(function() {
     $("#layoutParts").click(function(){
         setLayout("parts");
         setWindowAndDraw();
+    });
+
+    $("#showvariants").click(function(){
+        setWindowAndDraw(true);
+        $("#showvariants").prop("hidden",true);
+        $("#hidevariants").prop("hidden",false);
+        setShowVars(true);
+    });
+
+    $("#hidevariants").click(function(){
+        setWindowAndDraw(false);
+        $("#hidevariants").prop("hidden",true);
+        $("#showvariants").prop("hidden",false);
+        setShowVars(false);
     });
 
     $(window).resize(function() {

@@ -67,10 +67,12 @@ function MusicHolder(text, outdiv){
     this.hands = [];
     /** @property {MusicHolder} */
     this.UUIDs = {};
+    /** @property {MusicHolder} toggle if variants should be displayed */
+    this.showvars = false;
     /** infoButton
      * @summary infoButtons (qv) presents several buttons for different bits of info.
-     */
-      this.infoButton = function(){
+    */
+    this.infoButton = function(){
       // this.infoButtons (qv) presents several buttons for different bits of
       // info. Let's try a less complex approach -- just one button
       var ib = this.drawTo.appendChild(DOMDiv('infoButtons'), false, false);
@@ -391,6 +393,9 @@ function MusicHolder(text, outdiv){
       // writing header info
       this.writeHeaders();
 
+      var oldshowvariants = showvariants;
+      showvariants = this.showvars;
+
       // start drawing music
       var musicDiv = DOMDiv("music row row-cols-" + rowCols, "music");
       this.drawTo.appendChild(musicDiv);
@@ -474,6 +479,7 @@ function MusicHolder(text, outdiv){
       }
       // I don't know why, but without putting it into console.log(), no MEI will be created...
       console.log(this.toMEI());
+      showvariants = oldshowvariants;
     };
     /** header text */
     this.headerText = function(){

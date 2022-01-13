@@ -109,6 +109,13 @@ function findMenuItem(itemID, itemList)
     return menuItem;
 }
 
+/**
+ * For drawing the parts submenu, the parent menu object needs to be retrieved.
+ * Works like @link findMenuItem() but retrieves the parent of a part object.
+ * @param {string} itemID 
+ * @param {Object} itemList 
+ * @returns {Object}
+ */
 function findSubMenuParent(itemID, itemList)
 {
     var menuItem;
@@ -142,7 +149,11 @@ function findSubMenuParent(itemID, itemList)
     return menuItem;
 }
 
-function setWindowAndDraw(showvars)
+/**
+ * Retrieves layout options from URL params and window size.
+ * Adjusts layout and draws music example.
+ */
+function setWindowAndDraw()
 {
     let drawWidth = $(document).width()*0.97;
     let rowCols = 1;
@@ -154,7 +165,6 @@ function setWindowAndDraw(showvars)
         wrapWidth = drawWidth/2;
         choirbook = true;
         pagination = true;
-        $("#pageNavbar").prop("hidden", false);
     }
     else if(currentParams.get("layout") == "pageparts")
     {
@@ -162,7 +172,6 @@ function setWindowAndDraw(showvars)
         pagination = true;
         choirbook = false;
         rowCols = 1;
-        $("#pageNavbar").prop("hidden", false);
     }
     else
     {
@@ -170,10 +179,9 @@ function setWindowAndDraw(showvars)
         pagination = false;
         choirbook = false;
         rowCols = 1;
-        $("#pageNavbar").prop("hidden", true);
     }
 
-    currentMusic.showvars = showvars;
+    currentMusic.showvars = currentParams.get("showvars") === "true" ? true : false;
     currentMusic.draw(rowCols, choirbook, pagination);
 
     if(pagination === true)
@@ -182,10 +190,18 @@ function setWindowAndDraw(showvars)
         let currentPage = currentParams.get("page") != null ? currentParams.get("page") : 1;
         setPage(currentPage);
     }
+    else
+    {
+        removePagination();
+    }
 }
 
+/**
+ * Adds the pagination menu to the bottom of the page.
+ */
 function addPagination()
 {
+    // delete old page buttons
     $(".pageMenu").remove();
     // count max pars per parts by selecting children of .musicPart
     let maxParsCount = 0;
@@ -201,7 +217,7 @@ function addPagination()
             break;
         }
     }
-
+    $("#pageNav").prop("hidden",false);
     $("#pageNav").append("<li class='nav-item pageMenu'><a id='pageBack' href='#' class='nav-link'>&laquo;</a></li>");
     for(let i = 1; i <= maxParsCount; i++)
     {
@@ -227,6 +243,21 @@ function addPagination()
     });
 }
 
+/**
+ * Removes pagination menu and url param.
+ */
+function removePagination()
+{
+    $("#pageNav").prop("hidden",true);
+    currentParams.delete("page");
+    window.history.replaceState({}, '', baseUrl + '?' + currentParams);
+}
+
+/**
+ * Paging is done by showing and hiding <pars>-divs accoding to their pagenum (stored as class, e.g. ".3").
+ * URL param and paging menu is adjusted as well.
+ * @param {integer} pageNum 
+ */
 function setPage(pageNum)
 {
     if(pageNum >= 1 || pageNum <= parsCount)
@@ -262,27 +293,41 @@ function setPage(pageNum)
     }
 }
 
+/**
+ * Toggles layout options and sets url param.
+ * @param {string} layout 
+ */
 function setLayout(layout)
 {
     currentParams.set("layout",layout);
     window.history.replaceState({}, '', baseUrl + '?' + currentParams);
+    setWindowAndDraw()
 }
 
+/**
+ * Toggles showvars option and updates url param.
+ * @param {boolean} showvars 
+ */
 function setShowVars(showvars)
 {
+    if(showvars===true)
+    {
+        $("#showvariants").prop("hidden",true);
+        $("#hidevariants").prop("hidden",false);
+    }
+    else
+    {
+        $("#showvariants").prop("hidden",false);
+        $("#hidevariants").prop("hidden",true);
+    }
     currentParams.set("showvars",showvars);
     window.history.replaceState({}, '', baseUrl + '?' + currentParams);
+    setWindowAndDraw();
 }
 
 $(document).ready(function() {
     // Load submenu from uri parameter
-    //var fileUrl = currentParams.get("file");
     var currentItemID = currentParams.get("item");
-
-    /*if(!currentLayout)
-    {
-        setLayout("parts");
-    }*/
 
     var currentMenuItem = findMenuItem(currentItemID, menu);
     var fileUrl;
@@ -300,30 +345,21 @@ $(document).ready(function() {
 
     $("#layoutBook").click(function(){
         setLayout("book");
-        setWindowAndDraw();
     });
 
     $("#layoutPageParts").click(function(){
         setLayout("pageparts");
-        setWindowAndDraw();
     });
 
     $("#layoutParts").click(function(){
         setLayout("parts");
-        setWindowAndDraw();
     });
 
     $("#showvariants").click(function(){
-        setWindowAndDraw(true);
-        $("#showvariants").prop("hidden",true);
-        $("#hidevariants").prop("hidden",false);
         setShowVars(true);
     });
 
     $("#hidevariants").click(function(){
-        setWindowAndDraw(false);
-        $("#hidevariants").prop("hidden",true);
-        $("#showvariants").prop("hidden",false);
         setShowVars(false);
     });
 

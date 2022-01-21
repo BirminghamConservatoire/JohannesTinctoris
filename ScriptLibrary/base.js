@@ -246,6 +246,7 @@ var editable = false;
 /** @global 
  * @summary Set on/off if window is an editor window*/
 var standaloneEditor = false;
+var cpw = false;
 /** @global */
 var MEILinks = (document.location.href.indexOf('github') >-1 ||
                 document.location.href.indexOf('localhost') > -1) ? true : false;

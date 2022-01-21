@@ -863,11 +863,14 @@ tspan.tspanSup {
   display: block;
   line-height: 0.5;
 }
-.textblock {
+.musicPart .textblock {
   /* font-size: 120%; */
   font-family: 'Barlow Condensed', sans-serif;
 }
 .part.textblock {
+  font-style: italic;
+}
+.musicPart .part.textblock {
 		font-style: italic;
     font-size: large;
 }

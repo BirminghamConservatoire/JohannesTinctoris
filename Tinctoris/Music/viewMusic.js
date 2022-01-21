@@ -230,10 +230,12 @@ function addPagination()
     if(layout === "book")
     {
         $("#pageNav").addClass("mx-auto");
+        $("#pageNav").removeClass("ml-auto");
     }
     else
     {
         $("#pageNav").addClass("ml-auto");
+        $("#pageNav").removeClass("mx-auto");
     }
 
     $("#pageNav").append("<li class='nav-item pageMenu'><a id='pageBack' href='#' class='nav-link'>&laquo;</a></li>");

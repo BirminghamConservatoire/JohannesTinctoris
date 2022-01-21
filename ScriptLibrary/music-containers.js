@@ -67,10 +67,12 @@ function MusicHolder(text, outdiv){
     this.hands = [];
     /** @property {MusicHolder} */
     this.UUIDs = {};
+    /** @property {MusicHolder} toggle if variants should be displayed */
+    this.showvars = false;
     /** infoButton
      * @summary infoButtons (qv) presents several buttons for different bits of info.
-     */
-      this.infoButton = function(){
+    */
+    this.infoButton = function(){
       // this.infoButtons (qv) presents several buttons for different bits of
       // info. Let's try a less complex approach -- just one button
       var ib = this.drawTo.appendChild(DOMDiv('infoButtons'), false, false);
@@ -114,59 +116,75 @@ function MusicHolder(text, outdiv){
     };
     /** writeHeaders to content */
     this.writeHeaders = function(){
+      var headerdiv = DOMDiv("musicHeader", "musicHeader","");
+      var detailDiv = DOMDiv("infoDetails", "infoDetails","");
+      this.drawTo.appendChild(headerdiv);
       if(this.title && showtitle){
-        this.drawTo.appendChild(DOMTextEl("h2", "title", false, this.title));
+        headerdiv.appendChild(DOMTextEl("h2", "title", false, this.title));
       }
       if(this.attribution && showtitle)
       {
-        this.drawTo.appendChild(DOMTextEl("hi", "attribution", false, this.attribution));
+        headerdiv.appendChild(DOMTextEl("hi", "attribution", false, this.attribution));
       }
       if(infoButtons){
         // this.infoButtons();
         this.infoButton();
       }
+      if(cpw)
+      {
+        $(detailDiv).addClass("collapse");
+        var dummySpan = DOMSpan("d-block", "infoSpan", "");
+        var infoButton = DOMAnchor("btn btn-outline-dark btn-sm", "infoButton", "", "#infoDetails");
+        $(infoButton).attr({
+          "data-toggle": "collapse"
+        });
+        $(infoButton).append("<i class='bi bi-info-lg'></i>");
+        dummySpan.appendChild(infoButton);
+        headerdiv.appendChild(dummySpan);
+      }
+      headerdiv.appendChild(detailDiv);
       if(this.translator){
-        this.drawTo.appendChild(fieldDatumPair("Translator", this.translator));
+        detailDiv.appendChild(fieldDatumPair("Translator", this.translator));
         if(editorDisplay == "hide" || !editorDisplay) $(".info.translator").hide();
       }
       if(this.editor){
-        this.drawTo.appendChild(fieldDatumPair("Editor", this.editor));
+        detailDiv.appendChild(fieldDatumPair("Editor", this.editor));
         if(editorDisplay == "hide" || !editorDisplay) $(".info.editor").hide();
       }
       if(this.entered){
-        this.drawTo.appendChild(fieldDatumPair("Entered by", this.entered));
+        detailDiv.appendChild(fieldDatumPair("Entered by", this.entered));
         if(editorDisplay == "hide" || !editorDisplay) $(".info.enteredby").hide();
       }
       if(this.checked){
-        this.drawTo.appendChild(fieldDatumPair("Checked by", this.checked));
+        detailDiv.appendChild(fieldDatumPair("Checked by", this.checked));
         if(editorDisplay == "hide" || !editorDisplay) $(".info.checkedby").hide();
       }
       if(this.established){
-        this.drawTo.appendChild(fieldDatumPair("Date established", this.established));
+        detailDiv.appendChild(fieldDatumPair("Date established", this.established));
         if(dateDisplay == "hide" || !dateDisplay) $(".info.dateestablished").hide();
       }
       if(this.approved){
-        this.drawTo.appendChild(fieldDatumPair("Approved by", this.approved));
+        detailDiv.appendChild(fieldDatumPair("Approved by", this.approved));
         if(editorDisplay == "hide" || !editorDisplay) $(".info.approvedby").hide();
       }
       if(this.copy){
-        this.drawTo.appendChild(fieldDatumPair("Copy text", this.copy));
+        detailDiv.appendChild(fieldDatumPair("Copy text", this.copy));
         if(copyTextDisplay == "hide" || !copyTextDisplay) $(".info.copytext").hide();
       }
       if(this.source){
-        this.drawTo.appendChild(fieldDatumPair("Source", this.source));
+        detailDiv.appendChild(fieldDatumPair("Source", this.source));
         if(sourceDisplay == "hide" || !sourceDisplay) $(".info.source").hide();
       }
       if(this.script){
-        this.drawTo.appendChild(fieldDatumPair("Script", this.script));
+        detailDiv.appendChild(fieldDatumPair("Script", this.script));
         if(extraInfoDisplay == "hide" || !extraInfoDisplay) $(".info.script").hide();
       }
       if(this.columns){
-        this.drawTo.appendChild(fieldDatumPair("Columns", ""+this.columns));
+        detailDiv.appendChild(fieldDatumPair("Columns", ""+this.columns));
         if(extraInfoDisplay == "hide" || !extraInfoDisplay) $(".info.columns").hide();
       }
       if(this.running){
-        this.drawTo.appendChild(fieldDatumPair("Running", this.running));
+        detailDiv.appendChild(fieldDatumPair("Running", this.running));
         if(extraInfoDisplay == "hide" || !extraInfoDisplay) $(".info.running").hide();
       }
       if(this.sources.length){
@@ -175,7 +193,7 @@ function MusicHolder(text, outdiv){
         for (var i=0; i<this.sources.length; i++){
           div.appendChild(this.sources[i].toHTML());
         }
-        this.drawTo.appendChild(div);
+        detailDiv.appendChild(div);
         if(sourceDisplay == "hide" || !sourceDisplay) $(".info.sources").hide();
       }
     };
@@ -310,15 +328,15 @@ function MusicHolder(text, outdiv){
           var MEIcoded = docObj.blobify();
           this.example.MEIcoded = MEIcoded;
           var anchor = DOMAnchor('MEI', 'MEILink', 'MEI', URL.createObjectURL(MEIcoded));
-          var anchor2 = DOMAnchor('MEI2', 'MEILink', 'download MEI', URL.createObjectURL(MEIcoded));
+          var anchor2 = DOMAnchor('MEI', 'MEIdownload', ' download', URL.createObjectURL(MEIcoded));
           this.example.MEILink = anchor;
           //this.example.VerovioLink = anchor2;
           anchor2.setAttribute('download', 'editor.mei');
           //anchor2.setAttribute('target', 'viewer');
           anchor.setAttribute('target', '_blank');
           //document.body.appendChild(anchor);
-          this.drawTo.appendChild(anchor);
-          document.body.appendChild(anchor2);
+          if(!document.getElementById("MEILink")) document.body.appendChild(anchor);
+          if(!document.getElementById("MEIdownload")) document.body.appendChild(anchor2);
           return docObj.serialize();
     };
     /** appendStaffDefs */
@@ -353,36 +371,122 @@ function MusicHolder(text, outdiv){
       return sd;
     };
     /** draw */
-      this.draw = function(){
-          state = "Starting to draw";
-          curDoc = this;
-          //editable=true;
-          this.footnotes = [];
-          if(!this.forceredraw && this.out.childNodes.length){
-              return;
-          }
-          state = "emptying drawTo (.draw())";
-          $(this.drawTo).empty();
-          // width of content div depends on editor or viewer
-          if(standaloneEditor)
+    this.draw = function(rowCols, choirbook, pagination){
+      state = "Starting to draw";
+      curDoc = this;
+      //editable=true;
+      this.footnotes = [];
+      if(!this.forceredraw && this.out.childNodes.length){
+          return;
+      }
+      state = "emptying drawTo (.draw())";
+      $(this.drawTo).empty();
+      // width of content div depends on editor or viewer
+      if(standaloneEditor)
+      {
+        this.drawTo.style.width = (wrapWidth+20)+"px";
+      }
+      /*else
+      {
+        this.drawTo.style.width = wrapWidth+"px";
+      }*/
+      // writing header info
+      this.writeHeaders();
+
+      var oldshowvariants = showvariants;
+      showvariants = this.showvars;
+
+      // start drawing music
+      var musicDiv = DOMDiv("music row row-cols-" + rowCols, "music");
+      this.drawTo.appendChild(musicDiv);
+      // split every part of this.example into a single music example
+      // every part will be rendered into a separate div
+      // if partwise MEI export is needed, make partExamples a property of MusicHolder
+      var partExamples = this.splitParts();
+      // choirbook toggles whether splitting at <pars> should happen, pagination in choir book format?
+      $(this.drawTo).removeClass("nowrap");
+      for(let i=0;i<partExamples.length;i++)
+      {
+        let partPair = partExamples[i];
+        let partDiv = DOMDiv("musicPart col mb-3");
+        let partDivID;
+        let partDivTitle;
+
+        if(partPair[0].includes("2"))
+        {
+          let lastPartDiv = document.getElementById(partExamples[i-1][0]);
+          partDivTitle = partPair[0];
+          partDivID = partDivTitle.replace(" ", "");
+          partDiv.setAttribute("title", partDivTitle);
+          partDiv.id = partDivID;
+          let combinedDiv = DOMDiv("musicPanel col mb-3 p-0", lastPartDiv.id + "1+2");
+          musicDiv.appendChild(combinedDiv);
+          combinedDiv.appendChild(lastPartDiv);
+          combinedDiv.appendChild(partDiv);
+          $(lastPartDiv).removeClass("musicPanel");
+          //$(partDiv).removeClass("mb-3");
+        }
+        else 
+        {
+          musicDiv.appendChild(partDiv);
+          partDivTitle = partPair[0];
+          partDivID = partDivTitle.replace(" ", "");
+          partDiv.setAttribute("title", partDivTitle);
+          partDiv.id = partDivID;
+          partDiv.className += " musicPanel";
+        }
+
+        // check for pagination
+        if(pagination===true)
+        {
+          let partPartes = splitPars(partPair[1]);
+
+          for(let parsPair of partPartes)
           {
-            this.drawTo.style.width = (wrapWidth+20)+"px";
+            let parsDiv = DOMDiv("musicPars "+parsPair[0], partDivID + parsPair[0]);
+            partDiv.appendChild(parsDiv);
+
+            state = "creating new svg – requires width and height";
+            var parsSVG = svg(parsPair[1].width(), parsPair[1].height());
+            state = "adding SVG to drawTo";
+            parsDiv.appendChild(parsSVG);
+            parsSVG.className += " musicexample dc1";
+            parsPair[1].SVG = parsSVG;
+            state = "drawing";
+            parsPair[1].draw(parsSVG, true);
           }
-          else
-          {
-            this.drawTo.style.width = wrapWidth+"px";
-          }
-          this.writeHeaders();
-          state = "creating new svg – requires width and height";
-          var newSVG = svg(this.example.width(), this.example.height());
+        }
+        else
+        {
+          state = "creating new svg – requires width and height";
+          var partSVG = svg(partPair[1].width(), partPair[1].height());
           state = "adding SVG to drawTo";
-          $(this.drawTo).removeClass("nowrap");
-          this.drawTo.appendChild(newSVG);
-      newSVG.className += " musicexample dc1";
-          this.example.SVG = newSVG;
+          partDiv.appendChild(partSVG);
+          partSVG.className += " musicexample dc1";
+          partPair[1].SVG = partSVG;
           state = "drawing";
-          this.example.draw(newSVG, true);
-          console.log(this.toMEI());
+          partPair[1].draw(partSVG, true);
+        }
+        
+
+        if(choirbook)
+        {
+          // Adjust ordering of the parts in choirbook format
+          if(partDivID.includes("Tenor"))
+          {
+            let partDiv = document.getElementById(partDivID);
+            $(partDiv).addClass("order-2");
+          }
+          else if(partDivID.includes("Bassus"))
+          {
+            let partDiv = document.getElementById(partDivID);
+            $(partDiv).addClass("order-last");
+          }
+        }
+      }
+      // I don't know why, but without putting it into console.log(), no MEI will be created...
+      console.log(this.toMEI());
+      showvariants = oldshowvariants;
     };
     /** header text */
     this.headerText = function(){
@@ -416,13 +520,121 @@ function MusicHolder(text, outdiv){
       }
       return text;
     };
-      this.toText = function(){
-          var text = "";
-          text += this.headerText();
-          return text + this.example.toText();
-      };
+    this.toText = function(){
+        var text = "";
+        text += this.headerText();
+        return text + this.example.toText();
+    };
+    /** splits MusicHolder.example into a single example per part to render it in single divs */
+    this.splitParts = function(){
+      var exampleParts = [];
+      var partCounter = 0;
+      var fullExampleCode = this.example.code;
+      var pieceEnd = fullExampleCode.indexOf(">")+1;
+      var pieceString = fullExampleCode.substring(0,pieceEnd);
+      let partNames = [];
+      // MusicExamples need to be parsed properly to work
+      // Splitting a MusicExample into its parts needs to be stupid string manipulation...
+      for(let i = 0; i < this.example.parts.length; i=i+2)
+      {
+        let part = this.example.parts[i];
+        partCounter++;
+        let partStart = fullExampleCode.indexOf("<part: ");
+        let partEnd = fullExampleCode.indexOf("</part>")+7;
+        let partString = pieceString + fullExampleCode.substring(partStart,partEnd);
+        string = partString;
+        let partExample;
+        try{
+          partExample = new MusicExample();
+        } catch(x){
+            console.log(x.stack);
+            console.log("error parsing example");
+            return false;
+        }
+
+        // partName will become the div id, try to make it unique
+        // Something like Tenor2 is not elaborate but will hopefully work for all realistic cases
+        let partName = partNames.indexOf(part.defaultName()) >= 0 ? 
+                      part.defaultName() + "2" : part.defaultName();
+        partNames.push(partName);
+        exampleParts.push([partName, partExample]);
+        fullExampleCode = pieceString + fullExampleCode.slice(partEnd+8);
+        console.log("sliced part no. " + partCounter);
+      }
+
+      return exampleParts;
+    };
       this.parse();
   }
+
+  function splitPars(part)
+  {
+    var partParses = [];
+    var parses = part.events.filter(event => event.objType==="Part" && event.type==="pars" && event.closes===false);
+    var parscounter = 1;
+    var fullPartCode = part.code;
+
+    var firstParsStart = fullPartCode.indexOf("<pars")+1;
+    // having the partname in every pars shows it at every page
+    var partString = fullPartCode.substring(0,firstParsStart-1);
+
+    var currentClef;
+    var currentSolm;
+
+    // MusicExamples need to be parsed properly to work
+    // Splitting a MusicExample into its parses needs to be stupid string manipulation...
+    // see MusicExample.splitParts()
+    for(parscounter; parscounter <= parses.length; parscounter++)
+    {
+      let parsStart = fullPartCode.indexOf("<pars");
+      let parsEnd = fullPartCode.indexOf("</pars>")+7;
+      let parsString = fullPartCode.substring(parsStart,parsEnd);
+
+      // we need to take clef and solm from last pars if there is none
+      let lastSolmPos = parsString.lastIndexOf("{solm:");
+      if(lastSolmPos != -1)
+      {
+        currentSolm = parsString.substring(lastSolmPos, parsString.indexOf("}", lastSolmPos)+1);
+      }
+      else
+      {
+        parsString = parsString.slice(0,6) + currentSolm + parsString.slice(6);
+      }
+
+      let lastClefPos = parsString.lastIndexOf("{clef:");  
+      if(lastClefPos != -1)
+      {
+        currentClef = parsString.substring(lastClefPos, parsString.indexOf("}",lastClefPos)+1);
+      }
+      else
+      {
+        parsString = parsString.slice(0,6) + currentClef + parsString.slice(6);
+      }
+
+      // add part tag to have the part name in every pars
+      parsString = partString + parsString;
+
+      // add part closing tag here to ensure proper parsing without disturbing string slicing
+      string = parsString + "</part>";
+      let parsExample;
+      
+      try{
+        parsExample = new MusicExample();
+      } catch(x){
+          console.log(x.stack);
+          console.log("error parsing example");
+          return false;
+      }
+
+      // parsNumber will become the div id, try to make it unique
+      partParses.push([parscounter, parsExample]);
+      fullPartCode = partString + fullPartCode.slice(parsEnd);
+      console.log("sliced pars no. " + parscounter);
+    }
+
+    return partParses;
+  }
+
 // end of MusicHolder
 //-------------------------------------------------------------------------------//  
 

@@ -224,6 +224,18 @@ function addPagination()
         }
     }
     $("#pageNav").prop("hidden",false);
+
+    // set margins based on current layout
+    let layout = currentParams.get("layout");
+    if(layout === "book")
+    {
+        $("#pageNav").addClass("mx-auto");
+    }
+    else
+    {
+        $("#pageNav").addClass("ml-auto");
+    }
+
     $("#pageNav").append("<li class='nav-item pageMenu'><a id='pageBack' href='#' class='nav-link'>&laquo;</a></li>");
     
     for(let i = 1; i <= maxParsCount; i++)
@@ -319,8 +331,9 @@ function addToggleParts(toggleParts)
 
         for(let partID of partIDs)
         {
-            let partSwitchID = "switch" + partID.replace(" ", "");
-            let partSwitch = `<div class='form-check py-1'><input type='checkbox' class='form-check-input partSwitch' id='${partSwitchID}' checked><label class='form-check-label' for='${partSwitchID}'>${partID}</label></div>`;
+            let partSwitchID = "switch" + partID;
+            let partLabel = $("#" + partID).attr("title");
+            let partSwitch = `<div class='form-check py-1'><input type='checkbox' class='form-check-input partSwitch' id='${partSwitchID}' checked><label class='form-check-label' for='${partSwitchID}'>${partLabel}</label></div>`;
 
             $("#partsForm").append(partSwitch);
             addSwitchToggleEvent(partSwitchID);
@@ -343,11 +356,11 @@ function addToggleParts(toggleParts)
 function addSwitchToggleEvent(switchID)
 {
     $("#" + switchID).click(function(){
-        let partID = $("[for='"+ this.id +"']").text();
+        let partID = this.id.replace("switch","");
         showPart(partID);
     });
     $("#" + switchID + ":checked").click(function(){
-        let partID = $("[for='"+ this.id +"']").text();
+        let partID = this.id.replace("switch","");
         hidePart(partID);
     });
 }

@@ -408,14 +408,18 @@ function MusicHolder(text, outdiv){
       for(let i=0;i<partExamples.length;i++)
       {
         let partPair = partExamples[i];
-        let partDiv = DOMDiv("musicPart col mb-3", partPair[0]);
+        let partDiv = DOMDiv("musicPart col mb-3");
         let partDivID;
+        let partDivTitle;
 
         if(partPair[0].includes("2"))
         {
           let lastPartDiv = document.getElementById(partExamples[i-1][0]);
-          partDivID = partPair[0] + "1&2";
-          let combinedDiv = DOMDiv("musicPanel col mb-3 p-0", partDivID);
+          partDivTitle = partPair[0];
+          partDivID = partDivTitle.replace(" ", "");
+          partDiv.setAttribute("title", partDivTitle);
+          partDiv.id = partDivID;
+          let combinedDiv = DOMDiv("musicPanel col mb-3 p-0", lastPartDiv.id + "1+2");
           musicDiv.appendChild(combinedDiv);
           combinedDiv.appendChild(lastPartDiv);
           combinedDiv.appendChild(partDiv);
@@ -425,7 +429,10 @@ function MusicHolder(text, outdiv){
         else 
         {
           musicDiv.appendChild(partDiv);
-          partDivID = partPair[0];
+          partDivTitle = partPair[0];
+          partDivID = partDivTitle.replace(" ", "");
+          partDiv.setAttribute("title", partDivTitle);
+          partDiv.id = partDivID;
           partDiv.className += " musicPanel";
         }
 

@@ -159,12 +159,14 @@ function setWindowAndDraw()
     let rowCols = 1;
     let choirbook = false;
     let pagination = false;
+    let toggleParts = false;
     if(currentParams.get("layout") == "book")
     {
         rowCols = 2;
         wrapWidth = drawWidth/2;
         choirbook = true;
         pagination = true;
+        toggleParts = false;
     }
     else if(currentParams.get("layout") == "pageparts")
     {
@@ -172,6 +174,7 @@ function setWindowAndDraw()
         pagination = true;
         choirbook = false;
         rowCols = 1;
+        toggleParts = true;
     }
     else
     {
@@ -179,6 +182,7 @@ function setWindowAndDraw()
         pagination = false;
         choirbook = false;
         rowCols = 1;
+        toggleParts = true;
     }
 
     currentMusic.showvars = currentParams.get("showvars") === "true" ? true : false;
@@ -194,6 +198,8 @@ function setWindowAndDraw()
     {
         removePagination();
     }
+
+    addToggleParts(toggleParts);
 }
 
 /**
@@ -219,6 +225,7 @@ function addPagination()
     }
     $("#pageNav").prop("hidden",false);
     $("#pageNav").append("<li class='nav-item pageMenu'><a id='pageBack' href='#' class='nav-link'>&laquo;</a></li>");
+    
     for(let i = 1; i <= maxParsCount; i++)
     {
         /* <!--li class="nav-item pagnination">
@@ -291,6 +298,87 @@ function setPage(pageNum)
             $("#pageForward").removeClass("disabled");
         }
     }
+}
+
+/**
+ * Adds menu to switch parts on/off
+ * @param {boolean} toggleParts 
+ */
+function addToggleParts(toggleParts)
+{
+    $("#partsForm").empty();
+    if(toggleParts===true)
+    {
+        $("#toggleParts").prop("hidden", false);
+
+        let partIDs = []; 
+        for(let musicPart of $(".musicPart"))
+        {
+            partIDs.push($(musicPart).attr("id"));
+        }
+
+        for(let partID of partIDs)
+        {
+            let partSwitchID = "switch" + partID.replace(" ", "");
+            let partSwitch = `<div class='form-check py-1'><input type='checkbox' class='form-check-input partSwitch' id='${partSwitchID}' checked><label class='form-check-label' for='${partSwitchID}'>${partID}</label></div>`;
+
+            $("#partsForm").append(partSwitch);
+            addSwitchToggleEvent(partSwitchID);
+        }
+
+        $("#switchAllParts").click(function(){
+            showAllParts();
+        });
+    }
+    else
+    {
+        $("#toggleParts").prop("hidden", true);
+    }
+}
+
+/**
+ * Adds toggle events to switch
+ * @param {string} switchID checkBox id to bind event
+ */
+function addSwitchToggleEvent(switchID)
+{
+    $("#" + switchID).click(function(){
+        let partID = $("[for='"+ this.id +"']").text();
+        showPart(partID);
+    });
+    $("#" + switchID + ":checked").click(function(){
+        let partID = $("[for='"+ this.id +"']").text();
+        hidePart(partID);
+    });
+}
+
+/**
+ * Make all parts visible again
+ */
+function showAllParts()
+{
+    $("#switchAllParts").addClass("disabled");
+    $(".partSwitch").prop("checked", true);
+    $(".musicPart").prop("hidden", false);
+}
+
+/**
+ * Make a hidden part visible
+ * @param {string} partID 
+ */
+function showPart(partID)
+{
+    $("#" + partID).prop("hidden", false);
+}
+
+/**
+ * Hide a part
+ * @param {string} partID 
+ */
+function hidePart(partID)
+{
+    $("#" + partID).prop("hidden", true);
+    $("#switchAllParts").removeClass("disabled");
 }
 
 /**

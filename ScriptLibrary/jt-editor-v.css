@@ -865,9 +865,11 @@ tspan.tspanSup {
 }
 .textblock {
   /* font-size: 120%; */
+  font-family: 'Barlow Condensed', sans-serif;
 }
 .part.textblock {
 		font-style: italic;
+    font-size: large;
 }
 .textblock.r90a, .textblock.r90c {
   font-size: 95%;

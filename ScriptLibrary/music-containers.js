@@ -385,6 +385,7 @@ function MusicHolder(text, outdiv){
       if(standaloneEditor)
       {
         this.drawTo.style.width = (wrapWidth+20)+"px";
+        this.showvars = showvariants;
       }
       /*else
       {

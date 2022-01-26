@@ -642,7 +642,7 @@ p.colend.columnPara {
   border: 1px dotted #663;
   background-color: #DDDDCC;
 }
-.tooltip, .popup {
+.edition .tooltip, .popup {
 		/* display:none; */
 		background-color:#ffa;
     z-index: 180;
@@ -654,7 +654,7 @@ p.colend.columnPara {
 		box-shadow: 2px 2px 11px #666;
 /*    cursor: none;*/
 }
-.tooltip.clicked, .popup.clicked {
+.edition .tooltip.clicked, .popup.clicked {
 	padding-right:25px;
 }
 

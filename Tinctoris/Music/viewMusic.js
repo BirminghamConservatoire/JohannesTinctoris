@@ -446,6 +446,11 @@ $(document).ready(function() {
         fetchMusic(fileUrl);
     }
 
+    // Enable bootstrap tooltips
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
     $("#layoutBook").click(function(){
         setLayout("book");
     });

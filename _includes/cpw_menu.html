@@ -1,6 +1,10 @@
 <nav class="navbar navbar-dark bg-dark navbar-expand-lg sticky-top">
-  <a class="navbar-brand" href="{{site.url}}">
-      <img src="{{site.url}}/Images/EMT logo abbr.png" width="30" height="30" class="d-inline-block align-top" alt="EMT" loading="lazy">
+  {% assign baseUri = {{site.url}} %}
+  {% if site.url contains "birminghamconservatoire.github.io" %}
+    {% assign baseUri = {{site.url}} + "/JohannesTinctoris/" %}
+  {% endif %}
+  <a class="navbar-brand" href="{{baseUri}}">
+      <img src="{{baseUri}}/Images/EMT logo abbr.png" width="30" height="30" class="d-inline-block align-top" alt="EMT" loading="lazy">
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navToggler" aria-controls="navToggler" aria-expanded="false" aria-label="Menu">
       <span class="navbar-toggler-icon"></span>

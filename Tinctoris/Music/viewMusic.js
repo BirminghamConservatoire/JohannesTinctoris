@@ -448,7 +448,9 @@ $(document).ready(function() {
 
     // Enable bootstrap tooltips
     $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
+        $('[data-toggle="tooltip"]').tooltip({
+            trigger : 'hover'
+        })
     })
 
     $("#layoutBook").click(function(){

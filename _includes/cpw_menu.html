@@ -41,12 +41,27 @@
       </ul>
       {% if page.name == "view.html" %}
         <div class="btn-group mr-1" role="group" aria-label="layout options">
-          <button id="layoutBook" type="button" class="btn btn-light"><i class="bi bi-book"></i></button>
-          <button id="layoutPageParts" type="button" class="btn btn-light"><i class="bi bi-view-stacked"></i></button>
-          <button id="layoutParts" type="button" class="btn btn-light"><i class="bi bi-file"></i></button>
+          <button id="layoutBook" type="button" class="btn btn-light" 
+            title="Choirbook layout" data-toggle="tooltip" data-placement="bottom">
+            <i class="bi bi-book"></i>
+          </button>
+          <button id="layoutPageParts" type="button" class="btn btn-light" 
+            title="Parts layout with pagniation" data-toggle="tooltip" data-placement="bottom">
+            <i class="bi bi-view-stacked"></i>
+          </button>
+          <button id="layoutParts" type="button" class="btn btn-light" 
+            title="Parts layout" data-toggle="tooltip" data-placement="bottom">
+            <i class="bi bi-file"></i>
+          </button>
         </div>
-        <button id="showvariants" type="button" class="btn btn-light variantsettings"><i class="bi bi-eye"></i></button>
-        <button id="hidevariants" type="button" class="btn btn-light variantsettings" hidden><i class="bi bi-eye-slash"></i></button>
+        <button id="showvariants" type="button" class="btn btn-light variantsettings" 
+          title="Show variants" data-toggle="tooltip" data-placement="bottom">
+          <i class="bi bi-eye"></i>
+        </button>
+        <button id="hidevariants" type="button" class="btn btn-light variantsettings" 
+          title="Hide variants" data-toggle="tooltip" data-placement="bottom" hidden>
+          <i class="bi bi-eye-slash"></i>
+        </button>
       {% endif %}
   </div>
 </nav>

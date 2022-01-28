@@ -2701,27 +2701,43 @@ docMapping.prototype.addPopup = function(info, referrer, ptype, tDoc){
     var olditem = document.getElementById(id);
     if(olditem) $(olditem).remove();
     document.getElementById("footnotes").appendChild(fndiv);
-    if(typeof(info) == "string"){
-      fndiv.appendChild(document.createTextNode(info));
-    } else if (info.objType==="Choice"){ 
-      fndiv.appendChild(info.footnote());
-    } else if (info.objType==="Annotation" || info.objType.indexOf("Comment")>-1){
-      fndiv.appendChild(info.footnote());
-    } else if (info.objType==="Part"){
-      fndiv.appendChild(info.footnote());
-    } else if (!info.tip){
-      fndiv.appendChild(info.footnote());
-    } else if (info){
-      var frame = svg(100, 100);
-      fndiv.appendChild(frame);
-      fndiv.appendChild(document.createTextNode(" "));
-      info.tip(frame);
-      fndiv.style.width = frame.getBBox().width+26+"px";
-      fndiv.style.height = frame.getBBox().height+26+"px";
-      frame.name = code+no;
-      frame.setAttribute("data-ref", code+no);
-      frame.title = code+no;
+    if(info)
+    {
+      if(typeof(info) === "string"){
+        fndiv.appendChild(document.createTextNode(info));
+      } else if (info.objType==="Choice"){ 
+        if(typeof info.footnote === "function")
+        {
+          fndiv.appendChild(info.footnote());
+        }
+      } else if (info.objType==="Annotation" || info.objType.indexOf("Comment")>-1){
+        if(typeof info.footnote === "function")
+        {
+          fndiv.appendChild(info.footnote());
+        }
+      } else if (info.objType==="Part"){
+        if(typeof info.footnote === "function")
+        {
+          fndiv.appendChild(info.footnote());
+        }
+      } else if (!info.tip){
+        if(typeof info.footnote === "function")
+        {
+          fndiv.appendChild(info.footnote());
+        }
+      } else{
+        var frame = svg(100, 100);
+        fndiv.appendChild(frame);
+        fndiv.appendChild(document.createTextNode(" "));
+        info.tip(frame);
+        fndiv.style.width = frame.getBBox().width+26+"px";
+        fndiv.style.height = frame.getBBox().height+26+"px";
+        frame.name = code+no;
+        frame.setAttribute("data-ref", code+no);
+        frame.title = code+no;
+      }
     }
+    
     fndiv.name = code+no;
     $(fndiv).data("ref", referrer);
     $(fndiv).mouseenter(popGlow);

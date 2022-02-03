@@ -2850,6 +2850,11 @@ function ProportionSign(){
         if((obj = arsNovaVoid[this.sign.charAt(i)+"Mens"])){
           obj.draw(curx, cury-yoffset(this.staffPos), rastralSize, 
             "proportion mensural propsign "+this.sign.charAt(i)+ extraClasses);
+          // horrible onion layer for proportions >19 to make the spacing less awkward
+          if (this.sign.length >= 2 && i < this.sign.length-1)
+          {
+            obj.advance = 400;
+          }
           curx += obj.advanceWidth(rastralSize);
         } else {console.log("Missing proportion: ", this.sign.charAt(i));}
       }

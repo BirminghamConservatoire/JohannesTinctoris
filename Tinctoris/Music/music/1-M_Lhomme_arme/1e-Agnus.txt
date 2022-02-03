@@ -31,7 +31,7 @@ CS35	V-CVbav Cappella Sistina 35, fols. lxiiij^s^-lxxxij^d^ (85^v^-104^r^)	Tinct
 </pars>
 </part>
 {staf: 5} <part: Contratenor Altus>
-</pars>
+<pars>
 {clef: C8} {solm: bb} {mens: Ç5} <label: 14>Crescit in duplum.</label> PL5-7 <text> Agnus Dei, qui tollis</text> PS5 SG Sc mb ma SG md .11 md SG Pm9 md <text>peccata mundi,</text> md md Sc mb ma SG PS11 Sg <text>miserere nobis.</text> mf mg me Sd Bd Md || [-] <label>{var=(ins.) "verte Tibault" CS35}</label>
 </pars>
 <pars>

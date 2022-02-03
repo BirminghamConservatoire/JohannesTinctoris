@@ -321,8 +321,10 @@ function MusicHolder(text, outdiv){
     /** Gets converted MEI and provides MEI links */
       this.toMEI = function(){
           var docObj = this.example.toMEI();
-          var old = document.getElementById('MEILink');
-          if(old) old.parentNode.removeChild(old);
+          var oldLink = document.getElementById('MEILink');
+          if(oldLink) oldLink.parentNode.removeChild(oldLink);
+          var oldDownload = document.getElementById('MEIdownload');
+          if (oldDownload) oldDownload.parentNode.removeChild(oldDownload);
           this.UUIDs = {};
           //var MEIcoded = btoa(docObj.serialize());
           var MEIcoded = docObj.blobify();

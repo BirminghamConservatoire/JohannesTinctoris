@@ -1529,8 +1529,13 @@ function MusicExample(){
           // The custos has to know the next (=current) note, so rewind
           // the pointer, briefly
           eventi-=1;
-          var custos = new Custos();
-          custos.draw();
+          // if the event before the system break is already a custos, we don't need another one
+          if(this.events[eventi].objType!=="Custos")
+          {
+            var custos = new Custos();
+            custos.draw();
+          }
+
                   if(this.events[eventi].classList){
                       // ledger lines
                       for(var l=0; l<this.events[eventi].classList.length; l++){
@@ -1543,7 +1548,8 @@ function MusicExample(){
           sysBreak2();
           sysBreak(false, leaveSpace);
           // draw Clef & Solm only if the next object is no clef
-          if(this.events[eventi+1] && this.events[eventi+1].objType!=="Clef")
+          //if(this.events[eventi+1] && this.events[eventi+1].objType!=="Clef")
+          if(this.events[eventi].objType!=="Clef")
           {
             if(currentClef) currentClef.draw();
             //console.log(currentClef.appliesTo);

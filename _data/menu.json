@@ -66,6 +66,72 @@
               "file" : "music/2-M_primi_toni/2c-Sanctus.txt"
             }
           ]
+      },
+      {   
+        "id": "tincMissaSecundiToniIrr",
+        "label" : "Missa [secundi toni irregularis]",
+        "file" : "music/3-M_secundi_toni_irr/3a-Kyrie.txt",
+        "parts" : 
+        [
+          {
+            "id": "tincMissaSecundiToniIrr-Kyrie",
+            "label": "Kyrie",
+            "file": "music/3-M_secundi_toni_irr/3a-Kyrie.txt"
+          },
+          {
+            "id": "tincMissaSecundiToniIrr-Gloria",
+            "label" : "Gloria",
+            "file" : "music/3-M_secundi_toni_irr/3b-Gloria.txt"
+          },
+          {
+            "id": "tincMissaSecundiToniIrr-Credo",
+            "label" : "Credo",
+            "file" : "music/3-M_secundi_toni_irr/3c-Credo.txt"
+          },
+          {
+            "id": "tincMissaSecundiToniIrr-Sanctus",
+            "label" : "Sanctus",
+            "file" : "music/3-M_secundi_toni_irr/3d-Sanctus.txt"
+          },
+          {
+            "id": "tincMissaSecundiToniIrr-Agnus",
+            "label" : "Agnus Dei",
+            "file" : "music/3-M_secundi_toni_irr/3e-Agnus.txt"
+          }
+        ]
+      },
+      {   
+        "id": "tincMissaQuintiToniIrr",
+        "label" : "Missa [quinti toni irregularis]",
+        "file" : "music/4-M_quinti_toni_irr/4a-Kyrie.txt",
+        "parts" : 
+        [
+          {
+            "id": "tincMissaQuintiToniIrr-Kyrie",
+            "label": "Kyrie",
+            "file": "music/4-M_quinti_toni_irr/4a-Kyrie.txt"
+          },
+          {
+            "id": "tincMissaQuintiToniIrr-Gloria",
+            "label" : "Gloria",
+            "file" : "music/4-M_quinti_toni_irr/4b-Gloria.txt"
+          },
+          {
+            "id": "tincMissaQuintiToniIrr-Credo",
+            "label" : "Credo",
+            "file" : "music/4-M_quinti_toni_irr/4c-Credo.txt"
+          },
+          {
+            "id": "tincMissaQuintiToniIrr-Sanctus",
+            "label" : "Sanctus",
+            "file" : "music/4-M_quinti_toni_irr/4d-Sanctus.txt"
+          },
+          {
+            "id": "tincMissaQuintiToniIrr-Agnus",
+            "label" : "Agnus Dei",
+            "file" : "music/4-M_quinti_toni_irr/4e-Agnus.txt"
+          }
+        ]
       }
       ]
     },

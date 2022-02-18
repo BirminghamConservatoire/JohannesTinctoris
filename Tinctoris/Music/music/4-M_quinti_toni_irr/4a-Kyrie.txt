@@ -22,6 +22,7 @@ Ve759	I-VEcap DCCLIX, fols. 25v–31r	Tintoris
 </part>
 
 {staf: 5} <part: Tenor>
+<pars>
 {clef: C4} {solm: 0} {mens: O5} PS5 PS5 Sc <text>Kyrie</text> me. sf mg maa Sg me mf mc mg maa. sg maa mbb mcc mg. ff fe mf Sg me mc md me. sf me Ps5 md mg sf mg. sf mg Saa mf. sg maa. fg faa mbb Sg mf <lig><obl>Sg Sc</obl></lig> md me. sf mg Sc Pm5 me. sd mc mb mc. sd se sf <lig>Sg Saa</lig> mg. ff fe mf <text>leyson.</text> mg <lig>Sc Sd</lig> -Lc || 
 </pars>
 <pars>
@@ -33,6 +34,7 @@ Ve759	I-VEcap DCCLIX, fols. 25v–31r	Tintoris
 </part>
 
 {staf: 5} <part: Contratenor>
+<pars>
 {clef: C8} {solm: 0} {mens: O9} PB9 PS9 Sc <text>Kyrie</text> me. sf mg maa mg me md. se mf mg mc me Sd Sc Pm9 ma mb mc. sd sc fb fa mb mG ma mG. sa sG fF <ll:-1>fE BD Pm5 md</ll> <lig>SG Sd</lig> Pm11 me. sd mc mb mc. sd se sf Bg mc ma mG mg. sf se sd mc mG <lig>SF SG</lig> md <text>leyson.</text>mc <lig><obl>Sa SG</obl></lig> Lg || 
 </pars>
 <pars>

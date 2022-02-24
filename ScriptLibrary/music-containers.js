@@ -337,8 +337,28 @@ function MusicHolder(text, outdiv){
           //anchor2.setAttribute('target', 'viewer');
           anchor.setAttribute('target', '_blank');
           //document.body.appendChild(anchor);
-          if(!document.getElementById("MEILink")) document.body.appendChild(anchor);
-          if(!document.getElementById("MEIdownload")) document.body.appendChild(anchor2);
+          if(!document.getElementById("MEILink"))
+          {
+            if(this.drawTo)
+            {
+              this.drawTo.prepend(anchor);
+            }
+            else
+            {
+              document.body.appendChild(anchor);
+            }
+          } 
+          if(!document.getElementById("MEIdownload"))
+          {
+            if(this.drawTo)
+            {
+              this.drawTo.prepend(anchor2);
+            }
+            else
+            {
+              document.body.appendChild(anchor2);
+            }
+          } 
           return docObj.serialize();
     };
     /** appendStaffDefs */

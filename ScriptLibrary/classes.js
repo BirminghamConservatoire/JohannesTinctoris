@@ -5557,7 +5557,8 @@ function MChoice(){
       // Simplest case. Accepted reading is always standardised
       reading = new MReading(witnesses, [], description, 
         description2, false, this);
-      if(staffing.length > 0 && currentClef != staffing[0][1]) currentClef = staffing[0][1];
+      // make sure there is another clef before change currentClef
+        if(staffing.length > 0 && staffing[0][1] != undefined && currentClef != staffing[0][1]) currentClef = staffing[0][1];
       reading.clef = currentClef;
       reading.solm = currentSolm;
       let content = string?nextMusic():[];
@@ -5568,7 +5569,8 @@ function MChoice(){
     } else if (witnesses.length <=1 || agreement){
       // Easiest case: either all definitions are the same (AGREEMENT) or there's only one
       // Do staff stuff: 
-      currentClef = staffing[0][1];
+      if(staffing.length > 0 && staffing[0][1] != undefined) currentClef = staffing[0][1];
+      // make sure to not set a non-existing clef
       reading = new MReading(witnesses, [], description, 
         description2, staffing, this);
       reading.clef = currentClef;
@@ -5590,7 +5592,7 @@ function MChoice(){
         var wits = split[0];
         var staffings = split[1];
         for(var i=0; i<wits.length; i++){
-          currentClef = staffings[i][0];
+          if(staffings[i][0] != undefined) currentClef = staffings[i][0];
           string = ostr;
           hackedString = ostr; // Why do I need this?! string disappears otherwise!!!
           obj = nextMusic();

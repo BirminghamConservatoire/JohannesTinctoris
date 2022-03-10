@@ -4053,7 +4053,7 @@ function TextUnderlay(){
         // we need to make sure, to put <dir> there
         //parent.afterChild(el);
         let staff = doc.evaluate("./ancestor::mei:staff", parent, nsResolver, 9).singleNodeValue;
-        staff.appendChild(el);
+        if(staff) staff.appendChild(el);
       }
 			this.MEIObj = el;
       // dir needs @startid, get uuid from parent element, last element in layer or do a fallback

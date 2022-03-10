@@ -5344,10 +5344,11 @@ function Parameters(){
     var pars;
     var vars = [];
     var found;
-    var sources = getSources();
+    //var sources = getSources();
+    var sources = this.getWitnesses();
 		var infoPresent = [false, false, false, false];
     for (var i=0; i<sources.length; i++){
-      pars = this.getWitOptions(sources[i].id);
+      pars = this.getWitOptions(sources[i]);
 			infoPresent = pars.map((x, i) => infoPresent[i] || x);
       if(typeof(pars[0])==="undefined") {
         continue;
@@ -5356,12 +5357,12 @@ function Parameters(){
       for(var j=0; j<vars.length; j++){
         if(listeq(pars, vars[j][0])){
           found = true;
-          vars[j][1].push(sources[i].id);
+          vars[j][1].push(sources[i]);
           break;
         }
       }
       if(!found){
-        vars.push([pars, [sources[i].id]]);
+        vars.push([pars, [sources[i]]]);
       }
     }
 		//TEST
@@ -5471,7 +5472,7 @@ function Parameters(){
         }
       }
     }
-    if(typeof(this.staff.colour) != "string"){
+    if(this.staff.colour && typeof(this.staff.colour) != "string"){
       for(i=0; i<this.staff.colour.content.length; i++){
         for(j=0; j<this.staff.colour.content[i].witnesses.length; j++){
           wit = this.staff.colour.content[i].witnesses[j];
@@ -5481,10 +5482,22 @@ function Parameters(){
         }
       }
     }
-    if(this.clef && this.clef.objType != "Clef"){
-      for(i=0; i<this.clef.content.length; i++){
-        for(j=0; j<this.clef.content[i].witnesses.length; j++){
-          wit = this.clef.content[i].witnesses[j];
+    let clef = this.getClef();
+    if(clef && clef.objType != "Clef"){
+      for(i=0; i<clef.content.length; i++){
+        for(j=0; j<clef.content[i].witnesses.length; j++){
+          wit = clef.content[i].witnesses[j];
+          if(wit != "MSS" && wit != "emend." && witnesses.indexOf(wit) == -1) {
+            witnesses.push(wit);
+          }
+        }
+      }
+    }
+    let solm = this.getSolmization();
+    if(solm && solm.objType != "SolmizationSignature"){
+      for(i=0; i<solm.content.length; i++){
+        for(j=0; j<solm.content[i].witnesses.length; j++){
+          wit = solm.content[i].witnesses[j];
           if(wit != "MSS" && wit != "emend." && witnesses.indexOf(wit) == -1) {
             witnesses.push(wit);
           }

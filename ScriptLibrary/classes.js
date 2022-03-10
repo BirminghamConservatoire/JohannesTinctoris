@@ -5425,23 +5425,34 @@ function Parameters(){
 //    SVG = staff;
     curx += 15;
     var c = currentClef;
-    if(clef) {
+    if(clef) 
+    {
       if(solm && solm!=clef
 //				 && ((solm.objType==="MusicalReading" && solm.content[0].members.length)
 //             || (solm.objType==="SolmizationSignature" && solm.members.length))){
 				 && (solm.objType==="MusicalReading"
-             || solm.objType==="SolmizationSignature" && solm.members.length)){
-        if(clef.objType==="MusicalReading"){
+             || solm.objType==="SolmizationSignature" && solm.members.length))
+      {
+        if(clef.objType==="MusicalReading")
+        {
           clef.draw(false, false, solm);
-        } else {
+          if(clef.content.length===0)
+          {
+            solm.draw();
+          }
+        } 
+        else 
+        {
           clef.draw(solm);
         }
-      } else {
+      } 
+      else 
+      {
 //				if(eventi<0) console.log(clef, solm, witnesses);
         clef.draw();
       }
     }
-//    if(solm && solm!=clef) solm.draw();
+    //if(solm && solm!=clef) solm.draw();
 //    SVG = oldSVG;
     curx = Math.max(curx, oldx+width);
     drawSystemLines(staff, lines, cury -lines*rastralSize, oldx+10, curx, colour);

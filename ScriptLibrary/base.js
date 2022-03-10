@@ -3575,11 +3575,17 @@ function SVGWitnessList(reading, parent){
 //    if(i){
     span.appendChild(svgSpan(span, "", false, " "));
 //    }
-    if(typeof(reading.witnesses[i])==="string"){
+    if(typeof(reading.witnesses[i])==="string")
+    {
       span.appendChild(svgSpan(span, "variantWitness", false, reading.witnesses[i]));
-    } else if(reading.witnesses[i].objType==="WitnessDescription" || 
-              reading.witnesses[i].objType==="Qualified Witness"){
+    } 
+    else if(reading.witnesses[i].objType==="Qualified Witness")
+    {
       span.appendChild(reading.witnesses[i].toSVG(span));
+    }
+    else if(reading.witnesses[i].objType==="WitnessDescription")
+    {
+      span.appendChild(svgSpan(span, "variantWitness", false, reading.witnesses[i].information));
     }
   }
   return span;

@@ -1447,12 +1447,14 @@ function sysBreak2(lastp){
  /** @memberof base/sysbreak
   * @summary Custos assistance
   */
-function nextPitch(){
-  var events = currentExample.events;
+function nextPitch(eventArray = currentExample.events, nextEventPos = eventi+1){
+  //var events = currentExample.events;
   var event;
   var components;
-  for(var i=eventi+1; i< events.length; i++){
-    event = events[i];
+  //for(var i=eventi+1; i< events.length; i++){
+  for(var i=nextEventPos; i< eventArray.length; i++){
+    //event = events[i];
+    event = eventArray[i];
 		switch(event.objType){
 			case "Note":
 			case "ChantNote":
@@ -1474,6 +1476,11 @@ function nextPitch(){
 				}
 				if(e) return pitchAndPos(e);
 				break;
+      case "MusicalChoice":
+        let defaultEvents = getDefaultReading(event);
+        let nextP;
+        nextP = nextPitch(defaultEvents, 0);
+        return nextP;
 			case "Part":
 				return false;
 		}

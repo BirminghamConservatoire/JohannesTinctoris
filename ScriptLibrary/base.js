@@ -1479,7 +1479,10 @@ function nextPitch(eventArray = currentExample.events, nextEventPos = eventi+1){
       case "MusicalChoice":
         let defaultEvents = getDefaultReading(event);
         let nextP;
-        nextP = nextPitch(defaultEvents, 0);
+        if(defaultEvents)
+        {
+          nextP = nextPitch(defaultEvents, 0);
+        }
         return nextP;
 			case "Part":
 				return false;

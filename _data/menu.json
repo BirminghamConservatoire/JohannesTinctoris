@@ -14,122 +14,139 @@
         {
           "id": "tincMissaLhommeArmee",
           "label": "Missa L'homme armé",
-          "file": "music/1-M_Lhomme_arme/1a-Kyrie.txt",
+          "file": "music/1_Tinctoris/1_Missa-Lhomme-arme/1a_Kyrie.txt",
           "parts":
           [
             {
               "id": "tincMissaLhommeArmee-Kyrie",
               "label": "Kyrie",
-              "file": "music/1-M_Lhomme_arme/1a-Kyrie.txt"
+              "file": "music/1_Tinctoris/1_Missa-Lhomme-arme/1a_Kyrie.txt"
             },
             {
               "id": "tincMissaLhommeArmee-Gloria",
               "label" : "Gloria",
-              "file" : "music/1-M_Lhomme_arme/1b-Gloria.txt"
+              "file" : "music/1_Tinctoris/1_Missa-Lhomme-arme/1b_Gloria.txt"
             },
             {
               "id": "tincMissaLhommeArmee-Credo",
               "label" : "Credo",
-              "file" : "music/1-M_Lhomme_arme/1c-Credo.txt"
+              "file" : "music/1_Tinctoris/1_Missa-Lhomme-arme/1c_Credo.txt"
             },
             {
               "id": "tincMissaLhommeArmee-Sanctus",
               "label" : "Sanctus",
-              "file" : "music/1-M_Lhomme_arme/1d-Sanctus.txt"
+              "file" : "music/1_Tinctoris/1_Missa-Lhomme-arme/1d_Sanctus.txt"
             },
             {
               "id": "tincMissaLhommeArmee-Agnus",
               "label" : "Agnus Dei",
-              "file" : "music/1-M_Lhomme_arme/1e-Agnus.txt"
+              "file" : "music/1_Tinctoris/1_Missa-Lhomme-arme/1e_Agnus.txt"
             }
           ]
         },
         {   
           "id": "tincMissaPrimiToni",
           "label" : "Missa [primi toni]",
-          "file" : "music/2-M_primi_toni/2a-Gloria.txt",
+          "file" : "music/1_Tinctoris/2_Missa-primi-toni/2a_Gloria.txt",
           "parts" : 
           [
             {
               "id": "tincMissaPrimiToni-Gloria",
               "label" : "Gloria",
-              "file" : "music/2-M_primi_toni/2a-Gloria.txt"
+              "file" : "music/1_Tinctoris/2_Missa-primi-toni/2a_Gloria.txt"
             },
             {
               "id": "tincMissaPrimiToni-Credo",
               "label" : "Credo",
-              "file" : "music/2-M_primi_toni/2b-Credo.txt"
+              "file" : "music/1_Tinctoris/2_Missa-primi-toni/2b_Credo.txt"
             },
             {
               "id": "tincMissaPrimiToni-Sanctus",
               "label" : "Sanctus",
-              "file" : "music/2-M_primi_toni/2c-Sanctus.txt"
+              "file" : "music/1_Tinctoris/2_Missa-primi-toni/2c_Sanctus.txt"
             }
           ]
       },
       {   
         "id": "tincMissaSecundiToniIrr",
         "label" : "Missa [secundi toni irregularis]",
-        "file" : "music/3-M_secundi_toni_irr/3a-Kyrie.txt",
+        "file" : "music/1_Tinctoris/3_Missa-secundi-toni-irr/3a_Kyrie.txt",
         "parts" : 
         [
           {
             "id": "tincMissaSecundiToniIrr-Kyrie",
             "label": "Kyrie",
-            "file": "music/3-M_secundi_toni_irr/3a-Kyrie.txt"
+            "file": "music/1_Tinctoris/3_Missa-secundi-toni-irr/3a_Kyrie.txt"
           },
           {
             "id": "tincMissaSecundiToniIrr-Gloria",
             "label" : "Gloria",
-            "file" : "music/3-M_secundi_toni_irr/3b-Gloria.txt"
+            "file" : "music/1_Tinctoris/3_Missa-secundi-toni-irr/3b_Gloria.txt"
           },
           {
             "id": "tincMissaSecundiToniIrr-Credo",
             "label" : "Credo",
-            "file" : "music/3-M_secundi_toni_irr/3c-Credo.txt"
+            "file" : "music/1_Tinctoris/3_Missa-secundi-toni-irr/3c_Credo.txt"
           },
           {
             "id": "tincMissaSecundiToniIrr-Sanctus",
             "label" : "Sanctus",
-            "file" : "music/3-M_secundi_toni_irr/3d-Sanctus.txt"
+            "file" : "music/1_Tinctoris/3_Missa-secundi-toni-irr/3d_Sanctus.txt"
           },
           {
             "id": "tincMissaSecundiToniIrr-Agnus",
             "label" : "Agnus Dei",
-            "file" : "music/3-M_secundi_toni_irr/3e-Agnus.txt"
+            "file" : "music/1_Tinctoris/3_Missa-secundi-toni-irr/3e_Agnus.txt"
           }
         ]
       },
       {   
         "id": "tincMissaQuintiToniIrr",
         "label" : "Missa [quinti toni irregularis]",
-        "file" : "music/4-M_quinti_toni_irr/4a-Kyrie.txt",
+        "file" : "music/1_Tinctoris/4_Missa-quinti-toni-irr/4a_Kyrie.txt",
         "parts" : 
         [
           {
             "id": "tincMissaQuintiToniIrr-Kyrie",
             "label": "Kyrie",
-            "file": "music/4-M_quinti_toni_irr/4a-Kyrie.txt"
+            "file": "music/1_Tinctoris/4_Missa-quinti-toni-irr/4a_Kyrie.txt"
           },
           {
             "id": "tincMissaQuintiToniIrr-Gloria",
             "label" : "Gloria",
-            "file" : "music/4-M_quinti_toni_irr/4b-Gloria.txt"
+            "file" : "music/1_Tinctoris/4_Missa-quinti-toni-irr/4b_Gloria.txt"
           },
           {
             "id": "tincMissaQuintiToniIrr-Credo",
             "label" : "Credo",
-            "file" : "music/4-M_quinti_toni_irr/4c-Credo.txt"
+            "file" : "music/1_Tinctoris/4_Missa-quinti-toni-irr/4c_Credo.txt"
           },
           {
             "id": "tincMissaQuintiToniIrr-Sanctus",
             "label" : "Sanctus",
-            "file" : "music/4-M_quinti_toni_irr/4d-Sanctus.txt"
+            "file" : "music/1_Tinctoris/4_Missa-quinti-toni-irr/4d_Sanctus-Benedictus.txt"
           },
           {
             "id": "tincMissaQuintiToniIrr-Agnus",
             "label" : "Agnus Dei",
-            "file" : "music/4-M_quinti_toni_irr/4e-Agnus.txt"
+            "file" : "music/1_Tinctoris/4_Missa-quinti-toni-irr/4e_Agnus-Dei.txt"
+          }
+        ]
+      },
+      {
+        "id": "tincLamentations",
+        "label": "Lamentations",
+        "file": "music/1_Tinctoris/5_Lamentations/5_Lamentationes.txt"
+      },
+      {
+        "id": "tincMotets",
+        "label": "Motets",
+        "parts":
+        [
+          {
+            "id": "tincVirgoDeiThrono",
+            "label": "Virgo Dei throno digna",
+            "file": "music/1_Tinctoris/6_Motets/8_Virgo-Dei-throno-digna.txt"
           }
         ]
       }

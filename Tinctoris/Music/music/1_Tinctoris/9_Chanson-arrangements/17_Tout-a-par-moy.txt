@@ -1,0 +1,16 @@
+﻿Tout a par moy
+Johannes Tinctoris
+Editor: Jeffrey J. Dean
+Checked by:
+Date established: 27 January 2022
+Base transcription: Seg
+Sources:
+Seg	E-SE s.s., fol. CC.iiij v – CC.v. r	.Jo. tinctoris	ii
+<piece: {mensural: void}, {staf: 5, black}>
+<part: {var="Contrapunctus" (ed.) : (om.) Seg}>
+{clef: C4} {solm: 0} {mens: c8} <label: 14>Duo</label> <full> Baa <text>Tout a par moy</text> Sg </full> maa mbb fcc fbb scc mdd mbb mcc sdd scc sbb scc Sdd. scc sbb maa mdd mcc maa sbb saa sg sf sg saa sbb scc sdd scc sbb saa Sg Sbb Baa Sf Be {var="{mens: O5} {prop: 3/2, 3-5}" (ed.) : "{prop: 3, 5}" Seg} Sd. me mf mg maa mbb mcc mdd scc sbb mcc mdd maa sbb saa mbb saa sg mf Be Saa Baa Sg {var="{mens: C9} {prop: 2/3, 7-9}" (ed.) : "{prop: 2, 9}" Seg} maa. sbb mcc mdd scc sbb maa sbb saa sg sf sg sf mg Saa sbb saa sg sf se sf sg se {var=(ins.) "{prop: 3, 9}" Seg^* : (eras.) Seg^c} sg sf se sd mf me. sd md mb mc Bd PS9 Saa Saa sbb saa sg saa Bbb Baa mf mg maa mbb scc sbb saa sg saa sg sf se sf sg maa sbb saa sg sf sg saa sbb scc sdd scc sbb saa sbb scc mdd see sdd scc sdd see sdd scc sbb scc sbb saa sbb scc sbb saa sg Saa PS9 mg. sf sg saa sbb scc sdd sbb scc sdd maa mcc mbb mg mbb maa sf sg saa sbb sg saa sbb scc sbb saa mbb scc sbb saa sg sf se mf Sg Pm9 mg saa sg sf se sf se sd <ll: -1> sc Sb SG PL3-5 </ll> maa. sbb mcc mdd see sdd scc sbb scc sbb saa sg saa sbb mcc sdd scc sbb saa sbb saa sg sf Sg Baa {var="{mens: O7} {prop: 3/2, 5-7}" (ed.) : "{prop: 3, 8}" Seg} Sf. mg saa sg maa mbb maa mbb mcc mdd mbb mcc maa mbb maa mbb mcc mdd scc sdd Scc sbb saa mbb maa mbb maa mbb mg {var="se sf" (ed.) : "me mf" Seg} Bg {var="{mens: C7} {prop: 2/3, 5-7}" (ed.) : "{prop: 2, 5}" Seg} PS5 Sd Sf Sg Sbb Baa Sg saa sbb mcc sdd scc sbb saa sbb saa sg saa sbb saa sg sf me. sd se sf sg saa Be* {mens: c7} Sf md {var="mf" (ed.) : "mf." Seg} sg faa fg saa sbb scc sdd saa fbb faa sbb saa sg sf me mg mf md Pm7 mf. sg saa sf sg saa sbb scc sbb scc mdd see sbb mcc Sdd PS11 maa mbb mcc mdd maa Scc mbb Pm11 mcc. saa Saa mdd mee mcc mbb Sdd mcc mdd mbb. saa mcc. sbb maa. sg mf me. sd Se Sd PS5 md. se mf mg saa sg sf se sf sg saa sbb scc sbb saa sg fg ff sg ff fe sf Bg PS7 Sg maa mbb scc <ll: 1> sdd mee sff see sdd </ll> scc Sbb mcc maa sg sf me mf mg saa sg saa sbb mcc maa mbb <full> Sdd mcc Saa mbb Scc sbb saa Sg sf sg Saa sg sf Se mf Sg sf sg Saa mbb Scc sbb saa </full> mg <full> Sf mg Saa sg sf </full> me mf. se md mb mc Bd PS5 Saa Sbb Scc Sdd Pm9 maa sbb saa sg sf sg saa sbb scc sdd scc sbb saa sbb saa sg sf se sf sg se sf sg maa sbb saa mbb scc sbb saa sg saa sg sf se sf se mf Lg {var="||" (ed.) : "|||" Seg}
+</part>
+{staf: 5} <part: {var="Tenor" (ed.) : "/t/" Seg}>
+{clef: C10} {solm: 0} {mens: O10} Bd <text>Tout a par moy</text> Se .13 Sd Bf Se  Bd Sc Sd Sa Pm11 md mc ma Sb Ba mE mF Sa mG mF SE BD PS3 SG mF SF mD SE SD PS3 Sd mG Sd Sc Sb mG ma mG md. sc mb mG Sa SG PS7 Sb ma Sa mG Sa Pm9 md mc ma Sb Sa Bd Sc mb mG Sa <lig>SG Sd.</lig> me md mc <lig><obl>Sb Sa</obl></lig> {var="Bc* PB11" (ed.) : "Bc PS11" Seg} Sf Sd Se Sd Sf mc md mc Sf me md me md. sc ma Sd mc <full> Bd Ba Bb </full> <lig><obl>Sa SG</obl></lig> Pm11 mc mb Sa mG SF Pm9 mb ma SG mF mE mD <lig><obl>SF SE</obl></lig> BD Pm9 ma mb mc md mc ma. sb mc md mG mb Sa LG {var="||" (ed.) : "|||" Seg}
+</part>
+</piece>

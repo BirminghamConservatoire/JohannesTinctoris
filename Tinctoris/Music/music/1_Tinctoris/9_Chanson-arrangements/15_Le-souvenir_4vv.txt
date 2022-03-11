@@ -1,0 +1,22 @@
+﻿Le souvenir
+Johannes Tinctoris
+Editor: Jeffrey J. Dean
+Checked by:
+Date established: 1 February 2022
+Base transcription: Seg
+Sources:
+Seg	E-SE s.s., fol. C xvj v – C.xvij r	Johannes tinctoris	iiii
+<piece: {mensural: void}, {staf: 5, black}>
+<part: {var="Supremum" (ed.) : (om.) Seg}>
+{clef: C4} {solm: 0} {mens: c8} PL9-11x2 PB11 Scc <text>Le souvenir</text> Scc mg. saa Sbb Pm9 mg mcc mdd mee mdd. scc Scc mbb mcc. sbb Sg Saa {var="PB9 PL7-9 PB9" (ed.) : "PL9-11 PL7-9" Seg} Pm9 mg Se Sd Pm5 mc me mf mg maa mbb Scc maa. sg Sg mf Bg PS9 Scc mdd. scc Saa Pm11 mcc mdd. scc mdd saa Sbb Pm11 Scc. sbb saa mg mcc. sdd See {var=(ins.) "." Seg} sdd scc mbb. saa Scc Pm9 maa mbb mcc Saa Sdd mg mcc. sbb mcc mdd mbb Saa mg. sf Sd Sc Pm11 Scc sbb saa <lig>Sg Saa</lig> mbb mcc mdd <ll: 1> bff See Scc Sff {var="mee." (ed.) : "{full}See" Seg} sdd </ll> scc sbb maa Sdd mcc <ll: 1> bff mdd Sff See mdd. </ll> scc sbb saa mg Scc mbb Lcc {var="||" (ed.) : "|||" Seg}
+</part>
+{staf: 5} <part: {var="Tenor" (ed.) : "t" Seg}>
+{clef: C10} {solm: 0} {mens: c6} PS5 SF <text>Le souvenir</text> SF mC. sD SE Pm5 mC mF mG ma. sG SG Pm7 SF sE sD SC Pm7 mc sd sc sb sa mG. sE mF mb ma mb mc sb sa sG sF sE sD mC mF mE mC mD mF SE mD. sE SF mG ma mb Sc sb sa mb SG mF mG sa sb mc sd se Sf Se mc md me mc md ma Sc md mb Sa mG Sc sb sa SG mF Sa mb mc. sd me mf Sd. mc <lig><obl>Sb Sa</obl></lig> Sc Bc Sc SG Sc PS9 PS7 SD Sd. Sc sb sa sb sc Sd md Sd PB11
+</part>
+{staf: 5} <part: {var="Contratenor Altus" (ed.) : "a" Seg}>
+{clef: C6} {solm: bb} {mens: c8} Sf <text>Le souvenir</text> Sf mc. sd Se Pm7 mc mf mg maa mg. sf Sf me mf md Sc PS5 {var="PL7-9 PL5-7" (ed.) : "PL5-7x2" Seg} Pm7 <ll: -1> mc Sa SG Pm3 mF ma mb </ll> mc md me Sf md. sc Sc mb Bc {var="PL7-9x2" (ed.) : "PL5-7 PL7-9" Seg} Se me. sf Sg Saa Pm9 mf me mf mg maa mf bbb mbb. saa Saa mg maa sg sf Se Pm11 Saa Sg sf se Sd Pm7 mc me mf mg Saa Sf Sbb maa. sg sf se md Sg mf mg Sbb Saa {var="mg." (ed.) : "{full}Sg" Seg} sf se sd mc Sf me Sf PB9 <lig><obl>Se Sc</obl></lig> mf Sg. mf maa. sg maa {var="mf." (ed.) : "{full}Sf" Seg} sg Saa Pm11 Sd Sg. Sg me Saa sg sf Le {var="||" (ed.) : "|||" Seg}
+</part>
+{staf: 5} <part: {var="Contratenor Bassus" (ed.) : "b" Seg}>
+{clef: C10} {solm: 0} {mens: c6} SF <text>Le souvenir</text> mD Sa sG sF sG sF sE sD mC mG ma Sc mC SF SC mF. sG ma. sb Sc. sb sa mG. sa Sb Pm7 mG mc md me. sd Sd Sc. {var="me." (ed.) : "{full}Se" Seg} sd Sd mc Sd SD mE mF mG ma SF mG mE SD SC Pm5 mC sD sE sF sG ma. sG ma mD mC mF mD {var="mF." (ed.) : "{full}SF" Seg} sG ma mD mG SD Pm5 SE SC. SF SD Sa mG mF Sb mG ma mE mG mF sE sD mC. sD mE SF sE sD SC PS3 SC mc md mb ma Sd SD mG ma SF Pm7 mG SD SG. mD mF sE sD SC mF ma SG {var="mF." (ed.) : "{full}SF" Seg} sE mD mC Pm5 <full> Sc mb Sa mG SF mE SC mD </full> mE mF mD <lig>Sa SD</lig> <lig><obl>Sc Sb</obl></lig> <lig>SG SC</lig> SG mC mF. sE sF sG ma sG sF sG sF sE sD -LC {var="||" (ed.) : "|||" Seg}
+</part>
+</piece>

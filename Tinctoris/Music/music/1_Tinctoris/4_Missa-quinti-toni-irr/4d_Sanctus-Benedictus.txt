@@ -1,0 +1,60 @@
+Missa quinti toni irregularis
+Johannes Tinctoris
+Editor: Christian Goursaud
+Checked by:
+Date established: 11 June 2020
+Base transcription: Ve759
+Sources: 
+Ve759	I-VEcap DCCLIX, fols. 25v–31r	Tintoris
+<piece: {mensural: void}, {staf: 5, black}>
+
+<section: Sanctus>
+<part: {var="Supremum" (ed.) : (om.) Ve759}>
+<pars>
+{clef: C4} {solm: 0} {mens: O5} Sc <text>Sanctus,</text> me. sf mg maa Sg me mc. sb mc Pm7 mcc. sdd <ll:1> mee mff. see mdd </ll> mee. scc Scc mbb Bcc PS11 <lig>Bg <text>sanctus,</text> Baa.</lig> Sg me. sf se fd fc mb. sc md. sf se fd fc <ll:-1>mb. sa Bc</ll> PS3 Sg. <text>sanctus,</text> saa sbb Scc mbb mg. saa sg ff fe Sd Pm7 Se mf mg <lig><obl>Saa Sd</obl></lig> mdd. scc sbb faa fg maa mbb. saa Sg mf Bg PL7-9 Be <text>Dominus</text> Sf Bg maa. <text>Deus</text> fg ff me Sc me Sd Sc Pm5 mc <text>{var="Sa" (ed.) : "sab" Ve759} -</text> mf. fe ff mg. saa mg Scc mbb <text>baoth.</text> Lcc || 
+</pars>
+<pars>
+{mens: c5} -Lc. <text>Pleni</text> <lig><obl>Be  Bd</obl>Bg</lig> Lg <lig>Bg <text>sunt</text> Baa Bbb Bcc</lig> PS11 Scc <text>ce -</text> <lig><obl>Sbb Saa.</obl></lig> sg saa sbb saa sg sf me md Sg. sf se Sf <text>li</text> Bg PL7-9x2 PL9-11 <lig>Sg. <text>et</text> Saa</lig> mg <text>ter -</text> me mc. sb mc md me Sc Pm7 me mf Sg maa mbb mcc. sdd mbb maa mg maa mbb. saa Sg mf <text>ra</text> Bg PB7 Sc <text>glo -</text> md. se mf Sg me sf se sd sc md mb <lig>Sc Sd</lig> Pm5 md <ll:-1>mc <lig>Sa Sd</lig> mc</ll> Sd. sc <text>ria</text> sd <lig><obl>Se Sc</obl></lig> PB5 <full>Be <text>tu -</text> Sf Bg Saa <lig><obl>Sg Se</obl></lig> Sf Bg Saa <lig>Sbb Scc</lig> Sdd <ll:1><lig>See Sff.</lig></ll> mee Scc Bdd Scc. sbb <text>a.</text> saa Sbb</full> Lcc ||
+</pars>
+<pars>
+{mens: O7} <lig>Bg <text>Osanna</text> Baa Bbb Bcc</lig> Sbb <full><lig>Baa<obl>Bg Bf</obl></lig></full> Bg <lig>Se Sf.</lig> me Be Pm7 {var= "mg. sf" (ed.) : "<full>Sg mf</full>" Ve759}<text>in</text> me md <text>ex -</text> me Sc mb mc. sd me md mc mg. saa mbb mcc mbb Sdd mee <lig><obl>Sdd Sg</obl></lig> mf mg. saa mbb maa mbb Sg mf mg. saa sbb scc Sdd mcc mbb Saa Sg Pm7 Se mc. sb mc md mb Bc {var=(ins.) "." Ve759} me. sf mg Saa mg. sf se sd me mc mg. saa mbb maa mcc mdd mbb mee. <text>celsis.</text> sdd Scc mbb Lcc ||
+</pars>
+<pars>
+{mens: c5} <label: 14>Duo</label> Bc <text>Benedictus</text> Se mf Sg maa mbb saa sbb Scc Sdd <ll:1>mee mff mee</ll> Scc mdd. sscc sbb saa mg Scc mbb Bcc PS9 <lig>Sc. <text>qui</text> Se</lig> mf md Sg maa mg mcc. sbb saa sg maa sbb scc mdd Sg me <text>ve -</text> sf sg maa md se sf mg maa mbb Sg mf <text>nit</text> Lg PB7 PS7 Sc. <text>in nomine</text> Sd md mc Se md mf. se Sg mf mg. sf md me mf Sg maa mg mbb mcc Sdd <text>Domi -</text><ll:1>mee mff. see</ll> sdd scc mee mdd. scc <text>ni.</text> Scc  mbb Lcc || 
+</pars>
+<pars>
+<tacet>Osanna ut supra.</tacet>
+</pars>
+</part> 
+
+{staf: 5} <part: Tenor>
+<pars>
+{clef: C4} {solm: 0} {mens: O5} PS5 PS5 Sc <text>Sanctus,</text> me. sf mg maa Sg me mf mc mg maa. sg maa mbb mcc Sg mf Sg maa. <text>sanctus,</text> sg me. sd Se Bc Sf. md. sc md me mc. sb Sc. Bd. mc me.<text>sanctus,</text> sd Sc mb <lig>Sc Se.</lig> mf Bg Saa Sbb mcc maa mbb mcc Saa mdd. scc maa mg sd se mf. se Sd mc Sd Pm5 Sd <text>Dominus Deus</text> me md <lig>Sg Saa</lig> mbb mcc mg. sf me Sd Bc PS3 Be <text>{var="Sabaoth" (ed.) : "sabbaoth" Ve759}</text> Sf Bg maa. fg ff me Sc me Sd mc me. sd Sg mf Lg ||     
+</pars>
+<pars>
+{mens: c11} <full>Bcc <text>Pleni</text> mbb maa</full>**@@Should this be adjusted as minor coloration?@@** <lig>Sg. Saa</lig> mg. <text>sunt</text> sf se sd Sc Pm7 mg<lig>Saa. Sdd</lig> mbb. saa Sg me. sd mc. sb sc sd Se Pm5 mc. <text>celi</text> sd <ll:-1>me ma sb</ll> sc md se sf mg. sf Sd Lc PL5-7x2 <lig>Sd. <text>et</text> Sg</lig> md <text>ter -</text> Sg. me mf Sg maa. sbb mcc mdd mcc Saa Pm9 maa mbb <lig>Sg Scc</lig> mbb Bcc PS11 <lig>Sg. Saa</lig> mg me mc. sb mc md <text>ra</text> me Sc Pm5 me <text>gloria</text> mf mg maa mbb mcc mdd. scc mbb Saa Bg PL7-9 PS5 Sc md. se mf Sg me sf se sd sc md mb mc me. sd Sg mf Lg PL7-9 <full>Be <text>tu -</text> Sf Bg Saa <lig><obl>Sg Se</obl></lig> Sf <lig>Sg Saa</lig> Sbb <lig>Scc Sdd.</lig> scc sbb Scc. sbb saa Sbb Sg. sf <text>a.</text> se Sf</full> Lg ||
+</pars>
+<pars>
+{mens: O5} Se <text>Osanna</text> md me. sf sg ff fe md mf. sg sf fe fd sc me sf mg me. sd Sg mf mg maa. sg me md mg mf. saa. fg ff fe mf Sg PB7 md mb sc sd me. fd fc md Sc PS3 PS3 Pm7 mg. sf me md me Sc mb {var="mc. sd" (ed.) : "<full>Sc md</full>" Ve759} me md mc mg. saa mbb mcc mbb Sdd mee Sdd Sg mf mg. saa mbb maa mbb Sg mf mg. saa sbb scc mdd mbb Sg. sf sg maa Sg mf Sg Bc PS7 PS7 Sg Pm9 Se mc. sb mc md mb Bc <text>in excelsis.</text> me. sf mg Saa mg. sf se sd me mf Sd Lc ||   
+</pars>
+<pars>
+<tacet> {var="Benedictus" (ed.) : (om.) Ve759}<l/>{var="tacet." (ed.) : (om.) Ve759}</tacet> || 
+</pars>
+</part> 
+
+{staf: 5} <part: {var="Contratenor" (ed.) : "Contra." Ve759}>
+<pars>
+{clef: C8} {solm: 0} {mens: O9} PB9 PS9 Sc <text>Sanctus,</text> me. sf mg maa mg me md. se mf mg mc me Sd Sc Pm9 ma. <text>sanctus,</text> sb mc. sb sc sd me. sc Se Sd. mf. se mf mc me. sd sc sb Sa mG. sa mb sG sd. fc fb fa mG Pm7 mg. <text>sanc -</text> sf me. sc md Se mc. sb Sa SG mc. fd fe Sf Sg mc md mb ma Sd SG md me mf md. sc mb <text>tus,</text> Sa BG Pm7 mc <text>Dominus</text> mb mG <lig>Sc Sd</lig> mc me. sd Sc mb mc mg. sf me <text>Deus</text> Sd Bc PS7 Be <text>{var="Sabaoth" (ed.) : "sabbaoth" Ve759}.</text> Sf Bg maa. fg ff me Sc me Sd Lc ||
+</pars>
+<pars>
+{mens: c7} PL5-7x2 PL7-9x2 PL9-11 PB9 PS7 Sc. <text>et</text> md me mf Sg mf md. <text>ter -</text> sc sb sa mG. fa fb mc md mb. fa fb sc sb sa <text>ra</text> sG Sa BG PS5 <lig>SG. Sa</lig> mG Sc. ma mb Sc md. se mf Sg mc me Sd Lc PL7-9x2 PL5-7 PS7 Sc <text>glo -</text> {var="md. se" (ed.) : "<full>Sd me</full>" Ve759} mf Sg me sf se sd sc md mb Sc PL5-7 SG ma mc. sb mG Sa <text>ria</text> BG PB5 <full>Be <text>tu -</text> Sf Bg Saa <lig><obl>Sg Se</obl></lig> Sd Se. mf Sd <lig><obl>Se Sc</obl></lig> Sa <lig><obl>SG SF</obl></lig> PS3 <lig><obl>Sc Sb.</obl></lig> mc Sa BG <text>a.</text> Sc <lig>Bd</full> Lc</lig> ||
+</pars>
+<pars>
+{mens: O9} Sc <text>Osanna</text> mG mc. sd me mf md. sc sd fc fb Sa mG mg. sf me Sd mc {var="ma. sb" (ed.) : "<full>Sa mb</full>" Ve759} mc SG md. sf. fe fd fc md mG mc. sb mc md sa sd. fc sb ma SG Pm7 mc. fb fa mb <lig>Sc Sd.</lig> mc Bc mb Sc. md mc Se Pm11 me Sc mG ma SG mg mc Sg. mc md mG. sF mG ma SG. md mG. sF <ll:-1>mE mD mE.</ll> sF sG sa sb sc sd se mf mg Sd <lig>SG Sg</lig> {var=(ins.) "." Ve759} me. sf mg {var="Saa" Ve759^* : "maa" Ve759^c} mg. sf se sd me. sf Sg PS11 {var=(ins.) "PS11" Ve759} PS9 me. <text>in excelsis.</text> sf mg me mc. sa mG mF ma mb mG Sc mF SG Lg ||
+</pars>
+<pars>
+{mens: c7} <label: 14>Duo</label> Sc. <text>Bene -</text> sb sa mG Sa mG mE mF SG Pm7 ma mb sa sb mc md <lig>Se <text>di -</text> Sf</lig> mg. sf se sd mc <text>ctus</text> Sd Lc PS7 Sa <text>qui</text> Sb mc. <text>ve -</text> sd Se mf. se sd sc md mG. sF mG <ll:-1>ma mD. sE</ll> mF sG sa mb mc md mb Sa BG PB5 <lig>Sc. <text>nit,</text> Sd.</lig> mc Se md {var="mf. se" (ed.) : "<full>Sf me</full>" Ve759} Sg mc {var="md. sc" (ed.) : "<full>Sd mc</full>" Ve759} {var="ma mb mG ma mb" Ve759^c : "ma mb mG mb" Ve759^*} SG Pm7 ma <text>in nomine Domini.</text> mb {var="mc. sa mb. sG" (ed.) : "<full>Sc ma Sb mG</full>" Ve759} ma mG mb mc {var="md. se" (ed.) : "<full>Sd me</full>" Ve759} mf {var="mg. sf" (ed.) : "<full>Sg mf</full>" Ve759} mg me Sd Lc ||
+</pars>
+</part>
+</section>
+</piece>

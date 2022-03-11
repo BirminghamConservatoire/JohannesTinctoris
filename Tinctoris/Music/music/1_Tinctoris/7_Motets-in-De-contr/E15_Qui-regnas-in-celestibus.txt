@@ -1,0 +1,20 @@
+Qui regnas in celestibus
+Editor: Jeffrey J. Dean
+Checked by:
+Date established:
+Base transcription: V
+Sources:
+V	E-VAu 835, fols. 142v–143r	(impl.)	ttt
+BU	I-Bu 2573, fols. 163v–164r	(impl.)	ttt
+Br1	B-Br II 4147 Mus., fol. 99va–b	(impl.)	ttt
+<piece: {mensural: void}, {staf: 5, black}>
+<part: {var="Supremum" (ed.) : (om.) V BU Br1}>
+{clef: "C6" V BU : "C8" Br1} {solm: 0} {mens: o7} Sc <text>Qui re-</text> me. fd fc Sd mG mc. fb fa mb mc _<ll: -1>SG mF mG</ll> mg mf<text>gnas</text>. fe fd {var=(ins.) "{staf: 5} {clef: C4} {solm: 0}" Br1} Se Pm11 mg<text>in</text>. sf se sd Sg <text>celestibus{.,}</text> maa mbb mcc. fbb faa Sbb. mg<text>Sedes</text>. ff fe mf Sg Pm11 mg <text>conterens</text> me me {var=(ins.) "{staf: 5} {clef: C8} {solm: 0}" Br1} md. fc fb Sa mb<text>in-</text>. fc fd se sf mg. sf md<text>fimas{.,}</text>. sc sb sa mb mG Sg <text>Da gaudiis felici-</text> me me Sc {var=(ins.) "{staf: 5} {clef: C4} {solm: 0}" Br1} md mg. saa mbb mcc mcc. fbb faa mg saa sg mcc. sbb saa sg {var=(ins.) "{staf: 4} {clef: C6} {solm: 0}" BU} Bg <text>bus</text> Pm7 Sc <text>Perfrui nostras animas.</text> Se Sg {var=(ins.) "{staf: 5} {clef: C6} {solm: 0}" Br1} Sc{var="{red}?" V BU : (om.) Br1} Se mg. sf se sd me mc. fb fa mb Lc ||
+</part>
+{staf: "5" V BU : "4" Br1} <part: Tenor>
+{clef: F8} {solm: 0} {mens: o5} <text>Qui regnas in celestibus{.,}</text> BC SB <lig>SC SD</lig> SC <lig><obl>SD{var="{red}?" V BU : (om.) Br1} SC</obl></lig> <lig><obl>SD SC</obl></lig> <lig><obl>SE SC</obl></lig> <lig><obl>SE SD</obl></lig> {var=(ins.) "{staf: 4} {clef: F6} {solm: 0}" Br1} SC SG<text>Sedes conterens</text>. mb Sa BG mc mc SG PS9_PS9 mc<text>infimas{.,}</text>{var="{red}-?" V BU : (om.) Br1} mc SG PS9 SG <text>Da gau{var="diis" V BU Br1^c : (om.) Br1^*} felicibus</text> mE mE {var=(ins.) "{staf: 5} {clef: C12} {solm: 0}" BU} SC PS7 SG {var=(ins.) "{staf: 5} {clef: C12} {solm: 0}" Br1} mE{var="{red}-?" V BU : (om.) Br1} mE SC PS5 SC PS5 SC PS5 SC <text>Perfrui</text> SE SG SC<text>nostras animas.</text>{var="{red}?" V BU : (om.) Br1} SE SG SE mC mE SD LC ||
+</part>
+{staf: 5} <part: Contratenor>
+{clef: C10} {solm: 0} {mens: o7} SG<text>Qui</text>. ma mb md <text>re-</text> sc. fb SG mF <text>gnas</text> mG mc. fb fa mb mc<text>in</text>. sb sa sb sa fG fF mE <text>celestibus{.,}</text> mG. sF sE sD SG mC mc Pm11 md <text>Sedes</text> Se Sd. mG SD Pm11 md <text>conterens infimas{.,}</text> {var=(ins.) "{staf: 6} {clef: C12} {solm: 0}" BU : "{staf: 5} {clef: C12} {solm: 0}" Br1} mb mb Sa Sb mc mc SG SC PS5 SG <text>Da gaudiis felicibus</text> mE mE SC SG <lig>Sa Sb</lig> SG mE mE SC PS3 SC{var="{red}?" V BU : (om.) Br1} PS3 SC PS3 SC <text>Perfrui nostras ani-</text> SE SG {var=(ins.) "{staf: 4} {clef: C10} {solm: 0}" Br1} SC{var="{red}?" V BU : (om.) Br1} SE mG. fa fb sc. sb mG. fF fE mF <text>mas.</text> LG ||
+</part>
+</piece>

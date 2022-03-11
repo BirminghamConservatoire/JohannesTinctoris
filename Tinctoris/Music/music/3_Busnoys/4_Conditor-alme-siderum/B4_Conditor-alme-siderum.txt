@@ -1,0 +1,29 @@
+Conditor alme siderum
+Antoine Busnoys
+Editor: Christian Goursaud
+Checked by:
+Date established: 10 March 2022
+Base transcription: Per
+
+Sources:
+Per		I-PEc 1013, 113v–114r	Busnoys
+
+Published Editions:
+edS		Albert Seay, ‘The Conditor Alme Siderum by Busnois’, Quadrivium, 12 (1971), 225—34.
+edT		Antoine Busnoys, Collected Works, ed. R. Taruskin, iv (1990) [Implicit notation] 
+
+<piece: {mensural: void}, {staf: 5, black}>
+<part: {var: (ed.) "Discantus" : (om.) Per} >
+{clef: C4} {solm: 0} {mens: O7} {prop: 3, 7}<lig><obl>Laa <text>Conditor alme siderum,</text> Bg</obl></lig><lig>Lf Baa</lig> Lcc <lig> Bcc Bdd</lig> Scc <full><lig><obl>Scc Sbb</obl>Bcc</lig> Sbb. maa</full> Bcc PB11 Bcc <text>{var="eterna lux credentium," (ed.) : (om.) Per}</text> Ldd Bbb Lcc Baa <full><lig><obl>Bbb Baa</obl> <lig>Sg Saa</lig> Bg</full> mf mg Baa PB9 <text>{var="Christe redemptor omnium" (ed.) : (om.) Per}</text> Bcc Lbb Bg <lig>Laa Bbb</lig> <full>Laa <lig>Sf Saa</lig></full> Bg Sf Bf PB7 Bf<text>{var="exaudi preces supplicum." (ed.) : (om.) Per}</text> Laa Bbb Lcc Baa Bbb maa mbb <full>Laa Sg mf</full> Laa||  
+</part>
+{staf: 5} <part: Altus>
+{clef: C8} {solm: 0} {mens: c5}<full>Ba.<text>{var="Conditor alme siderum," (ed.) : (om.) Per}</text> SF BG <lig><obl>Ba BF</obl>Bf</lig></full><lig>Be Bg</lig> <full>Baa. Sf Bg Be</full> PB11 Bg<text>{var="eterna lux credentium," (ed.) : (om.) Per}</text> Sg Sg Se. Se md Sc <lig>Sb Sd<obl>Se Bc</obl></lig> PB9 <full>Bd<text>{var="Christe redemptor omnium" (ed.) : (om.) Per}</text><lig>Sb Sc Bd</lig> Ba. SF Bb</full> <lig>BF Bc</lig> <full>Ba Bb. Sa Ba PS5 [-]{var="PS11"  (ed.) : "PS5" Per} Bg<text>{var="exaudi preces supplicum." (ed.) : (om.) Per}</text> Baa. Sg <lig>Se Sf</lig> Sg. mf Bd Se. mc </full> Bc||
+</part>
+{staf: 5} <part: Tenor>
+{clef: C10} {solm: 0} {mens: C8} {prop: 2, 8} <lig>Ba<text>{var="Conditor alme siderum," (ed.) : (om.) Per}</text> Bc Bd</lig> Bd <lig>Bc Be</lig> <full>Bf <lig><obl>Se Sc</obl><obl>Bd Bc.</obl></lig> Sb Ba</full> BG PB7 Sa.<text>{var="eterna lux credentium," (ed.) : (om.) Per}</text> mb Sc Sc <lig><obl>Sd Sa</obl>Bb</lig> <full>Ba <lig>SF SG Ba</lig></full> SG PB7<lig>Bc<text>{var="Christe redemptor omnium exaudi preces supplicum." (ed.) : (om.) Per}</text> Bd</lig> <full><lig>Bc <obl>Bf Be</obl></lig></full> Bf [-]<lig><obl>Bd Bc</obl>Bd</lig><full>Ba. Sb Bc Bd. Sa Bb</full> La||
+</part>
+{staf: 5} <part: Bassus>
+{clef: F8} {solm: 0} {mens: C6} {prop: 3, 6} <lig>BD<text>{var="Conditor alme siderum," (ed.) : (om.) Per}</text> BF BE LD</lig> <lig>SF SG Ba.</lig>SG BE SD. mE <lig>SF<obl>Sa BG</obl></lig> <lig>SC SE.</lig> mF <lig>BG Ba</lig> Sc Bb. Sc Bd {mens: Q12} Lc<text>{var="eterna lux credentium," (ed.) : (om.) Per}</text> PL8-12 BG BF BE BE <full><lig>BF Ba.</lig> SG <lig><obl>LG BF</obl></lig> LG. Ba Bb. Sa</full>{mens: C10} {prop: 3, 10}**3 appears below the semicircle in Per** <lig>LF<text>{var="Christe redemptor omnium" (ed.) : (om.) Per}</text> BG Ba <obl>BF BC</obl></lig>[-][-][-][-][-][-][-][-][-]<lig><obl>BD BB</obl></lig> [-]BB[-]<lig>LF<text>{var="exaudi preces supplicum." (ed.) : (om.) Per}</text> [-]BG</lig> [-]BF. [-]SG[-] Ba [-]<lig>BG<obl>BF BE</obl></lig>[-] -LA||
+</part>
+</piece>
+

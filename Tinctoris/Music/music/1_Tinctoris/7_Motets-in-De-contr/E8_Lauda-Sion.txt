@@ -1,0 +1,17 @@
+Lauda Sion
+Editor: Jeffrey J. Dean
+Checked by:
+Date established: 9 October 2020
+Base transcription: V
+Sources:
+V	E-VAu 835, fol. 128r	(impl.)	tt
+BU	I-Bu 2573, fols. 147v–148r	(impl.)	tt
+Br1	B-Br II 4147 Mus., fol. 89ra	(impl.)	tt
+<piece: {mensural: void}, {staf: "5" (ed.) : "6" V BU : "4" Br1}>
+<part: Contrapunctus>
+{clef: C4} {solm: 0} {mens: o5} [-] Sd <text>Lauda</text> [-] Se [-] Sf <text>Sion</text> [-] Sg {var=(ins.) "{staf: 4} {clef: G6} {solm: 0}" Br1} [-] Saa <text>Salvatorem,</text> [-] Sg Scc [-] Sbb[-] Saa <text>Lauda</text> {var=(ins.) "{staf: 5} {clef: C4} {solm: 0}" V} [-] Sg {var=(ins.) "{staf: 5} {clef: C4} {solm: 0}" BU} [-] Saa <text>ducem et</text> [-] Sbb [-] See [-] Sdd <text>pastorem</text> [-] Scc [-] Sdd [-] Scc <text>In hymnis et can -</text> [-] Sg [-] Sf [-] Sg [-] Saa [-][-] Sd <text>ticis.</text> [-] Sg [-] {var="||" V Br1 : "|" BU}
+</part>
+{staf: "5" V : "6" BU : "4" Br1, black} <part: Tenor>
+{clef: "C10" V Br1 : "C12" BU} {solm: 0} {mens: o5} [-] SD <text>Lauda</text> [-] SG [-] Sa <text>Sion</text> [-] SG Sc <text>Salvatorem,</text> [-] Sb [-] Sa [-] SG [-] Sa <text>Lauda</text> [-] Sb [-] Sa <text>ducem et</text> [-] SG [-] SE [-] SF <text>pastorem</text> [-] SE [-] SD [-] Sa <text>In hymnis et can -</text> {var=(ins.) "{staf: 6} {clef: C10} {solm: 0}" V} [-] Sb [-] Sa [-] SG [-] SF [-][-] SG <text>ticis.</text> [-] SG [-] ||**(Corpus Christi) LU 945, GR 315.**
+</part>
+</piece>

@@ -1,0 +1,20 @@
+O mater Dei memento mei
+Editor: Jeffrey J. Dean
+Checked by:
+Date established:
+Base transcription: V
+Sources:
+V	E-VAu 835, fol. 140r	(impl.)	ttt
+BU	I-Bu 2573, fols. 160v–161r	(impl.)	ttt
+Br1	B-Br II 4147 Mus., fol. 97va–b	(impl.)	ttt
+<piece: {mensural: void}, {staf: "5" V Br1 : "8" BU, black}>
+<part: {var="Supremum" (ed.) : (om.) V BU Br1}>
+{clef: "C4" V Br1 : "C6" BU} {solm: 0} {mens: "O11" V Br1 : "O13" BU} Bcc <text>O mater De-</text> Sbb{var="{red}-?" V BU : (om.) Br1} Scc Pm11 maa. sbb saa fg ff se sc md mc mcc. fbb faa mbb <lig><obl>Scc Saa</obl></lig> Sg <lig><text>i,</text>Sf Saa{var="{red}?" BU : (om.) V Br1}.</lig> mg Pm7 mf<text>memento mei.</text>. sg maa mbb scc. fbb saa sg mcc maa Sf me Lf ||
+</part>
+{staf: "5" V BU : "4" Br1} <part: Tenor>
+{clef: "C10" V BU : "C8" Br1} {solm: 0} {mens: O7} <lig><text>O mater De-</text> SF Sa</lig> SG BF Pm7 mF ma mb <lig>Sc Sd</lig> <lig>Sc. Sf</lig> me mf. se {var=(ins.) "{staf: 5} {clef: C8} {solm: 0}" Br1} md mc<text>i,</text>. sd me Sf Pm11 mc <text>memento</text> md mc. sb sa sG mc <text>mei.</text> ma SG LF ||
+</part>
+{staf: 5} <part: Contratenor>
+{clef: C10} {solm: 0} {mens: O13} Bf <text>O mater De-</text> Se{var="{red}-?" V BU : (om.) Br1} mf. fe fd Sc md mc. sa mG <lig><obl>Sa SG</obl></lig> Pm5 mC SF Sc SF <text>i,</text> Pm9{var="{red}?" BU : (om.) V Br1} ma<text>memento</text>. sb mc md. sc sd fc fb ma mG ma BF <text>mei.</text> SC Lc ||
+</part>
+</piece>

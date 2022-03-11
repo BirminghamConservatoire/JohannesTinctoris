@@ -440,7 +440,7 @@ function MusicHolder(text, outdiv){
           let lastPartDiv = document.getElementById(partExamples[i-1][0]);
           partDivTitle = partPair[0];
           partDivID = partDivTitle.replace(" ", "");
-          partDiv.setAttribute("title", partDivTitle);
+          //partDiv.setAttribute("title", partDivTitle);
           partDiv.id = partDivID;
           let combinedDiv = DOMDiv("musicPanel col mb-3 p-0", lastPartDiv.id + "1+2");
           musicDiv.appendChild(combinedDiv);
@@ -454,7 +454,7 @@ function MusicHolder(text, outdiv){
           musicDiv.appendChild(partDiv);
           partDivTitle = partPair[0];
           partDivID = partDivTitle.replace(" ", "");
-          partDiv.setAttribute("title", partDivTitle);
+          //partDiv.setAttribute("title", partDivTitle);
           partDiv.id = partDivID;
           partDiv.className += " musicPanel";
         }

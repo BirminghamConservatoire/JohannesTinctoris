@@ -52,19 +52,22 @@ function fillSubMenu(item)
     let linkUrl = new URL(currentUrl.toString());
     let linkParams = new URLSearchParams(currentParams.toString());
 
-    for(let entry of menuItem["parts"])
+    if(menuItem["parts"])
     {
-        linkParams.set("item", entry["id"]);
-        linkUrl.search = linkParams.toString();
-        let entryHref = linkUrl.toString();
-        $("#submenu").append("<li class='nav-item'><a id='"
-            +entry["id"]+
-            "' class='nav-link' href='"
-            +entryHref+"'>"
-            +entry["label"]+"</a></li>");
-        if(entry["id"]===item["id"])
+        for(let entry of menuItem["parts"])
         {
-            $("#"+entry["id"]).addClass("active");
+            linkParams.set("item", entry["id"]);
+            linkUrl.search = linkParams.toString();
+            let entryHref = linkUrl.toString();
+            $("#submenu").append("<li class='nav-item'><a id='"
+                +entry["id"]+
+                "' class='nav-link' href='"
+                +entryHref+"'>"
+                +entry["label"]+"</a></li>");
+            if(entry["id"]===item["id"])
+            {
+                $("#"+entry["id"]).addClass("active");
+            }
         }
     }
 }

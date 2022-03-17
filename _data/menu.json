@@ -261,6 +261,16 @@
             "id":"tincHelas",
             "label":"Helas le bon temps",
             "file":"music/1_Tinctoris/8_Songs/9_Helas-le-bon-temps.txt"
+          },
+          {
+            "id":"tincOInvida",
+            "label":"O invida Fortuna Nemica d’ogni pace",
+            "file":"music/1_Tinctoris/8_Songs/10_O-invida-fortuna.txt"
+          },
+          {
+            "id":"tincVostreRegart",
+            "label":"Vostre regart si tresfort m’a feru",
+            "file":"music/1_Tinctoris/8_Songs/11_Vostre-regart.txt"
           }
         ]
       },

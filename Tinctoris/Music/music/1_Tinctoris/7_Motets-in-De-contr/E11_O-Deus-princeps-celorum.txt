@@ -9,12 +9,18 @@ BU	I-Bu 2573, fol. 159v	(impl.)	ttt
 Br1	B-Br II 4147 Mus., fols. 96vb–97ra	(impl.)	ttt
 <piece: {mensural: void}, {staf: "5" BU Br1 : "6" V, black}>
 <part: {var="Supremum" (ed.) : (om.) V BU Br1}>
+<pars>
 {clef: C4} {solm: 0} {mens: O5} Bd <text>O Deus, prin-</text> Sc Sd me mf Sg{var="{red}?" V BU : (om.) Br1} mf maa. sg sf se mf <lig>Sd Sdd</lig> Saa <text>ceps</text> mbb {var=(ins.) "{staf: 5} {clef: G6} {solm: 0}" Br1} mcc. sdd See. Scc <text>celorum,</text> mbb. saa Saa mg{var="{red}-?" V BU : (om.) Br1} Saa Pm9 maa <text>Memor</text> mbb Saa mbb Scc mdd mcc {var=(ins.) "{staf: 5} {clef: C4} {solm: 0}" V Br1 : "{staf: 4} {clef: C4} {solm: 0}" BU} maa<text>esto</text>. sg sf se md Ps5 mb <text>musi-</text> sc sd me mf se md<text>corum.</text>. {var="fc fb" BU Br1 : "sc sb" V} mc Ld ||
+</pars>
 </part>
 {staf: "5" V Br1 : "4" Bu} <part: Tenor>
+<pars>
 {clef: C10} {solm: 0} {mens: O5} BD <text>O Deus,</text> SE mD SG mF SE BD {var=(ins.) "{staf: 5} {clef: C10} {solm: 0}" BU} Bd <text>princeps celorum,</text> Ba mc Sd mc Sb Ba Pm5 mD <text>Memor esto</text> {var=(ins.) "{staf: 6} {clef: C12} {solm: 0}" Br1} mF mG Sa mb Sc md. sc sb sa mG<text>musi-</text>. sE sF sG ma. sG mF <text>corum.</text> SE LD {var="||" V Br1 : "|" BU}
+</pars>
 </part>
 {staf: "5" V BU : "4" Br1} <part: Contratenor>
+<pars>
 {clef: "C10" V BU : "C8" Br1} {solm: 0} {mens: O9} Ba <text>O Deus, princeps</text> SG ma mb. sa md xc_ mc{var="{red}-?" V BU : (om.) Br1}. sb md{var="." BU Br1 : (om.) V} mf se sd fc fb Sa {var=(ins.) "{staf: 5} {clef: C10} {solm: 0}" Br1} mb mG SD Pm7 mG <text>celo-</text> mF Sc mc. sb mc ma mG. sD <text>rum,</text> mF SG{var="{red}?" V BU : (om.) Br1} {var=(ins.) "{staf: 4} {clef: C10} {solm: 0}" BU} Pm5 {var="SD" BU Br1 : "mD mD" V} <text>Memor</text> mF mG ma {var="mD" V Br1 : "SD" BU} md <text>esto</text> mc. fb fa mG {var="sa." BU Br1 : "ma." V} fG {var="sF" V^c BU Br1 : "fF" V^*} sE SD mG <text>musi-</text> sb md sG sa sb {var=(ins.) "{staf: 4} {clef: C8} {solm: 0}" Br1} mc. sb ma<text>corum.</text>. fG fF mG {var="La" V BU : "Ma" Br1} {var="||" Br1 : "|" V BU}
+</pars>
 </part>
 </piece>

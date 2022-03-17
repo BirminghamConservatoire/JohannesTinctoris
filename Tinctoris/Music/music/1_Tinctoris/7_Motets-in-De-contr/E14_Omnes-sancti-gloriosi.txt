@@ -9,12 +9,18 @@ BU	I-Bu 2573, fols. 157v–158r	(impl.)	ttt
 Br1	B-Br II 4147 Mus., fols. 95va–96ra	(impl.)	ttt
 <piece: {mensural: void}, {staf: "5" V BU : "4" Br1, black}>
 <part: {var="Supremum" (ed.) : (om.) V BU Br1}>
+<pars>
 {clef: "C6" V : "C4" BU Br1} {solm: 0} {mens: O7} md<text>Omnes</text>. se mf. fe fd se. ff me md Ps7 sd <text>sancti</text> sf sg maa {var=(ins.) "{staf: 5} {clef: C6} {solm: 0}" Br1} mbb<text>glorio-</text>. faa fg maa mbb. saa mg. ff fe mf Sg <text>si{.,}</text> Pm9 me <text>Cives ce-</text> mf mg maa. sg sf fe fd se {var="mc" V BU^c Br1 : "md" BU^*} <text>li</text> sb ma {var=(ins.) "{staf: 5} {clef: C6} {solm: 0}" BU} mb <text>lumino-</text> mc ma md. sb mc {var=(ins.) "{staf: 6} {clef: C6} {solm: 0}" V} {mens: c7} Bd <text>si{.,}</text> PS11 Saa<text>Orate</text>. mbb Scc. sbb saa {var=(ins.) "{staf: 4} {clef: C6} {solm: 0}" Br1} Sg Sf<text>Dei</text>. me Sg<text>filium</text>. mf me md Sc. sb sa Sb Pm5 ma <text>Pro salu-</text> mc md Se. sf sg {var=(ins.) "{staf: 4} {clef: C4} {solm: 0}" Br1} Saa. mbb maa sg sf Se<text>te</text>. mf mg<text>fide-</text>. sf me md Sd. sc sb Sc <text>lium.</text> Ld {var="||" Br1 : "|" V BU}
+</pars>
 </part>
 {staf: "5" BU Br1 : "6" V} <part: Tenor>
+<pars>
 {clef: C10} {solm: 0} {mens: O11} {var=(ins.) "xc" BU} Bd <text>Omnes</text> {var="xc" V Br1 : (transf.) BU}_ Sc Bd SG <text>sancti gloriosi{.,}</text> mF mG. sF mb Sa mG Sb <text>Cives</text> mc md mG <text>{var="celi" V BU^c Br1 : (om.) BU^*}</text> mF SD ma<text>lumino-</text>. sG mF mG ma <lig>SD SE</lig> {mens: c5} LD <text>si{.,}</text> PS7 Sa<text>Orate</text>. mb mc {var=(ins.) "." V^*} sb sc {var=(ins.) "{staf: 5} {clef: C10} {solm: 0}" V} Sd<text>Dei</text>. mc mb. sa Sc<text>fili-</text>. mb Sa. {var="sG sF" BU Br1 : "fG fF" V} SG <text>um</text> Ba PS7 Sa<text>Pro salute {var="fidelium" V BU^c Br1 : (om.) BU^*}.</text>. sb sc Bd Sc Sa BG SF BE LD ||
+</pars>
 </part>
 {staf: 5} <part: Contratenor>
+<pars>
 {clef: C10} {solm: 0} {mens: O5} BD <text>Omnes</text> Sa BD {var=(ins.) "xc" BU} Sd <text>sancti gloriosi{.,}</text> {var="Sd md" V BU : "Sd." Br1} md {var="xc" V Br1 : (transf.) BU}_ mc. sb Sd mG ma Pm9 mb <text>Cives</text> mc md sa<text>{var="celi" V BU : "Dei" Br1}</text>. {var="fb" V Br1 : "sb" BU} mc. fd fe sf. fe md <text>lumino-</text> sc ma sd. fc {var=(ins.) "xG" BU} fb fa {var="xG" Br1 : (transf.) BU : (space) V}_ sG. fF mG {mens: c9} Ba <text>si{.,} Orate</text> Sd md. sc Sa Pm7 SF <text>Dei</text> mG SE BD Sd <text>filium</text> Se Ba PS5 SE <text>Pro salute</text> mF mF. sE mD <lig>SC Sc.</lig> sd se Sf {var=(ins.) "{staf: 4} {clef: C8} {solm: 0}" BU} Sd <text>fide-</text> ma. sb Sc md. sc mb sa sG Sa. {var="sG sF" BU Br1 : "fG fF" V} SG <text>lium.</text> La {var="||" Br1 : "|" V : (om.) BU}
+</pars>
 </part>
 </piece>

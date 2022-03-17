@@ -2110,6 +2110,10 @@ function nextMusic(parent){
           continue;
           //
         } 
+        else if(next.objType==="Annotation" && prev.objType==="Ligature")
+        {
+          next.ligature = prev;
+        }
         else if(next.objType=="MusicalChoice" && augmented 
                   && next.content.length //&& !next.content[0].nonDefault()
                   && next.content[0].content.length && next.content[0].content[0].objType==="Fermata")

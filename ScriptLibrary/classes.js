@@ -3747,7 +3747,16 @@ Annotation.prototype.draw = function(){
 				this.startY = prevBox.y +prevBox.height;
 				drawnx = this.startX;
 			} else {
-        drawnx = currentExample.events[eventi-1].startX;// - (rastralSize*prop);//why?
+        let lastEvent = currentExample.events[eventi-1];
+        let lastStartX = lastEvent.startX;
+        if(lastEvent.startX==false && lastEvent.members)
+        {
+          lastStartX = lastEvent.members[lastEvent.members.length-1].startX;
+        }
+        if(lastStartX!=false)
+        {
+          drawnx = lastStartX;// - (rastralSize*prop);//why?
+        }
         this.startX = drawnx;
         if(typeof(currentExample.events[eventi-1].domObj)!="undefined" &&
            currentExample.events[eventi-1].domObj && false){

@@ -25,6 +25,7 @@ Ve759	I-VEcap DCCLIX, fols. 25v–31r	Tintoris
 </part>
 
 {staf: 5} <part: Tenor>
+<pars>
 {clef: C4} {solm: 0} {mens: O5} PS5 PS5 Sc <text>Et in terra pax hominibus bone voluntatis.</text> me. sf mg maa Sg me mf mc mg Saa. mbb mcc mg. ff fe mf mg maa. sg me mf md mc Ps5 <text>Laudamus te.</text> me sd se sf mg me. sf mg maa Se mf mg maa. sg sf fe ff mg mc. <text>Benedicimus te.</text> sd se ff fg maa mg me. sf sg sf sd se Sf Pm7 <text>Adoramus te.</text> Sd mc md mdd. scc mbb. faa fg maa Sbb mcc. fbb faa Bg Pm9 <text>Glorificamus te.</text> mg mf. se md mc me mf md. sc <lig>Se Sf Bg</lig> maa mg. sf se sd mc mg. saa mf me. <text>Gratias {var="agimus tibi" (ed.) : (om.) Ve759}</text> fd fc md Sc mb Sc mb mc Sd Sc PS5 <text>{var="propter magnam" (ed.) : (om.) Ve759}</text> PS5 Sg maa mbb mg mf <text>{var="gloriam tuam." (ed.) : (om.) Ve759}</text> mg maa mbb Sg mf Lg ||
 </pars>
 <pars>

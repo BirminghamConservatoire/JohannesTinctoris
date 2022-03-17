@@ -8,9 +8,13 @@ Sources:
 Seg	E-SE s.s., fol. CC.iij v	Johannes tinctoris	ii
 <piece: {mensural: void}, {staf: 5, black}>
 <part: {var="Contrapunctus" (ed.) : (om.) Seg}>
+<pars>
 {clef: C6} {solm: bb ^bbb} {mens: O9} {var="{prop: 2/1, 7-9}" (ed.) : "{prop: 2, 9}" Seg} <label: 14>Duo</label> Sf. <text>Le souvenir</text> mc mf se sf sg sf se sd mc md. sc sd sf me. sf se sd sc sb Sc Pm7 mc Sf sg saa sbb scc maa sg sf mg. sf se sd mc. sd se sf mg Sf me mf se sd se sd sc sb sc sb sa sG Sa. mc. sb sa sG <ll: -1> ma mF. sG sa sb SG SE Pm3 mF. sG </ll> ma. sG sa sb Sc. md. se sf sg me sd se mf. se sd sc md. sc sb sa sb <ll: -1> sa sG sF sG sa </ll> sb sc md mc. sb sb sa {var="{prop: 3/2, 3-5}" (ed.) : "{prop: 3, 5}" Seg} Bc PB7 Se. md mc md Se. md me mf Sg. maa mbb mcc Saa. mg maa mbb Scc mbb maa mg mf {prop: 4/3, 7-9} {var="<full> <lig>Be Bf</lig> <lig>Bg Baa</lig> </full>" (ed.) : "<lig>Be Bf</lig> <lig>Bg Baa</lig>" Seg} {prop: 6/4, 9-11} Sf. mg Saa Sbb. mg Sbb Saa. mg Sf <lig>Se Sg</lig> Saa Sbb. maa Sg Sf Bg {prop: 12/6, 9-11} <full> <lig><obl>Baa Bg</obl></lig> <lig><obl>Bf Be</obl></lig> <lig><obl>Bf Bd</obl> Be</lig> PB9 <lig>Be Bf Bg</lig> c {clef: C4} {solm: bbb} {prop: 18/12, 9-11} <lig>Baa Bbb Bdd</lig> <lig>Bcc <ll: 1> Bdd Bee</lig> <lig>Bff <obl>Bee Bdd</obl></lig> </ll> <lig>Bcc <obl>Bbb Baa</obl></lig> <lig>Bg <obl>Bf Be</obl></lig> {var="bb" (ed.) : (om.) Seg} <ll: -1> <lig>Bd <obl>Bc Bb</obl></lig> {var="{prop: 24/18, 3-5}" (ed.) : "{prop: 14/18, 3-5}" Seg} -La -Lb -Lc </ll> Ld Le Lf <lig>Mg Le</lig> <lig>Lc Md</lig> </full> {var="c {clef: C6} {solm: bb ^bbb}" (ed.) : (C4 clef unchanged to end of piece) Seg} {mens: O5} {prop: 2/1, 3-5} Sc  Pm7 mc. sd me. sd se sf Sg mc mf. sg saa sbb mcc sbb saa mg <lig>Sf Sbb</lig> saa sg maa mcc. sbb maa. sg sf se md <lig>Sg Saa</lig> Sg mf mg mbb. sg mbb. saa mf. sg maa. sg maa. sg me. sf mg. sf se sd sc sb <ll: -1> sa sG mF mf sg </ll> sf se sd me sd se Lf {var="||" (ed.) : "|||" Seg}
+</pars>
 </part>
 {staf: 5} <part: {var="Tenor" (ed.) : "/t/" Seg}>
+<pars>
 {clef: C10} {solm: bb} {mens: O6} BF <text>Le so{var="u" (ed.) : (om.) Seg}venir</text>  ma mb Sc Sa Pm11 mc mF mE Sa SG SF Pm11 mc Sa Pm11 mc mb sa sG Sa SF Pm7 mF mG ma SF mG mE SD BC. PS9 Sc SF ma mb mc. sa mb mc Sd. mc Sb Sa Pm11 mc SF ma mb Sc Sb Sc Pm9 ma mb ma <lig>SF Sb</lig> mG  SF ma mb mG Sa SG Sd <lig><obl>Sc Sb</obl></lig> mc ma SG LF {var="||" (ed.) : "|||" Seg}
+</pars>
 </part>
 </piece>

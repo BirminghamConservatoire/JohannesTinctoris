@@ -1,0 +1,25 @@
+O virgo miserere mei
+Johannes Tinctoris
+Editor: Jeffrey J. Dean
+Checked by:
+Date established: 14 March 2022
+Base transcription: Mel
+Sources:
+Mel	US-NHub 91, fols. 24v–25r	Jo. tinctoris.	ttt
+<piece: {mensural: void}, {staf: 5, black}>
+<part: {var="Supremum" (ed.) : (om.) Mel}>
+<pars>
+{clef: C6} {solm: 0} {mens: c11} <label: 14>Beatissime virgini domine Beatrici de Aragonia</label> Baa <text>O vir -</text> Sg. sf se <lig><obl>Sf Se</obl></lig> Pm7 md. sc mb ma mc. sd Se sd sc Sd <text>go,</text> Se Pm9 me <text>mi -</text> mf. sg maa maa. <text>se -</text> sg mf me. sd md mf. sg bbb maa. sg mbb. saa Sg <text>re -</text> sf se Sf <text>re</text> Sg Pm11 mg <text>me -</text> maa. sbb mcc maa. sg mf Se <full> <lig>Sa Sc.</lig> md <lig>Se Sf.</lig> bb me Sd. mb Sc </full> <lig>Sd. <text>i;</text> Sg.</lig> sf sg Saa. <text>mi -</text> sg saa sbb saa sg sf Se. <text>se -</text> mf mg <text>rere</text> saa sbb mcc mbb. <text>meorum;</text> se Saa mg Baa <lig><obl>Sg. <text>Effice</text> Sf</obl></lig> mg Se Sd PS7 <lig><obl>Sd. <text>me</text> Sc</obl></lig> md Sb <lig>Sa. <text>me -</text> Sc</lig> md <lig>Se. Sf</lig> me Sg. sf sg Saa. sg sf sg <text>{var="ri  -" (ed.) : (transp.) Mel}</text> sf se sd <text>  {var=(ins.) "ri-" Mel}tis</text> mc. sb Sd Pm9 Sf <text>tem -</text> mg Saa. sg sf Sg sg sf se sd <text>pus</text>Se Sa. <text>in om -</text> mb mc Sd mc Sd <text>ne</text> Pm7 md <text>tu -</text> se sf sg saa mbb mcc. sbb Saa mg <text>um.</text> Laa {var="||" (ed.) : "|" Mel}
+</pars>
+</part>
+{staf: 5}  <part: Tenor>
+<pars>
+{clef: C10} {solm: 0} {mens: c9} Ba <text>O vir{var=(ins.) "go" Mel}-</text> <lig>Sb Sc</lig> ma Sd mc Sd Pm11 md <lig><obl>Se Sa</obl></lig> mG sF sE SF <text>{var="go" (ed.) : (transp.) Mel},</text> Pm5 mE. <text>mi -</text> sF mG ma SD mf. <text>se -</text> se md mc. sb md. sc ma. sb mc md mG. <text>re -</text> sa mb sa sG Sa <text>re</text> Pm7 mG. <text>me -</text> sF mE mD mF. sE sF sG <lig>Sa. Sc</lig> ma. sG mF <full> <lig><obl>SG SD.</obl></lig> mE <lig>SF SG</lig> Sa </full> <lig>Bb <text>i;</text> Bc Bd</lig> Sc. <text>misere -</text> md Se ma md. sc ma <text>re</text> Sb Pm9 Sa <text>meorum;</text> mF mG SE mD md <text>Effice</text> mb Sc md mb. sa mG. sF <lig><obl>SG <text>me</text> SE</obl></lig> mF SG ma <text>{var="me -" (ed.) : (om.) Mel}</text> mc. sb ma. sG mF mE. sF mG ma mF mG. sa Sb mc ma Sc sb sa sb <text>ri -</text> sa sG sF SE <text>tis</text> Pm5 mD <text>tempus</text> mF. sG bb ma mb ma mc. sb sc sd Se mE. <text>in</text> sF mG sa sb mc SF <text>om -</text> mG ma mF <text>{var=(ins.) "ne" Mel}</text> SE mD <text>{var="ne" (ed.) : (transp.) Mel} {var="tu -" (ed.) : (transp.) Mel}</text> Sd mb Sc <text>{var=(ins.) "tu-" Mel}</text> md me. sd mc Sb <text>um.</text> La {var="||" (ed.) : "|" Mel}
+</pars>
+</part>
+{staf: 5} <part: {var="Contratenor" (ed.) : "Contra" Mel}>
+<pars>
+{clef: F10} {solm: 0} {mens: c11} Sa. <text>O</text> sG sF sG <text>vir{var=(ins.) "go" Mel}-</text> sF sE sD SC <lig><obl>SD SA</obl></lig> SD SD <text>{var=(ins.) "mi-" Mel}</text> mA <ll: 1> ma. sb mc mb sa </ll> sG Sa <text>{var="go" (ed.) : (transp.) Mel},</text> mG mG. <text>{var="mi -" (ed.) : "sere-" Mel}</text> sF mE SD Pm9 mD. <text>{var="se -" (ed.) : (transp.) Mel}</text> sE sF sG Sa mD. sE mF. sG <ll: 1> ma mG Sd <lig><obl>SG <text>{var="re -" (ed.) : "re" Mel}</text> SD</obl></lig> </ll> mG <text>{var="re" (ed.) : (transp.) Mel} me -</text> mC. sD mE mF. sG Sa mD. sC SA <text> {var=(ins.) "i" Mel}</text> PB5 bB <full> <lig><obl>SC <text>{var=(ins.) "mi-" Mel}</text> SB.</obl></lig> mC <lig><obl>SD SB</obl></lig> SA </full> BGG <text>{var="i" (ed.) : (transp.) Mel};</text> <lig>SC <text>{var="mi -" (ed.) : (transp.) Mel}</text> <obl>SF {var="BD" Mel^c : "BC" Mel^*}</obl></lig> mA <text>se -</text> <ll: 1> Sa mb Sc mF mG. <text>rere</text> </ll> sa mF SE <lig>SA <text>meo -</text> SD</lig> mE SC mD bB mB <text>{var=(ins.) "rum" Mel}</text> mGG <text> {var="rum" (ed.) : (transp.) Mel};</text> SA PS5 SGG. <text>Effice</text> <lig>SGG SA</lig> mD SGG <text>{var="me" (ed.) : (transp.) Mel}</text> PS9 SF. <text>{var="me -" (ed.) : "me" Mel}</text> mD mC. sD mE <lig><obl> SD SC</obl></lig> SG <text>{var=(ins.) "me-" Mel}</text> mC SF. mG SE SA <text>ritis</text> mD mF.  <text>tempus</text> sG sa sb ma mG SF. sE sD mC <text>in {var=(ins.) "omne" Mel}</text> mE. sF SG. mF mD. <text>{var="omne" (ed.) : (transp.) Mel}</text> sC mB mA mD SA PS7 <lig><obl>SD <text>tuum.</text> SC</obl></lig> mB <lig>SA. SE</lig> -LA ||
+</pars>
+</part>
+</piece>

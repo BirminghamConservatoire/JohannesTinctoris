@@ -144,6 +144,11 @@
         "parts":
         [
           {
+            "id": "tincOVirgoMiserere",
+            "label": "O virgo miserere mei",
+            "file": "music/1_Tinctoris/6_Motets/7_O-Virgo-miserere-mei.txt"
+          },
+          {
             "id": "tincVirgoDeiThrono",
             "label": "Virgo Dei throno digna",
             "file": "music/1_Tinctoris/6_Motets/8_Virgo-Dei-throno-digna.txt"

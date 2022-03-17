@@ -581,7 +581,26 @@ function MusicHolder(text, outdiv){
                       part.defaultName() + "2" : part.defaultName();
         partNames.push(partName);
         exampleParts.push([partName, partExample]);
-        fullExampleCode = pieceString + fullExampleCode.slice(partEnd+8);
+        // cut part from example
+        fullExampleCode = fullExampleCode.slice(partEnd);
+        fullExampleCode = fullExampleCode.trim();
+        if(fullExampleCode.startsWith("{staf:"))
+        {
+          let firstCloseCurly = fullExampleCode.indexOf("}")+1;
+          let staffSubString = fullExampleCode.substring(0,firstCloseCurly);
+          let lineNumPos = staffSubString.match(/\d/).index;
+          let lineNum = staffSubString[lineNumPos];
+          let currentPieceLinesNum =pieceString.match(/\d/).index;
+          let currentPieceLines = pieceString[currentPieceLinesNum];
+
+          if(lineNum != currentPieceLines)
+          {
+            pieceString = pieceString.replace(currentPieceLines,lineNum);
+          }
+
+          fullExampleCode.slice(firstCloseCurly);
+        }
+        fullExampleCode = pieceString + fullExampleCode;
         console.log("sliced part no. " + partCounter);
       }
 

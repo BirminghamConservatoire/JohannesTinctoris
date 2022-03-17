@@ -136,7 +136,29 @@
       {
         "id": "tincLamentations",
         "label": "Lamentations",
-        "file": "music/1_Tinctoris/5_Lamentations/5_Lamentationes.txt"
+        "parts":
+        [
+          {
+            "id": "tincLamentAleph",
+            "label": "Aleph",
+            "file":"music/1_Tinctoris/5_Lamentations/5a_Lamentationes-Aleph.txt"
+          },
+          {
+            "id": "tincLamentBeth",
+            "label": "Beth",
+            "file":"music/1_Tinctoris/5_Lamentations/5b_Lamentationes-Beth.txt"
+          },
+          {
+            "id": "tincLamentGimel",
+            "label": "Gimel",
+            "file":"music/1_Tinctoris/5_Lamentations/5c_Lamentationes-Gimel.txt"
+          },
+          {
+            "id": "tincLamentIerusalem",
+            "label": "Ierusalem convertere",
+            "file":"music/1_Tinctoris/5_Lamentations/5d_Lamentationes-Ierusalem-convertere.txt"
+          }
+        ]
       },
       {
         "id": "tincMotets",

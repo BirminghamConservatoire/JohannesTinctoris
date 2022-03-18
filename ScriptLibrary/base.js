@@ -330,6 +330,10 @@ var dateDisplay = "show";
 */
 var copyTextDisplay = "show";
 /** @global 
+ * @summary toggles if copy text info is displayed
+*/
+var baseFileDisplay = "show";
+/** @global 
  * @summary toggles if source info is displayed
 */
 var sourceDisplay = "show";

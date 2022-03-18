@@ -77,7 +77,7 @@ function MusicHolder(text, outdiv){
       // info. Let's try a less complex approach -- just one button
       var ib = this.drawTo.appendChild(DOMDiv('infoButtons'), false, false);
       infoButton("i", ["editor", "checkedby", "enteredby", "approvedby","dateestablished",
-                       "source", "sources", "translator", "copytext","script", "columns", "running"], 
+                       "source", "sources", "translator", "copytext", "basefile","script", "columns", "running"], 
                  ib, infoDisplay == "show", "infoDisplay");
     };
     /** infoButton */
@@ -105,6 +105,12 @@ function MusicHolder(text, outdiv){
         if(copyTextDisplay == "show" || copyTextDisplay == "hide"){
           infoButton("c", ["copytext"], ib,
           copyTextDisplay == "show", "copyTextDisplay");
+        }
+      }
+      if(this.basefile){
+        if(baseFileDisplay == "show" || baseFileDisplay == "hide"){
+          infoButton("c", ["basefile"], ib,
+          baseFileDisplay == "show", "baseFileDisplay");
         }
       }
       if(this.running){
@@ -170,6 +176,10 @@ function MusicHolder(text, outdiv){
       if(this.copy){
         detailDiv.appendChild(fieldDatumPair("Copy text", this.copy));
         if(copyTextDisplay == "hide" || !copyTextDisplay) $(".info.copytext").hide();
+      }
+      if(this.basefile){
+        detailDiv.appendChild(fieldDatumPair("Base transcription", this.basefile));
+        if(baseFileDisplay == "hide" || !baseFileDisplay) $(".info.basefile").hide();
       }
       if(this.source){
         detailDiv.appendChild(fieldDatumPair("Source", this.source));
@@ -523,6 +533,7 @@ function MusicHolder(text, outdiv){
       if(this.approved) text += "Approved by: "+this.approved+"\n";
       if(this.copy) text += "Copy-text: "+this.copy+"\n";
       if(this.source) text += "Source: "+this.source+"\n";
+      if(this.basefile) text += "Base transcription: "+this.basefile+"\n";
       if(this.script || this.columns){
         text += "Script: ";
         if(this.script) text += this.script;

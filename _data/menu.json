@@ -167,6 +167,11 @@
         "parts":
         [
           {
+            "id": "tincDifficilesAlios",
+            "label": "Difficiles alios delectat pangere cantus",
+            "file": "music/1_Tinctoris/6_Motets/6_Difficiles-alios-delectat-pangere-cantus.txt"
+          },
+          {
             "id": "tincOVirgoMiserere",
             "label": "O virgo miserere mei",
             "file": "music/1_Tinctoris/6_Motets/7_O-Virgo-miserere-mei.txt"

@@ -620,8 +620,8 @@ function MusicHolder(text, outdiv){
     // having the partname in every pars shows it at every page
     var partString = fullPartCode.substring(0,firstParsStart-1);
 
-    var currentClef;
-    var currentSolm;
+    var currentClefString;
+    var currentSolmString;
 
     // MusicExamples need to be parsed properly to work
     // Splitting a MusicExample into its parses needs to be stupid string manipulation...
@@ -633,24 +633,41 @@ function MusicHolder(text, outdiv){
       let parsString = fullPartCode.substring(parsStart,parsEnd);
 
       // we need to take clef and solm from last pars if there is none
-      let lastSolmPos = parsString.lastIndexOf("{solm:");
-      if(lastSolmPos != -1)
+      // make sure, that only a clef and a solm at the start of a pars is found
+      // we're looking for the first string because we hope this isn't inside a variant
+      // unfortunately, we're not able to deal with clefs in variants, or even determine the default reading without parsing
+      // this solution is definitely errorneuous, but it likely won't break at least...
+
+      let firstSolmPos = parsString.indexOf("{solm:");
+      if(firstSolmPos != -1)
       {
-        currentSolm = parsString.substring(lastSolmPos, parsString.indexOf("}", lastSolmPos)+1);
+        let foundSolmString = parsString.substring(firstSolmPos, parsString.indexOf("}", firstSolmPos)+1);
+        // if there is already a solm, use that
+        if(currentSolmString!=null)
+        {
+          parsString = parsString.slice(0,6) + currentSolmString + parsString.slice(6);
+        }
+        currentSolmString = foundSolmString;
       }
       else
       {
-        parsString = parsString.slice(0,6) + currentSolm + parsString.slice(6);
+        parsString = parsString.slice(0,6) + currentSolmString + parsString.slice(6);
       }
 
-      let lastClefPos = parsString.lastIndexOf("{clef:");  
-      if(lastClefPos != -1)
+      let firstClefPos = parsString.indexOf("{clef:");  
+      if(firstClefPos != -1)
       {
-        currentClef = parsString.substring(lastClefPos, parsString.indexOf("}",lastClefPos)+1);
+        let foundClefString = parsString.substring(firstClefPos, parsString.indexOf("}",firstClefPos)+1);
+        // if there is already a clef, use that
+        if(currentClefString!=null)
+        {
+          parsString = parsString.slice(0,6) + currentClefString + parsString.slice(6);
+        }
+        currentClefString = foundClefString;
       }
       else
       {
-        parsString = parsString.slice(0,6) + currentClef + parsString.slice(6);
+        parsString = parsString.slice(0,6) + currentClefString + parsString.slice(6);
       }
 
       // add part tag to have the part name in every pars

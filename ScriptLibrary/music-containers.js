@@ -528,6 +528,7 @@ function MusicHolder(text, outdiv){
 
         if(choirbook)
         {
+          // Layout depends on number of items in partExamples...
           // Adjust ordering of the parts in choirbook format
           if(partDivID.includes("Tenor"))
           {
@@ -612,8 +613,10 @@ function MusicHolder(text, outdiv){
 
         // partName will become the div id, try to make it unique
         // Something like Tenor2 is not elaborate but will hopefully work for all realistic cases
-        let partName = partNames.indexOf(part.defaultName()) >= 0 ? 
-                      part.defaultName() + "2" : part.defaultName();
+        // and strip non-word-characters to avoid problems
+        let defaultPartName = part.defaultName().replace(/\W/g,"");
+        let partName = partNames.indexOf(defaultPartName) >= 0 ? 
+                      defaultPartName + "2" : defaultPartName;
         partNames.push(partName);
         exampleParts.push([partName, partExample]);
         // cut part from example

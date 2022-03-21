@@ -54,6 +54,8 @@ function MusicHolder(text, outdiv){
     /** @property {MusicHolder} */
     this.sources = [];
     /** @property {MusicHolder} */
+    this.editions = [];
+    /** @property {MusicHolder} */
     this.running = false;
     /** @property {MusicHolder} */
     this.scriptSpec = false;
@@ -206,6 +208,15 @@ function MusicHolder(text, outdiv){
         detailDiv.appendChild(div);
         if(sourceDisplay == "hide" || !sourceDisplay) $(".info.sources").hide();
       }
+      if(this.editions.length){
+        var div = DOMDiv('info editions', false, false);
+        div.appendChild(DOMSpan('fieldname', false, "Modern editions: "));
+        for (var i=0; i<this.editions.length; i++){
+          div.appendChild(this.editions[i].toHTML());
+        }
+        detailDiv.appendChild(div);
+        if(sourceDisplay == "hide" || !sourceDisplay) $(".info.editions").hide();
+      }
     };
     /** parseHeaders from codeDiv(?) */
     this.parseHeaders = function(){
@@ -288,13 +299,26 @@ function MusicHolder(text, outdiv){
             break;
           case "Sources:":
             consumeSpace();
-            var id, details;
+            var sourceId, sourceDetails;
+            while(string.substring(0,10)!="<treatise>" && string.length
+                                  && !/^\n\n/.exec(string) && string.substring(0, 6)!="<piece" 
+                                  && string.substring(0,16)!="Modern Editions:"){
+              sourceId = consumeIf(/\S*/);
+              consumeSpace();
+              sourceDetails = trimString(consumeIf(/[^\n\r]*/));
+              this.sources.push(new Source(sourceId, sourceDetails));
+              if(!/^\n\n/.exec(string)) consumeSpace();
+            }
+            break;
+          case "Modern Editions:":
+            consumeSpace();
+            var edId, edDetails;
             while(string.substring(0,10)!="<treatise>" && string.length
                                   && !/^\n\n/.exec(string) && string.substring(0, 6)!="<piece"){
-              id = consumeIf(/\S*/);
+              edId = consumeIf(/\S*/);
               consumeSpace();
-              details = trimString(consumeIf(/[^\n\r]*/));
-              this.sources.push(new Source(id, details));
+              edDetails = trimString(consumeIf(/[^\n\r]*/));
+              this.editions.push(new Source(edId, edDetails));
               if(!/^\n\n/.exec(string)) consumeSpace();
             }
             break;

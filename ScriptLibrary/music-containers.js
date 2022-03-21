@@ -307,7 +307,7 @@ function MusicHolder(text, outdiv){
               consumeSpace();
               sourceDetails = trimString(consumeIf(/[^\n\r]*/));
               this.sources.push(new Source(sourceId, sourceDetails));
-              if(!/^\n\n/.exec(string)) consumeSpace();
+              /*if(!/^\n\n/.exec(string))*/ consumeSpace();
             }
             break;
           case "Modern Editions:":
@@ -319,7 +319,7 @@ function MusicHolder(text, outdiv){
               consumeSpace();
               edDetails = trimString(consumeIf(/[^\n\r]*/));
               this.editions.push(new Source(edId, edDetails));
-              if(!/^\n\n/.exec(string)) consumeSpace();
+              /*if(!/^\n\n/.exec(string))*/ consumeSpace();
             }
             break;
           default:

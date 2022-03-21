@@ -462,6 +462,9 @@ function MusicHolder(text, outdiv){
       var partExamples = this.splitParts();
       // choirbook toggles whether splitting at <pars> should happen, pagination in choir book format?
       $(this.drawTo).removeClass("nowrap");
+
+      // initialize countColumns to help ordering the choir book layout
+      let countColums = 2;
       for(let i=0;i<partExamples.length;i++)
       {
         let partPair = partExamples[i];
@@ -528,18 +531,23 @@ function MusicHolder(text, outdiv){
 
         if(choirbook)
         {
-          // Layout depends on number of items in partExamples...
           // Adjust ordering of the parts in choirbook format
-          if(partDivID.includes("Tenor"))
+          // ordering in partExamples is columnbased, but it needs to be converted into rowbased ordering
+          // e.g. 1,3,2 for 3 parts, 1,3,2,4 for 4 parts or 1,3,5,2,4 for 5 parts...
+          // i is number of current part i this loop
+          let countParts = partExamples.length;
+          let partOrder = i+1;
+
+          if (partOrder <= Math.ceil(countParts / 2))
           {
-            let partDiv = document.getElementById(partDivID);
-            $(partDiv).addClass("order-2");
+            partOrder = partOrder + (partOrder-1);
           }
-          else if(partDivID.includes("Bassus"))
+          else
           {
-            let partDiv = document.getElementById(partDivID);
-            $(partDiv).addClass("order-last");
+            partOrder = countColums;
+            countColums += 2;
           }
+          $(partDiv).addClass("order-"+partOrder);
         }
       }
       // I don't know why, but without putting it into console.log(), no MEI will be created...

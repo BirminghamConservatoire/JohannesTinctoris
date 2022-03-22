@@ -386,7 +386,29 @@
     {
       "id": "about",
       "label": "About",
-      "url": "index.html"
+      "items":
+      [
+        {
+          "id": "aboutCPW",
+          "label": "About JT:CPW",
+          "url": "about.html"
+        },
+        {
+          "id": "project",
+          "label": "Project",
+          "url": "project.html"
+        },
+        {
+          "id": "team",
+          "label": "Team",
+          "url": "team.html"
+        },
+        {
+          "id": "funding",
+          "label": "Funding",
+          "url":"funding.html"
+        }
+      ]
     }
   ]
 }

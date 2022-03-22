@@ -30,10 +30,10 @@
               <a class="nav-link dropdown-toggle" href="{{entry_href}}" id="{{entry.id}}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{entry.label}}
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <div class="dropdown-menu" aria-labelledby="{{entry.id}}">
                 {% for subentry in entry.items %}
                 {% if subentry.url %}
-                  {% capture subentry_href %}{{entry.url}}}{% endcapture %}
+                  {% capture subentry_href %}{{subentry.url}}{% endcapture %}
                 {% else %}
                   {% capture subentry_href %}view.html?item={{subentry.id}}{% endcapture %}
                   {% if subentry.file %}

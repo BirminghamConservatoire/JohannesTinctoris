@@ -533,20 +533,25 @@ function MusicHolder(text, outdiv){
         {
           // Adjust ordering of the parts in choirbook format
           // ordering in partExamples is columnbased, but it needs to be converted into rowbased ordering
-          // e.g. 1,3,2 for 3 parts, 1,3,2,4 for 4 parts or 1,3,5,2,4 for 5 parts...
+          // e.g. 1,3,2,4 for 4 parts or 1,3,5,2,4 for 5 parts...
           // i is number of current part i this loop
           let countParts = partExamples.length;
           let partOrder = i+1;
 
-          if (partOrder <= Math.ceil(countParts / 2))
+          // 3 part pieces are an exception
+          if(countParts>3)
           {
-            partOrder = partOrder + (partOrder-1);
+            if (partOrder <= Math.ceil(countParts / 2))
+            {
+              partOrder = partOrder + (partOrder-1);
+            }
+            else
+            {
+              partOrder = countColums;
+              countColums += 2;
+            }
           }
-          else
-          {
-            partOrder = countColums;
-            countColums += 2;
-          }
+          
           $(partDiv).addClass("order-"+partOrder);
         }
       }

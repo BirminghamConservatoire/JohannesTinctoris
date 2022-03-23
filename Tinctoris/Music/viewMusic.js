@@ -203,6 +203,7 @@ function setWindowAndDraw()
     }
 
     addToggleParts(toggleParts);
+    $("#license").prop("hidden", false);
 }
 
 /**

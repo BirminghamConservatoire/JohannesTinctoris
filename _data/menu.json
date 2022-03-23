@@ -351,11 +351,6 @@
       "label": "Du Faÿ",
       "items":[
         {
-          "id":"dufayAveRegina",
-          "label":"Ave regina celorum",
-          "file":"music/2_Dufay/D2_Ave-regina-celorum.txt"
-        },
-        {
           "id":"dufaySalveRegina",
           "label":"Salve regina",
           "file":"music/2_Dufay/D3_Salve-regina.txt"

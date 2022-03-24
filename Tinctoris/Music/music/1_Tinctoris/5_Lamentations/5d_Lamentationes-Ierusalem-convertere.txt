@@ -15,7 +15,6 @@ Lam	Lamentationum Jeremie prophete Liber primus (Venice: Octavianus Petrutius, 8
 </part>
 {staf: 5} <part: Tenor>
 <pars>
-<pars>
 {clef: C10} {solm: bb} {mens: "c9" (ed.) : (om.) Lam} BG <text>Ierusa -</text> Sb. sc sd Be <lig>Sd <text>{var="lem," (ed.) : (transp.) Lam}</text> Sb.</lig> ma SG. sF sE <text>{var=(ins.) "lem" Lam}</text> SF BG PL7-9x2 PL5-7 <lig>SG <text>converte -</text> Sb.</lig> mc md me <lig>Sf Sb.</lig> ma Sb Bc Sd. sc sb <lig><obl>Sa SG</obl></lig> Sb Sc <text>re</text> Ba BG PL7-9x2 PL9-11x2 PL7-9 BG <text>{var="ad" (ed.) : (transp.) Lam} {var="Do -" (ed.) : "ad domi-" Lam}</text> <lig>Sa Sb</lig> Sc. mb ma mG Sd. mc mb sa sG <lig>SF <text>{var="mi" (ed.) : (transp.) Lam}num</text> SD</lig> BE BD PS7 SG <text>Deum</text> Sd. sc sb ma sG sF SE <lig>SD SC</lig> <lig>SD SE.</lig> mD SF <lig>SG Sa</lig> <lig>SF SD.</lig> mE SF BG <text>tu -</text> Sa Sb. mc mb <text>um.</text> sa sG Ba* LG ||
 </pars>
 </part>

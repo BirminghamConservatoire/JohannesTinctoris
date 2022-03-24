@@ -13,7 +13,7 @@ Lam	Lamentationum Jeremie prophete Liber primus (Venice: Octavianus Petrutius, 8
 {clef: C6} {solm: bb ^bbb} {mens: "c9" (ed.) : (om.) Lam} Bg. <text>Gi -</text> mf me Bf PS9 Sg. mf me sd sc <text>mel.</text> Be Ld* [-] Ld <text>Migravit</text> Be. md mc Ld Bg <text>Iudas</text> Sd Sg. maa mg sf se Lf* Bg <text>propter</text> Sg. me. sd mc mb. sa Bc PS5 Sc <text>afflictio{var=(ins.) "nem" Lam}-</text> Se. mf mg saa sbb Scc. sbb saa Sbb <text>{var="nem," (ed.) : (transp.) Lam}</text> Bcc PS9 Sg <text>Et multitu -</text> Saa. sg sf Se Bd Sg. sf se mf sg saa <lig><obl>Sbb Saa.</obl></lig> mg Sg. <text>dinem</text> sf se Sf Bg PL9-11 <full>Be <text>Habita -</text> Sf Bg Sf Se <text>vit</text> Bd</full> Bc PL7-9x2 <full>Bd <text>Nec invenit</text> Be Bf Bg. Baa. Bg. Scc. <text>re -</text> mbb maa mg Sbb Saa. mg Sg. sf <text>quiem;</text> se Sf</full> Lg ||
 </pars>
 <pars>
-{mens: c9} Bg. <text>Omnes</text> mf me Lf Be PS5 <text>persecutores eius</text> Sc Bd. Sc Sb Sb Ba BG PL5-7x2 PB7 Bd <text>apprehenderunt</text> Be Bf Sf. se sf <lig>Sg Sbb</lig> Saa. sg sf me. sd Sg. sf se Sf <text>{var=(ins.) "e-" Lam}</text> Bg. Saa. <text>{var="e -" (ed.) : (transp.) Lam}</text> mg <text>{var=(ins.) "am" Lam}</text> Sf Be <text>{var="am" (ed.) : (transp.) Lam}</text> Ld PL7-9 PS7 Sd <text>Inter</text> Se. mf <lig>Sg Saa</lig> PS11 Sd. <text>{var="an" (ed.) : (transp.) Lam}{var="gusti -" (ed.) : "angusti-" Lam}</text> me mf mg <lig>Saa Sbb.</lig> mg Bg <text>as.</text> Sf Lg ||
+{clef: C6} {solm: bb ^bbb} {mens: c9} Bg. <text>Omnes</text> mf me Lf Be PS5 <text>persecutores eius</text> Sc Bd. Sc Sb Sb Ba BG PL5-7x2 PB7 Bd <text>apprehenderunt</text> Be Bf Sf. se sf <lig>Sg Sbb</lig> Saa. sg sf me. sd Sg. sf se Sf <text>{var=(ins.) "e-" Lam}</text> Bg. Saa. <text>{var="e -" (ed.) : (transp.) Lam}</text> mg <text>{var=(ins.) "am" Lam}</text> Sf Be <text>{var="am" (ed.) : (transp.) Lam}</text> Ld PL7-9 PS7 Sd <text>Inter</text> Se. mf <lig>Sg Saa</lig> PS11 Sd. <text>{var="an" (ed.) : (transp.) Lam}{var="gusti -" (ed.) : "angusti-" Lam}</text> me mf mg <lig>Saa Sbb.</lig> mg Bg <text>as.</text> Sf Lg ||
 </pars>
 </part>
 {staf: 5} <part: Tenor>
@@ -21,7 +21,7 @@ Lam	Lamentationum Jeremie prophete Liber primus (Venice: Octavianus Petrutius, 8
 {clef: C10} {solm: bb} {mens: "c9" (ed.) : (om.) Lam} Bb. <text>Gimel.</text> ma mG Ba BG Lc Lb* [-] Lb <text>Migravit Iudas</text> Bc. mb ma Lb LG. La* PL7-9x2 PL9-11x2 Lc. <text>Et multitu -</text> <lig><obl>Sc Sb</obl></lig> BG Sa. sb sc Sd. mc <lig>Sd <text>dinem</text> Sb</lig> Ba BG PL7-9 <full>Bc <text>Habitavit</text> Sd Be Sd Sc. sb sa Sb</full> Bc PL9-11 PL7-9 <full>BG. <text>Nec invenit requi -</text> Ba. BG Sc Sa Bd BG Sc. mb ma mG Sc Bd Sc <text>em;</text> Sb Ba</full> LG ||
 </pars>
 <pars>
-{mens: c10} SG. <text>Omnes</text> sa sb Bc <lig>Ld Lc</lig> PL9-11x2 PB11 Bc <text>persecutores eius</text> Bd. Sc Sb Sb Ba BG BC -LD PS7 SG <text>apprehenderunt</text> SF. sE sF <lig>SG Sb</lig> Ba SG Bb Sc <lig>Sa Sd. <text>eam</text></lig> sc sb Sc Bd PB11 Bd <text>Inter</text> mc. sb SG. <text>angu -</text> sF sE SF SG. ma <lig>Sb Sc</lig> <lig>Sd Sf.</lig> me Sd <lig><obl>Sc <text>stias.</text> Sb</obl></lig> <lig>BG Ba</lig> LG ||
+{clef: C10} {solm: bb} {mens: c10} SG. <text>Omnes</text> sa sb Bc <lig>Ld Lc</lig> PL9-11x2 PB11 Bc <text>persecutores eius</text> Bd. Sc Sb Sb Ba BG BC -LD PS7 SG <text>apprehenderunt</text> SF. sE sF <lig>SG Sb</lig> Ba SG Bb Sc <lig>Sa Sd. <text>eam</text></lig> sc sb Sc Bd PB11 Bd <text>Inter</text> mc. sb SG. <text>angu -</text> sF sE SF SG. ma <lig>Sb Sc</lig> <lig>Sd Sf.</lig> me Sd <lig><obl>Sc <text>stias.</text> Sb</obl></lig> <lig>BG Ba</lig> LG ||
 </pars>
 </part>
 {staf: 5} <part: {var="Contratenor" (ed.) : (om.) Lam} Altus>
@@ -29,7 +29,7 @@ Lam	Lamentationum Jeremie prophete Liber primus (Venice: Octavianus Petrutius, 8
 {clef: C8} {solm: bb} {mens: "c9" (ed.) : (om.) Lam} Ld. <text>Gimel.</text> Sb BG. LG* [-] -LG <text>Migravit Iudas</text> -LG -LG <lig>Sb Sc</lig> Bd Sc mb mc Ld* Se. <text>propter afflictio -</text> sd sc mb Sc mg. sf me Sd PS7 Sc Se. mf Sg <text>nem,</text> Bc Se Bd Lc PB7 <text>Et multitudinem</text> BG <lig>Sb Sc</lig> Md PB9 <full>Be Sd <text>servitu -</text> Sc. sb sa Sb</full> Bc <text>tis;</text> PB9 PL7-9 <full>Bb <text>inter gentes,</text> Sc Bd Sc Sb Ba</full> BG PL5-7 <full>Bd <text>Nec invenit</text> Be Bf Sg. mf me md</full> Be <full>Bf <text>re -</text> Se Sd. sc <text>quiem;</text> sb Sc</full> Ld ||
 </pars>
 <pars>
-{mens: c9} Sc. <text>Omnes</text> sb sa SG. ma Lb BG PL5-7x2 PL7-9 Sg. <text>e -</text> sf se md. se Sf. se sd Se <lig>Sd Sg. <text>ius</text></lig> sf se Sf Bg. mf <text>apprehenderunt</text> me Ld <lig>Sb SG</lig> Sa. mb Sc Sd. sc sb Sa PL7-9x2 <lig>Sd <text>Inter</text> Sf.</lig> me md mc Sb. sc sd Se Sc. mb mb ma Bc <text>angusti -</text> <lig><obl>Sd Sc</obl></lig> Sb. sa sG mF mG Ba SG Sb. <text>as.</text> mc Bd Lb ||
+{clef: C8} {solm: bb} {mens: c9} Sc. <text>Omnes</text> sb sa SG. ma Lb BG PL5-7x2 PL7-9 Sg. <text>e -</text> sf se md. se Sf. se sd Se <lig>Sd Sg. <text>ius</text></lig> sf se Sf Bg. mf <text>apprehenderunt</text> me Ld <lig>Sb SG</lig> Sa. mb Sc Sd. sc sb Sa PL7-9x2 <lig>Sd <text>Inter</text> Sf.</lig> me md mc Sb. sc sd Se Sc. mb mb ma Bc <text>angusti -</text> <lig><obl>Sd Sc</obl></lig> Sb. sa sG mF mG Ba SG Sb. <text>as.</text> mc Bd Lb ||
 </pars>
 </part>
 {staf: 5} <part: {var="Contratenor" (ed.) : (om.) Lam} Bassus>
@@ -37,7 +37,7 @@ Lam	Lamentationum Jeremie prophete Liber primus (Venice: Octavianus Petrutius, 8
 {clef: F10} {solm: bB} {mens: "c7" (ed.) : (om.) Lam} bE -LGG <text>Gimel.</text> BD BE LC LGG* [-] <text>{var=(ins.) "migravit" Lam}</text> -LGG <text>{var="Migravit" (ed.) : (transp.) Lam}</text> LC -LGG <lig>SGG SC</lig> SB <text>Iudas</text> SGG SC SE LD* PL7-9x2 PL5-7x2 LC <text>Et multitudi -</text> SF. sE sD <lig>SC SG.</lig> mF SE BD SGG <text>nem</text> BD SG BD <full>BE <text>servitu -</text> SF BG SF SE BD</full> <text>tis;</text> BC PB7 PL7-9 <full>BG <text>inter gentes,</text> Sa Bb Sa SG. sF sE SF</full> BG PL9-11x2 PL7-9x2 -LGG ||
 </pars>
 <pars>
-{mens: c10} LC <text>Omnes persecutores</text> LB  SC. mD SE SF SD BG Sa <lig>SD SG.</lig> sF <text>eius</text> sE SF BG PL9-11x2 <ll: 1> PB11 <lig>Bb <text>apprehenderunt</text> Bc</lig> La</ll> BG BD <lig>SC SGG</lig> BD SE BG SF. mE <text>eam</text> SD Ba PS7 SD. <text>Inter</text> mE SF  BG <lig>SC SE</lig> BD <text>angu -</text> BC <lig><obl>SB SA</obl></lig> SB. <text>sti -</text> mC SD. mE <lig>SF SG.</lig> mF <text>as.</text> SE BD -LGG ||
+{clef: F10} {solm: bB} {mens: c10} LC <text>Omnes persecutores</text> LB  SC. mD SE SF SD BG Sa <lig>SD SG.</lig> sF <text>eius</text> sE SF BG PL9-11x2 <ll: 1> PB11 <lig>Bb <text>apprehenderunt</text> Bc</lig> La</ll> BG BD <lig>SC SGG</lig> BD SE BG SF. mE <text>eam</text> SD Ba PS7 SD. <text>Inter</text> mE SF  BG <lig>SC SE</lig> BD <text>angu -</text> BC <lig><obl>SB SA</obl></lig> SB. <text>sti -</text> mC SD. mE <lig>SF SG.</lig> mF <text>as.</text> SE BD -LGG ||
 </pars>
 </part>
 </section>

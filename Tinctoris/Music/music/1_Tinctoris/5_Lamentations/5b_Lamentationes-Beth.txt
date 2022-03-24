@@ -13,10 +13,10 @@ Lam	Lamentationum Jeremie prophete Liber primus (Venice: Octavianus Petrutius, 8
 {clef: C6} {solm: bb ^bbb} {mens: c9} Lg <text>Be -</text> Saa. sg sf Le Sf. se sd <lig><obl>Se Sd.</obl></lig> mc mb <text>th.</text> sa sG La* [-] Laa <text>Plorans</text> Bbb <lig><obl>Saa Sg.</obl></lig> maa mg sf se Lf PS11 Saa. <text>plora -</text> mg maa mbb <lig><obl>Scc Sbb.</obl></lig> maa Saa. sg sf <text>vit</text> Sg Laa* Bd <text>in nocte,{var=(ins.) "et" Lam}</text> <lig>Bf Le</lig> Ld PS11 Baa <text>{var="Et" (ed.) : (transp.) Lam} {var="lachrime" (ed.) : "lacrime" Lam}</text> Saa Saa. sg sf Le PS7 Sd. <text>e -</text> me Sf me md Sg. sf se <text>ius</text> Sf Lg. PB9 Se. <text>in maxillis</text> mf Sg Sg Saa. sg sf Be PS7 Sd. <text>e -</text> se sf Sg. mf me md Sc Sd. sc sb <text>ius;</text> Sc Ld* ||
 </pars>
 <pars>
-{mens: "c10" (ed.) : (om.) Lam} Lg <text>Non est qui consoletur eam,</text> <label: 14>Duo</label> Baa Sbb Scc.  mbb maa mg <lig><obl>Sbb Saa.</obl></lig> mg Sg. sf se Sf Lg PB11 Bbb <text>Ex omnibus</text> Sbb Sbb Baa PS9 Sg. <text>ca -</text> mf me md Sf me md. <text>ris</text> sc mb Sa BG PB5 PS3 SG <text>e -</text> ma Sb mc md me Sf Sg. saa sbb <lig>Scc Sbb.</lig> maa mg sf se <lig>Sd Sg.</lig> sf <text>ius;</text> se Sf Lg ||
+{clef: C6} {solm: bb ^bbb} {mens: "c10" (ed.) : (om.) Lam} Lg <text>Non est qui consoletur eam,</text> <label: 14>Duo</label> Baa Sbb Scc.  mbb maa mg <lig><obl>Sbb Saa.</obl></lig> mg Sg. sf se Sf Lg PB11 Bbb <text>Ex omnibus</text> Sbb Sbb Baa PS9 Sg. <text>ca -</text> mf me md Sf me md. <text>ris</text> sc mb Sa BG PB5 PS3 SG <text>e -</text> ma Sb mc md me Sf Sg. saa sbb <lig>Scc Sbb.</lig> maa mg sf se <lig>Sd Sg.</lig> sf <text>ius;</text> se Sf Lg ||
 </pars>
 <pars>
-{mens: c9} Lg <text>Omnes</text> Lbb Baa. Sf Sg. sf sg Laa Sd. <text>amici</text> me Sf Sg. mf me md Sc <text>e -</text> Sd. sc sb <text>ius</text> Sc Ld PL7-9x2 PL9-11 Baa <text>Et facti</text> Saa Scc Sbb. saa sg Bf Sg Saa. mg Sf <lig><obl>Se <text>sunt</text> Sd</obl></lig> Be Bd. mc mb Ba PS3 SG <text>ei</text> Sa. mb Lc PS9 Sg <text>inimi -</text> Saa. mbb Bcc Sbb. saa sg Saa Sg. sf se <text>ci.</text> Sf Lg ||
+{clef: C6} {solm: bb ^bbb} {mens: c9} Lg <text>Omnes</text> Lbb Baa. Sf Sg. sf sg Laa Sd. <text>amici</text> me Sf Sg. mf me md Sc <text>e -</text> Sd. sc sb <text>ius</text> Sc Ld PL7-9x2 PL9-11 Baa <text>Et facti</text> Saa Scc Sbb. saa sg Bf Sg Saa. mg Sf <lig><obl>Se <text>sunt</text> Sd</obl></lig> Be Bd. mc mb Ba PS3 SG <text>ei</text> Sa. mb Lc PS9 Sg <text>inimi -</text> Saa. mbb Bcc Sbb. saa sg Saa Sg. sf se <text>ci.</text> Sf Lg ||
 </pars>
 </part>
 {staf: 5} <part: Tenor>
@@ -27,7 +27,7 @@ Lam	Lamentationum Jeremie prophete Liber primus (Venice: Octavianus Petrutius, 8
 <tacet>Non est<l/>tacet</tacet> ||
 </pars>
 <pars>
-{mens: c9} Bb <text>Omnes</text> Sb. mc Bd Sb. sa sG SF. <text>amici</text> mG <lig>Ba Bb</lig> La Sb. mc Sd BG <text>eius</text> Sa. mG mF mD SE SE -LD PL5-7x2 PL7-9 Sc. <text>Et facti sunt</text> mb Ba <lig>BG Ba</lig> Sb Sc Sa. mb Sc Sd. sc sb Sc Bd PB11 SD. <text>ei</text> sE sF <lig>SG SC</lig> SF. sE sF SG SC. mD mE mF BG PS9 Sc. <text>inimi -</text> mb Sa <lig>Sd SG</lig> <lig>SF SG</lig> Ba <text>ci.</text> LG ||
+{clef: C10} {solm: bb} {mens: c9} Bb <text>Omnes</text> Sb. mc Bd Sb. sa sG SF. <text>amici</text> mG <lig>Ba Bb</lig> La Sb. mc Sd BG <text>eius</text> Sa. mG mF mD SE SE -LD PL5-7x2 PL7-9 Sc. <text>Et facti sunt</text> mb Ba <lig>BG Ba</lig> Sb Sc Sa. mb Sc Sd. sc sb Sc Bd PB11 SD. <text>ei</text> sE sF <lig>SG SC</lig> SF. sE sF SG SC. mD mE mF BG PS9 Sc. <text>inimi -</text> mb Sa <lig>Sd SG</lig> <lig>SF SG</lig> Ba <text>ci.</text> LG ||
 </pars>
 </part>
 {staf: 5} <part: {var="Contratenor" (ed.) : (om.) Lam} Altus>
@@ -38,7 +38,7 @@ Lam	Lamentationum Jeremie prophete Liber primus (Venice: Octavianus Petrutius, 8
 {clef: C8} {solm: bb} {mens: "c11" (ed.) : (om.) Lam} Bg <text>Non est qui consoletur eam,</text> <label: 14>Duo</label> Sg. sf se Bf <lig>Sg Se</lig> Sf. me Sd. mc <lig>Sd Sb</lig> Ba -LG PB5 Bg <text>Ex omnibus</text> x8 Sg Sg Bf Sg. <text>ca -</text> mf me md mc sb sc Sd mc mb. sa SG <text>ris</text> mF SG PS5 SG <text>e -</text> ma Sb mc md me <lig>Sf Sg</lig> Pm9 mc md sc sd <lig>Se Sc.</lig> sb sa SG. ma mb mc <lig>Sd <text>ius;</text> Sb</lig> Ba LG ||
 </pars>
 <pars>
-{mens: c9} Bd <text>Omnes amici</text> Sd. se sf Sg. sf se Md Se <text>e -</text> mf Sd sc sb <text>ius</text> Sa BG PL5-7 PB7 Ba. <text>spreve -</text> SF. mG ma mb Sc md Sf me <text>runt</text> Sd Sc mb Sd mc md sc sb Sa Sa. <text>eam,</text> sG sF SG Sa. mb Sc Sc Ld Sd Bf <text>Et facti</text> Sf <lig>Sc SG</lig> PB5 Ba. <text>sunt</text> SG Sa. <text>  ei</text> mb <lig>Sc Sg</lig> Sf. se sd Le. <text>ini -</text> Sc. mb Sa mF. sE <text> mici.</text> <lig>SG Sd</lig> Pm9 md mb. sc Ld ||
+{clef: C8} {solm: bb} {mens: c9} Bd <text>Omnes amici</text> Sd. se sf Sg. sf se Md Se <text>e -</text> mf Sd sc sb <text>ius</text> Sa BG PL5-7 PB7 Ba. <text>spreve -</text> SF. mG ma mb Sc md Sf me <text>runt</text> Sd Sc mb Sd mc md sc sb Sa Sa. <text>eam,</text> sG sF SG Sa. mb Sc Sc Ld Sd Bf <text>Et facti</text> Sf <lig>Sc SG</lig> PB5 Ba. <text>sunt</text> SG Sa. <text>  ei</text> mb <lig>Sc Sg</lig> Sf. se sd Le. <text>ini -</text> Sc. mb Sa mF. sE <text> mici.</text> <lig>SG Sd</lig> Pm9 md mb. sc Ld ||
 </pars>
 </part>
 {staf: 5} <part: {var="Contratenor" (ed.) : (om.) Lam} Bassus>
@@ -49,7 +49,7 @@ Lam	Lamentationum Jeremie prophete Liber primus (Venice: Octavianus Petrutius, 8
 <tacet>Non est<l/>tacet</tacet> ||
 </pars>
 <pars>
-{mens: c10} MG <text>Omnes amici</text> LD BGG PS7 SD. mE SF <text>eius</text> SG. sF sE SD SE SC. mB <lig>SA SB</lig> BA PS7 SD. <text>spreverunt</text> mE mF mG Sa SD. mC SB <text>  ea -</text> <lig><obl>SA SGG.</obl></lig> mA SB <text>m,</text> <lig>SC SD</lig> BB -LA PB5 BD <text>Et facti sunt</text> <lig>SG SF.</lig> mE SD <lig>Sa Sb</lig> Ba BD. <text>ei</text> SE SF. sE <text>inimi -</text> sD SC SE BD LC. LA BGG bE SD SE <text>ci.</text> BD -LGG ||
+{clef: F10} {solm: bB} {mens: c10} MG <text>Omnes amici</text> LD BGG PS7 SD. mE SF <text>eius</text> SG. sF sE SD SE SC. mB <lig>SA SB</lig> BA PS7 SD. <text>spreverunt</text> mE mF mG Sa SD. mC SB <text>  ea -</text> <lig><obl>SA SGG.</obl></lig> mA SB <text>m,</text> <lig>SC SD</lig> BB -LA PB5 BD <text>Et facti sunt</text> <lig>SG SF.</lig> mE SD <lig>Sa Sb</lig> Ba BD. <text>ei</text> SE SF. sE <text>inimi -</text> sD SC SE BD LC. LA BGG bE SD SE <text>ci.</text> BD -LGG ||
 </pars>
 </part>
 </section>

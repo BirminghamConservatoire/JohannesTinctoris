@@ -351,6 +351,39 @@
       "label": "Du Faÿ",
       "items":[
         {
+          "id": "dufayMissaLhommeArmee",
+          "label": "Missa L'homme armé",
+          "file": "music/2_Dufay/D1_Missa-Lhomme-arme/D1a_Missa-Lhomme-arme_Kyrie.txt",
+          "parts":
+          [
+            {
+              "id": "dufayMissaLhommeArmee-Kyrie",
+              "label": "Kyrie",
+              "file": "music/2_Dufay/D1_Missa-Lhomme-arme/D1a_Missa-Lhomme-arme_Kyrie.txt"
+            },
+            {
+              "id": "dufayMissaLhommeArmee-Gloria",
+              "label": "Gloria",
+              "file": "music/2_Dufay/D1_Missa-Lhomme-arme/D1b_Missa-Lhomme-arme_Gloria.txt"
+            },
+            {
+              "id": "dufayMissaLhommeArmee-Credo",
+              "label": "Credo",
+              "file": "music/2_Dufay/D1_Missa-Lhomme-arme/D1c_Missa-Lhomme-arme_Credo.txt"
+            },
+            {
+              "id": "dufayMissaLhommeArmee-Sanctus",
+              "label": "Sanctus",
+              "file": "music/2_Dufay/D1_Missa-Lhomme-arme/D1d_Missa-Lhomme-arme_Sanctus.txt"
+            },
+            {
+              "id": "dufayMissaLhommeArmee-Agnus",
+              "label": "Agnus Dei",
+              "file": "music/2_Dufay/D1_Missa-Lhomme-arme/D1e_Missa-Lhomme-arme_Agnus.txt"
+            }
+          ]
+        },
+        {
           "id":"dufaySalveRegina",
           "label":"Salve regina",
           "file":"music/2_Dufay/D3_Salve-regina.txt"

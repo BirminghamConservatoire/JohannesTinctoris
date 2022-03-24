@@ -689,36 +689,34 @@ function MusicHolder(text, outdiv){
       // unfortunately, we're not able to deal with clefs in variants, or even determine the default reading without parsing
       // this solution is definitely errorneuous, but it likely won't break at least...
 
-      let firstSolmPos = parsString.indexOf("{solm:");
-      if(firstSolmPos != -1)
+      let checksubString = parsString.substring(parsString.indexOf("{"));
+
+      if(checksubString.startsWith("{clef:"))
       {
-        let foundSolmString = parsString.substring(firstSolmPos, parsString.indexOf("}", firstSolmPos)+1);
-        // if there is already a solm, use that
-        if(currentSolmString!=null)
-        {
-          parsString = parsString.slice(0,6) + currentSolmString + parsString.slice(6);
-        }
-        currentSolmString = foundSolmString;
+        currentClefString = checksubString.substring(0,checksubString.indexOf("}")+1);
+        checksubString = checksubString.substring(checksubString.indexOf("}")+1);
+        checksubString = checksubString.trim();
       }
       else
       {
-        parsString = parsString.slice(0,6) + currentSolmString + parsString.slice(6);
-      }
-
-      let firstClefPos = parsString.indexOf("{clef:");  
-      if(firstClefPos != -1)
-      {
-        let foundClefString = parsString.substring(firstClefPos, parsString.indexOf("}",firstClefPos)+1);
-        // if there is already a clef, use that
-        if(currentClefString!=null)
+        if(currentClefString)
         {
           parsString = parsString.slice(0,6) + currentClefString + parsString.slice(6);
         }
-        currentClefString = foundClefString;
+      }
+      
+      if(checksubString.startsWith("{solm:"))
+      {
+        currentSolmString = checksubString.substring(0,checksubString.indexOf("}")+1);
+        checksubString = null;
       }
       else
       {
-        parsString = parsString.slice(0,6) + currentClefString + parsString.slice(6);
+        let firstClosingCurlyPos = parsString.indexOf("}");
+        if(currentSolmString)
+        {
+          parsString = parsString.slice(0,firstClosingCurlyPos+1) + currentSolmString + parsString.slice(firstClosingCurlyPos+1);
+        }
       }
 
       // add part tag to have the part name in every pars

@@ -246,8 +246,9 @@ var editable = false;
 /** @global 
  * @summary Set on/off if window is an editor window*/
 var standaloneEditor = false;
+var cpw = false;
 /** @global */
-var MEILinks = (document.location.href.indexOf('beta') >-1 ||
+var MEILinks = (document.location.href.indexOf('github') >-1 ||
                 document.location.href.indexOf('localhost') > -1) ? true : false;
 /** @global */
 var nocache = false;
@@ -328,6 +329,10 @@ var dateDisplay = "show";
  * @summary toggles if copy text info is displayed
 */
 var copyTextDisplay = "show";
+/** @global 
+ * @summary toggles if copy text info is displayed
+*/
+var baseFileDisplay = "show";
 /** @global 
  * @summary toggles if source info is displayed
 */
@@ -1446,12 +1451,14 @@ function sysBreak2(lastp){
  /** @memberof base/sysbreak
   * @summary Custos assistance
   */
-function nextPitch(){
-  var events = currentExample.events;
+function nextPitch(eventArray = currentExample.events, nextEventPos = eventi+1){
+  //var events = currentExample.events;
   var event;
   var components;
-  for(var i=eventi+1; i< events.length; i++){
-    event = events[i];
+  //for(var i=eventi+1; i< events.length; i++){
+  for(var i=nextEventPos; i< eventArray.length; i++){
+    //event = events[i];
+    event = eventArray[i];
 		switch(event.objType){
 			case "Note":
 			case "ChantNote":
@@ -1473,6 +1480,14 @@ function nextPitch(){
 				}
 				if(e) return pitchAndPos(e);
 				break;
+      case "MusicalChoice":
+        let defaultEvents = getDefaultReading(event);
+        let nextP;
+        if(defaultEvents)
+        {
+          nextP = nextPitch(defaultEvents, 0);
+        }
+        return nextP;
 			case "Part":
 				return false;
 		}
@@ -2700,27 +2715,43 @@ docMapping.prototype.addPopup = function(info, referrer, ptype, tDoc){
     var olditem = document.getElementById(id);
     if(olditem) $(olditem).remove();
     document.getElementById("footnotes").appendChild(fndiv);
-    if(typeof(info) == "string"){
-      fndiv.appendChild(document.createTextNode(info));
-    } else if (info.objType==="Choice"){ 
-      fndiv.appendChild(info.footnote());
-    } else if (info.objType==="Annotation" || info.objType.indexOf("Comment")>-1){
-      fndiv.appendChild(info.footnote());
-    } else if (info.objType==="Part"){
-      fndiv.appendChild(info.footnote());
-    } else if (!info.tip){
-      fndiv.appendChild(info.footnote());
-    } else if (info){
-      var frame = svg(100, 100);
-      fndiv.appendChild(frame);
-      fndiv.appendChild(document.createTextNode(" "));
-      info.tip(frame);
-      fndiv.style.width = frame.getBBox().width+26+"px";
-      fndiv.style.height = frame.getBBox().height+26+"px";
-      frame.name = code+no;
-      frame.setAttribute("data-ref", code+no);
-      frame.title = code+no;
+    if(info)
+    {
+      if(typeof(info) === "string"){
+        fndiv.appendChild(document.createTextNode(info));
+      } else if (info.objType==="Choice"){ 
+        if(typeof info.footnote === "function")
+        {
+          fndiv.appendChild(info.footnote());
+        }
+      } else if (info.objType==="Annotation" || info.objType.indexOf("Comment")>-1){
+        if(typeof info.footnote === "function")
+        {
+          fndiv.appendChild(info.footnote());
+        }
+      } else if (info.objType==="Part"){
+        if(typeof info.footnote === "function")
+        {
+          fndiv.appendChild(info.footnote());
+        }
+      } else if (!info.tip){
+        if(typeof info.footnote === "function")
+        {
+          fndiv.appendChild(info.footnote());
+        }
+      } else{
+        var frame = svg(100, 100);
+        fndiv.appendChild(frame);
+        fndiv.appendChild(document.createTextNode(" "));
+        info.tip(frame);
+        fndiv.style.width = frame.getBBox().width+26+"px";
+        fndiv.style.height = frame.getBBox().height+26+"px";
+        frame.name = code+no;
+        frame.setAttribute("data-ref", code+no);
+        frame.title = code+no;
+      }
     }
+    
     fndiv.name = code+no;
     $(fndiv).data("ref", referrer);
     $(fndiv).mouseenter(popGlow);
@@ -3558,11 +3589,17 @@ function SVGWitnessList(reading, parent){
 //    if(i){
     span.appendChild(svgSpan(span, "", false, " "));
 //    }
-    if(typeof(reading.witnesses[i])==="string"){
+    if(typeof(reading.witnesses[i])==="string")
+    {
       span.appendChild(svgSpan(span, "variantWitness", false, reading.witnesses[i]));
-    } else if(reading.witnesses[i].objType==="WitnessDescription" || 
-              reading.witnesses[i].objType==="Qualified Witness"){
+    } 
+    else if(reading.witnesses[i].objType==="Qualified Witness")
+    {
       span.appendChild(reading.witnesses[i].toSVG(span));
+    }
+    else if(reading.witnesses[i].objType==="WitnessDescription")
+    {
+      span.appendChild(svgSpan(span, "variantWitness", false, reading.witnesses[i].information));
     }
   }
   return span;
@@ -3766,10 +3803,18 @@ function TEIWitnesses(rdg, el){
 function MEIAddPosition(obj, MEIObj){
   // Adds pitch to MEI element, if available, and otherwise adds staff
   // position
-  if(obj.pitch){
-		var pname = obj.pitch.charAt(0).toLowerCase();
+  // elements with pname & oct: note, keyAccid, custos
+  var logPitch = ["note", "keyAccid", "custos"];
+  // elements with ploc & oloc: accid, dot, rest
+  var visPitch = ["accid", "dot", "rest"];
+  if(obj.pitch && logPitch.indexOf(MEIObj.localName)>=0){
+		let pname = obj.pitch.charAt(0).toLowerCase();
     MEIObj.setAttributeNS(null, "pname", pname);
     MEIObj.setAttributeNS(null, "oct", 1+(Math.floor((notes.indexOf(obj.pitch)+5) / 7)));
+  } else if(obj.pitch && visPitch.indexOf(MEIObj.localName)>=0){ 
+    let pname = obj.pitch.charAt(0).toLowerCase();
+    MEIObj.setAttributeNS(null, "ploc", pname);
+    MEIObj.setAttributeNS(null, "oloc", 1+(Math.floor((notes.indexOf(obj.pitch)+5) / 7)));
   } else if(obj.staffPos){
     MEIObj.setAttribute("loc", obj.staffPos-4);
   }
@@ -3850,6 +3895,18 @@ function addUUIDs(event, mei, document){
 	mei.setAttribute("xml:id", ID);
 	if(!document.UUIDs) document.UUIDs = {};
 	document.UUIDs[ID] = {event: event, mei: mei};
+}
+
+/** 
+ * Name space manager function. Takes a prefix and returns the URL for
+ * that name space. In this case, though, pretty much hard-wired.
+ * @param {String} prefix The namespace prefix to retrieve as a URL
+ */
+ function nsResolver(prefix){
+  var ns = {
+    mei: "http://www.music-encoding.org/ns/mei"
+  }
+  return ns[prefix] || null;
 }
 
 

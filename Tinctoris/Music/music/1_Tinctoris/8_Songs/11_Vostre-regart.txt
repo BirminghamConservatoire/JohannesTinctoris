@@ -1,0 +1,34 @@
+﻿Vostre regart si tresfort m’a feru
+Johannes Tinctoris
+Editor: Jeffrey J. Dean
+Checked by:
+Date established: 11 March 2022
+Base transcription: Dij
+Sources:
+Dij	F-Dm 517, fols. xxiiij v – xxv r (27v–28r)	Tinctoris	tii
+Lab	US-Wc M2.1.L25 case, opening iiij\xx (fols. 79v–80r)	Jo. Tinctoris	tii
+F176	I-Fn Magl. XIX.176, opening 4 (fols. 3v–4r)	—	iii
+Col	E-Sc 5-1-43, sigs. [l11]v–[l12]r (fols. 85v–86r)	—	tii
+Pix	F-Pn français 15123, fols. 120v–121r	—	tii
+<piece: {mensural: void}, {staf: 5, black}>
+<part: {var="Supremum" (ed.) : (om.) Dij Lab F176 Col Pix}>
+<pars>
+{clef: C4} {solm: 0} {mens: c11} Bg <text>Vostre {var="regart" Dij Lab Col Pix : "regard" F176} si {var="tresfort" Dij Col Pix : "tres fort" Lab}</text> Sd Sd Se Sd. me Sf Sg Saa. mbb mcc mdd Sbb <text>m’a feru</text> Saa. mg {var="Bg" Dij Lab F176 : "Sg. sf se" Col Pix} Sf Bg PS7 {var=(ins.) "{solm: bbb}" Pix} Sg <text>{var="D’" Dij Lab Col : "ma feru dun dart" Pix}{var="un" Dij Lab : "ung" Col} dart poignant, bien cler{var=", fort" Dij Lab Col : "pognant" Pix} {var="esmoulu" Dij : "esmolu" Lab Col}</text> {var="{solm: bbb}" Dij Lab F176 Col : (transp.) Pix} Sbb {var=(ins.) "{staf: 5} {clef: C4} {solm: bbb}" Pix} Sbb Saa. sg sf Sg Saa Sd Sdd. mcc mbb maa {var="<lig>Saa Sbb.</lig>" Dij Lab F176 Col Pix^c : "<lig>Sbb Scc.</lig>" Pix^*} maa {var="Baa" Dij Lab F176 : "Saa. sg sf" Col Pix} Sg Laa PB9 Sf <text>{var="Jusques" Dij Lab Col : "bien cler fort esmo-lu jus-" Pix} au cueur, que{var=(ins.) "je" Lab}ne sçay que {var="je" Dij Col : (transp.) Lab} fa{var="ce." Dij Lab Col : "que" Pix}</text> Sg Se Sd. Sg me Sf Sg {var="Saa." Lab F176 Col Pix : "Saa caa {staf: 5} {clef: C4} {solm: 0} maa" Dij} mbb Scc. mbb mg maa Sg. sf {var="sg mf me" Dij Col F176 : "se Sf" Col Pix} Bg PS7 Sd <text>{var="Si" Dij Lab : "se" Col : "que je faye sela patie" Pix} la pitié de vous ou votre {var="gra -" Lab Col : (transp.) Dij}{var=(ins.) "de" Pix}</text> Se Sf Sg Saa Sg Scc mbb mdd mcc maa mbb mg maa sg sf <text>{var=(ins.) "gra-" Dij}</text> Se md <text>{var=(ins.) "vous" Pix}</text> Sg <text>{var=(ins.) "ce" Dij}</text> mf md sc sd <text>{var=(ins.) "ce" Lab}</text> {var="Se" Lab F176 Col Pix : "me" Dij} {var="Bd" Dij Lab F176 : "Sd. sc sb" Col Pix} Sc <text>{var="ce" Col : (transp.) Dij Lab}</text> Ld PB5 Sg <text>{var="Ne" Dij Lab Col : "yene me tiens abba-" Pix} m’y {var="sequeurt" Dij Lab : "secourt" Col}, je me tiens {var="abatu" Lab : "a batu" Dij : "abbatu" Col}</text> Se Sf Bg Saa mbb Sdd mbb <lig><obl>Scc Saa.</obl></lig> mg mf me Sd {var=(ins.) "bbb" Pix} me Sf {solm: 0} mg maa sg saa {var="bbb" Dij Lab F176 : (transp.) Pix : (om.) Col} {var="Sbb Sg." Dij Lab F176 Pix : "<lig><obl>Sbb Sg.</obl></lig>" Col} sf se <text>{var=(ins.) "tu" Pix}</text> Sf Lg || {var=(ins.) "Be" F176}
+</pars>
+</part>
+{staf: 0} <part: [text strophes]>
+<pars>
+<label>Si fort m’actaint que parfont l’ay sentu,<l/>Tout a travers si tres roide est venu,<l/>Que tout {var="pasmé" Dij : "paume" Lab} en suis cheü en la place.<l/> <l/>Si la doulceur qu’en vous croist {var="et" Lab ; " " Dij} a creü<l/>N’{var="envoie" Dij : "envoye" Lab} confort que tant j’ay actendu,<l/>Ne {var="l’adoulcist" (ed.) : "la doulcist" Dij Lab} le grant mal que j’{var="embrasse" Lab : "ambrace" Dij},<l/> {var="Vendra" Dij : "Venra" Lab} la mort qui ung chascun amasse<l/>Et me prendra du lit tout estendu.</label>
+</pars>
+</part>
+{staf: 5} <part: Tenor>
+<pars>
+{clef: C10} {solm: "0" Dij Lab : "bb" F176 Col Pix} {mens: c11} PL5-7 <text>Vostre {var="regard" Dij Lab F176 : "regart" Col Pix} {var=(ins.) "si tresfort" Col Pix} {var=(ins.) "ma feru" Col}</text> BG SD SD SE SD BF <lig>SG Sa</lig> {var="<lig>SF <obl>Sb Ba</obl></lig> LG" Dij Lab F176 : "<lig>SF Sb Ba LG</lig>" Col Pix} PS7 SG SF. sE sD SE SF SG. mF {var="BD" Dij Lab F176^c Col Pix : "SD" F176^*} Bd. Sc {var="Bb La" Dij Lab Col Pix : "<lig>Bb La</lig>" F176} <lig>Sb Sc</lig> {var="Sd SG" Dij Lab Col Pix : "<lig>Sd SG</lig>" F176} PS7 SF SG SE {var="<lig>SD SE</lig>" Dij Lab F176 : "SD SE" Col Pix} SF. mG ma mb Bc Sb <lig>Ba LG</lig> PS7 SD {var="SE SF" Dij Lab F176 : "<lig>SE SF</lig>" Col Pix} SG {var="Sa SG" Dij Lab F176 : "<lig><obl>Sa SG</obl></lig>" Col Pix} Sc md mb Sc. ma Sb mG ma SF <lig>SG <obl>SF BE</obl></lig> BD <lig>SG Sb.</lig> mc {var="Sa <lig>Sb Sc</lig> <lig><obl>Sa SG</obl></lig>" Dij Lab F176 : "<lig>Sa Sb</lig> <lig><obl>Sc Sa</obl></lig> SG" Col Pix} {var="<lig>SE SF</lig> BG" Dij Lab : "<lig>SE SF BG</lig>" F176 Col Pix} Sa. mb Sc {var="Sd Sb" Dij Lab Col : "<lig><obl>Sd Sb</obl></lig>" F176 Pix} Sa. mb Sc {var="Sd Sb <lig>Ba LG</lig>" (ed.) : "Sd Sb <lig>Ba MG</lig>" Dij Lab : "<lig><obl>Sd Sb</obl></lig> <lig>Ba LG</lig>" Pix : "<lig>Sd Sb Ba LG</lig>" F176 : "<lig>Sd Sb Ba MG</lig>" Col} {var="||" Dij Lab Col : "|" F176}
+</pars>
+</part>
+{staf: 5} <part: {var="Contratenor" (ed.) : "Conctratenor" Dij Lab : "Contra Tenor" F176 : "Contra" Col Pix}>
+<pars>
+{clef: F10} {solm: bB} {mens: "c11" Dij F176^c Col Pix : (om.) Lab F176^*} LG <text>{var="Vostre" Dij Lab Col : (om.) F176} {var="regard" Dij Lab : "regart" Col Pix : (om.) F176} {var=(ins.) "si tresfort" Col Pix} {var=(ins.) "ma feru" Col}</text> {var="<lig><obl>SC SGG</obl></lig>" Dij Lab Col Pix : "<lig>SC SGG</lig>" F176} SB. mD <lig>SC SF.</lig> mG <ll: 1> Sa {var="<lig><obl>Sd Sc</obl></lig>" Dij Lab F176 Col : "Sd Sc" Pix} ma mc SG </ll> BD bE SE SC. mB <lig>BGG. BD</lig> {var="<lig><obl>SC SA</obl></lig> SGG." Dij Lab Col Pix : "SC <lig><obl>SB SGG.</obl></lig>" F176} mA mB mC BD SG. mD SF {var="BG BD" Dij Lab F176 : "<lig><obl>BG BD</obl></lig>" Col Pix} PS9 SF SG SE SD {var="SE SC" Dij Lab F176 : "<lig><obl>SE SC</obl></lig>" Col Pix} {var="SB" Lab F176 Col Pix : "mA mB" Dij} SGG {var="SG Sa SG <lig>SD SF.</lig>" Dij Lab F176 : "<lig>SG Sa</lig> <lig><obl>SG SD</obl></lig> SF." Col : "SG Sa <lig><obl>SG SD</obl></lig> SF." Pix} mE mC mD mE mF SG {var="BD LGG SC SB" Dij Lab : "<lig>BD LGG</lig> <lig><obl>SC SB</obl></lig>" F176 Col : "BD LGG." Pix} PS5 SD SE {var="SF SG Sa SG SF" Dij Lab F176 : "<lig>SF SG</lig> <lig><obl>Sa SG</obl></lig> SF" Col : "SF <lig>SG Sa</lig> <lig><obl>SG SF</obl></lig>" Pix} PS9 SG mE {var="SD. SC" Dij Lab : "SD mD SC" F176 : "<lig><obl>SD. SC</obl></lig>" Col Pix} SD {var="<lig>BA Ba</lig>" Dij Lab F176 : "BA Ba" Col Pix} PS11 SG SE SF SG {var="<lig>SC SD</lig>" Dij Lab F176 : "SC SD" Col Pix} SGG. {var="mC" Dij Lab F176 : "mB" Col Pix} SA {var="<lig>SGG SG</lig> SF." Dij Lab F176 Col : "SGG <lig><obl>SG SF.</obl></lig>" Pix} mG Sa {var="<lig>SD SG</lig>" Dij Lab F176 : "SD SG" Col Pix} Pm9 SD mB SA {var="SGG SGG <lig>BD LGG</lig>" Dij : "SGG SGG <lig>BD MGG</lig>" Lab : "SGG SGG mD SD mD -LGG" F176 : "<lig>BGG BD LGG</lig>" Col : "<lig>BGG BD</lig> LGG" Pix} ||
+</pars>
+</part>
+</piece>

@@ -132,9 +132,53 @@ function Note(){
 		}
     if((voidRule(this) && currentSubType==="full") 
        || (fullRule(this) && currentSubType==="void")){
-      el.setAttribute("coloration", "true");
+      el.setAttribute("colored", "true");
     }
-    parent.appendChild(el);
+    // sup outside of ligatures (within ligatures we have LigatureNote objects) is used for divisio. Put notes into chord
+    // sup can follow as well accidentals, make sure that previous is a note
+    if(this.sup && this.previous.objType==="Note")
+    {
+      var prevElement = parent.lastElementChild;
+      var chord;
+      // check for previous chord
+      if(prevElement.localName === "chord")
+      {
+        chord = prevElement;
+        chord.appendChild(el);
+      }
+      // or create new chord if note
+      else if(prevElement.localName === "note")
+      {
+        chord = doc.createElementNS("http://www.music-encoding.org/ns/mei", "chord");
+        chord.setAttribute("xml:id", "ID"+uuid());
+        // put previous non-sup note into chord and current note
+        chord.appendChild(prevElement);
+        chord.appendChild(el);
+        parent.appendChild(chord);
+      }
+      else
+      {
+        // unlikely fallback just in case
+        parent.appendChild(el);
+      }
+
+      // check for coloration: this is not semantic coloration if not every note is coloured
+      if(doc.evaluate("count(./*[@colored])<=count(./*)", chord, nsResolver, 3).booleanValue)
+      {
+        let coloredNotes = doc.evaluate("./*[@colored]", chord, nsResolver, 6);
+        
+        for(let i = 0; i < coloredNotes.snapshotLength; i++)
+        {
+          coloredNotes.snapshotItem(i).setAttribute("head.fill", "solid");
+          coloredNotes.snapshotItem(i).removeAttribute("colored");
+        }
+      }
+    }
+    else
+    {
+      parent.appendChild(el);
+    }
+    
 		if(this.text) this.text.toMEI(doc, el, this);
     this.MEIObj = el;
     return el;
@@ -393,7 +437,15 @@ function Dot(){
     MEIAddPosition(this, el);
     // ? form?
     if(parent.tagName==="note" || this.reallyAugments()) el.setAttribute("form", "aug");
-    parent.appendChild(el);
+    // dot as a child of note or rest is not allowed in MEI mensural
+    if (parent.tagName==="note" || parent.tagName==="rest")
+    {
+      parent.after(el)
+    }
+    else
+    {
+      parent.appendChild(el);
+    }
     this.MEIObj = el;
     return el;
   };
@@ -626,7 +678,8 @@ function Fermata(){
   /** Writes fermata as MEI element */
   this.toMEI = function(doc, parent){
     if(!parent) parent = doc.currentParent;
-    var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "fermata");
+    // Fermata element is not allowed in MEI Mensural, only @fermata
+    /*var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "fermata");
 		addUUIDs(this, el, curDoc);
     MEIAddPosition(this, el);
     if(this.lengthens && this.lengthens.MEIObj 
@@ -634,7 +687,18 @@ function Fermata(){
       el.setAttribute("startid", this.lengthens.MEIObj.getAttribute("xml:id"));
     }
     parent.appendChild(el);
-    return el;
+    return el;*/
+    if(this.lengthens && this.lengthens.MEIObj)
+    {
+      if(this.flipped)
+      {
+        this.lengthens.MEIObj.setAttribute("fermata", "below");
+      }
+      else
+      {
+        this.lengthens.MEIObj.setAttribute("fermata", "above");
+      }
+    }
   };
   /** Draws Fermata to SVG */
   this.draw = function(){
@@ -930,7 +994,6 @@ function LigatureNote(note){
     // FIXME: SUP?
     el.setAttribute("dur", rhythms[this.rhythm]);
 		addUUIDs(this, el, curDoc);
-    if(this.dot) this.dot.toMEI(doc, el);
     MEIAddPosition(this, el);
     if((voidRule(this) && currentSubType==="full") 
        || (fullRule(this) && currentSubType==="void")){
@@ -938,6 +1001,7 @@ function LigatureNote(note){
     }
 		this.MEIObj = el;
     parent.appendChild(el);
+    if(this.dot) this.dot.toMEI(doc, el);
   };
   // Ligature Note
   /** draw variant
@@ -1547,9 +1611,13 @@ function Oblique(){
   };
 	this.toMEI = function(doc, parent){
     if(!parent) parent = doc.currentParent;
-		for(var i=0; i<this.members.length; i++){
-			if(this.members[i].toMEI){
-				this.members[i].toMEI(doc, parent);
+    // currently, ObliqueNoteChoice.toMEI() is not implemeted,
+    // just retrieve default reading instead
+    // change defaultRdg back to this.members...
+    var defaultRdg = this.flattenedMembers(false);
+		for(var i=0; i<defaultRdg.length; i++){
+			if(defaultRdg[i].toMEI){
+				defaultRdg[i].toMEI(doc, parent);
 			}
 		}
   }
@@ -1619,20 +1687,30 @@ function Oblique(){
 		// Not as harmful as it sounds. Support function for this.member –
 		// create a list of all member notes and the variants they apply to.
 		var m = [];
-		for(var i=0; i<this.members.length; i++){
+    for(var i=0; i<this.members.length; i++)
+    {
 			var member = this.members[i];
-			if(member.objType==="ObliqueNote") {
+			if(member.objType==="ObliqueNote") 
+      {
 				m.push(member);
-			} else if (member.objType==="ObliqueNote Choice"){
-				for(var j=0; j<member.content.length; j++){
+			} 
+      else if (member.objType==="ObliqueNote Choice")
+      {
+				for(var j=0; j<member.content.length; j++)
+        {
 					var reading = member.content[j];
-					if(reading.content && (!variant || reading.applies(variant))){
-						for(var k=0; k<reading.content.length; k++){
-							if(reading.content[k].objType==="ObliqueNote" || reading.content[k].objType==="Note"){
+
+          if(reading.content && (!variant || reading.applies(variant)))
+          {
+						for(var k=0; k<reading.content.length; k++)
+            {
+              if(reading.content[k].objType==="ObliqueNote" || reading.content[k].objType==="Note")
+              {
 								m.push(reading.content[k]);
 							}
 						}
 					}
+          if(!variant) break;
 				}
 			}
 		}
@@ -1678,85 +1756,58 @@ function Oblique(){
     m1.startX = this.startX + oWidth(m0.staffPos, m1.staffPos)/1.8;
     // Draw oblique bit
     if(!(m0&&m1)) return false;
-		if(m0.choice){
-			if(m1.choice){
-        if(variant || !showvariants){
-          m0.choice.drawVar(variant);
-          m1.choice.drawVar(variant);
-        } else {
-          var click = m0.choice.drawVar(false);
-          click.id = "gii";
-          click.style.fill = "#060";
-          var tempSVG = SVG;
-          if(!variant) addAnnotation(click, this.members[0], "Oblique MusicalChoice");
-          SVG = tempSVG;
-          click = m1.draw(m0);
-          click.id = "wii";
-          click.style.fill = "#060";
-          if(!variant) addAnnotation(click, this.members[1], "Oblique MusicalChoice");
-          SVG = tempSVG;
-        }
-			} else {
-        if(variant){
-          m0.drawVar(variant);
-					m1.drawVar(variant);
-        } else {
-          m0.draw();
-					m1.draw();
-        }
-			}
-		} else {
-      if(variant){
+    if(m0.choice)
+    {
+      if(variant || !showvariants)
+      {
+        m0.choice.drawVar(variant);
+      }
+      else
+      {
+        let click = m0.choice.drawVar(false);
+        click.style.fill = "#0B0";
+        let tempSVG = SVG;
+        addAnnotation(click, this.members[0], "Oblique MusicalChoice");
+        SVG = tempSVG;
+      }
+    }
+    else
+    {
+      if(variant)
+      {
         m0.drawVar(variant);
-        m1.drawVar(variant);          
-      } else{
+      }
+      else
+      {
         m0.draw();
+      }
+    }
+    if(m1.choice)
+    {
+      if(variant || !showvariants)
+      {
+        m1.choice.drawVar(variant);
+      }
+      else
+      {
+        let click = m1.choice.drawVar(false);
+        click.style.fill = "#0B0";
+        let tempSVG = SVG;
+        addAnnotation(click, this.members[1], "Oblique MusicalChoice");
+        SVG = tempSVG;
+      }
+    }
+    else
+    {
+      if(variant)
+      {
+        m1.drawVar(variant);
+      }
+      else
+      {
         m1.draw();
       }
-		}
-		/*
-    if(this.members[0].objType == "ObliqueNote Choice"){
-      if(this.members[0].content[0].content.length == 1){
-        if(variant){
-          this.members[0].drawVar(variant);
-        } else {
-          this.members[0].draw();
-        }
-        if(this.members.length == 2){
-          if(variant){
-            this.members[1].drawVar(variant);
-          } else {
-            this.members[1].draw();
-          }
-        }
-      } else {
-        // The Choice is the full Oblique
-        if(variant || !showvariants){
-          m0.drawVar(variant);
-          m1.drawVar(variant);
-        } else {
-          var click = m0.drawVar(false);
-          click.id = "gii";
-          click.style.fill = "#060";
-          var tempSVG = SVG;
-          if(!variant) addAnnotation(click, this.members[0], "Oblique MusicalChoice");
-          SVG = tempSVG;
-          click = m1.draw(m0);
-          click.id = "wii";
-          click.style.fill = "#060";
-          if(!variant) addAnnotation(click, this.members[0], "Oblique MusicalChoice");
-          SVG = tempSVG;
-        }
-      }
-    } else {
-      if(variant){
-        this.members[0].drawVar(variant);
-        this.members[1].drawVar(variant);          
-      } else{
-        this.members[0].draw();
-        this.members[1].draw();
-      }
-    }*/
+    }
     //then left stem
     var ls = this.lstem(variant);
     if(ls){
@@ -2307,6 +2358,13 @@ function Rest(){
 		addUUIDs(this, el, curDoc);
     el.setAttribute("dur", rhythms[this.rhythm]);
     MEIAddPosition(this, el);
+    // make sure that the location of a rest is never a space but the line below (because of false rendering)
+    if (parseInt(el.getAttributeNS("","loc"))%2>0)
+    {
+      let loc = parseInt(el.getAttributeNS("","loc"));
+      loc = loc-1;
+      el.setAttributeNS("","loc",loc);
+    }
     parent.appendChild(el);
     if(this.dot) this.dot.toTEI(doc, parent);
     this.MEIObj = el;
@@ -2403,8 +2461,16 @@ function LongRest() {
   this.toMEI = function(doc, parent){
     if(!parent) parent = doc.currentParent;
     var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "rest");
-    el.setAttribute("dur", "longa");
-		el.setAttribute("quality", this.end-this.start==2 ? "i" : "p");
+    //el.setAttribute("dur", "longa");
+		//el.setAttribute("quality", this.end-this.start==2 ? "i" : "p");
+    if(this.end-this.start==2)
+    {
+      el.setAttribute("dur", "2B");
+    }
+    else
+    {
+      el.setAttribute("dur", "3B");
+    }
 		addUUIDs(this, el, curDoc);
     if(this.dot) this.dot.toTEI(doc, el);
     // FIXME: How does position work?
@@ -2479,15 +2545,32 @@ function MaxRest() {
   };
   this.toMEI = function(doc, parent){
     if(!parent) parent = doc.currentParent;
-    var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "rest");
-    el.setAttribute("dur", "maxima");
-		el.setAttribute("longIsPerfect", this.end-this.start==3 ? "true" : "false");
-		el.setAttribute("maximaIsPerfect", this.multiple==3 ? "true" : "false");
-		addUUIDs(this, el, curDoc);
-    MEIAddPosition(this, el);
-    parent.appendChild(el);
-    if(this.dot) this.dot.toMEI(doc, parent);
-    this.MEIObj = el;
+    var rests = [];
+    for(let i = 1; i<=this.multiple;i++)
+    {
+      var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "rest");
+      if(this.end-this.start==2)
+      {
+        el.setAttribute("dur", "2B");
+      }
+      else
+      {
+        el.setAttribute("dur", "3B");
+      }
+      if(i===1)
+      {
+        addUUIDs(this, el, curDoc);
+      }
+      else
+      {
+        el.setAttribute("xml:id", "ID"+uuid());
+      }
+      MEIAddPosition(this, el);
+      parent.appendChild(el);
+      if(this.dot) this.dot.toMEI(doc, parent);
+      this.MEIObj = el;
+    }
+    
     return el;
   };
   this.draw = function(){
@@ -2594,7 +2677,7 @@ function MensuralSignature(){
 			parent.appendChild(el);
 		}
 		if("cCçÇqQœŒ".indexOf(this.signature[0])>=0){
-			el.setAttributeNS(null, "symbol", "C");
+			el.setAttributeNS(null, "sign", "C");
 			el.setAttributeNS(null, "tempus", "2");
 			if("çÇŒ".indexOf(this.signature[0])>-1) {
 				el.setAttributeNS(null, "dot", "true");
@@ -2606,7 +2689,7 @@ function MensuralSignature(){
 				el.setAttributeNS(null, "orient", "reversed");
 			}
 		} else if("oOøØ".indexOf(this.signature[0])>=0){
-			el.setAttributeNS(null, "symbol", "O");
+			el.setAttributeNS(null, "sign", "O");
 			el.setAttributeNS(null, "tempus", "3");
 			if("øØ".indexOf(this.signature[0])>=0) {
 				el.setAttributeNS(null, "dot", "true");
@@ -2733,7 +2816,8 @@ function ProportionSign(){
 		parent.appendChild(el);
 		el.setAttributeNS(null, 'num', this.sign);
 		console.log("--", this.proportionChangesTo);
-		el.setAttributeNS(null, 'multiplier', this.proportionChangesTo);
+		// multiplier is not schema conform
+    //el.setAttributeNS(null, 'multiplier', this.proportionChangesTo);
 		addUUIDs(this, el, curDoc);
 		this.MEIObj = el;
 	}
@@ -2766,6 +2850,11 @@ function ProportionSign(){
         if((obj = arsNovaVoid[this.sign.charAt(i)+"Mens"])){
           obj.draw(curx, cury-yoffset(this.staffPos), rastralSize, 
             "proportion mensural propsign "+this.sign.charAt(i)+ extraClasses);
+          // horrible onion layer for proportions >19 to make the spacing less awkward
+          if (this.sign.length >= 2 && i < this.sign.length-1)
+          {
+            obj.advance = 400;
+          }
           curx += obj.advanceWidth(rastralSize);
         } else {console.log("Missing proportion: ", this.sign.charAt(i));}
       }
@@ -2825,8 +2914,9 @@ function StackedProportionSigns(){
 		var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "proport");
 		parent.appendChild(el);
 		if(this.signs[0] && this.signs[0].objType==='ProportionSign') el.setAttributeNS(null, 'num', this.signs[0].sign);
-		if(this.signs[1] && this.signs[1].objType==='ProportionsSign') el.setAttributeNS(null, 'numbase', this.signs[1].sign);
-		el.setAttributeNS(null, 'multiplier', this.proportionChangesTo);		
+		if(this.signs[1] && this.signs[1].objType==='ProportionSign') el.setAttributeNS(null, 'numbase', this.signs[1].sign);
+		// multiplier is not schema conform
+    //el.setAttributeNS(null, 'multiplier', this.proportionChangesTo);		
 		addUUIDs(this, el, curDoc);
 		this.MEIObj = el;
 	}
@@ -2947,7 +3037,15 @@ function SolmizationSign(){
   };
 	this.toMEI = function(doc, parent) {
 		if(!parent) parent = doc.currentParent;
-    var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "keyAccid");
+    var el;
+    if(parent.localName==="keySig")
+    {
+      el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "keyAccid");
+    }
+    else
+    {
+      el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "accid");
+    }
 		addUUIDs(this, el, curDoc);
 		parent.appendChild(el);
 		MEIAddPosition(this, el);
@@ -3649,7 +3747,16 @@ Annotation.prototype.draw = function(){
 				this.startY = prevBox.y +prevBox.height;
 				drawnx = this.startX;
 			} else {
-        drawnx = currentExample.events[eventi-1].startX;// - (rastralSize*prop);//why?
+        let lastEvent = currentExample.events[eventi-1];
+        let lastStartX = lastEvent.startX;
+        if(lastEvent.startX==false && lastEvent.members)
+        {
+          lastStartX = lastEvent.members[lastEvent.members.length-1].startX;
+        }
+        if(lastStartX!=false)
+        {
+          drawnx = lastStartX;// - (rastralSize*prop);//why?
+        }
         this.startX = drawnx;
         if(typeof(currentExample.events[eventi-1].domObj)!="undefined" &&
            currentExample.events[eventi-1].domObj && false){
@@ -3936,17 +4043,40 @@ function TextUnderlay(){
     if(!parent) parent = doc.currentParent;
 		if(lyricParent){
 			var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "verse");
+      var elSyl = doc.createElementNS("http://www.music-encoding.org/ns/mei", "syl");
 			addUUIDs(this, el, curDoc);
-			parent.appendChild(el);
+      parent.appendChild(el);
+      el.appendChild(elSyl);
 			this.MEIObj = el;
-			el.appendChild(doc.createTextNode(this.justGiveMeText()));
+      // put syl inside verse to be schema conform
+			elSyl.appendChild(doc.createTextNode(this.justGiveMeText()));
+      // question: what to do with multiple lines??? (hope this never happens)
 			return el;
 		} else {
-			var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "dir");
+      var el = doc.createElementNS("http://www.music-encoding.org/ns/mei", "dir");
 			addUUIDs(this, el, curDoc);
-			parent.appendChild(el);
+      // append dir only if there is any text to contain
+      if (this.justGiveMeText().length > 0) 
+      {
+        // since MEI 4, <dir> will be put into staff in mensural notation
+        // we need to make sure, to put <dir> there
+        //parent.afterChild(el);
+        let staff = doc.evaluate("./ancestor::mei:staff", parent, nsResolver, 9).singleNodeValue;
+        if(staff) staff.appendChild(el);
+      }
 			this.MEIObj = el;
-			el.appendChild(doc.createTextNode(this.justGiveMeText()));
+      // dir needs @startid, get uuid from parent element, last element in layer or do a fallback
+      if(parent && parent.localName!=="layer") {
+        el.setAttributeNS(null, 'startid', '#' + parent.getAttribute('xml:id'));
+      }
+      else if (parent && parent.localName==='layer' && parent.childNodes.length>0) {
+        el.setAttributeNS(null, 'startid', '#' + parent.childNodes[parent.childNodes.length-1].getAttribute('xml:id'));
+      }
+      else {
+        // this is a nasty fallback to keep the MEI valid even though tstamp in mensural is nonsense
+        el.setAttributeNS(null, 'tstamp', '0');
+      }
+      el.appendChild(doc.createTextNode(this.justGiveMeText()));
 			if(this.type==="label" && typeof(this.components[0])=="string"
 				 && this.components[0].toLowerCase()=="crescit in duplum"){
 				var el2 = doc.createElementNS("http://www.music-encoding.org/ns/mei", "proport");
@@ -5223,10 +5353,11 @@ function Parameters(){
     var pars;
     var vars = [];
     var found;
-    var sources = getSources();
+    //var sources = getSources();
+    var sources = this.getWitnesses();
 		var infoPresent = [false, false, false, false];
     for (var i=0; i<sources.length; i++){
-      pars = this.getWitOptions(sources[i].id);
+      pars = this.getWitOptions(sources[i]);
 			infoPresent = pars.map((x, i) => infoPresent[i] || x);
       if(typeof(pars[0])==="undefined") {
         continue;
@@ -5235,12 +5366,12 @@ function Parameters(){
       for(var j=0; j<vars.length; j++){
         if(listeq(pars, vars[j][0])){
           found = true;
-          vars[j][1].push(sources[i].id);
+          vars[j][1].push(sources[i]);
           break;
         }
       }
       if(!found){
-        vars.push([pars, [sources[i].id]]);
+        vars.push([pars, [sources[i]]]);
       }
     }
 		//TEST
@@ -5304,23 +5435,34 @@ function Parameters(){
 //    SVG = staff;
     curx += 15;
     var c = currentClef;
-    if(clef) {
+    if(clef) 
+    {
       if(solm && solm!=clef
 //				 && ((solm.objType==="MusicalReading" && solm.content[0].members.length)
 //             || (solm.objType==="SolmizationSignature" && solm.members.length))){
 				 && (solm.objType==="MusicalReading"
-             || solm.objType==="SolmizationSignature" && solm.members.length)){
-        if(clef.objType==="MusicalReading"){
+             || solm.objType==="SolmizationSignature" && solm.members.length))
+      {
+        if(clef.objType==="MusicalReading")
+        {
           clef.draw(false, false, solm);
-        } else {
+          if(clef.content.length===0)
+          {
+            solm.draw();
+          }
+        } 
+        else 
+        {
           clef.draw(solm);
         }
-      } else {
+      } 
+      else 
+      {
 //				if(eventi<0) console.log(clef, solm, witnesses);
         clef.draw();
       }
     }
-//    if(solm && solm!=clef) solm.draw();
+    //if(solm && solm!=clef) solm.draw();
 //    SVG = oldSVG;
     curx = Math.max(curx, oldx+width);
     drawSystemLines(staff, lines, cury -lines*rastralSize, oldx+10, curx, colour);
@@ -5339,7 +5481,7 @@ function Parameters(){
         }
       }
     }
-    if(typeof(this.staff.colour) != "string"){
+    if(this.staff.colour && typeof(this.staff.colour) != "string"){
       for(i=0; i<this.staff.colour.content.length; i++){
         for(j=0; j<this.staff.colour.content[i].witnesses.length; j++){
           wit = this.staff.colour.content[i].witnesses[j];
@@ -5349,10 +5491,22 @@ function Parameters(){
         }
       }
     }
-    if(this.clef && this.clef.objType != "Clef"){
-      for(i=0; i<this.clef.content.length; i++){
-        for(j=0; j<this.clef.content[i].witnesses.length; j++){
-          wit = this.clef.content[i].witnesses[j];
+    let clef = this.getClef();
+    if(clef && clef.objType != "Clef"){
+      for(i=0; i<clef.content.length; i++){
+        for(j=0; j<clef.content[i].witnesses.length; j++){
+          wit = clef.content[i].witnesses[j];
+          if(wit != "MSS" && wit != "emend." && witnesses.indexOf(wit) == -1) {
+            witnesses.push(wit);
+          }
+        }
+      }
+    }
+    let solm = this.getSolmization();
+    if(solm && solm.objType != "SolmizationSignature"){
+      for(i=0; i<solm.content.length; i++){
+        for(j=0; j<solm.content[i].witnesses.length; j++){
+          wit = solm.content[i].witnesses[j];
           if(wit != "MSS" && wit != "emend." && witnesses.indexOf(wit) == -1) {
             witnesses.push(wit);
           }
@@ -5436,7 +5590,8 @@ function MChoice(){
       // Simplest case. Accepted reading is always standardised
       reading = new MReading(witnesses, [], description, 
         description2, false, this);
-      if(staffing.length > 0 && currentClef != staffing[0][1]) currentClef = staffing[0][1];
+      // make sure there is another clef before change currentClef
+        if(staffing.length > 0 && staffing[0][1] != undefined && currentClef != staffing[0][1]) currentClef = staffing[0][1];
       reading.clef = currentClef;
       reading.solm = currentSolm;
       let content = string?nextMusic():[];
@@ -5447,7 +5602,8 @@ function MChoice(){
     } else if (witnesses.length <=1 || agreement){
       // Easiest case: either all definitions are the same (AGREEMENT) or there's only one
       // Do staff stuff: 
-      currentClef = staffing[0][1];
+      if(staffing.length > 0 && staffing[0][1] != undefined) currentClef = staffing[0][1];
+      // make sure to not set a non-existing clef
       reading = new MReading(witnesses, [], description, 
         description2, staffing, this);
       reading.clef = currentClef;
@@ -5469,7 +5625,7 @@ function MChoice(){
         var wits = split[0];
         var staffings = split[1];
         for(var i=0; i<wits.length; i++){
-          currentClef = staffings[i][0];
+          if(staffings[i][0] != undefined) currentClef = staffings[i][0];
           string = ostr;
           hackedString = ostr; // Why do I need this?! string disappears otherwise!!!
           obj = nextMusic();
@@ -6228,6 +6384,7 @@ function ObliqueNoteChoice(){
       obj = rdg.content[i].drawVar(variant);
       //obj.style.fill = "#704";
     }
+    return obj;
 //    return this.applicableReading(variant).sketch(SVG, true);
   };
   // ObliqueNoteChoice
@@ -6502,13 +6659,21 @@ function MReading(witnesses, content, description, description2, staves, choice)
         }
       }
       if(!this.clefp()){
-        currentClef = this.staves[0][1];
+        this.drawPrep = true;
+        if(!this.staves[0][1])
+        {
+          this.drawPrep = false;
+        }
+        else
+        {
+          currentClef = this.staves[0][1];
+        }
         currentSolm = this.solmp() ? null : this.staves[0][2];
 //      currentLinecount = this.staves[0][3].varLines(this.witnesses[0]);
         currentStaffColour = this.staves[0][3].varColour(this.witnesses[0]);
       // currentLinecount = this.staves[0][3].trueLines();
       // currentStaffColour = this.staves[0][3].trueColour();
-        this.drawPrep = true;
+        
       }
     }
     systemLines = [staffGroup, currentLinecount, currentStaffColour, curx, cury];

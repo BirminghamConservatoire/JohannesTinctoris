@@ -1,0 +1,20 @@
+﻿De tous biens playne
+Johannes Tinctoris
+Editor: Jeffrey J. Dean
+Checked by:
+Date established: 17 March 2022
+Base transcription: Seg
+Sources:
+Seg	E-SE s.s., fol. CC.ij r	.Jo. tinctoris	ii
+<piece: {mensural: void}, {staf: 5, black}>
+<part: {var="Contrapunctus" (ed.) : (om.) Seg}>
+<pars>
+{clef: C4} {solm: bbb} {mens: c8} <label: 14>Duo</label> Sg. <text>De tous biens playne</text> Sg sf se sd se sf sg mf mg sd se sf sg maa Sg mf sbb saa sbb sg mf mg sf sg saa sbb saa sg maa. sf mbb. sg Sdd mcc Sdd Pm5 md. se sf sg saa sbb scc saa mbb mf. sg saa sbb maa mbb scc sbb saa sg mf mbb. saa sg sf se sd me mf Sg mf {var="{prop: 3/2, 7-9}" (ed.) : "{prop: 3, 7}" Seg} Sg. mf Se Sd. me mf mg Saa Bbb Saa. mg mf me <lig>Sd Sf</lig> Sg Baa Sf .7 Sg Be {var="{prop: 2/3, 5-7}" (ed.) : "{prop: 2, 6}" Seg} md mf. sg saa sbb scc saa mcc mbb mdd Pm9 <lig>Sg <full>Saa</full></lig> sg sf se sf se sf sd se sd <ll: -1> sc sb sa sb sc </ll> sd me Sd mc Pm5 md. se sf sg saa sf maa. sg sf se md maa sbb saa sg sf {var="{prop: 3/2, 5-7}" (ed.) : "{prop: 3, 6}" Seg} me. sd me md. se mf mg. sf mg me. sf mg mf maa mg maa me mf {mens: c8}{var="{prop: 2/1, 7-9}" (ed.) : "{prop: 2, 8}" Seg} Sg Bbb maa mg Sf Bg mf me mf me Sf. me Sc be me md Se. md Sb PS7 Sg maa mf Saa. mg mf me Sd mc md me md <ll: -1> mc mb Ba {var="{prop: 3/2, 1-3}" (ed.) : "{prop: O/3, 1-3}" Seg} **The proportion intended here would have been written O3 by most contemporaries; Tinctoris would probably have required a 3-space perfect longa rest (above the proportion?) to designate perfect minor modus, but the grouping in units of 3 breves and the blackening for imperfection may have sufficed.** BG Bb Bc </ll> Ld Be <full> Ld Le Lc Lb Ld Lc </full> {mens: c5} Sd Pm5 md mf. sd mf se sd <ll: -1> mc md sa sb sc </ll> sd mc md {var=(ins.) "{prop: 3, 4}" Seg} <full> Sc Sd Se <lig>Sd Se</lig> Sf <lig>Sf Sg</lig> Saa <lig><obl>Sbb Saa</obl></lig> Sdd Scc mbb Sdd Sbb Sg <lig>Sf Sg</lig> Saa Sbb. <lig><obl>Scc Saa</obl></lig> Sf Sg. Saa Se Sf </full> Lg {var="||" (ed.) : "|||" Seg}
+</pars>
+</part>
+{staf: 5} <part: {var="Tenor" (ed.) : "/t/" Seg}>
+<pars>
+{clef: C10} {solm: bb} {mens:c6} <lig>LG <text>De tous biens playne</text> <obl>Bb Ba</obl></lig> SG Sb Sb Sc Bd be <lig>Se <obl>Sd Bb</obl></lig> <lig>Sc Sb Bd</lig> <lig>Sc Sd BG Ba LG</lig> PS7 SG SF SF Sb Sb Sa Sd. mc mc {var="mb" (ed.) : (om.) Seg} Sd. sc sb <lig>Sa Sb Bc</lig> Ba <lig>SG SF BE LD</lig> PS3 Sd <lig>Sc Sb BG Ba</lig> SG Bb Sc <lig><obl>Ba BG</obl></lig> <lig>Sb Sa</lig> SF SG. mF mF mE LG PS7 SG <lig>Sa SF</lig> <lig>SG SD BE LD</lig> PS3 SD <lig>BF BG</lig> <lig>Sa Sb</lig> Sc Bd be <lig>Se <obl>Sd Bb</obl></lig> <lig>Sc Sd</lig> <lig>Sc Sd</lig> Sb <lig>Ba LG</lig> {var="||" (ed.) : "|||" Seg}
+</pars>
+</part>
+</piece>

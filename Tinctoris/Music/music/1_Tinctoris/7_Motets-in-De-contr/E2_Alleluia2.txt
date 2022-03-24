@@ -1,0 +1,23 @@
+Alleluia 2
+Editor: Jeffrey J. Dean
+Checked by:
+Date established: 10 November 2020
+Base transcription: V
+Sources:
+V	E-VAu 835, fol. 125v	(impl.)	tt
+BU	I-Bu 2573, fol. 145r	(impl.)	tt
+Br1	B-Br II 4147 Mus., fol. 87ra–b	(impl.)	tt
+Per	I-PEc 1013, fol. 89r	—	--
+Bo2	I-Bc A 71, p. 289	—	ii
+<piece: {mensural: void}, {staf: "5" V Per Bo2 : "4" BU Br1, black}>
+<part: {var="Contrapunctus" V BU Br1 : "Cantus" Per : "Tenor" Bo2}>
+<pars>
+{clef: C4} {solm: 0} {mens: O7} {var="Sd. mf." V BU Br1 Per : "<lig>Sd. {full}Sf</lig>" Bo2} <text>{var="Al" V : (transp.) BU Br1 : "michi" Bo2 : (om.) Per}{var=(ins.) "le" V}-</text> sg saa sbb {var=(ins.) "{staf: 5} {clef: C6} {solm: 0}" BU : "{staf: 5} {clef: C4} {solm: 0}" Br1} <text>{var=(ins.) "Al-" BU}</text> mcc. <text>{var="le -" BU : (transp.) V Br1 : (om.) Per B02}</text> fbb faa sg saa sg se ff fe fd fc <ll: -1> sb. fa {prop: 2/1, 5-7} <label>{var=(ins.) "Dupla do semib. per batt." Per}</label> Bc </ll> PS7 Se. <text>{var="lu-" (ed.) : (transp.) V BU Br1 : (om.) Per B02}</text> mf mg sf sg Saa. mcc. sbb mcc {var=(ins.) "{staf: 5} {clef: C6} {solm: 0}" Br1} maa sg sf me <text>{var=(ins.) "Al-" Br1}</text> mc. sd <ll: -1> me ma <text: -2>{var="ia." (ed.) : (transp.) V BU Br1 : (om.) Per B02}</text> mb ma md. </ll> se sf sg {var=(ins.) "c __{clef: C4} {solm: 0}" Br1} maa sbb scc {var=(ins.) "{staf: 5} {clef: C4} {solm: 0}" BU} mdd. <text>{var=(ins.) "lu-" BU}</text> scc Saa Sg Pm7 me. sf mg. sf se sd <lig>Sc Sd</lig> {var="Se. mg." V BU Br1 Per : "<lig>Se. {full}Sg</lig>" Bo2} saa Sbb mcc. <text>{var=(ins.) "le-" Br1}</text> sdd mee mbb mcc mdd. scc maa. sg mbb maa. sg mf sg sf se sd Se {mens: C5}{prop: 4/3, 3-5} <label>{var=(ins.) "Sexquitertia. Octo semib. per tre batt." Per}</label> <lig>Bd <text>{var=(ins.) "lu-" V}</text> Bf.</lig> Sd Sf. mg Baa. <text>{var=(ins.) "ia." BU}</text> Sbb <lig>Scc <obl>Sdd Bbb</obl></lig> Saa. mbb Bcc. Saa. mg mf me {var="<lig>Bd <obl>Bg. Bf</obl></lig>" V BU Br1 : "Bd {staf: 5} {clef: C4} {solm: 0} <lig><obl>Bg. Bf</obl></lig>" Per Bo2} Se {var="{mens: O9}" V Br1 Per : (om.) BU Bo2}{prop: 9/8, 7-9} <label>{var=(ins.) "Sexquioctava nove semib. per tre batt." Per}</label> Bg PS7 <lig>Sd Se</lig> {var="<lig>Sd Sg.</lig>" V BU Br1 Per : "Sd Sg." Bo2} maa Sbb Saa. mf <text>{var=(ins.) "luy-" Br1}</text> maa mbb <full>Bcc Sdd. mcc Bbb</full> {var=(ins.) "{staf: 4} {clef: C4} {solm: 0}" Br1} {prop: 2/3, 7-9} <label>{var=(ins.) "Subsexquialtera do semib. per batt." Per}</label> Baa PS9 Se. sf sg Saa. {var=(ins.) "{staf: 3} {clef: C4} {solm: 0}" BU} mf. se md mc sd se mf Sd mc mc {var="mb" V BU Br1 Bo2 : "sb sc" Per} <text>{var=(ins.) "ia." V}</text> {var="Ld" V BU Per Bo2 : "Md" Br1} <text>{var=(ins.) "a" Br1}</text> {var="||" Br1 Bo2 : "|" V BU : "||||" Per}
+</pars>
+</part>
+{staf: "5" Per Bo2 : "4" V BU Br1} <part: Tenor>
+<pars>
+{clef: F8} {solm: 0} {mens: O7} {var="BD BC" V BU Br1 : "<lig><obl>BD BC</obl></lig>" Per Bo2} <text>{var="Alle" V BU : (transp.) Br1 : "michi" Bo2 : (om.) Per}{var=(ins.) "luia" BU}-</text> SD <lig><obl>BC BA</obl></lig> SC <text>{var="lu-" (ed.) : (transp.) V BU Br1 : (om.) Per B02}</text> <lig><text>{var="ia." (ed.) : (transp.) V BU Br1 : "lu-" V : (om.) Per B02}</text> BD BE</lig> SF <lig><obl>BE BD</obl></lig> SC {var="BD BF" V BU Br1 : "<lig>BD BF</lig>" Per Bo2} <text>{var=(ins.) "Alle-" Br1}</text> SG <lig>Ba Bb</lig> Sa <lig><obl>BG BF</obl></lig> SG <lig><obl>Ba <text>{var=(ins.) "luya" Br1}</text> BF</obl></lig> SE <text>{var=(ins.) "ia." V}</text> {var="LD" V BU Br1 Bo2 : "-MD" Per} {var="||" V Br1 Bo2 : "|||" BU : "||||" Per}**Begins like <italic>All. Deus autem</italic> (Sanctissimi Redemptoris), GR [192], or (less closely owing to repeated notes) like Schlager 7c, Cantus mSCH007c, but diverges after 8 notes.**
+</pars>
+</part>
+</piece>

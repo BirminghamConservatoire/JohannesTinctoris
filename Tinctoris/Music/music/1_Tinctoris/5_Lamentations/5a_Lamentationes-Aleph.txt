@@ -1,0 +1,32 @@
+﻿Lamentationes
+Johannes Tinctoris
+Editor: Jeffrey J. Dean
+Checked by:
+Date established: 16 December 2021
+Base transcription: Lam
+Sources:
+Lam	Lamentationum Jeremie prophete Liber primus (Venice: Octavianus Petrutius, 8.iv.1506; RISM B.1 1506^1), fols. 2v–6r	Tinctoris.	tttt
+<piece: {mensural: void}, {staf: 5, black}>
+<section: Aleph>
+<part: {var="Supremum" (ed.) : (om.) Lam}>
+<pars>
+{clef: C6} {solm: bb ^bbb} {mens: c10} Lg <text>Ale -</text> xc ^Sf. sg saa mbb. scc mbb saa sg Lf* Sf. mg Saa Pm13 Sbb maa Sg. <text>ph.</text> sf se Sf Lg* [-] Bg <text>Quomodo</text> Sg. mf Se Se Ld <text>sedet sola Civitas</text> Bd Bd Bd Bd Sf. se sd <lig>Se Sf</lig> Be Ld PB7 Sf. <text>plena</text> mg Saa Sd. <text>popu -</text> me mf sg saa mbb maa Sg. sf se Sf <text>lo!</text> Lg PB9 Bg <text>Facta est</text> Be Bf. me md Be Bd PS5 Sc. <text>quasi vidu -</text> md me sd se <lig>Sf Sd.</lig> mc Sb Ba <text>a</text> BG PS3 Sd. <text>Domina</text> md Sd PS9 Sg. <text>gen -</text> mf me sd sc <lig>Sd Se.</lig> md <text>tium:</text> Sc. sb sa Sb Lc PL5-7x2 Bd <text>Facta est</text> Be. md mc Ld PS9 Sf. <text>sub tribu -</text> mg Saa Bbb <lig><obl>Saa Sg.</obl></lig> sf <text>to.</text> se Sf Lg ||
+</pars>
+</part>
+{staf: 5} <part: Tenor>
+<pars>
+{clef: C10} {solm: bb} {mens: c9} BG <text>Ale -</text> Sb. mc Bd Sd. sc sb La* Sa. mb Sc Sd. mc <text>ph.</text> Sb Ba LG* [-] Lb <text>Quomodo</text> Bc Bd PS7 SG. <text>sedet</text>  ma mb sa sG Sa SD <text>sola Civi -</text> Sb. ma mG sF sE mF. sG Sa. mb Sc Sd. <text>tas</text> sc sb Sc Bd SD <text>plena</text> SF. mG Sa SD. <text>popu -</text> mE mF sG sa Sb. mc Sd. mc Sb <text>lo!</text> Ba LG PB7 BG <text>Facta est</text> Bc Ld Sc. sb sa Bb Bc PS9 Sc <text>quasi vidu -</text> Sd Sb. ma SG. sF sE SF <text>a</text> LG PS7 <text>Domina</text> SG. mG SG Bc <text>gen -</text> <lig>Sb SG.</lig> mF SE <text>tium;</text> BD -LC PL5-7x2 BG <text>Facta est</text> Bc. mb ma Lb <lig>Sc <text>sub tributo.</text> Sd.</lig> me Sf Bd <lig>Sc Sb</lig> Ba LG ||
+</pars>
+</part>
+{staf: 5} <part: {var="Contratenor" (ed.) : (om.) Lam} Altus>
+<pars>
+{clef: C10} {solm: bb} {mens: c11} Bd. <text>Ale -</text> Sd. sc sb Sa SG Bd. Bd* Bd <ll: 1> me mf Sg. sf se </ll> Sd <lig>Sc Sa</lig> Sb. <text>ph.</text> mc Bd* [-] Ld <text>Quomodo</text> PS7 Sa. mG Sa Bb BG <text>sedet</text> mD. sE SF BG. <text>{var="sola" (ed.) : (om.) Lam}</text> SD BF PL5-7 <lig>SD <text>plena</text> SF.</lig> mG Sa SD. <text>popu -</text> mE mF mG Ba SG Ld Bd Ld <text>lo!</text> PB11 Bc <text>Facta est</text> SG. ma Lb BG PS7 SG <text>quasi vidua</text> BG. SG Sb. mc Ld PS11 <text>Domina gentium;</text> Sd. md Sd Sb. sc sd Le <lig><obl>Sd Sc.</obl></lig> mb BG. SE. <text>Princeps provinciarum</text> mF BG Sa. mb Sc Sd. mc Sb Ba BG PS7 BG. <text>Facta</text> <lig>SG Sb.</lig> mc Sd SG <text>  est</text> Ba.  BG <text>sub tribu -</text> Sa Sd. sc sb Sa Sb. mc <text>to.</text> Ld ||
+</pars>
+</part>
+{staf: 5} <part: {var="Contratenor" (ed.) : (om.) Lam} Bassus>
+<pars>
+{clef: F10} {solm: bB} {mens: c11} BG <text>Ale -</text> SG. sF sE BD BGG LD* SD. sC sB <lig><obl>SA SGG.</obl></lig> mA SB <lig>SC SD <text>ph.</text></lig> LGG* [-] LG <text>Quomodo</text>  Ba BD <lig>SG Sb.</lig> ma mG <text>sedet</text> sF sE  mF. sG Sa <text>sola</text> SG. ma <text>Civitas</text> mb sa sG Sa BD <lig>Sa SD</lig> Ba PS11 SD <text>plena</text> SF. mG Sa SD. <text>popu -</text> mE BF SG. mF SD BG BD -LGG <text>lo!</text> PB5 LC <text>Facta est quasi vidua Domina gentium;</text> LB <lig>BC BG</lig> LC BB {var="BGG BD" (ed.) : "<lig>BGG BD</lig>" Lam} BGG SGG. mGG SGG LC SGG BC. BGG PS7 SC. <text>Princeps provinciarum</text> mD SE SF. mG Sa Sb. ma SG. sF sE SF BG LC <text>Facta est</text> BG SG. mF SE <text>sub tribu -</text> BD. SG. sF sE SF SG BD <text>to.</text> -LGG ||
+</pars>
+</part>
+</section>
+</piece>

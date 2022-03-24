@@ -1,0 +1,25 @@
+﻿O invida Fortuna Nemica d’ogni pace
+Johannes Tinctoris
+Editor: Jeffrey J. Dean
+Checked by:
+Date established: 15 March 2022
+Base transcription: F176
+Sources:
+F176	I-Fn Magl. XIX.176, opening 87 (fols. 86v–87r)	Jo tinctoris	tii
+<piece: {mensural: void}, {staf: 5, black}>
+<part: {var="Supremum" (ed.) : (om.)  F176}>
+<pars>
+{clef: C4} {solm: 0} {mens: O7} Be <text>O in -</text> Sf mg maa. <text>vida</text> sg mf Se mf <text>Fortu -</text> mg. sf Se md <text>na,</text> Be PS7 PS7 Sg <text>Nemi -</text> <lig>Saa Sbb.</lig> saa sbb Bcc <text>ca d’ogni</text> Sbb. maa. sg Sg <text>pace,</text> mf Bg PS7 .7 Sg <text>Poi {var="ch’a te cosí" (ed.) : "cate cosý" F176}</text> Baa Sg. maa. sbb mcc maa <text>{var=(ins.) "piace" F176}</text> <lig>Sg <text>{var="piace" (ed.) : (transp.) F176},</text> {var="Scc" F176^c : "Sbb" F176^*}</lig> mbb Bcc PS11 Saa. <text>Pia{var="n" (ed.) : (om.) F176}gerò {var="sem" (ed.) : "sen-" F176} -</text> sg sf Se Sf Sg Saa mbb mcc. sbb Saa mg <text>pre</text> Baa PS5 PS5 Se <text>in vesta hoscura</text> mf mg. sf me Sd Bc PS3 Se. <text>et bru -</text> mf Sg Saa. mg mf. se mf mg. sf Se <text>{var=(ins.) "na" F176}</text> md <text>{var="na" (ed.) : (transp.) F176}.</text> Le {var="||" (ed.) : "|||" F176}
+</pars>
+</part>
+{staf: 5} <part: Tenor>
+<pars>
+{clef: C10} {solm: 0} {mens: O11} Be <text>O invida Fortuna</text> Sd mb mc Sd mc Sa mG <lig>SE SF</lig> SE PS5 SG <lig>Sa Sb.</lig> sa sb Sc Bd mc. sb Sa mG Sd mc md mb Sa SG PS7 Sc. mb <lig>Sc Sd</lig> me. fd sc mb ma Sc md me <lig>Sc Sd</lig> Bc PS9 PS9 Sa. sG sF SE SF mG ma. sG mc Sb Ba PS7 SE mF mG. sF mE mD mE mC Sc mb Sc PS9 Sa. mb mc md Sb ma Sc mb ma. sG ma mG mE mG SF -LE {var="||" (ed.) : "|" F176}
+</pars>
+</part>
+{staf: 5} <part: {var="Contratenor" (ed.) : "Contra" F176}>
+<pars>
+{clef: C10} {solm: 0} {mens: O5} mE. <text>O invida Fortuna</text> sF mG ma SD mG mF SD ma Sc md se. fd mb. fa fG ma mb mG ma. fG fF SE SF mG Sd sc sb Sa BG mC mF. sE mF SG. ma mD mG SD Pm11 md mc. sb Sa Pm7 mG BF mE. sF mG mF. sG ma mF SE ma SG mC. sD mE mF. sE mC mF. sG ma mb Sc. sb sa mb <lig>Sc Sd</lig> mc ma mF SG Pm5 mD. sE mF. sG sa sF SG ma Sb mc md mb {var="<lig><obl>Sc SG</obl></lig>" (ed.) : "<lig>Sc SG</lig>" F176} mC mF. sG sa sb Sc. mG ma mD SE SF. mG SD. md me mb. fa fG ma Lb ||
+</pars>
+</part>
+</piece>

@@ -1,0 +1,56 @@
+﻿Lamentationes
+Johannes Tinctoris
+Editor: Jeffrey J. Dean
+Checked by:
+Date established: 16 December 2021
+Base transcription: Lam
+Sources:
+Lam	Lamentationum Jeremie prophete Liber primus (Venice: Octavianus Petrutius, 8.iv.1506; RISM B.1 1506^1), fols. 2v–6r	Tinctoris.	tttt
+<piece: {mensural: void}, {staf: 5, black}>
+<section: Beth>
+<part: {var="Supremum" (ed.) : (om.) Lam}>
+<pars>
+{clef: C6} {solm: bb ^bbb} {mens: c9} Lg <text>Be -</text> Saa. sg sf Le Sf. se sd <lig><obl>Se Sd.</obl></lig> mc mb <text>th.</text> sa sG La* [-] Laa <text>Plorans</text> Bbb <lig><obl>Saa Sg.</obl></lig> maa mg sf se Lf PS11 Saa. <text>plora -</text> mg maa mbb <lig><obl>Scc Sbb.</obl></lig> maa Saa. sg sf <text>vit</text> Sg Laa* Bd <text>in nocte,{var=(ins.) "et" Lam}</text> <lig>Bf Le</lig> Ld PS11 Baa <text>{var="Et" (ed.) : (transp.) Lam} {var="lachrime" (ed.) : "lacrime" Lam}</text> Saa Saa. sg sf Le PS7 Sd. <text>e -</text> me Sf me md Sg. sf se <text>ius</text> Sf Lg. PB9 Se. <text>in maxillis</text> mf Sg Sg Saa. sg sf Be PS7 Sd. <text>e -</text> se sf Sg. mf me md Sc Sd. sc sb <text>ius;</text> Sc Ld* ||
+</pars>
+<pars>
+{clef: C6} {solm: bb ^bbb} {mens: "c10" (ed.) : (om.) Lam} Lg <text>Non est qui consoletur eam,</text> <label: 14>Duo</label> Baa Sbb Scc.  mbb maa mg <lig><obl>Sbb Saa.</obl></lig> mg Sg. sf se Sf Lg PB11 Bbb <text>Ex omnibus</text> Sbb Sbb Baa PS9 Sg. <text>ca -</text> mf me md Sf me md. <text>ris</text> sc mb Sa BG PB5 PS3 SG <text>e -</text> ma Sb mc md me Sf Sg. saa sbb <lig>Scc Sbb.</lig> maa mg sf se <lig>Sd Sg.</lig> sf <text>ius;</text> se Sf Lg ||
+</pars>
+<pars>
+{clef: C6} {solm: bb ^bbb} {mens: c9} Lg <text>Omnes</text> Lbb Baa. Sf Sg. sf sg Laa Sd. <text>amici</text> me Sf Sg. mf me md Sc <text>e -</text> Sd. sc sb <text>ius</text> Sc Ld PL7-9x2 PL9-11 Baa <text>Et facti</text> Saa Scc Sbb. saa sg Bf Sg Saa. mg Sf <lig><obl>Se <text>sunt</text> Sd</obl></lig> Be Bd. mc mb Ba PS3 SG <text>ei</text> Sa. mb Lc PS9 Sg <text>inimi -</text> Saa. mbb Bcc Sbb. saa sg Saa Sg. sf se <text>ci.</text> Sf Lg ||
+</pars>
+</part>
+{staf: 5} <part: Tenor>
+<pars>
+{clef: C10} {solm: bb} {mens: c11} Lb <text>Be -</text> <lig>Sa Sb</lig> Lc Bd <lig><obl>Sc Sb.</obl></lig> ma <text>th.</text> SG LF* [-] LF <text>Plorans</text> BG <lig>Sa Sb</lig> Bc Sd. sc <text>plo -</text> sb <lig>Sa Sd.</lig> mc md <text>ra -</text> me Bf Se Bd Sc Bb <text>vit</text> La* Bb <text>in noc -</text> Sa Bd Sc Sc. sb <text>te,</text> sc Bd PS11 Sd <text>Et {var="lachrime" (ed.) : "lacrime" Lam}</text> Sd. sc sb Sa. mb Lc. <text>{var=(ins.) "e-" Lam}</text> Ld <text>{var="e -" (ed.) : (transp.) Lam}</text> <lig>Sc Sb</lig> Ba <text>ius</text> BG PB7 SE. <text>in maxillis</text> mF SG SG Sa. sG sF BE <lig>BD <text>e -</text> Ba</lig> SD. sE sF SG. mF mE mD BC SF <text>ius;</text> BE LD* ||
+</pars>
+<pars>
+<tacet>Non est<l/>tacet</tacet> ||
+</pars>
+<pars>
+{clef: C10} {solm: bb} {mens: c9} Bb <text>Omnes</text> Sb. mc Bd Sb. sa sG SF. <text>amici</text> mG <lig>Ba Bb</lig> La Sb. mc Sd BG <text>eius</text> Sa. mG mF mD SE SE -LD PL5-7x2 PL7-9 Sc. <text>Et facti sunt</text> mb Ba <lig>BG Ba</lig> Sb Sc Sa. mb Sc Sd. sc sb Sc Bd PB11 SD. <text>ei</text> sE sF <lig>SG SC</lig> SF. sE sF SG SC. mD mE mF BG PS9 Sc. <text>inimi -</text> mb Sa <lig>Sd SG</lig> <lig>SF SG</lig> Ba <text>ci.</text> LG ||
+</pars>
+</part>
+{staf: 5} <part: {var="Contratenor" (ed.) : (om.) Lam} Altus>
+<pars>
+{clef: C10} {solm: bb} {mens: c11} Bd <text>Be -</text> Sd. me Sf. se sd <lig>Se Sa.</lig> mb Sc <lig>Sa Sb</lig> <lig><obl>SG <text>th.</text> SF </obl></lig> SD Bd. Bd* [-] Sa. <text>Plorans</text> mb Bc PB11 <lig><obl>Sc Sb</obl></lig> BG Sa. sb sc Sd. <text> plora -</text> mc md me <ll: 1> Sf Bd Bg. mf Sd.<text>vit</text> </ll> me Lf* PL9-11x2 <lig>Sa <text>{var="in nocte," (ed.) : "Et lacrime" Lam}</text> Sd</lig> Sd. sc sb Ba PS7 {var="Ba Sa" (ed.) : "Ba." Lam} <text>{var="Et lachrime" (ed.) : (transp.) Lam : "e-" Lam}</text> Sa. sG sF BE <lig>SD <text>{var="e -" (ed.) : (transp.) Lam}</text> SF.</lig> mG mF sE sD mE. sF SG PS7 Sa <lig>Sb SG.</lig> mF mE <text>ius</text> mD BC {var="PL5-7 PB7" (ed.) : "PB5 PL5-7" Lam} Sa. <text>in maxillis</text> mb Sc Sc Bd Sb. ma <lig>SG <text>e -</text> Sc.</lig> mb ma mG <text>ius;</text> Ba La* ||
+</pars>
+<pars>
+{clef: C8} {solm: bb} {mens: "c11" (ed.) : (om.) Lam} Bg <text>Non est qui consoletur eam,</text> <label: 14>Duo</label> Sg. sf se Bf <lig>Sg Se</lig> Sf. me Sd. mc <lig>Sd Sb</lig> Ba -LG PB5 Bg <text>Ex omnibus</text> x8 Sg Sg Bf Sg. <text>ca -</text> mf me md mc sb sc Sd mc mb. sa SG <text>ris</text> mF SG PS5 SG <text>e -</text> ma Sb mc md me <lig>Sf Sg</lig> Pm9 mc md sc sd <lig>Se Sc.</lig> sb sa SG. ma mb mc <lig>Sd <text>ius;</text> Sb</lig> Ba LG ||
+</pars>
+<pars>
+{clef: C8} {solm: bb} {mens: c9} Bd <text>Omnes amici</text> Sd. se sf Sg. sf se Md Se <text>e -</text> mf Sd sc sb <text>ius</text> Sa BG PL5-7 PB7 Ba. <text>spreve -</text> SF. mG ma mb Sc md Sf me <text>runt</text> Sd Sc mb Sd mc md sc sb Sa Sa. <text>eam,</text> sG sF SG Sa. mb Sc Sc Ld Sd Bf <text>Et facti</text> Sf <lig>Sc SG</lig> PB5 Ba. <text>sunt</text> SG Sa. <text>  ei</text> mb <lig>Sc Sg</lig> Sf. se sd Le. <text>ini -</text> Sc. mb Sa mF. sE <text> mici.</text> <lig>SG Sd</lig> Pm9 md mb. sc Ld ||
+</pars>
+</part>
+{staf: 5} <part: {var="Contratenor" (ed.) : (om.) Lam} Bassus>
+<pars>
+{clef: F10} {solm: bB} {mens: c10} LG <text>Be -</text> BD La <lig>SD SB</lig> <lig>SC SD</lig> BGG <text>th.</text> LD* [-] SD. <text>Plorans</text> sC sB BA <lig>SGG SG</lig> <lig>SF SG</lig> BE <text>plora -</text> MD <lig>SC SG.</lig> mD SF <text>vit</text> BG LD* <text>  {var=(ins.) "et" Lam}</text> BG <text>in nocte,</text> <lig>SF SD</lig> La PS7 BD. <text>{var="Et" (ed.) : (transp.) Lam} {var="lachrime" (ed.) "lacrime" Lam}</text> BD SD. sC sB -LA. LB <text>eius</text> <lig>SC SGG</lig> BD <text>in maxil -</text> <lig>SGG SC.</lig> mD mE mF <lig>SG SC.</lig> mA <text>lis</text> SB <lig>SA <text>e -</text> SC.</lig> mD SE <lig>SF SD</lig> BA BB SGG. sA sB SC. mB <lig>SA SD <text>ius;</text></lig> BA La* ||
+</pars>
+<pars>
+<tacet>Non est<l/>tacet</tacet> ||
+</pars>
+<pars>
+{clef: F10} {solm: bB} {mens: c10} MG <text>Omnes amici</text> LD BGG PS7 SD. mE SF <text>eius</text> SG. sF sE SD SE SC. mB <lig>SA SB</lig> BA PS7 SD. <text>spreverunt</text> mE mF mG Sa SD. mC SB <text>  ea -</text> <lig><obl>SA SGG.</obl></lig> mA SB <text>m,</text> <lig>SC SD</lig> BB -LA PB5 BD <text>Et facti sunt</text> <lig>SG SF.</lig> mE SD <lig>Sa Sb</lig> Ba BD. <text>ei</text> SE SF. sE <text>inimi -</text> sD SC SE BD LC. LA BGG bE SD SE <text>ci.</text> BD -LGG ||
+</pars>
+</part>
+</section>
+</piece>

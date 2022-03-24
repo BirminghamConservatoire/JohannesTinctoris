@@ -1,0 +1,48 @@
+Missa quinti toni irregularis
+Johannes Tinctoris
+Editor: Christian Goursaud
+Checked by:
+Date established: 11 June 2020
+Base transcription: Ve759
+Sources: 
+Ve759	I-VEcap DCCLIX, fols. 25v–31r	Tintoris
+<piece: {mensural: void}, {staf: 5, black}>
+
+<section: Kyrie>
+<part: {var="Supremum" (ed.) : (om.) Ve759}>
+<pars>
+{clef: C4} {solm: 0} {mens: O5} Sc <text>Kyrie</text> me. sf mg maa Sg me mc. sb mc Pm7 mcc. sdd <ll:1>mee mff. see</ll> mdd mee. scc Scc mbb Bcc Pm11 mg maa. fbb fcc Sdd mcc mbb. saa sbb faa fg mf. sg maa md. se mf mg mbb Saa Bg. Pm7 me. sd mc mb mc. sd se sf Sg Pm9 mg. saa mbb mcc. fbb faa mbb. scc mdd <text>leyson.</text> mee. sdd Scc mbb Lcc || 
+</pars>
+<pars>
+{mens: c7} <label: 14>Duo</label> Bg. <text>Xpriste</text> Sg. saa sbb <lig>Scc Sdd.</lig> scc sbb mcc sbb saa mbb Scc mbb Lcc PS11 Bee Sdd Scc. sbb saa sbb saa sg sf Se Pm7 md mf sg saa Sbb maa mbb. saa mg mf. se Lg Pm8 Se. mg. sf se sd <lig><obl>Sg Sc</obl></lig> Pm5 mc me mf <full><lig>Sg Saa</lig> Sbb Scc. mbb Saa Sg. maa mbb mcc <lig>Sdd See</lig> <lig>Scc Sdd.</lig> mcc mbb maa <lig>Scc<text>leyson.</text> Sdd</lig> <lig>Sg Saa.</lig> mbb maa sg sf</full> Le || 
+</pars>
+<pars>
+{mens: o5} PB5 Be <text>Kyrie</text> Sf Bg Saa Pm11 mbb. saa mg Sf <lig> Sg. Saa </lig> <lig><obl>Sbb Saa</obl></lig> Sg mf Sg Pm9 me. sf mg. sf me Bd <lig><obl>Se Sc</obl></lig> Se md sc sd me Sc mb Sc Se <lig>Sf Sg</lig> Pm9 mcc. sbb maa Sbb Baa Sg Pm9 me. sf mg mc mg. saa mbb mg mcc mbb <text>leyson.</text> mee. sdd Scc  mbb Lcc || 
+</pars>
+</part>
+
+{staf: 5} <part: Tenor>
+<pars>
+{clef: C4} {solm: 0} {mens: O5} PS5 PS5 Sc <text>Kyrie</text> me. sf mg maa Sg me mf mc mg maa. sg maa mbb mcc mg. ff fe mf Sg me mc md me. sf me Ps5 md mg sf mg. sf mg Saa mf. sg maa. fg faa mbb Sg mf <lig><obl>Sg Sc</obl></lig> md me. sf mg Sc Pm5 me. sd mc mb mc. sd se sf <lig>Sg Saa</lig> mg. ff fe mf <text>leyson.</text> mg <lig>Sc Sd</lig> -Lc || 
+</pars>
+<pars>
+{mens: c5} <label: 14>Duo</label>  Bc. <text>Xpriste</text> Sc. sd se mf mg. sf se sd me sd sc md mc Sd Sc Pm5 Sc md me  mf Sg Pm7 mc. sd me mf mg Saa. sbb scc <lig><obl>Sdd Scc</obl></lig> mdd. fcc fbb Saa Pm9 mg mf mg. sf mbb Saa Bg PS7 Se. mg. sf se sd <lig><obl>Sg Sc</obl></lig> Pm5 mc me mf Sg. maa <full><lig>Sbb Scc</lig> Sdd See. mdd Scc Sbb. mcc Sdd Bg Saa <lig>Sf Sg.</lig> mf me md <text>leyson.</text> <lig>Sf Sg</lig> Sc <lig>Bd</full> Lc</lig> || 
+</pars>
+<pars>
+{clef: "C4" (ed.): "C6" Ve759} {mens: o7} Be <text>Kyrie</text> Sf Bg Saa Pm9 mg. sf se sd mc. <ll:-1>fb fa mb</ll> md. sc mb Sc Sd me mf. se mf mg mf. se Sd mc md mg. sf Sg me. sd mc Bb Sc Pm7 mg. sf me mf mg mc me Sd {var=(ins.) "{staf: 5} {clef: C4} {solm: 0}" Ve759} Sc Pm7 mcc. sbb maa Sbb Baa mg sf sg saa sg sf se Sf Sg me. sf mg mc mg. saa  mbb mg me. sf mg <text>leyson.</text> me <lig>Sc Sd</lig> -Lc || 
+</pars>
+</part>
+
+{staf: 5} <part: Contratenor>
+<pars>
+{clef: C8} {solm: 0} {mens: O9} PB9 PS9 Sc <text>Kyrie</text> me. sf mg maa mg me md. se mf mg mc me Sd Sc Pm9 ma mb mc. sd sc fb fa mb mG ma mG. sa sG fF <ll:-1>fE BD Pm5 md</ll> <lig>SG Sd</lig> Pm11 me. sd mc mb mc. sd se sf Bg mc ma mG mg. sf se sd mc mG <lig>SF SG</lig> md <text>leyson.</text>mc <lig><obl>Sa SG</obl></lig> Lg || 
+</pars>
+<pars>
+<tacet>Xpriste<l/>tacet.</tacet>|| 
+</pars>
+<pars>
+{mens: o5} PL5-7 BE <text>Kyrie</text> SF BG Sa Sb mc md. sc md mG md. sc mb Sa <lig>SG Sc.</lig> Sc mc BG Pm9 mg. sf me. sd mc md me ma mc SG Ba. SG BF SG Bc SG Bg Pm11 me. sf mg mc. sd me <text>leyson.</text> mc. sb ma SG Lg ||
+</pars>
+</part>
+</section>
+</piece>

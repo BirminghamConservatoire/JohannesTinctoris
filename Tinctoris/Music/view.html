@@ -3,12 +3,73 @@ layout: cpw_works
 title: Johannes Tinctoris - Complete Practical Works
 rel_url: ../..
 ---
-  <div class="mainBody">
-    <div class="sidebar1 sidemenu">
-      <!-- side menu space-->
+<div class="container-fluid mb-5">
+    <div class="flex-row">
+        <ul id="submenu" class="nav nav-pills justify-content-center">
+            <!--<li class="nav-item">
+                <a class="nav-link active" href="#">Test</a>
+            </li>-->
+        </ul>
+        <div id="renderedMusic">
+            <div class="container-fluid" id="content"></div>
+            <div id="footnotes"></div>
+        </div>
     </div>
-			<main id="rendered" class="notation-pane content">
-        <div id="content"></div>
-        <div id="footnotes"></div>
-			</main>
-  <!-- end .mainBody --></div>
+    <div class="flex-row">
+        <div id="license" class="float-right mb-5" hidden>
+            <a rel="license" class="float-right" href="http://creativecommons.org/licenses/by-nc/4.0/">
+                <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/80x15.png" />
+            </a><br/>
+            <p class="small">
+                This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+            </p>
+        </div>
+    </div>
+</div>
+
+<nav id="pageNavbar" class="navbar navbar-expand fixed-bottom bg-dark p-1">
+    <ul id="pageNav" class="nav nav-pills justify-content-center" role="group" hidden>
+    <!-- title="Flip pages" data-toggle="tooltip" data-placement="top" hidden> -->
+
+    </ul>
+    <div id="toggleParts" class="btn-group dropup justify-content-end ml-auto" 
+        title="Choose parts for display" data-toggle="tooltip" data-placement="left" hidden>
+        <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="bi bi-list-task"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+            <form id="partsForm" class="px-4 py-3">
+                <!-- add checkboxes (switches were bad) -->
+            </form>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item disabled" href="#" tabindex="-1" aria-disabled="true" id="switchAllParts">Show all parts</a>
+        </div>
+    </div>
+    
+</nav>
+
+<!-- get the library -->
+<script src="{{page.rel_url}}/ScriptLibrary/base.js"></script>
+<script src="{{page.rel_url}}/ScriptLibrary/debugger.js"></script>
+<script src="{{page.rel_url}}/ScriptLibrary/dom.js"></script>
+
+<script src="{{page.rel_url}}/ScriptLibrary/tei-classes.js"></script>
+<script src="{{page.rel_url}}/ScriptLibrary/glyphs.js"></script>
+<script src="{{page.rel_url}}/ScriptLibrary/arsnovavoid.js"></script>
+<script src="{{page.rel_url}}/ScriptLibrary/music-containers.js"></script>
+<script src="{{page.rel_url}}/ScriptLibrary/buttons.js"></script>
+<script src="{{page.rel_url}}/ScriptLibrary/facs-preview.js"></script>
+<script src="{{page.rel_url}}/ScriptLibrary/Br1.js"></script>
+<script src="{{page.rel_url}}/ScriptLibrary/text-classes.js"></script>
+<script src="{{page.rel_url}}/ScriptLibrary/classes.js"></script>
+<script src="{{page.rel_url}}/ScriptLibrary/music-parser.js"></script>
+<script src="{{page.rel_url}}/ScriptLibrary/parser.js"></script>
+<script src="{{page.rel_url}}/ScriptLibrary/editor.js"></script>
+
+<script>
+    var menu = {{ site.data.menu.menu | jsonify }};
+    cpw = true;
+</script>
+
+<!-- cpm funcionality scripts -->
+<script src="viewMusic.js" type="text/javascript"></script>

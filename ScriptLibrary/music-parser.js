@@ -1369,9 +1369,14 @@ function parseClefReading(fields){
         // either we've got a clef for this reading, or there is none
         // (and so there has been at least one witness listed)
         var wits = fields.slice(from, i);
+        // witnesses as strings are stupid, consume them, therefore, nasty string manipulation!
+        let oldstring = string
+        string = wits.join(" ");
+        wits = consumeWitnesses();
+        string = oldstring;
         var staffing = staffDetailsForWitnesses(wits);
         // console.log(staffing);
-        return [fields.slice(i), new MReading(fields.slice(from, i), clef ? [clef] : [], descr, false, staffing)];
+        return [fields.slice(i), new MReading(wits, clef ? [clef] : [], descr, false, staffing)];
       } else {
         // Clef for this reading
         finish = fields[i].lastIndexOf('"');
@@ -1392,9 +1397,14 @@ function parseClefReading(fields){
         // this either doesn't apply to the clef or there's already a
         // description
         var wits = fields.slice(from, i);
+        // witnesses as strings are stupid, consume them, therefore, nasty string manipulation!
+        let oldstring = string
+        string = wits.join(" ");
+        wits = consumeWitnesses();
+        string = oldstring;
         var staffing = staffDetailsForWitnesses(wits);
         // console.log(wits);
-        return [fields.slice(i), new MReading(fields.slice(from, i), clef ? [clef] : [], descr, false, staffing)];
+        return [fields.slice(i), new MReading(wits, clef ? [clef] : [], descr, false, staffing)];
       } else {
         // relevant description
         finish = fields[i].lastIndexOf(')');
@@ -1404,9 +1414,14 @@ function parseClefReading(fields){
     }
   }
   var wits = fields.slice(from, fields.length);
+  // witnesses as strings are stupid, consume them, therefore, nasty string manipulation!
+  let oldstring = string
+  string = wits.join(" ");
+  wits = consumeWitnesses();
+  string = oldstring;
   var staffing = staffDetailsForWitnesses(wits);
   // console.log(wits);
-  return [false, new MReading(fields.slice(from, fields.length), clef ? [clef] : [], descr, false, staffing)];
+  return [false, new MReading(wits, clef ? [clef] : [], descr, false, staffing)];
 }
 
 // function parseClefReading(fields){
@@ -2095,6 +2110,10 @@ function nextMusic(parent){
           continue;
           //
         } 
+        else if(next.objType==="Annotation" && prev.objType==="Ligature")
+        {
+          next.ligature = prev;
+        }
         else if(next.objType=="MusicalChoice" && augmented 
                   && next.content.length //&& !next.content[0].nonDefault()
                   && next.content[0].content.length && next.content[0].content[0].objType==="Fermata")

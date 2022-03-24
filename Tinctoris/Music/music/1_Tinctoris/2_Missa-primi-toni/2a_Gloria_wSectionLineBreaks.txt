@@ -1,0 +1,72 @@
+﻿﻿Missa [primi toni] | Gloria
+Johannes Tinctoris
+Editor: Christian Goursaud
+Checked by:
+Date established: 15 July 2020
+Base transcription: Mi2
+Sources:
+Mi2	I-Md Librone 2 [2268], 38s–43d	.Jo. Tinctoris
+<piece: {mensural: void}, {staf: 5, black}>
+
+<section: Gloria>
+<part: {var="Superius" (ed.) : (om.) Mi2}>
+<pars>
+{clef: C6} {solm: 0} {mens: O7} Sd <text>Et in terra pax hominibus</text> Sd Sa Sc. md Se mf md. sc md me Sc mf. <text>bone volunta -</text> sg maa. sg mf. se Sd sc <text>tis.</text> sb Sc Bs PB7 ma <text>Laudamus</text>mb ma Sd sc sb ma md. se Sf se <text>te.</text> sd <lig><obl>Se Sc</obl></lig> Pm7 Sc <text>Benedicimus</text> md me mc md mf me mc md Sf me <text>te.</text> <full>Bf PS9 PS9 Bf</full> <text>Adoramus</text> <lig>Sf. Saa</lig> <lig><obl>Sf Sd</obl></lig> mf. sg maa b12 mbb maa sg sf Se <text>te.</text> Bd PS7 PL7-9x2 Saa. <text>Propter</text> mg Sf Be <text>magnam</text> Bd Bc mc. <text>gloriam</text> sd me Sf <text>tu -</text> se sd mc. sb Sd <text>am.</text> PS7 mf. <text>Domine</text> sg Saa mg me mf. fe fd me mc Pm7 Sf <text>Deus,</text> me Sf PS9 <lig><obl>Saa. <text>rex celestis,</text> Sf</obl></lig> Sg Sf me mf maa. <text>Deus pater om -</text> sg Sf se sd se sd sc sb mc. <text>nipotens.</text>sb Bd PS7 Saa. <text>Domine</text> mg Sf Se me Sf <text>fili</text> se sd Sc Pm7 Sd <text>unigenite</text> sc sb mc. sb <lig> Sd Saa </lig> PS11 Saa <text>Jhesu Chri -</text> maa maa. sg Sf se sd mc. sb <text>ste.</text> Ld [-] [-]||
+</pars>
+<pars>
+{staf: 5}<tacet>Domine Deus<l/>tacet.</tacet>|| 
+</pars>
+<pars>
+{staf: 5}{clef: C6} {solm: 0} {mens: c9}Bf <text>Qui tollis peccata mundi,</text> {var= "Sf. se sd" (ed.) : "<full>Bf me md</full>" Mi2} me mf me Saa sg sf Se Sf. md Bd PL7-9 Sd <text>misere -</text> Sd mc Sf se sd me mf me mg mf Saa sg sf <lig>Se <text>re no -</text> Sf.</lig> me Sd. sc sb Sc Ld <text>bis.</text> PS7 Sf <text>Qui tollis peccata mundi,</text> Sf Sf me. sf mg Saa sg sf Sg Laa PL9-11x2 PB11 Baa <text>suscipe</text> Sg Sg Sf <text>deprecationem</text> Sf me Sg sf se md Sf se sd se sd sc sb Sc <lig><obl>Sf <text>no -</text>Se.</obl></lig> me Se. sc sb Sc Bd <text>stram.</text> PB7 Sf <text>Qui sedes</text> Sf. se sd Se me <text>ad</text> Saa <text>de</text>mg<text>xte</text> Saa <text>ram</text> Saa <text>pa</text>Sd <text>tris,</text> PB7 Sf <text>miserere no -</text> Se Sd Sc Pm7 <lig><obl>Sb Sa</obl></lig> mG ma mc Sb Sa <text>bis.</text> PS3 Sa<text>Quo</text> Sd<text>ni</text> Sc<text>am</text> Pm7 <lig><obl>Sb <text>tu</text> Sa</obl></lig> mG <text>so</text> Sa <text>lus</text> Pm5 Sd <text>sanc -</text> mc md mf <lig><obl>Se <text>tus.</text> Sd</obl></lig> PS7 Sf <text>Tu solus Dominus.</text> {var= "Se Saa. sg sf" (ed.) : "<lig>Se maa <full>maa.</lig> mg mf</full>" Mi2} Sg Saa mf <text>Tu solus altissimus</text> Sg me mf <lig> Sd Se</lig> sd sc Sb Sa Pm5 Sd <text>Jhe -</text> mc md mf me Saa <text>su</text> sg sf sg sf se <text>Chri -</text> sd mc. sb Ld <text>ste.</text> ||
+</pars>
+<pars>
+{clef: C6} {solm: 0} {mens: O7} Bd <text>Cum</text> mf. sg Saa. <text>sanc -</text> mg Sf Se PS7 Sd Bc <text>to</text> Se <text>spiri -</text> mf mg. sf se sd mc. sb <text>tu,</text> Bd. Pm9 maa <text>in gloria</text> mg me Sf me mf md me mc md me mc Pm7 Sf <text>De -</text> me Sf Pm9 mf. sg Saa sg sf Se Pm9 mf <text>i</text> <lig><obl>Sg <text>pa -</text> Se</obl></lig> Sf me Sg sf se Sd mc Sf se sd me mc <text>tris.</text> md maa mg me mf md se sd sc sb Sc md. se Lc<text>A -</text>* Ld <text>men.</text> ||    
+</pars>
+</part>
+
+{staf: 5} <part: Altus>
+<pars>
+{clef: C10} {solm: 0} {mens: O9} <lig><obl>Sa <text>Et in</text> SF</obl></lig> SD SE Pm7 mG <text>terra</text> mF ma. <text>pax hominibus</text> sG ma mb SG mc. <text>bone voluntatis</text> sb Sa sG sF SG {full}Ba BF PS5 ma <text>Laudamus te.</text> mb ma Sd sc sb ma md. se mf. se Sd sc sb {full}Ba PB9 Sa <text>{var="Benedicimus te." (ed.) : (om.) Mi2}</text> mG Sc mb Sc PS9 Sc <text>Gratias agimus tibi</text> Ba Sd Sd me Sf se sd Bc Sc {full}Bd PS11 PS11 {full}Be <text>{var="propter" (ed.) : (om.) Mi2}</text> Sf me Sd sc sb ma md mc ma Sb ma mc md mf. se md mc <lig><obl>Se <text>{var="magnam" (ed.) : (om.) Mi2}</text> Sd</obl></lig> mc md mf. <text>{var="gloriam" (ed.) : (om.) Mi2}</text> se Sd sc sb ma Sd sc sb ma mb Sc. sb sa mG ma mD b9 mb. <text>{var="tu -" (ed.) : (om.) Mi2}</text>sa sG sF SG Ba <text>{var="am." (ed.) : (om.) Mi2}</text> Pm9 ma <text>{var="Domine" (ed.) : (om.) Mi2}</text> mb mc Ba Sa mb <text>{var="Deus" (ed.) : (om.) Mi2}</text> ma md. sc <lig><obl> Sa sG</obl></lig> mF mG ma <lig>SF Sc</lig> Pm11 <lig><obl> Sc. <text>{var="rex celestis," (ed.) : (om.) Mi2}</text> sa</obl></lig> <lig>SF Sc</lig> md. sc md mc. <text>{var="Deus pater omnipotens." (ed.) : (om.) Mi2}</text> sb Sc SF mc mb. sa Sa mG <lig><obl> Sa. sF</obl></lig> SD <text>{var="Domine fili" (ed.) : (om.) Mi2} </text> Sd sc sb ma. sb Bc Sa Pm9 Sa <text>{var="unigenite" (ed.) : (om.) Mi2}</text> sG sF SG Ba. PS7 Sa <text>Jhesu Xpriste</text> ma Sa mG Ba La || 
+</pars>
+<pars>
+{staf: 5}{clef: C10} {solm: 0} {mens: O9} <label: 14>Duo</label> Sd. <text>Domine</text> sc sb ma md. sc me. <text>Deus,</text> sd sc sb mc. sb md. sc sb ma. sG mc b9<lig><obl> Sb sa</obl></lig> mG Sa mE mF mE <text>Agnus</text> ma mD Sf se sd mc. <text>Dei,</text> sb md ma mb mc md Pm11 mG. <text>filius</text> sa mb mc Pm11 mF. sG ma mE mF mG <ll:-1>mC. sB sC</ll> sD sE sF mG ma. sb sc sd me ma Sd <text>patris.</text> mc Ld || 
+</pars>
+<pars>
+{staf: 5}{clef: C10} {solm: 0} {mens: c11} Bd. <text>Qui tollis</text> Sd mc md me <text>peccata</text> Sf se sd mc. <text>mundi,</text>sb Sd Sd. <text>misere -</text>sc sb ma. sb Sc b9 Sb. ma <text>re nobis.</text> Ba SG Ba PL7-9x2 PL5-7 Ba <text>Qui</text> BD SD <text>tol -</text> SD <text>lis</text> <lig> Sa SF BE Be </lig> PS11 Sf <text>peccata</text> Sf Sf Se <text>mundi,</text> <ll:1> mf Sg <text>suscipe</text> sf </ll> se Sd Sc md Se <text>depre -</text> sd sc Sb <lig>Sa <text>ca -</text> Sd.</lig> sc sb Sc <lig><obl>Sd <text>ti -</text> Sb</obl></lig> <lig><obl>Sc <text>o -</text> Sa</obl></lig> <lig>Sb <text>nem</text> SG Ba</lig> <lig>Sa <text>no -</text> Sc.</lig> mb SG Ba Ba <text>stram.</text> PB9 Sd <text>Qui</text> Sd <text>se</text> Sd <text>des</text> mc <text>ad</text> Se <text>dexteram patris,</text> sd sc Sb ma Sd mc Sd Sf <text>miserere</text> Se Sd Sc Pm11 <lig><obl>Sb <text>no -</text> Sa</obl></lig> mG ma mc Sb Sa <text>bis.</text> PS7 Sa <text>Quoniam</text> Sd Sc Pm11 <lig><obl>Sb <text>tu solus</text> Sa</obl></lig> mG Sa Pm9 Sd <text>sanct -</text> mc md mf Se <text>us.</text> Pm11 mD <text>Tu</text> mE mC mD <text>solus</text> mF SE mD <text>Dominus.</text> md mc Se <text>Tu</text> sd sc <text>so -</text> sd sc sb sa Sb ma Sd mb Sc <text>lus</text> mD. <text>altissimus</text> sE mF mG mE Sa mG ma mD. <text>Jhe -</text> sE mF mG ma mD <text>su Chri -</text> md me mc md ma sb sa sG sF SE LD <text>ste.</text> || 
+</pars>
+<pars>
+{staf: 5} {clef: C10} {solm: 0} {mens: o9} PB9 Sa <text>Cum</text> mF mG ma mb Bc Sa <text>sancto</text> Ba mG mc <text>spiritu,</text> md mb <lig><obl>Sc Sa</obl></lig> Pm9 Sa <text>in glo -</text> mb ma md. sc Sa mG. sa mF mG <lig><obl>Sd <text>ri -</text> Sc</obl></lig> mb Sc md mc Sc <text>a</text> Pm11 Sa <text>De -</text> mF. sE mF. sG ma mb mc. sd Se sd sc sd sc sb sa Sb Sc. ma Sa <text>i</text> Pm9 mc <text>pa -</text> md mf Se <text>tris.</text> Sd mb mc Sa PS7 Sa mF. sG La<text>A -</text>* La <text>men.</text> || 
+</pars>
+</part>
+
+{staf: 5} <part: Tenor>
+<pars>
+{clef: C10} {solm: 0} {mens: O5} BD <text>Et in terra pax</text> mF. sG Sa. sG sF SE PS5 SD <text>hominibus</text>mG mG mG Sa <text>bone voluntatis.</text> SF mD. sC mD mF. sG SE BD PB5 SD <text>Laudamus te.</text> SD SD BD Ba Pm7 mF. <text>Benedicimus</text> sE mF mG ma SF mG ma <ll:-1> <lig><obl> SF <text>te.</text> sC</obl></lig> b2 <lig>BD <text>Gratias</text> BB BF</lig></ll> **@@ledger line not working correctly here - logged in Github@@** PS5 Sa. <text>agimus tibi</text> SF SD. {full}Ba BD PS3 PL5-7 PB7 Sa <text>propter magnam</text> ma b9 Sb sa sG SF. mD mF mG Sa. <text>gloriam</text> sG sF mE ma mF mG mF mD. sC mD SE mE SF mF mE Sa <text>tu -</text> sG sF SE SD <text>am.</text> PS3 ma <text>Domine</text> mb ma <lig><obl> Sd <text>Deus,</text> sc</obl></lig> mb mc Sa <text>{var="rex celestis." (ed.) : (om.) Mi2}</text> mF SG BF PL5-7 PB7 PS7 <lig><obl> Sa. <text>Domine</text> sF</obl></lig> mD mD mF. sG Sa <text>fili</text> sG sF mE ma. <text>unigenite</text> sG mF mE mF. sE sD sC SD SE Pm5 mD <text>Jhesu Chri -</text> SF mE ma. sG mF mE ma mF mD mF. sG SE -LD <text>ste.</text> || 
+</pars>
+<pars>
+{staf: 5} <tacet>Domine Deus<l/> tacet.</tacet> || 
+</pars>
+<pars>
+{staf: 5} {clef: C12} {solm: 0} {mens: c7} BD <text>Qui</text> SB <text>tollis</text> SB BA <lig>BA <text>pecca -</text> Ba</lig> Sa.<text>ta</text> sG sF <lig>SE SF.</lig> mE SE. <text>mun -</text> sD sC SD <text>di,</text> mE Sa <text>miserere</text> mF mG mD SE <lig>SD Sa</lig> <lig>Sb <text>no -</text> Sc</lig> Sd Sa. sG sF SG {clef: C10} Ba <text>bis.</text> PB9 Bd <text>Qui tollis peccata mundi,</text> Sd Sd Sc. sb sa Sb Sb Ba LD PL5-7x2 PB7 PS7 SG <text>deprecationem</text> Sa. sG sF SG. sF sE SF. sE sD SE Sa <lig>SF <text>no -</text> SG</lig> <lig>Sa <text>stram.</text>SD BE LD</lig> PL5-7x2 PL7-9x2 PL9-11x2 {var="PL7-9x2 PL5-7x2 PL7-9x2 PL9-11x2" (ed.) : (om.) Mi2} || 
+</pars>
+<pars>
+{staf: 5}{clef: C10} {solm: 0} {mens: o7} Ba <text>Cum</text> SF SD. <text>sanc -</text> mE SF SG. <text>to</text> mE <text>spi -</text> mF mD SE. mF mE Sa <text>ri -</text> mG ma <text>tu,</text> mF SE <lig><obl>SF <text>in</text> SD</obl></lig> ma <text>glo -</text> mb ma <lig><obl>Sd <text>ri -</text> Sc</obl></lig> mb mc <text>a</text> Sa mG ma mF mG Sa mF SG <text>Dei</text> BF PB7 PS7 PS7 SF <text>pa -</text> SG mE SF sE sD mE Sa sG sF mG ma SD Pm7 mG <text>tris.</text> mF Sa sG sF SE SD LE <text>A -</text>* LD <text>men.</text>||  
+</pars>
+</part>
+
+{staf: 5} <part: Bassus>
+<pars>
+{clef: F8} {solm: 0} {mens: O7} BD. <text>Et in terra pax hominibus.</text> SA. mB SC SD mF mF SE <full><lig>SC SD <obl>BB BA</obl></lig></full> Ba BD PB7 Bd. <text>Benedicimus te.</text> Sc. sb sa mb ma SF mE mF SD mC <text>Adoramus</text> SF ma SG b11 <lig>BF <text>te.</text><obl>Bb Ba</obl></lig> SF <full><lig>BD <text>{var="Propter" (ed.) : (om.) Mi2}</text> Bd Bc</full> Bd</lig> SD SF <text>{var="ma -" (ed.) : (om.) Mi2}</text> mE <text>{var="gnam gloriam" (ed.) : (om.) Mi2}</text> Sa mG ma <lig><obl>SF SD</obl></lig> mF mE SG mF SE <text>{var="tuam." (ed.) : (om.) Mi2}</text> BD PS5 SD<text>{var="Domine Deus," (ed.) : (om.) Mi2}</text> mD SD mD <lig>BA BB</lig> {full}BA PS3 PS3 <lig>{full}BA <text>{var="rex ce -" (ed.) : (om.) Mi2}</text> BD.</lig> SF mE mC SD mC <text>{var="le -" (ed.) : (om.) Mi2}</text> mF mD mF SC <text>{var="stis," (ed.) : (om.) Mi2}</text> Bc <text>{var="Deus pa -" (ed.) : (om.) Mi2}</text> Sa b11 <lig>SF. Sb.</lig> <lig><obl>Sa. <text>{var="ter omnipotens." (ed.) : (om.) Mi2}</text> SF</obl></lig> Sa mG. sF mD SE BD. SF <text>Domine fi -</text> mF SF mF BC SD .5 SA BB <lig>SA <text>li,</text> SD</lig> Pm7 mD <text>Jhe -</text>mC mD <lig>SA <text>su</text> SC</lig> mB <text>Xpri -</text> SD sC sB SA LD <text>ste.</text> ||
+</pars>
+<pars>
+{staf: 5} {clef: F8} {solm: 0} {mens: O7} <label: 14>Duo</label> <full>BD <text>Domine</text> <lig>SF <obl>SG BE</obl></lig></full> BD SF <text>De -</text> mE SD mC SB BA <text>us,</text> PS3 Sa <text>agnus</text> ma ma. sG ma <text>Dei,</text> SD Pm9 ma mb mc Sd mG ma mb Sc mF mG ma mE. sF mG mC. <text>filius</text> sD mE mA SD <text>pa -</text> mC mD mF SE BD<text>tris.</text> ||
+</pars>
+<pars>
+{staf: 5} {clef: F8} {solm: 0} {mens: c7} BD. <text>Qui tollis peccata mundi, miserere nobis.</text> SD Sa Sa Sa Sa LD <lig>SC SD BA BB</lig> <lig>SA SD. </lig> sC sB SC <lig>SD SF</lig> <lig>SG Sa BD BE LD</lig> PL5-7x2 PB9 Bd <text>Qui tollis peccata mundi,</text>Sd Sd Sc. sb sa Sb Sb Ba PS9 SG <text>su -</text> SF. sE <text>scipe</text> sD SE <text>deprecationem</text> SE SD SD SC SC <lig>SD <text>no -</text> <obl>SB BA</obl></lig> <lig><obl>SD SC.</obl></lig> mD SB <lig>BA <text>stram.</text> La</lig> PL9-11x2 PL7-9x2 PL5-7x2 PL7-9x2 PL9-11x2 PL7-9x2 PL5-7x2 ||    
+</pars>
+<pars>
+{staf: 5} {clef: F8} {solm: 0} {mens: o7} BD. <text>Cum</text> SF. <text>sanc -</text> mE SD BC SD BA SC. SB BA SD <text>to</text> PS5 SD <text>spiri -</text> SF mE mC SD mC SF mE mF mD mC mF mD mF SC <text>tu,</text> Sc <text>in gloria</text> mc Sa ma SF mG Sa sG sF mE SG sF sE SD SC mC SD <text>De -</text> mD <text>i</text> <lig>SA <text>patris.</text> SD </lig> SC Pm7 mF mE mC <lig><obl>SD SA</obl></lig> SA b4 SB <lig>LA* <text>Amen</text> LD</lig>||
+</pars>
+</part>
+</section>
+</piece>

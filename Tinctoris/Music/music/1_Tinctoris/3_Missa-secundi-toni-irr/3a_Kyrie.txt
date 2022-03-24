@@ -1,0 +1,45 @@
+﻿Missa secundi toni irregularis
+Johannes Tinctoris
+Editor: Jeffrey J. Dean
+Checked by:
+Date established: 3 August 2018
+Base transcription: Ve755
+Sources:
+Ve755	I-VEcap DCCLV, fols. 17^v^-26^r^)	tintoris (in distich)	ttt/---
+<piece: {mensural: void}, {staf: 5, black}>
+<section: Kyrie>
+<part: {var="Supremum" (ed.) : (om.) Ve755}>
+<pars>
+{clef: "C10" Ve755^c : (om.) Ve755^*}**The music was originally written with the flat or <italic>fa</italic> signs as the only “clefs” (<italic>claves minores</italic>); all the clefs were added afterwards. The form of the added clef was originally a majuscule letter ‘C’ in the Kyrie, erased and replaced by a more usual C-clef.** {solm: bE ^bb ^be} {mens: O11} Bc <text>Kyrie</text> Sb Sc. md me. fd fc me <label: 21>Ferdinande sacer, inter divos referende,</label> <label: 18>    Cantica {var="Tinctoris" (ed.) : "tintoris" Ve755} suscipe parva tui.**“Holy Ferrante, to be counted among the divine, receive thy Tinctoris’s little songs.”**</label> md. sc mb Sa Pm7 mG. <text>leyson;</text> sa sb fa fb mc sb sG. fF sE mD Ps5 sC <text>Kyrie</text> mE mD mC sG sa mb Sc md me. <text>ley -</text> sf se fd fc sb mc md mc sa <text>son;</text> Bb* Se <text>Kyrie</text>md mc. fb fa mb Ps7 mE mF sG sa {var="fG fa" Ve755^c : "sG sa" Ve755^*} sb mG sF BG PB7 SE <text>ley -</text> mD sC mE sF mG sa mb sc md me. sd mf. se sd sc me sd mc fb fa mb Lc <text>son.</text>||
+</pars>
+<pars>
+{mens: c11} Bc <text>{var="Xpriste" (ed.) : "[X]pristre" Ve755}</text> Sc mG mc. sb ma mG. sF ba ma mG. sF mE BD Pm5 mD. sE mF mG ma mb mc md me md mf. se sd sc me md. sG Sc <text>leyson;</text> mb Bc Pm11 mc. <text>Xpri -</text> sb ma. sG mF xE mE mG SC <text>ste</text> Pm5 mC mE SF mG ma mb mc md. <text>ley -</text> sc mb Sa SG <text>son;</text> PS7 <lig><obl>Sd <text>Xpri -</text> Se</obl></lig> <ll: 1><lig>Sf Sg</lig> mf</ll> md se sd sc sb Sa mG SG mF <text>ste</text> SG Sc <text>ley -</text> Pm11 md me Sc mb Lc <text>son.</text> ||
+</pars>
+<pars>
+{mens: o9} Sc. <text>Kyrie</text> mb ma. sG SG. sF sG sa sG sF sE SD mE SC me. sd mf. se sd sc mb. <text>leyson;</text> sa Bc PS9 PL9-11 PB9 Ba <text>Kyrie</text> Sc mb md. sc mb ma. sG <lig><obl>Sb Sa.</obl></lig> mG SG Pm7 mG <text>leyson;</text> ma mb Sc Pm5 mC <text>Kyrie</text> mD mE mF mG. sF mE SD SC Pm11 Sc. mb md. sc sb sa Sb Sc ma SG mc mb Sd me md sc sb sc sb sa sG mb ma mG Sc mb me. sd mf. se sd sc me. <text>leyson.</text> sd Sc mb Lc ||
+</pars>
+</part>
+{staf: 5} <part: Tenor>
+<pars>
+{clef: "F10" Ve755^c : (om.) Ve755^*}**The music was originally written with the flat or <italic>fa</italic> signs as the only “clefs” (<italic>claves minores</italic>); all the clefs were added afterwards. The form of the added clef was originally a majuscule letter ‘F’ in the first three staves of the Kyrie, erased and replaced by a more usual F-clef in all five staves.** {solm: bB ^bE} {mens: O7} SC. <text>Kyrie</text> mE SD mC SE mF SG BG SF mG. sC sE sF mD mC sD sE. fD sC xB mB <text>leyson;</text> SC mB Ps7 sC <text>Kyrie</text> mE mD mC. sA mB mC. sD sE sF sG sE mF sD <text>leyson;</text> sE mF {full}BD ^BG* SG <text>Ky -</text> mF mE SD mC. sD. fC sB sC fB fA sGG sB mA Pm5 mGG. <text>ri -</text> sA mB mC mGG <text>e</text> Ps5 mA mB sC sD fC fD sE mC sB {var="SC" Ve755^c : "mC" Ve755^*} Pm7 SC mB sC sD mE mF mG. sF mD. sE mF mG mE <text>leyson.</text> SD LC ||
+</pars>
+<pars>
+{mens: c7} MC <text>Xpriste</text> BB mGG. sA mB. sC SD. mE mF SG mF SD mG. <text>ley -</text> sF mG mE {var="SD" Ve755^c : "SB" Ve755^*?} <text>son;</text> BC. Pm11 mF. <text>Xpri -</text> sE mD. sC mB mA mC <text>ste</text> SFF Pm5 mFF mA mB mC mD mE mF mD SG <text>leyson;</text> mF <lig><obl>SG SC</obl></lig> PB7 <lig>SD <text>Xpriste</text> SE</lig> <lig>SF SG</lig> mF mD sE sD sC sB <lig>SA SGG</lig> Pm7 SC <text>leyson.</text> mB mC mE SD LC ||
+</pars>
+<pars>
+{mens: o7} LC <text>Kyrie</text> .9 SB mC. sD sE sF SG ba ma. sG sF sE SD mC mC. <text>ley -</text> sB mA <text>  son;</text> SGG Pm5 <lig>SFF <text>Kyrie</text> SA</lig> mB <full>SC <label: 4>emiolia</label> mD mE mF mG ba ma mG mF</full> mG mE mC <text>ley -</text> SF mE <text>  son;</text> SF Pm11 mF. <text>{var="Kyrie" (ed.) : (om.) Ve755}</text> sE mF SG mD. sE mF. sG mD SG mF mF. sE SG mC mD Pm9 mD mC mE mF mG Pm7 mC mD mE. sD mC 7xB" (ed.) : "xGG" Ve755} mB. sA <lig>SC <obl>SE BD</obl></lig> mC SF mE SC BG SF mE mF mG mF mE mC SD mC mF. sE sD sC mF mG. <text>ley -</text> sF mE SD LC <text>son.</text>||
+</pars>
+</part>
+{staf: 5} <part: {var="Contratenor" (Gloria) : "Contra" (Kyrie, Credo)}>
+<pars>
+{clef: "Gamma8" Ve755^c : (om.) Ve755^*}**The music was originally written with the flat or <italic>fa</italic> signs as the only “clefs” (<italic>claves minores</italic>); all the clefs were added afterwards.** {solm: bEE ^bB} {mens: O11} mC. <text>Kyrie</text> sB sA sFF mC SGG mCC. mCC sEE mDD SCC. mGG. sA sB sC SD sGG. fA sB mC sFF mGG bA mA sGG sCC. fDD fEE fFF mGG SCC mGG <text>{var="leyson;" (ed.) : (om.) Ve755}</text> SCC mGG Ps5 sCC <text>{var="Kyrie" (ed.) : (om.) Ve755}</text> mEE mDD mCC mC. fB fA sGG sC sFF mB <text>{var="leyson;" (ed.) : (om.) Ve755}</text> sC mA BGG* SCC <text>{var="Kyrie" (ed.) : (om.) Ve755}</text> mDD mEE mFF mGG bA sA. fB sC sB. fA sGG mFF mGG mDD sEE sCC. fDD mEE sFF mGG Ps5 mCC sDD sEE mFF sGG. fFF {var="sEE" (ed.) : "mEE" Ve755} sFF fEE fDD sCC sEE mDD SCC mGG SA mGG Ps9 sGG mEE mDD mCC mC mB. sC mD SC <text>leyson.</text> SGG -LCC ||
+</pars>
+<pars>
+{mens: c5} -LCC <text>Xpriste</text> SFF mEE. sDD mFF mCC. sDD sEE sFF SGG Pm9 mGG. sA sB sC <ll: 1><lig>SD. SF</lig> mE mD mC mGG {var="mD. sE" (ed.) : "<full>SD mE</full>" Ve755} mF mC</ll> mGG Pm5 mCC <text>{var="leyson;" (ed.) : (om.) Ve755}</text> SGG mCC. sDD mEE mFF mCC mFF mFF. <text>{var="Xpriste" (ed.) : (om.) Ve755}</text> sGG mA mB mC mGG mC mFF mA. sB SC. mB mA mGG Pm13 mD <text>{var="leyson;" (ed.) : (om.) Ve755}</text> mB mGG SD Pm9 mGG <text>{var="Xpriste" (ed.) : (om.) Ve755}</text> SA <lig>SB SC</lig> mB mD SC <lig><obl>SD SC</obl></lig> <ll: 1>mD mF SC</ll> Pm11 mC mB mGG sA sGG sFF sEE SDD <lig>SCC <text>leyson.</text> SGG</lig> -LCC ||
+</pars>
+<pars>
+{mens: o5} BCC <text>Kyrie</text> SFF mCC. sDD <lig>SEE SFF</lig> SGG <lig>SCC SC.</lig> <lig>SFF. SGG</lig> Pm9 bA mA. <text>{var="leyson;" (ed.) : (om.) Ve755}</text> sGG mFF {var="xEE" (ed.) : "xDD" Ve755} mEE. sDD SFF BDD <text>{var="Kyrie" (ed.) : (om.) Ve755}</text> <lig>SCC SC</lig> SFF SC mA mFF SGG BFF SA BGG mFF mDD SGG BDD Pm9 mGG <text>{var="leyson;" (ed.) : (om.) Ve755}</text> mA mB {var="mC" Ve755^c : (om.) Ve755^*} mGG Pm9 mCC <text>{var="Kyrie" (ed.) : (om.) Ve755}</text> mDD mEE mFF mEE mDD <lig>SCC. SGG</lig> SCC bA mC mA. sB mC mGG mB. sA sGG sFF SGG mA SFF {var="mC. sB" (ed.) : "<full>SC mB</full>" Ve755} mA mGG. sA mB mC SD mC mD mGG sA sB mC mA SGG mCC <text>leyson.</text> mDD. sEE mFF. sEE <lig>SCC. SGG</lig> -LCC ||
+</pars>
+</part>
+</section>
+</piece>

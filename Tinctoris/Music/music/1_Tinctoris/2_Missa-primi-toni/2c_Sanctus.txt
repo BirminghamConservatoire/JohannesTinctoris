@@ -1,0 +1,84 @@
+Missa primi toni
+Johannes Tinctoris
+Editor: Christian Goursaud
+Checked by:
+Date established: 11 June 2020
+Base transcription: Mi2
+Sources:
+Mi2	I-Md Librone 2 [2268], 38s–43d	.Jo. Tinctoris
+<piece: {mensural: void}, {staf: 5, black}>
+
+<section: Sanctus>
+<part: Superius>
+<pars>
+{clef: C6} {solm: 0} {mens: O7} Bd <text>Sanctus,</text> Sa Sc. md Se mf Sd mc md mf me <lig><obl>Sg Se</obl></lig> md Be mc. sd <lig>Se Sf</lig> Pm9 mf. <text>Sanctus,</text> se Sd sc sb Sc Sd Pm9 mf. <text>Sanctus</text> sg maa b12 mbb Saa sg sf Se Sd PS7 Saa <text>Domi -</text> Saa. mg Sf Se Saa Pm11 <lig><obl>Saa Sg</obl></lig> Sf <text>nus</text> me Bf PS9 PS9 Sf <text>De -</text> Be Sf md Se mc md mb Bc <text>us</text> PS5 me <text>Saba -</text> mf me mg. sf Saa mf. sg maa mg me mf Sd sc sb mc. <text>oth.</text> sb Ld ||
+</pars>
+<pars>
+{clef: C6} {solm: 0} {mens: o7} <label: 14>Duo</label> Bd <text>Pleni</text> Sf <full><lig>Be <obl>Baa Bg</obl></lig></full> Pm11 Saa Sf sg saa b12 mbb Saa sg sf Se Bd <text>sunt</text> Sd <text>ce -</text> <full><lig><obl>Sc Sa</obl></lig><lig>Sc <text>li</text> <obl>Sd Bb</obl></lig></full> Sa PS3 PS3 Se. <text>et terra</text> mf me Saa mg Baa Pm11 b12 mbb <text>glo -</text> maa mf. se mf mg me mf md. sc md me mc md. se mf mg <text>ria</text> Se Sd Pm9 mf. <text>tu -</text> sg maa me mg. sf se sd mf me. sd sc sb mc. sb <text>a.</text> Ld ||
+</pars>
+<pars>
+{clef: C6} {solm: 0} {mens: o8} PL7-9 PS9 PS9 Sf <text>Osanna</text> {var= "Se mg. sf" (ed.) : "<lig>Se <full>Sg</lig> mf</full>" Mi2} me md Sf. se sd <full><lig>Bc Bd</lig></full> mc me. sd sc sb mc. sb Sd PS7 Saa Saa. mg Sf Se Pm9 Saa mf mg Saa sg sf me. sd Bf Sf md. se mf mg. sf se sd Sc Sc Sf Sf. mg Saa Sd PS7 Sd <text>in</text> Be Se me <text> excel -</text> Sf se sd mc Sd mb mc Sa md mb Sc sb sa <ll:-1> mG. sF <full><lig>Ba Bc</lig></full></ll> <lig>Sd. Se.</lig> <lig>Sf. Sg.</lig> <lig>Se. Sf</lig> se ssd Sc Pm7 mc md. <text>sis.</text> se Lc* Ld ||
+</pars>
+<pars>
+{clef: C6} {solm: 0} {mens: c7} <label: 14>Duo</label> Bd <text>Benedic -</text> <lig>Sc Sd</lig> <lig>Sb Sc Bd Be</lig> PS7 Se <lig>Sd Se</lig> <lig>Sc Sd Be Bf</lig> PS9 Sf <lig>Se Sf</lig> {var= "Sd Se Sf. se sd" (ed.) : "<lig>Sd Se <full>Bf</lig> me md</full>" Mi2} <lig>Se. Saa</lig> sg <text>tus</text> sf Sg Saa. sg sf Se <text>qui</text> me Sf se sd Sc <lig><obl>Sf Se</obl></lig> sd sc Sb Sa Pm5 ma <text>ve -</text> {var= "mc. sd" (ed.) : "<full>Sc md</full>" Mi2} me Sf se sd mc. <text>nit</text> sb {mens: O9}{prop: 3/2, 7-9} Ld PB7 Bf <text>in</text> Be Se <text>no -</text> Sf. me Sd Sc Bf Se. mf Sg Saa. <text>mi -</text> mg Sf Be PS7 PS7 Saa Saa. sg sf Sg Saa. mg Se Sf. me Sd Sd. sc sb Sc {mens: c7} Ld <text>ne</text> PS7 Sf <text>Do -</text><lig>Se. Saa</lig> mg maa mf mg me md <lig><obl>Sf Se</obl></lig> md me mc md mb mc Sa mG Sa Pm5 ma mb mc Sd mb <text>mi -</text> mc md Se mc md me mf md se sd sc sb ma Sd <text>ni.</text> mc Ld ||  
+</pars>
+<pars>
+<tacet>Osanna ut supra</tacet>
+</pars>
+</part>
+
+{staf: 5} <part: Altus>
+<pars>
+{clef: C10} {solm: 0} {mens: O9} <lig><obl>Sa <text>Sanctus,</text> SF</obl></lig> SD BE Pm7 Ba mG ma mF <lig>SG Sc</lig> Sa Sa. sG sF BE Pm9 Sa <text>Sanctus,</text> sG sF SG Ba mF. sG Sa BF Pm9 md <text>Sanctus</text> Se Sf me Sd sc sb Ba PS7 PS7 mc. <text>Do -</text> sd Se Bc <text>minus</text>ma. sb mc md mc mf. se <lig><obl>Sd <text>Deus</text> Sc</obl></lig> mb Bc b9 <lig><obl>Sb Sa.</obl></lig> mF mG Sa mE mF mE <text>Sabaoth.</text> ma. sb Sc mb Sc Ba mb <lig><obl>Sc Sa</obl></lig> ma Sa La ||
+</pars>
+<pars>
+{clef: C10} {solm: 0} {mens: o9} <label: 14>Duo</label>  Bd <text>Pleni</text> Sd Pm11 Se Sc sd se mf <text>sunt</text> Se sd sc Sb <full><lig>Ba <obl>Bd Bc</obl></lig></full> Sd Pm11 mD <text>celi</text> mF mG mE ma. sb mc. <text>et</text> sb ma mG b9 mb. sa sG sF <text>ter -</text> SG Pm7 ma mE mF mE Sa mG <text>ra</text> Ba Pm9 b9 mb <text>glo -</text> ma mF. sE mF mG mE mF mD. sC mD mE mC mD. sE mF mG SE mD Sd <text>ria</text> mb Sc Bd Sa. mG b9 Sb <text>tua.</text> ma mG. sF sE sD SE LD ||
+</pars>
+<pars>
+{clef: C10} {solm: 0} {mens: o11} Bd <text>O -</text> ma <text>sanna</text> mb ma <lig><obl>Sd Sc</obl></lig> mb mc Se sd sc mb. sa Bc. PS9 mF. sG ma. sG mF {var= "SE." (ed.) : "SE" Mi2} sD sC SD {full}BE <lig><obl>Sa. SF.</obl></lig> SD PS3 PS3 SF SG PS7 Sa Pm9 Pm9 Sc <lig>Ba Bd.</lig> PS11 <lig>Sc Sd</lig> md Sf se sd mc. sb <lig><obl>Sd Sb</obl></lig> Sa {full}Ba <lig><obl>Sc Sa</obl></lig> mb Sc <lig><obl>Sa SG</obl></lig> mF <lig><obl>Sa SG</obl></lig> PS7 Sd <text>in excel -</text> {full}Bc <lig><obl>Sa SG</obl></lig> Pm9 ma. sb mc. sb mc md. sc md me Sd PS11 Pm11 mc md mb mc Sa ma mF. <text>sis.</text> sG La* La ||    
+</pars>
+<pars>
+{clef: C10} {solm: 0} {mens: c5} <label: 14>Duo</label> BD <text>Bene -</text> BF <lig><obl>SG SE</obl></lig> <lig>SF SG LC</lig> PS5 SG ** At this point, the scribe appears to have skipped to the next group of notes, creating a five-breve lacuna.** {var= "<lig><obl>Sa SF</obl></lig> <lig>SG sa LD</lig>  PS9 Sa" (ed.) : (om.) Mi2} <lig><obl>Sb SG</obl></lig> <lig>Sa sb</lig><text>dictus</text> <lig>Sc Sd Bb La</lig> La BG SF mD<text>qui</text> mF. sG ma mG Sa <text>ve -</text> sG sF SE <text>nit</text> {mens: O7}{prop: 3/2, 5-7} BD <full> SD. <text>in</text> mE <lig>SF<text>no -</text> <obl>SG BE</obl></lig></full> BD <full> Sa. mb <lig>Sc <obl>Sd Bb</obl></lig></full> Ba <full> Sc. md <lig>Se<text>mi -</text> <obl>Sf Bd</obl></lig></full> Bc <full> Sa. mb <lig>Sc <obl>Sd Bb</obl></lig></full> Ba <full> SD. mE <lig>SF<text>ne</text> <obl>SG BE</obl></lig></full> {mens: c7} BD PB5 Bd<text>Do -</text> <lig><obl>Sc Sa</obl></lig> Sb Sa SG b9 mb Sa mG SF SE Pm5 mG ma mc mb md mc Sa sG sF mG mE mF SG ma mF<text>mi -</text> mG Sa mb mc ma sb sa sG sF mE mF mG<text>ni.</text> SE LD ||
+</pars>
+<pars>
+<tacet>Osanna ut supra</tacet>
+</pars>
+</part>
+
+{staf: 5} <part: Tenor>
+<pars>
+{clef: F8} {solm: 0} {mens: O7} BD <text>Sanctus,</text> mF mG Sa. sG sF SE mD SF SE mD BE SF BE Sa mG <lig><obl>Sa <text>Sanctus,</text> SF</obl></lig> mD. sC mD {full}BE BD PS5 Bd <text>Sanctus</text> Sc Bd BD SD <lig><obl>Sa. <text>Dominus</text> SF.</obl></lig> <lig>SE SF</lig> SC <lig><obl>Sc Sa</obl></lig> PS11 mc. <text>De -</text> sb Sa SG mF mG. sF mG <lig><obl>Sa SF</obl></lig> SE  <text>us</text> mF SD SE PS7 mE <text>Saba -</text> mF mE Sa SG mE mF SD mF mG ma SD <text>oth.</text> BE LD ||
+</pars>
+<pars>
+<tacet>Pleni tacet.</tacet> || 
+</pars>
+<pars>
+{clef: F8} {solm: 0} {mens: o11} Ba <text>Osanna</text> SF mD SF mE SD SC Pm7 mG ma mF BG mG ma b11 mb ma. sG mF <lig>SE. Sa</lig> sG sF SG Pm11 Sa sG sF SE BD. Pm11 Sd sc sb ma. sb Bc SF PS9 mF mD mF SC <lig>BD BB BF</lig> SD Ba. PS9 SF <text>in excel -</text> SF <lig><obl> SE. SC.</obl></lig> mA SD mB mA SD mE mC mD. sE mF mG SE mF SD mE mF mE Sa sG sF SE mD. sE mF mG. sF mG ma. sG ma mb. sa mb <lig><obl>Sc. Sa</obl></lig> mG ma mF SE SD<text>sis.</text> <lig>LE* LD</lig> **@@system won't render fermata within ligature -- logged in Github@@** ||
+</pars>
+<pars>
+<tacet> {var="Benedictus tacet." (ed.) : (om.) Mi2}</tacet> || 
+</pars>
+<pars>
+<tacet> {var="Osanna ut supra." (ed.) : (om.) Mi2}</tacet>
+</pars>
+</part>
+
+{staf: 5} <part: Bassus>
+<pars>
+{clef: F8} {solm: 0} {mens: O7} BD. <text>Sanctus,</text> SA. mB SC SD. mE SF BC SD <text>Sanctus,</text> BA. <full><lig>SC SD <obl>BB BA</obl></lig></full> Ba PS9 PS9 Sa <lig>BD <obl>Bd Bc</obl></lig> Sa b11 Sb <text>Sanctus</text> ma mF SG <full> LF mE mC SD</full> BC Pm7 SD <text>Dominus Deus</text> mC <lig>SA SB</lig> BA PS3 PS3 SC <text>Saba -</text> <lig>SD SF</lig> mE mC SD <text>oth.</text> <lig>BA LD</lig> ||
+</pars>
+<pars>
+<tacet>Pleni tacet.</tacet> || 
+</pars>
+<pars>
+{clef: F8} {solm: 0} {mens: o7} BD <text>Osanna</text> SD SD. mE SF mE SG sF sE SD <lig>BC <full>BD BA BB</full></lig> BA SA <lig><obl>Sa. SF.</obl></lig> <lig>SF. Sa.</lig> BC SD mE SF ma SG SF. SF. b11 Sb. Sb. <lig><obl>Sa. <text>in excel -</text> SF.</obl></lig> SD. mE SF b4 SB. mC SD BA. Sa mF mG ma SF mG mE mF SD mE SC mD SB BA. Pm5 mC mB SD mC SE mD SF mE <full><lig>SG SA</lig> <lig>SA <obl>SB BGG</obl></lig></full> SB <text>sis.</text> <lig>LA* LD</lig> **@@system won't render fermata within ligature@@**||    
+</pars>
+<pars>
+<tacet> {var="Benedictus tacet." (ed.) : (om.) Mi2}</tacet> || 
+</pars>
+<pars>
+<tacet>Osanna ut supra.</tacet>
+</pars>
+</part>
+</section>
+</piece>

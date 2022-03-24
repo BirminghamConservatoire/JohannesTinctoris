@@ -1,7 +1,7 @@
 
 node_modules/
 _site
+.jekyll-cache
 
 
 debug.log
-CNAME

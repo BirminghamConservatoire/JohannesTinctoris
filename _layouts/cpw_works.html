@@ -1,60 +1,44 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-	<meta charset="UTF-8">
-  <title>Johannes Tinctoris: Complete Practical Works</title>
-  <link rel="icon" type="image/png" href="{{page.rel_url}}/Images/jt.png">
-  <!-- website styles-->
-  <link href="{{page.rel_url}}/SpryAssets/SpryMenuBarHorizontal.css" rel="stylesheet" type="text/css" />
-  <link href="{{page.rel_url}}/SpryAssets/SpryAccordion.css" rel="stylesheet" type="text/css" />
-  <link href="{{page.rel_url}}/css/thrColLiqHdr.css" rel="stylesheet" type="text/css" />
-  <!-- jQuery-->
-  <script src="{{page.rel_url}}/ScriptLibrary/jquery-1.8.2.min.js" ></script>
-  <script src="{{page.rel_url}}/ScriptLibrary/jquery.scrollTo-1.4.2.js"></script>
-  <script src="{{page.rel_url}}/ScriptLibrary/jquery-ui-1.9.0.custom.min.js"></script>
+    <head>
+        <meta charset="UTF-8">
+        <title>Johannes Tinctoris: Complete Practical Works</title>
+        <link rel="icon" type="image/png" href="{{page.rel_url}}/Images/jt.png">
 
-  <!-- music editor styles -->
-  <link type="text/css" rel="stylesheet" href="{{page.rel_url}}/ScriptLibrary/jt-editor-v.css" />
-  <!--<link type="text/css" rel="stylesheet" href="../ScriptLibrary/GUI-print.css" media="print"/>-->
-  <link type="text/css" rel="stylesheet" href="{{page.rel_url}}/ScriptLibrary/buttons.css" />
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
-  <!-- menu scripts -->
-  <script src="{{page.rel_url}}/ScriptLibrary/privatemenu.js" type="text/javascript"></script>
-  <script src="{{page.rel_url}}/SpryAssets/SpryMenuBar.js" type="text/javascript"></script>
-  <script src="{{page.rel_url}}/SpryAssets/SpryAccordion.js" type="text/javascript"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        
+        <script src="{{page.rel_url}}/ScriptLibrary/jquery-ui-1.10.3.custom.min.js"></script>
+        <script type="text/javascript">
+            // Change JQueryUI plugin names to fix name collision with Bootstrap:
+            $.widget.bridge('uitooltip', $.ui.tooltip);
+            $.widget.bridge('uibutton', $.ui.button);
+        </script>
+        
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 
-  <!-- get the library -->
-  <script src="{{page.rel_url}}/ScriptLibrary/base.js"></script>
-  <script src="{{page.rel_url}}/ScriptLibrary/debugger.js"></script>
-	  <script src="{{page.rel_url}}/ScriptLibrary/dom.js"></script>
-    <script src="{{page.rel_url}}/ScriptLibrary/tei-classes.js"></script>
-	  <script src="{{page.rel_url}}/ScriptLibrary/glyphs.js"></script>
-	  <script src="{{page.rel_url}}/ScriptLibrary/arsnovavoid.js"></script>
-	  <script src="{{page.rel_url}}/ScriptLibrary/music-containers.js"></script>
-	  <script src="{{page.rel_url}}/ScriptLibrary/buttons.js"></script>
-    <script src="{{page.rel_url}}/ScriptLibrary/facs-preview.js"></script>
-    <script src="{{page.rel_url}}/ScriptLibrary/Br1.js"></script>
-	  <script src="{{page.rel_url}}/ScriptLibrary/text-classes.js"></script>
-	  <script src="{{page.rel_url}}/ScriptLibrary/classes.js"></script>
-	  <script src="{{page.rel_url}}/ScriptLibrary/music-parser.js"></script>
-	  <script src="{{page.rel_url}}/ScriptLibrary/parser.js"></script>
-    <script src="{{page.rel_url}}/ScriptLibrary/editor.js"></script>
-    
-      <!-- funcionality scripts -->
-  <script src="getMusic.js" type="text/javascript"></script>
-  <script src="menu.js" type="text/javascript"></script>
-  
-</head>
+        <link href="{{page.rel_url}}/css/cpw.css" rel="stylesheet" type="text/css" />
 
-<body>
-<div class="container">
-    {% include cpw_header.html %}
-	{% include cpw_menu.html %}
-    {{ content }}
-  <!-- end .container --></div>
-  <script type="text/javascript">
-		var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"{{page.rel_url}}/SpryAssets/SpryMenuBarDownHover.gif", imgRight:"{{page.rel_url}}/SpryAssets/SpryMenuBarRightHover.gif"});
-		var Accordion1 = new Spry.Widget.Accordion("Accordion1");
-  </script>
-</body>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300&family=Barlow+Condensed:wght@300&family=El+Messiri&family=Yanone+Kaffeesatz:wght@300&display=swap" rel="stylesheet"> 
+
+        <!-- music editor styles -->
+        <link type="text/css" rel="stylesheet" href="{{page.rel_url}}/ScriptLibrary/jt-editor-v.css" />
+        <!--<link type="text/css" rel="stylesheet" href="../ScriptLibrary/GUI-print.css" media="print"/>-->
+        <link type="text/css" rel="stylesheet" href="{{page.rel_url}}/ScriptLibrary/buttons.css" />
+
+    </head>
+
+    <body class="cpw">
+        {% include cpw_menu.html %}
+        <div class="container-fluid">
+            {{ content }}
+        <!-- end .container -->
+        </div>
+    </body>
 </html>

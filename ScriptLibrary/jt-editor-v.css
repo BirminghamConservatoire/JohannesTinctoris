@@ -510,6 +510,20 @@ p.colend.columnPara {
   margin-right: 12px;
 } 
 
+.col.musicPart {
+  fill: #000;
+  color: #000;
+  text-align: left;
+  font-weight: normal;
+  font-size: medium;
+  margin: 0px;
+  padding: 0px;
+}
+
+.musicPart {
+  overflow-y:auto;
+}
+
 .pag {
   font-size: 130%;
 }
@@ -628,7 +642,7 @@ p.colend.columnPara {
   border: 1px dotted #663;
   background-color: #DDDDCC;
 }
-.tooltip, .popup {
+.edition .tooltip, .popup {
 		/* display:none; */
 		background-color:#ffa;
     z-index: 180;
@@ -640,7 +654,7 @@ p.colend.columnPara {
 		box-shadow: 2px 2px 11px #666;
 /*    cursor: none;*/
 }
-.tooltip.clicked, .popup.clicked {
+.edition .tooltip.clicked, .popup.clicked {
 	padding-right:25px;
 }
 
@@ -849,11 +863,16 @@ tspan.tspanSup {
   display: block;
   line-height: 0.5;
 }
-.textblock {
+.musicPart .textblock {
   /* font-size: 120%; */
+  font-family: 'Barlow Condensed', sans-serif;
 }
 .part.textblock {
+  font-style: italic;
+}
+.musicPart .part.textblock {
 		font-style: italic;
+    font-size: large;
 }
 .textblock.r90a, .textblock.r90c {
   font-size: 95%;

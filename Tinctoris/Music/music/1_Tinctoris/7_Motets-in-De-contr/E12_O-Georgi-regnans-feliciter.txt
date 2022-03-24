@@ -1,0 +1,26 @@
+O Georgi regnans feliciter
+Editor: Jeffrey J. Dean
+Checked by:
+Date established:
+Base transcription: V
+Sources:
+V	E-VAu 835, fols. 141v–142r	(impl.)	ttt
+BU	I-Bu 2573, fol. 163r	(impl.)	ttt
+Br1	B-Br II 4147 Mus., fols. 98vb–99rb	(impl.)	ttt
+<piece: {mensural: void}, {staf: "5" BU Br1 : "6" V, black}>
+<part: {var="Supremum" (ed.) : (om.) V BU Br1}>
+<pars>
+{clef: C4} {solm: 0} {mens: O5}  md<text>O</text>. {var="se" V Br1 : "me" BU} mf mf <text>Geor-</text> mg fg ff fe fd sc sd me mf Sd mc Sd <text>gi</text> Pm13 mdd<text>regnans</text>. saa mdd {var=(ins.) "{staf: 4} {clef: C4} {solm: 0}" Br1} Sbb mg maa mbb. faa fbb mcc mbb<text>feli-</text>. saa mg. ff fe mf mbb{var="{red}-?" V BU : (om.) Br1}. sg<text>ci-</text>. ff fe fd sg. ff {var=(ins.) "{staf: 5} {clef: C4} {solm: 0}" V} Sd <text>ter{.,} Ora</text> Sg maa mf Se sf{var="{red}-?" V BU : (om.) Br1}. fg saa sbb mcc Saa <text>Deum</text> mg Saa Pm9 <lig><text>pro nobis</text><obl>Saa Sf</obl></lig> {var="md" V^c BU Br1 : "me" V^*}  {var=(ins.) "{staf: 5} {clef: C6} {solm: 0}" Br1} mg sf sd maa. sg sf se maa sf <text>iugi-</text> se md. {var="fc fb" V Br1 : "sc sb" BU} mc Ld <text>ter.</text> ||
+</pars>
+</part>
+{staf: "5" BU Br1 : "6" V} <part: Tenor>
+<pars>
+{clef: C10} {solm: 0} {mens: O5} BD <text>O Geor-</text> SE mF mG ma mF SE BD <text>gi</text> Pm7 mG<text>regnans feliciter{.,}</text>. sD mG mE mF SG ma md. sc mb Sa BG{var="{red}?" V BU : (om.) Br1} Pm7 mG<text>Ora</text>. sa sb sc ma md. fc fb mc Sd{var="{red}?" V BU : (om.) Br1} <text>Deum</text> ma mc Sb Ba{var="{red}?" V BU : (om.) Br1} SF <text>pro nobis</text> SD mE mF mD ma<text>iugiter.</text>. sG sF sE ma mF SE LD ||
+</pars>
+</part>
+{staf: 5} <part: Contratenor>
+<pars>
+{clef: "C10" V BU : "C8" Br1} {solm: 0} {mens: O9} Sa <text>O Geor-</text> md. sc mb mG ma mb mc ma. fG fF mG <text>gi</text> Sa md<text>regnans</text>. sa {var=(ins.) "{staf: 5} {clef: C10} {solm: 0}" Br1} md sb sc md mb<text>feliciter{.,}</text>. sc ma md mG mF {var="<lig><obl>SG. SD</obl></lig> <lig><obl>Sd Sb.</obl></lig>" V BU : "<lig>SG. SD</lig> Sd Sb." Br1} mb<text>Ora</text>. sa sG fF fE mF mD Sa mD <text>{var="Deum" V Br1 : (om.) BU} pro nobis {var=(ins.) "de- um" BU}</text> mF. sG ma SE {var=(ins.) "{staf: 4} {clef: C10} {solm: 0}" Br1} mF{var="{red}-?" V BU : (om.) Br1} <lig><obl>Sa SF</obl></lig> mD. sEmF mC mD mF mD ma. <text>iugi-</text> sb mc ma. fG fF mG <text>ter.</text> La ||
+</pars>
+</part>
+</piece>

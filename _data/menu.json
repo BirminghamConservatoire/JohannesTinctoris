@@ -1,0 +1,442 @@
+{
+  "menu":
+  [
+    {
+      "id": "home",
+      "label": "Home",
+      "url": "index.html"
+    },
+    {
+      "id": "tinctoris",
+      "label": "Tinctoris",
+      "items":
+      [
+        {
+          "id": "tincMissaLhommeArmee",
+          "label": "Missa L'homme armé",
+          "file": "music/1_Tinctoris/1_Missa-Lhomme-arme/1a_Kyrie.txt",
+          "parts":
+          [
+            {
+              "id": "tincMissaLhommeArmee-Kyrie",
+              "label": "Kyrie",
+              "file": "music/1_Tinctoris/1_Missa-Lhomme-arme/1a_Kyrie.txt"
+            },
+            {
+              "id": "tincMissaLhommeArmee-Gloria",
+              "label" : "Gloria",
+              "file" : "music/1_Tinctoris/1_Missa-Lhomme-arme/1b_Gloria.txt"
+            },
+            {
+              "id": "tincMissaLhommeArmee-Credo",
+              "label" : "Credo",
+              "file" : "music/1_Tinctoris/1_Missa-Lhomme-arme/1c_Credo.txt"
+            },
+            {
+              "id": "tincMissaLhommeArmee-Sanctus",
+              "label" : "Sanctus",
+              "file" : "music/1_Tinctoris/1_Missa-Lhomme-arme/1d_Sanctus.txt"
+            },
+            {
+              "id": "tincMissaLhommeArmee-Agnus",
+              "label" : "Agnus Dei",
+              "file" : "music/1_Tinctoris/1_Missa-Lhomme-arme/1e_Agnus.txt"
+            }
+          ]
+        },
+        {   
+          "id": "tincMissaPrimiToni",
+          "label" : "Missa [primi toni]",
+          "file" : "music/1_Tinctoris/2_Missa-primi-toni/2a_Gloria.txt",
+          "parts" : 
+          [
+            {
+              "id": "tincMissaPrimiToni-Gloria",
+              "label" : "Gloria",
+              "file" : "music/1_Tinctoris/2_Missa-primi-toni/2a_Gloria.txt"
+            },
+            {
+              "id": "tincMissaPrimiToni-Credo",
+              "label" : "Credo",
+              "file" : "music/1_Tinctoris/2_Missa-primi-toni/2b_Credo.txt"
+            },
+            {
+              "id": "tincMissaPrimiToni-Sanctus",
+              "label" : "Sanctus",
+              "file" : "music/1_Tinctoris/2_Missa-primi-toni/2c_Sanctus.txt"
+            }
+          ]
+      },
+      {   
+        "id": "tincMissaSecundiToniIrr",
+        "label" : "Missa [secundi toni irregularis]",
+        "file" : "music/1_Tinctoris/3_Missa-secundi-toni-irr/3a_Kyrie.txt",
+        "parts" : 
+        [
+          {
+            "id": "tincMissaSecundiToniIrr-Kyrie",
+            "label": "Kyrie",
+            "file": "music/1_Tinctoris/3_Missa-secundi-toni-irr/3a_Kyrie.txt"
+          },
+          {
+            "id": "tincMissaSecundiToniIrr-Gloria",
+            "label" : "Gloria",
+            "file" : "music/1_Tinctoris/3_Missa-secundi-toni-irr/3b_Gloria.txt"
+          },
+          {
+            "id": "tincMissaSecundiToniIrr-Credo",
+            "label" : "Credo",
+            "file" : "music/1_Tinctoris/3_Missa-secundi-toni-irr/3c_Credo.txt"
+          },
+          {
+            "id": "tincMissaSecundiToniIrr-Sanctus",
+            "label" : "Sanctus",
+            "file" : "music/1_Tinctoris/3_Missa-secundi-toni-irr/3d_Sanctus.txt"
+          },
+          {
+            "id": "tincMissaSecundiToniIrr-Agnus",
+            "label" : "Agnus Dei",
+            "file" : "music/1_Tinctoris/3_Missa-secundi-toni-irr/3e_Agnus.txt"
+          }
+        ]
+      },
+      {   
+        "id": "tincMissaQuintiToniIrr",
+        "label" : "Missa [quinti toni irregularis]",
+        "file" : "music/1_Tinctoris/4_Missa-quinti-toni-irr/4a_Kyrie.txt",
+        "parts" : 
+        [
+          {
+            "id": "tincMissaQuintiToniIrr-Kyrie",
+            "label": "Kyrie",
+            "file": "music/1_Tinctoris/4_Missa-quinti-toni-irr/4a_Kyrie.txt"
+          },
+          {
+            "id": "tincMissaQuintiToniIrr-Gloria",
+            "label" : "Gloria",
+            "file" : "music/1_Tinctoris/4_Missa-quinti-toni-irr/4b_Gloria.txt"
+          },
+          {
+            "id": "tincMissaQuintiToniIrr-Credo",
+            "label" : "Credo",
+            "file" : "music/1_Tinctoris/4_Missa-quinti-toni-irr/4c_Credo.txt"
+          },
+          {
+            "id": "tincMissaQuintiToniIrr-Sanctus",
+            "label" : "Sanctus",
+            "file" : "music/1_Tinctoris/4_Missa-quinti-toni-irr/4d_Sanctus-Benedictus.txt"
+          },
+          {
+            "id": "tincMissaQuintiToniIrr-Agnus",
+            "label" : "Agnus Dei",
+            "file" : "music/1_Tinctoris/4_Missa-quinti-toni-irr/4e_Agnus-Dei.txt"
+          }
+        ]
+      },
+      {
+        "id": "tincLamentations",
+        "label": "Lamentations",
+        "file":"music/1_Tinctoris/5_Lamentations/5a_Lamentationes-Aleph.txt",
+        "parts":
+        [
+          {
+            "id": "tincLamentAleph",
+            "label": "Aleph",
+            "file":"music/1_Tinctoris/5_Lamentations/5a_Lamentationes-Aleph.txt"
+          },
+          {
+            "id": "tincLamentBeth",
+            "label": "Beth",
+            "file":"music/1_Tinctoris/5_Lamentations/5b_Lamentationes-Beth.txt"
+          },
+          {
+            "id": "tincLamentGimel",
+            "label": "Gimel",
+            "file":"music/1_Tinctoris/5_Lamentations/5c_Lamentationes-Gimel.txt"
+          },
+          {
+            "id": "tincLamentIerusalem",
+            "label": "Ierusalem convertere",
+            "file":"music/1_Tinctoris/5_Lamentations/5d_Lamentationes-Ierusalem-convertere.txt"
+          }
+        ]
+      },
+      {
+        "id": "tincMotets",
+        "label": "Motets",
+        "parts":
+        [
+          {
+            "id": "tincDifficilesAlios",
+            "label": "Difficiles alios delectat pangere cantus",
+            "file": "music/1_Tinctoris/6_Motets/6_Difficiles-alios-delectat-pangere-cantus.txt"
+          },
+          {
+            "id": "tincOVirgoMiserere",
+            "label": "O virgo miserere mei",
+            "file": "music/1_Tinctoris/6_Motets/7_O-Virgo-miserere-mei.txt"
+          },
+          {
+            "id": "tincVirgoDeiThrono",
+            "label": "Virgo Dei throno digna",
+            "file": "music/1_Tinctoris/6_Motets/8_Virgo-Dei-throno-digna.txt"
+          }
+        ]
+      },
+      {
+        "id":"tincDeContr",
+        "label": "Motets in De contr.",
+        "parts":
+        [
+          {
+            "id":"tincAll1",
+            "label":"Alleluia 1",
+            "file":"music/1_Tinctoris/7_Motets-in-De-contr/E1_Alleluia1.txt"
+          },
+          {
+            "id":"tincAll2",
+            "label":"Alleluia 2",
+            "file":"music/1_Tinctoris/7_Motets-in-De-contr/E2_Alleluia2.txt"
+          },
+          {
+            "id":"tincAll3",
+            "label":"Alleluia 3",
+            "file":"music/1_Tinctoris/7_Motets-in-De-contr/E3_Alleluia3.txt"
+          },
+          {
+            "id":"tincAll4",
+            "label":"Alleluia 4",
+            "file":"music/1_Tinctoris/7_Motets-in-De-contr/E4_Alleluia4.txt"
+          },
+          {
+            "id":"tincBeatissima",
+            "label":"Beatissima Beatrix",
+            "file":"music/1_Tinctoris/7_Motets-in-De-contr/E5_Beatissima-Beatrix.txt"
+          },
+          {
+            "id":"tincDeoGratias",
+            "label":"Deo gratias",
+            "file":"music/1_Tinctoris/7_Motets-in-De-contr/E6_Deo-gratias.txt"
+          },
+          {
+            "id":"tincKaterina",
+            "label":"Katerina, sponsa Dei",
+            "file":"music/1_Tinctoris/7_Motets-in-De-contr/E7_Katerina-sponsa-Dei.txt"
+          },
+          {
+            "id":"tincLauda",
+            "label":"Lauda Sion",
+            "file":"music/1_Tinctoris/7_Motets-in-De-contr/E8_Lauda-Sion.txt"
+          },
+          {
+            "id":"tincMagneDoctor",
+            "label":"Magne doctor Augustine",
+            "file":"music/1_Tinctoris/7_Motets-in-De-contr/E9_Magne-doctor-Augustine.txt"
+          },
+          {
+            "id":"tincMartine",
+            "label":"Martine, presul inclyte",
+            "file":"music/1_Tinctoris/7_Motets-in-De-contr/E10_Martine-presul-inclyte.txt"
+          },
+          {
+            "id":"tincODeus",
+            "label":"O Deus, princeps celorum",
+            "file":"music/1_Tinctoris/7_Motets-in-De-contr/E11_O-Deus-princeps-celorum.txt"
+          },
+          {
+            "id":"tincOGoergi",
+            "label":"O Georgi regnans feliciter",
+            "file":"music/1_Tinctoris/7_Motets-in-De-contr/E12_O-Georgi-regnans-feliciter.txt"
+          },
+          {
+            "id":"tincOMater",
+            "label":"O mater Dei memento mei",
+            "file":"music/1_Tinctoris/7_Motets-in-De-contr/E13_O-mater-Dei-memento-mei.txt"
+          },
+          {
+            "id":"tincOmnesSancti",
+            "label":"Omnes sancti gloriosi",
+            "file":"music/1_Tinctoris/7_Motets-in-De-contr/E14_Omnes-sancti-gloriosi.txt"
+          },
+          {
+            "id":"tincQuiRegnas",
+            "label":"Qui regnas in celestibus",
+            "file":"music/1_Tinctoris/7_Motets-in-De-contr/E15_Qui-regnas-in-celestibus.txt"
+          },
+          {
+            "id":"tincSalveMatryr",
+            "label":"Salve martyr virgoque Barbara",
+            "file":"music/1_Tinctoris/7_Motets-in-De-contr/E16_Salve-martyr-virgoque-Barbara.txt"
+          },
+          {
+            "id":"tincSancteJoannes",
+            "label":"Sancte Joannes Baptista",
+            "file":"music/1_Tinctoris/7_Motets-in-De-contr/E17_Sancte-Joannes-Baptista.txt"
+          },
+          {
+            "id":"tincSantus",
+            "label":"Sanctus",
+            "file":"music/1_Tinctoris/7_Motets-in-De-contr/E18_Sanctus.txt"
+          },
+          {
+            "id":"tincVirginis",
+            "label":"Virginis Marie laudes",
+            "file":"music/1_Tinctoris/7_Motets-in-De-contr/E19_Virginis-Marie-laudes.txt"
+          }
+        ]
+      },
+      {
+        "id":"tincSongs",
+        "label":"Songs",
+        "parts":
+        [
+          {
+            "id":"tincHelas",
+            "label":"Helas le bon temps",
+            "file":"music/1_Tinctoris/8_Songs/9_Helas-le-bon-temps.txt"
+          },
+          {
+            "id":"tincOInvida",
+            "label":"O invida Fortuna Nemica d’ogni pace",
+            "file":"music/1_Tinctoris/8_Songs/10_O-invida-fortuna.txt"
+          },
+          {
+            "id":"tincVostreRegart",
+            "label":"Vostre regart si tresfort m’a feru",
+            "file":"music/1_Tinctoris/8_Songs/11_Vostre-regart.txt"
+          }
+        ]
+      },
+      {
+        "id":"tincChansonArrs",
+        "label": "Chanson arragements",
+        "parts":
+        [
+          {
+            "id":"tincCommeFemme",
+            "label":"Comme femme",
+            "file":"music/1_Tinctoris/9_Chanson-arrangements/12_Comme-femme.txt"
+          },
+          {
+            "id":"tincDeTous",
+            "label":"De tous biens playne",
+            "file":"music/1_Tinctoris/9_Chanson-arrangements/13_De-tous-biens-playne.txt"
+          },
+          {
+            "id":"tincDungAultre",
+            "label":"D’ung aultre amer",
+            "file":"music/1_Tinctoris/9_Chanson-arrangements/14_Dung-aultre-amer.txt"
+          },
+          {
+            "id":"tincLeSouv4v",
+            "label":"Le souvenir 4vv",
+            "file":"music/1_Tinctoris/9_Chanson-arrangements/15_Le-souvenir_4vv.txt"
+          },
+          {
+            "id":"tincLeSouv2v",
+            "label":"Le souvenir 2vv",
+            "file":"music/1_Tinctoris/9_Chanson-arrangements/16_Le-souvenir_2vv.txt"
+          },
+          {
+            "id":"tincToutPar",
+            "label":"Tout a par moy",
+            "file":"music/1_Tinctoris/9_Chanson-arrangements/17_Tout-a-par-moy.txt"
+          }
+        ]
+      }
+      ]
+    },
+    {
+      "id": "dufay",
+      "label": "Du Faÿ",
+      "items":[
+        {
+          "id": "dufayMissaLhommeArmee",
+          "label": "Missa L'homme armé",
+          "file": "music/2_Dufay/D1_Missa-Lhomme-arme/D1a_Missa-Lhomme-arme_Kyrie.txt",
+          "parts":
+          [
+            {
+              "id": "dufayMissaLhommeArmee-Kyrie",
+              "label": "Kyrie",
+              "file": "music/2_Dufay/D1_Missa-Lhomme-arme/D1a_Missa-Lhomme-arme_Kyrie.txt"
+            },
+            {
+              "id": "dufayMissaLhommeArmee-Gloria",
+              "label": "Gloria",
+              "file": "music/2_Dufay/D1_Missa-Lhomme-arme/D1b_Missa-Lhomme-arme_Gloria.txt"
+            },
+            {
+              "id": "dufayMissaLhommeArmee-Credo",
+              "label": "Credo",
+              "file": "music/2_Dufay/D1_Missa-Lhomme-arme/D1c_Missa-Lhomme-arme_Credo.txt"
+            },
+            {
+              "id": "dufayMissaLhommeArmee-Sanctus",
+              "label": "Sanctus",
+              "file": "music/2_Dufay/D1_Missa-Lhomme-arme/D1d_Missa-Lhomme-arme_Sanctus.txt"
+            },
+            {
+              "id": "dufayMissaLhommeArmee-Agnus",
+              "label": "Agnus Dei",
+              "file": "music/2_Dufay/D1_Missa-Lhomme-arme/D1e_Missa-Lhomme-arme_Agnus.txt"
+            }
+          ]
+        },
+        {
+          "id":"dufaySalveRegina",
+          "label":"Salve regina",
+          "file":"music/2_Dufay/D3_Salve-regina.txt"
+        },
+        {
+          "id":"dufaySupremum",
+          "label":"Supremum est mortalibus",
+          "file":"music/2_Dufay/D4_Supremum-est-mortalibus.txt"
+        }
+      ]
+    },
+    {
+      "id": "busnoys",
+      "label": "Busnoys",
+      "items":[
+        {
+          "id":"busnoysAnimaMea",
+          "label":"Anima mea liquefacta est / Stirps Jesse",
+          "file":"music/3_Busnoys/2_Anima-mea-Stirps-Jesse/B2_Anima-mea-Stirps-Jesse.txt"
+        },
+        {
+          "id":"busnoysConditor",
+          "label":"Conditor alme siderum",
+          "file":"music/3_Busnoys/4_Conditor-alme-siderum/B4_Conditor-alme-siderum.txt"
+        }
+      ]
+    },
+    {
+      "id": "about",
+      "label": "About",
+      "items":
+      [
+        {
+          "id": "aboutCPW",
+          "label": "About JT:CPW",
+          "url": "about.html"
+        },
+        {
+          "id": "project",
+          "label": "Project",
+          "url": "project.html"
+        },
+        {
+          "id": "team",
+          "label": "Team",
+          "url": "team.html"
+        },
+        {
+          "id": "funding",
+          "label": "Funding",
+          "url":"funding.html"
+        }
+      ]
+    }
+  ]
+}

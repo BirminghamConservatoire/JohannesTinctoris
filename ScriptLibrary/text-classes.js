@@ -778,7 +778,7 @@ function Paragraph(suppressNodeNumbers){
         this.content[i].reset();
 				if(MEILinks && standalone){
 					try {
-						var anchor = DOMAnchor('MEI', 'link-ex'+this.counter, 'MEI', "data:application/xml;base64,"+btoa(this.content[i].toMEI().serialize()));
+						var anchor = DOMAnchor('MEI', 'link-ex'+this.counter, 'MEI', URL.createObjectURL(this.content[i].toMEI().blobify()));
 						anchor.setAttributeNS(null, 'download', (curDoc.shortTitle || curDoc.title).replace(/\s+/, '-') + '--' + roman(this.book).toUpperCase()+'-'+roman(this.chapter)+'-'+'ex'+(this.content[i].exampleno+1)+'.mei');
 						para.appendChild(anchor);
 					}

@@ -1,0 +1,22 @@
+﻿D’ung aultre amer
+Johannes Tinctoris
+Editor: Jeffrey J. Dean
+Checked by:
+Date established: 20 January 2022
+Base transcription: Seg
+Sources:
+Seg	E-SE s.s., fol. CC.iiij r	Johannes tinctoris	ii
+Per	I-PEc 1013, fols. 89v–90r	—	--
+Bo2	I-Bc A 71, p. 297	—	ii
+<piece: {mensural: void}, {staf: 5, black}>
+<part: {var="Contrapunctus" (ed.) : "Cantus" Per : (om.) Seg Bo2}>
+<pars>
+{clef: C4} {solm: bbb} {mens: c8} <label: 14>Duo</label> Bg <text>D’ung aultre {var="amer" Seg : (om.) Bo2}</text> Saa mg mbb. scc **Bo2 presents flagged void semiminims and fuse throughout this section, probably owing to a misunderstanding of the notation of the final section.** sdd see mdd scc sdd see sdd scc sbb saa sg maa sbb saa sg sf sg sf se sd md Sdd mcc mbb mdd. scc mbb scc sbb saa sg sf se mf sg sf se sd sc sd se sf sd se sf sg se sf sg ff fg saa sbb mcc sdd scc sbb saa {var="Sbb" Seg Per Bo2^c : "mbb" Bo2^*} mg mcc. sbb saa sg mbb saa sg maa Sbb maa sbb saa sg sf Se {var="{mens: Ø5}" (ed.) : (om.) Seg Per Bo2}{var="{prop: 3/2, 3-5}" Bo2 : "{prop: 3, 5}" Seg Per} <label>{var=(ins.) "Sexquialtera tre semibreve per battere." Per}</label> md me mf me mf mg mf me md md mc md <full>{var="<lig><obl>Se Sb</obl></lig>" Seg Per : "<lig>Se Sb</lig>" Bo2} Sc</full> {var="{mens: C5}{prop: 4/3, 3-5}" (ed.) : "{mens: Q5}" Seg Per Bo2} <label>{var=(ins.) "Sexquitertia quattro semibreve per battere." Per}</label> Md PL5-7 mbb mcc Sdd mee mdd mcc mbb {var="Sbb Scc" Seg Per : "<lig>Sbb Scc</lig>" Bo2} mdd mcc mbb mcc Bdd Sdd Bdd Scc <lig><obl>Sdd Sbb</obl></lig> mcc mbb maa mg maa mg mf me md me mf mg mf mg Saa mbb maa mg mf Bg Saa <lig>Bf Baa</lig> <lig>Bbb Bcc</lig> <full>Bdd {var="Scc" Seg Per Bo2^c : "mcc" Bo2^*}</full> Sdd mee mdd mcc mbb Saa mg maa Lbb PL9-11 <label>{var=(ins.) "Sexquialtera tre semibreve [sic: breve] per battere." Per}</label> <full> <lig>Mbb Laa</lig> {var="Lg Bcc." Seg Bo2 : "<lig>Lg Bcc.</lig>" Per} Sbb Baa Sg Saa {var="<lig><obl>Sbb Saa</obl></lig>" Per Bo2 : "Sbb Saa" Seg} {var="<lig><obl>Sbb Sg</obl></lig>" Per : "<lig>Sbb Sg</lig>" Bo2 : "Sbb Sg" Seg} maa mg mf me Bd Bf. Sg Baa <lig>Sg <obl>Sf Be</obl></lig> </full> {mens: "ç5" (ed.) : "c5" Seg Per Bo2} <label>{var=(ins.) "Improlatione." Per}</label> <void> sd **Seg presents full semiminims throughout this section; the flagged void semiminims in Per Bo2 imply major prolation (as indicated by the annotation in Per), with minims equivalent to those of the Tenor, as Tinctoris insisted.** se mf mg maa sbb scc mdd see sdd scc sbb scc sbb saa sg mf se sf </void> Lg {var="||" Seg Bo2 : "||||||" Per}
+</pars>
+</part>
+{staf: 5} <part: {var="Tenor" Per Bo2 : "/t/" Seg}>
+<pars>
+{clef: C10} {solm: bb} {mens:c6} {var="SG. mE" Seg : "<full>BG SE</full>" Per Bo2} <text>D’ung {var="aultre amer" Seg : (om.) Bo2}</text> {var="<lig>SF SG</lig>" Per Bo2 : "SF SG" Seg} {var="<lig>Bb Bc</lig>" Seg Bo2 : "Bb Bc" Per} {var="Sd. mc" Seg : "<full>Bd Sc</full>" Per Bo2} **The full notation here and at the beginning of the Tenor, as in Per Bo2, seems to have been Okeghem’s original, but Tinctoris would have interpreted that strictly as sesquialtera (3 semibreves in the time of 2), and the counterpoint here is better with the dotted rhythm, so that has been adopted from Seg in both places.** {var="<lig>Sb Sa <obl>BG BD</obl></lig>" Per Bo2 : "<lig><obl>Sb Sa</obl></lig> BG BD" Seg} {var="<lig><obl>Sb Sa</obl></lig>" Per : "<lig>Sb Sa</lig>" Bo2 : "Sb Sa" Seg} {var="<lig><obl>Sb SG</obl></lig>" Per Bo2 : "Sb SG" Seg} mF SF {var="sE sF" Per Bo2 : "mE" Seg} SG {var="BC" Seg Per Bo2^c : "BD" Bo2^*} SG mF SG {var="sF sE" Per Bo2 : "mE" Seg} mF mD SC BG {var="<lig>SD SF <obl>BE BD</obl></lig>" Bo2 : "<lig>SD SF</lig> cE {clef: C10} {solm: bb} <lig><obl>BE BD</obl></lig>" Per : "<lig>SD <obl>SF BE</obl></lig> BD" Seg} Bb Sc Sc <lig>Bd Be</lig> Sd Bf Sb <lig>Ba Bb</lig> {var="<lig><obl>Sf Se</obl></lig>" Per Bo2 : "Sf Se" Seg} Sf Bd Se {var="Sf Sb Bc Sb. ma SG SF BG <lig>BD BE BF BG</lig>" Seg : "Sf Sb <lig><obl>Bc <full>Bb</obl></lig> Sa</full> <lig><obl>SG SF</obl> <obl>BG BD</obl></lig> <lig>BE BF</lig> BG" Per : "<lig>Sf Sb <obl>Bc <full>Bb</obl></lig> Sa</full> <lig><obl>SG SF</obl> BG BD BE</lig> <lig>BF BG</lig>" Bo2} {var="<lig><obl>Sb Sa</obl> Bc</lig>" Seg Bo2 : "<lig><obl>Sb Sa</obl></lig> cc {clef: C10} {solm: bb} Bc" Per} Sd mb mc md. sc ma SG mb Sa LG {var="||" Bo2 : "|||" Seg : "|||||" Per}
+</pars>
+</part>
+</piece>

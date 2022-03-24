@@ -1,0 +1,36 @@
+Deo gratias
+Editor: Jeffrey J. Dean
+Checked by:
+Date established: 24 September 2020
+Base transcription: V
+Sources:
+V	E-VAu 835, fols. 123v–124r	(impl.)	ttttt
+BU	I-Bu 2573, fols. 142v–143r	(impl.)	ttttt
+Br1	B-Br II 4147 Mus., fols. 85va–86rb	(impl.)	ttttt
+<piece: {mensural: void}, {staf: "5" BU Br1 : "6" V, black}>
+<part: {var="Supremum" (ed.) : (om.) V BU Br1}>
+<pars>
+{clef: C4} {solm: bbb} {mens: O9} PL7-9 <lig><text>De{var=(ins.) "o" BU}-</text> <obl>Sg Se</obl></lig> md mg. saa sg ff fe sf sg Saa mbb mcc. fbb faa Sg Pm9 mg. sd mg mf. saa. fg saa sf. {var="fe" V Br1 : "{void}se" BU} Sg mbb. scc Sdd Pm13 mdd mcc. fbb faa mg. saa sbb scc {var=(ins.) "{staf: 5} {clef: C4} {solm: 0}" BU} mdd. scc saa sbb {var=(ins.) "{staf: 5} {clef: C4} {solm: bbb}" V : "{staf: 4} {clef: G6} {solm: bbb}" Br1} mcc mg mcc. sbb Saa Pm9 maa Sbb mbb sg mcc sbb mg maa Sg mcc. fbb faa mbb Bcc Pm11 mcc mdd. scc sbb saa Saa mg <text>{var="o" V Br1 : (transp.) BU}</text> Saa Pm11 mcc <text>{var="gra -" V : (transp.) BU Br1}{var=(ins.) "gra-" BU Br1}</text> Sdd mg mcc. sbb saa sg Sg. me md {var=(ins.) "{staf: 5} {clef: C4} {solm: bbb}" BU} {var="mdd. scc sbb" V BU^c Br1 : "mbb. saa sg" BU^*} <text>{var=(ins.) "ti-" BU}</text> saa {var=(ins.) "{staf: 5} {clef: C4} {solm: bbb}" Br1} mg. ff fe mf sg saa. <text>{var="ti" V Br1 : (transp.) BU}as.</text> fg ff fe mf Lg {var="||" BU Br1 : "|" V}
+</pars>
+</part>
+{staf: "5" BU Br1 : "6" V} <part: Tenor>
+<pars>
+{clef: C8} {solm: bb} {mens: O5} PL5-7 <full>BG <text>{var="De -" V : (transp.) BU Br1}</text> <lig>Sb Sc Bd</lig></full> Sc. sb sa SG Sb Ba <text>{var=(ins.) "De-" Br1}</text> LG <lig><full>Bd <text>{var=(ins.) "Deo" BU}</text> Be Bf</full></lig> Bg {var=(ins.) "bc" BU} Se mc mb mc me {var=(ins.) "{staf: 6} {clef: C10} {solm: bb}" BU} Sd <text>{var=(ins.) "gra-" BU}</text> Bc <text>{var="o" V : (transp.) BU Br1}</text> Sa <text>{var="gra -" V : (transp.) BU Br1}</text>  mb. sc md mc Sb <text>{var=(ins.) "o gra-" Br1}</text> Ba Sb <lig>Bc <text>tias.</text> <full>BG <obl>Bb Ba</obl></full></lig> LG {var="||" BU Br1 : "|" V}**Begins like <italic>Ite missa est</italic> IX, GR 32*, LU 43 = <italic>Benedicamus Domino</italic> de B. V., AR 50*, LU 126 (= Kyrie IX “Cum jubilo”, GR 29*, LU 40), but diverges after 9 notes.**
+</pars>
+</part>
+{staf: "5" (ed.) : "6" V BU : "4" Br1} <part: Contratenor primus>
+<pars>
+{clef: "F10" V Br1 : "F12" BU} {solm: bB} {mens: O5} BGG <text>{var="De -" V : (transp.) Br1 : (om.) BU}</text> SD mE mD <lig>SGG SD</lig> mE mC. sD sE sF mG. sF SE BD SA SC. sB sA {var=(ins.) "{staf: 5} {clef: F10} {solm: bB}" BU} SGG BD <lig><full>LGG BC</full></lig> mB. sC SD <lig><obl>SC SA</obl></lig> BD SGG. mC. sD mE <text>{var=(ins.) "De-" Br1}</text> mF mG <lig><obl>SC SGG</obl></lig> {var=(ins.) "{staf: 5} {clef: F10} {solm: bB}" V Br1} mA mC. sB sA. fGG SA SGG <text>{var="o" Br1 : (om.) V BU}</text> PS3 SGG <text>{var="gra -" (ed.) : (transp.) Br1 : (om.) V BU}</text> mD. fC fB <text>{var=(ins.) "gra-" Br1}</text> <lig><obl>SA SGG</obl></lig> <lig><text>{var="tias." V Br1 : (om.) BU}</text> {full}LC BGG {full}BD</lig> LGG {var="||" Br1 : "|||" V : "|" BU}
+</pars>
+</part>
+{staf: "5" V Br1 : "6" BU} <part: Contratenor secundus>
+<pars>
+{clef: "C10" V Br1 : "C12" BU} {solm: "bb" Br1 : "0" V BU} {mens: O7} BG <text>{var="De -" V : (transp.) BU Br1}</text> Sa mG mF mG mb Sa mG mE. sD mC PS3 SG ma mF. sD sF sG ma mc. fb fa mG {var=(ins.) "{staf: 5} {clef: C10} {solm: bb}" V} mE. {var=(ins.) "bb" BU} sF SG ma md. sc ma mb. <text>{var=(ins.) "Deo" BU} {var=(ins.) "de-" Br1}</text> sc Sd Pm9 mb. sa mG. sF sE sD {var=(ins.) "{staf: 5} {clef: C10} {solm: bb}" BU} SE mD. sE SF SG Ba. mG. sD mG mE SC PS7 BG Pm7 <text>{var=(ins.) "gra-" BU}</text> mG mE. sa. fG fF fE mF mG mG. sD mF SG <text>{var="o" Br1 : (transp.) V BU}</text> Pm5 mD <text>{var="gra -" (ed.) : (transp.) V BU Br1 : "o" V}</text> sE mF sE sG. fF mD {var=(ins.) "{staf: 6} {clef: C12} {solm: bb}" Br1} sC mE sF SG mG. <text>{var=(ins.) "gra-" V}</text> fa fb <text>{var=(ins.) "gra-" Br1}</text> Sc <text>{var=(ins.) "tias" BU}</text> md. {var="sc sb" V^c BU Br1 : "fc fb" V^*} sa mG Pm7 mG <text>{var="tias." (ed.) : (transp.) V BU Br1}</text> ma sD mF sG ma <text>{var=(ins.) "tias." Br1}</text> mb. <text>{var=(ins.) "tias" V}</text> sc Ld {var="||" BU Br1 : "|" V}
+</pars>
+</part>
+{staf: "5" V BU : "6" Br1} <part: Contratenor {var="tertius" V BU : "Tercius" Br1}>
+<pars>
+{clef: C8} {solm: bb} {mens: O11} Bg <text>{var="De" V : (transp.) BU Br1}{var=(ins.) "o" V}-</text> Sf mg maa sg se sd mg sf sf se {var="Bg" V^c BU Br1 : "Lg" V^*} PB11 PL9-11 md mb. sc <text>{var=(ins.) "De-" Br1}</text> md mb. sa SG. mc. sd me Bf me mc. sd se sf {var=(ins.) "{staf: 5} {clef: C6} {solm: bb}" Br1} md md. sa md mb mG PS5 Sg mf {var="md me" V BU^c Br1 : "mb mc" BU^*} mg. <text>{var="o" Br1 : (transp.) V BU : "Deo gratias" BU}</text> sd {var=(ins.) "{staf: 5} {clef: C8} {solm: 0}" V} mg me mc PS7 Sc <text>{var="gra -" V : (transp.) BU Br1}</text> mb md. mf. {var=(ins.) "{staf: 5} {clef: C8} {solm: 0}" BU} md. se mf. fe fd {var="sc." BU Br1 : "mc." V} fa mc sb. fc md se <text>{var=(ins.) "gra-" Br1}</text> mg sf se sd {var=(ins.) "{staf: 5} {clef: C8} {solm: bb}" Br1} sc me sf mg. se. fd {var="sc" V^c BU Br1 : "fc" V^*} mb. sc <text>{var=(ins.) "tias" Br1}</text> md. sc sb sa mG Pm9 Sd. Sd <text>{var="tias." V : (transp.) BU Br1}</text> mb. sc Ld {full}^Lb {var="||" Br1 : "|" BU : (om.) V}
+</pars>
+</part>
+</piece>

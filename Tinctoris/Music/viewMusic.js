@@ -338,7 +338,8 @@ function addToggleParts(toggleParts)
         for(let partID of partIDs)
         {
             let partSwitchID = "switch" + partID;
-            let partLabel = $("#" + partID).attr("title");
+            //use partID and insert spaces at positions of camel casing
+            let partLabel = partID.replace(/(^\w+)([A-Z]{1})/, "$1 $2");
             let partSwitch = `<div class='form-check py-1'><input type='checkbox' class='form-check-input partSwitch' id='${partSwitchID}' checked><label class='form-check-label' for='${partSwitchID}'>${partLabel}</label></div>`;
 
             $("#partsForm").append(partSwitch);

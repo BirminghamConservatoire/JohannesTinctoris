@@ -29,7 +29,7 @@ Anna Plaksin is a digital musicologist specializing in music of the fifteenth an
 
 ## David Lewis (Researcher, 2017–19)
 
-<img src="../../Images/DL.jpg" alt="AP" class="float-left img-thumbnail mr-2">
+<img src="../../Images/DL.jpg" alt="DL" class="float-left img-thumbnail mr-2">
 David Lewis is a researcher at the University of Oxford e-Research Centre and a lecturer in the Department of Computing at Goldsmiths University of London. Trained as a historical musicologist, he has worked as a researcher on a range of digital musicology projects, investigating novel ways of publishing musical scholarship (e.g. _Unlocking Musicology_), corpus building (e.g. the _Electronic Corpus of Lute Music_), digital scholarly editions of music treatises (e.g. _Johannes Tinctoris: Complete Theoretical Works_) and works catalogues (Delius Catalogue of Works). Most recently, he has been working on musical arrangements for domestic use as part of the _Beethoven in the House_ project, with the Beethoven-Haus Bonn and the University of Paderborn. David has taught on both music and computing degree programmes, and helped design and deliver the Digital Musicology workshop at the Digital Humanities at Oxford Summer School.
 
 ## Emeritus Professor Ronald Woodley (Co-investigator, 2017–18)

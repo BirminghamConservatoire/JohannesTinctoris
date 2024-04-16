@@ -2110,7 +2110,8 @@ function chapterp(tag){
 }
 
 function columnp(tag){
-  return tag.match(/-[^\[\]]*-/);
+  // check for - ... - explicitly at the beginning and end of tag to make sure it's a columnp (AP 16.04.2024)
+  return tag.match(/^-[^\[\]]*-$/);
 }
 
 function parseColumn (colSpec, col){

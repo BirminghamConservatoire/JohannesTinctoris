@@ -1,0 +1,156 @@
+Complexus effectuum musices
+Translator: Jeffrey J. Dean
+Checked by:
+Date established: 22 March 2024
+<treatise>
+<title>An encompassing of the effects of music: published by master Johannes Tinctoris, licentiate in law and chaplain of the king of Sicily</title>
+<prologue>
+<heading>Prologue</heading>
+To the most illustrious lady Beatrice d’Aragona, most virtuous daughter of the king of Sicily, Jerusalem, and Hungary, Johannes Tinctoris, least among those professing the law and the mathematical arts, pledges undying service. It occurs to me, most blessed Beatrice, knowing with what ardent and what strenuous application you devote effort to the noble art of music, to expound succinctly to your Highness some of its remarkable effects. You should be stimulated by them (though I judge your mind to be very steadfast, like his from whom it drew its heavenly origin) never to desist from such a distinguished effort. I have undertaken this, too, moved no less by love of you than of the art. Certainly, as it is as welcome to me as can be that music, to which I have dedicated myself from a tender age, will be the study of such an illustrious, such an intelligent, and such a beautiful royal princess, so also I wish your mind to be always thoroughly purified from every sorrow by the help of this art that Plato declares to be the “most powerful” science of all, Quintilian the “most beautiful”, and Augustine “divine”. And you must not suppose that I intend all the effects of this “liberal and honorable” music (so Aristotle calls it) to be encompassed in this little work, but only twenty, which are:
+<table>
+Delighting God;
+    Adorning the praises of God;
+Increasing the joys of the blessed;
+    Making the Church Militant like the Triumphant;
+Preparing for acceptance of the divine blessing;
+    Stimulating minds to devotion;
+Dispelling sadness;
+    Softening hardness of heart;
+Putting the devil to flight;
+    Causing ecstasy;
+Lifting up the earthly mind;
+    Restraining ill will;
+Gladdening people;
+    Healing the sick;
+Lightening labours;
+    Rousing the spirits to battle;
+Enticing love;
+    Increasing the enjoyment of a banquet;
+Glorifying those skilled in it;
+    Blessing souls.
+</table>
+I have decided, too, to attest these admirable and (if I may say so) divine effects now by arguments, now by sacred authorities, now by the sayings of philosophers, historians, and poets (which are customarily sought “to establish belief”, according to Cicero), and I have set about to discuss them in due order of each so that they may be more plainly clear. And although you may recognize the abilities of a singer as unequal to this publication because it is difficult, concerning now theology, now philosophy, now poetry, surely you will hardly accuse me of the vice of presumption if you are not unaware that stretching for the difficult is appropriate to virtue.
+</prologue>
+<chapter>
+<heading>On the first effect of music. Chapter 1 [i].</heading>
+First: Music delights God. For it is a property of any artist to take delight in their art, especially when it is perfect. Whence, since God, who “does not create a work of imperfection” (as is held in the <citation>Decretals of Gregory IX</citation> in the chapter “Maiores”, “On baptism and its effect”), of old wrought this most perfect art, it must be maintained that by it above all he takes delight. Hence from his most beloved bride (whom the faithful believe to be the Church) he wishes to hear the sweetness of her voice, which music alone can accomplish. Indeed, through Solomon in the Song of songs, chapter 2, he addresses her thus: “let thy voice sound sweet in my ears”, and there follows, “for thy voice is sweet”, as if he would say, “Because thy voice is sweet (that is, melodious), I wish that it should sound in my ears.” And God would not wish to hear the sweetness of a voice if it did not delight him in any way.
+</chapter>
+<chapter>
+<heading>On the second effect. Chapter 2 [ii].</heading>
+Second: Music adorns the praises of God. Hence in the Church Triumphant, those devoting themselves to the ceaseless praises of God are said to sing them, so that they may be adorned the more. Whence John reports in Revelation, chapter 14, that a voice of people singing “as it were a new canticle before the throne” of God was “as the voice of harpers, harping on their harps”.
+Hence Virgil imagines those who were in the Elysian Fields as singing praises of Apollo, the god of wisdom. For in the <citation>Aeneid</citation>, book 6, he says of Aeneas, who had arrived in that place with the sibyl:
+<verse>Look, he observes others to right and left, eating<l/>on the grass and joyfully singing a paean in chorus.</verse>
+Likewise, priests under Evander used to sing praises in the Arcadian manner to the god Hercules, on which Virgil, again, says in book 8:
+<verse>Then the Salii are present around the burning altar<l/>to sing, heads wreathed with poplar branches,<l/>this chorus of youths, that of elders; they offer praises<l/>of Hercules and his deeds with song: (and the rest)</verse>
+And Numa Pompilius, the most pious founder of the Roman rites, wanted the Salii to adorn the praises of the gods with musical verses. Whence Quintilian in the <citation>Institutes of oratory</citation>, book 1: “The verses of the Salii also have their tune.”
+But these pertain to false religion. King David, however, cultivator of true religion, desiring to adorn the praises of God, instituted singers who descanted them before the ark of the covenant, on which in Ecclesiastes, chapter 47: “he set singers before the altar, and by their voices he made sweet melody”. Hence, seeking for the praises of God to be adorned by all different musical instruments, after he has said in the 146th Psalm, “to our God be joyful and comely praise”, he adds in the last one:
+<verse>Praise him with sound of trumpet;<l/>praise him with psaltery and harp.<l/>Praise him with timbrel and choir;<l/>praise him with strings and organs.<l/>Praise him on high sounding cymbals;<l/>praise him on cymbals of joy.<l/>Let every spirit praise the Lord!</verse>
+In the manner of this royal institution, Ambrose first ordained the praises of God in the Church Militant to be adorned with music. For which reason it has come about that at this time are found the most excellent singers free to apply themselves most carefully to the praises of God; the office of these singers, indeed, is the more excellent to the extent that God, whom they devoutly serve by singing, excels everything else.
+</chapter>
+<chapter>
+<heading>On the third effect. Chapter 3 [iii].</heading>
+Third: Music increases the joys of the blessed. For we believe blessedness to be a state completed by the accumulation of all good things; if the blessed have achieved it, the most delightful things that are good cannot be lacking to them. Whence, since (as the Philosopher [Aristotle] says in the <citation>Politics</citation>, book 8) music is “one of the most delightful things”, we infer by reason that the sweetness of musical concords increases their joys. Hence, since musical instruments signify the happiness of blessed spirits (as is clear through Ovid in the <citation>Metamorphoses</citation>, book 4, saying: “both lyres and pipes and song sound, the gladsome signs of merry minds”), painters, when they want to represent the joys of the blessed, depict angels sounding various musical instruments. The Church would not permit this unless it believed music to increase the joys of the blessed.
+Nor is it beside the point that Virgil imagined music being present among the joys of the Elysian Fields, which he calls “pleasant lawns, joyful places, fortunate groves, and blessed abodes”. Whence in the <citation>Aeneid</citation>, book 6, of those who were rejoicing together in those fields, he says this:
+<verse>Some stamp dances with their feet and sing songs.<l/>And also the Thracian priest [Orpheus] with his long robe<l/>accompanies with the measures of seven distinct pitches;<l/>now he strikes them with his fingers, now with an ivory plectrum.</verse>
+</chapter>
+<chapter>
+<heading>On the fourth effect. Chapter 4 [iv].</heading>
+Fourth: Music makes the Church Militant like the Triumphant. Whence Bernard on the Song of songs: “nothing on earth so displays the state of the heavenly dwelling-place as the joyfulness of those praising God”. Augustine writes in the same sense, saying in <citation>The city of God</citation>, book 17, chapter 14: “For the rational and measured harmony of diverse sounds in concordant variety indicates the compact unity of the well-ordered city of God.”
+</chapter>
+<chapter>
+<heading>On the fifth effect. Chapter 5 [v].</heading>
+Fifth: Music prepares for acceptance of the divine blessing. Whence in 4 Kings, chapter 3: “while the minstrel played, the hand of the Lord came upon Elisha”.
+</chapter>
+<chapter>
+<heading>On the sixth effect. Chapter 6 [vi].</heading>
+Sixth: Music stimulates minds to devotion. Whence Augustine in the <citation>Confessions</citation>, book 10: “I am inclined to approve of the custom of singing in church, so that through the delights of the ears a weaker mind may rise up to the accomplishment of devotion”.
+</chapter>
+<chapter>
+<heading>On the seventh effect. Chapter 7 [vii].</heading>
+Seventh: Music dispels sadness. Whence in James, chapter 5: “Is one of you sad? Let him pray with a patient mind and sing.” Hence Virgil says of Polyphemus in the <citation>Aeneid</citation>, book 3: “and a recorder, the solace of his woes, hangs from his neck”.
+And since sadness very often happens in love, music, with an inherent solace, is accustomed to dispel it. Whence Virgil, again, says about Orpheus, sad on account of the absence of Euridice, whom he ardently loved, consoling himself with his own instrument, in the <citation>Georgics</citation>, book 4:
+<verse>He, consoling his love-sickness with the hollow lyre,<l/>sang of thee, his sweet wife, thee by himself on the lonely shore,<l/>thee in the dawning day, and thee in the waning.</verse>
+</chapter>
+<chapter>
+<heading>On the eighth effect. Chapter 8 [viii].</heading>
+Eighth: Music softens hardness of heart. Whence Augustine in the <citation>Confessions</citation>, book 9: “I wept in thy hymns and canticles, bitterly moved by the sweetly sounding voices of thy Church”. Hence, since the Jewish people was “stiff necked” (witness the Lord in Exodus, chapter 32), the use of many musical instruments was necessary for them, by which the hardness of their hearts was softened, as is clear through St Thomas [Aquinas] in the Second part of the second part [of the <citation>Summa theologiae</citation>], question 91, article 2.
+And Orpheus, since he softened the hardness of rude and rustic minds by musical melody, “was said in the memory of posterity to have led not only wild animals but even stones and woods”: so Quintilian in the <citation>Institutes of oratory</citation>, book 1. Amphion is said to have done something similar to this, on which Horace in his <citation>Odes</citation>: “Amphion moved stones by singing”, and Statius in the <citation>Thebaid</citation>, book 1:
+<verse>                                                                with what song<l/>Amphion commanded the Tyrian mountains to be like walls.</verse>
+Nay more, the poets, in order to show the greater efficacy of music in respect of softening hardness of heart, imagine Orpheus himself as having moved both the gods and the judges and the monsters of the underworld with his song, on which Virgil in the <citation>Georgics</citation>, book 4, says:
+<verse>He entered the jaws of Taenarus, the deep entrance of Dis,<l/>and the grove, reeking with black horror,<l/>and approached the gods of the dead and the terrible king<l/>and the hearts that do not know how to be softened by human entreaties.<l/>And, moved by his song, the faint shades came from the deepest<l/>foundations of Erebus, ghosts of those deprived of light.</verse>
+And a little later follows:
+<verse>Nay, even the halls of Death and deepest Tartarus were stunned,<l/>and the Eumenides with their hair entwined with dark snakes,<l/>and Cerberus held his three mouths gaping,<l/>and Ixion’s wheel stood still with the underworld’s wind.</verse>
+</chapter>
+<chapter>
+<heading>On the ninth effect. Chapter 9 [ix].</heading>
+Ninth: Music puts the devil to flight. Whence in 1 Samuel, chapter 16: “David took his harp and played with his hand, and Saul was refreshed and was better, for the evil spirit departed from him”. On which some rhetorician has published these verses:
+<verse>King David calmed the wrath of the demon in Saul,<l/>Showing with a song the harp’s wonderful power.</verse>
+</chapter>
+<chapter>
+<heading>On the tenth effect. Chapter 10 [x].</heading>
+Tenth: Music causes ecstasy. Whence, after David sang in the 67th Psalm, “Princes went before joined with singing, in the midst of young damsels playing on timbrels”, a little later he added, “There is Benjamin a youth, in ecstasy of mind.” The Philosopher writes this about it in the <citation>Politics</citation>, book 8: “The melodies of [the 7th-century-BC Phrygian composer] Olympus make souls carried away”. As Quintilian reports in confirmation of this in the <citation>Institutes of oratory</citation>, book 1, “a piper, who had played a Phrygian tune for a sacrificing priest, is stated to be accused of having been the cause of his death, after he was driven mad and leapt off a cliff”.
+</chapter>
+<chapter>
+<heading>On the eleventh effect. Chapter 11 [xi].</heading>
+Eleventh: Music lifts up the earthly mind. Whence Bernard on the Song of songs: “The joyful song of praise lifts up the eyes of the heart.” The mind, indeed, is moved by the sweetness of harmony to contemplation of heavenly joys, which is the greatest part of the better life, and hence it forsakes thought of earthly things, which, pertaining to the active life, leads to anxiety and worry.
+</chapter>
+<chapter>
+<heading>On the twelfth effect. Chapter 12 [xii].</heading>
+Twelfth: Music restrains ill will. For, as Cicero says in his book <citation>On his deliberations</citation> and Quintilian repeats in the <citation>Institutes of oratory</citation>, book 1: “Pythagoras pacified some young men, who were stirred up to inflict violence on an inoffensive household, by telling the woman piper to change the rhythm to a spondee”.
+</chapter>
+<chapter>
+<heading>On the thirteenth effect. Chapter 13 [xiii].</heading>
+Thirteenth: Music gladdens people. For indeed, as Aristotle reports in the <citation>Politics</citation>, book 8: “Musaeus says that singing is the most delightful thing for people; on that account they reasonably adopt it in assemblies and pastimes as having the power to gladden”.
+And indeed, it gladdens some more, and others less. For indeed, the more perfected in this art one is, the more one is delighted by it, because one grasps its nature both inwardly and outwardly: inwardly by the power of understanding, by which one understands fitting composition and performance, and outwardly by the power of hearing, by which one perceives the sweetness of concords. But only such are those who can truly judge and be delighted by music itself; on that account the Philosopher in the <citation>Politics</citation>, book 8, advises the young to apply themselves to music, so that not only they may be delighted by the sound produced by themselves or by another, but once they have grown old and given up the practice, they can correctly judge about it.
+But music gladdens those less who get nothing at all out of it except the sound. For they are delighted only by the external sense. They are so much affected, however, by such sound that, in Juvenal’s words, “running after a pretty voice”, they proclaim and extol as the best musicians those who sing (as they think) with a delightful voice, even if they perform very crudely. Nor do I wonder when I have read Virgil having sung in the 2nd eclogue of the <citation>Bucolics</citation>: “Each is attracted to their own pleasure”.
+The perfection of musical delight, therefore, consists in its perfect knowledge. Whence Aristotle in the <citation>Politics</citation>, book 8, states to the point that “an end”, that is, the perfection of delight in it, “does not accord with the imperfect”.
+</chapter>
+<chapter>
+<heading>On the fourteenth effect. Chapter 14 [xiv].</heading>
+Fourteenth: Music heals the sick. Whence Isidore reports in the <citation>Etymologies</citation>, book 4, that “the physician Asclepiades restored a madman to his former health by the art of melody”. Hence the same eminent author says that music is necessary for the physician. This seems demonstrable enough from the sayings of Ibn Sīnā and Galen, of whom the first says: “You must know, however, that in the pulse is found the nature of music”, and the second: “When the nature of musical proportions was made known to me, then the gates of the pulse were opened to me.”
+</chapter>
+<chapter>
+<heading>On the fifteenth effect. Chapter 15 [xv].</heading>
+Fifteenth: Music lightens labours. For, as Quintilian has it in the <citation>Institutes of oratory</citation>, book 1, “nature herself seems to have given us music to endure labours more easily, since songs cheer even oarsmen”. Virgil writes about this in the 9th eclogue of the <citation>Bucolics</citation>: “we can go along singing (the way will trouble less)”, and in the <citation>Georgics</citation>, book 1:
+<verse>meanwhile, her long labour lightened by a song,<l/>his wife runs through the warp with a rattling reed.</verse>
+</chapter>
+<chapter>
+<heading>On the sixteenth effect. Chapter 16 [xvi].</heading>
+Sixteenth: Music rouses the spirits to battle. Hence it is said of Misenus, who, accompanying Hector, most excellently fired up the battle against the siege of Troy with the bugle, that when Misenus, who had followed Aeneas over the seas after Hector died, endeavoured to do it again, he was drowned out of envy by Triton, Neptune’s trumpeter. On which Virgil says in the <citation>Aeneid</citation>, book 6:
+<verse>And as they thus came, they saw Misenus<l/>on the dry shore, cut off by unworthy death,<l/>Misenus son of Aeolus, whom no other excelled<l/>in rousing up men with the brass and firing up Mars with a song.<l/>(and the rest that follow there)</verse>
+Hence we read that Timotheus, piper of Alexander the Great, repeatedly stirred him up from feasts to war. Quintilian agrees with this in the <citation>Institutes of oratory</citation>, book 1: “It was said that the greatest generals played both lyres and pipes and that the army of the Lacedaemonians were fired up by musical measures.” Such melodies, however, are provocative of anger, as the Philosopher holds in the <citation>Politics</citation>, book 8; the more vigorous they are, the stronger they make the spirits of the fighters (so Isidore in the <citation>Etymologies</citation>, book 3), for which reason they attain in the end the glory of victory. Whence Quintilian in the <citation>Institutes of oratory</citation>, book 1: “What else, indeed, do horns and trumpets do in our legions? The more vigorous their sounding is, the more Roman glory in war excels that of others.”
+</chapter>
+<chapter>
+<heading>On the seventeenth effect. Chapter 17 [xvii].</heading>
+Seventeenth: Music entices love. Whence Ovid teaches girls desiring to entice the love of men that they should study singing; and in fact he says in the <citation>Art of love</citation>, book 3:
+<verse>Song is an alluring thing: girls should study singing;<l/>    instead of the face, for many the voice has been her procuress.</verse>
+Hence it is that it was said by the poets that when Orpheus played the lyre very sweetly, many women were fired with love of him. On which Ovid in the <citation>Metamorphoses</citation>, book 10:
+<verse>                    Still, many women had a burning desire<l/>to join themselves with the bard; many, rejected, lamented.</verse>
+Nay, the melody of Orpheus’ singing was of such sure efficacy at enticing love that it even compelled pre-pubescent boys to loving, whence there follows in the same place:
+<verse>He was even the originator among the peoples of Thrace of transferring<l/>[men’s] love to tender males, and plucking the first flowers<l/>in the brief springtime of the age before youth.</verse>
+</chapter>
+<chapter>
+<heading>On the eighteenth effect. Chapter 18 [xviii].</heading>
+Eighteenth: Music increases the enjoyment of a banquet. Whence in Ecclesiastes, chapter 32: “A concert of music in a banquet of wine is as a carbuncle set in gold.” The gloss: “The carbuncle compares to the gold, and the musical melody to the banquet; indeed, just as a carbuncle doubles the splendour of gold, so does melody the enjoyment of a banquet.”
+Hence the poets say that music was accepted at the feasts of the gods. Whence Horace writes in his <citation>Odes</citation>:
+<verse>O lyre, ornament of Phoebus and welcome<l/>at the grandest dinners of Jove, O sweet<l/>alleviation of labours, greet me whenever<l/>    I duly call!</verse>
+But from of old it has been not uncommon for illustrious people to take up music when feasting. Whence Virgil, reciting what had taken place at the sumptuous banquet prepared by Elissa for Aeneas with his companions, cites Iopas, a most skilful harper, as striking the harp so that it would be more enjoyable; on which in the <citation>Aeneid</citation>, book 1: “Long-haired Iopas sounds the gilded harp” (and the rest). “It was also the custom of the earlier Romans to employ lyres and pipes at feasts”; so Quintilian in the <citation>Institutes of oratory</citation>, book 1. And in Isaiah, chapter 5, we read: “The harp, and the lyre, and the timbrel, and the pipe, and wine are in your feasts”.
+We also see this custom thriving very much at this time: when great men are feasting splendidly and solemnly, what kind of musicians do we not hear present? There singers, there pipers, there drummers, there organists, there harpers, there recorders, there trumpets, making music together so melodiously that it seems to be a true image of heavenly joys.
+</chapter>
+<chapter>
+<heading>On the nineteenth effect. Chapter 19 [xix].</heading>
+Nineteenth: Music glorifies those skilled in it. Whence in Ecclesiastes, chapter 44: “Men such as by their skill sought out musical tunes have gained glory in their generations, and were praised in their days.”
+And because long ago in Greece musicians used to be honoured with the greatest glory on account of the “greatest accomplishment” that “the Greeks considered to be placed in those making music of strings and voices”, not only the most excellent philosophical men bestowed care on it, like Socrates, Pythagoras, Plato, Aristotle, but also the most warlike rulers, like Epaminondas and Achilles. “And Themistocles, when he refused the lyre at a feast, was deemed rather uneducated”. Moreover, Cicero also states, along with the preceding, in the prologue of the <citation>Tusculan disputations</citation>: “everyone used to study it, and whoever was ignorant of it was not considered sufficiently cultivated in learning”.
+In our time, however, we know from experience how much glory most musicians have been honoured with. For who has not heard of John Dunstaple, Guillaume du Faÿ, Gilles Binchois, Johannes Okeghem, Antoine Busnoys, Johannes Regis, Fremin Caron, Robert Morton? Who does not bestow the highest praises on them, whose compositions, renowned throughout the world, fill God’s temples, kings’ palaces, the houses of private people with the greatest sweetness? I pass over many distinguished musicians endowed with riches and titles, since even though they have acquired honours from these, they are by no means to be compared with the undying fame that the first composers have spread about for themselves. For the former thing needs luck, the latter talent; whence Virgil in the <citation>Aeneid</citation>, book 10:
+<verse>To each his day is due; life lasts a brief and irretrievable time<l/>for everyone. But to spread about one’s fame with deeds,<l/>this needs talent.</verse>
+</chapter>
+<chapter>
+<heading>On the twentieth effect. Chapter 20 [xx].</heading>
+Twentieth: Music blesses souls. For there is no doubt that people are led to remorse by hearing song; indeed, on this account the Church has established the praises of God to be sung, as is clear from [the <citation>Decretals of Gratian</citation>, part I,] distinction 21, chapter 1, and from the Holy Doctor [Thomas Aquinas] in the Second part of the second part [of the <citation>Summa theologiae</citation>], question 91, article 2. Whence, since souls attain salvation through remorse, it follows that music is the cause of such salvation. This salvation, indeed, is the greatest blessing, which is attained not only, as we have said, by those who hear music, but also by those who understand it. Whence the prophet in the 88th Psalm: “Blessed is the people that knoweth jubilation.”
+</chapter>
+<conclusion>
+<heading>Conclusion of the work.</heading>
+If anyone, therefore, pays attention to these effects, they will not repent having applied their intelligence to this element of learning; nay rather, every day with the most ardent devotion they will study melody, which for kings, which for other rulers, and which for free people it is glorious and commendable to have practised and to practise. For it is this that is approved and recommended by Lycurgus, Plato, Quintilian; if anyone follows their recommendations, both the art will be a credit to them and they to the art forever.
+</conclusion>
+<explicit>Here ends the <citation>Encompassing of the effects of music</citation>.</explicit>
+</treatise>

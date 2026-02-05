@@ -1,0 +1,175 @@
+Proportionale musices I
+Translator: Jeffrey Dean
+Checked by:
+Date established: 25 November 2025
+<treatise>
+[Only Book I of the <italic>Proportionale musices</italic> is available here. To keep things manageable, Books II and III are in a separate file.]
+<title>The proportional of music, set forth by Master Johannes Tinctoris, licentiate in law and chaplain of the most serene ruler Ferrante, king of Sicily, Jerusalem, and Hungary, begins auspiciously.</title>
+<prologue>
+<heading>Proem</heading>
+To the most sacred and unconquered ruler, divine Ferrante, by the providence of the King of kings and Lord of lords king of Sicily, Jerusalem, and Hungary, Johannes Tinctoris, least among professors of music and his chaplains, [pledges] humble and servile obedience so far as to kiss his feet.
+Although, most wise king, from the time of the first musician, Jubal (to whom Moses ascribed so much that in Genesis he called him “the father of them that play upon the organs and the harp”), a great many very distinguished men, such as David, Ptolemy, Epaminondas (rulers of Judah, Egypt, and Greece), Zoroaster, Pythagoras, Linus of Thebes, Zethus, Amphion, Orpheus, Musaeus, Socrates, Plato, Aristotle, Aristoxenus, and Timotheus, devoted so much effort to the noble art of music that (witness Cicero) “they grasped by thought almost all its power and infinite matter” (for which reason many Greeks asserted that some of them, especially Pythagoras, had found out the first beginnings of music), nevertheless how they performed or composed is by no means evident to us in writing; it is most likely, however, that they did it very elegantly. Indeed, they placed the highest learning in this science, which Plato calls the “most powerful”. And so of old “everyone used to study it, and whoever was ignorant of it was not considered sufficiently cultivated in learning”.
+And how great, pray, was that melody by virtue of which we read that gods, ghosts, unclean spirits, even animals devoid of reason and inanimate objects were moved? Which (even though it should be partly imaginary) is not without mystery. Of course the poets would not have imagined such things about music unless they had perceived its marvellous power by a certain divine strength of mind.
+But still, after the fulness of time arrived, in which that greatest musician, Jesus Christ, “our peace”, by a duple proportion “hath made both [Jews and Gentiles] one”, wonderful musicians flourished in his Church, like Gregory, Ambrose, Augustine, Hilary [of Poitiers], Boethius, Martianus [Capella], Guido, Johannes de Muris, of whom some established the use of singing in that salvific Church, some composed numerous hymns and canticles for this purpose, some left to their successors works of divinity, some of the theory, some of the practice of this art, in books now widely distributed. Finally, the most Christian rulers (of all of whom, most pious King, you are by far the first in the gifts of mind, body, and fortune), desiring to enhance divine worship, have instituted chapels in the manner of David, in which at great expense they have employed diverse singers, through whom with diverse (not adverse) voices “to our God should be joyful and comely praise”. And since the singers of rulers (if they should be endowed with the generosity that makes people famous) are rewarded with honour, glory, riches, many are fired most warmly to this kind of study. For this reason it happens that at this time the faculty of our music has received such a wonderful increase that it seems to be a new art; the fount and origin of this (so to speak) new art is held to have been among the English, whose chief Dunstaple proved to be. And contemporaneous with him in France were Du Faÿ and Binchois, whom the moderns Okeghem, Busnoys, Regis, and Caron immediately succeeded, the most outstanding in composition of all those I have heard.
+The English nowadays (though they are commonly said to jubilate, but the French to sing) do not approach comparison to them: for indeed the former [“the moderns” named in the previous paragraph; the syntax is a little clearer in the Latin] are inventing new songs every day in the newest way, while the latter [“the English nowadays”] are always using one and the same manner of composing (which is a sign of the most wretched ingenuity).  But alas, I have found that not only they but even many other famous composers (which I am astonished by), while they compose so subtly and ingeniously together with inconceivable euphony, either are wholly ignorant of musical proportions or sign the few that they do know incorrectly. This, indeed, I do not doubt arises from a deficiency in arithmetic, without which no-one turns out excellent in music itself; for indeed every proportion is drawn from its innermost parts.
+Therefore (so that young people wishing to study this “liberal and honorable” musical art should not adopt this kind of ignorance and error in the proportions) to the praise of God, out of whose gift they are, and to the splendour of your most sacred majesty, who more than other rulers are disposed by them to piety, and lastly to the honour of your very proportionate chapel, to which, I would have thought, there is not easily the like in the world, I am most readily undertaking (to the best of my ability) this little work, which I think should be named <citation>The proportional of music</citation> through a consonance with its matter, in which, if I have been so bold as to oppose many or nearly all the most famous composers, let it hardly be ascribed to arrogance, I beg. For I do not demand that my writings necessarily be observed more than others’, but, serving under Truth, whatever in respect of proportions in theirs I find right or wrong I approve or reject. But if I seem to readers to conduct this teaching of mine fairly, I urge that they place their trust in me, if unfairly, however, that they rather believe the others. Because just as to refute others, so I am prepared to be refuted by others.
+</prologue>
+<book>
+<incipit>Here begins the first book.</incipit>
+<chapter>
+<heading>The definition of proportion. Chapter 1 [i].</heading>
+Proportion is the relationship of two terms to one another.
+This, however, is the general definition of any kind of proportion, whether in arithmetic or music or geometry; but when it is specified as musical proportion, you should say “of two terms, namely of musical passages that are notes significative of pitches”.
+</chapter>
+<chapter>
+<heading>How and in how many ways proportions are effected. Chapter 2 [ii].</heading>
+This proportional relationship, therefore, happens either in singing or in composing whenever one number of notes is related to another. This, indeed, comes about in two ways, either when we immediately relate the following notes to the preceding ones in one and the same part of the piece, as here:
+{example}
+or when the notes of one part are related directly to the notes of another one against which they are composed, as here:
+{example}
+But since there are, as is stated above, two ways of effecting proportions, whether the proportions of any piece put before them be set forth according to the signs in the first way, that is, through the relation to the preceding number in one and the same part, or in the second, that is, through the relation to the notes of another part, can be ascertained by no singer except by divination or by looking through the counterpoint. For this reason it happens that hesitation and doubt are generated in singing, which however must particularly be avoided; for when compositions are presented in public, they must be performed then and there without any uncertainty. Whence I would advise that only a single way should be adopted, namely that proportions should be signed according to the relation to another part, were it not that in the other way, namely through the relation to the preceding number in one and the same part, many proportions are singable that otherwise would not be.
+</chapter>
+<chapter>
+<heading>The division of proportions. Chapter 3 [iii].</heading>
+Some proportions, moreover, are of equality, others of inequality.
+Proportions of equality are those that are made up of equal numbers, such as 1 to 1, 2 to 2, 3 to 3, 4 to 4, and so on. And the species of such proportions of equality are “most specific”,**<italic>Species specialissima</italic> (most specific species) is a technical term of Aristotelian logic, denoting a species that cannot be considered as a genus of subordinate species but is divisible only into individual cases. This and related terms derive from Boethius’ translations of and commentaries on Aristotle’s <citation>Categories</citation> and Porphyry’s <citation>Isagoge</citation>. See also n. on I.iv.3 below.** neither receiving specific names in speech nor definite signs in composition. Certainly whenever we see in any piece no sign of inequality, we judge it to be composed by equal numbers, as shown here:
+{example}
+Out of this is confounded an inexcusable error by Okeghem, who signed his <italic>chanson rustique</italic> “L’autre d’antan”, composed in every part with equal numbers, not only with a sign of proportion but with the one that, by itself and badly, is assigned by some to triple [3:1], by others to sesquialtera [3:2], like this:
+{example}
+Du Faÿ, though, chose to sign the Qui cum patre in the Credo of his mass <citation>de Sancto Anthonio</citation>, proportioned through duple sesquiquarta [9:4], with the same sign, from which it arises that if the former signed rightly, the latter did wrongly, for different proportions require different signs. But I shall show [see below, III.vi.5–6 with ex2] that just as the former here, so the latter in his case has signed wrongly. Whenever, in fact, they hold the aforementioned song, namely “L’autre d’antan”, or another similarly signed, the inexperienced say at once, “Let’s sing, it’s sesquialtera.” What childish ignorance, to call a proportion of equality one of inequality! Nor do I suppose that the composer, even though he may have so signed it according to some, wished it to be so spoken of, but rather that his song should be sung speeded up after the fashion of sesquialtera. To effect this, a stroke drawn through the middle of the circle of each part would have sufficed. For it is proper to it to signify acceleration of the measure, be it perfect or imperfect tempus, as appears in a infinite number of his own compositions. Its form in both is such: {example}.
+</chapter>
+<chapter>
+<heading>On proportions of inequality. Chapter 4 [iv].</heading>
+Proportions of inequality are those that are made up of unequal numbers, such as 2 to 1, 3 to 2, 4 to 3, and so on. And the species of such inequality are “subaltern”,**“Subalterna” (subaltern) is another technical term of Aristotelean logic, denoting any category that can be considered both as a species of a more general genus and also as a genus of more specific species. See n. on I.iii.4 above.** since they can be made into genera.
+It has been found, all the same, that there are only five genera of inequality, namely 3 simple ones: multiple, superparticular, and superpartient, and 2 compound ones arising out of these: multiple superparticular and multiple superpartient.
+To avoid confusion, we intend to treat these one by one, defining them together with some of their species, adding the practice of those species through example (by which, just as the Philosopher holds, we know more).
+</chapter>
+<chapter>
+<heading>On the multiple genus. Chapter 5[v].</heading>
+The multiple genus of inequality is that in which the larger number related to a smaller contains it within itself multiple times precisely. For instance twice and it will be duple, thrice and it will be triple, four times and it will be quadruple, five times and it will be quintuple, six times and it will be sextuple. And so for the others.
+<subheading>On duple.</subheading>
+Duple is the proportion in which the larger number related to a smaller contains it within itself precisely twice, as 2 to 1, 4 to 2, 6 to 3, as here:
+{example}
+The Pythagoreans declare that the diapason [octave] arises out of this proportion, inasmuch as in the discovery of the concords, Pythagoras (if the Greeks are to be believed) observed that by two hammers sounding together, one of which was of 6 pounds, the other of 12, the concord of a diapason was brought about. Whence it happens that very many call both that concord “duple” and this proportion, conversely, “diapason”.
+This proportion, indeed, is familiar as being the easiest of all. And in the case of minims it is not always signed with figures, since if 2 minims are related to 1 or 4 to 2 or 6 to 3, in place of the sign they should be filled in with any colour, but now more commonly black (ink, that is); or such halved minims are bent back at their tops [i.e. at the distal ends of their stems] by a slanting little stroke on the right side. And no definitive law is imposed on them; these minims, indeed, like the others can be full and made halved again. But we more frequently use the former [i.e. full (semi)minims] in minor prolation, the latter [i.e. flagged (semi)minims] in major, as here:
+{example}
+And even though thus under duple proportion 2 minims are set down in place of one, they are nevertheless not on this account (as the ignorant prate) “semiminims”; just as under this proportion 2 maximas are written or performed in place of one, 2 longas in place of one, 2 breves in place of one, 2 semibreves in place of one, nevertheless they are not then called semimaximas, semilongas, semi-breves, semisemibreves.
+<subheading>On triple.</subheading>
+Triple is the proportion in which the larger number related to a smaller contains it within itself precisely thrice, as 3 to 1, 6 to 2, 9 to 3 etc., just as is clear here:
+{example}
+<subheading>On quadruple.</subheading>
+Quadruple is the proportion in which the larger number related to a smaller contains it within itself precisely four times, as 4 to 1, 8 to 2 etc., just as here:
+{example}
+<subheading>On quintuple.</subheading>
+Quintuple is the proportion in which the larger number related to a smaller contains it within itself precisely five times, as 5 to 1, 10 to 2 etc., just as here:
+{example}
+<subheading>On sextuple.</subheading>
+Sextuple is the proportion in which the larger number related to a smaller contains it within itself precisely six times, as 6 to 1, 12 to 2 etc., just as here:
+{example}
+</chapter>
+<chapter>
+<heading>On the superparticular genus. Chapter 6 [vi].</heading>
+The superparticular genus is that in which the larger number related to a smaller contains it within itself as a whole and in addition its aliquot part.**An aliquot part is an integer that divides a larger integer exactly with no remainder; e.g. the aliquot parts of 8 are 1 (an eighth), 2 (a fourth), and 4 (a half). The hyparchetype of Br2 Bo interpolated an explanatory paragraph (somewhat randomly) after I.vi.ex1: “An aliquot part is when, taken several times, it gives a precise number, as the number 9 is divided by 1 or by 3.” Tinctoris’s own definition is at III.vii.10.** For instance a half and it will be sesquialtera, a third and it will be sesquitertia, a fourth and it will be sesquiquarta, a fifth and it will be sesquiquinta. And so for the others.
+<subheading>On sesquialtera.</subheading>
+Sesquialtera is the proportion in which the larger number related to a smaller contains it within itself as a whole and in addition its half aliquot part, as 3 to 2, 6 to 4, 9 to 6 and so on, just as here:
+{example}
+Sometimes, however, this proportion is signed without figures, namely by the filling in of notes (not only minims but the rest) with some colour though more frequently black (ink, that is), as here:
+{example}
+But since this filling in of notes designates not only duple (as said before) and sesquialtera, but also (as shown by countless works of composers) imperfection and regrouping, in order easily to know in any piece (if it occurs) which of these four it signifies, distinguish thus. Either only minims are full, and then either they can be regrouped [with larger notes that are also full] as integral ones [i.e., minims that are neither altered nor subject to any proportion], and so they are regrouped integrally howsoever and in whatsoever number they are set down. Or they cannot be thus regrouped, and then they are either in twos, and so (whether syncopated [i.e. separated by other notes] or not) they are dupled [i.e. halved], or in threes, and so (unless one of them is syncopated) they are sesquialterated, as shown here:
+{example}
+And hence note that these dupled minims can be syncopated, but not sesquialterated ones; whence if before a larger or equal note you see 3 full minims, straightaway notice whether another precedes or follows by syncopation, since then they are sung by duple and not by sesquialtera, as shown towards the end of the last discantus above [at the beginning of the last breve before the final longa].
+But if just 6 minims are full in this way (that is, without interruption), since the number six is divisible by both two and three, what can be said? Certainly that if an integral minim to which two of them are proportioned precedes or follows [in the mensural space of a single semibreve], all are sung under duple, but if not, they are assigned to sesquialtera, as shown here:
+{example}
+And you should so conclude about a similar number [i.e., a multiple of 6].
+Moreover, if even 5 or 7 full notes are composed without interruption, even though neither the number five or seven is divisible by two or three, nevertheless since each of them is made up of twos and threes or the other way round, if an integral minim should precede these five, the first two should be numbered together with it through duple, but the remaining three will be sesquialterated. But if, on the other hand, an integral minim follows these 5, the first three pertain to sesquialtera, the following two, however, to duple. And in the case of 7, since duple precedes sesquialtera, the first 4 will be dupled and the other 3 sesquialterated, as shown here:
+{example}
+And you should do thus with similar numbers [i.e. multiples of 5 or 7].
+Or else these minims are full not alone but together with larger notes as though they are subject to them, and then they entirely follow the nature of their greaters, whether they are imperfected or regrouped or halved or sesquialterated by such filling in.
+Furthermore, what has been said about the number and quality of minims full in this way, you should understand this also about their value, namely that also the dot of augmentation, and their assigned rest, and (if any are present) 2 minims not only full but bent back, as has been said before [I.v.9–10], at their tops should be carefully reckoned with them. These two points are clear not only in this work but through example everywhere. Nevertheless, Pasquin (I don’t know who he is) in very many passages of his dis-toned Mass in the irregular authentic protus [the 1st mode (Dorian) on G], devoid of all art and melody, dissents from everyone about the first. Nor do I wonder, for he is also at odds with himself (which is extremely ridiculous) in the Cum Sancto Spiritu, since he operated with us at the beginning but against us in this way at the end:
+{example}
+Or semibreves, breves, longas, or maximas are full, and then either they are syncopated with a larger note in between and thus it is a sign of regrouping alone, or with an equal one and it is a sign not only of regrouping but also imperfection. Or they are not syncopated, and then either they must be regrouped and are regrouped without exception, or not, and so either they are perfect in themselves [i.e. in their regular value] and then, if they can be sesquialterated with their perfection of number preserved, they are sesquialterated, but if not they are imperfected, or they are imperfect in themselves and thus they are assigned without exception to sesquialtera, as here:
+{example}
+What has been said, however, about the number and quality of such notes thus full, as I said before about minims, must be understood likewise about their own value.
+[I say this] because when some ignorant people, not only singers but (what is more intolerable) composers, look at notes thus sesquialterated by filling in, they say it is not “sesquialtera” but “hemiola”, maintaining that in sesquialtera both the perfection and the alteration of notes occur, but in hemiola not in the least. In this they plainly assume a difference between sesquialtera and hemiola, but they are altogether mistaken: for it is one proportion and of the same nature, though of different name; but sesquialtera is more frequently the term among mathematicians, hemiola however among musicians. Whence it happens that the Pythagoreans say that Pythagoras perceived the concord of the diapente [fifth] to be born from hemiola, when he heard two hammers sounding harmoniously of which the first was of 6 or 8 pounds, the other of 9 or 12. And from that both the concord diapente is sometimes called “hemiola” by a good many, and the proportion hemiola “diapente”.
+Here I do not think it should be overlooked that some in the past have treated full notes as void ones [i.e. normal notation], which certain very recent people imitating them say, since quite often this happens with color, as we have previously set black ones in place of white ones. Therefore when you wish either to sing or to compose the like, assign everything that has been said before about full notes to void ones; form your own examples of them out of the opposite of the foregoing.
+<subheading>On sesquitertia.</subheading>
+Sesquitertia is the proportion in which the larger number related to a smaller contains it within itself as a whole and in addition its third aliquot part, as 4 to 3, 8 to 6, 12 to 9 and so on, just as here:
+{example}
+This proportion, however, is more often named “epitritus” by the Pythagoreans, because according to them Pythagoras heard the concord (not pure and simple but in some respects)**“Non simpliciter sed secundum quid”: again these are technical terms of Aristotelian logic, treated most fully in Boethius’ translation of Aristotle’s <citation>Topics</citation>, a text Tinctoris paraphrased at I.iv.5. <italic>Simpliciter</italic> means “absolutely, without qualification, universally”, <italic>secundum quid</italic> “contingently, with qualification, in certain cases”. The reference is to the equivocal consonance of the fourth, dissonant in itself but consonant when supported by a third or a fifth.** of the diatessaron [fourth] arising through a hammer of 8 or 12 pounds sounding together with one that was of 6 or 9. Hence it happens that most people call such a concord, the diatessaron, “epitritus” or “sesquitertia”, and conversely this proportion “diatessaron”.
+<subheading>On sesquiquarta.</subheading>
+Sesquiquarta is the proportion in which the larger number related to a smaller contains it within itself as a whole and in addition its fourth aliquot part, as 5 to 4, 10 to 8, 15 to 12 and so on, just as here:
+{example}
+<subheading>On sesquiquinta.</subheading>
+Sesquiquinta is the proportion in which the larger number related to a smaller contains it within itself as a whole and in addition its fifth aliquot part, as 6 to 5, 12 to 10, 18 to 15 and so on, just as here:
+{example}
+<subheading>On sesquioctava.</subheading>
+Under this genus, on the other hand, as is clear to the attentive observer, is included sesquioctava, which is the proportion in which the larger number related to a smaller contains it within itself as a whole and in addition its eighth aliquot part, as 9 to 8, 18 to 16 and so on, just as here:
+{example}
+Pythagoras, however, ascertained that the tone was caused by this proportion, when he ordered hammers to strike together of which the first was of 8 pounds, the second of 9. Whence it happens that this proportion is sometimes called the “tone” by the Pythagoreans (who more often name it “epogdous”), and conversely the tone itself is called “sesquioctava” or “epogdous”.
+</chapter>
+<chapter>
+<heading>On the superpartient genus. Chapter 7 [vii].</heading>
+The superpartient genus is that in which the larger number related to a smaller contains it within itself as a whole and in addition some of its aliquot parts making one aliquant part.**An aliquant part is an integer that leaves a remainder when divided into a larger integer; e.g. the aliquant parts of 8 are 3, 5, 6, and 7 (so many eighths, which cannot be simplified into other fractions). Br2 interpolated an explanatory sentence (somewhat randomly) into I.vii.7: “An aliquant part is one that, taken several times, does not give an exact number, but a remainder, as when the number 9 is divided by 2 or 4.” Tinctoris’s own definition is at III.vii.11.** For instance 2 and it will be superbipartient, 3 and it will be supertripartient, 4 and it will be superquadripartient. And so for the others.
+Such species, however, are subaltern, hence they can be made into genera; their most specific species, indeed, take specific names, composed out of the correct case of the name of the closest genus and an oblique one, namely the accusative plural of its ordinal lesser number. For example, if 5 is related to 3 it is called superbipartient thirds, if 7 to 5 superbipartient fifths, if 7 to 4 supertripartient fourths, if 8 to 5 supertripartient fifths, but if 9 to 5 superquadripartient fifths and so on.
+Hence you will first define the subaltern species thus: Superbipartient is the proportion in which the larger number related to a smaller contains it within itself as a whole and in addition 2 of its aliquot parts making one aliquant part, as 5 to 3, 7 to 5 and so on. Supertripartient is the proportion in which the larger number related to a smaller contains it within itself as a whole and in addition 3 of its aliquot parts making one aliquant part, as 7 to 4, 8 to 5 and so on. Superquadripartient is the proportion in which the larger number related to a smaller contains it within itself as a whole and in addition 4 of its aliquot parts making one aliquant part, as 9 to 5 and so on.
+The most specific species, however, will have to be defined so:
+<subheading>On superbipartient thirds.</subheading>
+Superbipartient thirds is the proportion in which the larger number, which is 5, is related to the smaller, which is 3, as is demonstrated here:
+{example}
+<subheading>On superbipartient fifths.</subheading>
+Superbipartient fifths is the proportion in which the larger number, which is 7, is related to the smaller, which is 5, as shown in the following example:
+{example}
+<subheading>On supertripartient fourths.</subheading>
+Supertripartient fourths is the proportion in which the larger number, which is 7, is related to the smaller, which is 4, as shown here:
+{example}
+<subheading>On supertripartient fifths.</subheading>
+Supertripartient fifths is the proportion in which the larger number, which is 8, is related to the smaller, which is 5, as here:
+{example}
+<subheading>On superquadripartient fifths.</subheading>
+Superquadripartient fifths is the proportion in which the larger number, which is 9, is related to the smaller, which is 5, as shown here:
+{example}
+</chapter>
+<chapter>
+<heading>On the multiple superparticular genus. Chapter 8 [viii].</heading>
+The multiple superparticular genus is that in which the larger number related to a smaller contains it multiple times within itself and in addition one of its aliquot parts. For instance twice and a half and it will be duple sesquialtera, twice and a third and it will be duple sesquitertia, twice and a fourth and it will be duple sesquiquarta, twice and a fifth and it will be duple sesquiquinta. And so for the others.
+<subheading>On duple sesquialtera.</subheading>
+Duple sesquialtera is the proportion in which the larger number related to a smaller contains it twice within itself and in addition its half aliquot part, as 5 to 2, 10 to 4, 15 to 6 and so on, just as here:
+{example}
+<subheading>On duple sesquitertia.</subheading>
+Duple sesquitertia is the proportion in which the larger number related to a smaller contains it twice within itself and in addition its third aliquot part, as 7 to 3, 14 to 6 and so on, just as here:
+{example}
+<subheading>On duple sesquiquarta.</subheading>
+Duple sesquiquarta is the proportion in which the larger number related to a smaller contains it twice within itself and in addition its fourth aliquot part, as 9 to 4, 18 to 8 and so on, just as here:
+{example}
+<subheading>On duple sesquiquinta.</subheading>
+Duple sesquiquinta is the proportion in which the larger number related to a smaller contains it twice within itself and in addition its fifth aliquot part, as 11 to 5, 22 to 10 and so on, just as here:
+{example}
+<subheading>On duple sesquioctava.</subheading>
+And since above in the case of the superparticular genus, beyond the 4 proportions, placed in order, that suffice to every good intellect for comprehending the rest of the same genus, we made special mention, not out of place, of sesquioctava, it is most suitable to show that duple sesquioctava is contained in this genus, even though a clever investigator should be able to understand it for themself.
+Duple sesquioctava, therefore, is the proportion in which the larger number related to a smaller contains it twice within itself and in addition its eighth aliquot part, as 17 to 8, 34 to 16 and so on, just as here:
+{example}
+</chapter>
+<chapter>
+<heading>On the multiple superpartient genus. Chapter 9 [ix].</heading>
+The multiple superpartient genus is that in which the larger number related to a smaller contains it multiple times within itself and in addition some of its aliquot parts making one aliquant part. For instance twice and 2 and it will be duple superbipartient, twice and 3 and it will be duple supertripartient, twice and 4 and it will be duple superquadripartient. And so for the others.
+But such species, like those of the superpartient, subalternate, and hence they are made into genera. Every most specific species of these likewise takes a name composed out of the correct case of the name of the closest genus and an oblique one, namely the accusative plural of its ordinal lesser number. For example, if 8 is related to 3 it will be called duple superbipartient thirds, if 12 to 5 duple superbipartient fifths, if 11 to 4 duple supertripartient fourths, if 13 to 5 duple tripartient fifths, if 14 to 5 duple quadripartient fifths and so forth.
+First, therefore, the subaltern species must be defined so. Duple superbipartient is the proportion in which the larger number related to a smaller contains it twice within itself and in addition 2 of its aliquot parts making one aliquant part, as 8 to 3, 12 to 5, and so forth. Duple supertripartient is the proportion in which the larger number related to a smaller contains it twice within itself and in addition 3 of its aliquot parts making one aliquant part, as 11 to 4, 13 to 5, and so forth. Duple superquadripartient is the proportion in which the larger number related to a smaller contains it twice within itself and in addition 4 of its aliquot parts making one aliquant part, as 14 to 5 and so forth.
+And you will define the most specific species thus:
+<subheading>On duple superbipartient thirds.</subheading>
+Duple superbipartient thirds is the proportion in which the larger number, which is 8, is related to the smaller, which is 3, as here:
+{example}
+<subheading>On duple superbipartient fifths.</subheading>
+Duple superbipartient fifths is the proportion in which the larger number, which is 12, is related to the smaller, which is 5, as here:
+{example}
+<subheading>On duple supertripartient fourths.</subheading>
+Duple supertripartient fourths is the proportion in which the larger number, which is 11, is related to the smaller, which is 4, as here:
+{example}
+<subheading>On duple supertripartient fifths.</subheading>
+Duple supertripartient fifths is the proportion in which the larger number, which is 13, is related to the smaller, which is 5, as here:
+{example}
+<subheading>On duple superquadripartient fifths.</subheading>
+Duple superquadripartient fifths is the proportion in which the larger number, which is 14, is related to the smaller, which is 5, as here:
+{example}
+</chapter>
+</book>
+</treatise>

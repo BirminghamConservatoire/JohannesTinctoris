@@ -1,0 +1,153 @@
+Proportionale musices II–III
+Translator: Jeffrey Dean
+Checked by:
+Date established: 25 November 2025
+<treatise>
+<book></book><book>
+<chapter>
+<heading>On proportions of inequality that come about by the relation of a smaller number to a larger one. Book II, Chapter 1 [i].</heading>
+What is more, just as in the 5 aforementioned genera of inequality larger numbers, as has been shown, are related to smaller ones, so conversely smaller ones can be related to larger ones in them. In this case you should notice that the names of neither the genera themselves nor their species are altered, except that by way of composition “sub” is prefixed to any of them, as submultiple, subsuperparticular, subsuperpartient, submultiple superparticular, submultiple superpartient, subduple, subsesquialtera, subsuperbipartient, subsuperbipartient thirds, subduple sesquialtera, subduple superbipartient, subduple superbipartient thirds. And so for the others.
+The definition of any of them, nevertheless, should be made in such a way that what was the subject there is here the predicate and vice versa. So that these may become better known by the inexperienced, I propose to easily define the aforementioned 5 genera together with (as I judge) sufficient of their species suitable for understanding the rest, and to put them into practice for example.
+</chapter>
+<chapter>
+<heading>On the submultiple genus. Chapter 2 [ii].</heading>
+The submultiple genus is that in which the smaller number related to a larger is contained within it multiple times precisely. For instance twice and it will be subduple and so forth.
+<subheading>On subduple.</subheading>
+Subduple is the proportion in which the smaller number related to a larger is contained within it twice precisely, as 1 to 2 and so forth, just as here:
+{example}
+</chapter>
+<chapter>
+<heading>On the subsuperparticular genus. Chapter 3 [iii].</heading>
+The subsuperparticular genus is that in which the smaller number related to a larger is contained within it as a whole and in addition its aliquot part. For instance a half and it will be subsesquialtera and so forth.
+<subheading>On subsesquialtera.</subheading>
+Subsesquialtera is the proportion in which the smaller number related to a larger is contained within it as a whole and in addition its half aliquot part, as 2 to 3, 4 to 6, and so forth, just as here:
+{example}
+</chapter>
+<chapter>
+<heading>On the subsuperpartient genus. Chapter 4 [iv].</heading>
+The subsuperpartient genus is that in which the smaller number related to a larger is contained within it as a whole and in addition some of its aliquot parts making one aliquant part. For instance 2 and it will be subsuperbipartient. And so for the others.
+<subheading>On subsuperbipartient.</subheading>
+Subsuperbipartient is the proportion in which the smaller number related to a larger is contained within it as a whole and in addition 2 of its aliquot parts making one aliquant part, as 3 to 5. Subsuperbipartient thirds is constituted out of these. And in the same way compose the other most specific species of this kind of genus, and carefully define them according to the following form.
+<subheading>On subsuperbipartient thirds.</subheading>
+Subsuperbipartient thirds is the proportion in which the smaller number, which is 3, is related to a larger, which is 5, as here:
+{example}
+</chapter>
+<chapter>
+<heading>On the submultiple superparticular genus. Chapter 5 [v].</heading>
+The submultiple superparticular genus is that in which the smaller number related to a larger is contained within it multiple times and in addition one of its aliquot parts. For instance twice and a half and it will be subduple sesquialtera. And so for the others.
+<subheading>On subduple sesquialtera.</subheading>
+Subduple sesquialtera is the proportion in which the smaller number related to a larger is contained within it twice and in addition its half aliquot part, as 2 to 5 and so forth, just as here:
+{example}
+</chapter>
+<chapter>
+<heading>On the submultiple superpartient genus. Chapter 6 [vi].</heading>
+The submultiple superpartient genus is that in which the smaller number related to a larger is contained within it multiple times and in addition some of its aliquot parts making one aliquant part. For instance twice and 2 and it will be subduple superbipartient. And so for the others.
+<subheading>On subduple superbipartient.</subheading>
+Subduple superbipartient is the proportion in which the smaller number related to a larger is contained within it twice and in addition 2 of its aliquot parts making one aliquant part, as 3 to 8. Subduple superbipartient thirds is constituted out of these. And the remaining most specific species of this kind of genus should be composed thus and defined according to the following form.
+<subheading>On subduple superbipartient thirds.</subheading>
+Subduple superbipartient thirds is the proportion in which the smaller number, which is 3, is related to a larger, which is 8, as shown here:
+{example}
+</chapter>
+</book>
+<book>
+<chapter>
+<heading>Some things to be considered generally about proportions. Book III, Chapter 1 [i].</heading>
+Having dealt with the genera of proportions of inequality together with some of their species particularly, I judge it necessary to note down some things about them generally, namely how, when, and where such proportions are to be signed.
+</chapter>
+<chapter>
+<heading>How proportions should be signed. Chapter 2 [ii].</heading>
+With respect to the first, namely that you should know how you must sign proportions. Every proportion is correctly signed with [arabic] figures. These indeed have this characteristic, that they signify a number, as 1 2 3 4 5 6 7 8 9, and these are the simple ones; but there are infinite composite ones, as 10 11 12 13 14 15 16 17 18 19 20 21 etc., 30 31 etc., 40 41 etc., 50 51 etc., 60 61 etc., 70 71 etc. 80 81 etc., 90 91 etc., 100 101 etc.
+Accordingly, the nature of these figures is that if one is joined to another with whatever degree of multiplication, its value is always multiplied by ten, whence the verse:
+<verse>The units first, second the tens, the third gives the hundreds,<l/>    the fourth will give the thousands, the fifth the ten thousands.</verse>
+This order, indeed, is from right to left, as here: 231,471.
+Furthermore, whenever 0 is placed one or more times before [in right-to-left order] or between figures, it does not denote a number but the increase of a number, just as a figure does, as here: 35,700 305,070.
+Accordingly, if a larger number is related to a smaller, you, the composer, should place the figure of the former above, that of the latter however below. But if conversely a smaller should be related to a larger, the figure of the former is placed above, and that of the latter below, as here:
+{example}
+Nevertheless, duple and sesquialtera (if the composer should wish) are excepted from this rule. For in place of a sign, the minims of the former and all the notes of the latter (as has been shown before in their places) are filled in with any colour, or are left void in opposition to the others.
+Also, some in the past have chosen to sign both these and other proportions not with figures but rather with their specific names, as here:
+{example}
+I do not care for this, supposing that (according to the common proverb) “what is more briefly done is better done.” And what is more foolish than to sign with a long row of letters or syllables what could be recognized from two little figures?
+There are also others, and nearly all, who, led by the greatest error, showing themselves utterly destitute of arithmetic, sign all the proportions that they practise with only one figure, namely of the number that is related to the other, as here:
+{example}
+And nothing is more foreign to arithmetic, from which we have received the proportions, than this, merely to sign with a sign pertaining to a number “in itself”, that is, constituted without any relation, a number “to something”, that is, that is compared to another relatively.
+Besides, if we place, for example, 2 or 3 alone before any notes, since we might relate both 2 to 1, 2 to 3, and 2 to 4, and 3 to 2 and 3 to 4 and 3 to 5, and so for the others, why shall we understand it rather to be duple than subsesquialtera or subduple, sesquialtera than subsesquitertia or subsuperbipartient thirds, or any other proportion that can be formed out of these numbers? On account of custom, they say, inasmuch as both among the ancients and among the moderns duple and sesquialtera are signified through these single figures, namely 2 and 3. To whom I reply that it must be added that they are the blind leading the blind, straying far from the clarity of the truth of the knowledge of making proportions, and not the best teachers of our art or their most clear-sighted imitators; among whom was that Binchois who by his most delightful composing acquired for himself an eternal name. For in fact in his Credo in the irregular authentic tritus [K19; the 5th mode (Lydian)] he once very properly (as a royal book attests) signed sesquialtera thus:
+{example}
+Others for their part, in place of the sign of duple, simply place the sign of imperfect tempus and minor prolation with a stroke drawn through, denoting (as has been said above) acceleration of the measure, which is commonly called <italic>cantus ad medium</italic> (singing by half), as here:
+{example}
+Which I think tolerable (that I might please De Domarto and Faugues, signing thus in the masses <citation>Spiritus almus</citation> and <citation>Vinus</citation>) on account of a sort of equal force of the former proportion and the latter prolation. For when something is sung by half, 2 notes are measured together with one as if by duple proportion.
+But certain people sign sesquialtera with the sign of major prolation and perfect or imperfect tempus, as here:
+{example}
+and others subsesquitertia with the same sign of imperfect tempus and major prolation, as here:
+{example}
+Although Le Rouge and Pullois do this in the masses <citation>Mon cœur pleure</citation> and in a Gloria in the irregular plagal tritus [the 6th mode (Hypolydian)], it is nevertheless intolerable. For sesquialtera or subsesquitertia and this proportion do not have an equal value, since 1 semibreve of major prolation, worth 3 minims, must not be measured together with one or two minor semibreves, but rather a semibreve and a minim, as shown by Du Faÿ in his Gloria <citation>de Sancto Anthonio</citation>, just as here:
+{example}
+Since these three very famous composers disagree about this sign, believe Du Faÿ rather than the others, of whom the first is the most arrogant of all those making proportions (for, fallen into the error of the English, knowing no proportions, he teaches all), the second, however, the most artless.
+Many, to be sure, have not blushed to sign sesquialtera with the aforesaid sign of imperfect tempus and major prolation thus reversed {example} (which is even worse as denotable through the filling-in of notes), like Barbingant in his Gloria in the mixed authentic protus [the 1st/2nd mode (Dorian)], and sesquitertia with the sign of imperfect tempus and minor prolation similarly so reversed {example}, like those whom I am afraid to name. But I pray that they spare me, since these signs are so silly, so erroneous, and so far from any appearance of reason that I have not thought them worthy of an example.
+</chapter>
+<chapter>
+<heading>When proportions should be signed. Chapter 3 [iii].</heading>
+With respect to the second, namely when proportions should be signed, you are obliged, in the manner of the old masters with their praiseworthy method, as soon as you wish to produce any proportion of inequality, to sign it immediately. In contradistinction to proportions of equality, which are judged to be such (as we have said before) without a sign. In this regard De Domarto more than once offended intolerably in the mass <citation>Spiritus almus</citation>. For in the first sections of the Et in terra, Patrem, and Sanctus, he has indiscriminately left the Supremum and the Contratenors, constructed in duple in relation to the Tenor, without a sign just as if he had constituted them equally, as here:
+{example}
+It is very easily demonstrated, however, that this is duple, since, as is evident to the observer, two objects are compared to one. Nor can it be pleaded in excuse by equivalence on the grounds that the primary part, namely the Tenor, is sung by major prolation, but the the secondary parts, namely the Supremum and the Contratenors, by minor, since one minim of major prolation must not be measured together with 2 of minor but rather with a single one, as shown by Du Faÿ in the [last] example of the preceding chapter. Indeed, I am not astonished if Regis, Caron, Boubert, Faugues, Courbet, and many others, as I have seen in their works, have imitated De Domarto in this error, since I have heard they are not at all learned. And who, without learning, will succeed in attaining the truth not only of this but of any liberal science? But for Okeghem and Busnoys, who it is agreed are suitably endowed with Latinity, to have been equal to them in the masses <citation>De plus en plus</citation> and <citation>L’homme armé</citation>, strikes no little astonishment into my breast. For what is more astonishing than the sighted entering the pathless wastes of blindness? But since in such a manner of composing as theirs (if it were signed thus {example} as the art requires) a difficulty of performance, or rather the destruction of the whole melody, will arise on account of excessive speed, it would be better for a canon to be applied to the Tenor, namely “Crescit in duplo [It grows to double]” or the equivalent, just as Du Faÿ has laudably done in the mass <citation>Se la face ay pale</citation>.
+</chapter>
+<chapter>
+<heading>Where we must sign proportions. Chapter 4 [iv].</heading>
+With respect to the third, namely where (that is, in which part and in which place) we must sign these proportions, it must be said that if there are two or three or more parts in any composed work, whether the secondary parts are proportioned to the primary one in a single proportion or in different ones, they must be signed according to their relation to that very one, and the signs must be placed without interruption as close as possible before the first note of the proportion, just as here:
+{example}
+Now, the primary part is the foundation of relationship in a whole composed piece, which, having been composed first, the others regard as the principal one. And this is quite frequently or rather almost always the Tenor (so called, indeed, as if holding [<italic>tenens</italic>] the other parts subject to it); this is shown by countless pieces in which, if the Tenor is left out, the other parts, discording with one another, misshapenly and harshly offend our ears.
+Sometimes, to be sure, the highest part is the primary one, namely when we add one or more parts to some high-pitched piece composed monophonically [<italic>simpliciter</italic>], as here:
+{example}
+Or when we produce another new part on the Supremum of any composed piece, as here:
+{example}
+The Contratenor, however, is rarely or never the primary part. If we still should want to work something on [the Contratenor of] any precomposed piece, we shall make it the primary one, as here:
+{example}
+The secondary parts are all those principally regarding the primary one as the foundation of relationship.
+On the other hand, Busnoys alone dissents from these three chapters [2–4] at the same time, when he again and again signs his hemiolas, already indicated by the filling-in of the notes, with the placement of the figure 3 beneath, as shown in this motet of his. Look:
+{example}
+In which it is called by all superfluous because the filling in of the notes suffices for a sign [“when”], deficient because even if it had needed a sign in figures a single figure would not have satisfied [“how”], and out of order because he places beneath what must be placed before [“where”].
+</chapter>
+<chapter>
+<heading>That it must be considered in which modus, tempus, and prolation proportions should occur. Chapter 5 [v].</heading>
+Next it must be noted that, about any proportion, we must consider in which modus, in which tempus, and in which prolation it should occur. For some proportions are binary, such as duple, quadrupla, and so on. Some ternary, such as triple, sesquialtera, and so on. Some both, such as sextuple, sesquiquinta, and so on. Some neither, such as sesquiquarta, superbipartiens tertias, and so on. All the same, they cannot alter the nature of the mensurations in which they occur; rather, whatever the proportion be, whether binary or ternary or both or neither, the notes must always be computed according to their perfection or imperfection in respect of the sign of modus, tempus, and prolation under which they stand, as here:
+<subheading>Duple and sesquialtera in perfect major and minor modus, imperfect tempus, and minor prolation.</subheading>
+{example}
+<subheading>Duple, sesquialtera, sesquitertia, and subsesquialtera in imperfect major and minor modus, perfect tempus, and major and minor prolation.</subheading>
+{example}
+In this regard De Domarto has failed many times in the mass <citation>Spiritus almus</citation>. For with duple composed under the sign of perfect tempus, he admitted notes that must be computed by imperfect tempus. Like this:
+{example}
+And notwithstanding Busnoys and Regis, following him in the masses <citation>L’homme armé</citation> and throughout, it could not be excused on the ground that in such parts of masses minor modus is perfect, and the complete circle with the figure 2 denotes that, since the complete circle itself, as shown by countless works also of theirs, is not the sign of perfect modus but rather tempus, while according to them the figure 2 (though inadequately) designates duple.
+Perfect minor modus, however, is reasonably signed by the placement before or between [the mensuration sign and the proportion] of rests occupying three spaces, as Eloy [d’Amerval], whom I have always regarded as most learned in the modi, has done in the mass <citation>Dixerunt discipuli</citation>. Hence such parts [<italic>or</italic> parts in this modus] must be signed in this way:
+{example}
+Besides, De Domarto also erred about these things more than once in the aforesaid mass <citation>Spiritus almus</citation>, since he wished notes in sesquialtera constituted under the sign of minor prolation to be reckoned as if it were major prolation, as here:
+{example}
+And Cousin in the mass <citation>Nigrarum</citation> also notated this very sesquialtera proportion under the same sign through perfect tempus, as here:
+{example}
+Accordingly, let us consider the difference between those composers of no little authority. Under one and the same signature the first, De Domarto, made semibreves perfect and breves imperfect, the second, Cousin, conversely made semibreves imperfect and breves perfect. It is necessary for one or the other to have erred. And in fact each has failed, De Domarto in the sign of prolation, Cousin in that of tempus, and both in that of proportion. For De Domarto, since there the prolation is major, needed to sign in this way {example}, but Cousin, because the tempus is perfect, thus: {example}.
+I recommend, however, that [whenever composers intend a change of mensuration simultaneously with a proportion] for any proportion a mensuration rather similar to it should be signed immediately before, if not mediately,**That is, with intervening notes or rests between the mensuration and proportion, in cases where the proportion does not change the mensuration, as in III.v.exx1–2 above and many more of Tinctoris’s examples.** as, say, for a binary one imperfect modus, imperfect tempus, and minor prolation, for a ternary one perfect modus, perfect tempus, and major prolation, but interchangeably for ones that are both or neither.
+</chapter>
+<chapter>
+<heading>How it must be understood for some notes to be related to others. Chapter 6 [vi].</heading>
+Also, because through any proportion some notes are said to be simply related either equally or unequally to others, it must be understood that they should be of the same value; when 3 semibreves are compared to 2, say, if any of the former is worth 2 minims, any of the latter must likewise be worth 2. And even though the notes proportionally related may be of one mensuration, and the notes to which they are related of another, the latter would still have to be computed, through a certain subordination, according to the mensuration of the former. For otherwise we should often be misled about the number [<italic>or</italic> should repeatedly be misled]. To be sure, if, for example, desiring 3 to be related to 2 in sesquialtera, we should compose three breves of imperfect tempus against 2 of perfect, we should bring about not sesquialtera but rather not even any proportion of inequality but one of equality, namely 6 [semibreves] to 6, as here:
+{example}
+Nor, if conversely 3 breves of perfect tempus should be related to 2 of imperfect, will sesquialtera be brought about but duple sesquiquarta; for there will be 9 to 4 of the same value [semibreves], as is fitting. In this regard Du Faÿ made an astonishing error in his Qui cum Patre <citation>de Sancto Anthonio</citation>, for there he wanted to sign the same proportion, namely duple sesquiquarta (because he related 3 perfect breves to 2 imperfect ones), with the sign with which (though inadequately) he and almost all others sign sesquialtera, as shown here:
+{example}
+This needed to be signed so: {example}, for it is not sesquialtera but rather, as we have said before and is self-evident, duple sesquiquarta.
+</chapter>
+<chapter>
+<heading>On number and its parts so far as is necessary for understanding proportions. Chapter 7 [vii].</heading>
+Finally, since it is necessary for one desiring to understand proportions to know something about number, I propose to show a few things that have seemed to me necessary for this, and to begin with the definition of number. So: a number is a multitude made up of unities, like 2, 3, 4, 5, 6, 7, 8, 9, 10 and so forth. And 1 is not properly a number but the basis of number and the elemental particle of arithmetic, just like the unison of music, the point of geometry, and the instant of astrology.
+Now, every number is either even or odd. An even number is one that can be divided into two equal parts, like 2, 4, 6, 8 and so forth. An odd number is one that cannot be divided into two equal parts, like 3, 5, 7, 9 and so forth.
+Furthermore, every number, since it is a kind of total, is composed of several parts. These parts are either aliquot or aliquant. An aliquot part of a number is one that, taken several times, produces the total precisely, as 1 is an aliquot part of 4, because 1 taken four times produces 4 precisely.
+An aliquant part of a number is one that, taken several times, exceeds its total or fails to reach it, as 3 is an aliquant part of 8, because if 3 is taken three times it produces 9 and so exceeds 8, but if two times only 6 and so fails to reach 8.
+Furthermore, every ternary number, that is, one that is divisible by three, is “perfect” according to musicicans, like 3, 6, 9, 12 and so forth. The reason for this is because it pertains to perfect mensurations, namely both kinds of perfect modus, perfect tempus, and major prolation. And every binary number, that is one that is divisible by two, is “imperfect”, like 2, 4, 6, 8, 10, 12 and so forth. The reason for this is because it pertains to imperfect mensurations, namely both kinds of imperfect modus, imperfect tempus, and minor prolation.
+And because 6, 12, and similar numbers are [both] ternary and binary, since they are divisible by 3 and by 2, they can be perfect and imperfect in different respects, perfect indeed under perfect mensurations and imperfect under imperfect.
+Furthermore, every number is either “as such” or “to something”. A number as such is one that is constituted without any relation, like 1, 2, 3, 4, 5 and so forth. A number to something is one that is compared relatively to another, like 2 to 2, 3 to 2, 3 to 3, 3 to 4 and so forth. Some, however, of these numbers that are to something are equal, others unequal. Equal numbers are those that are compared to one another through equality of magnitude, like 2 to 2, 3 to 3. Unequal numbers are those that are compared to one another through inequality of magnitude, like 2 to 3, 3 to 2, 3 to 4, 4 to 3 and so forth.
+Hence one of these unequal numbers is greater, the other lesser. The greater number is the one that exceeds the number to which it is related, as, if 3 is related to 2, the former exceeds the latter by 1. The lesser number is the one that is exceeded by the number to which it is related, as, if 2 is related to 3, the former is exceeded by 1 by the latter.
+And from such numbers, namely those that are to something, as shown above, every proportion is derived.
+</chapter>
+<chapter>
+<heading>The conclusion of this work. Chapter 8 [viii].</heading>
+For his part, most clement king, your Tinctoris has treated these matters on the musical proportions particularly and generally, although he has not dyed [tinxerit] them with the brightest colours of rhetoric except for the things placed in the Proem, so that, if any should make progress through them, he might deserve to acquire both the grace of God by their prayers and your favour. By this may he be able to live well and happily both in the present age and in that to come.
+</chapter>
+</book>
+</treatise>
